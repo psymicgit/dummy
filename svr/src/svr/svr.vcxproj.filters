@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="svr">
+      <UniqueIdentifier>{c7777031-fee9-4bfa-931c-9106a790f95c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="packet">
+      <UniqueIdentifier>{58f54fd0-58c9-424c-8fb4-f9f08e66bd0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="api">
+      <UniqueIdentifier>{04e3c911-272d-4fd4-a3ca-1d72d60e6eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sql">
+      <UniqueIdentifier>{6e1816b7-78b0-461a-b66b-e9481a8347bc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Server.cpp">
+      <Filter>svr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\packet\LoginReqMsg.pb.cc">
+      <Filter>packet</Filter>
+    </ClCompile>
+    <ClCompile Include="g_xxx.cpp">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="ProtobufApi.cpp">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="ScheduleApi.cpp">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectionPool.cpp">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="DB.cpp">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="DBThread.cpp">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="Sqler.cpp">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="SqlExecParticle.cpp">
+      <Filter>sql</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseSvr.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Server.h">
+      <Filter>svr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\packet\LoginReqMsg.pb.h">
+      <Filter>packet</Filter>
+    </ClInclude>
+    <ClInclude Include="g_xxx.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="ProtobufApi.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="ScheduleApi.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionPool.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="DB.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="DBThread.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="Sqler.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="SqlExecParticle.h">
+      <Filter>sql</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseSvr.h" />
+  </ItemGroup>
+</Project>
