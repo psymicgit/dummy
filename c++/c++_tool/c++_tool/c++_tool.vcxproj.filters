@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stringconversion.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="random.cpp" />
+    <ClCompile Include="timetools.cpp" />
+    <ClCompile Include="gnu.cpp" />
+    <ClCompile Include="base64tool.cpp" />
+    <ClCompile Include="tick_tool.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stringconversion.h" />
+    <ClInclude Include="singleton.h" />
+    <ClInclude Include="random.h" />
+    <ClInclude Include="registertemplate.h" />
+    <ClInclude Include="timetools.h" />
+    <ClInclude Include="gnu.h" />
+    <ClInclude Include="gnutypes.h" />
+    <ClInclude Include="base64tool.h" />
+    <ClInclude Include="poolbase.h" />
+    <ClInclude Include="simpleallocator.h" />
+    <ClInclude Include="threadsafe_singleton.h" />
+    <ClInclude Include="tick_tool.h" />
+    <ClInclude Include="type.h" />
+  </ItemGroup>
+</Project>
