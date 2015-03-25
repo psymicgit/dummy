@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="robot.cpp" />
+    <ClCompile Include="robotmgr.cpp" />
+    <ClCompile Include="..\protocol\client.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\protocol.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="robot.h" />
+    <ClInclude Include="robotmgr.h" />
+    <ClInclude Include="..\protocol\client.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\protocol.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="robotmsghandler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{6f23cb59-f93b-4133-9682-711d44bff426}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

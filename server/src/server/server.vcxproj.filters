@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="server.h" />
+    <ClInclude Include="tool\filetool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="def\type.h">
+      <Filter>def</Filter>
+    </ClInclude>
+    <ClInclude Include="net\netaddress.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\endiantool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="def\platform.h">
+      <Filter>def</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\sockettool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="log\log.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="net\listener.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\net.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\taskqueue.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="net\netfactory.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\singleton.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\thread.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\lock.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="net\link.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\timetool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\timerqueue.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="net\netreactor.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\buffer.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="net\connector.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\timertool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\bind.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="net\msgdispatcher.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\protocol.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\net.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\message.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="net\serverlink.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\servertool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\protocol.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="net\session.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\encrypttool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\randtool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="net\imsghandler.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\msghandler.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\netmsghandler.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="tool">
+      <UniqueIdentifier>{5db7ebd0-7f5e-4c97-84a2-f3e86a4d5091}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{a0ef870b-9955-45eb-afd7-a401bed953d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="def">
+      <UniqueIdentifier>{ad1a6770-b64a-4193-8d18-546344da1f6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{21a45f05-786a-4f43-9101-07852fd6bd8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="basic">
+      <UniqueIdentifier>{9191102b-5521-42b6-92e3-0ef5d6090a03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{eb5753f9-d0ff-4471-ad75-3943fe08baea}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="server.cpp" />
+    <ClCompile Include="tool\filetool.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="net\netaddress.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\endiantool.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\sockettool.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="log\log.cpp">
+      <Filter>log</Filter>
+    </ClCompile>
+    <ClCompile Include="net\listener.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\net.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\netfactory.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\taskqueue.cpp">
+      <Filter>basic</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\thread.cpp">
+      <Filter>basic</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\lock.cpp">
+      <Filter>basic</Filter>
+    </ClCompile>
+    <ClCompile Include="net\link.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\timetool.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\timerqueue.cpp">
+      <Filter>basic</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\buffer.cpp">
+      <Filter>basic</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="net\connector.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\timertool.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="net\msgdispatcher.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\net.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="net\serverlink.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="protocol\message.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\servertool.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\protocol.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\randtool.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\encrypttool.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="net\msghandler.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

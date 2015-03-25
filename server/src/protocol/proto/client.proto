@@ -1,0 +1,30 @@
+enum EncryptKeyDef {
+	EncryptKeyLen = 32; // 新创建角色
+	EncryptHeadLen = 2; // 加解密头大小，保存使用的密钥偏移量和使用的密钥字节数
+	EncryptTailLen = 4; // 加解密尾大小，保存检验和
+}
+
+message EncryptKeyNtf
+{
+	required string encryptKey = 1;
+}
+
+message LoginReq
+{
+	enum LoginType {
+		NewRole = 0; // 新创建角色
+		OldRole = 1; // 旧角色
+	}
+
+	required int32 clientVersion = 1; // 客户端版本号
+    required string deviceid = 2; // 设备号
+    required string notifyid = 3; // 通知号
+    required string username = 4; // 用户名
+	required int32 zoneid = 5; // 区ID
+	required int32 userid = 6; //用户Id
+	required int32 playerid = 7; // 玩家Id
+	required string job = 8; // 职业
+	required LoginType loginType = 9; // 操作类别
+	required int32 authType = 10; //认证类型
+	required string authKey = 11; //认证字符串
+}

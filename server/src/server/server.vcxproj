@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EB348CE6-1B88-46B8-B07B-6B38EAD9CE83}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>server</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+    <EmbedManifest>false</EmbedManifest>
+    <OutDir>../../lib/</OutDir>
+    <IntDir>../../bin/$(ProjectName)/$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>./;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;libglog_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>ws2_32.lib;libglog_static.lib;libprotobuf.lib;libprotobuf-lite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\protocol\net.pb.h" />
+    <ClInclude Include="..\protocol\protocol.pb.h" />
+    <ClInclude Include="basic\bind.h" />
+    <ClInclude Include="basic\buffer.h" />
+    <ClInclude Include="basic\lock.h" />
+    <ClInclude Include="basic\singleton.h" />
+    <ClInclude Include="basic\taskqueue.h" />
+    <ClInclude Include="basic\thread.h" />
+    <ClInclude Include="basic\timerqueue.h" />
+    <ClInclude Include="def\platform.h" />
+    <ClInclude Include="def\type.h" />
+    <ClInclude Include="log\log.h" />
+    <ClInclude Include="net\connector.h" />
+    <ClInclude Include="net\imsghandler.h" />
+    <ClInclude Include="net\link.h" />
+    <ClInclude Include="net\listener.h" />
+    <ClInclude Include="net\msgdispatcher.h" />
+    <ClInclude Include="net\msghandler.h" />
+    <ClInclude Include="net\net.h" />
+    <ClInclude Include="net\netaddress.h" />
+    <ClInclude Include="net\netfactory.h" />
+    <ClInclude Include="net\netreactor.h" />
+    <ClInclude Include="net\serverlink.h" />
+    <ClInclude Include="net\session.h" />
+    <ClInclude Include="protocol\message.h" />
+    <ClInclude Include="protocol\netmsghandler.h" />
+    <ClInclude Include="protocol\protocol.h" />
+    <ClInclude Include="server.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="tool\encrypttool.h" />
+    <ClInclude Include="tool\endiantool.h" />
+    <ClInclude Include="tool\filetool.h" />
+    <ClInclude Include="tool\randtool.h" />
+    <ClInclude Include="tool\servertool.h" />
+    <ClInclude Include="tool\sockettool.h" />
+    <ClInclude Include="tool\timertool.h" />
+    <ClInclude Include="tool\timetool.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\protocol\net.pb.cc" />
+    <ClCompile Include="..\protocol\protocol.pb.cc" />
+    <ClCompile Include="basic\buffer.cpp" />
+    <ClCompile Include="basic\lock.cpp" />
+    <ClCompile Include="basic\taskqueue.cpp" />
+    <ClCompile Include="basic\thread.cpp" />
+    <ClCompile Include="basic\timerqueue.cpp" />
+    <ClCompile Include="log\log.cpp" />
+    <ClCompile Include="net\connector.cpp" />
+    <ClCompile Include="net\link.cpp" />
+    <ClCompile Include="net\listener.cpp" />
+    <ClCompile Include="net\msgdispatcher.cpp" />
+    <ClCompile Include="net\msghandler.cpp" />
+    <ClCompile Include="net\net.cpp" />
+    <ClCompile Include="net\netaddress.cpp" />
+    <ClCompile Include="net\netfactory.cpp" />
+    <ClCompile Include="net\serverlink.cpp" />
+    <ClCompile Include="protocol\message.cpp" />
+    <ClCompile Include="server.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="tool\encrypttool.cpp" />
+    <ClCompile Include="tool\endiantool.cpp" />
+    <ClCompile Include="tool\filetool.cpp" />
+    <ClCompile Include="tool\randtool.cpp" />
+    <ClCompile Include="tool\servertool.cpp" />
+    <ClCompile Include="tool\sockettool.cpp" />
+    <ClCompile Include="tool\timertool.cpp" />
+    <ClCompile Include="tool\timetool.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

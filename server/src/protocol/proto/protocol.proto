@@ -1,0 +1,16 @@
+enum NetMsgId
+{
+	eConnectSvrReq = 1; // 连接对端内网服务器请求
+	eConnectSvrAck = 2; // 连接对端内网服务器答复
+}
+
+enum ClientGateMsgId
+{
+	eClientGateMsgIdMin = 1000;
+	eLoginReq	= 1001; // 登录到网关请求
+	eLoginAck	= 1002; // 登录到网关答复
+	eEncryptKeyNtf = 1003; // 通知加密串
+
+	eClientGateMsgIdMax = 2000;
+}
+

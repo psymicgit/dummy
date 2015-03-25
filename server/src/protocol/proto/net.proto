@@ -1,0 +1,22 @@
+message ConnectReq
+{
+	required int32 svrType = 1;
+	required string authKey = 2; // »œ÷§¬Î
+	optional int32 svrId = 3;
+}
+
+
+enum ConnectResult {
+    CONNECT_OK = 0;
+	CONNECT_FAIL_UNKNOWN_SERVER_TYPE = 1;
+    CONNECT_FAIL_FOUND_SAME_SERVER = 2;
+	CONNECT_FAIL_AUTH_KEY_INVALID = 3;
+}
+
+message ConnectResponse
+{
+	required ConnectResult ret = 1;
+
+	required int32 svrType = 2;
+	optional int32 svrId = 3;
+}

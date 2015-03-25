@@ -1,0 +1,27 @@
+1. 主题 : C++跨平台：多线程、定时器、tcp、udp、http等基础设施的轻量级封装，另附测试Demo《SocketTool for Mac》
+	http://www.cocoachina.com/bbs/read.php?tid=190174  
+
+2. <源码>中的<服务器2.rar>
+
+3. c++/c++_tool
+
+4. C++ 后台程序实时性能监控	fflib
+	http://www.cnblogs.com/zhiranok/archive/2012/06/06/cpp_perf.html
+	svn取下来之后，里面的ffown含linux下的线程及锁封装
+
+5. muduo
+	https://github.com/chenshuo/muduo/trunk
+
+6. link库(go语言)
+	https://github.com/funny/link
+
+7. tinynet(里面的tinynet源码)
+	http://blog.chinaunix.net/uid-20671208-id-4440213.html (三种网络数据传输方式比较(byte stream,protobuf,json)) 
+	
+	里面的 https://github.com/yuyunliuhen/tinynet
+
+
+
+性能分析
+1. linux下使用性能分析工具nmon 
+	http://blog.chinaunix.net/uid-8625039-id-4326747.html

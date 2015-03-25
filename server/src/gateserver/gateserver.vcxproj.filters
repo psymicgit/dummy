@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="gateserver.cpp" />
+    <ClCompile Include="net\gamesvrlink.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="net\userlink.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\client.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="net\clientmgr.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\user.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\usermgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="net\client.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gateserver.h" />
+    <ClInclude Include="net\gamesvrlink.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="net\userlink.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\protocol.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\client.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="net\clientmgr.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\client.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\usermgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\user.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="net\clientmsghandler.h">
+      <Filter>net</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="net">
+      <UniqueIdentifier>{a3001c97-8dd1-4f53-9331-d890a090ef6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{8734d580-3ea0-4085-8f78-e6978f1eafb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic">
+      <UniqueIdentifier>{cce8e00c-7ca4-4b22-8477-286a799ffba0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

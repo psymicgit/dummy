@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="gameserver.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="..\protocol\net.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="net\gatelink.h">
+      <Filter>net</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="gameserver.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\protocol\net.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="net\gatelink.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{b08dc400-02e7-4c0c-b6a7-f980d09a3362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{06bfe0d0-0317-4252-8d63-dc3e0f14c06b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic">
+      <UniqueIdentifier>{61dbe058-cca4-49a6-9f83-a0b5b76be352}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

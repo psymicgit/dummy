@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "server\server.vcxproj", "{EB348CE6-1B88-46B8-B07B-6B38EAD9CE83}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gameserver", "gameserver\gameserver.vcxproj", "{0F32A337-691A-40D5-BE02-47CA30E415BF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EB348CE6-1B88-46B8-B07B-6B38EAD9CE83} = {EB348CE6-1B88-46B8-B07B-6B38EAD9CE83}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gateserver", "gateserver\gateserver.vcxproj", "{C5FE3A93-E30B-4DC6-924E-BA9C8EC1FA50}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EB348CE6-1B88-46B8-B07B-6B38EAD9CE83} = {EB348CE6-1B88-46B8-B07B-6B38EAD9CE83}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "robot", "robot\robot.vcxproj", "{DFEE9973-826F-421E-9C8C-3F4108A245CF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EB348CE6-1B88-46B8-B07B-6B38EAD9CE83} = {EB348CE6-1B88-46B8-B07B-6B38EAD9CE83}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB348CE6-1B88-46B8-B07B-6B38EAD9CE83}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EB348CE6-1B88-46B8-B07B-6B38EAD9CE83}.Debug|Win32.Build.0 = Debug|Win32
+		{EB348CE6-1B88-46B8-B07B-6B38EAD9CE83}.Release|Win32.ActiveCfg = Release|Win32
+		{EB348CE6-1B88-46B8-B07B-6B38EAD9CE83}.Release|Win32.Build.0 = Release|Win32
+		{0F32A337-691A-40D5-BE02-47CA30E415BF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0F32A337-691A-40D5-BE02-47CA30E415BF}.Debug|Win32.Build.0 = Debug|Win32
+		{0F32A337-691A-40D5-BE02-47CA30E415BF}.Release|Win32.ActiveCfg = Release|Win32
+		{0F32A337-691A-40D5-BE02-47CA30E415BF}.Release|Win32.Build.0 = Release|Win32
+		{C5FE3A93-E30B-4DC6-924E-BA9C8EC1FA50}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C5FE3A93-E30B-4DC6-924E-BA9C8EC1FA50}.Debug|Win32.Build.0 = Debug|Win32
+		{C5FE3A93-E30B-4DC6-924E-BA9C8EC1FA50}.Release|Win32.ActiveCfg = Release|Win32
+		{C5FE3A93-E30B-4DC6-924E-BA9C8EC1FA50}.Release|Win32.Build.0 = Release|Win32
+		{DFEE9973-826F-421E-9C8C-3F4108A245CF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DFEE9973-826F-421E-9C8C-3F4108A245CF}.Debug|Win32.Build.0 = Debug|Win32
+		{DFEE9973-826F-421E-9C8C-3F4108A245CF}.Release|Win32.ActiveCfg = Release|Win32
+		{DFEE9973-826F-421E-9C8C-3F4108A245CF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
