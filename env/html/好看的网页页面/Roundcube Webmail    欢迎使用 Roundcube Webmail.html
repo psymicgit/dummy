@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)https://mail.xmniu.com/mail/ -->
+<html class=" js chrome webkit"><script>(function main() {
+
+var w = window;
+
+if (!w.alert.is_nice) {
+
+	w.alert = function alert(msg) {
+
+		if (typeof GM_addStyle == 'undefined') {
+			function GM_addStyle(css) {
+				var head = document.head || document.getElementsByTagName('head')[0];
+				if (head) {
+					var style = document.createElement("style");
+					style.type = "text/css";
+					style.appendChild(document.createTextNode(css));
+					head.appendChild(style);
+				}
+			}
+		}
+
+		GM_addStyle("#nice_alert {\
+	font: 14px/16px sans-serif !important;\
+	position: fixed !important;\
+	top: 0 !important;\
+	right: 0 !important;\
+	margin: 0 !important;\
+	padding: 0 !important;\
+	list-style-type: none !important;\
+	float: left !important;\
+	cursor: pointer !important;\
+	text-align: left !important;\
+	z-index: 9999 !important;\
+}\
+#nice_alert ALERTBOX {\
+	background-color: InfoBackground !important;\
+	color: InfoText !important;\
+	border-bottom: 1px solid rgba(0,0,0,0.3) !important;\
+	margin: 0 !important;\
+	float: right !important;\
+	clear: both !important;\
+	overflow: hidden !important;\
+	font-size: 14px !important;\
+	white-space: pre-wrap !important;\
+	outline: 0 !important;\
+	-webkit-box-shadow: 0px 2px 8px rgba(0,0,0,0.2);\
+	-moz-box-shadow: 0px 2px 8px rgba(0,0,0,0.3);\
+	box-shadow: 0px 2px 8px rgba(0,0,0,0.3);\
+}");
+
+		var nice_alert = document.getElementById('nice_alert') || document.createElement('ALERTGROUP');
+		nice_alert.id = 'nice_alert';
+		document.documentElement.appendChild(nice_alert);
+		nice_alert.addEventListener('click',function(e){
+			var t = e.target;
+			if (t.tagName == 'ALERTBOX') {
+				var h = t.clientHeight - 18;
+				t.style.height = h +'px';
+				var i = 9;
+				var closing = setInterval(function(){
+					i--;
+					t.style.opacity = i/10;
+					t.style.paddingTop = parseInt(t.style.paddingTop) - 1 +'px';
+					t.style.paddingBottom = parseInt(t.style.paddingBottom) - 1 +'px';
+					var currentHeight = parseInt(t.style.height) - h/10;
+					t.style.height = (currentHeight < 0 ? 0 : currentHeight) +'px';
+					if (i < 1) {
+						t.style.display = 'none';
+						clearInterval(closing);
+					}
+				}, 30);
+			}
+		}, false);
+
+		var cache = document.createElement('ALERTBOX');
+		cache.style.padding = '0px 16px';
+		cache.style.opacity = 0;
+		cache.tabIndex = 0;
+
+		(w.alert = function alert (msg) {
+			w.alert.is_nice = 'Of course it is!';
+			var box = cache.cloneNode(false);
+			box.appendChild(document.createTextNode(msg));
+			nice_alert.appendChild(box);
+			var i = 1;
+			var showing = setInterval(function(){
+				box.style.opacity = i/10;
+				i++;
+				box.style.paddingTop = parseInt(box.style.paddingTop) + 1 +'px';
+				box.style.paddingBottom = parseInt(box.style.paddingBottom) + 1 +'px';
+				if (i > 9) {
+					clearInterval(showing);
+				}
+			}, 30);
+		})(msg);
+	
+	};
+	
+}
+
+
+})();</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Roundcube Webmail :: 欢迎使用 Roundcube Webmail</title>
+<meta name="Robots" content="noindex,nofollow">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<link rel="shortcut icon" href="https://mail.xmniu.com/mail/skins/larry/images/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://mail.xmniu.com/mail/skins/larry/styles.css?s=1371395454">
+<!--[if IE 9]><link rel="stylesheet" type="text/css" href="skins/larry/svggradients.css?s=1371395454" /><![endif]-->
+<!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="skins/larry/iehacks.css?s=1371395454" /><![endif]-->
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="skins/larry/ie7hacks.css?s=1371395454" /><![endif]-->
+<link rel="stylesheet" type="text/css" href="https://mail.xmniu.com/mail/plugins/jqueryui/themes/larry/jquery-ui-1.9.1.custom.css?s=1371395453">
+<script type="text/javascript" src="https://mail.xmniu.com/mail/skins/larry/ui.js?s=1371395454"></script>
+
+<script src="https://mail.xmniu.com/mail/program/js/jquery.min.js?s=1371395453" type="text/javascript"></script>
+<script src="https://mail.xmniu.com/mail/program/js/common.js?s=1371395453" type="text/javascript"></script>
+<script src="https://mail.xmniu.com/mail/program/js/app.js?s=1371395453" type="text/javascript"></script>
+<script src="https://mail.xmniu.com/mail/program/js/jstz.min.js?s=1371395453" type="text/javascript"></script>
+<script type="text/javascript">
+
+var rcmail = new rcube_webmail();
+rcmail.set_env({"task":"login","x_frame_options":"sameorigin","cookie_domain":"","cookie_path":"\/","cookie_secure":"1","skin":"larry","refresh_interval":60,"session_lifetime":600,"action":"","comm_path":".\/?_task=login","date_format":"yy-mm-dd","request_token":"ca2c220bb9576d0252e38b5b347d9437"});
+rcmail.gui_container("loginfooter","bottomline");
+rcmail.add_label({"loading":"\u6b63\u5728\u767b\u5f55...","servererror":"\u670d\u52a1\u5668\u9519\u8bef\uff01","requesttimedout":"\u8bf7\u6c42\u8d85\u65f6","refreshing":"\u6b63\u5728\u5237\u65b0..."});
+rcmail.gui_object('loginform', 'form');
+rcmail.gui_object('message', 'message');
+</script>
+
+<script type="text/javascript" src="https://mail.xmniu.com/mail/plugins/jqueryui/js/jquery-ui-1.9.1.custom.min.js?s=1371395453"></script>
+<script type="text/javascript" src="https://mail.xmniu.com/mail/plugins/jqueryui/js/i18n/jquery.ui.datepicker-zh-CN.js?s=1371395453"></script>
+<link rel="stylesheet" type="text/css" href="chrome-extension://iopbckiipcchfjgijddbfhfakdbdmgjk/css/style.css"><link rel="stylesheet" type="text/css" href="chrome-extension://iopbckiipcchfjgijddbfhfakdbdmgjk/css/jquery.autocomplete.css"><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+
+<div id="login-form">
+<div class="box-inner">
+<img src="https://mail.xmniu.com/mail/skins/larry/images/roundcube_logo.png" id="logo" border="0" alt="Roundcube Webmail">
+
+<form name="form" action="./Roundcube Webmail    欢迎使用 Roundcube Webmail_files/Roundcube Webmail    欢迎使用 Roundcube Webmail.html" method="post">
+<input type="hidden" name="_token" value="ca2c220bb9576d0252e38b5b347d9437">
+<input type="hidden" name="_task" value="login"><input type="hidden" name="_action" value="login"><input type="hidden" name="_timezone" id="rcmlogintz" value="Asia/Shanghai"><input type="hidden" name="_url" id="rcmloginurl" value=""><table><tbody><tr><td class="title"><label for="rcmloginuser">用户名</label>
+</td>
+<td class="input"><input name="_user" id="rcmloginuser" size="40" autocapitalize="off" type="text" autocomplete="off" style="cursor: auto; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDhss3LcOZQAAAU5JREFUOMvdkzFLA0EQhd/bO7iIYmklaCUopLAQA6KNaawt9BeIgnUwLHPJRchfEBR7CyGWgiDY2SlIQBT/gDaCoGDudiy8SLwkBiwz1c7y+GZ25i0wnFEqlSZFZKGdi8iiiOR7aU32QkR2c7ncPcljAARAkgckb8IwrGf1fg/oJ8lRAHkR2VDVmOQ8AKjqY1bMHgCGYXhFchnAg6omJGcBXEZRtNoXYK2dMsaMt1qtD9/3p40x5yS9tHICYF1Vn0mOxXH8Uq/Xb389wff9PQDbQRB0t/QNOiPZ1h4B2MoO0fxnYz8dOOcOVbWhqq8kJzzPa3RAXZIkawCenHMjJN/+GiIqlcoFgKKq3pEMAMwAuCa5VK1W3SAfbAIopum+cy5KzwXn3M5AI6XVYlVt1mq1U8/zTlS1CeC9j2+6o1wuz1lrVzpWXLDWTg3pz/0CQnd2Jos49xUAAAAASUVORK5CYII=); background-attachment: scroll; background-position: 100% 50%; background-repeat: no-repeat;"></td>
+</tr>
+<tr><td class="title"><label for="rcmloginpwd">密码</label>
+</td>
+<td class="input"><input name="_pass" id="rcmloginpwd" size="40" autocapitalize="off" type="password" autocomplete="off" style="cursor: auto; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDhss3LcOZQAAAU5JREFUOMvdkzFLA0EQhd/bO7iIYmklaCUopLAQA6KNaawt9BeIgnUwLHPJRchfEBR7CyGWgiDY2SlIQBT/gDaCoGDudiy8SLwkBiwz1c7y+GZ25i0wnFEqlSZFZKGdi8iiiOR7aU32QkR2c7ncPcljAARAkgckb8IwrGf1fg/oJ8lRAHkR2VDVmOQ8AKjqY1bMHgCGYXhFchnAg6omJGcBXEZRtNoXYK2dMsaMt1qtD9/3p40x5yS9tHICYF1Vn0mOxXH8Uq/Xb389wff9PQDbQRB0t/QNOiPZ1h4B2MoO0fxnYz8dOOcOVbWhqq8kJzzPa3RAXZIkawCenHMjJN/+GiIqlcoFgKKq3pEMAMwAuCa5VK1W3SAfbAIopum+cy5KzwXn3M5AI6XVYlVt1mq1U8/zTlS1CeC9j2+6o1wuz1lrVzpWXLDWTg3pz/0CQnd2Jos49xUAAAAASUVORK5CYII=); background-attachment: scroll; background-position: 100% 50%; background-repeat: no-repeat;"></td>
+</tr>
+</tbody>
+</table>
+
+
+<p class="formbuttons"><input type="submit" class="button mainaction" value="登录"></p>
+
+</form>
+</div>
+
+<div class="box-bottom">
+	<div id="message"></div>
+	<noscript>
+		&lt;p class="noscriptwarning"&gt;警告：本程序需要 Javascript 支持！请在浏览器设置中启用 Javascript。&lt;/p&gt;
+	</noscript>
+</div>
+
+<div id="bottomline">
+	Roundcube Webmail 
+		
+</div>
+</div>
+
+<script type="text/javascript">
+
+// UI startup
+var UI = new rcube_mail_ui();
+$(document).ready(function(){
+	UI.set('errortitle', '发生错误！');
+	UI.init();
+});
+
+</script>
+
+
+
+
+
+<script type="text/javascript">
+
+jQuery.extend(jQuery.ui.dialog.prototype.options.position, {
+                using: function(pos) {
+                    var me = jQuery(this),
+                        offset = me.css(pos).offset(),
+                        topOffset = offset.top - 12;
+                    if (topOffset < 0)
+                        me.css('top', pos.top - topOffset);
+                    if (offset.left + me.outerWidth() + 12 > jQuery(window).width())
+                        me.css('left', pos.left - 12);
+                }
+            });
+$(document).ready(function(){ 
+rcmail.init();
+var images = ["skins\/larry\/images\/ajaxloader.gif","skins\/larry\/images\/buttons.png","skins\/larry\/images\/addcontact.png","skins\/larry\/images\/filetypes.png","skins\/larry\/images\/listicons.png","skins\/larry\/images\/messages.png","skins\/larry\/images\/quota.png","skins\/larry\/images\/selector.png","skins\/larry\/images\/splitter.png","skins\/larry\/images\/watermark.jpg"];
+            for (var i=0; i<images.length; i++) {
+                img = new Image();
+                img.src = images[i];
+            }
+});
+</script>
+
+
+<script id="hiddenlpsubmitdiv" style="display: none;"></script><script>try{for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){ var lastpass_f = document.forms[lastpass_iter]; if(typeof(lastpass_f.lpsubmitorig2)=="undefined"){ lastpass_f.lpsubmitorig2 = lastpass_f.submit; lastpass_f.submit = function(){ var form=this; var customEvent = document.createEvent("Event"); customEvent.initEvent("lpCustomEvent", true, true); var d = document.getElementById("hiddenlpsubmitdiv"); if (d) {for(var i = 0; i < document.forms.length; i++){ if(document.forms[i]==form){ d.innerText=i; } } d.dispatchEvent(customEvent); }form.lpsubmitorig2(); } } }}catch(e){}</script></body></html>

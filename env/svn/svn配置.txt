@@ -1,0 +1,2 @@
+svn忽略文件类型
+	*.o *.lo *.la *.al .libs *.so *.so.[0-9]* *.a *.pyc *.pyo __pycache__ *.rej *~ #*# .#* .*.swp .DS_Store *.vshost.exe *.manifest *.pdb *.cache *.xds *.suo bin debug Debug obj *.dsd *.ipch ipch *.ilk *.user *.sdf *.opensdf *.d *.obj *.log *.pdb *.dat *.dmp *.pch *.tlog *.unsuccessfulbuild *.idb *.lastbuildstate *.exe *.exp *.lib bin *.lib *.xml .git Debug *.bat *.rc exchangeDlg.* resource.h make_end

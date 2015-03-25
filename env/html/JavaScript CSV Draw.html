@@ -1,0 +1,686 @@
+
+<!-- saved from url=(0030)http://ffown.sinaapp.com/perf/ -->
+<html><script>(function main() {
+
+var w = window;
+
+if (!w.alert.is_nice) {
+
+	w.alert = function alert(msg) {
+
+		if (typeof GM_addStyle == 'undefined') {
+			function GM_addStyle(css) {
+				var head = document.head || document.getElementsByTagName('head')[0];
+				if (head) {
+					var style = document.createElement("style");
+					style.type = "text/css";
+					style.appendChild(document.createTextNode(css));
+					head.appendChild(style);
+				}
+			}
+		}
+
+		GM_addStyle("#nice_alert {\
+	font: 14px/16px sans-serif !important;\
+	position: fixed !important;\
+	top: 0 !important;\
+	right: 0 !important;\
+	margin: 0 !important;\
+	padding: 0 !important;\
+	list-style-type: none !important;\
+	float: left !important;\
+	cursor: pointer !important;\
+	text-align: left !important;\
+	z-index: 9999 !important;\
+}\
+#nice_alert ALERTBOX {\
+	background-color: InfoBackground !important;\
+	color: InfoText !important;\
+	border-bottom: 1px solid rgba(0,0,0,0.3) !important;\
+	margin: 0 !important;\
+	float: right !important;\
+	clear: both !important;\
+	overflow: hidden !important;\
+	font-size: 14px !important;\
+	white-space: pre-wrap !important;\
+	outline: 0 !important;\
+	-webkit-box-shadow: 0px 2px 8px rgba(0,0,0,0.2);\
+	-moz-box-shadow: 0px 2px 8px rgba(0,0,0,0.3);\
+	box-shadow: 0px 2px 8px rgba(0,0,0,0.3);\
+}");
+
+		var nice_alert = document.getElementById('nice_alert') || document.createElement('ALERTGROUP');
+		nice_alert.id = 'nice_alert';
+		document.documentElement.appendChild(nice_alert);
+		nice_alert.addEventListener('click',function(e){
+			var t = e.target;
+			if (t.tagName == 'ALERTBOX') {
+				var h = t.clientHeight - 18;
+				t.style.height = h +'px';
+				var i = 9;
+				var closing = setInterval(function(){
+					i--;
+					t.style.opacity = i/10;
+					t.style.paddingTop = parseInt(t.style.paddingTop) - 1 +'px';
+					t.style.paddingBottom = parseInt(t.style.paddingBottom) - 1 +'px';
+					var currentHeight = parseInt(t.style.height) - h/10;
+					t.style.height = (currentHeight < 0 ? 0 : currentHeight) +'px';
+					if (i < 1) {
+						t.style.display = 'none';
+						clearInterval(closing);
+					}
+				}, 30);
+			}
+		}, false);
+
+		var cache = document.createElement('ALERTBOX');
+		cache.style.padding = '0px 16px';
+		cache.style.opacity = 0;
+		cache.tabIndex = 0;
+
+		(w.alert = function alert (msg) {
+			w.alert.is_nice = 'Of course it is!';
+			var box = cache.cloneNode(false);
+			box.appendChild(document.createTextNode(msg));
+			nice_alert.appendChild(box);
+			var i = 1;
+			var showing = setInterval(function(){
+				box.style.opacity = i/10;
+				i++;
+				box.style.paddingTop = parseInt(box.style.paddingTop) + 1 +'px';
+				box.style.paddingBottom = parseInt(box.style.paddingBottom) + 1 +'px';
+				if (i > 9) {
+					clearInterval(showing);
+				}
+			}, 30);
+		})(msg);
+	
+	};
+	
+}
+
+
+})();</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+	<title>JavaScript CSV Draw</title>
+<link rel="stylesheet" type="text/css" href="chrome-extension://iopbckiipcchfjgijddbfhfakdbdmgjk/css/style.css"><link rel="stylesheet" type="text/css" href="chrome-extension://iopbckiipcchfjgijddbfhfakdbdmgjk/css/jquery.autocomplete.css"></head>
+<body>
+<div id="content">
+  <div id="indiv">
+  <a href="http://ffown.sinaapp.com/perf/showcsv.html"> show CSV/JSON </a>
+	<h1>A simple CSV Draw demo</h1> 
+	<textarea id="incsv" rows="10" cols="100">time,mod,max_cost[us],min_cost[us],per_cost[us],request_per_second,exe_times
+20120606-17:01:41,dumy,515,174,254,3937,390
+20120606-17:01:41,foo,5924,4,506,1976,1030
+20120606-17:01:41,test,304,8,243,4115,185
+time,mod,max_cost[us],min_cost[us],per_cost[us],request_per_second,exe_times
+20120606-17:11:41,dumy,1086,222,280,5571,312
+20120606-17:11:41,foo,5707,194,503,1988,770
+20120606-17:11:41,test,807,8,265,3773,142
+time,mod,max_cost[us],min_cost[us],per_cost[us],request_per_second,exe_times
+20120606-17:21:41,dumy,1086,222,680,2571,512
+20120606-17:21:41,foo,5707,194,403,1388,470
+20120606-17:21:41,test,807,8,265,4773,442</textarea>
+        <button type="button" id="butt">转换</button>
+        
+        <p>
+           不包含 <input id="FilterExclude" style="WIDTH:200px;   HEIGHT: 21px" type="input" maxlength="50" size="38" name="FilterExclude" value="PY,GS,c00,41f">
+           包含   <input id="FilterInclude" style="WIDTH:200px;   HEIGHT: 21px" type="input" maxlength="50" size="38" name="FilterInclude" value="NotifyPlayerMoving,bc3,bc5"> 
+           执行次数必须大于   <input id="minLimitExeTimes" style="WIDTH:50px;   HEIGHT: 21px" type="input" maxlength="50" size="38" name="minLimitExeTimes" value="100"> 
+           注意为显示方便，request_per_second&gt;4000 统一显示为4000
+        </p>
+  </div>
+
+  <div id="outdiv">
+  </div>
+  <div id="graph"></div>
+
+</div>
+
+
+
+<script type="text/javascript" src="./JavaScript CSV Draw_files/jquery.js"></script>
+<script src="./JavaScript CSV Draw_files/ucsv-1.1.0.js"></script>
+<script src="./JavaScript CSV Draw_files/highcharts.js" type="text/javascript"></script>
+<script src="./JavaScript CSV Draw_files/exporting.js"></script>
+
+<script>
+
+function apple_theme()
+{
+/**
+* Gray theme for Highcharts JS
+* @author Torstein Hønsi
+*/
+
+Highcharts.theme = {
+   colors: ["#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee",
+      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+   chart: {
+      backgroundColor: {
+         linearGradient: [0, 0, 0, 400],
+         stops: [
+            [0, 'rgb(96, 96, 96)'],
+            [1, 'rgb(16, 16, 16)']
+         ]
+      },
+      borderWidth: 0,
+      borderRadius: 15,
+      plotBackgroundColor: null,
+      plotShadow: false,
+      plotBorderWidth: 0
+   },
+   title: {
+      style: {
+         color: '#FFF',
+         font: '16px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+      }
+   },
+   subtitle: {
+      style: {
+         color: '#DDD',
+         font: '12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+      }
+   },
+   xAxis: {
+      gridLineWidth: 0,
+      lineColor: '#999',
+      tickColor: '#999',
+      labels: {
+         style: {
+            color: '#999',
+            fontWeight: 'bold'
+         }
+      },
+      title: {
+         style: {
+            color: '#AAA',
+            font: 'bold 12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+         }
+      }
+   },
+   yAxis: {
+      alternateGridColor: null,
+      minorTickInterval: null,
+      gridLineColor: 'rgba(255, 255, 255, .1)',
+      lineWidth: 0,
+      tickWidth: 0,
+      labels: {
+         style: {
+            color: '#999',
+            fontWeight: 'bold'
+         }
+      },
+      title: {
+         style: {
+            color: '#AAA',
+            font: 'bold 12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+         }
+      }
+   },
+   legend: {
+      itemStyle: {
+         color: '#CCC'
+      },
+      itemHoverStyle: {
+         color: '#FFF'
+      },
+      itemHiddenStyle: {
+         color: '#333'
+      }
+   },
+   labels: {
+      style: {
+         color: '#CCC'
+      }
+   },
+   tooltip: {
+      backgroundColor: {
+         linearGradient: [0, 0, 0, 50],
+         stops: [
+            [0, 'rgba(96, 96, 96, .8)'],
+            [1, 'rgba(16, 16, 16, .8)']
+         ]
+      },
+      borderWidth: 0,
+      style: {
+         color: '#FFF'
+      }
+   },
+
+
+   plotOptions: {
+      line: {
+         dataLabels: {
+            color: '#CCC'
+         },
+         marker: {
+            lineColor: '#333'
+         }
+      },
+      spline: {
+         marker: {
+            lineColor: '#333'
+         }
+      },
+      scatter: {
+         marker: {
+            lineColor: '#333'
+         }
+      },
+      candlestick: {
+         lineColor: 'white'
+      }
+   },
+
+   toolbar: {
+      itemStyle: {
+         color: '#CCC'
+      }
+   },
+
+   navigation: {
+      buttonOptions: {
+         backgroundColor: {
+            linearGradient: [0, 0, 0, 20],
+            stops: [
+               [0.4, '#606060'],
+               [0.6, '#333333']
+            ]
+         },
+         borderColor: '#000000',
+         symbolStroke: '#C0C0C0',
+         hoverSymbolStroke: '#FFFFFF'
+      }
+   },
+
+   exporting: {
+      buttons: {
+         exportButton: {
+            symbolFill: '#55BE3B'
+         },
+         printButton: {
+            symbolFill: '#7797BE'
+         }
+      }
+   },
+
+   // scroll charts
+   rangeSelector: {
+      buttonTheme: {
+         fill: {
+            linearGradient: [0, 0, 0, 20],
+            stops: [
+               [0.4, '#888'],
+               [0.6, '#555']
+            ]
+         },
+         stroke: '#000000',
+         style: {
+            color: '#CCC',
+            fontWeight: 'bold'
+         },
+         states: {
+            hover: {
+               fill: {
+                  linearGradient: [0, 0, 0, 20],
+                  stops: [
+                     [0.4, '#BBB'],
+                     [0.6, '#888']
+                  ]
+               },
+               stroke: '#000000',
+               style: {
+                  color: 'white'
+               }
+            },
+            select: {
+               fill: {
+                  linearGradient: [0, 0, 0, 20],
+                  stops: [
+                     [0.1, '#000'],
+                     [0.3, '#333']
+                  ]
+               },
+               stroke: '#000000',
+               style: {
+                  color: 'yellow'
+               }
+            }
+         }
+      },
+      inputStyle: {
+         backgroundColor: '#333',
+         color: 'silver'
+      },
+      labelStyle: {
+         color: 'silver'
+      }
+   },
+
+   navigator: {
+      handles: {
+         backgroundColor: '#666',
+         borderColor: '#AAA'
+      },
+      outlineColor: '#CCC',
+      maskFill: 'rgba(16, 16, 16, 0.5)',
+      series: {
+         color: '#7798BF',
+         lineColor: '#A6C7ED'
+      }
+   },
+
+   scrollbar: {
+      barBackgroundColor: {
+            linearGradient: [0, 0, 0, 20],
+            stops: [
+               [0.4, '#888'],
+               [0.6, '#555']
+            ]
+         },
+      barBorderColor: '#CCC',
+      buttonArrowColor: '#CCC',
+      buttonBackgroundColor: {
+            linearGradient: [0, 0, 0, 20],
+            stops: [
+               [0.4, '#888'],
+               [0.6, '#555']
+            ]
+         },
+      buttonBorderColor: '#CCC',
+      rifleColor: '#FFF',
+      trackBackgroundColor: {
+         linearGradient: [0, 0, 0, 10],
+         stops: [
+            [0, '#000'],
+            [1, '#333']
+         ]
+      },
+      trackBorderColor: '#666'
+   },
+
+   // special colors for some of the demo examples
+   legendBackgroundColor: 'rgba(48, 48, 48, 0.8)',
+   legendBackgroundColorSolid: 'rgb(70, 70, 70)',
+   dataLabelsColor: '#444',
+   textColor: '#E0E0E0',
+   maskColor: 'rgba(255,255,255,0.3)'
+};
+
+// Apply the theme
+var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
+}
+
+function showLine(x_array, data_array)
+{
+    /*
+    var x_array    = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    var data_array = [{
+                            name: 'Tokyo',
+                            data: [1000.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 20000.6]
+                        }, {
+                            name: 'New York',
+                            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+                        }, {
+                            name: 'Berlin',
+                            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+                        }, {
+                            name: 'London',
+                            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                        }]
+    */
+        var chart;
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'line_container',
+                type: 'spline',
+                marginRight: 130,
+                marginBottom: 50
+            },
+            title: {
+                text: 'reques per seconds 各接口性能监控',
+                x: -20 //center
+            },
+            subtitle: {
+                text: '接口性能线形图',
+                x: -20
+            },
+            xAxis: {
+                categories: x_array
+            },
+            yAxis: {
+                title: {
+                    text: 'request per seconds'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>'+
+                        this.x +': '+ this.y +' request_per_second';
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: data_array
+        });
+
+    }
+
+function showCombinations(x_array, data_array)
+{
+    //var x_array = ['1', '2', 'Apples', 'Oranges', 'Pears', 'Bananas', 'Plums']
+    var color_index = 0;
+    var color_arr  = ['#1072A7','#3572A7','#89A54E','#45A54E','#5A54E'];
+    var pie_data_arr = []
+    var pie_data = {
+		type: 'pie',
+		name: '调用次数汇总',
+		data: [],
+		center: [100, 80],
+		size: 100,
+		showInLegend: false,
+		dataLabels: {
+			enabled: false
+		}
+	}
+    for (var m in data_array){
+        //data_array[m]['type'] = 'line';
+        var total = data_array[m]['total_exe_times'];
+        pie_data['data'].push({
+			name: data_array[m]['name'],
+			y: total,
+			color: color_arr[color_index++ % color_arr.length]
+		});
+		pie_data_arr.push({ 'type': 'spline', 'name': data_array[m]['name'], 'data': data_array[m]['exe_times'] })
+    }
+    pie_data_arr.push(pie_data);
+
+    var chart = new Highcharts.Chart({
+		chart: {
+		renderTo: 'bar_container'
+		},
+		title: {
+			text: '单位时间执行次数热点分析图'
+		},
+		xAxis: {
+			categories: x_array
+		},
+
+		tooltip: {
+			formatter: function() {
+				var s;
+				if (this.point.name) { // the pie chart
+					s = ''+
+						this.point.name +': '+ this.y + ' exe times';
+				} else {
+					s = ''+
+						this.x  +': '+ this.y + ' exe times';
+				}
+				return s;
+			}
+		},
+		labels: {
+			items: [{
+				html: '热点分析图',
+				style: {
+					left: '40px',
+					top: '8px',
+					color: 'black'
+				}
+			}]
+		},
+		series: pie_data_arr
+	});
+}
+
+function showGraph(x_array, data_array)
+{
+    apple_theme();
+    showLine(x_array, data_array);
+    showCombinations(x_array, data_array);
+}
+
+function showCSV() {
+    //! 过滤关键字，若有不重要的接口，应该过滤掉
+    var arrFilterExclude = $('#FilterExclude').val().split(',');
+    var arrFilterInclude = $('#FilterInclude').val().split(',');
+
+    var setFilterExclude = {}
+    var setFilterInclude = {}
+
+    for (var i = 0; i < arrFilterExclude.length; ++i) {
+        if (arrFilterExclude[i].length > 0) setFilterExclude[arrFilterExclude[i]] = arrFilterExclude[i];
+    }
+    for (var i = 0; i < arrFilterInclude.length; ++i) {
+        if (arrFilterInclude[i].length > 0) setFilterInclude[arrFilterInclude[i]] = arrFilterInclude[i];
+    }
+    //! 过滤那些调用次数很少的接口
+    var minLimitTimes = $('#minLimitExeTimes').val();
+
+    var i, j, row, out = '<hr>';
+	cell = '';
+	csv = $('#incsv').val(); // get the input from the textbox
+	arr = CSV.csvToArray(csv, true); // Convert the csv into an array
+
+    var ret_data = {}
+
+    var x_array    = [];
+    x_array.push
+    var data_array = [];
+
+    var cur_valid_row_num = 0;
+	// Each item in the array is a row from the csv
+	// walk each row and create table cells for them
+	// time,mod,max_cost[us],min_cost[us],per_cost[us],request_per_second,exe_times
+        var last_time_str = ''
+	for (i = 0; i < arr.length; i += 1) {
+		row = arr[i];
+        time = row[0];
+        mod  = row[1];
+        max_cost = row[2];
+        min_cost = row[3];
+        per_cost = row[4];
+        request_per_second = row[5];
+        exe_times = row[6];
+
+		if (time == 'time'){
+                    cur_valid_row_num += 1;
+		    continue;
+		}
+
+		//! 如果调用次数太少，那么过滤掉
+		if (exe_times < minLimitTimes) {
+		    setFilterExclude[mod] = mod;
+		}
+        //! 过滤不太重要的接口
+		var flag = true;
+		for (var k in setFilterExclude) {
+		    if (mod.indexOf(setFilterExclude[k]) != -1) {
+		        flag = false;
+		        break;
+		    }
+		}
+		if (false == flag) {
+		    for (var k in setFilterInclude) {
+		        if (mod.indexOf(setFilterInclude[k]) != -1) {
+		            flag = true;
+		            break;
+		        }
+		    }
+		}
+		
+		if (false == flag) continue;
+
+        if (request_per_second > 4000) request_per_second = 4000;
+        
+		time_str = time.substring(0, 4) + "<br>" + time.substring(4, 8)+ "<br>" + time.substring(9);
+
+        if (false == ret_data.hasOwnProperty(mod)) {
+            ret_data[mod] = {'name' : mod, 'data': [], 'total_exe_times':0, 'exe_times':[]}
+            data_array.push(ret_data[mod]);
+        }
+        
+        for (n = ret_data[mod]['data'].length; n < cur_valid_row_num; n += 1){
+            if (ret_data[mod]['data'].length == 0){
+                ret_data[mod]['data'].push(0);
+                ret_data[mod]['exe_times'].push(0);
+            }
+            else{
+                ret_data[mod]['data'].push(ret_data[mod]['data'][ret_data[mod]['data'].length - 1]);
+                ret_data[mod]['exe_times'].push(0);
+            }
+        }
+
+        ret_data[mod]['data'].push(request_per_second);
+        ret_data[mod]['exe_times'].push(exe_times);
+
+        ret_data[mod]['total_exe_times'] += exe_times;
+        if (time != last_time_str)
+        {
+        	x_array.push(time_str);
+                last_time_str = time;
+        }
+	}
+
+	// replace the current data with the new imported data
+	//$('#outdiv').html(out);
+
+    for(var key in ret_data) {
+        var n = ret_data[key]['data'].length;
+        for (; n < cur_valid_row_num; n += 1){
+            ret_data[key]['data'].push(ret_data[key]['data'][ret_data[key]['data'].length - 1]);
+        }
+        var n = ret_data[key]['exe_times'].length;
+        for (; n < cur_valid_row_num; n += 1){
+            ret_data[key]['exe_times'].push(0);
+        }
+    }
+	showGraph(x_array, data_array);    
+}
+
+  
+$(document).ready( function() {
+    $('#butt').click(showCSV);
+});
+</script>
+
+<div id="line_container" style="min-width: 400px; height: 800px; margin: 10 auto"></div>
+<div id="bar_container" style="min-width: 400px; height: 600px; margin: 10 auto"></div>
+
+
+
+</body></html>
