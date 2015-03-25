@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="propapi.cpp">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="keyutil.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\svr_data\ActivityProp.cpp">
+      <Filter>prop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\svr_data\AwardProp.cpp">
+      <Filter>prop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\svr_data\BagProp.cpp">
+      <Filter>prop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\svr_data\EquipMasterProp.cpp">
+      <Filter>prop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\svr_data\ItemProp.cpp">
+      <Filter>prop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\svr_data\NickFilterProp.cpp">
+      <Filter>prop</Filter>
+    </ClCompile>
+    <ClCompile Include="tickutil.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\prop_declare\str_util.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="api">
+      <UniqueIdentifier>{3a573145-90db-4e79-8d5e-a63fef3afb3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="prop">
+      <UniqueIdentifier>{1d137b19-47d2-44fa-b353-617b706709e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{aa2e16d6-5ff1-4ea3-9536-9d25d5b5f160}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="powerups.h" />
+    <ClInclude Include="propapi.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="type.h" />
+    <ClInclude Include="keyutil.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\svr_data\ActivityProp.h">
+      <Filter>prop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\svr_data\AwardProp.h">
+      <Filter>prop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\svr_data\BagProp.h">
+      <Filter>prop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\svr_data\EquipMasterProp.h">
+      <Filter>prop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\svr_data\ItemProp.h">
+      <Filter>prop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\svr_data\NickFilterProp.h">
+      <Filter>prop</Filter>
+    </ClInclude>
+    <ClInclude Include="tickutil.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\prop_declare\str_util.h">
+      <Filter>util</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

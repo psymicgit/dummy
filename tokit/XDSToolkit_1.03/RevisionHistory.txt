@@ -1,0 +1,46 @@
+XDS Toolkit & Library -- Revision History
+
+
+1.03 May 6, 2004
+
+* changed build target directory of release versions of xdsMakeSchema and
+  xdsConvert to ..\..\binaries (where the pre-built versions are found)
+* XDS Lite Library Trie implementation changed to
+  1. fix bug when inserting proper prefix of existing key
+  2. add bulletproofing against invalid keys
+  3. add debug printing support
+  4. add minor performance optimizations
+  (100% code coverage testing was also performed for CTrie)
+* XDS Lite Library XML parser changed to
+  1. fix bug when reading arrays that are part of a structure
+  2. add bulletproofing against badly formed XML documents
+* xdsMakeSchema changed to correct console comment output when generating
+  an XDS schema
+
+
+1.02 Apr 30, 2004
+
+* Fixed various memory leaks -- mostly in XDSXMLParser.cpp
+* XDS Lite library changed to fix structure alignment errors
+* xdsConvert changed to support DSD files larger than 1024 bytes (Fix by Lloyd
+  Weehuizen).
+* xdsMakeSchema changed to correct handling of typedefs
+* xdsMakeSchema changed to correct handling of arrays of character pointers
+
+
+1.01 Apr 21, 2004
+
+* xdsMakeSchema changed to correct order of evaluation during generation of
+  complex terminal types (e.g. arrays of pointers) 
+* xdsMakeSchema changed to prevent out-of-order generation of type IDs. This
+  would occur when using a new type for the first time within a structure. 
+* xdsMakeSchema changed to use correct default record length size when using
+  default record name. Also changed XDS Lite library to check for and report
+  invalid record length sizes. 
+* xdsConvert changed to prevent crash when run with non-existent input data
+  files. 
+* XDS Lite library changed to correct parsing of non-character arrays within
+  structures in XML files (Fix by Lloyd Weehuizen).
+
+
+1.00 Sep 23, 2003 -- initial version (released via Game Programming Gems IV)

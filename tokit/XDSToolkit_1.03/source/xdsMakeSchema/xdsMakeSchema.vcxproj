@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1B14CBB5-8FB9-4483-93C0-290B6ECCC305}</ProjectGuid>
+    <SccProjectName />
+    <SccLocalPath />
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../data/tool/</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../XDSLiteAPI;.;.\cppparser\misc;.\cppparser\cpplib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>.\Debug/xdsMakeSchema.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../../../data/tool/xdsMakeSchema.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\Debug/xdsMakeSchema.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <Midl>
+      <TypeLibraryName>.\Debug/xdsMakeSchema.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../XDSLiteAPI;.;.\cppparser\misc;.\cppparser\cpplib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>.\Release/xdsMakeSchema.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
+      <ObjectFileName>.\Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\binaries\xdsMakeSchema.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ProgramDatabaseFile>.\Release/xdsMakeSchema.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <Midl>
+      <TypeLibraryName>.\Release/xdsMakeSchema.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Getopt.c" />
+    <ClCompile Include="cppDriver.cpp" />
+    <ClCompile Include="defTypes.cpp" />
+    <ClCompile Include="genDotH.cpp" />
+    <ClCompile Include="genSchema.cpp" />
+    <ClCompile Include="xdsMakeSchema.cpp" />
+    <ClCompile Include="cppparser\cpplib\cp_argument.c" />
+    <ClCompile Include="cppparser\cpplib\cp_class.c" />
+    <ClCompile Include="cppparser\cpplib\cp_declaration.c" />
+    <ClCompile Include="cppparser\cpplib\cp_declarator.c" />
+    <ClCompile Include="cppparser\cpplib\cp_enum.c" />
+    <ClCompile Include="cppparser\cpplib\cp_error.c" />
+    <ClCompile Include="cppparser\cpplib\cp_expression.c" />
+    <ClCompile Include="cppparser\cpplib\cp_init.c" />
+    <ClCompile Include="cppparser\cpplib\cp_list.c" />
+    <ClCompile Include="cppparser\cpplib\cp_literal.c" />
+    <ClCompile Include="cppparser\cpplib\cp_malloc.c" />
+    <ClCompile Include="cppparser\cpplib\cp_name.c" />
+    <ClCompile Include="cppparser\cpplib\cp_oper.c" />
+    <ClCompile Include="cppparser\cpplib\cp_process.c" />
+    <ClCompile Include="cppparser\cpplib\cp_stack.c" />
+    <ClCompile Include="cppparser\cpplib\cp_statement.c" />
+    <ClCompile Include="cppparser\cpplib\cp_step.c" />
+    <ClCompile Include="cppparser\cpplib\cp_symbol.c" />
+    <ClCompile Include="cppparser\cpplib\cp_type.c" />
+    <ClCompile Include="cppparser\cpplib\cp_typename.c" />
+    <ClCompile Include="cppparser\cpplib\cpkeyw.c" />
+    <ClCompile Include="cppparser\cpplib\cplex.c" />
+    <ClCompile Include="cppparser\cpplib\expr.c" />
+    <ClCompile Include="cppparser\cpplib\macread.c" />
+    <ClCompile Include="cppparser\cpplib\macro.c" />
+    <ClCompile Include="cppparser\cpplib\process.c" />
+    <ClCompile Include="cppparser\cpplib\token.c" />
+    <ClCompile Include="cppparser\misc\longstr.c" />
+    <ClCompile Include="cppparser\misc\srchtbl.c" />
+    <ClCompile Include="..\XDSLiteAPI\Trie.cpp" />
+    <ClCompile Include="..\XDSLiteAPI\XDSBuffer.cpp" />
+    <ClCompile Include="..\XDSLiteAPI\XDSCRC.cpp" />
+    <ClCompile Include="..\XDSLiteAPI\XDSDSD.cpp" />
+    <ClCompile Include="..\XDSLiteAPI\XDSHelpers.cpp" />
+    <ClCompile Include="..\XDSLiteAPI\XDSParser.cpp" />
+    <ClCompile Include="..\XDSLiteAPI\XDSRead.cpp" />
+    <ClCompile Include="..\XDSLiteAPI\XDSWrite.cpp" />
+    <ClCompile Include="..\XDSLiteAPI\XDSXMLParser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cppparser\cpplib\cpdefines.h" />
+    <ClInclude Include="cppparser\cpplib\cpkeyw.h" />
+    <ClInclude Include="cppparser\cpplib\cplex.h" />
+    <ClInclude Include="cppparser\cpplib\crossrefP.h" />
+    <ClInclude Include="cppparser\cpplib\operator.h" />
+    <ClInclude Include="cppparser\cpplib\symbol.h" />
+    <ClInclude Include="cppparser\misc\longstr.h" />
+    <ClInclude Include="cppparser\misc\sn.h" />
+    <ClInclude Include="cppparser\misc\srchtbl.h" />
+    <ClInclude Include="cppparser\misc\tcl.h" />
+    <ClInclude Include="..\XDSLiteAPI\Trie.h" />
+    <ClInclude Include="..\XDSLiteAPI\XDSBuffer.h" />
+    <ClInclude Include="..\XDSLiteAPI\XDSinternal.h" />
+    <ClInclude Include="..\XDSLiteAPI\XDSliteAPI.h" />
+    <ClInclude Include="XDSconfig.h" />
+    <ClInclude Include="xdsMakeSchema.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

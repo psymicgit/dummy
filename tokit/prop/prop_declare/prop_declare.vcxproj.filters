@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="prop_decl.h" />
+    <ClInclude Include="file_util.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="str_util.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="echoutil.h">
+      <Filter>util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="prop_decl.cpp" />
+    <ClCompile Include="file_util.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="str_util.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="echoutil.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="util">
+      <UniqueIdentifier>{5ee2bdae-6daa-42d8-84fc-e5c7c0b516a1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

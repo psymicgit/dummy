@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{c18b56af-c9a9-4703-90ed-763f41c57108}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\cppParser">
+      <UniqueIdentifier>{ed431536-5865-421a-8a2f-07d2271afdd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cppParser\cppSupport">
+      <UniqueIdentifier>{02437a48-e213-4ce3-b003-acda77b36b57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\XDSLiteAPI">
+      <UniqueIdentifier>{c5807a83-2472-4d7e-92f3-02d6a3a2e31e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{6cf7e62b-b861-4e3c-921b-c1847b04335d}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{1f75acad-aee5-4166-afe0-bcb2b2da9c11}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Getopt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cppDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="defTypes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="genDotH.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="genSchema.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xdsMakeSchema.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_argument.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_class.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_declaration.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_declarator.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_enum.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_error.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_expression.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_init.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_list.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_literal.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_malloc.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_name.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_oper.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_process.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_stack.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_statement.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_step.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_symbol.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_type.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cp_typename.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cpkeyw.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\cplex.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\expr.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\macread.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\macro.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\process.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\cpplib\token.c">
+      <Filter>Source Files\cppParser</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\misc\longstr.c">
+      <Filter>Source Files\cppParser\cppSupport</Filter>
+    </ClCompile>
+    <ClCompile Include="cppparser\misc\srchtbl.c">
+      <Filter>Source Files\cppParser\cppSupport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XDSLiteAPI\Trie.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XDSLiteAPI\XDSBuffer.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XDSLiteAPI\XDSCRC.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XDSLiteAPI\XDSDSD.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XDSLiteAPI\XDSHelpers.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XDSLiteAPI\XDSParser.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XDSLiteAPI\XDSRead.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XDSLiteAPI\XDSWrite.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\XDSLiteAPI\XDSXMLParser.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cppparser\cpplib\cpdefines.h">
+      <Filter>Source Files\cppParser</Filter>
+    </ClInclude>
+    <ClInclude Include="cppparser\cpplib\cpkeyw.h">
+      <Filter>Source Files\cppParser</Filter>
+    </ClInclude>
+    <ClInclude Include="cppparser\cpplib\cplex.h">
+      <Filter>Source Files\cppParser</Filter>
+    </ClInclude>
+    <ClInclude Include="cppparser\cpplib\crossrefP.h">
+      <Filter>Source Files\cppParser</Filter>
+    </ClInclude>
+    <ClInclude Include="cppparser\cpplib\operator.h">
+      <Filter>Source Files\cppParser</Filter>
+    </ClInclude>
+    <ClInclude Include="cppparser\cpplib\symbol.h">
+      <Filter>Source Files\cppParser</Filter>
+    </ClInclude>
+    <ClInclude Include="cppparser\misc\longstr.h">
+      <Filter>Source Files\cppParser\cppSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="cppparser\misc\sn.h">
+      <Filter>Source Files\cppParser\cppSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="cppparser\misc\srchtbl.h">
+      <Filter>Source Files\cppParser\cppSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="cppparser\misc\tcl.h">
+      <Filter>Source Files\cppParser\cppSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XDSLiteAPI\Trie.h">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XDSLiteAPI\XDSBuffer.h">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XDSLiteAPI\XDSinternal.h">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XDSLiteAPI\XDSliteAPI.h">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="XDSconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xdsMakeSchema.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

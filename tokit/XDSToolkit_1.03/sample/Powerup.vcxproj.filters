@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7215e8cd-e4fa-43e4-a1ed-a5bbfdb5c8d3}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Source Files\XDSLiteAPI">
+      <UniqueIdentifier>{c4164746-d699-4422-9b70-503d940716df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2b99bf89-4d8b-4b5d-aebf-e8f59669836c}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\XDSLiteAPI\Trie.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\XDSLiteAPI\XDSBuffer.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\XDSLiteAPI\XDSCRC.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\XDSLiteAPI\XDSDSD.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\XDSLiteAPI\XDSHelpers.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\XDSLiteAPI\XDSParser.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\XDSLiteAPI\XDSRead.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\XDSLiteAPI\XDSWrite.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\XDSLiteAPI\XDSXMLParser.cpp">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\XDSLiteAPI\Trie.h">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\XDSLiteAPI\XDSBuffer.h">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\XDSLiteAPI\XDSinternal.h">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\XDSLiteAPI\XDSliteAPI.h">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\XDSLiteAPI\XdsLicense.h">
+      <Filter>Source Files\XDSLiteAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="XDSconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="powerups.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="powerups_dsd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
