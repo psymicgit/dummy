@@ -1,0 +1,166 @@
+include ${MAXNET}/project/linux/makebase/make_begin
+
+PCH_H	=	stdafx.h
+PCH		=	stdafx.h.gch
+
+MODULE			= server
+
+MACD            = -DLUAPLUS_EXCEPTIONS=1 -DLUA_API
+
+LIBA_FILE 		= 
+LIBSO_FILE		= 
+EXEC_FILE 		= gameserver
+
+OTHER_SRC_C	= 
+OTHER_SRC_CPP   =       ${MAXNET_SRC_DIR}/server/common/server/utility.cpp \
+						${MAXNET_SRC_DIR}/server/common/server/packetparser.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protocligs.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protocligt.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protoclils.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protoclizs.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protocommondata.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protogsdb.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protogsls.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protogtcommon.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protogtgs.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protogtls.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protorechargegs.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protoksgs.cpp \
+                        ${MAXNET_SRC_DIR}/server/protocol/server/protogsns.cpp \
+						${MAXNET_SRC_DIR}/server/protocol/server/protogmgs.cpp \
+						${MAXNET_SRC_DIR}/server/protocol/server/protogsgs.cpp \
+						${MAXNET_SRC_DIR}/server/common/server/base64.cpp 
+
+INLIB_FILE		= -lpthread -lz -lncurses -liconv -lcharset -lsqlite3 -lmysqlclient -lsdframework -lsdnet -lsdlogger -lsdpipe -lsdconsole -lsddb \
+					-lsdu -ltinyxml -ljson_linux-gcc-4.7.0_libmt -lmaxnetlua -lcurl
+INLIB_DIR		= -L/usr/local/lib -L/usr/local/lib64 -L/usr/lib -L/usr/lib64 
+INC_PATH 		= -I${MAXNET_INC_DIR} -I${MAXNET_INC_DIR}/dll \
+                          -I${MAXNET_INC_DIR}/dll/sdu \
+			  -I${MAXNET_INC_DIR}/dll/sdlogger \
+			  -I${MAXNET_INC_DIR}/dll/sdframework \
+			  -I${MAXNET_INC_DIR}/dll/sdconsole \
+			  -I${MAXNET_INC_DIR}/dll/sdnet \
+			  -I${MAXNET_INC_DIR}/dll/sddb \
+			  -I${MAXNET_INC_DIR}/dll/sdpipe  \
+			  -I${MAXNET_SRC_DIR}/server \
+			  -I${MAXNET_SRC_DIR}/server/common \
+			  -I${MAXNET_SRC_DIR}/server/common/server  \
+			  -I${MAXNET_SRC_DIR}/server/common/client \
+			  -I${MAXNET_SRC_DIR}/server/protocol/server \
+			  -I${MAXNET_SRC_DIR}/server/gameserver \
+			  -I${THIRDP_DIR}/tinyxml/include \
+			  -I${THIRDP_DIR}/jsoncpp-src/include \
+			  -I/usr/share/gettext/intl \
+			  -I${THIRDP_DIR}/maxnetlua \
+			  -I${THIRDP_DIR}/maxnetlua/lua \
+			  -I${THIRDP_DIR}/maxnetlua/luaplus \
+			  -I${THIRDP_DIR}/maxnetlua/tolua \
+			  -I${MAXNET} \
+			  -I${THIRDP_DIR}/mysql/include \
+			  -I${THIRDP_DIR}/curl \
+			  -I${THIRDP_DIR} -I${THIRDP_DIR}/sqlite
+
+
+
+
+
+
+
+
+
+
+
+FILE_LIST_C		= $(shell find . -name "*.c")
+FILE_LIST_CPP	= $(shell find . -name "*.cpp")
+#COMM_OBJ       = $(patsubst %.cpp,%.o,$(wildcard *.cpp)) $(patsubst %.c,%.o,$(wildcard *.c))
+COMM_OBJ        = $(patsubst %.cpp,%.o,${FILE_LIST_CPP}) $(patsubst %.c,%.o,${FILE_LIST_C}) $(patsubst %.cpp,%.o,${OTHER_SRC_CPP}) $(patsubst %.c,%.o,${OTHER_SRC_C})
+ALL_OBJ			= $(notdir ${COMM_OBJ})
+
+BIN_DIR 		= ${MAXNET_BIN_DIR}/${MODULE}/linux${long_bit}
+MAXNET_DLL_DIR 	= ${MAXNET_BIN_DIR}/dll/linux${long_bit}
+
+
+
+A_LINK      = ar rv
+ifeq (${compile_type}, OFF)
+	LIB_DIR		= ${MAXNET_DLL_DIR}/release
+	ifneq (${EXEC_FILE}, "")
+		OUT_DIR     = ${BIN_DIR}/release/${EXEC_FILE}
+	else
+		OUT_DIR     = ${BIN_DIR}/release
+	endif
+	COMP   		= g++ -c -w -fPIC   -m64 $(MACD) 
+	COMPC   	= gcc -c -w -fPIC   -m64 $(MACD) 
+	SO_LINK     = g++ -fPIC -shared   -m64 $(MACD) -o 
+	EXEC_LINK   = g++   -m64 $(MACD) -o	
+else	
+	LIB_DIR		= ${MAXNET_DLL_DIR}/debug
+	ifneq (${EXEC_FILE}, "")
+		OUT_DIR     = ${BIN_DIR}/debug/${EXEC_FILE}
+	else
+		OUT_DIR     = ${BIN_DIR}/debug
+	endif
+	#COMP   	= g++ -c -g -Wall -fPIC -D_DEBUG  -m64 $(MACD) 
+	COMP   		= g++ -c -g -w -fPIC  -D_DEBUG  -m64 $(MACD)		
+	COMPC   	= gcc -c -g -w -fPIC  -D_DEBUG  -m64 $(MACD)		
+	SO_LINK     = g++ -fPIC -shared -g   -m64 $(MACD) -o
+	EXEC_LINK   = g++ -g   -m64 $(MACD) -o
+endif
+
+all : $(COMP_ONLY) $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) 
+
+clean : 
+	rm -f *.o *.a *.so $(COMM_OBJ) $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) $(PCH)
+
+touch :
+	touch *.h; touch *.c; touch *.cpp
+
+
+install:$(LIBA_FILE) $(EXEC_FILE) $(LIBSO_FILE)
+
+	mkdir -p ${OUT_DIR}; 
+
+	if [ -n '$(LIBA_FILE)' ] ;  \
+	then  \
+    		cp -rf $(LIBA_FILE) $(OUT_DIR) ; \
+	fi
+
+	if [ -n '$(LIBSO_FILE)' ] ;  \
+	then  \
+    		cp -rf $(LIBSO_FILE) $(OUT_DIR) ; \
+	fi
+
+	if [ -n '$(EXEC_FILE)' ] ;  \
+	then  \
+    		cp -rf $(EXEC_FILE) $(OUT_DIR) ; \
+	fi
+
+print:
+	echo Hello ${MAXNET_DIR}world
+
+	
+$(COMP_ONLY): $(COMM_OBJ)	
+
+$(LIBA_FILE) : $(COMM_OBJ)
+	$(A_LINK) $@ $(COMM_OBJ)
+
+${LIBSO_FILE} : ${COMM_OBJ}
+	${SO_LINK} $@ ${COMM_OBJ} -L${LIB_DIR} ${INLIB_FILE} ${INLIB_DIR} ${INC_PATH}
+
+${EXEC_FILE} : ${PCH} ${COMM_OBJ}
+	${EXEC_LINK} $@ ${COMM_OBJ} -L${LIB_DIR} ${INLIB_FILE} ${INLIB_DIR} ${INC_PATH} 
+
+${COMM_OBJ}:$(PCH)
+
+# Pre-compiled header
+$(PCH): 
+	$(COMP) $(INC_PATH) $(PCH_H)
+
+.c.o:
+	${COMPC} ${INC_PATH} -o $@ $<
+
+.cpp.o:
+	${COMP} ${INC_PATH} -include ${PCH_H} -o $@ $<
+
+#-include ${PCH_H}
+#   -include ${PCH_H}
