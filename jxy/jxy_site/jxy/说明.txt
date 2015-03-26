@@ -1,0 +1,13 @@
+/*
+*  @Author: 洪坤安
+*  @Company: heihuo
+*  @brief: 囧西游后台网站简述
+*  @Created Time: 2014年7月30日
+*/
+
+这是囧西游的后台网站，用php语言写的，开发环境：apache2.2+php5.4+mysql，网站界面全部copy自游力运营后台，目前只包含了一个页面，其余的留待后续扩充
+
+各页面说明：
+
+1. jxy_home.php 主页
+2. jxy_each_zone_exec_sql.php 各个区执行sql脚本页面，查询前需先选择ios、安卓平台，并从游戏主库、游戏从库、日志库3个中选择一个

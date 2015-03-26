@@ -1,0 +1,1 @@
+select * from oprecord_20140928202824 where ModuleType = 32 and OpType = 1 and OpTime > ' 2014-10-14 00:00:00' and Param1 > 6000;
