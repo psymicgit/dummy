@@ -1,0 +1,1 @@
+select sum(c.DecGold) from player_consume c,players p where c.DecGold > 0 and p.Pay > 0 and c.PlayerID = p.PlayerID and c.CreateTime >= "2014-01-01" and c.CreateTime <= "2014-04-01" and p.PlayerID not in (select PlayerID from mysql.test_player);

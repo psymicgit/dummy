@@ -1,0 +1,1 @@
+select sum(Gold) from players where Pay > 0 and PlayerID not in (select PlayerID from mysql.test_player) and LastLoginTime >= "2014-01-01 00:00:00";

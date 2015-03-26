@@ -1,0 +1,1 @@
+select sum(p.Gold) from players p where p.Pay > 0 and p.PlayerID not in (select PlayerID from mysql.test_player);

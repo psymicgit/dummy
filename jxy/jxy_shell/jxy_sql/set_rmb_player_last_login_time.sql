@@ -1,0 +1,1 @@
+update mysql.top_rmp_player t, (select PlayerID, Time from (select PlayerID, Time from playerloginoff where Login = 1 and Time < "2014-04-01 00:00:00" order by PlayerID asc, Time desc) as g group by g.PlayerID) g set t.LastLoginTime = g.Time where t.PlayerID = g.PlayerID;
