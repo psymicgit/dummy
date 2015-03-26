@@ -53,7 +53,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
@@ -66,7 +66,7 @@
       <AdditionalDependencies>ws2_32.lib;libglog_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>ws2_32.lib;libglog_static.lib;libprotobuf.lib;libprotobuf-lite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;libglog_static.lib;libprotobuf.lib;libprotobuf-lite.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -102,6 +102,10 @@
     <ClInclude Include="basic\taskqueue.h" />
     <ClInclude Include="basic\thread.h" />
     <ClInclude Include="basic\timerqueue.h" />
+    <ClInclude Include="db\db.h" />
+    <ClInclude Include="db\dbconnection.h" />
+    <ClInclude Include="db\dbfactory.h" />
+    <ClInclude Include="db\dbsession.h" />
     <ClInclude Include="def\platform.h" />
     <ClInclude Include="def\type.h" />
     <ClInclude Include="log\log.h" />
@@ -139,6 +143,9 @@
     <ClCompile Include="basic\taskqueue.cpp" />
     <ClCompile Include="basic\thread.cpp" />
     <ClCompile Include="basic\timerqueue.cpp" />
+    <ClCompile Include="db\dbconnection.cpp" />
+    <ClCompile Include="db\dbfactory.cpp" />
+    <ClCompile Include="db\dbsession.cpp" />
     <ClCompile Include="log\log.cpp" />
     <ClCompile Include="net\connector.cpp" />
     <ClCompile Include="net\link.cpp" />

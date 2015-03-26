@@ -108,6 +108,18 @@
     <ClInclude Include="protocol\netmsghandler.h">
       <Filter>protocol</Filter>
     </ClInclude>
+    <ClInclude Include="db\dbfactory.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="db\db.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="db\dbsession.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="db\dbconnection.h">
+      <Filter>db</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -127,6 +139,9 @@
     </Filter>
     <Filter Include="protocol">
       <UniqueIdentifier>{eb5753f9-d0ff-4471-ad75-3943fe08baea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="db">
+      <UniqueIdentifier>{ba04841f-4721-42b0-a8e3-6d1567ddd729}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +224,15 @@
     </ClCompile>
     <ClCompile Include="net\msghandler.cpp">
       <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="db\dbfactory.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="db\dbsession.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="db\dbconnection.cpp">
+      <Filter>db</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

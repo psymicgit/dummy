@@ -85,7 +85,7 @@ void Robot::OnRecv(Link *link, Buffer &buf)
 
 	//œ»Ω‚√‹
 	uint8* encryptBuf =  (uint8*)(buf.peek() + sizeof(NetMsgHead));
-	INT32 encryptBufLen = msgLen - sizeof(NetMsgHead);
+	int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
 	if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
 		LOG_ERROR << "robot [" << link->m_localAddr.toIpPort() << "] <-> gatesvr [" << link->m_peerAddr.toIpPort()
