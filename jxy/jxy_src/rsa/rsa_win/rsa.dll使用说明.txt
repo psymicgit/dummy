@@ -1,0 +1,121 @@
+///<------------------------------------------------------------------------------
+//< @file:   rsa.dll
+//< @author: 洪坤安
+//< @date:   2014年1月8日 19:20:30
+//< Copyright (c) 2014 heihuo. All rights reserved.
+///<------------------------------------------------------------------------------
+
+rsa.dll提供了针对于快用、可币支付平台对接所需要的rsa验签和解密方法，供lua调用（目前为止，rsa.dll仅在快用和可币平台进行过验证，由于不同支付平台采用的rsa算法格式很可能不一致，比如，其他平台可能采用pkcs#1或者pkcs#8来加解密，验证签名时可能采用sha1/sha/md5等签名算法，所以，rsa.dll中提供的rsa解密函数很有可能无法直接适用于其他平台）
+
+下面先说明使用rsa.dll的方法，然后针对快用、可币平台给出相应的接入方案（这2个平台均采用rsa私钥加密、公钥解密算法，此后的其余支付平台若与其有相似之处，也可以依照这2个平台的方案施行）
+
+一、使用rsa.dll的方法
+1. 在lua中使用rsa.dll
+
+	rsa.dll的入口方法为：luaopen_rsa，所以在lua载入rsa.dll的代码如下：
+		local rsadll = package.loadlib("rsa.dll", "luaopen_rsa");
+		if rsadll then
+			print(rsadll)
+			rsadll();
+		end
+
+2. 使用rsa.dll中的函数
+
+	rsa.dll中的模块名称为：rsa，所以想调用里面的函数，需加上模块名rsa
+	例子：
+		rsa.public_key_decrypt(xxxx)
+		rsa.public_key_verify(xxxx)
+
+3. rsa.dll里的函数说明
+
+	rsa.dll里面给出了2个函数，用于支付平台的rsa验签和解密：
+
+	1. public_key_decrypt: 利用支付平台给出的公钥对http中的密文进行解密，得到明文
+
+	使用方法：
+		明文, 明文长度, 错误提示 = public_key_decrypt(密文，公钥)
+
+	例子：
+		--公钥
+		public_key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+WNnrVVHQEcE3VwiuOPdAMZ5NGgs4Dikn6vd+XTURtAwn/86jd7En86F4s61pq7zjABNsVka8lpeq0Dq9XbXOQAPHJBt4PyEKA9EJ9XMeGF63UeJYPmN5VgrGtLJdPoFLY5AdTiNf3v6+CHyIoDs0NWsw3OSbostMbgwm7Z5A+wIDAQAB";
+
+		--密文
+		encrypt_text = "V/5/99ubmARZ0uOT/KOBrOdns/91mm23mAGDvfvgJjhG36/R82QaaEQrD7+vIR7850Hx03wZr7QcdIy2CGiEB+p5lgKDjU8FAQAjwLxqIWNT0T8ugdwGiMI3pC/SKlY3I0mKtoN78YNIgFLWA5QM0xSWvjls5p7hLbs4cZz6Oe4=";
+
+		--开始解密
+		decrypt_text, decrypt_len, errmsg = rsa.public_key_decrypt(encrypt_text, public_key);
+
+		--如果返回的明文不为nil，则说明解密成功，否则解密失败，失败原因存在errmsg中
+		if decrypt_text then
+			print("decrypt_text = ", decrypt_text, "\n");
+			print("decrypt_len = ", decrypt_len, "\n");
+		else
+			print("errmsg = ", errmsg, "\n");
+		end
+
+	2. public_key_verify: 利用支付平台给出的公钥对http中的签名进行验签，返回结果：验签成功true/失败false
+
+	使用方法：
+		验签是否成功（是true/否false）, 错误提示 = public_key_verify(签名原串， 签名， 公钥)
+
+	例子：
+		--公钥
+		public_key  = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQl074HcPTQ+cOyoUaL4cznY8yt5WBg76oIUiaqO+eOG0a31J08e9jqU1kEs9Ik2yjU+VVMQdZpYEoewg/XmKhtj4GvvClvkvmMxZUXTP0pWLG8EIX0seHEt+9oECwmVsfJyVvXl2yAc0FKLRCmGfjBko38YRa0NJ4iW871toPnQIDAQAB";
+
+		--签名原串
+		sign_plain_text  = "dealseq=20130222105228127&fee=0.01&notify_data=V/5/99ubmARZ0uOT/KOBrOdns/91mm23mAGDvfvgJjhG36/R82QaaEQrD7+vIR7850Hx03wZr7QcdIy2CGiEB+p5lgKDjU8FAQAjwLxqIWNT0T8ugdwGiMI3pC/SKlY3I0mKtoN78YNIgFLWA5QM0xSWvjls5p7hLbs4cZz6Oe4=&orderid=130222-23-10523450458&payresult=0&subject=充值100金&uid=放着我来&v=1";
+
+		--签名
+		sign_text = "xxxxxxxxxxxxxxxxx";
+
+		--使用私钥进行验签
+		verify_ok, errmsg = rsa.public_key_verify(sign_plain_text, sign_text, public_key);
+		print("verify_ok = ", verify_ok);
+
+		if verify_ok == false then
+			if string.len(errmsg) > 0 then
+				print(errmsg);
+			end
+		end
+
+
+二、快用支付平台接入方案：（如有疑问、遗漏或者不匹配，以快用文档为准）
+	
+	以快用文档提供的测试公钥为例：
+		快用平台公钥 = MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQl074HcPTQ+cOyoUaL4cznY8yt5WBg76oIUiaqO+eOG0a31J08e9jqU1kEs9Ik2yjU+VVMQdZpYEoewg/XmKhtj4GvvClvkvmMxZUXTP0pWLG8EIX0seHEt+9oECwmVsfJyVvXl2yAc0FKLRCmGfjBko38YRa0NJ4iW871toPnQIDAQAB
+
+	当接收到快用平台的下行通告交易支付结果时，需做如下处理：
+
+	1. 先将http除去sign签名参数，并根据key值进行排序，获得签名原串，如下：
+		   签名原串 = "dealseq=20130222105228127&fee=0.01&notify_data=V/5/99ubmARZ0uOT/KOBrOdns/91mm23mAGDvfvgJjhG36/R82QaaEQrD7+vIR7850Hx03wZr7QcdIy2CGiEB+p5lgKDjU8FAQAjwLxqIWNT0T8ugdwGiMI3pC/SKlY3I0mKtoN78YNIgFLWA5QM0xSWvjls5p7hLbs4cZz6Oe4=&orderid=130222-23-10523450458&payresult=0&subject=充值100金&uid=放着我来&v=1";
+	
+	2. 使用rsa.dll中的public_key_verify函数，根据签名原串、sign签名参数和公钥进行验签
+	3. 验签成功后，使用rsa.dll中的public_key_decrypt函数对notify_data中的密文进行解密，得到明文
+
+	当以上三步完成时，可以看到notify_data参数中的密文被解密后的明文为：
+		dealseq=20130222105228127&fee=0.01&payresult=0
+
+
+三、可币平台接入方案：（如有疑问、遗漏或者不匹配，以可币文档为准）
+	
+	请先参考可币支付平台文档
+
+	以可币文档提供的测试公钥为例：
+		可币平台公钥 = MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCmreYIkPwVovKR8rLHWlFVw7YDfm9uQOJKL89Smt6ypXGVdrAKKl0wNYc3/jecAoPi2ylChfa2iRu5gunJyNmpWZzlCNRIau55fxGW0XEu553IiprOZcaw5OuYGlf60ga8QT6qToP0/dpiL/ZbmNUO9kUhosIjEu22uFgR+5cYyQIDAQAB
+
+	以及提供的模拟url参数：
+		模拟url参数 = sign=kHKXA7brp%2B2G1Sys3fT7JEcK13dukRLNoK0LBFi1BdKpngw2WAr8sEcP37UBfIAaRT4UXOb5dXnfzc0WIrfrWxfE%2BTXqfgFMBAIV6Nk2wQinZ2I45pt3zTYo3I2NFfU2IehqA%2BVOmgTG8uWDhjOL63HHfm1pv7CFzFedd3OM9kA%3D&partnerOrder=1383896624538&productDesc=%E5%95%86%E5%93%81%E6%8F%8F%E8%BF%B0&price=1&count=1&attach=%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%97%E6%AE%B5&notifyId=GC2013110815435301400004525090&productName=%E7%BA%A2%E9%92%BB
+
+	当接收到可币平台的下行通告交易支付结果时，需做如下处理：
+
+	1. 由于可币把url进行了url编码，所以得先进行url解码，获得原生url串：
+		（如果不知道url编码，到这个在线url编解码网站玩玩看：http://www.convertstring.com/zh_CN/EncodeDecode/UrlDecode ）
+		   解码后的url =
+		   sign=kHKXA7brp+2G1Sys3fT7JEcK13dukRLNoK0LBFi1BdKpngw2WAr8sEcP37UBfIAaRT4UXOb5dXnfzc0WIrfrWxfE+TXqfgFMBAIV6Nk2wQinZ2I45pt3zTYo3I2NFfU2IehqA+VOmgTG8uWDhjOL63HHfm1pv7CFzFedd3OM9kA=&partnerOrder=1383896624538&productDesc=商品描述&price=1&count=1&attach=自定义字段&notifyId=GC2013110815435301400004525090&productName=红钻
+
+	2. 将url参数按照notifyId、partnerOrder、productName、productDesc、price、count、attach的顺序重新连接，获得签名原串，如下：
+		   签名原串 = "notifyId=GC2013110815435301400004525090&partnerOrder=1383896624538&productName=红钻&productDesc=商品描述&price=1&count=1&attach=自定义字段";
+	
+	3. 使用rsa.dll中的public_key_verify函数，根据签名原串、sign签名参数和公钥进行验签
+
+	当以上三步完成时，可以看到验签的结果是：成功
