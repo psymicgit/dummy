@@ -9,9 +9,62 @@
 #ifndef _dbconnection_h_
 #define _dbconnection_h_
 
+#include "db.h"
+
 class DBConnection
 {
+	friend class DBSession;
 
+	typedef std::map<std::string, std::string> Charsets;
+
+public:
+	DBConnection()
+		: m_mysql(NULL)
+		, m_connected(false)
+		, m_used(false)
+	{
+	}
+
+public:
+	bool connect();
+
+	void release();
+
+	bool reconnect();
+
+	bool escape(const char *pSrc, int nSrcSize, char *pDest, int nDstSize);
+
+	DB::DBExecuteCode execute(const char *sql, uint32 strlen = 0, uint64 *pInsertId = NULL, uint32* pEffectRowNum = NULL);
+
+	DB::DBQueryCode query(const char *sql, DBRecordSet **pRes);
+
+	void beginTransaction();
+
+	void commit();
+
+	void rollback();
+
+	bool selectdb(const char* dbname);
+
+private:
+	bool setCharsetName();
+
+	bool getCharsets(Charsets&);
+
+	bool isCompatiableCharset(Charsets&);
+
+	bool checkConnection();
+
+public:
+	DBAccount m_account;
+	volatile bool m_connected;
+	volatile bool m_used;
+
+private:
+	MYSQL *m_mysql;
+
+	typedef tr1::unordered_map<std::string, MYSQL_STMT*> PreparedStmtMap;
+	PreparedStmtMap m_preparedStmtMap;
 };
 
 #endif //_dbconnection_h_

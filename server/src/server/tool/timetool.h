@@ -17,15 +17,13 @@ typedef int32 TimeInMs; // in ms∫¡√Îµ•Œª
 
 namespace timetool
 {
-	Timestamp GetTimeOfDay();
+	Timestamp getTimeOfDay();
 
 	Timestamp GetLocalTime();
 
 	const char* FormatTime(const Timestamp& time);
 
 	const char* FormatNow();
-
-	void EchoNow();
 }
 
 #endif //_timetool_h_

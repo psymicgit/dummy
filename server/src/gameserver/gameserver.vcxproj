@@ -51,7 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <DisableSpecificWarnings>4099</DisableSpecificWarnings>
     </ClCompile>
@@ -81,12 +81,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\protocol\net.pb.h" />
+    <ClInclude Include="db\dbmgr.h" />
     <ClInclude Include="gameserver.h" />
     <ClInclude Include="net\gatelink.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\protocol\net.pb.cc" />
+    <ClCompile Include="db\dbmgr.cpp" />
     <ClCompile Include="gameserver.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="net\gatelink.cpp" />

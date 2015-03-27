@@ -10,30 +10,81 @@
 #define _dbsession_h_
 
 #include "db.h"
+#include "basic/lock.h"
+#include "basic/thread.h"
 
-// DBSession接口类，代表与一个数据库服务器连接的会话，该会话也可以维护多个连接
+// DBSession接口类，代表与一个数据库服务器连接的会话，该会话可以维护多个连接
 class DBSession
 {
+	DBSession();
+
 public:
+	bool init(DBAccount &dbaccount, int minPoolSize, int maxPoolSize);
+
 	// 将二进制字符串转化为数据库可识别的以0结尾的字符串
-	uint32 EscapeString(const char *pSrc, int srcSize, char *pDest, int nDstSize, int timeout = -1);
+	bool escape(const char *pSrc, int nSrcSize, char *pDest, int nDstSize);
 
-	int ExecuteSql(const char *pSQL, uint64 *pInsertId = NULL, int timeout = -1);
+	DB::DBExecuteCode execute(const char *sql, uint32 strlen = 0, uint64 *pInsertId = NULL, uint32* pEffectRowNum = NULL);
 
-	int ExecuteSqlRs(const char *pSQL, int **ppoRs, UINT32* pdwErr = NULL, string* pstrErr = NULL, int timeout = -1);
+	DB::DBQueryCode query(const char *sql, DBRecordSet **pRes);
 
-	bool CreateDB(const char *pcDBName, bool bForce, const char *pcCharSet, int timeout = -1);
+	// 执行命令，返回实际执行的命令数
+	uint32 run(uint32 loopcnt);
 
-	bool SelectDB(const char *pcDBName, int timeout = -1);
+	// 分配出的数据库线程执行的run调用
+	void threadrun();
 
-	bool AddDBCommand(IDBCommand *poDBCommand);
+	void addDBCommand(DBCommand*);
 
-	bool QuickAddDBCommand(IDBCommand*poDBCommand);
+	DBConnection* getConnection(int groupId);
 
-	bool Run(UINT32& dwCount);
+	void recycle(DBConnection*);
 
 private:
-	friend class CSDDBModule;
+	void executeCmd(DBCommand*);
+
+	DBConnection* createConnection();
+
+	DBConnection* borrow();
+
+	DBConnection* onUsed(DBConnection*);
+
+	//删除在ConnectionMap中的一个连接
+	void removeConnFromMap(DBConnection*);
+
+
+public:
+	DBAccount m_dbaccount;
+
+private:
+	typedef std::vector<DBCommand*> DBCommandList;
+	typedef tr1::unordered_map<int /* 组Id */, DBConnection*> ConnectionMap; // 组别Id <-> 连接
+	typedef tr1::unordered_set<DBConnection*> ConnectionPool;
+
+	friend class DBFactory;
+
+	DBCommandList m_cmdList;
+	DBCommandList m_executedCmdList;
+
+	mutex_t m_cmdLock;
+	mutex_t m_executedCmdLock;
+	mutex_t m_poolLock;
+	mutex_t m_mapLock;
+
+	condition_var_t m_cmdCondition;
+
+	volatile bool m_running;
+
+	int m_minPoolSize;
+	int m_maxPoolSize;
+
+	ConnectionPool m_connPool;
+	ConnectionMap m_connMap;
+
+	volatile int m_connCount;
+	volatile int m_freeConnCount;
+
+	thread_t m_dbthread;
 };
 
 #endif //_dbsession_h_

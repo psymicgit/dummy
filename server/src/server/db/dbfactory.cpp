@@ -9,10 +9,42 @@
 #include "dbfactory.h"
 
 #include "db.h"
+#include "dbsession.h"
 
-#include "mysql.h"
-
-DBConnection* DBFactory::createDBConnection(DBAccount &account)
+DBSession* DBFactory::createDBSession(DBAccount &account, int minPoolSize, int maxPoolSize)
 {
-	return NULL;
+	DBSession *dbsession = new DBSession;
+	if (false == dbsession->init(account, minPoolSize, maxPoolSize)) {
+		delete dbsession;
+		return NULL;
+	}
+
+	m_dbsessions.push_back(dbsession);
+	return dbsession;
+}
+
+void DBFactory::close()
+{
+	for (size_t i = 0; i < m_dbsessions.size(); ++i) {
+		DBSession *dbsession = m_dbsessions[i];
+		delete dbsession;
+	}
+
+	m_dbsessions.clear();
+}
+
+void DBFactory::del(DBSession *delsession)
+{
+	for (size_t i = 0; i < m_dbsessions.size(); ++i) {
+		DBSession *session = m_dbsessions[i];
+
+		if (session == delsession) {
+			m_dbsessions[i] = m_dbsessions.back();
+			m_dbsessions.pop_back();
+
+			break;
+		}
+	}
+
+	delete delsession;
 }

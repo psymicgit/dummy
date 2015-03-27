@@ -13,11 +13,18 @@ class DBSession;
 class DBConnection;
 struct DBAccount;
 
-class DBFactory
+class DBFactory : public Singleton<DBFactory>
 {
-	DBSession* createDBSession(DBAccount&);
+public:
+	DBSession* createDBSession(DBAccount&, int minPoolSize = 1, int maxPoolSize = 1);
 
-	DBConnection* createDBConnection(DBAccount&);
+	void close();
+
+	void del(DBSession*);
+
+private:
+	typedef std::vector<DBSession*> DBSessions;
+	DBSessions m_dbsessions;
 };
 
 #endif //_dbfactory_h_

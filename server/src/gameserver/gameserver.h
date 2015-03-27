@@ -10,6 +10,7 @@
 #define _gameserver_h_
 
 #include "server.h"
+#include "db/dbmgr.h"
 
 class GateLink;
 
@@ -30,6 +31,8 @@ public:
 
 private:
 	GateLink *m_gateLink;
+
+	DBMgr m_dbmgr;
 };
 
 #endif //_gameserver_h_

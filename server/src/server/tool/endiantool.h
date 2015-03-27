@@ -15,7 +15,7 @@ namespace endiantool
 	uint64_t hostToNetwork64(uint64_t host64);
 
 	// 将32位的整数从主机字节顺序转换成网络字节顺序
-	uint32_t hostToNetwork32(uint32_t host32);
+	uint32 hostToNetwork32(uint32 host32);
 
 	// 将16位的整数从主机字节顺序转换成网络字节顺序
 	uint16_t hostToNetwork16(uint16_t host16);
@@ -24,7 +24,7 @@ namespace endiantool
 	uint64_t networkToHost64(uint64_t net64);
 
 	// 将32位的整数从网络字节顺序转换成主机字节顺序
-	uint32_t networkToHost32(uint32_t net32);
+	uint32 networkToHost32(uint32 net32);
 
 	// 将16位的整数从网络字节顺序转换成主机字节顺序
 	uint16_t networkToHost16(uint16_t net16);

@@ -120,6 +120,18 @@
     <ClInclude Include="db\dbconnection.h">
       <Filter>db</Filter>
     </ClInclude>
+    <ClInclude Include="db\dbrecordset.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="db\dbcommand.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\atomictool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\ticktool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -233,6 +245,15 @@
     </ClCompile>
     <ClCompile Include="db\dbconnection.cpp">
       <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="db\dbrecordset.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\atomictool.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\ticktool.cpp">
+      <Filter>tool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

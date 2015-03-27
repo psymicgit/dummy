@@ -9,6 +9,8 @@
 #include "gameserver.h"
 
 #include "net/gatelink.h"
+#include "db/db.h"
+#include "db/dbfactory.h"
 
 GameServer::GameServer()
 	: Server()
@@ -33,6 +35,11 @@ bool GameServer::init()
 		m_lan.connect("127.0.0.1", 10001, *this);
 	}
 
+	if (!m_dbmgr.init()) {
+		LOG_ERROR << "dbmgr init failed, aborted";
+		return false;
+	}
+
 	return true;
 }
 
@@ -44,6 +51,8 @@ void GameServer::start()
 void GameServer::run()
 {
 	Server::run();
+
+	m_dbmgr.run();
 	Sleep(10);
 }
 

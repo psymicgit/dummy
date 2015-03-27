@@ -31,7 +31,7 @@ namespace timetool
 		return filetime;
 	}
 
-	Timestamp GetTimeOfDay()
+	Timestamp getTimeOfDay()
 	{
 		FILETIME now;
 		GetSystemTimeAsFileTime (&now); // 获得系统UTC格式时间
@@ -85,13 +85,8 @@ namespace timetool
 		return format;
 	}
 
-	void EchoNow()
-	{
-		LOG_INFO << FormatNow();
-	}
-
 #else
-	Timestamp GetTimeOfDay()
+	Timestamp getTimeOfDay()
 	{
 		struct timeval tv;
 		gettimeofday(&tv, NULL);

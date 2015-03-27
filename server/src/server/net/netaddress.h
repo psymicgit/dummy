@@ -40,7 +40,7 @@ public:
 	const struct sockaddr_in& getSockAddr() const { return m_addr; }
 	void setSockAddr(const struct sockaddr_in& addr) { m_addr = addr; }
 
-	uint32_t ipNetEndian() const { return m_addr.sin_addr.s_addr; }
+	uint32 ipNetEndian() const { return m_addr.sin_addr.s_addr; }
 	uint16_t portNetEndian() const { return m_addr.sin_port; }
 
 	static bool resolve(string hostname, NetAddress* result);

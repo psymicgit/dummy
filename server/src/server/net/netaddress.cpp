@@ -76,7 +76,7 @@ bool NetAddress::resolve(string hostname, NetAddress* out)
 		}
 	}
 
-	assert(remoteHost->h_addrtype == AF_INET && remoteHost->h_length == sizeof(uint32_t));
+	assert(remoteHost->h_addrtype == AF_INET && remoteHost->h_length == sizeof(uint32));
 	out->m_addr.sin_addr = *reinterpret_cast<struct in_addr*>(remoteHost->h_addr);
 	return true;
 
@@ -91,7 +91,7 @@ bool NetAddress::resolve(string hostname, NetAddress* out)
 
 	int ret = gethostbyname_r(hostname.c_str(), &hent, t_resolveBuffer, sizeof t_resolveBuffer, &he, &herrno);
 	if (ret == 0 && he != NULL) {
-		assert(he->h_addrtype == AF_INET && he->h_length == sizeof(uint32_t));
+		assert(he->h_addrtype == AF_INET && he->h_length == sizeof(uint32));
 		out->m_addr.sin_addr = *reinterpret_cast<struct in_addr*>(he->h_addr);
 		return true;
 	}

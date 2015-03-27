@@ -9,6 +9,9 @@
     <ClInclude Include="net\gatelink.h">
       <Filter>net</Filter>
     </ClInclude>
+    <ClInclude Include="db\dbmgr.h">
+      <Filter>db</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameserver.cpp" />
@@ -20,6 +23,9 @@
     <ClCompile Include="net\gatelink.cpp">
       <Filter>net</Filter>
     </ClCompile>
+    <ClCompile Include="db\dbmgr.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocol">
@@ -30,6 +36,9 @@
     </Filter>
     <Filter Include="logic">
       <UniqueIdentifier>{61dbe058-cca4-49a6-9f83-a0b5b76be352}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="db">
+      <UniqueIdentifier>{ba936bd3-d8b4-421e-8ba8-082e31284a81}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

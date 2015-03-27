@@ -18,7 +18,7 @@ void TimerQueue::run()
 		return;
 	}
 
-	Timestamp now = timetool::GetTimeOfDay();
+	Timestamp now = timetool::getTimeOfDay();
 	cachedNow = now;
 
 	while(!m_taskqueue.empty()) {
@@ -64,7 +64,7 @@ void TimerQueue::runAfter(const task_t &task, TimeInMs delay)
 
 void TimerQueue::runAfter(Timer *pTask, TimeInMs delay)
 {
-	Timestamp now = timetool::GetTimeOfDay();
+	Timestamp now = timetool::getTimeOfDay();
 	pTask->m_life = 1;
 	runAt(pTask, now + delay);
 }

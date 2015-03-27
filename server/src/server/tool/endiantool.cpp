@@ -28,7 +28,7 @@ namespace endiantool
 		}
 
 		uint64_t ret = 0;
-		uint32_t high, low;
+		uint32 high, low;
 
 		low = host & 0xFFFFFFFF;
 		high = (host >> 32) & 0xFFFFFFFF;
@@ -49,7 +49,7 @@ namespace endiantool
 		}
 
 		uint64_t ret = 0;
-		uint32_t high, low;
+		uint32 high, low;
 
 		low = net & 0xFFFFFFFF;
 		high = (net >> 32) & 0xFFFFFFFF;
@@ -78,7 +78,7 @@ namespace endiantool
 	}
 
 	// 将32位的整数从主机字节顺序转换成网络字节顺序
-	uint32_t hostToNetwork32(uint32_t host32)
+	uint32 hostToNetwork32(uint32 host32)
 	{
 #ifdef WIN
 		return htonl(host32);
@@ -109,7 +109,7 @@ namespace endiantool
 	}
 
 	// 将32位的整数从网络字节顺序转换成主机字节顺序
-	uint32_t networkToHost32(uint32_t net32)
+	uint32 networkToHost32(uint32 net32)
 	{
 #ifdef WIN
 		return ntohl(net32);
