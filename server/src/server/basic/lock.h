@@ -263,19 +263,16 @@ public:
 	condition_var_t(mutex_t& mutex_);
 	~condition_var_t();
 	bool wait();
-	bool time_wait(int us_);
+	bool wait(int ms);
+
 	bool notify();
 	bool broadcast();
 
 private:
-	mutex_t&                         m_mutex;
+	mutex_t&                         m_lock;
 
 #ifdef WIN
-	HANDLE m_event;
-	fast_mutex m_lock;
-	int n_waiting;
-	int n_to_wake;
-	int generation;
+	CONDITION_VARIABLE m_condVariable;
 #else
 	pthread_cond_t                m_cond;
 #endif

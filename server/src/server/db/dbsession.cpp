@@ -114,7 +114,13 @@ void DBSession::threadrun()
 				m_cmdCondition.wait();
 			}
 
-			cmds.swap(m_cmdList);
+			// cmds.swap(m_cmdList);
+
+			size_t takecnt = m_cmdList.size();
+			takecnt = min(50, takecnt);
+
+			cmds.assign(m_cmdList.begin(), m_cmdList.begin() + takecnt);
+			m_cmdList.erase(m_cmdList.begin(), m_cmdList.begin() + takecnt);
 		}
 
 		DBConnection *conn = NULL;
@@ -161,7 +167,7 @@ void DBSession::addDBCommand(DBCommand *cmd)
 	m_cmdList.push_back(cmd);
 
 	if (needNotify)	{
-		m_cmdCondition.notify();
+		m_cmdCondition.broadcast();
 	}
 }
 

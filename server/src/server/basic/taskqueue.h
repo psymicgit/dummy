@@ -723,7 +723,7 @@ class BlockingTaskQueue: public task_queue_i
 {
 public:
 	BlockingTaskQueue():
-		m_flag(true),
+		m_closed(false),
 		m_cond(m_mutex)
 	{
 	}
@@ -733,7 +733,7 @@ public:
 	void close()
 	{
 		lock_guard_t<> lock(m_mutex);
-		m_flag = false;
+		m_closed = true;
 		m_cond.broadcast();
 	}
 
@@ -765,7 +765,7 @@ public:
 	{
 		lock_guard_t<> lock(m_mutex);
 		while (m_tasklist.empty()) {
-			if (false == m_flag) {
+			if (m_closed) {
 				return -1;
 			}
 			m_cond.wait();
@@ -791,7 +791,7 @@ public:
 		lock_guard_t<> lock(m_mutex);
 
 		while (m_tasklist.empty()) {
-			if (false == m_flag) {
+			if (m_closed) {
 				return -1;
 			}
 			m_cond.wait();
@@ -817,7 +817,7 @@ public:
 		return 0;
 	}
 private:
-	volatile bool                   m_flag;
+	volatile bool                   m_closed;
 	task_list_t                     m_tasklist;
 	mutex_t                         m_mutex;
 	condition_var_t                 m_cond;
