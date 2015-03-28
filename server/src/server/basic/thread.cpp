@@ -52,7 +52,7 @@ int thread_t::join()
 
 	WaitForMultipleObjects(threadCnt, &thread0, TRUE, INFINITE);
 #else
-	for (ThreadIdList::iterator it = m_tid_list.begin(); it != m_tid_list.end(); ++it) {
+	for (ThreadIdList::iterator itr = m_tid_list.begin(); itr != m_tid_list.end(); ++itr) {
 		pthread_t tid = *itr;
 		pthread_join(tid, NULL);
 	}

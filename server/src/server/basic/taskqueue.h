@@ -9,6 +9,7 @@
 #ifndef _taskqueue_h_
 #define _taskqueue_h_
 
+#include <stdexcept>
 #include "lock.h"
 
 typedef void (*task_func_t)(void*);
@@ -898,7 +899,7 @@ public:
 		{
 			lock_guard_t<> lock(m_mutex);
 			if (m_index >= (int)m_tqs.size()) {
-				throw runtime_error("too more thread running!!");
+				throw std::runtime_error("too more thread running!!");
 			}
 			p = m_tqs[m_index++];
 		}

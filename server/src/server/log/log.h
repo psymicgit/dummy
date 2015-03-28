@@ -14,6 +14,7 @@
 
 #pragma warning( disable : 4355 )
 
+#define  __STDC_FORMAT_MACROS
 #include <glog/logging.h>
 
 const char* strerror_threadlocal(int savedErrno);
