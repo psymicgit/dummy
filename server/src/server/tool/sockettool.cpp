@@ -49,10 +49,12 @@ namespace socktool
 #else
 		int flags;
 		if ((flags = fcntl(sockfd, F_GETFL, NULL)) < 0) {
+			LOG_SOCKET_ERR << "set nonblock failed";
 			return false;
 		}
 
 		if (fcntl(sockfd, F_SETFL, flags | O_NONBLOCK) == -1) {
+			LOG_SOCKET_ERR << "set nonblock failed";
 			return false;
 		}
 #endif

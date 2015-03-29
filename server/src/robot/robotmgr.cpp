@@ -22,9 +22,9 @@ bool RobotMgr::init()
 		Robot *robot = new Robot;
 		robot->m_taskQueue = &m_taskQueue;
 		robot->m_robotMgr = this;
-		m_wan.connect("127.0.0.1", 20001, *robot);
 
-		LOG_INFO << "robot " << i << "start connecting to server";
+		LOG_INFO << "robot " << i << " start connecting to server";
+		m_wan.connect("127.0.0.1", 20001, *robot);
 	}
 
 	RobotMsgHandler *robotMsgHandler = new RobotMsgHandler(&m_dispatcher);

@@ -57,7 +57,6 @@ bool Connector::connect()
 	case ECONNREFUSED:
 	case ENETUNREACH:
 		// 连接失败，重试
-		logError();
 		retry(m_sockfd);
 		break;
 
@@ -69,7 +68,6 @@ bool Connector::connect()
 	case EFAULT:
 	case ENOTSOCK:
 		// 连接异常，中断
-		logError();
 		retry(m_sockfd);
 		break;
 
@@ -163,7 +161,15 @@ bool Connector::connecting(socket_t sockfd)
 
 bool Connector::retry(socket_t sockfd)
 {
-	m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, this));
+	logError();
+
+	if (m_state == kConnecting) {
+		m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, this));
+	}
+
+#ifndef WIN
+	m_state = kDisconnected;
+#endif
 
 	TimerQueue &timerQueue = m_net->getTimerQueue();
 	timerQueue.runAfter(task_binder_t::gen(&Connector::connect, this), m_retryDelayMs);

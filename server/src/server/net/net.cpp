@@ -75,7 +75,7 @@ int Epoll::event_loop()
 			}
 
 			if (cur_ev.events & (EPOLLERR | EPOLLHUP)) {
-				fd_ptr->close();
+				fd_ptr->handleError();
 			}
 		}
 
@@ -111,7 +111,7 @@ void Epoll::addFd(IFd* pfd)
 	struct epoll_event ee = { 0, { 0 } };
 
 	ee.data.ptr  = pfd;
-	ee.events    = EPOLLPRI | EPOLLHUP | EPOLLET;;
+	ee.events    = EPOLLERR | EPOLLPRI | EPOLLHUP | EPOLLET;;
 
 	pfd->m_events = ee.events;
 	::epoll_ctl(m_efd, EPOLL_CTL_ADD, pfd->socket(), &ee);
@@ -119,12 +119,7 @@ void Epoll::addFd(IFd* pfd)
 
 void Epoll::delFd(IFd* pfd)
 {
-	if (pfd->socket() > 0) {
-		struct epoll_event ee;
-
-		ee.data.ptr  = (void*)0;
-		::epoll_ctl(m_efd, EPOLL_CTL_DEL, pfd->socket(), &ee);
-	}
+	disableAll(pfd);
 
 	{
 		lock_guard_t<> lock(m_mutex);
@@ -166,7 +161,12 @@ void Epoll::disableWrite(IFd *pfd)
 
 void Epoll::disableAll(IFd *pfd)
 {
-	mod(pfd, pfd->m_events & ~EPOLLIN & ~EPOLLOUT);
+	if (pfd->socket() > 0) {
+		struct epoll_event ee;
+
+		ee.data.ptr  = (void*)0;
+		::epoll_ctl(m_efd, EPOLL_CTL_DEL, pfd->socket(), &ee);
+	}
 }
 
 void Epoll::mod(IFd *pfd, uint16 events)
