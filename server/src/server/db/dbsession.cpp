@@ -82,7 +82,7 @@ uint32 DBSession::run(uint32 loopcnt)
 	{
 		lock_guard_t<> lock(m_executedCmdLock);
 		size_t copycnt = m_executedCmdList.size();
-		copycnt = min(loopcnt, copycnt);
+		copycnt = MIN(loopcnt, copycnt);
 
 		executingCmdList.assign(m_executedCmdList.begin(), m_executedCmdList.begin() + copycnt);
 		m_executedCmdList.erase(m_executedCmdList.begin(), m_executedCmdList.begin() + copycnt);
@@ -117,7 +117,7 @@ void DBSession::threadrun()
 			// cmds.swap(m_cmdList);
 
 			size_t takecnt = m_cmdList.size();
-			takecnt = min(50, takecnt);
+			takecnt = MIN(50, takecnt);
 
 			cmds.assign(m_cmdList.begin(), m_cmdList.begin() + takecnt);
 			m_cmdList.erase(m_cmdList.begin(), m_cmdList.begin() + takecnt);
@@ -138,7 +138,7 @@ void DBSession::executeCmd(DBCommand *cmd)
 	while(m_running) {
 		conn = getConnection(cmd->getGroupId());
 		if(NULL == conn) {
-			Sleep(10);
+			sleep(10);
 			continue;
 		}
 

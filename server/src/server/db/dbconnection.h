@@ -63,7 +63,7 @@ public:
 private:
 	MYSQL *m_mysql;
 
-	typedef tr1::unordered_map<std::string, MYSQL_STMT*> PreparedStmtMap;
+	typedef std::tr1::unordered_map<std::string, MYSQL_STMT*> PreparedStmtMap;
 	PreparedStmtMap m_preparedStmtMap;
 };
 

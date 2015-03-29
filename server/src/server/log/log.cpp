@@ -10,11 +10,13 @@
 
 thread_local char t_errnobuf[512];
 
+#ifdef WIN
 const char* strerror_threadlocal(int savedErrno)
 {
 	strerror_s(t_errnobuf, sizeof t_errnobuf, savedErrno);
 	return t_errnobuf;
 }
+#endif
 
 //将信息输出到单独的文件和 LOG(ERROR)
 void SignalHandle(const char* data, int size)

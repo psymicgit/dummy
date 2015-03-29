@@ -69,6 +69,8 @@
 	#include <ws2tcpip.h>
 	#include <io.h>
 #else
+	#include <netinet/in.h>
+	#include <sys/socket.h>
 #endif
 
 // 函数调用
@@ -76,6 +78,7 @@
 	#define fstat _fstati64
 	#define stat _stati64
 	#define mode_t int
+	#define sleep Sleep
 #endif
 
 // 编译器是否支持c++11的全部特性 ?
@@ -100,12 +103,18 @@
 #include <list>
 #include <vector>
 #include <map>
-#include <unordered_map> // 如果对map的有序性不作要求的话，请尽量用unorder_map代替map
-#include <unordered_set>
 #include <algorithm>
 #include <basic/singleton.h>
-
 #include <log/log.h>
+
+// unordered_map、unordered_set头文件路径定义
+#ifdef WIN
+	#include <unordered_map> // 如果对map的有序性不作要求的话，请尽量用unorder_map代替map
+	#include <unordered_set>
+#else
+	#include <tr1/unordered_map>
+	#include <tr1/unordered_set>
+#endif
 
 using namespace std;
 
@@ -116,6 +125,8 @@ using namespace std;
 	#define MSG_NOSIGNAL 0
 #else
 	#define NetModel Epoll
+
+	#define SOCKET_ERROR (-1)
 #endif
 
 // 错误码重定义
@@ -195,6 +206,21 @@ using namespace std;
 	#define EDQUOT                  WSAEDQUOT
 	#define ESTALE                  WSAESTALE
 	#define EREMOTE                 WSAEREMOTE
+#endif
+
+// 调试宏重定义
+#ifdef WIN
+	#define _FUNC_ __FUNCTION__
+#else
+	#define _FUNC_ << __FUNCTION__ <<
+#endif
+
+#ifndef MAX
+	#define MAX(a,b)            (((a) > (b)) ? (a) : (b))
+#endif
+
+#ifndef MIN
+	#define MIN(a,b)            (((a) < (b)) ? (a) : (b))
 #endif
 
 #endif //_platform_h_

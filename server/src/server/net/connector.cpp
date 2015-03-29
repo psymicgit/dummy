@@ -48,7 +48,10 @@ bool Connector::connect()
 		connecting(m_sockfd);
 		break;
 
+#ifdef WIN
+	// linux下的EAGAIN和EWOULDBLOCK是同一个值，编译会报错
 	case EAGAIN:
+#endif
 	case EADDRINUSE:
 	case EADDRNOTAVAIL:
 	case ECONNREFUSED:
@@ -165,7 +168,7 @@ bool Connector::retry(socket_t sockfd)
 	TimerQueue &timerQueue = m_net->getTimerQueue();
 	timerQueue.runAfter(task_binder_t::gen(&Connector::connect, this), m_retryDelayMs);
 
-	m_retryDelayMs = min(m_retryDelayMs * 2, MaxRetryDelayMs);
+	m_retryDelayMs = MIN(m_retryDelayMs * 2, MaxRetryDelayMs);
 	return true;
 }
 

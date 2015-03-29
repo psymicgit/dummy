@@ -1,7 +1,11 @@
 compile_type = ${shell echo $DEBUG}
 long_bit 	 = ${shell getconf LONG_BIT}
 
-export base_dir := ${shell pwd}
+base_dir := ${shell pwd}
 bin_dir 	 = ${base_dir}/../../bin/linux
 3rd_dir		 = ${base_dir}/../../3rd
 src_dir 	 = ${base_dir}/../../src
+
+# ÐÞ¸Äg++Ä¬ÈÏËÑË÷Â·¾¶
+CPLUS_INCLUDE_PATH=/usr/local/include
+export CPLUS_INCLUDE_PATH  

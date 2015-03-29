@@ -17,16 +17,16 @@
 #define  __STDC_FORMAT_MACROS
 #include <glog/logging.h>
 
-const char* strerror_threadlocal(int savedErrno);
-
-#define LOG_TRACE LOG(INFO) << "<"__FUNCTION__"> "
-#define LOG_INFO LOG(INFO) << "<"__FUNCTION__"> "
-#define LOG_DEBUG LOG(INFO) << "<"__FUNCTION__"> "
-#define LOG_WARN LOG(WARNING) << "<"__FUNCTION__"> "
-#define LOG_ERROR LOG(ERROR) << "<"__FUNCTION__"> "
-#define LOG_FATAL LOG(FATAL) << "<"__FUNCTION__"> "
+#define LOG_TRACE LOG(INFO) << "<" _FUNC_ " > "
+#define LOG_INFO LOG(INFO) << "<" _FUNC_ "> "
+#define LOG_DEBUG LOG(INFO) << "<" _FUNC_ "> "
+#define LOG_WARN LOG(WARNING) << "<" _FUNC_ "> "
+#define LOG_ERROR LOG(ERROR) << "<" _FUNC_ "> "
+#define LOG_FATAL LOG(FATAL) << "<" _FUNC_ "> "
 
 #ifdef WIN
+	const char* strerror_threadlocal(int savedErrno);
+
 	#define LOG_SOCKET_ERR LOG_ERROR << "[[err=<" << WSAGetLastError() << "> errmsg=<" << strerror_threadlocal(WSAGetLastError()) << ">]]:"
 #else
 	#define LOG_SOCKET_ERR LOG_ERROR << "[[socket err = <" << errno << ">--errno = <" << strerror(errno) << ">]]"
