@@ -22,7 +22,7 @@ class RobotMsgHandler : public MsgHandler<Robot>
 {
 public:
 	RobotMsgHandler(MsgDispatcher<Robot> *msgDispacher)
-		: MsgHandler(msgDispacher)
+		: MsgHandler<Robot>(msgDispacher)
 	{
 		init();
 	}

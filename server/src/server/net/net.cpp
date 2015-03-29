@@ -106,6 +106,8 @@ int Epoll::interruptLoop()
 
 void Epoll::addFd(IFd* pfd)
 {
+	LOG_INFO << "add fd" << pfd->socket();
+
 	struct epoll_event ee = { 0, { 0 } };
 
 	ee.data.ptr  = pfd;

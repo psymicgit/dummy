@@ -40,7 +40,7 @@ public:
 	TaskQueue *m_taskQueue;
 	RobotMgr *m_robotMgr;
 
-	UINT8 m_encryptKey[EncryptKeyLen];
+	uint8 m_encryptKey[EncryptKeyLen];
 	bool m_isEncrypt;
 };
 

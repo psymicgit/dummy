@@ -43,7 +43,7 @@ public:
 	TaskQueue *m_taskQueue;
 	ClientMgr *m_clientMgr;
 
-	UINT8 m_encryptKey[EncryptKeyLen];
+	uint8 m_encryptKey[EncryptKeyLen];
 
 };
 

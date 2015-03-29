@@ -10,6 +10,7 @@
     <ClCompile Include="..\protocol\protocol.pb.cc">
       <Filter>protocol</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="robot.h" />
@@ -21,6 +22,7 @@
       <Filter>protocol</Filter>
     </ClInclude>
     <ClInclude Include="robotmsghandler.h" />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocol">

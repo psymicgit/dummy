@@ -14,6 +14,4 @@
 #include <def/type.h>
 #include <def/platform.h>
 
-#include <google/protobuf/message.h>
-
 #endif // _stdafx_h_

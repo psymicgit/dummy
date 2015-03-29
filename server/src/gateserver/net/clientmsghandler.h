@@ -20,7 +20,7 @@ class ClientMsgHandler : public MsgHandler<Client>
 {
 public:
 	ClientMsgHandler(MsgDispatcher<Client> *msgDispacher)
-		: MsgHandler(msgDispacher)
+		: MsgHandler<Client>(msgDispacher)
 	{
 		init();
 	}

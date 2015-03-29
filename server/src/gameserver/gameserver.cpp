@@ -53,7 +53,7 @@ void GameServer::run()
 	Server::run();
 
 	m_dbmgr.run();
-	Sleep(10);
+	sleep(10);
 }
 
 ServerLink* GameServer::OnAcceptServer(Link &tcpLink, ServerType peerSvrType, int peerSvrId)

@@ -10,7 +10,7 @@ rem del /Q /S *.h
 rem del /Q /S *.cpp
 rem del /Q /S *.xsd
 del /Q /S %gen_dir%\*.h
-del /Q /S %gen_dir%\*.cpp
+del /Q /S %gen_dir%\*.cc
 
 rem 下面是批处理中的一些符号的说明
 rem %~dp0 =当前盘符+路径，如: d:\xxx\xxx

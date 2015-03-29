@@ -1,11 +1,11 @@
-compile_type = ${shell echo $DEBUG}
+compile_type = release
+# ${shell echo $DEBUG}
 long_bit 	 = ${shell getconf LONG_BIT}
 
-base_dir := ${shell pwd}
-bin_dir 	 = ${base_dir}/../../bin/linux
-3rd_dir		 = ${base_dir}/../../3rd
-src_dir 	 = ${base_dir}/../../src
+# 当前目录
+cur_dir := ${shell pwd}
 
-# 修改g++默认搜索路径
-CPLUS_INCLUDE_PATH=/usr/local/include
-export CPLUS_INCLUDE_PATH  
+bin_dir 	 = ${base_dir}/bin/linux${long_bit}
+lib_dir 	 = ${base_dir}/lib/linux${long_bit}/${compile_type}
+3rd_dir		 = ${base_dir}/3rd
+src_dir 	 = ${base_dir}/src

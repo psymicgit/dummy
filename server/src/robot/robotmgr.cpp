@@ -23,6 +23,8 @@ bool RobotMgr::init()
 		robot->m_taskQueue = &m_taskQueue;
 		robot->m_robotMgr = this;
 		m_wan.connect("127.0.0.1", 20001, *robot);
+
+		LOG_INFO << "robot " << i << "start connecting to server";
 	}
 
 	RobotMsgHandler *robotMsgHandler = new RobotMsgHandler(&m_dispatcher);
@@ -41,7 +43,7 @@ void RobotMgr::start()
 void RobotMgr::run()
 {
 	m_taskQueue.run();
-	Sleep(10);
+	sleep(10);
 }
 
 void RobotMgr::handleMsg(Robot &robot, int msgId, Buffer &buf, Timestamp receiveTime)

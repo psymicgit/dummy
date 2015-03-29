@@ -44,7 +44,7 @@ void GateServer::start()
 void GateServer::run()
 {
 	Server::run();
-	Sleep(10);
+	sleep(10);
 }
 
 ServerLink* GateServer::OnAcceptServer(Link &tcpLink, ServerType peerSvrType, int peerSvrId)

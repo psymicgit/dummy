@@ -160,7 +160,7 @@ void DBMgr::test()
 bool DBMgr::init()
 {
 	DBAccount gamedbAccnt;
-	gamedbAccnt.m_dbIp = "127.0.0.1";
+	gamedbAccnt.m_dbIp = "192.168.2.101";
 	gamedbAccnt.m_dbName = "gamedb";
 	gamedbAccnt.m_dbPort = 3306;
 	gamedbAccnt.m_loginName = "root";
@@ -176,13 +176,13 @@ bool DBMgr::init()
 	m_gamedb = m_dbfactory->createDBSession(gamedbAccnt, 20, 20);
 	if (NULL == m_gamedb) {
 		LOG_ERROR << "create gamedb seesion failed";
-		return FALSE;
+		return false;
 	}
 
 	m_logdb = m_dbfactory->createDBSession(logdbAccnt, 20, 20);
 	if (NULL == m_gamedb) {
 		LOG_ERROR << "create logdb seesion failed";
-		return FALSE;
+		return false;
 	}
 
 	test();

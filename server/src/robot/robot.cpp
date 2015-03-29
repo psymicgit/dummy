@@ -134,7 +134,7 @@ bool Robot::send(int msgId, const char* data, int len)
 
 	memcpy(netBuf + headSize + EncryptHeadLen, data, len);
 
-	uint8* decryptBuf = (UINT8*)(netBuf + headSize);
+	uint8* decryptBuf = (uint8*)(netBuf + headSize);
 	int decryptBufLen = len + EncryptHeadLen + EncryptTailLen;//添加加解密头尾
 
 	encrypttool::encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));

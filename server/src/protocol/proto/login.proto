@@ -1,6 +1,0 @@
-message LoginReq
-{
-    required int32 id = 3;
-    required string name = 1;
-    required string pwd = 2;
-}

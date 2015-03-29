@@ -19,7 +19,7 @@ class Client;
 class ClientMgr : public INetReactor
 {
 private:
-	typedef stdext::hash_map<uint32, Client*> ClientMap;
+	typedef std::tr1::unordered_map<uint32, Client*> ClientMap;
 
 public:
 	ClientMgr();
