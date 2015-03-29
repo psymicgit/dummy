@@ -71,6 +71,8 @@
 #else
 	#include <netinet/in.h>
 	#include <sys/socket.h>
+	#include <sys/epoll.h>
+	#include <arpa/inet.h>
 #endif
 
 // 函数调用
@@ -79,6 +81,8 @@
 	#define stat _stati64
 	#define mode_t int
 	#define sleep Sleep
+#else
+	#define sprintf_s snprintf
 #endif
 
 // 编译器是否支持c++11的全部特性 ?
@@ -103,6 +107,7 @@
 #include <list>
 #include <vector>
 #include <map>
+#include <iterator>
 #include <algorithm>
 #include <basic/singleton.h>
 #include <log/log.h>

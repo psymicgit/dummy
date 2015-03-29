@@ -7,13 +7,12 @@
 ///<------------------------------------------------------------------------------
 
 #include "filetool.h"
-#include <windows.h>
-#include <tchar.h>
 
 namespace tool
 {
 	std::string GetAbsolutePath()
 	{
+#ifdef WIN
 		char path[300];
 		GetModuleFileName(NULL, path, sizeof(path));
 		char *p = strrchr(path, '\\');
@@ -21,5 +20,9 @@ namespace tool
 		strcat_s(path, sizeof(path), "\\");
 
 		return path;
+#else
+		return "";
+#endif
 	}
+
 }

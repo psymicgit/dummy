@@ -20,7 +20,7 @@ class NetMsgHandler : public MsgHandler<Link>
 {
 public:
 	NetMsgHandler(MsgDispatcher<Link> *msgDispacher)
-		: MsgHandler(msgDispacher)
+		: MsgHandler<Link>(msgDispacher)
 	{
 		init();
 	}

@@ -11,8 +11,9 @@
 
 #include <google/protobuf/message.h>
 
-#include "basic/bind.h"
+// #include "basic/bind.h"
 #include "tool/timetool.h"
+#include "protocol/message.h"
 #include "net/msgdispatcher.h"
 #include "net/imsghandler.h"
 
@@ -72,7 +73,7 @@ public:
 
 	void onMessage(LinkType& link, int msgId, const char* data, int len, Timestamp receiveTime) const
 	{
-		CallbackMap::const_iterator it = m_callbackMap.find(msgId);
+		typename CallbackMap::const_iterator it = m_callbackMap.find(msgId);
 		if (it == m_callbackMap.end()) {
 			//discardMessage(link, message, receiveTime);
 			return;

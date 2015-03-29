@@ -119,7 +119,7 @@ void Connector::logError()
 
 void Connector::close()
 {
-	m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, m_sockfd));
+	m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, this));
 	m_net->getTaskQueue().put(task_binder_t::gen(&INet::delFd, m_net, this));
 }
 
@@ -163,7 +163,7 @@ bool Connector::connecting(socket_t sockfd)
 
 bool Connector::retry(socket_t sockfd)
 {
-	m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, m_sockfd));
+	m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, this));
 
 	TimerQueue &timerQueue = m_net->getTimerQueue();
 	timerQueue.runAfter(task_binder_t::gen(&Connector::connect, this), m_retryDelayMs);

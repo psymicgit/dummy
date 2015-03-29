@@ -48,7 +48,7 @@ bool Listener::open(const string& ip, int port)
 void Listener::close()
 {
 	if (m_listenFd > 0) {
-		m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, m_listenFd));
+		m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, this));
 		m_net->getTaskQueue().put(task_binder_t::gen(&INet::delFd, m_net, this));
 		socktool::closeSocket(m_listenFd);
 		m_listenFd = -1;

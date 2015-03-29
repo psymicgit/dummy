@@ -18,7 +18,7 @@ struct NetMsgHead {
 
 namespace msgtool
 {
-	string getMsgString(google::protobuf::Message &msg);
+	string getMsgString(const google::protobuf::Message &msg);
 
 	// 构建网络包头
 	int buildNetHeader(NetMsgHead *pstHead, uint16 msgId, uint32 msgLen);

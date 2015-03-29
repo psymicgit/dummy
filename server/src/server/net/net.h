@@ -27,6 +27,11 @@ public:
 	virtual int handleError()   = 0;
 
 	virtual void close() = 0;
+
+#ifndef WIN
+public:
+	uint16 m_events;
+#endif
 };
 
 //! 网络事件分发器
@@ -49,7 +54,7 @@ public:
 	virtual void disableWrite(IFd*)		= 0;
 
 	virtual void enableAll(IFd*)		= 0;
-	virtual void disableAll(socket_t)		= 0;
+	virtual void disableAll(IFd*)		= 0;
 
 	virtual TimerQueue& getTimerQueue() = 0;
 	virtual TaskQueue& getTaskQueue()   = 0;
@@ -65,23 +70,42 @@ public:
 	~Epoll();
 
 	virtual int event_loop();
-	virtual int close();
-	virtual int registerFd(IFd*);
-	virtual int unregisterFd(IFd*);
-	virtual int reopen(IFd*);
+	virtual void close();
 
-	int interupt_loop(); //! 中断事件循环
+	virtual void addFd(IFd*);
+	virtual void delFd(IFd*);
+
+	virtual void enableRead(IFd*);
+	virtual void disableRead(IFd*);
+
+	virtual void enableWrite(IFd*);
+	virtual void disableWrite(IFd*);
+
+	virtual void enableAll(IFd*);
+	virtual void disableAll(IFd*);
+
+	virtual void reopen(IFd*);
+
+	virtual TimerQueue& getTimerQueue() { return m_timers; }
+	virtual TaskQueue& getTaskQueue() { return m_tasks; }
 
 protected:
 	void fd_del_callback();
+
+	int interruptLoop();
+
+	void mod(IFd*, uint16 events);
 
 	volatile bool            m_running;
 	int                      m_efd;
 	task_queue_i*            m_task_queue;
 	int                      m_interupt_sockets[2];
+
 	//! 待销毁的error socket
 	list<IFd*>   		     m_error_fd_set;
 	mutex_t                  m_mutex;
+
+	TaskQueue m_tasks;
 	TimerQueue m_timers;
 };
 
@@ -110,19 +134,19 @@ public:
 	virtual void disableWrite(IFd*);
 
 	virtual void enableAll(IFd*);
-	virtual void disableAll(socket_t);
+	virtual void disableAll(IFd*);
 
 	virtual void reopen(IFd*);
 
-	virtual TimerQueue& getTimerQueue() { return m_timerQueue; }
-	virtual TaskQueue& getTaskQueue() { return m_taskQueue; }
+	virtual TimerQueue& getTimerQueue() { return m_timers; }
+	virtual TaskQueue& getTaskQueue() { return m_tasks; }
 
 protected:
 
 private:
 	LinkerList m_links;
-	TaskQueue m_taskQueue;
-	TimerQueue m_timerQueue;
+	TaskQueue m_tasks;
+	TimerQueue m_timers;
 
 	int m_maxfd;
 

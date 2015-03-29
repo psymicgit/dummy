@@ -11,6 +11,10 @@
 #include "tool/endiantool.h"
 #include "log/log.h"
 
+#ifndef WIN
+	#include <netdb.h>
+#endif
+
 NetAddress::NetAddress(uint16_t port, bool loopbackOnly)
 {
 	bzero(&m_addr, sizeof m_addr);
@@ -44,7 +48,7 @@ string NetAddress::toIp() const
 	char buf[32];
 	assert(sizeof buf >= INET_ADDRSTRLEN);
 
-	::inet_ntop(AF_INET, (PVOID)&m_addr.sin_addr, buf, static_cast<socklen_t>(sizeof buf));
+	::inet_ntop(AF_INET, (void*)&m_addr.sin_addr, buf, static_cast<socklen_t>(sizeof buf));
 	return buf;
 }
 
@@ -97,7 +101,7 @@ bool NetAddress::resolve(string hostname, NetAddress* out)
 	}
 	else {
 		if (ret) {
-			LOG_SYSERR << "InetAddress::resolve";
+			LOG_SOCKET_ERR << "InetAddress::resolve";
 		}
 		return false;
 	}

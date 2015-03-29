@@ -79,6 +79,7 @@ int Epoll::event_loop()
 			}
 		}
 
+		m_tasks.run();
 		m_timers.run();
 	}
 	while(nfds >= 0);
@@ -86,71 +87,106 @@ int Epoll::event_loop()
 	return 0;
 }
 
-int Epoll::close()
+void Epoll::close()
 {
 	m_running = false;
 
-	interupt_loop();
-
-	return 0;
+	interruptLoop();
 }
 
-int Epoll::register_fd(IFd* pFd)
-{
-	struct epoll_event ee = { 0, { 0 } };
-
-	ee.data.ptr  = pFd;
-	ee.events    = EPOLLIN | EPOLLPRI | EPOLLOUT | EPOLLHUP | EPOLLET;;
-
-	return ::epoll_ctl(m_efd, EPOLL_CTL_ADD, pFd->socket(), &ee);
-}
-
-int Epoll::unregister_fd(IFd* fd_ptr_)
-{
-	int ret = 0;
-	if (fd_ptr_->socket() > 0) {
-		struct epoll_event ee;
-
-		ee.data.ptr  = (void*)0;
-		ret = ::epoll_ctl(m_efd, EPOLL_CTL_DEL, fd_ptr_->socket(), &ee);
-	}
-
-	{
-		lock_guard_t lock(m_mutex);
-		m_error_fd_set.push_back(fd_ptr_);
-	}
-	interupt_loop();
-	return ret;
-}
-
-int Epoll::reopen(IFd* fd_ptr_)
-{
-	struct epoll_event ee = { 0, { 0 } };
-
-	ee.data.ptr  = fd_ptr_;
-	ee.events    = EPOLLIN | EPOLLPRI | EPOLLOUT | EPOLLHUP | EPOLLET;;
-
-	return ::epoll_ctl(m_efd, EPOLL_CTL_MOD, fd_ptr_->socket(), &ee);
-}
-
-void Epoll::fd_del_callback()
-{
-	lock_guard_t lock(m_mutex);
-	list<IFd*>::iterator it = m_error_fd_set.begin();
-	for (; it != m_error_fd_set.end(); ++it) {
-		(*it)->handleError();
-	}
-	m_error_fd_set.clear();
-}
-
-int Epoll::interupt_loop()//! 中断事件循环
+int Epoll::interruptLoop()
 {
 	struct epoll_event ee = { 0, { 0 } };
 
 	ee.data.ptr  = this;
-	ee.events    = EPOLLIN | EPOLLPRI | EPOLLOUT | EPOLLHUP | EPOLLET;;
+	ee.events    = EPOLLIN | EPOLLOUT | EPOLLPRI | EPOLLHUP | EPOLLET;;
 
 	return ::epoll_ctl(m_efd, EPOLL_CTL_MOD, m_interupt_sockets[0], &ee);
+}
+
+void Epoll::addFd(IFd* pfd)
+{
+	struct epoll_event ee = { 0, { 0 } };
+
+	ee.data.ptr  = pfd;
+	ee.events    = EPOLLPRI | EPOLLHUP | EPOLLET;;
+
+	pfd->m_events = ee.events;
+	::epoll_ctl(m_efd, EPOLL_CTL_ADD, pfd->socket(), &ee);
+}
+
+void Epoll::delFd(IFd* pfd)
+{
+	if (pfd->socket() > 0) {
+		struct epoll_event ee;
+
+		ee.data.ptr  = (void*)0;
+		::epoll_ctl(m_efd, EPOLL_CTL_DEL, pfd->socket(), &ee);
+	}
+
+	{
+		lock_guard_t<> lock(m_mutex);
+		m_error_fd_set.push_back(pfd);
+	}
+
+	interruptLoop();
+}
+
+void Epoll::reopen(IFd* pfd)
+{
+	mod(pfd, EPOLLIN | EPOLLOUT | EPOLLPRI | EPOLLHUP | EPOLLET);
+}
+
+void Epoll::enableRead(IFd *pfd)
+{
+	mod(pfd, pfd->m_events | EPOLLIN);
+}
+
+void Epoll::enableWrite(IFd *pfd)
+{
+	mod(pfd, pfd->m_events | EPOLLOUT);
+}
+
+void Epoll::enableAll(IFd *pfd)
+{
+	mod(pfd, pfd->m_events | EPOLLIN | EPOLLOUT);
+}
+
+void Epoll::disableRead(IFd *pfd)
+{
+	mod(pfd, pfd->m_events & ~EPOLLIN);
+}
+
+void Epoll::disableWrite(IFd *pfd)
+{
+	mod(pfd, pfd->m_events & ~EPOLLOUT);
+}
+
+void Epoll::disableAll(IFd *pfd)
+{
+	mod(pfd, pfd->m_events & ~EPOLLIN & ~EPOLLOUT);
+}
+
+void Epoll::mod(IFd *pfd, uint16 events)
+{
+	pfd->m_events = events;
+
+	struct epoll_event ee = { 0, { 0 } };
+	ee.data.ptr  = pfd;
+	ee.events    = events;
+
+	::epoll_ctl(m_efd, EPOLL_CTL_MOD, pfd->socket(), &ee);
+}
+
+void Epoll::fd_del_callback()
+{
+	lock_guard_t<> lock(m_mutex);
+	list<IFd*>::iterator it = m_error_fd_set.begin();
+	for (; it != m_error_fd_set.end(); ++it) {
+		delete *it;
+	}
+
+	m_error_fd_set.clear();
 }
 
 #else
@@ -235,11 +271,13 @@ void Select::disableWrite(IFd *pfd)
 	}
 }
 
-void Select::disableAll(socket_t fd)
+void Select::disableAll(IFd *pfd)
 {
-	FD_CLR(fd, &m_rset);
-	FD_CLR(fd, &m_wset);
-	FD_CLR(fd, &m_eset);
+	socket_t sock = pfd->socket();
+
+	FD_CLR(sock, &m_rset);
+	FD_CLR(sock, &m_wset);
+	FD_CLR(sock, &m_eset);
 }
 
 void Select::reopen(IFd *pfd)
@@ -306,8 +344,8 @@ int Select::event_loop()
 			// LOG_DEBUG << "Timeout.";
 		}
 
-		m_taskQueue.run();
-		m_timerQueue.run();
+		m_tasks.run();
+		m_timers.run();
 	}
 
 	return 0;

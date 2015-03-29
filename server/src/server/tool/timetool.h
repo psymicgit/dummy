@@ -17,6 +17,7 @@ typedef int32 TimeInMs; // in ms毫秒单位
 
 namespace timetool
 {
+	// 单位: 毫秒
 	Timestamp getTimeOfDay();
 
 	Timestamp GetLocalTime();

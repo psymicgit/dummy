@@ -7,9 +7,11 @@
 ///<------------------------------------------------------------------------------
 
 #include "ticktool.h"
+#include "timetool.h"
 
 namespace ticktool
 {
+#ifdef WIN
 	// 获取CPU每秒的滴答次数
 	uint64 GetTickFrequency()
 	{
@@ -29,13 +31,32 @@ namespace ticktool
 		return tick.QuadPart;
 	}
 
-	uint32 tickDiff(uint64 old_tick)
+	// 返回两次时钟周期的秒差
+	double tickDiff(uint64 old_tick)
 	{
 		uint64 tick_now = tick();
+		uint64 diff = tick_now - old_tick;
 
-		uint32 ms = (uint32)((tick_now - old_tick) * 1000 / GetTickFrequency());
-		return ms;
+		double s = (double)diff / GetTickFrequency();
+		return s;
 	}
+
+#else
+	uint64 tick()
+	{
+		return (uint64)timetool::getTimeOfDay();
+	}
+
+	// 返回相差秒
+	double tickDiff(uint64 old_tick)
+	{
+		uint64 tick_now = tick();
+		uint64 msDiff = tick_now - old_tick;
+
+		double s = (double)msDiff / 1000;
+		return s;
+	}
+#endif
 }
 
 void Tick::startTick()
@@ -47,11 +68,5 @@ void Tick::startTick()
 // 返回秒
 double Tick::endTick()
 {
-	uint64 tick_now = ticktool::tick();
-	uint64 diff = tick_now - m_tick;
-
-	// uint32_t ms = (double)((tick_now - old_tick) * 1000 / GetTickFrequency());
-
-	double passed_sec = (double)diff / ticktool::GetTickFrequency();
-	return passed_sec;
+	return ticktool::tickDiff(m_tick);
 }

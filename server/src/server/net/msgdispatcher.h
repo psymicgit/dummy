@@ -30,12 +30,12 @@ public:
 
 	void dispatch(LinkType& link, int msgId, const char* data, int len, Timestamp receiveTime)
 	{
-		MsgHandlerMap::const_iterator it = m_msgMap.find(msgId);
-		if (it == m_msgMap.end()) {
+		typename MsgHandlerMap::const_iterator itr = m_msgMap.find(msgId);
+		if (itr == m_msgMap.end()) {
 			return;
 		}
 
-		IMsgHandler<LinkType> *msgMgr = it->second;
+		IMsgHandler<LinkType> *msgMgr = itr->second;
 		msgMgr->onMessage(link, msgId, data, len, receiveTime);
 	}
 

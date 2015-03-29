@@ -13,7 +13,7 @@
 
 namespace msgtool
 {
-	string getMsgString(google::protobuf::Message &msg)
+	string getMsgString(const google::protobuf::Message &msg)
 	{
 		string text = msg.GetDescriptor()->DebugString();
 		text += "\nvalue = {\n" + msg.DebugString() + "}";

@@ -14,6 +14,10 @@
 
 #include "net/netaddress.h"
 
+#ifndef WIN
+	#include <fcntl.h>
+#endif
+
 namespace socktool
 {
 	socket_t createSocket()
@@ -29,7 +33,7 @@ namespace socktool
 	void closeSocket(socket_t sockfd)
 	{
 #ifndef WIN
-		_close(sockfd);
+		close(sockfd);
 #else
 		closesocket(sockfd);
 #endif

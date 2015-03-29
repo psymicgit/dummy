@@ -14,9 +14,6 @@
 namespace ticktool
 {
 	uint64 tick();
-
-	// 返回两次时钟周期的毫秒差
-	uint32 tickDiff(uint64 old_tick);
 }
 
 class Tick
