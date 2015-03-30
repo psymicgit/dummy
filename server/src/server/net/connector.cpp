@@ -180,7 +180,7 @@ bool Connector::retry(socket_t sockfd)
 
 Link* Connector::createLink(socket_t newfd, NetAddress &peerAddr)
 {
-	NetAddress localAddr(socktool::getLocalAddr(m_sockfd));
+	NetAddress localAddr(socktool::getLocalAddr(newfd));
 	Link *link = new Link(newfd, localAddr, peerAddr, m_taskQueuePool->alloc(newfd), m_net, m_pNetReactor);
 	link->m_isCreateByConnector = true;
 	return link;

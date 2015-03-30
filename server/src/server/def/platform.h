@@ -83,6 +83,7 @@
 	#define sleep Sleep
 #else
 	#define sprintf_s snprintf
+	#define sleep(ms) usleep(ms * 1000)
 #endif
 
 // 编译器是否支持c++11的全部特性 ?

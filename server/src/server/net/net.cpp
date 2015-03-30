@@ -171,6 +171,10 @@ void Epoll::disableAll(IFd *pfd)
 
 void Epoll::mod(IFd *pfd, uint16 events)
 {
+	if (pfd->m_events == events) {
+		return;
+	}
+
 	pfd->m_events = events;
 
 	struct epoll_event ee = { 0, { 0 } };

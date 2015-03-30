@@ -84,7 +84,7 @@ struct task_t {
 class task_queue_i
 {
 public:
-	typedef list<task_t> task_list_t;
+	typedef std::list<task_t> task_list_t;
 public:
 	virtual ~task_queue_i() {}
 	virtual void close() = 0;
@@ -864,7 +864,7 @@ public:
 	}
 
 private:
-	task_queue_i::task_list_t                     m_tasklist;
+	task_queue_i::task_list_t m_tasklist;
 	mutex_t                         m_mutex;
 };
 
