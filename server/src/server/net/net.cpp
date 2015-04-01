@@ -106,7 +106,7 @@ int Epoll::interruptLoop()
 
 void Epoll::addFd(IFd* pfd)
 {
-	LOG_INFO << "add fd " << pfd->socket();
+	// LOG_INFO << "add fd " << pfd->socket();
 
 	struct epoll_event ee = { 0, { 0 } };
 
@@ -191,7 +191,7 @@ void Epoll::recycleFds()
 	lock_guard_t<> lock(m_mutex);
 	list<IFd*>::iterator it = m_deletingFdList.begin();
 	for (; it != m_deletingFdList.end(); ++it) {
-		LOG_INFO << "add fd " << (*it)->socket();
+		// LOG_INFO << "add fd " << (*it)->socket();
 		delete *it;
 	}
 

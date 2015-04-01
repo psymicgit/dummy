@@ -155,8 +155,7 @@ bool Connector::retry(socket_t sockfd)
 		m_net->disableAll(this);
 
 #ifndef WIN
-		// linux下应重新加入事件监听
-		m_net->addFd(this);
+		m_state = kDisconnected;
 #endif
 	}
 

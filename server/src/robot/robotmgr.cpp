@@ -23,7 +23,7 @@ bool RobotMgr::init()
 		robot->m_taskQueue = &m_taskQueue;
 		robot->m_robotMgr = this;
 
-		LOG_INFO << "robot " << i << " start connecting to server";
+		// LOG_INFO << "robot " << i << " start connecting to server";
 		m_wan.connect("127.0.0.1", 20001, *robot);
 	}
 
