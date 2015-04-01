@@ -23,17 +23,17 @@ public:
 	Robot();
 
 public:
-	virtual void OnConnected(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
+	virtual void onConnected(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void OnDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
+	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void OnRecv(Link*, Buffer&);
+	virtual void onRecv(Link*, Buffer&);
 
 	bool send(int msgId, const char* data, int len);
 
 	bool send(int msgId, Message&);
 
-	virtual TaskQueue& GetTaskQueue() { return *m_taskQueue;}
+	virtual TaskQueue& getTaskQueue() { return *m_taskQueue;}
 
 public:
 	Link *m_link;

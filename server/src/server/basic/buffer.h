@@ -48,17 +48,15 @@ public:
 		std::swap(writerIndex_, rhs.writerIndex_);
 	}
 
-	size_t readableBytes() const
-	{ return writerIndex_ - readerIndex_; }
+	inline size_t readableBytes() const { return writerIndex_ - readerIndex_; }
 
-	size_t writableBytes() const
-	{ return buffer_.size() - writerIndex_; }
+	inline size_t writableBytes() const { return buffer_.size() - writerIndex_; }
 
-	size_t prependableBytes() const
-	{ return readerIndex_; }
+	inline size_t prependableBytes() const { return readerIndex_; }
 
-	const char* peek() const
-	{ return begin() + readerIndex_; }
+	inline const char* peek() const { return begin() + readerIndex_; }
+
+	inline bool empty() const { return readableBytes() == 0; }
 
 	const char* findCRLF() const
 	{

@@ -40,19 +40,15 @@ bool Listener::open(const string& ip, int port)
 		return false;
 	}
 
-	m_net->getTaskQueue().put(task_binder_t::gen(&INet::addFd, m_net, this));
-	m_net->getTaskQueue().put(task_binder_t::gen(&INet::enableRead, m_net, this));
+	m_net->addFd(this);
+	m_net->enableRead(this);
 	return true;
 }
 
 void Listener::close()
 {
-	if (m_listenFd > 0) {
-		m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, this));
-		m_net->getTaskQueue().put(task_binder_t::gen(&INet::delFd, m_net, this));
-		socktool::closeSocket(m_listenFd);
-		m_listenFd = -1;
-	}
+	socktool::closeSocket(m_listenFd);
+	m_net->delFd(this);
 }
 
 int Listener::handleRead()
@@ -68,7 +64,7 @@ int Listener::handleRead()
 			}
 			else if (errno == EINTR || errno == EMFILE || errno == ECONNABORTED || errno == ENFILE ||
 			         errno == EPERM || errno == ENOBUFS || errno == ENOMEM) {
-				perror("accept");//! if too many open files occur, need to restart epoll event
+				LOG_ERROR << "accept failed, restart listenning now";//! if too many open files occur, need to restart epoll event
 				m_net->reopen(this);
 				return 0;
 			}
@@ -81,7 +77,7 @@ int Listener::handleRead()
 		Link* link = createLink(newfd, peerAddr);
 		link->open();
 
-		m_pNetReactor->GetTaskQueue().put(task_binder_t::gen(&INetReactor::OnAccepted, m_pNetReactor, link, m_listenAddr, peerAddr));
+		m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&INetReactor::onAccepted, m_pNetReactor, link, m_listenAddr, peerAddr));
 
 		// m_pNetReactor->GetTaskQueue().put(task_binder_t::gen(&Listener::OnAccepted, this, link));
 	}

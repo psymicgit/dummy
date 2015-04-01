@@ -64,7 +64,7 @@ private:
 		}
 		else {
 			// LOG_DEBUG << "OnAcceptConnect : \n" << msgtool::getMsgString(*req);
-			ServerLink *svrLink = Server::instance->OnAcceptServer(*link, (ServerType)req->svrtype(), req->svrid());
+			ServerLink *svrLink = Server::instance->onAcceptServer(*link, (ServerType)req->svrtype(), req->svrid());
 			if (NULL == svrLink) {
 				res.set_ret(CONNECT_FAIL_UNKNOWN_SERVER_TYPE);
 			}
@@ -72,7 +72,7 @@ private:
 				svrLink->m_link = link;
 				svrLink->m_remoteSvrType = peerSvrType;
 				svrLink->m_svrId = peerSvrId;
-				svrLink->m_taskQueue = &Server::instance->GetTaskQueue();
+				svrLink->m_taskQueue = &Server::instance->getTaskQueue();
 
 				link->m_pNetReactor = svrLink;
 
@@ -106,12 +106,12 @@ private:
 		}
 
 		// LOG_DEBUG << "OnAcceptConnect : \n" << msgtool::getMsgString(*req);
-		ServerLink *svrLink = Server::instance->OnAcceptServer(*link, (ServerType)res->svrtype(), res->svrid());
+		ServerLink *svrLink = Server::instance->onAcceptServer(*link, (ServerType)res->svrtype(), res->svrid());
 		if (svrLink) {
 			svrLink->m_link = link;
 			svrLink->m_remoteSvrType = (ServerType)res->svrtype();
 			svrLink->m_svrId = res->svrid();
-			svrLink->m_taskQueue = &Server::instance->GetTaskQueue();
+			svrLink->m_taskQueue = &Server::instance->getTaskQueue();
 
 			link->m_pNetReactor = svrLink;
 

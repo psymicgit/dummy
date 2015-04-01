@@ -22,11 +22,11 @@ public:
 
 public:
 	// @override
-	virtual void OnDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
+	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void OnRecv(Link*, Buffer&);
+	virtual void onRecv(Link*, Buffer&);
 
-	virtual TaskQueue& GetTaskQueue() { return *m_taskQueue; }
+	virtual TaskQueue& getTaskQueue() { return *m_taskQueue; }
 
 public:
 	void onEstablish();

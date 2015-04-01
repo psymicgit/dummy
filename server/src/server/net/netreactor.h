@@ -17,15 +17,15 @@ class TaskQueue;
 class INetReactor
 {
 public:
-	virtual void OnConnected(Link*, const NetAddress& localAddr, const NetAddress& peerAddr) {}
+	virtual void onConnected(Link*, const NetAddress& localAddr, const NetAddress& peerAddr) {}
 
-	virtual void OnAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr) {}
+	virtual void onAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr) {}
 
-	virtual void OnDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr) = 0;
+	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr) = 0;
 
-	virtual void OnRecv(Link*, Buffer&) = 0;
+	virtual void onRecv(Link*, Buffer&) = 0;
 
-	virtual TaskQueue& GetTaskQueue() = 0;
+	virtual TaskQueue& getTaskQueue() = 0;
 };
 
 #endif //_netreactor_h_

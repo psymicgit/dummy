@@ -33,8 +33,6 @@ public:
 
 	bool retry(socket_t);
 
-	void logError();
-
 private:
 	Link* createLink(socket_t newfd, NetAddress &peerAddr);
 

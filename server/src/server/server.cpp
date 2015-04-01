@@ -39,7 +39,7 @@ bool Server::uninit()
 	return false;
 }
 
-void Server::OnConnected(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
+void Server::onConnected(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	ConnectReq req;
 	req.set_svrtype(m_svrType);
@@ -50,17 +50,17 @@ void Server::OnConnected(Link *link, const NetAddress& localAddr, const NetAddre
 	LOG_INFO << "<" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success";
 }
 
-void Server::OnAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr)
+void Server::onAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	LOG_INFO << "<" << localAddr.toIpPort() << "> receive new connection from <" << peerAddr.toIpPort() << ">";
 }
 
-void Server::OnDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr)
+void Server::onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	LOG_INFO << "<" << localAddr.toIpPort() << "> peer connection <" << peerAddr.toIpPort() << "> broken";
 }
 
-void Server::OnRecv(Link *link, Buffer& buf)
+void Server::onRecv(Link *link, Buffer& buf)
 {
 	// ¼ì²â°ë°ü
 	int bytes = buf.readableBytes();
@@ -81,10 +81,10 @@ void Server::OnRecv(Link *link, Buffer& buf)
 
 	buf.retrieve(msgHead->msgLen);
 
-	m_taskQueue.put(task_binder_t::gen(&Server::HandleMsg, this, link, msgHead->msgId, msg));
+	m_taskQueue.put(task_binder_t::gen(&Server::handleMsg, this, link, msgHead->msgId, msg));
 }
 
-void Server::HandleMsg(Link* link, int msgId, Buffer &buf)
+void Server::handleMsg(Link* link, int msgId, Buffer &buf)
 {
 	// LOG_INFO << "<Server> recv msg from <" << link->m_peerAddr.toIpPort() << "> :" << buffer->retrieveAllAsString();
 

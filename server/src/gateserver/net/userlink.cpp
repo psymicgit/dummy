@@ -22,5 +22,5 @@ void UserLink::OnRecv(Link *link, Buffer &buf)
 
 TaskQueue& UserLink::GetTaskQueue()
 {
-	return Server::instance->GetTaskQueue();
+	return Server::instance->getTaskQueue();
 }

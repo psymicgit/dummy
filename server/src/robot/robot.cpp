@@ -22,7 +22,7 @@ Robot::Robot()
 {
 }
 
-void Robot::OnConnected(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
+void Robot::onConnected(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	m_link = link;
 
@@ -44,7 +44,7 @@ void Robot::OnConnected(Link *link, const NetAddress& localAddr, const NetAddres
 // 	link->send(eLoginReq, req);
 }
 
-void Robot::OnDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
+void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	if (link->m_isCreateByConnector) {
 		Robot *robot = new Robot;
@@ -57,7 +57,7 @@ void Robot::OnDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	delete this;
 }
 
-void Robot::OnRecv(Link *link, Buffer &buf)
+void Robot::onRecv(Link *link, Buffer &buf)
 {
 	// ¼ì²â°ë°ü
 	size_t bytes = buf.readableBytes();

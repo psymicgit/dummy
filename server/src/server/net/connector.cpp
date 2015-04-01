@@ -104,21 +104,13 @@ int Connector::handleWrite()
 
 int Connector::handleError()
 {
-	logError();
-
 	retry(m_sockfd);
 	return true;
 }
 
-void Connector::logError()
-{
-	LOG_ERROR << "socket<" << m_sockfd << "> connect to peer<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
-}
-
 void Connector::close()
 {
-	m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, this));
-	m_net->getTaskQueue().put(task_binder_t::gen(&INet::delFd, m_net, this));
+	m_net->delFd(this);
 }
 
 
@@ -134,8 +126,8 @@ bool Connector::onConnected()
 	// 成功连接上对端
 	Link* link = createLink(m_sockfd, m_peerAddr);
 
-	m_pNetReactor->GetTaskQueue().put(task_binder_t::gen(&INetReactor::OnConnected, m_pNetReactor, link, link->m_localAddr, m_peerAddr));
-	m_pNetReactor->GetTaskQueue().put(task_binder_t::gen(&OpenLink, link));
+	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&INetReactor::onConnected, m_pNetReactor, link, link->m_localAddr, m_peerAddr));
+	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&OpenLink, link));
 
 	return true;
 }
@@ -143,17 +135,13 @@ bool Connector::onConnected()
 bool Connector::connecting(socket_t sockfd)
 {
 	if (m_state == kDisconnected) {
-		//m_net->registerFd(this);
-
-		// LOG_DEBUG << "INet::registerFd addr = " << this;
-
-		m_net->getTaskQueue().put(task_binder_t::gen(&INet::addFd, m_net, this));
-		m_net->getTaskQueue().put(task_binder_t::gen(&INet::enableWrite, m_net, this));
+		m_net->addFd(this);
+		m_net->enableWrite(this);
 
 		m_state = kConnecting;
 	}
 	else if(m_state == kConnecting) {
-		m_net->getTaskQueue().put(task_binder_t::gen(&INet::enableWrite, m_net, this));
+		m_net->enableWrite(this);
 	}
 
 	return true;
@@ -161,15 +149,16 @@ bool Connector::connecting(socket_t sockfd)
 
 bool Connector::retry(socket_t sockfd)
 {
-	logError();
+	LOG_ERROR << "socket<" << m_sockfd << "> connect to peer<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
 
 	if (m_state == kConnecting) {
-		m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, this));
-	}
+		m_net->disableAll(this);
 
 #ifndef WIN
-	m_state = kDisconnected;
+		// linux下应重新加入事件监听
+		m_net->addFd(this);
 #endif
+	}
 
 	TimerQueue &timerQueue = m_net->getTimerQueue();
 	timerQueue.runAfter(task_binder_t::gen(&Connector::connect, this), m_retryDelayMs);

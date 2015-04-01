@@ -56,7 +56,7 @@ void GameServer::run()
 	sleep(10);
 }
 
-ServerLink* GameServer::OnAcceptServer(Link &tcpLink, ServerType peerSvrType, int peerSvrId)
+ServerLink* GameServer::onAcceptServer(Link &tcpLink, ServerType peerSvrType, int peerSvrId)
 {
 	ServerLink *svrLink = NULL;
 
@@ -74,7 +74,7 @@ ServerLink* GameServer::OnAcceptServer(Link &tcpLink, ServerType peerSvrType, in
 	return svrLink;
 }
 
-void GameServer::OnDisconnectServer(Link &tcpLink, ServerType svrType, int serverId)
+void GameServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int serverId)
 {
 	ServerLink *link = NULL;
 

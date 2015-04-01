@@ -15,7 +15,7 @@
 
 #include <server.h>
 
-void GameSvrLink::OnRecv(Link *link, Buffer &buf)
+void GameSvrLink::onRecv(Link *link, Buffer &buf)
 {
-	ServerLink::OnRecv(link, buf);
+	ServerLink::onRecv(link, buf);
 }

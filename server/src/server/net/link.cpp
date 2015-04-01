@@ -22,8 +22,9 @@
 void Link::open()
 {
 	socktool::setNonBlocking(m_sockfd);
-	m_net->getTaskQueue().put(task_binder_t::gen(&INet::addFd, m_net, this));
-	m_net->getTaskQueue().put(task_binder_t::gen(&INet::enableRead, m_net, this));
+
+	m_net->addFd(this);
+	m_net->enableRead(this);
 }
 
 void Link::close()
@@ -34,47 +35,44 @@ void Link::close()
 
 	m_isClosing = true;
 
-	m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableAll, m_net, this));
-	m_pNetReactor->GetTaskQueue().put(task_binder_t::gen(&Link::onLogicClose, this));
+	m_net->disableAll(this);
+
+	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&Link::onLogicClose, this));
 }
 
 void Link::onLogicClose()
 {
-	m_pNetReactor->OnDisconnect(this, m_localAddr, m_peerAddr);
-	m_net->getTaskQueue().put(task_binder_t::gen(&Link::onClose, this));
-}
+	m_pNetReactor->onDisconnect(this, m_localAddr, m_peerAddr);
 
-void Link::onClose()
-{
 	socktool::closeSocket(m_sockfd);
 	m_net->delFd(this);
 }
 
-void Link::onSend(Buffer & srcBuff)
+void Link::onSend(Buffer &buf)
 {
 	// 如果发送缓存区仍有数据未发送，则直接append
 	if (m_sendBuf.readableBytes() > 0) {
-		m_sendBuf.append(srcBuff.peek(), srcBuff.readableBytes());
+		m_sendBuf.append(buf.peek(), buf.readableBytes());
 		return;
 	}
 
-	int ret = trySend(srcBuff);
+	int ret = trySend(buf);
 
 	if (ret < 0) {
 		this ->close();
 	}
 	else if (ret > 0) {
-		m_net->getTaskQueue().put(task_binder_t::gen(&INet::enableWrite, m_net, this));
-		m_sendBuf.append(srcBuff.peek(), srcBuff.readableBytes());
+		m_net->enableWrite(this);
+		m_sendBuf.append(buf.peek(), buf.readableBytes());
 	}
 	else {
-		//! send ok
+		// 发送成功
 	}
 }
 
 void Link::send(Buffer & buf)
 {
-	m_tq->produce(task_binder_t::gen(&Link::onSend, this, buf));
+	m_taskQueue->produce(task_binder_t::gen(&Link::onSend, this, buf));
 }
 
 void Link::send(const char *data, int len)
@@ -127,7 +125,7 @@ int Link::handleRead()
 #ifdef WIN32
 	handleReadTask();
 #else
-	m_tq->produce(task_binder_t::gen(&Link::handleReadTask, this));
+	m_taskQueue->produce(task_binder_t::gen(&Link::handleReadTask, this));
 #endif
 
 	return 0;
@@ -138,7 +136,7 @@ int Link::handleWrite()
 #ifdef WIN32
 	handleWriteTask();
 #else
-	m_tq->produce(task_binder_t::gen(&Link::handleWriteTask, this));
+	m_taskQueue->produce(task_binder_t::gen(&Link::handleWriteTask, this));
 #endif
 
 	return 0;
@@ -146,51 +144,44 @@ int Link::handleWrite()
 
 int Link::handleError()
 {
-#ifdef WIN32
-	handleErrorTask();
-#else
-	m_tq->produce(task_binder_t::gen(&Link::handleErrorTask, this));
-#endif
-
+	this->close();
 	return 0;
 }
 
 int Link::handleReadTask()
 {
-	if (isOpen()) {
-		int nread = 0;
-		char recv_buffer[8096];
+	int nread = 0;
+	char recvBuf[8096];
 
-		do {
-			nread = ::recv(m_sockfd, recv_buffer, sizeof(recv_buffer) - 1, NULL);
-			if (nread > 0) {
-				m_recvBuf.append(recv_buffer, nread);
+	do {
+		nread = ::recv(m_sockfd, recvBuf, sizeof(recvBuf) - 1, NULL);
+		if (nread > 0) {
+			m_recvBuf.append(recvBuf, nread);
 
-				if (nread < int(sizeof(recv_buffer) - 1)) {
-					break;//! equal EWOULDBLOCK
-				}
+			if (nread < int(sizeof(recvBuf) - 1)) {
+				break; // 相当于EWOULDBLOCK
 			}
-			else if (0 == nread) {   //! eof
+		}
+		else if (0 == nread) {   //! eof
+			this->close();
+			return -1;
+		}
+		else {
+			if (errno == EINTR) {
+				continue;
+			}
+			else if (errno == EWOULDBLOCK) {
+				break;
+			}
+			else {
 				this->close();
 				return -1;
 			}
-			else {
-				if (errno == EINTR) {
-					continue;
-				}
-				else if (errno == EWOULDBLOCK) {
-					break;
-				}
-				else {
-					this->close();
-					return -1;
-				}
-			}
 		}
-		while(1);
 	}
+	while(true);
 
-	m_pNetReactor->OnRecv(this, m_recvBuf);
+	m_pNetReactor->onRecv(this, m_recvBuf);
 	return 0;
 }
 
@@ -199,9 +190,12 @@ int Link::handleWriteTask()
 	int ret = 0;
 	string left_buff;
 
-	m_net->getTaskQueue().put(task_binder_t::gen(&INet::disableWrite, m_net, this));
+#ifdef WIN
+	// windows下select模型属于LT，需要屏蔽可写事件
+	m_net->disableWrite(this);
+#endif
 
-	if (m_sendBuf.readableBytes() == 0) {
+	if (m_sendBuf.empty()) {
 		return 0;
 	}
 
@@ -217,13 +211,7 @@ int Link::handleWriteTask()
 	return 0;
 }
 
-int Link::handleErrorTask()
-{
-	this->close();
-	return 0;
-}
-
-int Link::trySend(Buffer & buffer)
+int Link::trySend(Buffer &buffer)
 {
 	size_t nleft     = buffer.readableBytes();
 	const char* buff = buffer.peek();
@@ -236,8 +224,6 @@ int Link::trySend(Buffer & buffer)
 				nwritten = 0;
 			}
 			else if (EWOULDBLOCK == errno) {
-				// buffer.hasWritten(nwritten);
-				// left_buff_.assign(buff_.c_str() + (buff_.size() - nleft), nleft);
 				return 1;
 			}
 			else {

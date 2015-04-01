@@ -19,7 +19,7 @@ class INetReactor;
 
 namespace google {namespace protobuf {class Message;}}
 
-// Link = tcp connection
+// Link = tcp连接，相当于connection
 class Link : public IFd
 {
 public:
@@ -27,7 +27,7 @@ public:
 		: m_sockfd(sockfd)
 		, m_localAddr(localAddr)
 		, m_peerAddr(peerAddr)
-		, m_tq(pQueue)
+		, m_taskQueue(pQueue)
 		, m_net(pNet)
 		, m_pNetReactor(pNetReactor)
 		, m_isClosing(false)
@@ -37,12 +37,15 @@ public:
 
 	~Link() {}
 
-	void open();
+public:
+	virtual socket_t socket() const {return m_sockfd;}
+	virtual int handleRead();
+	virtual int handleWrite();
+	virtual int handleError();
 	virtual void close();
 
-	void onLogicClose();
-	void onClose();
-	void onSend(Buffer &buff);
+public:
+	void open();
 
 	void send(Buffer&);
 	void send(const char *data, int len);
@@ -51,23 +54,17 @@ public:
 	void send(int msgId, google::protobuf::Message &msg);
 	void send(int msgId, const char *data, int len);
 
-	bool isOpen() { return m_sockfd > 0; }
-
-	virtual socket_t socket() const {return m_sockfd;}
-
-	virtual int handleRead();
-	virtual int handleWrite();
-	virtual int handleError();
-
-	int handleReadTask();
-	int handleWriteTask();
-	int handleErrorTask();
-
 	NetAddress getLocalAddr();
 
 private:
 	// 尝试一次性发送数据，返回尚未发送的数据长度
 	int trySend(Buffer&);
+
+	void onLogicClose();
+	void onSend(Buffer &buff);
+
+	int handleReadTask();
+	int handleWriteTask();
 
 public:
 	const NetAddress m_peerAddr;
@@ -83,7 +80,7 @@ private:
 	socket_t m_sockfd;
 	INet *m_net;
 
-	task_queue_i *m_tq;
+	task_queue_i *m_taskQueue;
 
 	Buffer m_recvBuf;
 	Buffer m_sendBuf;

@@ -24,7 +24,7 @@ ClientMgr::ClientMgr()
 	ClientMsgHandler *netMsgMgr = new ClientMsgHandler(&m_dispatcher);
 }
 
-void ClientMgr::OnAccepted(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
+void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	LOG_INFO << "<" << localAddr.toIpPort() << "> accept new client from <" << peerAddr.toIpPort() << ">";
 
@@ -42,14 +42,14 @@ void ClientMgr::OnAccepted(Link *link, const NetAddress& localAddr, const NetAdd
 	m_clientMap[newClientId] = client;
 }
 
-void ClientMgr::OnDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
+void ClientMgr::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 
 }
 
-void ClientMgr::OnRecv(Link *link, Buffer &buf)
+void ClientMgr::onRecv(Link *link, Buffer &buf)
 {
-	Server::instance->OnRecv(link, buf);
+	Server::instance->onRecv(link, buf);
 }
 
 void ClientMgr::handleMsg(Client &client, int msgId, Buffer &buf, Timestamp receiveTime)
@@ -62,7 +62,7 @@ uint32 ClientMgr::allocClientId()
 	return ++m_allocClientId;
 }
 
-void ClientMgr::DelClient(Client *client)
+void ClientMgr::delClient(Client *client)
 {
 	// LOG_INFO << "client <" << client->m_link->m_peerAddr.toIpPort() << "> disconnet";
 

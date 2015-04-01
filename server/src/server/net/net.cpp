@@ -41,7 +41,7 @@ Epoll::~Epoll()
 	m_efd = -1;
 }
 
-int Epoll::event_loop()
+int Epoll::eventLoop()
 {
 	int i = 0, nfds = 0;
 	struct epoll_event ev_set[EPOLL_EVENTS_SIZE];
@@ -61,8 +61,8 @@ int Epoll::event_loop()
 					return 0;
 				}
 
-				//! 删除那些已经出现error的socket 对象
-				fd_del_callback();
+				//! 删除那些已被标记为垃圾的socket对象
+				recycleFds();
 				continue;
 			}
 
@@ -106,7 +106,7 @@ int Epoll::interruptLoop()
 
 void Epoll::addFd(IFd* pfd)
 {
-	LOG_INFO << "add fd" << pfd->socket();
+	LOG_INFO << "add fd " << pfd->socket();
 
 	struct epoll_event ee = { 0, { 0 } };
 
@@ -123,7 +123,7 @@ void Epoll::delFd(IFd* pfd)
 
 	{
 		lock_guard_t<> lock(m_mutex);
-		m_error_fd_set.push_back(pfd);
+		m_deletingFdList.push_back(pfd);
 	}
 
 	interruptLoop();
@@ -162,6 +162,8 @@ void Epoll::disableWrite(IFd *pfd)
 void Epoll::disableAll(IFd *pfd)
 {
 	if (pfd->socket() > 0) {
+		// 这里通过取消监听来达到disableAll的效果，因为epoll默认监听EPOLLERR事件
+		// 不取消监听的话，当发生EPOLLERR错误时，EPOLLERR事件将无限循环触发
 		struct epoll_event ee;
 
 		ee.data.ptr  = (void*)0;
@@ -184,15 +186,16 @@ void Epoll::mod(IFd *pfd, uint16 events)
 	::epoll_ctl(m_efd, EPOLL_CTL_MOD, pfd->socket(), &ee);
 }
 
-void Epoll::fd_del_callback()
+void Epoll::recycleFds()
 {
 	lock_guard_t<> lock(m_mutex);
-	list<IFd*>::iterator it = m_error_fd_set.begin();
-	for (; it != m_error_fd_set.end(); ++it) {
+	list<IFd*>::iterator it = m_deletingFdList.begin();
+	for (; it != m_deletingFdList.end(); ++it) {
+		LOG_INFO << "add fd " << (*it)->socket();
 		delete *it;
 	}
 
-	m_error_fd_set.clear();
+	m_deletingFdList.clear();
 }
 
 #else
@@ -211,86 +214,114 @@ Select::Select()
 
 void Select::addFd(IFd *pfd)
 {
-	socket_t fd = pfd->socket();
-	if (fd > m_maxfd) {
-		m_maxfd = fd;
-	}
-
-	m_links.push_back(pfd);
+	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_ADD));
 }
 
 void Select::delFd(IFd *pfd)
 {
-	for (size_t i = 0; i < m_links.size(); i++) {
-		IFd *link = m_links[i];
-
-		if (pfd == link) {
-			m_links[i] = m_links.back();
-			m_links.pop_back();
-			break;
-		}
-	}
-
-	// m_links.erase(remove(m_links.begin(), m_links.end(), pfd), m_links.end());
-	delete pfd;
+	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_DEL));
 }
 
 void Select::enableRead(IFd *pfd)
 {
-	socket_t fd = pfd->socket();
-	FD_SET(fd, &m_rset);
-	FD_SET(fd, &m_eset);
+	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_ENABLE_READ));
 }
 
 void Select::enableWrite(IFd *pfd)
 {
-	socket_t fd = pfd->socket();
-	FD_SET(fd, &m_wset);
-	FD_SET(fd, &m_eset);
+	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_ENABLE_WRITE));
 }
 
 void Select::enableAll(IFd *pfd)
 {
-	socket_t fd = pfd->socket();
-	FD_SET(fd, &m_wset);
-	FD_SET(fd, &m_rset);
-	FD_SET(fd, &m_eset);
+	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_ENABLE_ALL));
 }
 
 void Select::disableRead(IFd *pfd)
 {
-	socket_t fd = pfd->socket();
-	FD_CLR(fd, &m_rset);
-
-	if (!FD_ISSET(fd, &m_wset)) {
-		FD_CLR(fd, &m_eset);
-	}
+	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_DISABLE_READ));
 }
 
 void Select::disableWrite(IFd *pfd)
 {
-	socket_t fd = pfd->socket();
-	FD_CLR(fd, &m_wset);
-
-	if (!FD_ISSET(fd, &m_rset)) {
-		FD_CLR(fd, &m_eset);
-	}
+	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_DISABLE_WRITE));
 }
 
 void Select::disableAll(IFd *pfd)
 {
-	socket_t sock = pfd->socket();
-
-	FD_CLR(sock, &m_rset);
-	FD_CLR(sock, &m_wset);
-	FD_CLR(sock, &m_eset);
+	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_DISABLE_ALL));
 }
 
-void Select::reopen(IFd *pfd)
+void Select::updateFd(IFd *pfd, FDOperator op)
 {
+	socket_t fd = pfd->socket();
+
+	switch(op) {
+	case FD_ADD:
+		if (fd > m_maxfd) {
+			m_maxfd = fd;
+		}
+
+		m_links.push_back(pfd);
+		break;
+
+	case FD_DEL:
+		for (size_t i = 0; i < m_links.size(); i++) {
+			IFd *link = m_links[i];
+
+			if (pfd == link) {
+				m_links[i] = m_links.back();
+				m_links.pop_back();
+				break;
+			}
+		}
+
+		updateFd(pfd, FD_DISABLE_ALL);
+		// m_links.erase(remove(m_links.begin(), m_links.end(), pfd), m_links.end());
+		delete pfd;
+		break;
+
+	case FD_ENABLE_READ:
+		FD_SET(fd, &m_rset);
+		FD_SET(fd, &m_eset);
+		break;
+
+	case FD_DISABLE_READ:
+		FD_CLR(fd, &m_rset);
+
+		if (!FD_ISSET(fd, &m_wset)) {
+			FD_CLR(fd, &m_eset);
+		}
+		break;
+
+	case FD_ENABLE_WRITE:
+		FD_SET(fd, &m_wset);
+		FD_SET(fd, &m_eset);
+		break;
+
+	case FD_DISABLE_WRITE:
+		FD_CLR(fd, &m_wset);
+
+		if (!FD_ISSET(fd, &m_rset)) {
+			FD_CLR(fd, &m_eset);
+		}
+		break;
+
+	case FD_ENABLE_ALL:
+		FD_SET(fd, &m_wset);
+		FD_SET(fd, &m_rset);
+		FD_SET(fd, &m_eset);
+		break;
+
+	case FD_DISABLE_ALL:
+		FD_CLR(fd, &m_rset);
+		FD_CLR(fd, &m_wset);
+		FD_CLR(fd, &m_eset);
+		break;
+	}
 }
 
-int Select::event_loop()
+int Select::eventLoop()
 {
 	int n = 0;
 	size_t i = 0;
@@ -322,21 +353,21 @@ int Select::event_loop()
 			int readyfds = n;
 
 			for(i = 0; i < m_links.size(); ++i) {
-				IFd *link = m_links[i];
-				int fd = link->socket();
+				IFd *pfd = m_links[i];
+				int fd = pfd->socket();
 
 				if(FD_ISSET(fd, &rset)) {
-					link->handleRead();
+					pfd->handleRead();
 					if(--readyfds == 0) break;
 				}
 				else if(FD_ISSET(fd, &wset)) {
 					// LOG_DEBUG << "write fds";
-					link->handleWrite();
+					pfd->handleWrite();
 					if(--readyfds == 0) break;
 				}
 				else if(FD_ISSET(fd, &eset)) {
 					LOG_DEBUG << "exception fd";
-					link->handleError();
+					pfd->handleError();
 					if(--readyfds == 0) break;
 				}
 			}

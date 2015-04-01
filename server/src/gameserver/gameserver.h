@@ -25,9 +25,9 @@ public:
 
 	void run();
 
-	virtual ServerLink* OnAcceptServer(Link&, ServerType, int serverId);
+	virtual ServerLink* onAcceptServer(Link&, ServerType, int serverId);
 
-	virtual void OnDisconnectServer(Link&, ServerType, int serverId);
+	virtual void onDisconnectServer(Link&, ServerType, int serverId);
 
 private:
 	GateLink *m_gateLink;

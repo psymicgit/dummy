@@ -40,12 +40,12 @@ class INet
 public:
 	virtual ~INet() {}
 
-	virtual int event_loop() 		    = 0;
+	virtual int eventLoop() 		    = 0;
 	virtual void close() 				= 0;
-	virtual void reopen(IFd*)            = 0;
+	virtual void reopen(IFd*)			= 0;
 
-	virtual void addFd(IFd*)				= 0;
-	virtual void delFd(IFd*)				= 0;
+	virtual void addFd(IFd*)			= 0;
+	virtual void delFd(IFd*)			= 0;
 
 	virtual void enableRead(IFd*)		= 0;
 	virtual void disableRead(IFd*)		= 0;
@@ -57,7 +57,7 @@ public:
 	virtual void disableAll(IFd*)		= 0;
 
 	virtual TimerQueue& getTimerQueue() = 0;
-	virtual TaskQueue& getTaskQueue()   = 0;
+	virtual TaskQueue& getTaskQueue()	= 0;
 };
 
 #ifndef WIN
@@ -69,8 +69,9 @@ public:
 	Epoll();
 	~Epoll();
 
-	virtual int event_loop();
+	virtual int eventLoop();
 	virtual void close();
+	virtual void reopen(IFd*);
 
 	virtual void addFd(IFd*);
 	virtual void delFd(IFd*);
@@ -84,16 +85,12 @@ public:
 	virtual void enableAll(IFd*);
 	virtual void disableAll(IFd*);
 
-	virtual void reopen(IFd*);
-
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
 	virtual TaskQueue& getTaskQueue() { return m_tasks; }
 
 protected:
-	void fd_del_callback();
-
+	void recycleFds();
 	int interruptLoop();
-
 	void mod(IFd*, uint16 events);
 
 	volatile bool            m_running;
@@ -102,7 +99,7 @@ protected:
 	int                      m_interupt_sockets[2];
 
 	//! 待销毁的error socket
-	list<IFd*>   		     m_error_fd_set;
+	list<IFd*>   		     m_deletingFdList;
 	mutex_t                  m_mutex;
 
 	TaskQueue m_tasks;
@@ -115,14 +112,27 @@ protected:
 class Select : public INet
 {
 private:
+	enum FDOperator {
+		FD_ADD,
+		FD_DEL,
+		FD_ENABLE_READ,
+		FD_DISABLE_READ,
+		FD_ENABLE_WRITE,
+		FD_DISABLE_WRITE,
+		FD_ENABLE_ALL,
+		FD_DISABLE_ALL
+	};
+
 	typedef std::vector<IFd*> LinkerList;
+
 
 public:
 	Select();
 	~Select() {}
 
-	virtual int event_loop();
+	virtual int eventLoop();
 	virtual void close() {}
+	virtual void reopen(IFd*) {}
 
 	virtual void addFd(IFd*);
 	virtual void delFd(IFd*);
@@ -136,15 +146,14 @@ public:
 	virtual void enableAll(IFd*);
 	virtual void disableAll(IFd*);
 
-	virtual void reopen(IFd*);
-
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
 	virtual TaskQueue& getTaskQueue() { return m_tasks; }
 
-protected:
+private:
+	void updateFd(IFd*, FDOperator);
 
 private:
-	LinkerList m_links;
+	LinkerList m_links; // 当前维持的连接
 	TaskQueue m_tasks;
 	TimerQueue m_timers;
 

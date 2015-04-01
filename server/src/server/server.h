@@ -35,21 +35,21 @@ public:
 	bool init();
 	bool uninit();
 
-	virtual ServerLink* OnAcceptServer(Link&, ServerType, int svrId) = 0;
+	virtual ServerLink* onAcceptServer(Link&, ServerType, int svrId) = 0;
 
-	virtual void OnDisconnectServer(Link&, ServerType, int svrId) = 0;
+	virtual void onDisconnectServer(Link&, ServerType, int svrId) = 0;
 
-	virtual void OnConnected(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
+	virtual void onConnected(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void OnAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
+	virtual void onAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void OnDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
+	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void OnRecv(Link*, Buffer&);
+	virtual void onRecv(Link*, Buffer&);
 
-	virtual TaskQueue& GetTaskQueue() { return m_taskQueue; }
+	virtual TaskQueue& getTaskQueue() { return m_taskQueue; }
 
-	virtual void HandleMsg(Link*, int msgId, Buffer&);
+	virtual void handleMsg(Link*, int msgId, Buffer&);
 
 	void start();
 

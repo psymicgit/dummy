@@ -46,13 +46,13 @@ void Client::onEstablish()
 	m_link->send(eEncryptKeyNtf, ntf);
 }
 
-void Client::OnDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
+void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	LOG_INFO << "client [" << peerAddr.toIpPort() << "] <-> gatesvr [" << localAddr.toIpPort() << "] broken";
-	m_clientMgr->DelClient(this);
+	m_clientMgr->delClient(this);
 }
 
-void Client::OnRecv(Link *link, Buffer &buf)
+void Client::onRecv(Link *link, Buffer &buf)
 {
 	// 检测半包
 	size_t bytes = buf.readableBytes();
@@ -89,7 +89,7 @@ void Client::OnRecv(Link *link, Buffer &buf)
 		// 直接本地进行处理
 		Buffer deepCopyBuf;
 		deepCopyBuf.append(msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen);
-		Server::instance->GetTaskQueue().put(task_binder_t::gen(&ClientMgr::handleMsg, m_clientMgr, *this, msgId, deepCopyBuf, 0));
+		Server::instance->getTaskQueue().put(task_binder_t::gen(&ClientMgr::handleMsg, m_clientMgr, *this, msgId, deepCopyBuf, 0));
 	}
 
 	buf.retrieve(msgLen);

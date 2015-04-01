@@ -25,15 +25,15 @@ public:
 	ClientMgr();
 
 public:
-	virtual void OnAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
+	virtual void onAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void OnDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
+	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void OnRecv(Link*, Buffer&);
+	virtual void onRecv(Link*, Buffer&);
 
-	virtual TaskQueue& GetTaskQueue() { return *m_taskQueue; }
+	virtual TaskQueue& getTaskQueue() { return *m_taskQueue; }
 
-	void DelClient(Client*);
+	void delClient(Client*);
 
 	void handleMsg(Client &client, int msgId, Buffer&, Timestamp receiveTime);
 

@@ -47,7 +47,7 @@ void GateServer::run()
 	sleep(10);
 }
 
-ServerLink* GateServer::OnAcceptServer(Link &tcpLink, ServerType peerSvrType, int peerSvrId)
+ServerLink* GateServer::onAcceptServer(Link &tcpLink, ServerType peerSvrType, int peerSvrId)
 {
 	ServerLink *svrLink = NULL;
 
@@ -66,7 +66,7 @@ ServerLink* GateServer::OnAcceptServer(Link &tcpLink, ServerType peerSvrType, in
 	return svrLink;
 }
 
-void GateServer::OnDisconnectServer(Link &tcpLink, ServerType svrType, int serverId)
+void GateServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int serverId)
 {
 	ServerLink *link = NULL;
 

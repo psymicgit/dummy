@@ -14,8 +14,8 @@
 
 void NetFactory::runNet(void *e)
 {
-	NetFactory *factory = (NetFactory*)e;
-	factory->m_net.event_loop();
+	NetFactory *netFactory = (NetFactory*)e;
+	netFactory->m_net.eventLoop();
 }
 
 NetFactory::NetFactory()
