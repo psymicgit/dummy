@@ -9,3 +9,6 @@ bin_dir 	 = ${base_dir}/bin/linux${long_bit}
 lib_dir 	 = ${base_dir}/lib/linux${long_bit}/${compile_type}
 3rd_dir		 = ${base_dir}/3rd
 src_dir 	 = ${base_dir}/src
+
+PCH_H	=	stdafx.h
+# PCH		=	stdafx.h.gch

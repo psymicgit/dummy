@@ -2,9 +2,6 @@ include ../make_begin
 
 base_dir = ${cur_dir}/../..
 
-PCH_H	= stdafx.h
-PCH		= stdafx.h.gch
-
 MODULE			= robot
 MACD            = 
 
