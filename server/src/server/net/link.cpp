@@ -35,8 +35,8 @@ void Link::close()
 
 	m_isClosing = true;
 
+	// socktool::closeSocket(m_sockfd);
 	m_net->disableAll(this);
-
 	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&Link::onLogicClose, this));
 }
 
@@ -44,7 +44,7 @@ void Link::onLogicClose()
 {
 	m_pNetReactor->onDisconnect(this, m_localAddr, m_peerAddr);
 
-	socktool::closeSocket(m_sockfd);
+	m_net->getTaskQueue().put(task_binder_t::gen(&socktool::closeSocket, m_sockfd));
 	m_net->delFd(this);
 }
 

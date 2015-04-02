@@ -366,7 +366,7 @@ int Select::eventLoop()
 					if(--readyfds == 0) break;
 				}
 				else if(FD_ISSET(fd, &eset)) {
-					LOG_DEBUG << "exception fd";
+					// LOG_DEBUG << "exception fd";
 					pfd->handleError();
 					if(--readyfds == 0) break;
 				}
