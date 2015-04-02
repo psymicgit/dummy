@@ -17,9 +17,12 @@
 #include "robotmgr.h"
 
 Robot::Robot()
-	: m_isEncrypt(false)
-	, m_link(NULL)
+	: m_link(NULL)
+	, m_taskQueue(NULL)
+	, m_robotMgr(NULL)
+	, m_isEncrypt(false)
 {
+	bzero(m_encryptKey, sizeof(m_encryptKey));
 }
 
 void Robot::onConnected(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
@@ -27,21 +30,6 @@ void Robot::onConnected(Link *link, const NetAddress& localAddr, const NetAddres
 	m_link = link;
 
 	LOG_INFO << "robot <" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success";
-
-// 	LoginReq req;
-// 	req.set_clientversion(100);
-// 	req.set_deviceid("1273ab23c3390fe840a9e0");
-// 	req.set_notifyid("notifyid-00134678");
-// 	req.set_username("psy_micgit");
-// 	req.set_zoneid(1);
-// 	req.set_userid(100000001);
-// 	req.set_playerid(14560034);
-// 	req.set_job("sword");
-// 	req.set_logintype(LoginReq_LoginType_NewRole);
-// 	req.set_authtype(1);
-// 	req.set_authkey("2ab456b6b2b1b6b1bb2b");
-//
-// 	link->send(eLoginReq, req);
 }
 
 void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)

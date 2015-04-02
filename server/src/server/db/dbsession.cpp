@@ -15,8 +15,10 @@
 #include "basic/taskqueue.h"
 
 DBSession::DBSession()
-	: m_running(false)
-	, m_cmdCondition(m_cmdLock)
+	: m_cmdCondition(m_cmdLock)
+	, m_running(false)
+	, m_minPoolSize(0)
+	, m_maxPoolSize(0)
 	, m_connCount(0)
 {
 }
@@ -123,7 +125,6 @@ void DBSession::threadrun()
 			m_cmdList.erase(m_cmdList.begin(), m_cmdList.begin() + takecnt);
 		}
 
-		DBConnection *conn = NULL;
 		for (size_t i = 0; i < cmds.size(); i++) {
 			cmd = cmds[i];
 			executeCmd(cmd);

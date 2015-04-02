@@ -27,13 +27,6 @@ public:
 
 	void init()
 	{
-		//MyCallback my = Function::bind(OnAcceptConnect);
-
-		//typedef bi::function<void (Link*, ConnectReq*, Timestamp)> ConnectReqCallback;
-		//ConnectReqCallback conncall = bi::bind(OnAcceptConnect, _1, _2, _3);
-
-		// CallbackT<ConnectReq>::ProtobufMessageCallback callback(OnAcceptConnect);
-
 		registerMsg(eConnectSvrReq, OnConnectServerReq);
 		registerMsg(eConnectSvrAck, OnConnectServerAck);
 	}
@@ -91,15 +84,26 @@ private:
 	{
 		ConnectResult ret = res->ret();
 		if (ret != CONNECT_OK) {
+			std::string failMsg = "";
 			switch(ret) {
 			case CONNECT_FAIL_UNKNOWN_SERVER_TYPE:
-				LOG_ERROR << "connect failed: peer server<" << svrtool::getSvrName((ServerType)res->svrtype()) << ", zoneId=" << res->svrid() << "> reject connection : unknown server type! \n" << msgtool::getMsgString(*res);
+				failMsg = "unknown server type";
 				break;
 
 			case CONNECT_FAIL_FOUND_SAME_SERVER:
-				LOG_ERROR << "connect failed: peer server<" << svrtool::getSvrName((ServerType)res->svrtype()) << ", zoneId=" << res->svrid() << "> reject connection : found same server connection! \n" << msgtool::getMsgString(*res);
+				failMsg = "found same server connection";
+				break;
+
+			case CONNECT_FAIL_AUTH_KEY_INVALID:
+				failMsg = "auth key invalid";
+				break;
+
+			default:
+				failMsg = "unknow reason";
 				break;
 			}
+
+			LOG_ERROR << "connect failed: peer server<" << svrtool::getSvrName((ServerType)res->svrtype()) << ", zoneId=" << res->svrid() << "> reject connection : " << failMsg << "! \n" << msgtool::getMsgString(*res);
 
 			link->close();
 			return;

@@ -22,9 +22,9 @@ class Timer
 
 public:
 	Timer()
-		: m_life(0)
+		: m_interval(0)
+		, m_life(0)
 		, m_expired(0)
-		, m_interval(0)
 	{
 
 	}

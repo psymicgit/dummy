@@ -45,7 +45,7 @@ bool Connector::connect()
 	case EINTR:
 	case EISCONN:
 		// 正在连接（tcp三次握手正在进行）
-		connecting(m_sockfd);
+		connecting();
 		break;
 
 #ifdef WIN
@@ -132,7 +132,7 @@ bool Connector::onConnected()
 	return true;
 }
 
-bool Connector::connecting(socket_t sockfd)
+bool Connector::connecting()
 {
 	if (m_state == kDisconnected) {
 		m_net->addFd(this);

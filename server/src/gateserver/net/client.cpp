@@ -29,8 +29,10 @@ namespace clienttool
 }
 
 Client::Client()
-	: m_clientId(0)
-	, m_link(NULL)
+	: m_link(NULL)
+	, m_clientId(0)
+	, m_taskQueue(NULL)
+	, m_clientMgr(NULL)
 {
 	memset(m_encryptKey, 0, sizeof(m_encryptKey));
 }

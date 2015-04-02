@@ -24,14 +24,14 @@ class Link : public IFd
 {
 public:
 	explicit Link(int sockfd, NetAddress &localAddr, NetAddress &peerAddr, task_queue_i *pQueue, INet *pNet, INetReactor *pNetReactor)
-		: m_sockfd(sockfd)
-		, m_localAddr(localAddr)
+		: m_localAddr(localAddr)
 		, m_peerAddr(peerAddr)
-		, m_taskQueue(pQueue)
-		, m_net(pNet)
 		, m_pNetReactor(pNetReactor)
-		, m_isClosing(false)
 		, m_isCreateByConnector(false)
+		, m_isClosing(false)
+		, m_sockfd(sockfd)
+		, m_net(pNet)
+		, m_taskQueue(pQueue)
 	{
 	}
 
@@ -67,8 +67,8 @@ private:
 	int handleWriteTask();
 
 public:
-	const NetAddress m_peerAddr;
 	const NetAddress m_localAddr;
+	const NetAddress m_peerAddr;
 
 	INetReactor *m_pNetReactor;
 

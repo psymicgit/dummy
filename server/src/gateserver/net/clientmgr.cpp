@@ -18,8 +18,8 @@
 #include "clientmsghandler.h"
 
 ClientMgr::ClientMgr()
-	: m_allocClientId(0)
-	, m_taskQueue(NULL)
+	: m_taskQueue(NULL)
+	, m_allocClientId(0)
 {
 	ClientMsgHandler *netMsgMgr = new ClientMsgHandler(&m_dispatcher);
 }

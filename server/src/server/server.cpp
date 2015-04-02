@@ -18,8 +18,9 @@
 Server* Server::instance = NULL;
 
 Server::Server()
-	: m_isquit(false)
-	, m_svrType(eNullServer)
+	: m_svrType(eNullServer)
+	, m_zoneId(0)
+	, m_isquit(false)
 {
 	assert(NULL == instance);
 	instance = this;
@@ -63,7 +64,7 @@ void Server::onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& 
 void Server::onRecv(Link *link, Buffer& buf)
 {
 	// ¼ì²â°ë°ü
-	int bytes = buf.readableBytes();
+	size_t bytes = buf.readableBytes();
 	if (bytes < sizeof(NetMsgHead)) {
 		return;
 	}

@@ -12,7 +12,9 @@
 #define GLOG_NO_ABBREVIATED_SEVERITIES
 #define GOOGLE_GLOG_DLL_DECL
 
-#pragma warning( disable : 4355 )
+#ifdef WIN
+	#pragma warning( disable : 4355 )
+#endif
 
 #define  __STDC_FORMAT_MACROS
 #include <glog/logging.h>

@@ -70,7 +70,6 @@ private:
 	mutex_t m_executedCmdLock;
 	mutex_t m_poolLock;
 	mutex_t m_mapLock;
-
 	condition_var_t m_cmdCondition;
 
 	volatile bool m_running;
@@ -82,7 +81,6 @@ private:
 	ConnectionMap m_connMap;
 
 	volatile int m_connCount;
-	volatile int m_freeConnCount;
 
 	thread_t m_dbthread;
 };

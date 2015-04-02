@@ -5,6 +5,8 @@ FILE_LIST_CPP	= $(shell find . -name "*.cpp")
 COMM_OBJ        = $(patsubst %.cpp,%.o,${FILE_LIST_CPP}) $(patsubst %.c,%.o,${FILE_LIST_C}) $(patsubst %.cpp,%.o,$(OTHER_SRC_CPP:.cc=.o)) $(patsubst %.c,%.o,${OTHER_SRC_C})
 ALL_OBJ			= $(notdir ${COMM_OBJ})
 
+CPPFLAGS= -W -Wall -Wno-unused
+
 COMPILE_STANDARD = -std=c++0x
 
 A_LINK      = ar rv
@@ -16,15 +18,15 @@ else
 endif
 
 ifeq (${compile_type}, release)
-	COMP   		= g++ -c -w -fPIC   -m${long_bit} $(MACD) ${COMPILE_STANDARD} 
-	COMPC   	= gcc -c -w -fPIC   -m${long_bit} $(MACD) 
-	SO_LINK     = g++ -fPIC -shared   -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o 
-	EXEC_LINK   = g++   -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o	
+	COMP   		= g++ -O2 -c -fPIC ${CPPFLAGS} -m${long_bit} $(MACD) ${COMPILE_STANDARD} 
+	COMPC   	= gcc -O2 -c -fPIC ${CPPFLAGS} -m${long_bit} $(MACD) 
+	SO_LINK     = g++ -O2 ${CPPFLAGS} -fPIC -shared -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o 
+	EXEC_LINK   = g++ -O2 ${CPPFLAGS} -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o	
 else
-	COMP   		= g++ -c -g -w -fPIC  -D_DEBUG  -m${long_bit} $(MACD) ${COMPILE_STANDARD}  		
-	COMPC   	= gcc -c -g -w -fPIC  -D_DEBUG  -m${long_bit} $(MACD)
-	SO_LINK     = g++ -fPIC -shared -g   -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o
-	EXEC_LINK   = g++ -g   -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o
+	COMP   		= g++ -c -g -fPIC ${CPPFLAGS} -D_DEBUG  -m${long_bit} $(MACD) ${COMPILE_STANDARD}  		
+	COMPC   	= gcc -c -g -fPIC ${CPPFLAGS} -D_DEBUG  -m${long_bit} $(MACD)
+	SO_LINK     = g++ -fPIC -shared -g ${CPPFLAGS} -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o
+	EXEC_LINK   = g++ -g ${CPPFLAGS} -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o
 endif
 
 all : $(COMP_ONLY) $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) 

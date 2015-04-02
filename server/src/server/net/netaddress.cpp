@@ -15,7 +15,7 @@
 	#include <netdb.h>
 #endif
 
-NetAddress::NetAddress(uint16_t port, bool loopbackOnly)
+NetAddress::NetAddress(uint16 port)
 {
 	bzero(&m_addr, sizeof m_addr);
 	m_addr.sin_family = AF_INET;
@@ -23,7 +23,7 @@ NetAddress::NetAddress(uint16_t port, bool loopbackOnly)
 	m_addr.sin_port = endiantool::hostToNetwork16(port);
 }
 
-NetAddress::NetAddress(const std::string &ip, uint16_t port)
+NetAddress::NetAddress(const std::string &ip, uint16 port)
 {
 	bzero(&m_addr, sizeof m_addr);
 
@@ -52,7 +52,7 @@ string NetAddress::toIp() const
 	return buf;
 }
 
-uint16_t NetAddress::toPort() const
+uint16 NetAddress::toPort() const
 {
 	return endiantool::networkToHost16(m_addr.sin_port);
 }

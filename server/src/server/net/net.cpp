@@ -131,7 +131,7 @@ void Epoll::delFd(IFd* pfd)
 
 void Epoll::reopen(IFd* pfd)
 {
-	mod(pfd, EPOLLIN | EPOLLOUT | EPOLLPRI | EPOLLHUP | EPOLLET);
+	mod(pfd, (uint16)(EPOLLIN | EPOLLOUT | EPOLLPRI | EPOLLHUP | EPOLLET));
 }
 
 void Epoll::enableRead(IFd *pfd)

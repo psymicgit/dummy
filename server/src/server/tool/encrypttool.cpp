@@ -43,7 +43,7 @@ namespace encrypttool
 		dataLen -= 2;
 		data    += 2;
 
-		unsigned int dataSize = dataLen - sizeof(unsigned int);
+		int dataSize = dataLen - sizeof(unsigned int);
 
 		for (int i = 0; i < dataLen ; i++ ) {
 			if(i == dataSize) {

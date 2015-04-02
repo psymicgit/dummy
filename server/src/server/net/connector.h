@@ -29,7 +29,7 @@ public:
 
 	bool onConnected();
 
-	bool connecting(socket_t);
+	bool connecting();
 
 	bool retry(socket_t);
 

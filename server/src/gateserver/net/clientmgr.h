@@ -10,7 +10,6 @@
 #define _clientmgr_h_
 
 #include <net/netreactor.h>
-#include <hash_map>
 #include <net/msgdispatcher.h>
 #include <net/client.h>
 

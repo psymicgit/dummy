@@ -8,8 +8,10 @@
 #ifndef _stdafx_h_
 #define _stdafx_h_
 
-// ÆÁ±Îprotobuf¾¯¸æ
-#pragma warning( disable : 4996 )
+#ifdef WIN
+	// ÆÁ±Îprotobuf¾¯¸æ
+	#pragma warning( disable : 4996 )
+#endif
 
 #include <def/type.h>
 #include <def/platform.h>

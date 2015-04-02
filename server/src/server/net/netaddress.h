@@ -18,11 +18,11 @@ class NetAddress
 public:
 	/// Constructs an endpoint with given port number.
 	/// Mostly used in TcpServer listening.
-	explicit NetAddress(uint16_t port = 0, bool loopbackOnly = false);
+	explicit NetAddress(uint16 port = 0);
 
 	/// Constructs an endpoint with given ip and port.
 	/// @c ip should be "1.2.3.4"
-	NetAddress(const std::string &ip, uint16_t port);
+	NetAddress(const std::string &ip, uint16 port);
 
 	/// Constructs an endpoint with given struct @c sockaddr_in
 	/// Mostly used when accepting new connections
@@ -33,7 +33,7 @@ public:
 
 	string toIp() const;
 	string toIpPort() const;
-	uint16_t toPort() const;
+	uint16 toPort() const;
 
 	// default copy/assignment are Okay
 
@@ -41,7 +41,7 @@ public:
 	void setSockAddr(const struct sockaddr_in& addr) { m_addr = addr; }
 
 	uint32 ipNetEndian() const { return m_addr.sin_addr.s_addr; }
-	uint16_t portNetEndian() const { return m_addr.sin_port; }
+	uint16 portNetEndian() const { return m_addr.sin_port; }
 
 	static bool resolve(string hostname, NetAddress* result);
 

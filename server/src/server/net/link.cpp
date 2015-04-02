@@ -96,7 +96,7 @@ void Link::send(int msgId, google::protobuf::Message & msg)
 {
 	int size = msg.ByteSize();
 
-	NetMsgHead msgHead = {0};
+	NetMsgHead msgHead = {0, 0};
 	msgtool::buildNetHeader(&msgHead, msgId, size);
 
 	Buffer buf;
@@ -110,7 +110,7 @@ void Link::send(int msgId, google::protobuf::Message & msg)
 
 void Link::send(int msgId, const char *data, int len)
 {
-	NetMsgHead msgHead = {0};
+	NetMsgHead msgHead = {0, 0};
 	msgtool::buildNetHeader(&msgHead, msgId, len);
 
 	Buffer buf(msgHead.msgLen);

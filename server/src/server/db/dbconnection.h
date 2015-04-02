@@ -19,9 +19,9 @@ class DBConnection
 
 public:
 	DBConnection()
-		: m_mysql(NULL)
-		, m_connected(false)
+		: m_connected(false)
 		, m_used(false)
+		, m_mysql(NULL)
 	{
 	}
 

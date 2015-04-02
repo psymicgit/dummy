@@ -73,7 +73,7 @@ const char* DBRecordSet::GetFieldName(uint32 dwIndex)
 {
 	MYSQL_FIELD*	field = NULL ;
 	mysql_field_seek( m_res, dwIndex ) ;
-	if( field = mysql_fetch_field( m_res ) ) {
+	if((field = mysql_fetch_field( m_res )) != NULL) {
 		return field->name ;
 	}
 	return NULL ;
@@ -132,7 +132,8 @@ bool DBRecordSet::_FillMap()
 	}
 	MYSQL_FIELD * field = NULL;
 	int nIndex = 0;
-	while(field = mysql_fetch_field(m_res)) {
+
+	while((field = mysql_fetch_field(m_res)) != NULL) {
 		m_mapFieldName[field->name] = nIndex;
 		++nIndex;
 	}

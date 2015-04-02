@@ -12,8 +12,8 @@
 namespace google {namespace protobuf { class Message; }}
 
 struct NetMsgHead {
-	int msgId;
-	int msgLen;
+	uint16 msgId;
+	uint32 msgLen;
 };
 
 namespace msgtool

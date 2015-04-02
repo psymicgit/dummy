@@ -39,11 +39,11 @@ public:
 	NetAddress m_listenAddr;
 
 private:
-	socket_t m_listenFd;
 	INet *m_net;
-
 	INetReactor *m_pNetReactor;
 	task_queue_pool_t*  m_taskQueuePool;
+
+	socket_t m_listenFd;
 };
 
 #endif //_listener_h_

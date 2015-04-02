@@ -89,7 +89,7 @@ namespace endiantool
 	}
 
 	// 将16位的整数从主机字节顺序转换成网络字节顺序
-	uint16_t hostToNetwork16(uint16_t host16)
+	uint16 hostToNetwork16(uint16 host16)
 	{
 #ifdef WIN
 		return htons(host16); // means host to network short
@@ -119,7 +119,7 @@ namespace endiantool
 	}
 
 	// 将16位的整数从网络字节顺序转换成主机字节顺序
-	uint16_t networkToHost16(uint16_t net16)
+	uint16 networkToHost16(uint16 net16)
 	{
 #ifdef WIN
 		return ntohs(net16);
