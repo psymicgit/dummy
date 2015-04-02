@@ -1,15 +1,21 @@
 FILE_LIST_C		= $(shell find . -name "*.c")
 FILE_LIST_CPP	= $(shell find . -name "*.cpp")
 
-# OTHER_SRC_CC	= $(patsubst %.cc,%.o,${OTHER_SRC_CPP})
+# patsubst = 替换字符串，如: $(patsubst %.cpp,%.o,"abc.cpp") = "abc.o"
+
 COMM_OBJ        = $(patsubst %.cpp,%.o,${FILE_LIST_CPP}) $(patsubst %.c,%.o,${FILE_LIST_C}) $(patsubst %.cpp,%.o,$(OTHER_SRC_CPP:.cc=.o)) $(patsubst %.c,%.o,${OTHER_SRC_C})
 ALL_OBJ			= $(notdir ${COMM_OBJ})
 
-CPPFLAGS= -W -Wall -Wno-unused
-
-COMPILE_STANDARD = -std=c++0x
-
+# ar = archive 是生成静态链接库的工具
 A_LINK      = ar rv
+
+# -shared = 生成动态连接库
+# -fPIC = 编译为位置独立(地址无关)的代码
+# -Wall = 开启所有警告（小部分警告不会开启）
+# -Wno-unused = 屏蔽未初始化警告
+# -w = 关闭警告
+CPPFLAGS= -W -Wall -Wno-unused -m${long_bit} $(MACD) -pipe
+COMPILE_STANDARD = -std=c++0x
 
 ifdef EXEC_FILE
 	OUT_DIR     = ${bin_dir}/${compile_type}/${MODULE}/
@@ -18,15 +24,15 @@ else
 endif
 
 ifeq (${compile_type}, release)
-	COMP   		= g++ -O2 -c -fPIC ${CPPFLAGS} -m${long_bit} $(MACD) ${COMPILE_STANDARD} 
-	COMPC   	= gcc -O2 -c -fPIC ${CPPFLAGS} -m${long_bit} $(MACD) 
-	SO_LINK     = g++ -O2 ${CPPFLAGS} -fPIC -shared -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o 
-	EXEC_LINK   = g++ -O2 ${CPPFLAGS} -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o	
+	COMP   		= g++ -O2 ${CPPFLAGS} -fPIC -c ${COMPILE_STANDARD} 
+	COMPC   	= gcc -O2 ${CPPFLAGS} -fPIC -c 
+	SO_LINK     = g++ -O2 ${CPPFLAGS} -fPIC -shared ${COMPILE_STANDARD} -o 
+	EXEC_LINK   = g++ -O2 ${CPPFLAGS} ${COMPILE_STANDARD} -o	
 else
-	COMP   		= g++ -c -g -fPIC ${CPPFLAGS} -D_DEBUG  -m${long_bit} $(MACD) ${COMPILE_STANDARD}  		
-	COMPC   	= gcc -c -g -fPIC ${CPPFLAGS} -D_DEBUG  -m${long_bit} $(MACD)
-	SO_LINK     = g++ -fPIC -shared -g ${CPPFLAGS} -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o
-	EXEC_LINK   = g++ -g ${CPPFLAGS} -m${long_bit} $(MACD) ${COMPILE_STANDARD} -o
+	COMP   		= g++ ${CPPFLAGS} -g -fPIC -c -D_DEBUG ${COMPILE_STANDARD}  		
+	COMPC   	= gcc ${CPPFLAGS} -g -fPIC -c -D_DEBUG
+	SO_LINK     = g++ ${CPPFLAGS} -g -fPIC -shared ${COMPILE_STANDARD} -o
+	EXEC_LINK   = g++ ${CPPFLAGS} -g ${COMPILE_STANDARD} -o
 endif
 
 all : $(COMP_ONLY) $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) 
@@ -76,6 +82,9 @@ ${EXEC_FILE} : ${COMM_OBJ}
 
 ${COMM_OBJ} : $(PCH)
 
+# $@ = 目标文件的完整名称
+# $< = 第一个依赖文件的名称
+
 # Pre-compiled header
 $(PCH): 
 	$(COMP) $(INC_PATH) -g $(PCH_H)
@@ -88,6 +97,3 @@ $(PCH):
 
 .cc.o:
 	${COMP} ${INC_PATH} -include ${PCH_H} -o $@ $<
-
-#-include ${PCH_H}
-#   -include ${PCH_H}
