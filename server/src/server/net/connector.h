@@ -50,7 +50,7 @@ private:
 
 	socket_t m_sockfd;
 	int m_retryDelayMs;
-	States m_state;  // FIXME: use atomic variable
+	States m_state;
 };
 
 #endif //_connector_h_

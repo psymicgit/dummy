@@ -38,7 +38,7 @@ private:
 
 		loginCnt++;
 
-		if (loginCnt % 1000 == 0) {
+		if (loginCnt % 10 == 0) {
 			LOG_INFO << "loginCnt = " << loginCnt;
 		}
 	}

@@ -92,7 +92,6 @@ int Epoll::eventLoop()
 			}
 		}
 
-		m_tasks.run();
 		m_timers.run();
 	}
 	while(nfds >= 0);

@@ -132,6 +132,9 @@
     <ClInclude Include="tool\ticktool.h">
       <Filter>tool</Filter>
     </ClInclude>
+    <ClInclude Include="basic\objectpool.h">
+      <Filter>basic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">

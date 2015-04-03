@@ -16,6 +16,7 @@
 
 #ifndef WIN
 	#include <fcntl.h>
+	#include <netinet/tcp.h>
 #endif
 
 namespace socktool
@@ -60,6 +61,36 @@ namespace socktool
 #endif
 
 		return true;
+	}
+
+	bool setTcpNoDelay(socket_t sockfd)
+	{
+		int flag = 1;
+
+		/* Disable the Nagle (TCP No Delay) algorithm */
+		int ret = setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (char *)&flag, sizeof(flag) );
+		if (ret == -1) {
+			LOG_SOCKET_ERR << "set socket " << sockfd << " TCP_NODELAY failed";
+			exit(-1);
+
+			return false;
+		}
+
+		return true;
+	}
+
+	void setKeepAlive(socket_t sockfd, bool on, int keepAliveTime)
+	{
+		int keepalive = on ? 1 : 0;
+		::setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, (const char*)&keepalive, static_cast<socklen_t>(sizeof keepalive));
+
+		if (!on) {
+			return;
+		}
+
+#ifndef WIN
+		setsockopt(sockfd, IPPROTO_TCP, TCP_KEEPIDLE, (void*)(&keepAliveTime), (socklen_t)sizeof(keepAliveTime));
+#endif
 	}
 
 	void setReuseAddr(socket_t sockfd, bool on)
@@ -136,12 +167,6 @@ namespace socktool
 			LOG_SOCKET_ERR << "sockets::getPeerAddr";
 		}
 		return peeraddr;
-	}
-
-	void setKeepAlive(socket_t sockfd, bool on)
-	{
-		int optval = on ? 1 : 0;
-		::setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, (const char*)&optval, static_cast<socklen_t>(sizeof optval));
 	}
 
 	bool bindAddress(socket_t sockfd, const NetAddress& localaddr)

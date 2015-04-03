@@ -30,7 +30,7 @@ void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAdd
 
 	uint32 newClientId = allocClientId();
 
-	Client *client = new Client;
+	Client *client = m_clientPool.alloc();
 	client->m_link = link;
 	client->m_clientId = newClientId;
 	client->m_clientMgr = this;
@@ -67,5 +67,5 @@ void ClientMgr::delClient(Client *client)
 	// LOG_INFO << "client <" << client->m_link->m_peerAddr.toIpPort() << "> disconnet";
 
 	m_clientMap.erase(client->m_clientId);
-	delete client;
+	m_clientPool.free(client);
 }

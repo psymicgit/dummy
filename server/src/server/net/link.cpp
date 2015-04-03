@@ -22,6 +22,7 @@
 void Link::open()
 {
 	socktool::setNonBlocking(m_sockfd);
+	socktool::setTcpNoDelay(m_sockfd);
 
 	m_net->addFd(this);
 	m_net->enableRead(this);
@@ -59,6 +60,7 @@ void Link::onSend(Buffer &buf)
 
 	// 如果发送缓存区仍有数据未发送，则直接append
 	if (m_sendBuf.readableBytes() > 0) {
+		LOG_WARN << "socket<" << m_sockfd << "> m_sendBuf.append(buf.peek(), buf.readableBytes());";
 		m_sendBuf.append(buf.peek(), buf.readableBytes());
 		return;
 	}

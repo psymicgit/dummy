@@ -12,6 +12,7 @@
 #include <net/netreactor.h>
 #include <net/msgdispatcher.h>
 #include <net/client.h>
+#include <basic/objectpool.h>
 
 class Client;
 
@@ -47,6 +48,8 @@ public:
 	ClientMap m_clientMap;
 
 	MsgDispatcher<Client> m_dispatcher;
+
+	ObjectPool<Client> m_clientPool;
 };
 
 #endif //_clientmgr_h_

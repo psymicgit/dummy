@@ -22,13 +22,19 @@ namespace socktool
 	// 设置socket为非阻塞
 	bool setNonBlocking(socket_t);
 
+	// 关闭Nagle算法
+	bool setTcpNoDelay(socket_t);
+
 	bool checkNonBlocking(socket_t);
 
 	void setReuseAddr(socket_t, bool on);
 
 	void setReusePort(socket_t, bool on);
 
-	void setKeepAlive(socket_t, bool on);
+	void setKeepAlive(socket_t, bool on, int keepAliveTime);
+
+	// 延缓面向连接的socket的close操作
+	void setLinger(socket_t, bool on);
 
 	int getSocketError(socket_t sockfd);
 

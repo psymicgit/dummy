@@ -53,7 +53,6 @@ bool Connector::connect()
 		connecting();
 		break;
 
-
 	case EADDRINUSE:
 	case EADDRNOTAVAIL:
 	case ECONNREFUSED:
@@ -114,7 +113,6 @@ void Connector::close()
 {
 	m_net->delFd(this);
 }
-
 
 void OpenLink(Link *link)
 {

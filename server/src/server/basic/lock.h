@@ -35,6 +35,14 @@ private:
 #endif
 };
 
+// 空锁，什么也不做
+class NonMutex
+{
+public:
+	inline void lock() {}
+	inline void unlock() {}
+};
+
 // 首先检测是否支持asm级别的mutex，支持的话则实现fast_mutex
 // Check if we can support the assembly language level implementation (otherwise
 // revert to the system API)

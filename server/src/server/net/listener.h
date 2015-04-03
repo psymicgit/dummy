@@ -15,11 +15,12 @@
 class INetReactor;
 class Link;
 class NetAddress;
+class NetFactory;
 
 class Listener : public IFd
 {
 public:
-	Listener(INet*, INetReactor*, task_queue_pool_t*);
+	Listener(INet*, INetReactor*, NetFactory*);
 
 	bool open(const string& ip, int port);
 
@@ -41,9 +42,9 @@ public:
 private:
 	INet *m_net;
 	INetReactor *m_pNetReactor;
-	task_queue_pool_t*  m_taskQueuePool;
 
 	socket_t m_listenFd;
+	NetFactory *m_netFactory;
 };
 
 #endif //_listener_h_

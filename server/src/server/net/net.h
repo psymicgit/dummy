@@ -57,7 +57,6 @@ public:
 	virtual void disableAll(IFd*)		= 0;
 
 	virtual TimerQueue& getTimerQueue() = 0;
-	virtual TaskQueue& getTaskQueue()	= 0;
 };
 
 #ifndef WIN
@@ -86,7 +85,6 @@ public:
 	virtual void disableAll(IFd*);
 
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
-	virtual TaskQueue& getTaskQueue() { return m_tasks; }
 
 protected:
 	void recycleFds();
@@ -102,7 +100,6 @@ protected:
 	list<IFd*>   		     m_deletingFdList;
 	mutex_t                  m_mutex;
 
-	TaskQueue m_tasks;
 	TimerQueue m_timers;
 };
 
@@ -147,7 +144,6 @@ public:
 	virtual void disableAll(IFd*);
 
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
-	virtual TaskQueue& getTaskQueue() { return m_tasks; }
 
 private:
 	void updateFd(IFd*, FDOperator);

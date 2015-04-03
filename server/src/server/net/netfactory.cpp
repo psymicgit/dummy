@@ -21,16 +21,16 @@ void NetFactory::runNet(void *e)
 NetFactory::NetFactory()
 	: m_started(false)
 {
-
 }
 
-bool NetFactory::init(int threadCnt)
+bool NetFactory::init(int threadCnt, int initLinkCnt)
 {
 	assert(threadCnt > 0);
 
 	m_threadCnt = threadCnt;
 	m_taskQueuePool = new task_queue_pool_t(m_threadCnt);
 
+	m_linkPool.init(initLinkCnt, 500);
 	return true;
 }
 
@@ -59,12 +59,12 @@ void NetFactory::stop()
 
 Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor)
 {
-	NetAddress listenAddr(ip, port);
-	Listener* listener = new Listener(&m_net, &netReactor, m_taskQueuePool);
+	Listener* listener = new Listener(&m_net, &netReactor, this);
 	LOG_DEBUG << "start listening at <" << ip << ":" << port << ">";
 
 	if (!listener->open(ip, port)) {
 		LOG_SOCKET_ERR << "listen at <" << ip << ":" << port << "> failed";
+
 		delete listener;
 		return listener;
 	}

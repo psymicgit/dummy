@@ -39,7 +39,7 @@ private:
 
 		count++;
 
-		if (count % 100 == 0) {
+		if (count % 10 == 0) {
 			LOG_INFO << "OnEncryptKeyNtf count = " << count;
 		}
 

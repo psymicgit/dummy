@@ -10,7 +10,9 @@
 #define _netfactory_h_
 
 #include "basic/thread.h"
+#include "basic/objectpool.h"
 #include "net.h"
+#include "link.h"
 
 class Epoll;
 class Select;
@@ -23,12 +25,15 @@ class INetReactor;
 
 class NetFactory
 {
+	friend class Listener;
+	friend class Connector;
+
 public:
 	static void runNet(void *e);
 
 	NetFactory();
 
-	bool init(int threadCnt);
+	bool init(int threadCnt, int initLinkCnt = 500);
 
 	void start();
 
@@ -46,6 +51,8 @@ public:
 	bool m_started;
 
 	int m_threadCnt; /* = 2 */
+
+	ObjectPool<Link> m_linkPool;
 };
 
 #endif //_netfactory_h_

@@ -110,6 +110,7 @@
     <ClInclude Include="basic\bind.h" />
     <ClInclude Include="basic\buffer.h" />
     <ClInclude Include="basic\lock.h" />
+    <ClInclude Include="basic\objectpool.h" />
     <ClInclude Include="basic\singleton.h" />
     <ClInclude Include="basic\taskqueue.h" />
     <ClInclude Include="basic\thread.h" />
