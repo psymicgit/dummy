@@ -37,9 +37,14 @@ bool Connector::connect()
 	switch (err) {
 	case 0:
 		// 连接成功（当客户端和服务器端在同一台主机上的时候，connect会马上返回0）
-		//onConnected();
+		LOG_WARN << "warn: socket<" << m_sockfd << "> connect to localhost<" << m_peerAddr.toIpPort() << "> success";
+		onConnected();
 		break;
 
+#ifdef WIN
+	// linux下的EAGAIN和EWOULDBLOCK是同一个值，编译会报错
+	case EAGAIN:
+#endif
 	case EWOULDBLOCK:
 	case EINPROGRESS:
 	case EINTR:
@@ -48,10 +53,7 @@ bool Connector::connect()
 		connecting();
 		break;
 
-#ifdef WIN
-	// linux下的EAGAIN和EWOULDBLOCK是同一个值，编译会报错
-	case EAGAIN:
-#endif
+
 	case EADDRINUSE:
 	case EADDRNOTAVAIL:
 	case ECONNREFUSED:
@@ -121,10 +123,9 @@ void OpenLink(Link *link)
 
 bool Connector::onConnected()
 {
-	this->close();
-
 	// 成功连接上对端
 	Link* link = createLink(m_sockfd, m_peerAddr);
+	this->close();
 
 	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&INetReactor::onConnected, m_pNetReactor, link, link->m_localAddr, m_peerAddr));
 	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&OpenLink, link));

@@ -59,17 +59,21 @@ int Listener::handleRead()
 	int newfd = -1;
 	do {
 		if ((newfd = ::accept(m_listenFd, (struct sockaddr *)&addr, &addrlen)) == -1) {
-			if (errno == EWOULDBLOCK) {
-				return 0;
+			if (errno == EINTR) {
+				LOG_ERROR << "errno == EINTR";
+				continue;
+			}
+			if (errno == EWOULDBLOCK || errno == EAGAIN) {
+				break;
 			}
 			else if (errno == EINTR || errno == EMFILE || errno == ECONNABORTED || errno == ENFILE ||
 			         errno == EPERM || errno == ENOBUFS || errno == ENOMEM) {
 				LOG_ERROR << "accept failed, restart listenning now";//! if too many open files occur, need to restart epoll event
 				m_net->reopen(this);
-				return 0;
+				break;
 			}
 
-			return -1;
+			continue;
 		}
 
 		NetAddress peerAddr(*((struct sockaddr_in*)&addr));
@@ -78,10 +82,9 @@ int Listener::handleRead()
 		link->open();
 
 		m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&INetReactor::onAccepted, m_pNetReactor, link, m_listenAddr, peerAddr));
-
-		// m_pNetReactor->GetTaskQueue().put(task_binder_t::gen(&Listener::OnAccepted, this, link));
 	}
 	while (true);
+
 	return 0;
 }
 

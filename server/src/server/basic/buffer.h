@@ -9,6 +9,10 @@
 #ifndef _buffer_h_
 #define _buffer_h_
 
+#ifdef WIN
+	#pragma warning( disable : 4996 )
+#endif
+
 #include "tool/endiantool.h"
 
 /// A buffer class modeled after org.jboss.netty.buffer.ChannelBuffer

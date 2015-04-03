@@ -61,10 +61,13 @@ private:
 	int trySend(Buffer&);
 
 	void onLogicClose();
+	void onNetClose();
 	void onSend(Buffer &buff);
 
 	int handleReadTask();
 	int handleWriteTask();
+
+	bool isopen() { return !m_isClosing; }
 
 public:
 	const NetAddress m_localAddr;
@@ -75,7 +78,7 @@ public:
 	bool m_isCreateByConnector;
 
 private:
-	bool m_isClosing;
+	volatile bool m_isClosing;
 
 	socket_t m_sockfd;
 	INet *m_net;

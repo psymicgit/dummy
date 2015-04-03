@@ -53,6 +53,12 @@
 	#include <unistd.h>
 #endif
 
+#ifdef WIN
+	// ÆÁ±Îprotobuf¾¯¸æ
+	#pragma warning( disable : 4996 )
+#endif
+
+
 // Ïß³Ì¡¢Ëø
 #ifdef WIN
 	#include <process.h>

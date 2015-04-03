@@ -33,7 +33,14 @@ public:
 private:
 	static void OnLoginReq(Client* client, LoginReq *req, Timestamp receiveTime)
 	{
-		LOG_INFO << "OnLoginReq :" << msgtool::getMsgString(*req);
+		// LOG_INFO << "OnLoginReq :" << msgtool::getMsgString(*req);
+		static int loginCnt = 0;
+
+		loginCnt++;
+
+		if (loginCnt % 1000 == 0) {
+			LOG_INFO << "loginCnt = " << loginCnt;
+		}
 	}
 };
 

@@ -30,7 +30,7 @@ public:
 
 #ifndef WIN
 public:
-	uint16 m_events;
+	uint32 m_events;
 #endif
 };
 
@@ -91,7 +91,7 @@ public:
 protected:
 	void recycleFds();
 	int interruptLoop();
-	void mod(IFd*, uint16 events);
+	void mod(IFd*, uint32 events);
 
 	volatile bool            m_running;
 	int                      m_efd;

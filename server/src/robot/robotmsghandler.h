@@ -35,7 +35,16 @@ public:
 private:
 	static void OnEncryptKeyNtf(Robot* robot, EncryptKeyNtf *ntf, Timestamp receiveTime)
 	{
-		LOG_INFO << "OnEncryptKeyNtf :" << msgtool::getMsgString(*ntf);
+		static int count = 0;
+
+		count++;
+
+		if (count % 100 == 0) {
+			LOG_INFO << "OnEncryptKeyNtf count = " << count;
+		}
+
+		// LOG_INFO << "OnEncryptKeyNtf :" << msgtool::getMsgString(*ntf);
+
 		memcpy(robot->m_encryptKey, ntf->encryptkey().data(), sizeof(robot->m_encryptKey));
 		robot->m_isEncrypt = true;
 

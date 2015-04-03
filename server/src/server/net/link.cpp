@@ -35,21 +35,28 @@ void Link::close()
 
 	m_isClosing = true;
 
-	// socktool::closeSocket(m_sockfd);
-	m_net->disableAll(this);
+	// LOG_WARN << "close socket<" << m_sockfd << ">";
 	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&Link::onLogicClose, this));
 }
 
 void Link::onLogicClose()
 {
 	m_pNetReactor->onDisconnect(this, m_localAddr, m_peerAddr);
+	m_taskQueue->produce(task_binder_t::gen(&Link::onNetClose, this));
+}
 
-	m_net->getTaskQueue().put(task_binder_t::gen(&socktool::closeSocket, m_sockfd));
+void Link::onNetClose()
+{
+	socktool::closeSocket(m_sockfd);
 	m_net->delFd(this);
 }
 
 void Link::onSend(Buffer &buf)
 {
+// 	if (!isopen()) {
+// 		return;
+// 	}
+
 	// 如果发送缓存区仍有数据未发送，则直接append
 	if (m_sendBuf.readableBytes() > 0) {
 		m_sendBuf.append(buf.peek(), buf.readableBytes());
@@ -144,12 +151,19 @@ int Link::handleWrite()
 
 int Link::handleError()
 {
+	LOG_WARN << "socket<" << m_sockfd << "> error";
 	this->close();
 	return 0;
 }
 
 int Link::handleReadTask()
 {
+	// LOG_WARN << "socket<" << m_sockfd << "> read task";
+
+// 	if (!isopen()) {
+// 		return 0;
+// 	}
+
 	int nread = 0;
 	char recvBuf[8096];
 
@@ -158,22 +172,29 @@ int Link::handleReadTask()
 		if (nread > 0) {
 			m_recvBuf.append(recvBuf, nread);
 
+			// LOG_WARN << "read task socket<" << m_sockfd << "> recv nread = " << nread;
+
 			if (nread < int(sizeof(recvBuf) - 1)) {
 				break; // 相当于EWOULDBLOCK
 			}
 		}
 		else if (0 == nread) {   //! eof
+			// LOG_WARN << "socket<" << m_sockfd << "> read 0, closed";
 			this->close();
 			return -1;
 		}
 		else {
-			if (errno == EINTR) {
+			int err = errno;
+			if (err == EINTR) {
 				continue;
 			}
-			else if (errno == EWOULDBLOCK) {
+			else if (err == EWOULDBLOCK || err == EAGAIN) {
+				// LOG_WARN << "read task socket<" << m_sockfd << "> EWOULDBLOCK || EAGAIN, err = " << err;
+
 				break;
 			}
 			else {
+				LOG_WARN << "socket<" << m_sockfd << "> error = " << err;
 				this->close();
 				return -1;
 			}
@@ -187,6 +208,12 @@ int Link::handleReadTask()
 
 int Link::handleWriteTask()
 {
+	LOG_INFO << "socket <" << m_sockfd << "> is writable";
+
+// 	if (!isopen()) {
+// 		return 0;
+// 	}
+
 	int ret = 0;
 	string left_buff;
 
@@ -203,6 +230,8 @@ int Link::handleWriteTask()
 		ret = trySend(m_sendBuf);
 
 		if (ret < 0) {
+			LOG_WARN << "close socket<" << m_sockfd << ">";
+
 			this->close();
 			return -1;
 		}
@@ -223,11 +252,11 @@ int Link::trySend(Buffer &buffer)
 			if (EINTR == errno) {
 				nwritten = 0;
 			}
-			else if (EWOULDBLOCK == errno) {
-				return 1;
+			else if (EWOULDBLOCK == errno || EAGAIN == errno) {
+				break;
 			}
 			else {
-				this->close();
+				LOG_WARN << "close socket<" << m_sockfd << ">";
 				return -1;
 			}
 		}

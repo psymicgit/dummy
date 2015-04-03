@@ -12,10 +12,11 @@
 #include "listener.h"
 #include "link.h"
 
+#include <iostream>
+
 #ifndef WIN
 
-#define CREATE_EPOLL_SIZE  4096
-#define EPOLL_EVENTS_SIZE  128
+#define EPOLL_EVENTS_SIZE  512
 //! 100 ms
 #define EPOLL_WAIT_TIME    100
 
@@ -23,7 +24,8 @@ Epoll::Epoll()
 	: m_running(true)
 	, m_efd(-1)
 {
-	m_efd = ::epoll_create(CREATE_EPOLL_SIZE);
+	m_efd = ::epoll_create(1);
+
 	m_interupt_sockets[0] = -1;
 	m_interupt_sockets[1] = -1;
 	assert( 0 == ::socketpair(AF_LOCAL, SOCK_STREAM, 0, m_interupt_sockets));
@@ -31,6 +33,11 @@ Epoll::Epoll()
 	ee.data.ptr  = this;
 	ee.events    = EPOLLIN | EPOLLPRI | EPOLLOUT | EPOLLHUP | EPOLLET;;
 	::epoll_ctl(m_efd, EPOLL_CTL_ADD, m_interupt_sockets[0], &ee);
+
+	// 如果客户端关闭套接字close，而服务器调用一次write, 服务器会接收一个RST segment（tcp传输层）
+	// 如果服务器端再次调用了write，这个时候就会产生SIGPIPE信号，默认终止进程。
+	// 这里直接在程序中直接忽略掉SIGPIPE信号
+	signal(SIGPIPE, SIG_IGN);
 }
 
 Epoll::~Epoll()
@@ -53,9 +60,15 @@ int Epoll::eventLoop()
 			nfds = 0;
 			continue;
 		}
+
+// 		if (nfds > 0) {
+// 			LOG_INFO << "nfds = <" << nfds << ">";
+// 		}
+
 		for (i = 0; i < nfds; ++i) {
 			epoll_event& cur_ev = ev_set[i];
-			IFd* fd_ptr	    = (IFd*)cur_ev.data.ptr;
+			IFd* pfd = (IFd*)cur_ev.data.ptr;
+
 			if (cur_ev.data.ptr == this) { //! iterupte event
 				if (false == m_running) {
 					return 0;
@@ -67,15 +80,15 @@ int Epoll::eventLoop()
 			}
 
 			if (cur_ev.events & (EPOLLIN | EPOLLPRI)) {
-				fd_ptr->handleRead();
+				pfd->handleRead();
 			}
 
 			if(cur_ev.events & EPOLLOUT) {
-				fd_ptr->handleWrite();
+				pfd->handleWrite();
 			}
 
 			if (cur_ev.events & (EPOLLERR | EPOLLHUP)) {
-				fd_ptr->handleError();
+				pfd->handleError();
 			}
 		}
 
@@ -97,7 +110,6 @@ void Epoll::close()
 int Epoll::interruptLoop()
 {
 	struct epoll_event ee = { 0, { 0 } };
-
 	ee.data.ptr  = this;
 	ee.events    = EPOLLIN | EPOLLOUT | EPOLLPRI | EPOLLHUP | EPOLLET;;
 
@@ -109,7 +121,6 @@ void Epoll::addFd(IFd* pfd)
 	// LOG_INFO << "add fd " << pfd->socket();
 
 	struct epoll_event ee = { 0, { 0 } };
-
 	ee.data.ptr  = pfd;
 	ee.events    = EPOLLERR | EPOLLPRI | EPOLLHUP | EPOLLET;;
 
@@ -171,7 +182,7 @@ void Epoll::disableAll(IFd *pfd)
 	}
 }
 
-void Epoll::mod(IFd *pfd, uint16 events)
+void Epoll::mod(IFd *pfd, uint32 events)
 {
 	if (pfd->m_events == events) {
 		return;

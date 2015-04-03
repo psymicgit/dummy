@@ -22,6 +22,8 @@ namespace socktool
 	// ÉèÖÃsocketÎª·Ç×èÈû
 	bool setNonBlocking(socket_t);
 
+	bool checkNonBlocking(socket_t);
+
 	void setReuseAddr(socket_t, bool on);
 
 	void setReusePort(socket_t, bool on);
