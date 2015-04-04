@@ -48,8 +48,8 @@ void Link::onLogicClose()
 
 void Link::onNetClose()
 {
-	socktool::closeSocket(m_sockfd);
 	m_net->delFd(this);
+	socktool::closeSocket(m_sockfd);
 }
 
 void Link::onSend(Buffer &buf)
@@ -71,6 +71,8 @@ void Link::onSend(Buffer &buf)
 		this ->close();
 	}
 	else if (ret > 0) {
+		LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
+
 		m_net->enableWrite(this);
 		m_sendBuf.append(buf.peek(), buf.readableBytes());
 	}

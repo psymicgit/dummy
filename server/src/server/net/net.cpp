@@ -61,9 +61,9 @@ int Epoll::eventLoop()
 			continue;
 		}
 
-// 		if (nfds > 0) {
-// 			LOG_INFO << "nfds = <" << nfds << ">";
-// 		}
+		if (nfds > 0) {
+			LOG_INFO << "nfds = <" << nfds << ">";
+		}
 
 		for (i = 0; i < nfds; ++i) {
 			epoll_event& cur_ev = ev_set[i];

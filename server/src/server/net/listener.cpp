@@ -67,13 +67,14 @@ int Listener::handleRead()
 			if (errno == EWOULDBLOCK || errno == EAGAIN) {
 				break;
 			}
-			else if (errno == EINTR || errno == EMFILE || errno == ECONNABORTED || errno == ENFILE ||
-			         errno == EPERM || errno == ENOBUFS || errno == ENOMEM) {
+			else if (errno == EMFILE || errno == ECONNABORTED || errno == ENFILE ||
+			         errno == EPERM  || errno == ENOBUFS || errno == ENOMEM) {
 				LOG_ERROR << "accept failed, restart listenning now";//! if too many open files occur, need to restart epoll event
 				m_net->reopen(this);
 				break;
 			}
 
+			LOG_ERROR << "accept failed, continue";
 			continue;
 		}
 

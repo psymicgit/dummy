@@ -40,6 +40,13 @@ void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAdd
 	client->onEstablish();
 
 	m_clientMap[newClientId] = client;
+
+	static int clientNum = 0;
+	clientNum++;
+
+	if (clientNum % 10 == 0) {
+		LOG_INFO << "clientNum = " << clientNum << ", m_clientMap.size() = " << m_clientMap.size();
+	}
 }
 
 void ClientMgr::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)

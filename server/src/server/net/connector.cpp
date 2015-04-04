@@ -27,6 +27,7 @@ Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, INet *net, t
 {
 	m_sockfd = socktool::createSocket();
 	socktool::setNonBlocking(m_sockfd);
+	socktool::setTcpNoDelay(m_sockfd);
 }
 
 bool Connector::connect()
@@ -99,12 +100,15 @@ int Connector::handleWrite()
 	}
 
 	// 成功建立连接
+
 	onConnected();
 	return 0;
 }
 
 int Connector::handleError()
 {
+	LOG_ERROR << "Connector::handleError socket<" << m_sockfd << ">";
+
 	retry(m_sockfd);
 	return true;
 }

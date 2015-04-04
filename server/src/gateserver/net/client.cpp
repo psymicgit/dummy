@@ -67,6 +67,8 @@ void Client::onRecv(Link *link, Buffer &buf)
 	uint32 msgLen = endiantool::networkToHost32(msgHead->msgLen);
 
 	if (msgLen > bytes) {
+		LOG_ERROR << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
+		          << "] msgLen(" << msgLen << ") > bytes(" << bytes << ")";
 		return;
 	}
 
