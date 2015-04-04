@@ -42,18 +42,20 @@ bool Connector::connect()
 		onConnected();
 		break;
 
+	case EINTR:
+	case EISCONN:
+	case EINPROGRESS:
+		LOG_WARN << "warn: socket <" << m_sockfd << "> starting connecting err = <" << err << ">";
+
+		// 正在连接（tcp三次握手正在进行）
+		connecting();
+		break;
+
 #ifdef WIN
 	// linux下的EAGAIN和EWOULDBLOCK是同一个值，编译会报错
 	case EAGAIN:
 #endif
 	case EWOULDBLOCK:
-	case EINPROGRESS:
-	case EINTR:
-	case EISCONN:
-		// 正在连接（tcp三次握手正在进行）
-		connecting();
-		break;
-
 	case EADDRINUSE:
 	case EADDRNOTAVAIL:
 	case ECONNREFUSED:
@@ -92,7 +94,7 @@ int Connector::handleWrite()
 {
 	// 先检测套接字是否发生异常
 	int err = socktool::getSocketError(m_sockfd);
-	if (err) {
+	if (err > 0) {
 		LOG_SOCKET_ERR << "Connector::handleWrite - SOCK_ERROR = " << err;
 		retry(m_sockfd);
 
