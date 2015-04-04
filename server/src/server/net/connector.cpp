@@ -77,8 +77,8 @@ bool Connector::connect()
 
 	default:
 		// 发生未识别异常
-		LOG_SOCKET_ERR << "socket<" << m_sockfd << "> connect to peer<" << m_peerAddr.toIpPort() << "> fail, unexpected error";
-		this->close();
+		// LOG_SOCKET_ERR << "socket<" << m_sockfd << "> connect to peer<" << m_peerAddr.toIpPort() << "> fail, unexpected error = " << err;
+		retry(m_sockfd);
 		break;
 	}
 
@@ -154,7 +154,7 @@ bool Connector::connecting()
 
 bool Connector::retry(socket_t sockfd)
 {
-	LOG_ERROR << "socket<" << m_sockfd << "> connect to peer<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
+	LOG_SOCKET_ERR << "socket<" << m_sockfd << "> connect to peer<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
 
 	if (m_state == kConnecting) {
 		m_net->disableAll(this);
