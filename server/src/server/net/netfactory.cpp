@@ -63,7 +63,7 @@ Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor
 	LOG_DEBUG << "start listening at <" << ip << ":" << port << ">";
 
 	if (!listener->open(ip, port)) {
-		LOG_SOCKET_ERR << "listen at <" << ip << ":" << port << "> failed";
+		LOG_SYSTEM_ERR << "listen at <" << ip << ":" << port << "> failed";
 
 		delete listener;
 		return listener;

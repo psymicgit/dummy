@@ -9,6 +9,8 @@
 #ifndef _log_h_
 #define _log_h_
 
+#include "tool/sockettool.h"
+
 #define GLOG_NO_ABBREVIATED_SEVERITIES
 #define GOOGLE_GLOG_DLL_DECL
 
@@ -19,20 +21,16 @@
 #define  __STDC_FORMAT_MACROS
 #include <glog/logging.h>
 
-#define LOG_TRACE LOG(INFO) << "<" _FUNC_ " > "
-#define LOG_INFO LOG(INFO) << "<" _FUNC_ "> "
-#define LOG_DEBUG LOG(INFO) << "<" _FUNC_ "> "
-#define LOG_WARN LOG(WARNING) << "<" _FUNC_ "> "
-#define LOG_ERROR LOG(ERROR) << "<" _FUNC_ "> "
-#define LOG_FATAL LOG(FATAL) << "<" _FUNC_ "> "
+#define LOG_TRACE LOG(INFO) << "" _FUNC_ "() "
+#define LOG_INFO LOG(INFO) << "" _FUNC_ "() "
+#define LOG_DEBUG LOG(INFO) << "" _FUNC_ "() "
+#define LOG_WARN LOG(WARNING) << "" _FUNC_ "() "
+#define LOG_ERROR LOG(ERROR) << "" _FUNC_ "() "
+#define LOG_FATAL LOG(FATAL) << "" _FUNC_ "() "
 
-#ifdef WIN
-	const char* strerror_threadlocal(int savedErrno);
+#define LOG_SYSTEM_ERR LOG_ERROR << "[[socket --err=<" << socktool::geterrno() << "> --errmsg=<" << socktool::getErrorMsg(socktool::geterrno()) << ">]]"
 
-	#define LOG_SOCKET_ERR LOG_ERROR << "[[err=<" << WSAGetLastError() << "> errmsg=<" << strerror_threadlocal(WSAGetLastError()) << ">]]:"
-#else
-	#define LOG_SOCKET_ERR LOG_ERROR << "[[socket err = <" << errno << ">--errno = <" << strerror(errno) << ">]]"
-#endif
+#define LOG_SOCKET_ERR(sockfd, errnum) LOG_ERROR << "[[socket<" << sockfd << "> --err=<" << errnum << "> --errmsg=<" << socktool::getErrorMsg(errnum) << ">]]"
 
 namespace logging
 {

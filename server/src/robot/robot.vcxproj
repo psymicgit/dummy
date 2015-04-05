@@ -55,7 +55,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>def/platform.h;def/type.h</ForcedIncludeFiles>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>

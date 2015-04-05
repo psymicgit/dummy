@@ -101,7 +101,7 @@ bool NetAddress::resolve(string hostname, NetAddress* out)
 	}
 	else {
 		if (ret) {
-			LOG_SOCKET_ERR << "InetAddress::resolve";
+			LOG_SYSTEM_ERR << "InetAddress::resolve";
 		}
 		return false;
 	}

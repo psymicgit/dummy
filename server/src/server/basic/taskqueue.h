@@ -872,7 +872,7 @@ private:
 class task_queue_pool_t
 {
 	typedef task_queue_i::task_list_t task_list_t;
-	typedef vector<BlockingTaskQueue*>    task_queue_vt_t;
+	typedef std::vector<BlockingTaskQueue*>    task_queue_vt_t;
 	static void task_func(void* pd_)
 	{
 		task_queue_pool_t* t = (task_queue_pool_t*)pd_;

@@ -31,14 +31,14 @@ public:
 
 	bool connecting();
 
-	bool retry(socket_t);
+	bool retry();
 
 private:
 	Link* createLink(socket_t newfd, NetAddress &peerAddr);
 
 private:
 	static const int MaxRetryDelayMs = 30 * 1000;
-	static const int InitRetryDelayMs = 500;
+	static const int InitRetryDelayMs = 1000;
 
 	enum States { kDisconnected, kConnecting, kConnected };
 
@@ -51,6 +51,8 @@ private:
 	socket_t m_sockfd;
 	int m_retryDelayMs;
 	States m_state;
+
+	int m_errno; // socketµÄ´íÎóÂë
 };
 
 #endif //_connector_h_

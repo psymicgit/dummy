@@ -25,7 +25,7 @@ namespace socktool
 	{
 		socket_t sockfd = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 		if (sockfd < 0) {
-			LOG_SOCKET_ERR << "sockets::createNonblockingOrDie";
+			LOG_SYSTEM_ERR << "sockets::createNonblockingOrDie";
 		}
 
 		return sockfd;
@@ -50,12 +50,12 @@ namespace socktool
 #else
 		int flags;
 		if ((flags = fcntl(sockfd, F_GETFL, NULL)) < 0) {
-			LOG_SOCKET_ERR << "socket <" << sockfd << "> F_GETFL failed";
+			LOG_SYSTEM_ERR << "socket <" << sockfd << "> F_GETFL failed";
 			return false;
 		}
 
 		if (fcntl(sockfd, F_SETFL, flags | O_NONBLOCK) == -1) {
-			LOG_SOCKET_ERR << "socket " << sockfd << " set nonblock failed";
+			LOG_SYSTEM_ERR << "socket " << sockfd << " set nonblock failed";
 			return false;
 		}
 #endif
@@ -70,7 +70,7 @@ namespace socktool
 		/* Disable the Nagle (TCP No Delay) algorithm */
 		int ret = setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (char *)&flag, sizeof(flag) );
 		if (ret == -1) {
-			LOG_SOCKET_ERR << "set socket " << sockfd << " TCP_NODELAY failed";
+			LOG_SYSTEM_ERR << "set socket " << sockfd << " TCP_NODELAY failed";
 			exit(-1);
 
 			return false;
@@ -105,7 +105,7 @@ namespace socktool
 		                       &optval, static_cast<socklen_t>(sizeof optval));
 
 		if (-1 == ret) {
-			LOG_SOCKET_ERR << "acceptor_impl_t::open when setsockopt";
+			LOG_SYSTEM_ERR << "acceptor_impl_t::open when setsockopt";
 		}
 #endif
 	}
@@ -132,10 +132,45 @@ namespace socktool
 		socklen_t optlen = static_cast<socklen_t>(sizeof opt);
 
 		if (::getsockopt(sockfd, SOL_SOCKET, SO_ERROR, &opt, &optlen) < 0) {
-			return errno;
+			return opt;
 		}
 
 		return opt;
+	}
+
+#ifdef WIN
+	thread_local char t_errnobuf[512];
+
+	const char* strerror_threadlocal(int savedErrno)
+	{
+		strerror_s(t_errnobuf, sizeof t_errnobuf, savedErrno);
+		return t_errnobuf;
+	}
+#endif
+
+	const char* getErrorMsg(int err)
+	{
+#ifdef WIN
+//		return strerror_threadlocal(err);
+
+		LPVOID lpMsgBuf;
+		LPVOID lpDisplayBuf;
+
+		FormatMessage(
+		    FORMAT_MESSAGE_ALLOCATE_BUFFER |
+		    FORMAT_MESSAGE_FROM_SYSTEM |
+		    FORMAT_MESSAGE_IGNORE_INSERTS,
+		    NULL,
+		    err,
+		    MAKELANGID(LANG_ENGLISH, SUBLANG_DEFAULT),
+		    (LPTSTR) &lpMsgBuf,
+		    0,
+		    NULL );
+
+		return (const char*)lpMsgBuf;
+#else
+		return strerror(err);
+#endif
 	}
 
 	int geterrno()
@@ -153,7 +188,7 @@ namespace socktool
 		bzero(&localaddr, sizeof localaddr);
 		socklen_t addrlen = static_cast<socklen_t>(sizeof localaddr);
 		if (::getsockname(sockfd, (struct sockaddr*)(&localaddr), &addrlen) < 0) {
-			LOG_SOCKET_ERR << "sockets::getLocalAddr";
+			LOG_SYSTEM_ERR << "sockets::getLocalAddr";
 		}
 		return localaddr;
 	}
@@ -164,7 +199,7 @@ namespace socktool
 		bzero(&peeraddr, sizeof peeraddr);
 		socklen_t addrlen = static_cast<socklen_t>(sizeof peeraddr);
 		if (::getpeername(sockfd, (struct sockaddr*)(&peeraddr), &addrlen) < 0) {
-			LOG_SOCKET_ERR << "sockets::getPeerAddr";
+			LOG_SYSTEM_ERR << "sockets::getPeerAddr";
 		}
 		return peeraddr;
 	}
@@ -172,8 +207,8 @@ namespace socktool
 	bool bindAddress(socket_t sockfd, const NetAddress& localaddr)
 	{
 		int ret = bind(sockfd, (struct sockaddr *)&localaddr.m_addr, sizeof(localaddr.m_addr));
-		if(ret == -1) {
-			LOG_SOCKET_ERR << "bindAddress failed address=<" << localaddr.toIpPort() << ">";
+		if(ret == SOCKET_ERROR) {
+			LOG_SYSTEM_ERR << "bindAddress failed address=<" << localaddr.toIpPort() << ">";
 			return false;
 		}
 
@@ -184,7 +219,7 @@ namespace socktool
 	{
 		int ret = ::listen(sockfd, SOMAXCONN);
 		if (ret < 0) {
-			LOG_SOCKET_ERR << "sockets::listen fail, fd = " << sockfd;
+			LOG_SYSTEM_ERR << "sockets::listen fail, fd = " << sockfd;
 			return false;
 		}
 
@@ -212,7 +247,7 @@ namespace socktool
 				break;
 
 			default:
-				LOG_SOCKET_ERR << "unknown error of ::accept " << err;
+				LOG_SYSTEM_ERR << "unknown error of ::accept " << err;
 			}
 		}
 

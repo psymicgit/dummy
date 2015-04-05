@@ -18,7 +18,7 @@ bool RobotMgr::init()
 
 	m_wan.init(4);
 
-	for(int i = 0; i < 500; i++) {
+	for(int i = 0; i < 10000; i++) {
 		Robot *robot = new Robot;
 		robot->m_taskQueue = &m_taskQueue;
 		robot->m_robotMgr = this;

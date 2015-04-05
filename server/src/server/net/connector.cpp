@@ -24,6 +24,7 @@ Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, INet *net, t
 	, m_taskQueuePool(taskQueuePool)
 	, m_retryDelayMs(InitRetryDelayMs)
 	, m_state(kDisconnected)
+	, m_errno(0)
 {
 	m_sockfd = socktool::createSocket();
 	socktool::setNonBlocking(m_sockfd);
@@ -42,26 +43,26 @@ bool Connector::connect()
 		onConnected();
 		break;
 
-	case EINTR:
-	case EISCONN:
-	case EINPROGRESS:
-		LOG_WARN << "warn: socket <" << m_sockfd << "> starting connecting err = <" << err << ">";
-
-		// 正在连接（tcp三次握手正在进行）
-		connecting();
-		break;
-
 #ifdef WIN
 	// linux下的EAGAIN和EWOULDBLOCK是同一个值，编译会报错
 	case EAGAIN:
 #endif
 	case EWOULDBLOCK:
+	case EINTR:
+	case EISCONN:
+	case EINPROGRESS:
+		// LOG_WARN << "warn: socket <" << m_sockfd << "> starting connecting err = <" << err << ">";
+
+		// 正在连接（tcp三次握手正在进行）
+		connecting();
+		break;
+
 	case EADDRINUSE:
 	case EADDRNOTAVAIL:
 	case ECONNREFUSED:
 	case ENETUNREACH:
 		// 连接失败，重试
-		retry(m_sockfd);
+		retry();
 		break;
 
 	case EACCES:
@@ -72,13 +73,13 @@ bool Connector::connect()
 	case EFAULT:
 	case ENOTSOCK:
 		// 连接异常，中断
-		retry(m_sockfd);
+		retry();
 		break;
 
 	default:
 		// 发生未识别异常
 		// LOG_SOCKET_ERR << "socket<" << m_sockfd << "> connect to peer<" << m_peerAddr.toIpPort() << "> fail, unexpected error = " << err;
-		retry(m_sockfd);
+		retry();
 		break;
 	}
 
@@ -93,10 +94,10 @@ int Connector::handleRead()
 int Connector::handleWrite()
 {
 	// 先检测套接字是否发生异常
-	int err = socktool::getSocketError(m_sockfd);
-	if (err > 0) {
-		LOG_SOCKET_ERR << "Connector::handleWrite - SOCK_ERROR = " << err;
-		retry(m_sockfd);
+	m_errno = socktool::getSocketError(m_sockfd);
+	if (m_errno > 0) {
+		// LOG_SYSTEM_ERR << "Connector::handleWrite - SOCK_ERROR = " << err;
+		retry();
 
 		return -1;
 	}
@@ -109,9 +110,8 @@ int Connector::handleWrite()
 
 int Connector::handleError()
 {
-	LOG_ERROR << "Connector::handleError socket<" << m_sockfd << ">";
-
-	retry(m_sockfd);
+	// LOG_ERROR << "Connector::handleError socket<" << m_sockfd << ">";
+	retry();
 	return true;
 }
 
@@ -152,9 +152,19 @@ bool Connector::connecting()
 	return true;
 }
 
-bool Connector::retry(socket_t sockfd)
+bool Connector::retry()
 {
-	LOG_SOCKET_ERR << "socket<" << m_sockfd << "> connect to peer<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
+	// 注意：这里打印的错误码仅供参考，因为非阻塞式的connect很难获取到实际的连接失败原因
+	if (0 == m_errno) {
+		m_errno = socktool::getSocketError(m_sockfd);
+
+		if (0 == m_errno) {
+			m_errno = socktool::geterrno();
+		}
+	}
+
+	LOG_SOCKET_ERR(m_sockfd, m_errno) << "socket<" << m_sockfd << "> connect to peer<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
+	m_errno = 0;
 
 	if (m_state == kConnecting) {
 		m_net->disableAll(this);

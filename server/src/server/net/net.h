@@ -93,12 +93,11 @@ protected:
 
 	volatile bool            m_running;
 	int                      m_efd;
-	task_queue_i*            m_task_queue;
 	int                      m_interupt_sockets[2];
 
 	//! ´ýÏú»ÙµÄerror socket
-	list<IFd*>   		     m_deletingFdList;
-	mutex_t                  m_mutex;
+	std::list<IFd*>   		     m_deletingFdList;
+	fast_mutex                  m_mutex;
 
 	TimerQueue m_timers;
 };

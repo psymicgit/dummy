@@ -36,7 +36,10 @@ namespace socktool
 	// 延缓面向连接的socket的close操作
 	void setLinger(socket_t, bool on);
 
+	// 获取socket的错误码并置错误码为0
 	int getSocketError(socket_t sockfd);
+
+	const char* getErrorMsg(int err);
 
 	int geterrno();
 

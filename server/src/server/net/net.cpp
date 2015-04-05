@@ -16,9 +16,9 @@
 
 #ifndef WIN
 
-#define EPOLL_EVENTS_SIZE  512
+#define EPOLL_EVENTS_SIZE  1024
 //! 100 ms
-#define EPOLL_WAIT_TIME    100
+#define EPOLL_WAIT_TIME    500
 
 Epoll::Epoll()
 	: m_running(true)
@@ -61,9 +61,9 @@ int Epoll::eventLoop()
 			continue;
 		}
 
-		if (nfds > 0) {
-			LOG_INFO << "nfds = <" << nfds << ">";
-		}
+// 		if (nfds > 0) {
+// 			LOG_INFO << "nfds = <" << nfds << ">";
+// 		}
 
 		for (i = 0; i < nfds; ++i) {
 			epoll_event& cur_ev = ev_set[i];
@@ -132,7 +132,7 @@ void Epoll::delFd(IFd* pfd)
 	disableAll(pfd);
 
 	{
-		lock_guard_t<> lock(m_mutex);
+		lock_guard_t<fast_mutex> lock(m_mutex);
 		m_deletingFdList.push_back(pfd);
 	}
 
@@ -198,7 +198,7 @@ void Epoll::mod(IFd *pfd, uint32 events)
 
 void Epoll::recycleFds()
 {
-	lock_guard_t<> lock(m_mutex);
+	lock_guard_t<fast_mutex> lock(m_mutex);
 	list<IFd*>::iterator it = m_deletingFdList.begin();
 	for (; it != m_deletingFdList.end(); ++it) {
 		// LOG_INFO << "add fd " << (*it)->socket();
