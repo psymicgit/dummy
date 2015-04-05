@@ -81,6 +81,7 @@ int Listener::handleRead()
 		link->open();
 
 		m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&INetReactor::onAccepted, m_pNetReactor, link, m_listenAddr, peerAddr));
+		m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&Link::enableRead, link));
 	}
 	while (true);
 

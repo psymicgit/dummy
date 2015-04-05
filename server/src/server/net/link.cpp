@@ -25,6 +25,10 @@ void Link::open()
 	socktool::setTcpNoDelay(m_sockfd);
 
 	m_net->addFd(this);
+}
+
+void Link::enableRead()
+{
 	m_net->enableRead(this);
 }
 

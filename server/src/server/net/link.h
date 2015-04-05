@@ -47,6 +47,8 @@ public:
 public:
 	void open();
 
+	void enableRead();
+
 	void send(Buffer&);
 	void send(const char *data, int len);
 	void send(const char *msg);

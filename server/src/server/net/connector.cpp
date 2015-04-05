@@ -131,8 +131,9 @@ bool Connector::onConnected()
 	Link* link = createLink(m_sockfd, m_peerAddr);
 	this->close();
 
+	link->open();
 	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&INetReactor::onConnected, m_pNetReactor, link, link->m_localAddr, m_peerAddr));
-	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&OpenLink, link));
+	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&Link::enableRead, link));
 
 	return true;
 }
