@@ -47,48 +47,50 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 
 void Robot::onRecv(Link *link, Buffer &buf)
 {
-	// 检测半包
-	size_t bytes = buf.readableBytes();
-	if (bytes < sizeof(NetMsgHead)) {
-		return;
-	}
+	while(true) {
+		// 检测半包
+		size_t bytes = buf.readableBytes();
+		if (bytes < sizeof(NetMsgHead)) {
+			return;
+		}
 
-	NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
-	uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
-	uint32 msgLen = endiantool::networkToHost32(msgHead->msgLen);
+		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
+		uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
+		uint32 msgLen = endiantool::networkToHost32(msgHead->msgLen);
 
-	if (msgLen > bytes) {
-		return;
-	}
+		if (msgLen > bytes) {
+			return;
+		}
 
-	// 未加密
-	if (!m_isEncrypt) {
+		// 未加密
+		if (!m_isEncrypt) {
+			Buffer copyBuf;
+			copyBuf.append(buf.peek() + sizeof(NetMsgHead), msgLen - sizeof(NetMsgHead));
+
+			m_robotMgr->m_taskQueue.put(task_binder_t::gen(&RobotMgr::handleMsg, m_robotMgr, *this, msgId, copyBuf, 0));
+			buf.retrieve(msgLen);
+			return;
+		}
+
+		//先解密
+		uint8* encryptBuf =  (uint8*)(buf.peek() + sizeof(NetMsgHead));
+		int encryptBufLen = msgLen - sizeof(NetMsgHead);
+
+		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
+			LOG_ERROR << "robot [" << link->m_localAddr.toIpPort() << "] <-> gatesvr [" << link->m_peerAddr.toIpPort()
+			          << "] receive invalid msg[len=" << encryptBufLen << "]";
+			return;
+		}
+
+		char *msg = (char*)buf.peek() + sizeof(NetMsgHead) + EncryptHeadLen;
+
 		Buffer copyBuf;
-		copyBuf.append(buf.peek() + sizeof(NetMsgHead), msgLen - sizeof(NetMsgHead));
+		copyBuf.append(msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen);
 
+		// 直接本地进行处理
 		m_robotMgr->m_taskQueue.put(task_binder_t::gen(&RobotMgr::handleMsg, m_robotMgr, *this, msgId, copyBuf, 0));
 		buf.retrieve(msgLen);
-		return;
 	}
-
-	//先解密
-	uint8* encryptBuf =  (uint8*)(buf.peek() + sizeof(NetMsgHead));
-	int encryptBufLen = msgLen - sizeof(NetMsgHead);
-
-	if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
-		LOG_ERROR << "robot [" << link->m_localAddr.toIpPort() << "] <-> gatesvr [" << link->m_peerAddr.toIpPort()
-		          << "] receive invalid msg[len=" << encryptBufLen << "]";
-		return;
-	}
-
-	char *msg = (char*)buf.peek() + sizeof(NetMsgHead) + EncryptHeadLen;
-
-	Buffer copyBuf;
-	copyBuf.append(msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen);
-
-	// 直接本地进行处理
-	m_robotMgr->m_taskQueue.put(task_binder_t::gen(&RobotMgr::handleMsg, m_robotMgr, *this, msgId, copyBuf, 0));
-	buf.retrieve(msgLen);
 }
 
 bool Robot::send(int msgId, Message &msg)

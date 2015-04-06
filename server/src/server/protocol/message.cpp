@@ -13,6 +13,10 @@
 
 namespace msgtool
 {
+	char* g_packetBuf = new char[MAX_PACKET_LEN];
+	int g_packetBufSize = MAX_PACKET_LEN;
+	::google::protobuf::Message *g_lastMessage = NULL;
+
 	string getMsgString(const google::protobuf::Message &msg)
 	{
 		string text = msg.GetDescriptor()->DebugString();

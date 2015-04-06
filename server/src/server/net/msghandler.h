@@ -18,7 +18,6 @@
 #include "net/imsghandler.h"
 
 class Link;
-typedef google::protobuf::Message Message;
 
 template <typename LinkType>
 class Callback
@@ -41,16 +40,16 @@ public:
 
 	virtual void onMessage(LinkType& link, const char* data, int len, Timestamp receiveTime) const
 	{
-		MessageType t;
+		MessageType *t = msgtool::allocPacket<MessageType>();
 
-		bool ok = t.ParseFromArray(data, len);
+		bool ok = t->ParseFromArray(data, len);
 		if (!ok) {
-			LOG_INFO << "decode packet <" << t.SerializeAsString() << "> error";
+			LOG_INFO << "decode packet <" << t->SerializeAsString() << "> error";
 			return;
 		}
 
 		// assert(t != NULL);
-		m_callback(&link, &t, receiveTime);
+		m_callback(&link, t, receiveTime);
 	}
 
 private:

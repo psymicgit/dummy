@@ -63,26 +63,28 @@ void Server::onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& 
 
 void Server::onRecv(Link *link, Buffer& buf)
 {
-	// ¼ì²â°ë°ü
-	size_t bytes = buf.readableBytes();
-	if (bytes < sizeof(NetMsgHead)) {
-		return;
+	while(true) {
+		// ¼ì²â°ë°ü
+		size_t bytes = buf.readableBytes();
+		if (bytes < sizeof(NetMsgHead)) {
+			return;
+		}
+
+		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
+		msgHead->msgId = endiantool::networkToHost16(msgHead->msgId);
+		msgHead->msgLen = endiantool::networkToHost32(msgHead->msgLen);
+
+		if (msgHead->msgLen > bytes) {
+			return;
+		}
+
+		Buffer msg;
+		msg.append(buf.peek() + sizeof(NetMsgHead), msgHead->msgLen - sizeof(NetMsgHead));
+
+		buf.retrieve(msgHead->msgLen);
+
+		m_taskQueue.put(task_binder_t::gen(&Server::handleMsg, this, link, msgHead->msgId, msg));
 	}
-
-	NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
-	msgHead->msgId = endiantool::networkToHost16(msgHead->msgId);
-	msgHead->msgLen = endiantool::networkToHost32(msgHead->msgLen);
-
-	if (msgHead->msgLen > bytes) {
-		return;
-	}
-
-	Buffer msg;
-	msg.append(buf.peek() + sizeof(NetMsgHead), msgHead->msgLen - sizeof(NetMsgHead));
-
-	buf.retrieve(msgHead->msgLen);
-
-	m_taskQueue.put(task_binder_t::gen(&Server::handleMsg, this, link, msgHead->msgId, msg));
 }
 
 void Server::handleMsg(Link* link, int msgId, Buffer &buf)

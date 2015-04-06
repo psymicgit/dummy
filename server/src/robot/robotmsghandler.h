@@ -12,9 +12,9 @@
 #include <protocol.pb.h>
 #include <client.pb.h>
 
+#include "protocol/message.h"
 #include "net/msghandler.h"
 #include "tool/servertool.h"
-#include "protocol/message.h"
 
 #include "robot.h"
 
@@ -48,20 +48,22 @@ private:
 		memcpy(robot->m_encryptKey, ntf->encryptkey().data(), sizeof(robot->m_encryptKey));
 		robot->m_isEncrypt = true;
 
-		LoginReq req;
-		req.set_clientversion(100);
-		req.set_deviceid("1273ab23c3390fe840a9e0");
-		req.set_notifyid("notifyid-00134678");
-		req.set_username("psy_micgit");
-		req.set_zoneid(1);
-		req.set_userid(100000001);
-		req.set_playerid(14560034);
-		req.set_job("sword");
-		req.set_logintype(LoginReq_LoginType_NewRole);
-		req.set_authtype(1);
-		req.set_authkey("2ab456b6b2b1b6b1bb2b");
+		LoginReq *req = msgtool::allocPacket<LoginReq>();
+		req->set_clientversion(100);
+		req->set_deviceid("1273ab23c3390fe840a9e0");
+		req->set_notifyid("notifyid-00134678");
+		req->set_username("psy_micgit");
+		req->set_zoneid(1);
+		req->set_userid(100000001);
+		req->set_playerid(14560034);
+		req->set_job("sword");
+		req->set_logintype(LoginReq_LoginType_NewRole);
+		req->set_authtype(1);
+		req->set_authkey("2ab456b6b2b1b6b1bb2b");
 
-		robot->send(eLoginReq, req);
+		for(int i = 0; i < 1000; i++) {
+			robot->send(eLoginReq, *req);
+		}
 	}
 };
 

@@ -62,36 +62,6 @@ public:
 
 	inline bool empty() const { return readableBytes() == 0; }
 
-	const char* findCRLF() const
-	{
-		// FIXME: replace with memmem()?
-		const char* crlf = std::search(peek(), beginWrite(), kCRLF, kCRLF + 2);
-		return crlf == beginWrite() ? NULL : crlf;
-	}
-
-	const char* findCRLF(const char* start) const
-	{
-		assert(peek() <= start);
-		assert(start <= beginWrite());
-		// FIXME: replace with memmem()?
-		const char* crlf = std::search(start, beginWrite(), kCRLF, kCRLF + 2);
-		return crlf == beginWrite() ? NULL : crlf;
-	}
-
-	const char* findEOL() const
-	{
-		const void* eol = memchr(peek(), '\n', readableBytes());
-		return static_cast<const char*>(eol);
-	}
-
-	const char* findEOL(const char* start) const
-	{
-		assert(peek() <= start);
-		assert(start <= beginWrite());
-		const void* eol = memchr(start, '\n', beginWrite() - start);
-		return static_cast<const char*>(eol);
-	}
-
 	// retrieve returns void, to prevent
 	// string str(retrieve(readableBytes()), readableBytes());
 	// the evaluation of two functions are unspecified

@@ -64,7 +64,7 @@ void Link::onSend(Buffer &buf)
 
 	// 如果发送缓存区仍有数据未发送，则直接append
 	if (m_sendBuf.readableBytes() > 0) {
-		LOG_WARN << "socket<" << m_sockfd << "> m_sendBuf.append(buf.peek(), buf.readableBytes());";
+		// LOG_WARN << "socket<" << m_sockfd << "> m_sendBuf.append(buf.peek(), buf.readableBytes());";
 		m_sendBuf.append(buf.peek(), buf.readableBytes());
 		return;
 	}
@@ -75,7 +75,7 @@ void Link::onSend(Buffer &buf)
 		this ->close();
 	}
 	else if (ret > 0) {
-		LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
+		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
 
 		m_net->enableWrite(this);
 		m_sendBuf.append(buf.peek(), buf.readableBytes());
@@ -159,7 +159,7 @@ int Link::handleWrite()
 
 int Link::handleError()
 {
-	LOG_WARN << "socket<" << m_sockfd << "> error";
+	// LOG_WARN << "socket<" << m_sockfd << "> error";
 	this->close();
 	return 0;
 }
@@ -192,7 +192,7 @@ int Link::handleReadTask()
 			return -1;
 		}
 		else {
-			int err = errno;
+			int err = socktool::geterrno();
 			if (err == EINTR) {
 				continue;
 			}
@@ -202,7 +202,7 @@ int Link::handleReadTask()
 				break;
 			}
 			else {
-				LOG_WARN << "socket<" << m_sockfd << "> error = " << err;
+				// LOG_WARN << "socket<" << m_sockfd << "> error = " << err;
 				this->close();
 				return -1;
 			}
@@ -216,7 +216,7 @@ int Link::handleReadTask()
 
 int Link::handleWriteTask()
 {
-	LOG_INFO << "socket <" << m_sockfd << "> is writable";
+	// LOG_INFO << "socket <" << m_sockfd << "> is writable";
 
 // 	if (!isopen()) {
 // 		return 0;
@@ -257,14 +257,15 @@ int Link::trySend(Buffer &buffer)
 
 	while(nleft > 0) {
 		if((nwritten = ::send(m_sockfd, buff, nleft, MSG_NOSIGNAL)) <= 0) {
-			if (EINTR == errno) {
+			int err = socktool::geterrno();
+			if (EINTR == err) {
 				nwritten = 0;
 			}
-			else if (EWOULDBLOCK == errno || EAGAIN == errno) {
+			else if (EWOULDBLOCK == err || EAGAIN == err) {
 				break;
 			}
 			else {
-				LOG_WARN << "close socket<" << m_sockfd << ">";
+				LOG_SYSTEM_ERR << "close socket<" << m_sockfd << ">";
 				return -1;
 			}
 		}

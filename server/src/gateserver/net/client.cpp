@@ -10,11 +10,11 @@
 
 #include <client.pb.h>
 #include <protocol.pb.h>
+#include <protocol/message.h>
 
 #include "clientmgr.h"
 #include <net/netaddress.h>
 #include <server.h>
-#include <protocol/message.h>
 #include <tool/encrypttool.h>
 
 namespace clienttool
@@ -42,10 +42,10 @@ void Client::onEstablish()
 	//发送加解密密钥
 	clienttool::generateRandomNums(m_encryptKey, sizeof(m_encryptKey));
 
-	EncryptKeyNtf ntf;
-	ntf.set_encryptkey((const char*)m_encryptKey, sizeof(m_encryptKey));
+	EncryptKeyNtf *ntf = msgtool::allocPacket<EncryptKeyNtf>();
+	ntf->set_encryptkey((const char*)m_encryptKey, sizeof(m_encryptKey));
 
-	m_link->send(eEncryptKeyNtf, ntf);
+	m_link->send(eEncryptKeyNtf, *ntf);
 }
 
 void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
@@ -56,47 +56,50 @@ void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddr
 
 void Client::onRecv(Link *link, Buffer &buf)
 {
-	// 检测半包
-	size_t bytes = buf.readableBytes();
-	if (bytes < sizeof(NetMsgHead)) {
-		return;
-	}
+	while(true) {
+		// 检测包头长度
+		size_t bytes = buf.readableBytes();
+		if (bytes < sizeof(NetMsgHead)) {
+			return;
+		}
 
-	NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
-	uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
-	uint32 msgLen = endiantool::networkToHost32(msgHead->msgLen);
+		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
+		uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
+		uint32 msgLen = endiantool::networkToHost32(msgHead->msgLen);
 
-	if (msgLen > bytes) {
-		LOG_ERROR << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
-		          << "] msgLen(" << msgLen << ") > bytes(" << bytes << ")";
-		return;
-	}
+		// 检测半包
+		if (msgLen > bytes) {
+// 			LOG_WARN << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
+// 			          << "] msgLen(" << msgLen << ") > bytes(" << bytes << ")";
+			return;
+		}
 
-	//先解密
-	uint8* encryptBuf =  (uint8*)(buf.peek() + sizeof(NetMsgHead));
-	int encryptBufLen = msgLen - sizeof(NetMsgHead);
+		//先解密
+		uint8* encryptBuf =  (uint8*)(buf.peek() + sizeof(NetMsgHead));
+		int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
-	if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
-		LOG_ERROR << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
-		          << "] decrypt msg [len=" << encryptBufLen << "] failed";
+		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
+			LOG_ERROR << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
+			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
+			buf.retrieve(msgLen);
+			return;
+		}
+
+		char *msg = (char*)buf.peek() + sizeof(NetMsgHead) + EncryptHeadLen;
+
+		// 判断是否需要转发，
+		if (needRoute(msgId)) {
+			// 转发给游戏服务器
+		}
+		else {
+			// 直接本地进行处理
+			Buffer deepCopyBuf;
+			deepCopyBuf.append(msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen);
+			Server::instance->getTaskQueue().put(task_binder_t::gen(&ClientMgr::handleMsg, m_clientMgr, *this, msgId, deepCopyBuf, 0));
+		}
+
 		buf.retrieve(msgLen);
-		return;
-	}
-
-	char *msg = (char*)buf.peek() + sizeof(NetMsgHead) + EncryptHeadLen;
-
-	// 判断是否需要转发，
-	if (needRoute(msgId)) {
-		// 转发给游戏服务器
-	}
-	else {
-		// 直接本地进行处理
-		Buffer deepCopyBuf;
-		deepCopyBuf.append(msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen);
-		Server::instance->getTaskQueue().put(task_binder_t::gen(&ClientMgr::handleMsg, m_clientMgr, *this, msgId, deepCopyBuf, 0));
-	}
-
-	buf.retrieve(msgLen);
+	};
 }
 
 bool Client::needRoute(int msgId)
@@ -112,7 +115,7 @@ bool Client::needRoute(int msgId)
 bool Client::send(int msgId, const char* data, int len)
 {
 	//先加密
-	char netBuf[] = {0};
+	char *netBuf = msgtool::g_packetBuf;
 	uint32 headSize = sizeof(NetMsgHead);
 
 	memcpy(netBuf + headSize + EncryptHeadLen, data, len);
