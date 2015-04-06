@@ -173,7 +173,7 @@ int Link::handleReadTask()
 // 	}
 
 	int nread = 0;
-	char recvBuf[8096];
+	static thread_local char recvBuf[80960];
 
 	do {
 		nread = ::recv(m_sockfd, recvBuf, sizeof(recvBuf) - 1, NULL);

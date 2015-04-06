@@ -152,9 +152,7 @@ namespace socktool
 	{
 #ifdef WIN
 //		return strerror_threadlocal(err);
-
 		LPVOID lpMsgBuf;
-		LPVOID lpDisplayBuf;
 
 		FormatMessage(
 		    FORMAT_MESSAGE_ALLOCATE_BUFFER |
