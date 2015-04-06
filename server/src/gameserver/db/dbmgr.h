@@ -24,6 +24,8 @@ public:
 
 	void run();
 
+	void stop();
+
 	void test();
 
 private:

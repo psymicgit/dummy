@@ -84,7 +84,10 @@ uint32 DBSession::run(uint32 loopcnt)
 	{
 		lock_guard_t<> lock(m_executedCmdLock);
 		size_t copycnt = m_executedCmdList.size();
-		copycnt = MIN(loopcnt, copycnt);
+
+		if (loopcnt > 0) {
+			copycnt = MIN(loopcnt, copycnt);
+		}
 
 		executingCmdList.assign(m_executedCmdList.begin(), m_executedCmdList.begin() + copycnt);
 		m_executedCmdList.erase(m_executedCmdList.begin(), m_executedCmdList.begin() + copycnt);
@@ -301,4 +304,42 @@ DBConnection* DBSession::createConnection()
 	}
 
 	return conn;
+}
+
+void DBSession::stop()
+{
+	LOG_WARN << "	stoping dbsession ...";
+
+	{
+		lock_guard_t<> lock(m_poolLock);
+		LOG_INFO << "	<dbconnection pool size = " << m_connPool.size() << ", all connection count = " << m_connCount << ">";
+	}
+
+	{
+		lock_guard_t<> lock(m_executedCmdLock);
+		size_t cmdCount = m_executedCmdList.size();
+
+		LOG_INFO << "	<m_cmdList.size() = " << m_cmdList.size() << ", m_executedCmdList.size() = " << m_executedCmdList.size() << ">";
+	}
+
+	m_running = false;
+	m_dbthread.join();
+
+	run(0);
+
+	{
+		lock_guard_t<> lock(m_poolLock);
+		for (ConnectionPool::iterator itr = m_connPool.begin(); itr != m_connPool.end(); ++itr) {
+			DBConnection *dbconn = *itr;
+			dbconn->release();
+
+			delete dbconn;
+		}
+
+		m_connPool.clear();
+		m_connCount = 0;
+	}
+
+	LOG_WARN << "	stop dbsession successfully!";
+
 }

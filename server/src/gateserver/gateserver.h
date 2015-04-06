@@ -23,6 +23,8 @@ public:
 
 	void start();
 
+	virtual void stop();
+
 	virtual void run();
 
 	virtual ServerLink* onAcceptServer(Link&, ServerType, int serverId);

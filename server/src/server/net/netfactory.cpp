@@ -43,18 +43,33 @@ void NetFactory::start()
 	m_started = true;
 
 	m_thread.create_thread(task_t(&runNet, this), 1);
+
+#ifndef WIN
 	m_thread.create_thread(task_queue_pool_t::gen_task(m_taskQueuePool), m_threadCnt);
+#endif
 }
 
 void NetFactory::stop()
 {
-	if (m_started) {
-		m_taskQueuePool->close();
-		m_net.close();
-		m_thread.join();
-		delete m_taskQueuePool;
-		m_taskQueuePool = NULL;
+	if (!m_started) {
+		return;
 	}
+
+	LOG_WARN << "stopping net ...";
+	LOG_INFO << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
+	LOG_INFO << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
+
+	m_taskQueuePool->close();
+	m_linkPool.clear();
+
+	m_net.close();
+	m_thread.join();
+
+	delete m_taskQueuePool;
+	m_taskQueuePool = NULL;
+
+	m_started = false;
+	LOG_WARN << "stop net successful";
 }
 
 Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor)
@@ -79,6 +94,5 @@ Connector* NetFactory::connect(const string& ip, int port, INetReactor &netReact
 	// LOG_DEBUG << "NetFactory::connect addr = " << connector;
 
 	connector->connect();
-
 	return connector;
 }

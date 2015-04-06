@@ -25,12 +25,16 @@ DBSession* DBFactory::createDBSession(DBAccount &account, int minPoolSize, int m
 
 void DBFactory::close()
 {
+	LOG_WARN << "closing db ...";
+
 	for (size_t i = 0; i < m_dbsessions.size(); ++i) {
 		DBSession *dbsession = m_dbsessions[i];
+		dbsession->stop();
 		delete dbsession;
 	}
 
 	m_dbsessions.clear();
+	LOG_WARN << "close db successfully!";
 }
 
 void DBFactory::del(DBSession *delsession)

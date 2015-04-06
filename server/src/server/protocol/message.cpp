@@ -14,7 +14,7 @@
 namespace msgtool
 {
 	char* g_packetBuf = new char[MAX_PACKET_LEN];
-	int g_packetBufSize = MAX_PACKET_LEN;
+	uint32 g_packetBufSize = MAX_PACKET_LEN;
 	::google::protobuf::Message *g_lastMessage = NULL;
 
 	string getMsgString(const google::protobuf::Message &msg)

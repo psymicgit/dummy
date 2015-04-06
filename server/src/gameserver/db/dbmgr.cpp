@@ -194,3 +194,9 @@ void DBMgr::run()
 	m_gamedb->run(100);
 	m_logdb->run(100);
 }
+
+void DBMgr::stop()
+{
+	m_gamedb->stop();
+	m_logdb->stop();
+}

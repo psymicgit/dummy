@@ -83,7 +83,7 @@ void DBConnection::release()
 		mysql_stmt_close(stmt);
 	}
 
-	LOG_INFO << "close db successfully ----\tsvrip:" << m_account.m_dbIp << "\tdbname:" << m_account.m_dbName << "\tunicsocket:" << m_account.m_unixSocket;
+	LOG_INFO << "close dbconnection successfully! ----\tsvrip:" << m_account.m_dbIp << "\tdbname:" << m_account.m_dbName << "\tunicsocket:" << m_account.m_unixSocket;
 }
 
 bool DBConnection::reconnect()

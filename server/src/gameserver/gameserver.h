@@ -23,6 +23,8 @@ public:
 
 	void start();
 
+	virtual void stop();
+
 	void run();
 
 	virtual ServerLink* onAcceptServer(Link&, ServerType, int serverId);
@@ -31,7 +33,6 @@ public:
 
 private:
 	GateLink *m_gateLink;
-
 	DBMgr m_dbmgr;
 };
 

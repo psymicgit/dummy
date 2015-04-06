@@ -41,6 +41,10 @@ private:
 		if (loginCnt % 10 == 0) {
 			LOG_INFO << "loginCnt = " << loginCnt;
 		}
+
+		if (loginCnt == 1000) {
+			Server::instance->stop();
+		}
 	}
 };
 

@@ -58,6 +58,8 @@ public:
 
 	NetAddress getLocalAddr();
 
+	bool isopen() { return !m_isClosing; }
+
 private:
 	// 尝试一次性发送数据，返回尚未发送的数据长度
 	int trySend(Buffer&);
@@ -68,8 +70,6 @@ private:
 
 	int handleReadTask();
 	int handleWriteTask();
-
-	bool isopen() { return !m_isClosing; }
 
 public:
 	const NetAddress m_localAddr;

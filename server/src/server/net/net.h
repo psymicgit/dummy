@@ -56,6 +56,7 @@ public:
 	virtual void enableAll(IFd*)		= 0;
 	virtual void disableAll(IFd*)		= 0;
 
+	virtual TaskQueue* getTaskQueue()	= 0;
 	virtual TimerQueue& getTimerQueue() = 0;
 };
 
@@ -84,6 +85,7 @@ public:
 	virtual void enableAll(IFd*);
 	virtual void disableAll(IFd*);
 
+	virtual TaskQueue* getTaskQueue() { return NULL;}
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
 
 protected:
@@ -100,6 +102,7 @@ protected:
 	fast_mutex                  m_mutex;
 
 	TimerQueue m_timers;
+	volatile int m_curFdCount;
 };
 
 #else
@@ -127,8 +130,8 @@ public:
 	~Select() {}
 
 	virtual int eventLoop();
-	virtual void close() {}
 	virtual void reopen(IFd*) {}
+	virtual void close();
 
 	virtual void addFd(IFd*);
 	virtual void delFd(IFd*);
@@ -142,10 +145,13 @@ public:
 	virtual void enableAll(IFd*);
 	virtual void disableAll(IFd*);
 
+	virtual TaskQueue* getTaskQueue() { return &m_tasks;}
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
 
 private:
 	void updateFd(IFd*, FDOperator);
+
+	void closing();
 
 private:
 	LinkerList m_links; // 当前维持的连接
@@ -157,6 +163,8 @@ private:
 	fd_set m_rset;
 	fd_set m_wset;
 	fd_set m_eset;
+
+	bool m_running;
 };
 
 #endif

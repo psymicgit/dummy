@@ -14,7 +14,7 @@ A_LINK      = ar rv
 # -Wall = 开启所有警告（小部分警告不会开启）
 # -Wno-unused = 屏蔽未初始化警告
 # -w = 关闭警告
-CPPFLAGS= -W -Wall -Wno-unused -m${long_bit} $(MACD) -pipe
+CPPFLAGS= -W -Wall -Wno-unused -Wno-reorder -m${long_bit} $(MACD) -pipe
 COMPILE_STANDARD = -std=c++0x
 
 ifdef EXEC_FILE
@@ -68,6 +68,7 @@ print:
 	echo lib_dir = ${lib_dir}
 	echo OUT_DIR = ${OUT_DIR}
 	echo OTHER_SRC_CPP = ${OTHER_SRC_CPP}
+	echo ${compile_type}
 
 $(COMP_ONLY): $(COMM_OBJ)	
 

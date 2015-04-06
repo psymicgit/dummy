@@ -40,6 +40,8 @@ public:
 
 	void recycle(DBConnection*);
 
+	void stop();
+
 private:
 	void executeCmd(DBCommand*);
 

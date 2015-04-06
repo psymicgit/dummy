@@ -17,18 +17,39 @@
 
 class RobotMgr
 {
+	typedef std::map<uint32, Robot*> RobotMap;
+
+public:
+	RobotMgr()
+		: m_allocRobotId(0)
+		, m_run(false)
+	{
+	}
+
 public:
 	bool init();
 
 	void start();
 
+	void stop();
+
 	void run();
+
+	void onRobotDisconnect(Robot*);
 
 	void handleMsg(Robot &robot, int msgId, Buffer&, Timestamp receiveTime);
 
+	Robot* createRobot();
+
+private:
+	uint32 allocRobotId() { return ++m_allocRobotId; }
+
 public:
 	TaskQueue m_taskQueue;
-	bool m_isquit;
+	bool m_run;
+
+	uint32 m_allocRobotId;
+	RobotMap m_robotMap;
 
 	MsgDispatcher<Robot> m_dispatcher;
 	NetFactory m_wan;

@@ -735,7 +735,7 @@ public:
 	{
 		lock_guard_t<> lock(m_mutex);
 		m_closed = true;
-		m_cond.broadcast();
+		m_cond.notify();
 	}
 
 	void multi_produce(const task_list_t& task_)
@@ -861,6 +861,12 @@ public:
 
 		m_tasklist.clear();
 		return tasks.size();
+	}
+
+	int size()
+	{
+		lock_guard_t<> lock(m_mutex);
+		return m_tasklist.size();
 	}
 
 private:

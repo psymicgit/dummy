@@ -21,6 +21,7 @@ Robot::Robot()
 	, m_taskQueue(NULL)
 	, m_robotMgr(NULL)
 	, m_isEncrypt(false)
+	, m_robotId(0)
 {
 	bzero(m_encryptKey, sizeof(m_encryptKey));
 }
@@ -34,15 +35,14 @@ void Robot::onConnected(Link *link, const NetAddress& localAddr, const NetAddres
 
 void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
+	/*
 	if (link->m_isCreateByConnector) {
-		Robot *robot = new Robot;
-		robot->m_taskQueue = m_taskQueue;
-		robot->m_robotMgr = m_robotMgr;
-
+		Robot *robot = m_robotMgr->createRobot();
 		m_robotMgr->m_wan.connect(peerAddr.toIp(), peerAddr.toPort(), *robot);
 	}
+	*/
 
-	delete this;
+	m_robotMgr->onRobotDisconnect(this);
 }
 
 void Robot::onRecv(Link *link, Buffer &buf)
@@ -95,6 +95,10 @@ void Robot::onRecv(Link *link, Buffer &buf)
 
 bool Robot::send(int msgId, Message &msg)
 {
+	if (!m_link->isopen()) {
+		return false;
+	}
+
 	if (!m_isEncrypt) {
 		m_link->send(msgId, msg);
 		return true;
@@ -113,6 +117,10 @@ bool Robot::send(int msgId, Message &msg)
 
 bool Robot::send(int msgId, const char* data, int len)
 {
+	if (!m_link->isopen()) {
+		return false;
+	}
+
 	if (!m_isEncrypt) {
 		m_link->send(msgId, data, len);
 		return true;
@@ -135,4 +143,9 @@ bool Robot::send(int msgId, const char* data, int len)
 	m_link->send(netBuf, packetLen);
 
 	return true;
+}
+
+void Robot::close()
+{
+	m_link->close();
 }

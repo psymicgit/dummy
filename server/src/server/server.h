@@ -53,6 +53,8 @@ public:
 
 	void start();
 
+	virtual void stop();
+
 	virtual void run();
 
 	bool isquit() { return m_isquit; }

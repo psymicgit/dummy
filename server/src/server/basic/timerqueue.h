@@ -105,6 +105,8 @@ public:
 	// 每隔interval毫秒执行一次，不会终结
 	void runEvery(Timer*, TimeInMs interval);
 
+	int size() { return m_taskqueue.size(); }
+
 private:
 	struct cmp {
 		bool operator() ( Timer* a, Timer* b )

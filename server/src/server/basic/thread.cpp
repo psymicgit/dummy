@@ -48,9 +48,13 @@ int thread_t::join()
 
 #ifdef WIN
 	size_t threadCnt = m_tid_list.size();
-	HANDLE thread0 = m_tid_list[0];
 
-	WaitForMultipleObjects(threadCnt, &thread0, TRUE, INFINITE);
+	WaitForMultipleObjects(threadCnt, &m_tid_list[0], TRUE, INFINITE);
+
+	for (size_t i = 0; i < threadCnt; i++) {
+		HANDLE thread = m_tid_list[i];
+		CloseHandle(thread);
+	}
 #else
 	for (ThreadIdList::iterator itr = m_tid_list.begin(); itr != m_tid_list.end(); ++itr) {
 		pthread_t tid = *itr;

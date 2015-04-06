@@ -31,7 +31,7 @@ namespace msgtool
 
 	// 先申请1MB内存
 	extern char* g_packetBuf;
-	extern int g_packetBufSize;
+	extern uint32 g_packetBufSize;
 	extern ::google::protobuf::Message *g_lastMessage;
 
 	// 在预先分配好的内存上申请一个Message

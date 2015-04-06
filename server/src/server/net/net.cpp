@@ -9,6 +9,7 @@
 #include "net.h"
 
 #include "tool/sockettool.h"
+#include "tool/atomictool.h"
 #include "listener.h"
 #include "link.h"
 
@@ -23,6 +24,7 @@
 Epoll::Epoll()
 	: m_running(true)
 	, m_efd(-1)
+	, m_curFdCount(0)
 {
 	m_efd = ::epoll_create(1);
 
@@ -71,6 +73,7 @@ int Epoll::eventLoop()
 
 			if (cur_ev.data.ptr == this) { //! iterupte event
 				if (false == m_running) {
+					LOG_WARN << "close net successful";
 					return 0;
 				}
 
@@ -104,6 +107,9 @@ void Epoll::close()
 	m_running = false;
 
 	interruptLoop();
+
+	LOG_WARN << "closing net...";
+	LOG_INFO << "	<link count = " << m_curFdCount << ", timer size = " << m_timers.size() << ">";
 }
 
 int Epoll::interruptLoop()
@@ -125,6 +131,8 @@ void Epoll::addFd(IFd* pfd)
 
 	pfd->m_events = ee.events;
 	::epoll_ctl(m_efd, EPOLL_CTL_ADD, pfd->socket(), &ee);
+
+	atomictool::inc(&m_curFdCount);
 }
 
 void Epoll::delFd(IFd* pfd)
@@ -137,6 +145,8 @@ void Epoll::delFd(IFd* pfd)
 	}
 
 	interruptLoop();
+
+	atomictool::dec(&m_curFdCount);
 }
 
 void Epoll::reopen(IFd* pfd)
@@ -220,6 +230,8 @@ Select::Select()
 	FD_ZERO(&m_rset);
 	FD_ZERO(&m_wset);
 	FD_ZERO(&m_eset);
+
+	m_running = true;
 }
 
 void Select::addFd(IFd *pfd)
@@ -342,7 +354,7 @@ int Select::eventLoop()
 	//这里我们打算让select等待两秒后返回，避免被锁死，也避免马上返回
 	struct timeval tv = {2, 0};
 
-	while(true) {
+	while(m_running) {
 		rset = m_rset;
 		wset = m_wset;
 		eset = m_eset;
@@ -370,12 +382,12 @@ int Select::eventLoop()
 					pfd->handleRead();
 					if(--readyfds == 0) break;
 				}
-				else if(FD_ISSET(fd, &wset)) {
+				if(FD_ISSET(fd, &wset)) {
 					// LOG_DEBUG << "write fds";
 					pfd->handleWrite();
 					if(--readyfds == 0) break;
 				}
-				else if(FD_ISSET(fd, &eset)) {
+				if(FD_ISSET(fd, &eset)) {
 					// LOG_DEBUG << "exception fd";
 					pfd->handleError();
 					if(--readyfds == 0) break;
@@ -396,6 +408,24 @@ int Select::eventLoop()
 	}
 
 	return 0;
+}
+
+void Select::close()
+{
+	m_tasks.put(task_binder_t::gen(&Select::closing, this));
+}
+
+void Select::closing()
+{
+	LOG_WARN << "closing net...";
+	LOG_INFO << "	<link count = " << m_links.size() << ", task size = " << m_tasks.size() << ", timer size = " << m_timers.size() << ">";
+
+	FD_ZERO(&m_rset);
+	FD_ZERO(&m_wset);
+	FD_ZERO(&m_eset);
+
+	m_running = false;
+	LOG_WARN << "close net successful";
 }
 
 #endif

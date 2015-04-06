@@ -33,6 +33,8 @@ public:
 
 	bool send(int msgId, Message&);
 
+	void close();
+
 	virtual TaskQueue& getTaskQueue() { return *m_taskQueue;}
 
 public:
@@ -42,6 +44,7 @@ public:
 
 	uint8 m_encryptKey[EncryptKeyLen];
 	bool m_isEncrypt;
+	uint32 m_robotId;
 };
 
 #endif //_robot_h_

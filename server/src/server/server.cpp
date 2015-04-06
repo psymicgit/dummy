@@ -126,6 +126,13 @@ void Server::start()
 	}
 }
 
+void Server::stop()
+{
+	m_isquit = true;
+
+	m_lan.stop();
+}
+
 void Server::run()
 {
 	m_taskQueue.run();

@@ -47,7 +47,12 @@ void Link::close()
 void Link::onLogicClose()
 {
 	m_pNetReactor->onDisconnect(this, m_localAddr, m_peerAddr);
+
+#ifdef WIN
+	m_net->getTaskQueue()->put(task_binder_t::gen(&Link::onNetClose, this));
+#else
 	m_taskQueue->produce(task_binder_t::gen(&Link::onNetClose, this));
+#endif
 }
 
 void Link::onNetClose()
@@ -87,11 +92,23 @@ void Link::onSend(Buffer &buf)
 
 void Link::send(Buffer & buf)
 {
+	if (!isopen()) {
+		return;
+	}
+
+#ifdef WIN
+	m_net->getTaskQueue()->put(task_binder_t::gen(&Link::onSend, this, buf));
+#else
 	m_taskQueue->produce(task_binder_t::gen(&Link::onSend, this, buf));
+#endif
 }
 
 void Link::send(const char *data, int len)
 {
+	if (!isopen()) {
+		return;
+	}
+
 	Buffer buf(len);
 	buf.append(data, len);
 	send(buf);
@@ -217,10 +234,9 @@ int Link::handleReadTask()
 int Link::handleWriteTask()
 {
 	// LOG_INFO << "socket <" << m_sockfd << "> is writable";
-
-// 	if (!isopen()) {
-// 		return 0;
-// 	}
+	if (!isopen()) {
+		return 0;
+	}
 
 	int ret = 0;
 	string left_buff;
@@ -238,8 +254,7 @@ int Link::handleWriteTask()
 		ret = trySend(m_sendBuf);
 
 		if (ret < 0) {
-			LOG_WARN << "close socket<" << m_sockfd << ">";
-
+			// LOG_WARN << "close socket<" << m_sockfd << ">";
 			this->close();
 			return -1;
 		}

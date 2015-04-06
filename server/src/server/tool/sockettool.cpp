@@ -65,7 +65,11 @@ namespace socktool
 
 	bool setTcpNoDelay(socket_t sockfd)
 	{
-		int flag = 1;
+#ifdef WIN
+		char flag = 1;
+#else
+		socklen_t flag = 1;
+#endif
 
 		/* Disable the Nagle (TCP No Delay) algorithm */
 		int ret = setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (char *)&flag, sizeof(flag) );
@@ -81,7 +85,14 @@ namespace socktool
 
 	void setKeepAlive(socket_t sockfd, bool on, int keepAliveTime)
 	{
-		int keepalive = on ? 1 : 0;
+#ifdef WIN
+		char keepalive;
+#else
+		socklen_t keepalive;
+#endif
+
+		keepalive = on ? 1 : 0;
+
 		::setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, (const char*)&keepalive, static_cast<socklen_t>(sizeof keepalive));
 
 		if (!on) {
@@ -128,14 +139,19 @@ namespace socktool
 
 	int getSocketError(socket_t sockfd)
 	{
-		char opt  = 0;
-		socklen_t optlen = static_cast<socklen_t>(sizeof opt);
+#ifdef WIN
+		char err  = 0;
+#else
+		socklen_t err  = 0;
+#endif
 
-		if (::getsockopt(sockfd, SOL_SOCKET, SO_ERROR, &opt, &optlen) < 0) {
-			return opt;
+		socklen_t optlen = static_cast<socklen_t>(sizeof err);
+
+		if (::getsockopt(sockfd, SOL_SOCKET, SO_ERROR, &err, &optlen) < 0) {
+			return err;
 		}
 
-		return opt;
+		return err;
 	}
 
 #ifdef WIN
