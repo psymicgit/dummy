@@ -9,7 +9,7 @@ LIBA_FILE 		=
 LIBSO_FILE		= 
 EXEC_FILE 		= gateserver
 
-OTHER_SRC_CPP	= $(shell find ../protocol -name "*.cc")
+OTHER_SRC		= $(shell find ../protocol -name "*.cc")
 
 COMP_OBJ		= ${COMM_OBJ}
 INLIB_FILE		= -lpthread -lglog -lprotobuf -lmysqlclient -lserver

@@ -1,51 +1,50 @@
 FILE_LIST_C		= $(shell find . -name "*.c")
 FILE_LIST_CPP	= $(shell find . -name "*.cpp")
 
+ALL_HEADER = $(shell find . -name "*.h") 
 # patsubst = 替换字符串，如: $(patsubst %.cpp,%.o,"abc.cpp") = "abc.o"
+ALL_SRC  = $(shell find . -name "*.cpp" -o -name "*.cc") ${OTHER_SRC}
+ALL_OBJS = $(patsubst %.cc,%.o, $(patsubst %.cpp,%.o,${ALL_SRC}))
+ALL_DEPS = $(patsubst %.o,%.d,$(ALL_OBJS)) 
 
-COMM_OBJ        = $(patsubst %.cpp,%.o,${FILE_LIST_CPP}) $(patsubst %.c,%.o,${FILE_LIST_C}) $(patsubst %.cpp,%.o,$(OTHER_SRC_CPP:.cc=.o)) $(patsubst %.c,%.o,${OTHER_SRC_C})
-ALL_OBJ			= $(notdir ${COMM_OBJ})
+MISSING_DEPS :=$(filter-out $(wildcard $(ALL_DEPS)),$(ALL_DEPS)) 
 
-# ar = archive 是生成静态链接库的工具
-A_LINK      = ar rv
-
-# -shared = 生成动态连接库
-# -fPIC = 编译为位置独立(地址无关)的代码
-# -Wall = 开启所有警告（小部分警告不会开启）
-# -Wno-unused = 屏蔽未初始化警告
-# -w = 关闭警告
-CPPFLAGS= -W -Wall -Wno-unused -Wno-reorder -m${long_bit} $(MACD) -pipe
-COMPILE_STANDARD = -std=c++0x
-
+# start config options
 ifdef EXEC_FILE
 	OUT_DIR     = ${bin_dir}/${compile_type}/${MODULE}/
 else
 	OUT_DIR     = ${lib_dir}
 endif
 
+# -shared = 生成动态连接库
+# -fPIC = 编译为位置独立(地址无关)的代码
+# -Wall = 开启所有警告（小部分警告不会开启）
+# -Wno-unused = 屏蔽未初始化警告
+# -w = 关闭警告
+CPPFLAGS = -W -Wall -Wno-unused -Wno-reorder -m${long_bit} $(MACD) -pipe -std=c++0x -MMD
+
+# ar = archive 是生成静态链接库的工具
+A_LINK      = ar rv
+
 ifeq (${compile_type}, release)
-	COMP   		= g++ -O2 ${CPPFLAGS} -fPIC -c ${COMPILE_STANDARD} 
-	COMPC   	= gcc -O2 ${CPPFLAGS} -fPIC -c 
-	SO_LINK     = g++ -O2 ${CPPFLAGS} -fPIC -shared ${COMPILE_STANDARD} -o 
-	EXEC_LINK   = g++ -O2 ${CPPFLAGS} ${COMPILE_STANDARD} -o	
+	GCC   		= g++ -O2 ${CPPFLAGS} -fPIC -c
+	SO_LINK     = g++ -O2 ${CPPFLAGS} -fPIC -shared -o 
+	EXEC_LINK   = g++ -O2 ${CPPFLAGS} -o	
 else
-	COMP   		= g++ ${CPPFLAGS} -g -fPIC -c -D_DEBUG ${COMPILE_STANDARD}  		
-	COMPC   	= gcc ${CPPFLAGS} -g -fPIC -c -D_DEBUG
-	SO_LINK     = g++ ${CPPFLAGS} -g -fPIC -shared ${COMPILE_STANDARD} -o
-	EXEC_LINK   = g++ ${CPPFLAGS} -g ${COMPILE_STANDARD} -o
+	GCC   		= g++ ${CPPFLAGS} -g -fPIC -c -D_DEBUG
+	SO_LINK     = g++ ${CPPFLAGS} -g -fPIC -shared -o
+	EXEC_LINK   = g++ ${CPPFLAGS} -g -o
 endif
 
-all : $(COMP_ONLY) $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) 
+all : $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) 
 
 clean : 
-	rm -f *.o *.a *.so $(COMM_OBJ) $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) $(PCH)
+	rm -f *.o *.a *.so $(ALL_OBJS) $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) $(PCH)
 
 touch :
 	touch *.h; touch *.c; touch *.cpp
 
-
 install:$(LIBA_FILE) $(EXEC_FILE) $(LIBSO_FILE)
-
 	mkdir -p ${OUT_DIR}; 
 
 	if [ -n '$(LIBA_FILE)' ] ;  \
@@ -69,32 +68,39 @@ print:
 	echo OUT_DIR = ${OUT_DIR}
 	echo OTHER_SRC_CPP = ${OTHER_SRC_CPP}
 	echo ${compile_type}
+	echo ALL_SRC = ${ALL_SRC}
+	echo ALL_OBJS = ${ALL_OBJS}
 
-$(COMP_ONLY): $(COMM_OBJ)	
+$(LIBA_FILE) : $(ALL_OBJS)
+	$(A_LINK) $@ $(ALL_OBJS)
 
-$(LIBA_FILE) : $(COMM_OBJ)
-	$(A_LINK) $@ $(COMM_OBJ)
+${LIBSO_FILE} : ${ALL_OBJS}
+	${SO_LINK} $@ ${ALL_OBJS} ${INLIB_FILE} ${INLIB_DIR} ${INC_PATH}
 
-${LIBSO_FILE} : ${COMM_OBJ}
-	${SO_LINK} $@ ${COMM_OBJ} -L${LIB_DIR} ${INLIB_FILE} ${INLIB_DIR} ${INC_PATH}
+${EXEC_FILE} : ${ALL_OBJS}
+	${EXEC_LINK} $@ ${ALL_OBJS} ${INLIB_FILE} ${INLIB_DIR} ${INC_PATH} 
 
-${EXEC_FILE} : ${COMM_OBJ}
-	${EXEC_LINK} $@ ${COMM_OBJ} -L${LIB_DIR} ${INLIB_FILE} ${INLIB_DIR} ${INC_PATH} 
-
-${COMM_OBJ} : $(PCH)
+# 这里故意设定成一旦头文件更新则重新编译（makefile这点上比较难设置）
+${ALL_OBJS} : $(PCH)
 
 # $@ = 目标文件的完整名称
-# $< = 第一个依赖文件的名称
+# $< = 指所有依赖文件中的第一个文件
 
 # Pre-compiled header
+
 $(PCH): 
-	$(COMP) $(INC_PATH) -g $(PCH_H)
+	$(GCC) $(INC_PATH) -g $(PCH_H)
 
-.c.o:
-	${COMPC} ${INC_PATH} -o $@ $<
+%.o:%.cpp
+	${GCC} ${INC_PATH} -include ${PCH_H} -o $@ $<
 
-.cpp.o:
-	${COMP} ${INC_PATH} -include ${PCH_H} -o $@ $<
+%.o:%.cc
+	${GCC} ${INC_PATH} -include ${PCH_H} -o $@ $<
 
-.cc.o:
-	${COMP} ${INC_PATH} -include ${PCH_H} -o $@ $<
+%.o %.d: %.c
+	@set -e; rm -f $@; \
+	$(GCC) -MM $(CPPFLAGS) $< > $@.$$$$; \
+	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
+	rm -f $@.$$$$
+
+include $(ALL_DEPS)
