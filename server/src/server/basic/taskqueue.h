@@ -735,7 +735,7 @@ public:
 	{
 		lock_guard_t<> lock(m_mutex);
 		m_closed = true;
-		m_cond.notify();
+		m_cond.broadcast();
 	}
 
 	void multi_produce(const task_list_t& task_)

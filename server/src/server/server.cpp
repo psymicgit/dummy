@@ -124,12 +124,28 @@ void Server::start()
 	while(!m_isquit) {
 		run();
 	}
+
+	LOG_WARN << "stop <" << getServerName() << "> successfully!";
+}
+
+std::string& Server::getServerName()
+{
+	return svrtool::getSvrName(m_svrType);
 }
 
 void Server::stop()
 {
+	LOG_WARN << "start closing " << getServerName() << " ...";
+	LOG_WARN << "	<m_taskQueue.size() = " << m_taskQueue.size() << ">";
+
+	m_taskQueue.put(task_binder_t::gen(&Server::stopping, this));
+}
+
+void Server::stopping()
+{
 	m_isquit = true;
 
+	run();
 	m_lan.stop();
 }
 

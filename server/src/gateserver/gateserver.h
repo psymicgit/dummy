@@ -23,7 +23,7 @@ public:
 
 	void start();
 
-	virtual void stop();
+	virtual void stopping();
 
 	virtual void run();
 

@@ -50,12 +50,23 @@ void RobotMgr::start()
 	while(m_run) {
 		run();
 	}
+
+	LOG_WARN << "close robotmgr successfully!";
 }
 
 void RobotMgr::stop()
 {
-	m_wan.stop();
+	LOG_WARN << "start closing robotmgr ...";
+	LOG_WARN << "	<m_taskQueue.size() = " << m_taskQueue.size() << ">";
+
+	m_taskQueue.put(task_binder_t::gen(&RobotMgr::stopping, this));
+}
+
+void RobotMgr::stopping()
+{
 	run();
+
+	m_wan.stop();
 
 	m_run = false;
 }
@@ -68,6 +79,10 @@ void RobotMgr::run()
 
 void RobotMgr::handleMsg(Robot &robot, int msgId, Buffer &buf, Timestamp receiveTime)
 {
+	if (!m_run) {
+		return;
+	}
+
 	m_dispatcher.dispatch(robot, msgId, buf.peek(), buf.readableBytes(), receiveTime);
 }
 

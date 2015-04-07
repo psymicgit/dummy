@@ -42,11 +42,11 @@ void NetFactory::start()
 
 	m_started = true;
 
-	m_thread.create_thread(task_t(&runNet, this), 1);
-
 #ifndef WIN
 	m_thread.create_thread(task_queue_pool_t::gen_task(m_taskQueuePool), m_threadCnt);
 #endif
+
+	m_thread.create_thread(task_t(&runNet, this), 1);
 }
 
 void NetFactory::stop()
@@ -56,8 +56,8 @@ void NetFactory::stop()
 	}
 
 	LOG_WARN << "stopping net ...";
-	LOG_INFO << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
-	LOG_INFO << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
+	LOG_WARN << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
+	LOG_WARN << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
 
 	m_taskQueuePool->close();
 	m_linkPool.clear();

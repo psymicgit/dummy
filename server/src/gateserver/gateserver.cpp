@@ -41,12 +41,11 @@ void GateServer::start()
 	Server::start();
 }
 
-void GateServer::stop()
+void GateServer::stopping()
 {
 	LOG_WARN << "stopping gate server ...";
-	Server::stop();
+	Server::stopping();
 	m_wan.stop();
-	LOG_WARN << "stop gate server successfully!";
 }
 
 void GateServer::run()

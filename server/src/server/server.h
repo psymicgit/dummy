@@ -53,7 +53,9 @@ public:
 
 	void start();
 
-	virtual void stop();
+	void stop();
+
+	virtual void stopping();
 
 	virtual void run();
 
@@ -64,6 +66,8 @@ public:
 	bool isSvrLinkExist(ServerType, int zoneId);
 	void addSvrLink(int svrId, ServerLink*);
 	void eraseSvrLink(int svrId);
+
+	std::string& getServerName();
 
 public:
 	ServerType m_svrType;

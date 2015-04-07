@@ -33,6 +33,8 @@ public:
 
 	void stop();
 
+	void stopping();
+
 	void run();
 
 	void onRobotDisconnect(Robot*);

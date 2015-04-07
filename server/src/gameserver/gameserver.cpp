@@ -48,10 +48,10 @@ void GameServer::start()
 	Server::start();
 }
 
-void GameServer::stop()
+void GameServer::stoppping()
 {
 	LOG_WARN << "stopping game server ...";
-	Server::stop();
+	Server::stopping();
 	m_dbmgr.stop();
 	LOG_WARN << "stop game server successfully!";
 }

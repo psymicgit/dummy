@@ -8,7 +8,7 @@ all:
 	for i in $(ALL_DIR) ; \
 	do \
 		echo `pwd` "Make" $$i; \
-		cd $$i; make install; cd ..; \
+		cd $$i; make & make install; cd ..; \
 	done
 clean:
 	for i in $(ALL_DIR) ; \

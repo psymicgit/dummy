@@ -104,12 +104,11 @@ int Epoll::eventLoop()
 
 void Epoll::close()
 {
-	m_running = false;
-
-	interruptLoop();
-
 	LOG_WARN << "closing net...";
-	LOG_INFO << "	<link count = " << m_curFdCount << ", timer size = " << m_timers.size() << ">";
+	LOG_WARN << "	<link count = " << m_curFdCount << ", timer size = " << m_timers.size() << ">";
+
+	m_running = false;
+	interruptLoop();
 }
 
 int Epoll::interruptLoop()

@@ -34,11 +34,14 @@ void Link::enableRead()
 
 void Link::close()
 {
+	// LOG_INFO << "Link::close, socket = " << m_sockfd;
+
 	if (m_isClosing) {
 		return;
 	}
 
 	m_isClosing = true;
+	m_net->disableAll(this);
 
 	// LOG_WARN << "close socket<" << m_sockfd << ">";
 	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&Link::onLogicClose, this));
@@ -46,6 +49,8 @@ void Link::close()
 
 void Link::onLogicClose()
 {
+	// LOG_INFO << "Link::onLogicClose, socket = " << m_sockfd;
+
 	m_pNetReactor->onDisconnect(this, m_localAddr, m_peerAddr);
 
 #ifdef WIN
@@ -57,15 +62,19 @@ void Link::onLogicClose()
 
 void Link::onNetClose()
 {
+	// LOG_INFO << "Link::onNetClose, socket = " << m_sockfd;
+
 	m_net->delFd(this);
 	socktool::closeSocket(m_sockfd);
 }
 
 void Link::onSend(Buffer &buf)
 {
-// 	if (!isopen()) {
-// 		return;
-// 	}
+	if (!isopen()) {
+		return;
+	}
+
+	// LOG_INFO << "Link::onSend, socket = " << m_sockfd;
 
 	// 如果发送缓存区仍有数据未发送，则直接append
 	if (m_sendBuf.readableBytes() > 0) {
@@ -126,6 +135,10 @@ void Link::send(const char *msg)
 
 void Link::send(int msgId, google::protobuf::Message & msg)
 {
+	if (!isopen()) {
+		return;
+	}
+
 	int size = msg.ByteSize();
 
 	NetMsgHead msgHead = {0, 0};
@@ -142,6 +155,10 @@ void Link::send(int msgId, google::protobuf::Message & msg)
 
 void Link::send(int msgId, const char *data, int len)
 {
+	if (!isopen()) {
+		return;
+	}
+
 	NetMsgHead msgHead = {0, 0};
 	msgtool::buildNetHeader(&msgHead, msgId, len);
 
@@ -185,9 +202,9 @@ int Link::handleReadTask()
 {
 	// LOG_WARN << "socket<" << m_sockfd << "> read task";
 
-// 	if (!isopen()) {
-// 		return 0;
-// 	}
+	if (!isopen()) {
+		return 0;
+	}
 
 	int nread = 0;
 	static thread_local char recvBuf[80960];
@@ -280,7 +297,7 @@ int Link::trySend(Buffer &buffer)
 				break;
 			}
 			else {
-				LOG_SYSTEM_ERR << "close socket<" << m_sockfd << ">";
+				// LOG_SYSTEM_ERR << "close socket<" << m_sockfd << ">";
 				return -1;
 			}
 		}
