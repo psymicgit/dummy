@@ -3,9 +3,11 @@ FILE_LIST_CPP	= $(shell find . -name "*.cpp")
 
 ALL_HEADER = $(shell find . -name "*.h") 
 # patsubst = 替换字符串，如: $(patsubst %.cpp,%.o,"abc.cpp") = "abc.o"
-ALL_SRC  = $(shell find . -name "*.cpp" -o -name "*.cc") ${OTHER_SRC}
+LOCAL_SRC = $(shell find . -name "*.cpp" -o -name "*.cc")
+
+ALL_SRC  = $(LOCAL_SRC) ${OTHER_SRC}
 ALL_OBJS = $(patsubst %.cc,%.o, $(patsubst %.cpp,%.o,${ALL_SRC}))
-ALL_DEPS = $(patsubst %.o,%.d,$(ALL_OBJS)) 
+ALL_DEPS = $(patsubst %.o,%.d,$(patsubst %.cc,%.o, $(patsubst %.cpp,%.o,${LOCAL_SRC}))) 
 
 MISSING_DEPS :=$(filter-out $(wildcard $(ALL_DEPS)),$(ALL_DEPS)) 
 
@@ -39,37 +41,48 @@ endif
 all : $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) 
 
 clean : 
-	rm -f *.o *.a *.so $(ALL_OBJS) $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) $(PCH)
+	rm -f *.o *.a *.so $(ALL_OBJS) $(ALL_DEPS) $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) $(PCH)
 
 touch :
 	touch *.h; touch *.c; touch *.cpp
 
 install:$(LIBA_FILE) $(EXEC_FILE) $(LIBSO_FILE)
-	mkdir -p ${OUT_DIR}; 
+	@mkdir -p ${OUT_DIR}; 
 
-	if [ -n '$(LIBA_FILE)' ] ;  \
+	@if [ -n '$(LIBA_FILE)' ] ;  \
 	then  \
     		cp -rf $(LIBA_FILE) $(OUT_DIR) ; \
 	fi
 
-	if [ -n '$(LIBSO_FILE)' ] ;  \
+	@if [ -n '$(LIBSO_FILE)' ] ;  \
 	then  \
     		cp -rf $(LIBSO_FILE) $(OUT_DIR) ; \
 	fi
 
-	if [ -n '$(EXEC_FILE)' ] ;  \
+	@if [ -n '$(EXEC_FILE)' ] ;  \
 	then  \
     		cp -rf $(EXEC_FILE) $(OUT_DIR) ; \
 	fi
 
 print:
-	echo base_dir = ${base_dir}
-	echo lib_dir = ${lib_dir}
-	echo OUT_DIR = ${OUT_DIR}
-	echo OTHER_SRC_CPP = ${OTHER_SRC_CPP}
-	echo ${compile_type}
-	echo ALL_SRC = ${ALL_SRC}
-	echo ALL_OBJS = ${ALL_OBJS}
+	@echo ----------------------
+	@echo base_dir = ${base_dir}
+	@echo ----------------------
+	@echo lib_dir = ${lib_dir}
+	@echo ----------------------
+	@echo OUT_DIR = ${OUT_DIR}
+	@echo ----------------------
+	@echo OTHER_SRC = ${OTHER_SRC}
+	@echo ----------------------
+	@echo ${compile_type}
+	@echo ----------------------
+	@echo ALL_SRC = ${ALL_SRC}
+	@echo ----------------------
+	@echo ALL_OBJS = ${ALL_OBJS}
+	@echo ----------------------
+	@echo ALL_DEPS = $(ALL_DEPS)
+	@echo ----------------------
+	@echo MISSING_DEPS = $(MISSING_DEPS)
 
 $(LIBA_FILE) : $(ALL_OBJS)
 	$(A_LINK) $@ $(ALL_OBJS)
@@ -80,7 +93,6 @@ ${LIBSO_FILE} : ${ALL_OBJS}
 ${EXEC_FILE} : ${ALL_OBJS}
 	${EXEC_LINK} $@ ${ALL_OBJS} ${INLIB_FILE} ${INLIB_DIR} ${INC_PATH} 
 
-# 这里故意设定成一旦头文件更新则重新编译（makefile这点上比较难设置）
 ${ALL_OBJS} : $(PCH)
 
 # $@ = 目标文件的完整名称
@@ -97,10 +109,10 @@ $(PCH):
 %.o:%.cc
 	${GCC} ${INC_PATH} -include ${PCH_H} -o $@ $<
 
-%.o %.d: %.c
-	@set -e; rm -f $@; \
-	$(GCC) -MM $(CPPFLAGS) $< > $@.$$$$; \
-	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
-	rm -f $@.$$$$
+#%.o %.d: %.cpp
+#	@set -e; rm -f $@; \
+#	$(GCC) -MM ${INC_PATH} -include ${PCH_H} $< > $@.$$$$; \
+#	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
+#	rm -f $@.$$$$
 
-include $(ALL_DEPS)
+-include $(ALL_DEPS)

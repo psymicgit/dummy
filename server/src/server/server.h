@@ -75,11 +75,10 @@ public:
 	NetFactory m_lan;
 
 protected:
-	TaskQueue m_taskQueue;
 	bool m_isquit;
 
+	TaskQueue m_taskQueue;
 	MsgDispatcher<Link> m_dispatcher;
-
 	ServerLinkMap m_svrLinkMap;
 };
 

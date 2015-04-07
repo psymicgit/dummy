@@ -9,7 +9,7 @@
 #ifndef _message_h_
 #define _message_h_
 
-#include "def/define.h"
+#include <google/protobuf/message.h>
 
 // namespace google {namespace protobuf { class Message; }}
 

@@ -16,6 +16,15 @@
 class ServerLink : public INetReactor
 {
 public:
+	ServerLink()
+		: m_link(NULL)
+		, m_remoteSvrType(eNullServer)
+		, m_svrId(0)
+		, m_taskQueue(NULL)
+	{
+	}
+
+public:
 	// @override
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 

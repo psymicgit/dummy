@@ -1,26 +1,15 @@
-LIB_DIR=server
-EXE_DIR=gameserver gateserver robot
-ALL_DIR=$(LIB_DIR) $(EXE_DIR)
-
-ROBOT_DIR=server robot
+ALL_DIR=server gameserver gateserver robot
 
 all:
-	for i in $(ALL_DIR) ; \
+	@for i in $(ALL_DIR) ; \
 	do \
-		echo `pwd` "Make" $$i; \
-		cd $$i; make & make install; cd ..; \
-	done
+		echo ; echo ; echo -e "\e[34;1m ----------------------------------`pwd`/$$i "make" $$i----------------------------------\033[0m"; \
+		cd $$i; make; make install; cd ..; \
+	done; echo ; echo ; 
+
 clean:
-	for i in $(ALL_DIR) ; \
+	@for i in $(ALL_DIR) ; \
 	do \
-		echo `pwd` "Make clean" $$i ; \
+		echo ; echo ; echo -e "\e[34;1m ----------------------------------`pwd`/$$i "make" clean $$i----------------------------------\033[0m"; \
 		cd $$i; make clean ; cd .. ; \
-	done
-
-rob:
-	for i in $(ROBOT_DIR) ; \
-	do \
-		echo `pwd` "Make" $$i; \
-		cd $$i; make install; cd ..; \
-	done
-
+	done; echo ; echo ; 
