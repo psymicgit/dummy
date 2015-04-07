@@ -16,6 +16,11 @@ class INetReactor;
 
 class Connector : public IFd
 {
+	static const int MaxRetryDelayMs = 30 * 1000;
+	static const int InitRetryDelayMs = 1000;
+
+	enum States { kDisconnected, kConnecting, kConnected };
+
 public:
 	Connector(NetAddress &peerAddr, INetReactor*, INet*, task_queue_pool_t*);
 
@@ -35,12 +40,6 @@ public:
 
 private:
 	Link* createLink(socket_t newfd, NetAddress &peerAddr);
-
-private:
-	static const int MaxRetryDelayMs = 30 * 1000;
-	static const int InitRetryDelayMs = 1000;
-
-	enum States { kDisconnected, kConnecting, kConnected };
 
 private:
 	NetAddress m_peerAddr;

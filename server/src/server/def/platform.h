@@ -235,4 +235,9 @@ using namespace std;
 	#define MIN(a,b)            (((a) < (b)) ? (a) : (b))
 #endif
 
+namespace google {namespace protobuf { class Message; }}
+typedef google::protobuf::Message Message;
+
+#include <def/define.h>
+
 #endif //_platform_h_

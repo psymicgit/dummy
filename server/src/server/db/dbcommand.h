@@ -16,9 +16,6 @@
 class DBCommand
 {
 public:
-	static thread_local char s_sql[2048];
-
-public:
 	/**
 	* @brief 该命令的分组ID。
 	*/

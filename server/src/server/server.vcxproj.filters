@@ -135,6 +135,9 @@
     <ClInclude Include="basic\objectpool.h">
       <Filter>basic</Filter>
     </ClInclude>
+    <ClInclude Include="def\define.h">
+      <Filter>def</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -213,9 +216,6 @@
     <ClCompile Include="tool\timertool.cpp">
       <Filter>tool</Filter>
     </ClCompile>
-    <ClCompile Include="net\msgdispatcher.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="..\protocol\net.pb.cc">
       <Filter>protocol</Filter>
     </ClCompile>
@@ -237,9 +237,6 @@
     <ClCompile Include="tool\encrypttool.cpp">
       <Filter>tool</Filter>
     </ClCompile>
-    <ClCompile Include="net\msghandler.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="db\dbfactory.cpp">
       <Filter>db</Filter>
     </ClCompile>
@@ -257,6 +254,9 @@
     </ClCompile>
     <ClCompile Include="tool\ticktool.cpp">
       <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="def\define.cpp">
+      <Filter>def</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

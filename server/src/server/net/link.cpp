@@ -133,7 +133,7 @@ void Link::send(const char *msg)
 	send(msg, strlen(msg));
 }
 
-void Link::send(int msgId, google::protobuf::Message & msg)
+void Link::send(int msgId, Message & msg)
 {
 	if (!isopen()) {
 		return;
@@ -207,16 +207,14 @@ int Link::handleReadTask()
 	}
 
 	int nread = 0;
-	static thread_local char recvBuf[80960];
-
 	do {
-		nread = ::recv(m_sockfd, recvBuf, sizeof(recvBuf) - 1, NULL);
+		nread = ::recv(m_sockfd, global::g_recvBuf, sizeof(global::g_recvBuf) - 1, NULL);
 		if (nread > 0) {
-			m_recvBuf.append(recvBuf, nread);
+			m_recvBuf.append(global::g_recvBuf, nread);
 
 			// LOG_WARN << "read task socket<" << m_sockfd << "> recv nread = " << nread;
 
-			if (nread < int(sizeof(recvBuf) - 1)) {
+			if (nread < int(sizeof(global::g_recvBuf) - 1)) {
 				break; // Ïàµ±ÓÚEWOULDBLOCK
 			}
 		}

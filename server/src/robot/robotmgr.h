@@ -29,6 +29,8 @@ public:
 public:
 	bool init();
 
+	bool uninit();
+
 	void start();
 
 	void stop();

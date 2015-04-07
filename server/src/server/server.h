@@ -33,7 +33,7 @@ public:
 	Server();
 
 	bool init();
-	bool uninit();
+	virtual bool uninit();
 
 	virtual ServerLink* onAcceptServer(Link&, ServerType, int svrId) = 0;
 

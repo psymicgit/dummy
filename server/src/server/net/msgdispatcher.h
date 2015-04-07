@@ -20,12 +20,13 @@ class MsgDispatcher
 {
 private:
 	typedef std::map<int, IMsgHandler<LinkType>*> MsgHandlerMap;
+	typedef std::vector<IMsgHandler<LinkType>*> MsgHandlerVec;
 
 public:
 	// 这里register会与原有命名冲突，所以用Register
-	void Register(int msgId, IMsgHandler<LinkType> *msgMgr)
+	void Register(int msgId, IMsgHandler<LinkType> *msgHandler)
 	{
-		m_msgMap[msgId] = msgMgr;
+		m_msgMap[msgId] = msgHandler;
 	}
 
 	void dispatch(LinkType& link, int msgId, const char* data, int len, Timestamp receiveTime)
@@ -39,9 +40,23 @@ public:
 		msgMgr->onMessage(link, msgId, data, len, receiveTime);
 	}
 
+	void addMsgHandler(IMsgHandler<LinkType> *msgHandler)
+	{
+		m_msgHandlerVec.push_back(msgHandler);
+	}
+
+	void clear()
+	{
+		for (size_t i = 0; i < m_msgHandlerVec.size(); i++) {
+			delete m_msgHandlerVec[i];
+		}
+
+		m_msgHandlerVec.clear();
+	}
 
 private:
 	MsgHandlerMap m_msgMap;
+	MsgHandlerVec m_msgHandlerVec;;
 };
 
 #endif //_msgdispatcher_h_

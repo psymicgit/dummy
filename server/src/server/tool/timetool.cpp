@@ -63,13 +63,12 @@ namespace timetool
 		SYSTEMTIME systime;
 		FileTimeToSystemTime(&filetime, &systime);
 
-		static char format[32] = {0};
-		sprintf_s(format, sizeof format, "%02d/%02d/%d-%02d:%02d:%02d:%-6d",
+		sprintf_s(global::g_formatBuf, sizeof global::g_formatBuf, "%02d/%02d/%d-%02d:%02d:%02d:%-6d",
 		          systime.wDay, systime.wMonth, systime.wYear,
 		          systime.wHour, systime.wMinute, systime.wSecond, systime.wMilliseconds
 		         );
 
-		return format;
+		return global::g_formatBuf;
 	}
 
 	const char* FormatNow()
@@ -80,13 +79,12 @@ namespace timetool
 		FileTimeToLocalFileTime(&local, &local); // 转换为本地时间
 		FileTimeToSystemTime(&local, &systime);
 
-		static char format[32] = {0};
-		sprintf_s(format, sizeof format, "%02d/%02d/%d-%02d:%02d:%02d:%-6d",
+		sprintf_s(global::g_formatBuf, sizeof global::g_formatBuf, "%02d/%02d/%d-%02d:%02d:%02d:%-6d",
 		          systime.wDay, systime.wMonth, systime.wYear,
 		          systime.wHour, systime.wMinute, systime.wSecond, systime.wMilliseconds
 		         );
 
-		return format;
+		return global::g_formatBuf;
 	}
 
 #else

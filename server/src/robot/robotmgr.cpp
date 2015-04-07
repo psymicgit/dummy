@@ -14,6 +14,7 @@
 
 bool RobotMgr::init()
 {
+	global::init();
 	logging::init("robot", "log_robot_");
 
 	m_wan.init(4);
@@ -25,9 +26,17 @@ bool RobotMgr::init()
 		m_wan.connect("127.0.0.1", 20001, *robot);
 	}
 
-	RobotMsgHandler *robotMsgHandler = new RobotMsgHandler(&m_dispatcher);
+	m_dispatcher.addMsgHandler(new RobotMsgHandler(&m_dispatcher));
 
 	m_run = true;
+	return true;
+}
+
+bool RobotMgr::uninit()
+{
+	m_dispatcher.clear();
+	global::uninit();
+
 	return true;
 }
 
@@ -51,6 +60,7 @@ void RobotMgr::start()
 		run();
 	}
 
+	uninit();
 	LOG_WARN << "close robotmgr successfully!";
 }
 

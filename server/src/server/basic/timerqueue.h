@@ -85,9 +85,6 @@ private:
 class TimerQueue
 {
 public:
-	static Timestamp cachedNow;
-
-public:
 	void run();
 
 	// 指定在xx日xx小时xx秒时间点上执行

@@ -44,7 +44,6 @@ public:
 	ClientMgr *m_clientMgr;
 
 	uint8 m_encryptKey[EncryptKeyLen];
-
 };
 
 #endif //_client_h_

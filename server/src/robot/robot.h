@@ -15,8 +15,6 @@
 class TaskQueue;
 class RobotMgr;
 
-typedef google::protobuf::Message Message;
-
 class Robot : public INetReactor
 {
 public:

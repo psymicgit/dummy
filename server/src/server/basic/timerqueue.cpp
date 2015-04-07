@@ -10,8 +10,6 @@
 
 #define FOREVER_ALIVE -1
 
-Timestamp TimerQueue::cachedNow = 0;
-
 void TimerQueue::run()
 {
 	if(m_taskqueue.empty()) {
@@ -19,7 +17,6 @@ void TimerQueue::run()
 	}
 
 	Timestamp now = timetool::getTimeOfDay();
-	cachedNow = now;
 
 	while(!m_taskqueue.empty()) {
 		Timer &task = *m_taskqueue.top();

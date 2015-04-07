@@ -28,15 +28,16 @@ Server::Server()
 
 bool Server::init()
 {
-	randtool::initSeed();
+	global::init();
 
-	NetMsgHandler *netMsgMgr = new NetMsgHandler(&m_dispatcher);
+	m_dispatcher.addMsgHandler(new NetMsgHandler(&m_dispatcher));
 	return true;
 }
 
 bool Server::uninit()
 {
-	//google::protobuf::ShutdownProtobufLibrary();
+	m_dispatcher.clear();
+	global::uninit();
 	return false;
 }
 
@@ -125,6 +126,7 @@ void Server::start()
 		run();
 	}
 
+	uninit();
 	LOG_WARN << "stop <" << getServerName() << "> successfully!";
 }
 

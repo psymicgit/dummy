@@ -115,7 +115,7 @@ bool Client::needRoute(int msgId)
 bool Client::send(int msgId, const char* data, int len)
 {
 	//œ»º”√‹
-	char *netBuf = msgtool::g_packetBuf;
+	char *netBuf = global::g_packetBuf;
 	uint32 headSize = sizeof(NetMsgHead);
 
 	memcpy(netBuf + headSize + EncryptHeadLen, data, len);

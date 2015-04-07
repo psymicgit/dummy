@@ -16,17 +16,13 @@
 #include <db/dbconnection.h>
 #include <tool/ticktool.h>
 
-thread_local char DBCommand::s_sql[2048];
-
 class OpHistoryDBCmd : public DBCommand
 {
 	virtual void execute(DBConnection &conn)
 	{
-		char sql[1024] = {0};
-
-		sprintf_s(sql, sizeof(sql),
+		sprintf_s(global::g_sql, sizeof(global::g_sql),
 		          "INSERT INTO `ophistory` VALUES ('2014-03-27 00:00:00', '%d', '7', '61015', '2', '40003', '21012', '61015', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '61015', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');", m_idx);
-		DB::DBExecuteCode code = conn.execute(sql);
+		DB::DBExecuteCode code = conn.execute(global::g_sql);
 	}
 
 	virtual void onExecuted()
@@ -50,10 +46,10 @@ class PlayerDBCmd : public DBCommand
 public:
 	virtual void execute(DBConnection &conn)
 	{
-		sprintf_s(s_sql, sizeof(s_sql),
+		sprintf_s(global::g_sql, sizeof(global::g_sql),
 		          "INSERT INTO `players` VALUES ('%d', '76C91654-E392-44C0-BA9F-EA24E2B84E12', '', 'qqqqqqq', 'dispname%d', '0', '0', '100', '39360', '48', '0', '1000', '1100', '0', '900', '0', '0', 0x01018200000080000002000000020000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, '44', '2200', '4', '2', '0', '0', '0000-00-00 00:00:00', '0', '', '0', '4975', '0', '0', '0', '0', '10', '1', '0', '0', '2013-12-06 09:42:48', '2013-12-06 09:43:06', '2013-12-06 09:42:48', '1970-01-01 08:00:00', '0', '2013-12-02 11:11:23', '2013-12-06 09:43:06');", m_idx, m_idx);
 
-		DB::DBExecuteCode code = conn.execute(s_sql);
+		DB::DBExecuteCode code = conn.execute(global::g_sql);
 	}
 
 	virtual void onExecuted()

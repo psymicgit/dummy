@@ -42,7 +42,7 @@ private:
 			LOG_INFO << "loginCnt = " << loginCnt;
 		}
 
-		if (loginCnt == 500000) {
+		if (loginCnt == 100) {
 			Server::instance->stop();
 		}
 	}

@@ -53,7 +53,7 @@ public:
 	void send(const char *data, int len);
 	void send(const char *msg);
 	void send(string &msg);
-	void send(int msgId, google::protobuf::Message &msg);
+	void send(int msgId, Message &msg);
 	void send(int msgId, const char *data, int len);
 
 	NetAddress getLocalAddr();
