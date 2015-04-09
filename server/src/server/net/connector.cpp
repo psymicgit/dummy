@@ -117,8 +117,7 @@ int Connector::handleError()
 
 void Connector::close()
 {
-	LOG_INFO << "Connector::close, socket = " << m_sockfd;
-
+	//LOG_INFO << "Connector::close, socket = " << m_sockfd;
 	m_net->disableAll(this);
 	m_net->delFd(this);
 }

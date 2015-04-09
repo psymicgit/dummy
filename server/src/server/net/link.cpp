@@ -75,7 +75,7 @@ void Link::onNetClose()
 	m_net->delFd(this);
 }
 
-void Link::onSend(Buffer &buf)
+void Link::onSend(Buffer *buf)
 {
 	if (!isopen()) {
 		return;
@@ -86,27 +86,27 @@ void Link::onSend(Buffer &buf)
 	// 如果发送缓存区仍有数据未发送，则直接append
 	if (m_sendBuf.readableBytes() > 0) {
 		// LOG_WARN << "socket<" << m_sockfd << "> m_sendBuf.append(buf.peek(), buf.readableBytes());";
-		m_sendBuf.append(buf.peek(), buf.readableBytes());
+		m_sendBuf.append(buf->peek(), buf->readableBytes());
 		return;
 	}
 
-	int ret = trySend(buf);
+	int ret = trySend(*buf);
+	global::g_bufferPool.free(buf);
 
 	if (ret < 0) {
 		this ->close();
 	}
 	else if (ret > 0) {
 		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
-
 		m_net->enableWrite(this);
-		m_sendBuf.append(buf.peek(), buf.readableBytes());
+		m_sendBuf.append(buf->peek(), buf->readableBytes());
 	}
 	else {
 		// 发送成功
 	}
 }
 
-void Link::sendBuffer(Buffer &buf)
+void Link::sendBuffer(Buffer *buf)
 {
 	if (!isopen()) {
 		return;
@@ -125,9 +125,9 @@ void Link::send(const char *data, int len)
 		return;
 	}
 
-	Buffer buf(len);
-	buf.append(data, len);
-	sendBuffer(buf);
+	Buffer *buf = global::g_bufferPool.alloc(len);
+	buf->append(data, len);
+	this->sendBuffer(buf);
 }
 
 void Link::send(const char *text)
@@ -146,11 +146,11 @@ void Link::send(int msgId, Message & msg)
 	NetMsgHead msgHead = {0, 0};
 	msgtool::buildNetHeader(&msgHead, msgId, size);
 
-	Buffer buf;
-	buf.append((const char*)&msgHead, sizeof(msgHead));
+	Buffer *buf = global::g_bufferPool.alloc();
+	buf->append((const char*)&msgHead, sizeof(msgHead));
 
-	msg.SerializeToArray((void*)buf.beginWrite(), size);
-	buf.hasWritten(size);
+	msg.SerializeToArray((void*)buf->beginWrite(), size);
+	buf->hasWritten(size);
 
 	this->sendBuffer(buf);
 }
@@ -164,9 +164,9 @@ void Link::send(int msgId, const char *data, int len)
 	NetMsgHead msgHead = {0, 0};
 	msgtool::buildNetHeader(&msgHead, msgId, len);
 
-	Buffer buf(msgHead.msgLen);
-	buf.append((const char*)&msgHead, sizeof(msgHead));
-	buf.append(data, len);
+	Buffer *buf = global::g_bufferPool.alloc(msgHead.msgLen);
+	buf->append((const char*)&msgHead, sizeof(msgHead));
+	buf->append(data, len);
 
 	this->sendBuffer(buf);
 }
@@ -232,7 +232,6 @@ int Link::handleReadTask()
 			}
 			else if (err == EWOULDBLOCK || err == EAGAIN) {
 				// LOG_WARN << "read task socket<" << m_sockfd << "> EWOULDBLOCK || EAGAIN, err = " << err;
-
 				break;
 			}
 			else {

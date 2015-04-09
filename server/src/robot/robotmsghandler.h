@@ -61,7 +61,7 @@ private:
 		req->set_authtype(1);
 		req->set_authkey("2ab456b6b2b1b6b1bb2b");
 
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 1000; i++) {
 			robot->send(eLoginReq, *req);
 		}
 	}

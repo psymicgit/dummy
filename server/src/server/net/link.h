@@ -58,7 +58,7 @@ public:
 	bool isopen() { return !m_isClosing; }
 
 private:
-	void sendBuffer(Buffer&);
+	void sendBuffer(Buffer*);
 
 	NetAddress getLocalAddr();
 
@@ -68,7 +68,7 @@ private:
 
 	void onLogicClose();
 	void onNetClose();
-	void onSend(Buffer &buff);
+	void onSend(Buffer *buff);
 
 	int handleReadTask();
 	int handleWriteTask();
