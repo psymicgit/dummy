@@ -1,0 +1,2 @@
+/usr/bin/ar cr /home/develop/dengshaokun/sgdp/lib/libtinyxml.a  CMakeFiles/tinyxml.dir/home/develop/dengshaokun/sgdp/thirdparty/tinyxml/tinystr.cpp.o CMakeFiles/tinyxml.dir/home/develop/dengshaokun/sgdp/thirdparty/tinyxml/tinyxml.cpp.o CMakeFiles/tinyxml.dir/home/develop/dengshaokun/sgdp/thirdparty/tinyxml/tinyxmlerror.cpp.o CMakeFiles/tinyxml.dir/home/develop/dengshaokun/sgdp/thirdparty/tinyxml/tinyxmlparser.cpp.o
+/usr/bin/ranlib /home/develop/dengshaokun/sgdp/lib/libtinyxml.a
