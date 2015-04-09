@@ -6,7 +6,7 @@
 
 #!/bin/bash
 
-bin_dir=$svr/bin/linux/release
+bin_dir=$svr/bin/linux32/release
 
 cd $bin_dir
 
