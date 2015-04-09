@@ -45,9 +45,11 @@ namespace msgtool
 	}
 
 	template<typename T>
-	void freePacket(T *obj)
+	inline void freePacket(T *obj)
 	{
-		obj->~T();
+		if (obj) {
+			obj->~T();
+		}
 	}
 }
 

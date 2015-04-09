@@ -17,7 +17,7 @@ bool RobotMgr::init()
 	global::init();
 	logging::init("robot", "log_robot_");
 
-	LOG_OK("starting robotmgr ...");
+	LOG_WARN << "starting robotmgr ...";
 
 	m_wan.init(4);
 
@@ -32,7 +32,7 @@ bool RobotMgr::init()
 
 	m_run = true;
 
-	LOG_OK("start robotmgr successfully!");
+	LOG_WARN << "start robotmgr successfully!";
 	return true;
 }
 

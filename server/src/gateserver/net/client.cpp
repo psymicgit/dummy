@@ -114,6 +114,10 @@ bool Client::needRoute(int msgId)
 
 bool Client::send(int msgId, const char* data, int len)
 {
+	if (!m_link->isopen()) {
+		return false;
+	}
+
 	//œ»º”√‹
 	char *netBuf = global::g_packetBuf;
 	uint32 headSize = sizeof(NetMsgHead);

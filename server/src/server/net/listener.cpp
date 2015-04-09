@@ -14,7 +14,7 @@
 #include "net/netreactor.h"
 #include "net/netfactory.h"
 
-Listener::Listener(INet *pNet, INetReactor *pNetReactor, NetFactory *netFactory)
+Listener::Listener(NetModel *pNet, INetReactor *pNetReactor, NetFactory *netFactory)
 	: m_net(pNet)
 	, m_pNetReactor(pNetReactor)
 	, m_listenFd(0)
@@ -50,6 +50,11 @@ void Listener::close()
 {
 	socktool::closeSocket(m_listenFd);
 	m_net->delFd(this);
+}
+
+void Listener::erase()
+{
+	delete this;
 }
 
 int Listener::handleRead()
@@ -102,7 +107,7 @@ void Listener::onAccepted(Link &link)
 
 Link* Listener::createLink(socket_t newfd, NetAddress &peerAddr)
 {
-	// 这里由对象池进行分配，注意：这里对象池申请出的对象之后将直接用delete进行删除，并不回收到对象池里，因为不方便实现
-	return m_netFactory->m_linkPool.alloc(newfd, m_listenAddr, peerAddr, m_netFactory->m_taskQueuePool->alloc(newfd), m_net, m_pNetReactor);
+	LinkPool &linkPool = m_net->getLinkPool();
+	return linkPool.alloc(newfd, m_listenAddr, peerAddr, m_netFactory->m_taskQueuePool->alloc(newfd), m_net, m_pNetReactor);
 	// return new Link(newfd, m_listenAddr, peerAddr, m_netFactory->m_taskQueuePool->alloc(newfd), m_net, m_pNetReactor);
 }

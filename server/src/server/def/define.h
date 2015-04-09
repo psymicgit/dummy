@@ -9,11 +9,13 @@
 #ifndef _define_h_
 #define _define_h_
 
+#include "basic/objectpool.h"
+#include "basic/buffer.h"
+
 #define MAX_PACKET_LEN (1024 * 1024)
 
 namespace global
 {
-
 // 网络消息定义
 	// 预先申请的消息包内存
 	static char* g_packetBuf = new char[MAX_PACKET_LEN];
@@ -29,6 +31,9 @@ namespace global
 
 // 打印
 	static thread_local char g_sprintfBuf[4096] = {0};
+
+// 全局缓冲区区
+	static ObjectPool<Buffer> g_bufferPool;
 
 	void init();
 	void uninit();

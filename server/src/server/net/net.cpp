@@ -42,12 +42,26 @@ Epoll::Epoll()
 	signal(SIGPIPE, SIG_IGN);
 }
 
+bool Epoll::init(int initLinkCount, int linkGrowCount)
+{
+	m_linkPool.init(initLinkCount, linkGrowCount);
+	return true;
+}
+
 Epoll::~Epoll()
 {
+	m_linkPool.clear();
+
 	::close(m_interupt_sockets[0]);
 	::close(m_interupt_sockets[1]);
 	::close(m_efd);
 	m_efd = -1;
+}
+
+void Epoll::stop()
+{
+	LOG_WARN << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
+	LOG_WARN << "close net successful";
 }
 
 int Epoll::eventLoop()
@@ -73,7 +87,7 @@ int Epoll::eventLoop()
 
 			if (cur_ev.data.ptr == this) { //! iterupte event
 				if (false == m_running) {
-					LOG_WARN << "close net successful";
+					stop();
 					return 0;
 				}
 
@@ -208,10 +222,13 @@ void Epoll::mod(IFd *pfd, uint32 events)
 void Epoll::recycleFds()
 {
 	lock_guard_t<fast_mutex> lock(m_mutex);
-	list<IFd*>::iterator it = m_deletingFdList.begin();
-	for (; it != m_deletingFdList.end(); ++it) {
+	list<IFd*>::iterator itr = m_deletingFdList.begin();
+
+	IFd *pfd = NULL;
+	for (; itr != m_deletingFdList.end(); ++itr) {
 		// LOG_INFO << "add fd " << (*it)->socket();
-		delete *it;
+		pfd = *itr;
+		pfd->erase();
 	}
 
 	m_deletingFdList.clear();
@@ -231,6 +248,12 @@ Select::Select()
 	FD_ZERO(&m_eset);
 
 	m_running = true;
+}
+
+bool Select::init(int initLinkCount, int linkGrowCount)
+{
+	m_linkPool.init(initLinkCount, linkGrowCount);
+	return true;
 }
 
 void Select::addFd(IFd *pfd)
@@ -298,7 +321,7 @@ void Select::updateFd(IFd *pfd, FDOperator op)
 		}
 
 		// m_links.erase(remove(m_links.begin(), m_links.end(), pfd), m_links.end());
-		delete pfd;
+		pfd->erase();
 		break;
 
 	case FD_ENABLE_READ:
@@ -417,12 +440,14 @@ void Select::closing()
 {
 	LOG_WARN << "closing net...";
 	LOG_INFO << "	<link count = " << m_links.size() << ", task size = " << m_tasks.size() << ", timer size = " << m_timers.size() << ">";
+	LOG_WARN << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
 
 	FD_ZERO(&m_rset);
 	FD_ZERO(&m_wset);
 	FD_ZERO(&m_eset);
 
 	m_running = false;
+	m_links.clear();
 	LOG_WARN << "close net successful";
 }
 

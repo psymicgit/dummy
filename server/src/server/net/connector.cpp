@@ -17,7 +17,7 @@
 #include "basic/timerqueue.h"
 #include "basic/taskqueue.h"
 
-Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, INet *net, task_queue_pool_t *taskQueuePool)
+Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *net, task_queue_pool_t *taskQueuePool)
 	: m_peerAddr(peerAddr)
 	, m_pNetReactor(netReactor)
 	, m_net(net)
@@ -123,9 +123,9 @@ void Connector::close()
 	m_net->delFd(this);
 }
 
-void OpenLink(Link *link)
+void Connector::erase()
 {
-	link->open();
+	delete this;
 }
 
 bool Connector::onConnected()

@@ -30,7 +30,7 @@ bool NetFactory::init(int threadCnt, int initLinkCnt)
 	m_threadCnt = threadCnt;
 	m_taskQueuePool = new task_queue_pool_t(m_threadCnt);
 
-	m_linkPool.init(initLinkCnt, 500);
+	m_net.init(initLinkCnt, 1000);
 	return true;
 }
 
@@ -56,11 +56,8 @@ void NetFactory::stop()
 	}
 
 	LOG_WARN << "stopping net ...";
-	LOG_WARN << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
-	LOG_WARN << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
 
 	m_taskQueuePool->close();
-	m_linkPool.clear();
 
 	m_net.close();
 	m_thread.join();
@@ -75,10 +72,10 @@ void NetFactory::stop()
 Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor)
 {
 	Listener* listener = new Listener(&m_net, &netReactor, this);
-	LOG_DEBUG << "start listening at <" << ip << ":" << port << ">";
+	LOG_DEBUG << "start listening at <" << ip << ": " << port << ">";
 
 	if (!listener->open(ip, port)) {
-		LOG_SYSTEM_ERR << "listen at <" << ip << ":" << port << "> failed";
+		LOG_SYSTEM_ERR << "listen at <" << ip << ": " << port << "> failed";
 
 		delete listener;
 		return listener;

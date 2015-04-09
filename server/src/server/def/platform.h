@@ -133,10 +133,12 @@ using namespace std;
 // Ì×½Ó×Ö¡¢ÍøÂç
 #ifdef WIN
 	#define NetModel Select
+	class Select;
 
 	#define MSG_NOSIGNAL 0
 #else
 	#define NetModel Epoll
+	class Epoll;
 
 	#define SOCKET_ERROR (-1)
 #endif

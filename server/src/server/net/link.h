@@ -23,7 +23,7 @@ namespace google {namespace protobuf {class Message;}}
 class Link : public IFd
 {
 public:
-	explicit Link(int sockfd, NetAddress &localAddr, NetAddress &peerAddr, task_queue_i *pQueue, INet *pNet, INetReactor *pNetReactor)
+	explicit Link(int sockfd, NetAddress &localAddr, NetAddress &peerAddr, task_queue_i *pQueue, NetModel *pNet, INetReactor *pNetReactor)
 		: m_localAddr(localAddr)
 		, m_peerAddr(peerAddr)
 		, m_pNetReactor(pNetReactor)
@@ -43,22 +43,24 @@ public:
 	virtual int handleWrite();
 	virtual int handleError();
 	virtual void close();
+	virtual void erase();
 
 public:
 	void open();
 
 	void enableRead();
 
-	void send(Buffer&);
 	void send(const char *data, int len);
-	void send(const char *msg);
-	void send(string &msg);
+	void send(const char *text);
 	void send(int msgId, Message &msg);
 	void send(int msgId, const char *data, int len);
 
-	NetAddress getLocalAddr();
-
 	bool isopen() { return !m_isClosing; }
+
+private:
+	void sendBuffer(Buffer&);
+
+	NetAddress getLocalAddr();
 
 private:
 	// 尝试一次性发送数据，返回尚未发送的数据长度
@@ -83,7 +85,7 @@ private:
 	volatile bool m_isClosing;
 
 	socket_t m_sockfd;
-	INet *m_net;
+	NetModel *m_net;
 
 	task_queue_i *m_taskQueue;
 

@@ -31,9 +31,10 @@ class NetFactory
 	typedef std::vector<Listener*> ListenerVec;
 	typedef std::vector<Connector*> ConnectorVec;
 
-public:
+private:
 	static void runNet(void *e);
 
+public:
 	NetFactory();
 
 	bool init(int threadCnt, int initLinkCnt = 500);
@@ -54,8 +55,6 @@ public:
 	bool m_started;
 
 	int m_threadCnt; /* = 2 */
-
-	ObjectPool<Link> m_linkPool;
 
 	ListenerVec m_listeners;
 	ConnectorVec m_connectors;

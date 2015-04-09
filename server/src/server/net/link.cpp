@@ -49,6 +49,12 @@ void Link::close()
 	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&Link::onLogicClose, this));
 }
 
+void Link::erase()
+{
+	LinkPool &linkPool = m_net->getLinkPool();
+	linkPool.free(this);
+}
+
 void Link::onLogicClose()
 {
 	// LOG_INFO << "Link::onLogicClose, socket = " << m_sockfd;
@@ -100,7 +106,7 @@ void Link::onSend(Buffer &buf)
 	}
 }
 
-void Link::send(Buffer & buf)
+void Link::sendBuffer(Buffer &buf)
 {
 	if (!isopen()) {
 		return;
@@ -121,17 +127,12 @@ void Link::send(const char *data, int len)
 
 	Buffer buf(len);
 	buf.append(data, len);
-	send(buf);
+	sendBuffer(buf);
 }
 
-void Link::send(string & msg)
+void Link::send(const char *text)
 {
-	send(msg.data(), msg.size());
-}
-
-void Link::send(const char *msg)
-{
-	send(msg, strlen(msg));
+	send(text, strlen(text));
 }
 
 void Link::send(int msgId, Message & msg)
@@ -151,7 +152,7 @@ void Link::send(int msgId, Message & msg)
 	msg.SerializeToArray((void*)buf.beginWrite(), size);
 	buf.hasWritten(size);
 
-	this->send(buf);
+	this->sendBuffer(buf);
 }
 
 void Link::send(int msgId, const char *data, int len)
@@ -167,7 +168,7 @@ void Link::send(int msgId, const char *data, int len)
 	buf.append((const char*)&msgHead, sizeof(msgHead));
 	buf.append(data, len);
 
-	this->send(buf);
+	this->sendBuffer(buf);
 }
 
 int Link::handleRead()

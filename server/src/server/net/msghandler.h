@@ -50,6 +50,7 @@ public:
 
 		// assert(t != NULL);
 		m_callback(&link, t, receiveTime);
+		msgtool::freePacket(t);
 	}
 
 private:

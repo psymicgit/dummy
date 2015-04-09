@@ -22,13 +22,14 @@ class Connector : public IFd
 	enum States { kDisconnected, kConnecting, kConnected };
 
 public:
-	Connector(NetAddress &peerAddr, INetReactor*, INet*, task_queue_pool_t*);
+	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, task_queue_pool_t*);
 
 	virtual socket_t socket() const {return m_sockfd;}
 	virtual int handleRead();
 	virtual int handleWrite(); // 对于非阻塞connect，当连接成功建立时，描述符变成可写
 	virtual int handleError();
 	virtual void close();
+	virtual void erase();
 
 	bool connect();
 
@@ -44,7 +45,7 @@ private:
 private:
 	NetAddress m_peerAddr;
 	INetReactor *m_pNetReactor;
-	INet *m_net;
+	NetModel *m_net;
 	task_queue_pool_t* m_taskQueuePool;
 
 	socket_t m_sockfd;

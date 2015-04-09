@@ -20,17 +20,16 @@ class NetFactory;
 class Listener : public IFd
 {
 public:
-	Listener(INet*, INetReactor*, NetFactory*);
+	Listener(NetModel*, INetReactor*, NetFactory*);
 
-	bool open(const string& ip, int port);
-
-	void close();
+	virtual bool open(const string& ip, int port);
+	virtual void close();
+	virtual void erase();
 
 	virtual socket_t socket() const {return m_listenFd;}
 	virtual int handleRead();
 	virtual int handleWrite() {return -1;}
 	virtual int handleError() {return -1;}
-
 private:
 	void onAccepted(Link &link);
 
@@ -40,7 +39,7 @@ public:
 	NetAddress m_listenAddr;
 
 private:
-	INet *m_net;
+	NetModel *m_net;
 	INetReactor *m_pNetReactor;
 
 	socket_t m_listenFd;

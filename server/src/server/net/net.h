@@ -12,6 +12,8 @@
 #include "basic/timerqueue.h"
 #include "basic/lock.h"
 #include "basic/taskqueue.h"
+#include "basic/objectpool.h"
+#include "basic/buffer.h"
 
 class Listener;
 class Link;
@@ -27,6 +29,7 @@ public:
 	virtual int handleError()   = 0;
 
 	virtual void close() = 0;
+	virtual void erase() = 0;
 
 #ifndef WIN
 public:
@@ -34,11 +37,16 @@ public:
 #endif
 };
 
+typedef ObjectPool<Link> LinkPool;
+typedef ObjectPool<Buffer> BufferPool;
+
 //! 网络事件分发器
 class INet
 {
 public:
 	virtual ~INet() {}
+
+	virtual bool init(int initLinkCount, int linkGrowCount) = 0;
 
 	virtual int eventLoop() 		    = 0;
 	virtual void close() 				= 0;
@@ -58,6 +66,9 @@ public:
 
 	virtual TaskQueue* getTaskQueue()	= 0;
 	virtual TimerQueue& getTimerQueue() = 0;
+	virtual LinkPool& getLinkPool()		= 0;
+	virtual BufferPool& getBufferPool()	= 0;
+
 };
 
 #ifndef WIN
@@ -68,6 +79,8 @@ class Epoll : public INet
 public:
 	Epoll();
 	~Epoll();
+
+	virtual bool init(int initLinkCount, int linkGrowCount);
 
 	virtual int eventLoop();
 	virtual void close();
@@ -87,11 +100,14 @@ public:
 
 	virtual TaskQueue* getTaskQueue() { return NULL;}
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
+	inline virtual LinkPool& getLinkPool() { return m_linkPool; }
+	inline virtual BufferPool& getBufferPool() { return m_bufferPool; }
 
 protected:
 	void recycleFds();
 	int interruptLoop();
 	void mod(IFd*, uint32 events);
+	void stop();
 
 	volatile bool            m_running;
 	int                      m_efd;
@@ -103,6 +119,8 @@ protected:
 
 	TimerQueue m_timers;
 	volatile int m_curFdCount;
+	LinkPool m_linkPool;
+	BufferPool m_bufferPool;
 };
 
 #else
@@ -127,7 +145,8 @@ private:
 
 public:
 	Select();
-	~Select() {}
+
+	virtual bool init(int initLinkCount, int linkGrowCount);
 
 	virtual int eventLoop();
 	virtual void reopen(IFd*) {}
@@ -147,6 +166,8 @@ public:
 
 	virtual TaskQueue* getTaskQueue() { return &m_tasks;}
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
+	inline virtual LinkPool& getLinkPool() { return m_linkPool; }
+	inline virtual BufferPool& getBufferPool() { return m_bufferPool; }
 
 private:
 	void updateFd(IFd*, FDOperator);
@@ -157,6 +178,7 @@ private:
 	LinkerList m_links; // 当前维持的连接
 	TaskQueue m_tasks;
 	TimerQueue m_timers;
+	LinkPool m_linkPool;
 
 	int m_maxfd;
 
@@ -165,6 +187,7 @@ private:
 	fd_set m_eset;
 
 	bool m_running;
+	BufferPool m_bufferPool;
 };
 
 #endif

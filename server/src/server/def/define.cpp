@@ -11,6 +11,7 @@
 #include <google/protobuf/message.h>
 
 #include "tool/randtool.h"
+#include "protocol/message.h"
 
 namespace global
 {
@@ -23,16 +24,14 @@ namespace global
 		}
 
 		g_inited = true;
+		g_bufferPool.init(1000, 500);
 
 		randtool::initSeed();
 	}
 
 	void uninit()
 	{
-		if (g_lastMessage) {
-			g_lastMessage->~Message();
-		}
-
+		msgtool::freePacket(global::g_lastMessage);
 		delete[] g_packetBuf;
 
 		google::protobuf::ShutdownProtobufLibrary();
