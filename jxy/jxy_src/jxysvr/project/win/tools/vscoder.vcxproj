@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3D955B73-4942-4CE9-81B4-72BA7B017D0B}</ProjectGuid>
+    <RootNamespace>vscoder</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\tool\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../obj/$(ProjectName)/$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateManifest>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>false</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>./lua;./java;./as;../../../include;../../../include/dll/sdu;../../../thirdparty/tinyxml/include;../../../thirdparty/libiconv/include/win32;../../../src/tool/vscoder;../../../thirdparty/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc80.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;tinyxml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\tool\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../thirdparty/tinyxml/lib/win32/debug;../../../thirdparty/boost/stage/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>false</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>../../../include;../../../include/dll/sdu;../../../thirdparty/tinyxml/include;../../../thirdparty/libiconv/include/win32;../../../src/tool/vscoder;../../../thirdparty/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>$(OutDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc80.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;tinyxml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../thirdparty/tinyxml/lib/win32/debug;../../../thirdparty/boost/stage/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>LIBCMTD.lib;Nafxcwd.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\tool\vscoder\classmaker.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\lua\luacompiler.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\lua\luamaker.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\vscoder.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\vscoderdlg.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\compiler.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\paraminfo.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\parser.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\as\aschecker.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\as\ascompiler.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\as\asloader.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\as\asmaker.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\as\asprotocolsource.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\java\javaloader.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\java\javamaker.cpp" />
+    <ClCompile Include="..\..\..\src\tool\vscoder\java\javaproto.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\tool\vscoder\charset.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\classmaker.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\lua\luacompiler.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\lua\luamaker.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\singleton.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\vscoder.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\vscoderdlg.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\compiler.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\paraminfo.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\parser.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\resource.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\stdafx.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\aschecker.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\ascompiler.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\asdefinition.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\asloader.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\asmaker.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\asprotocolsource.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\java\javaloader.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\java\javamaker.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\java\javaproto.h" />
+    <ClInclude Include="..\..\..\src\tool\vscoder\java\javaprotosource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\tool\vscoder\res\Coder.ico" />
+    <None Include="..\..\..\src\tool\vscoder\res\vscoder.ico" />
+    <None Include="..\..\..\src\tool\vscoder\res\vscoder.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\src\tool\vscoder\vscoder.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

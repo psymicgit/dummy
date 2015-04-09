@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\as">
+      <UniqueIdentifier>{5e813394-0d6d-4d05-8f1a-0b77baedad96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\java">
+      <UniqueIdentifier>{4bfa812e-cc9c-4b4f-977a-c09ccd8858bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\as">
+      <UniqueIdentifier>{bb19e17c-6656-40b0-814a-fb8e3d8fa812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\java">
+      <UniqueIdentifier>{dea87e21-04dc-4ef9-904a-625857cd1ccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source Files\lua">
+      <UniqueIdentifier>{e8bc2f64-fdc4-488d-b2e5-e8337d787a63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\lua">
+      <UniqueIdentifier>{dea52bb7-4ac0-410b-b256-012b5b09daeb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\tool\vscoder\classmaker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\vscoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\vscoderdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\compiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\paraminfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\as\aschecker.cpp">
+      <Filter>Source Files\as</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\as\ascompiler.cpp">
+      <Filter>Source Files\as</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\as\asloader.cpp">
+      <Filter>Source Files\as</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\as\asmaker.cpp">
+      <Filter>Source Files\as</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\as\asprotocolsource.cpp">
+      <Filter>Source Files\as</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\java\javaloader.cpp">
+      <Filter>Source Files\java</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\java\javamaker.cpp">
+      <Filter>Source Files\java</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\java\javaproto.cpp">
+      <Filter>Source Files\java</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\lua\luamaker.cpp">
+      <Filter>Source Files\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\vscoder\lua\luacompiler.cpp">
+      <Filter>Source Files\lua</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\tool\vscoder\charset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\classmaker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\vscoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\vscoderdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\compiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\paraminfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\aschecker.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\ascompiler.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\asdefinition.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\asloader.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\asmaker.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\as\asprotocolsource.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\java\javaloader.h">
+      <Filter>Header Files\java</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\java\javamaker.h">
+      <Filter>Header Files\java</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\java\javaproto.h">
+      <Filter>Header Files\java</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\java\javaprotosource.h">
+      <Filter>Header Files\java</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\lua\luamaker.h">
+      <Filter>Header Files\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\lua\luacompiler.h">
+      <Filter>Header Files\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\vscoder\singleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\tool\vscoder\res\vscoder.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\src\tool\vscoder\res\vscoder.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\src\tool\vscoder\res\Coder.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\src\tool\vscoder\vscoder.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

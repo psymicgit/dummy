@@ -1,0 +1,712 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_UnicodeMD|Win32">
+      <Configuration>Debug_UnicodeMD</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_UnicodeMD|x64">
+      <Configuration>Debug_UnicodeMD</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Unicode|Win32">
+      <Configuration>Debug_Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Unicode|x64">
+      <Configuration>Debug_Unicode</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_UnicodeMD|Win32">
+      <Configuration>Release_UnicodeMD</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_UnicodeMD|x64">
+      <Configuration>Release_UnicodeMD</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Unicode|Win32">
+      <Configuration>Release_Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Unicode|x64">
+      <Configuration>Release_Unicode</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E03D6459-CE00-4C35-AFB2-2134A9BF6ACE}</ProjectGuid>
+    <RootNamespace>balanceserver</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../obj/$(ProjectName)/$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">true</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</EmbedManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\dll;..\..\..\include\dll\sdframework;..\..\..\include\dll\sdu;..\..\..\include\dll\sdnet;..\..\..\include\dll\sdconsole;..\..\..\include\dll\sdpipe;..\..\..\include\dll\sdlogger;..\..\..\include;..\..\..\src\server/protocol/server;..\..\..\src\server/gateserver;..\..\..\src\server/;..\..\..\thirdparty\;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/libiconv/include/win32;..\..\../thirdparty/breakpad/src;..\..\../thirdparty/jsoncpp-src/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;_SDEXCEPTION;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Version.lib;ws2_32.lib;wsock32.lib;wldap32.lib;tinyxml.lib;libiconv.lib;sdconsole_Debug.lib;sddb_Debug.lib;sdframework_Debug.lib;sdlogger_Debug.lib;sdnet_Debug.lib;sdpipe_Debug.lib;sdu_Debug.lib;common.lib;crash_generation_client.lib;exception_handler.lib;json_vc71_libmtd.lib;libcurl.lib;ssleay32.lib;libeay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\../bin/dll/Win32/Debug;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/libiconv/lib/win32/debug;..\..\../thirdparty/breakpad/src/client/windows/Debug/lib;..\..\../thirdparty/jsoncpp-src/build/vs71/debug/lib_json;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include/components/framework/protocol;..\..\..\include\dll\sdu;..\..\../thirdparty/tinyxml/include;..\..\..\include;..\..\..\src\server/protocol/server;..\..\..\src\server/gateserver;..\..\..\src\server/;..\..\..\src\server/common;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release;../../../../bin/win32/release/components;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/libiconv/lib/win32/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include/components/framework/protocol;..\..\..\include\dll\sdu;..\..\../thirdparty/tinyxml/include;..\..\..\include;..\..\..\src\server/protocol/server;..\..\..\src\server/gateserver;..\..\..\src\server/;..\..\..\src\server/common;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\dll\Win32\Debug_Unicode;..\..\..\bin\dll\Win32\Debug_Unicode/components;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/libiconv/lib/win32/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include/components/framework/protocol;..\..\..\include\dll\sdu;..\..\../thirdparty/tinyxml/include;..\..\..\include;..\..\..\src\server/protocol/server;..\..\..\src\server/gateserver;..\..\..\src\server/;..\..\..\src\server/common;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release_unicode;../../../../bin/win32/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/libiconv/lib/win32/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include/components/framework/protocol;..\..\..\include\dll\sdu;..\..\../thirdparty/tinyxml/include;..\..\..\include;..\..\..\src\server/protocol/server;..\..\..\src\server/gateserver;..\..\..\src\server/;..\..\..\src\server/common;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release_unicode;../../../../bin/win32/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/libiconv/lib/win32/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include/components/framework/protocol;..\..\..\include\dll\sdu;..\..\../thirdparty/tinyxml/include;..\..\..\include;..\..\..\src\server/protocol/server;..\..\..\src\server/gateserver;..\..\..\src\server/;..\..\..\src\server/common;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\dll\Win32\Debug_Unicode;..\..\..\bin\dll\Win32\Debug_Unicode/components;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/libiconv/lib/win32/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/gateserver;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include\dll\sdframework;..\..\..\include/components/framework/protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug\mmo\gateserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/debug;../../../../bin/win64/debug/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/libiconv/lib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug\components\sdnet.dll ..\..\..\..\bin\win64\debug\mmo\gateserver\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/gateserver;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include\dll\sdframework;..\..\..\include/components/framework/protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release\mmo\gateserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release;../../../../bin/win64/release/components;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/libiconv/lib/win64/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(SolutionName)\$(ProjectName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release\components\sdnet.dll ..\..\..\..\bin\win64\release\mmo\gateserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/gateserver;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include\dll\sdframework;..\..\..\include/components/framework/protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN64;_DEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug_unicode\mmo\gateserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/debug_Unicode;../../../../bin/win64/debug_Unicode/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/libiconv/lib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug_unicode\components\sdnet.dll ..\..\..\..\bin\win64\debug_unicode\mmo\gateserver\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/gateserver;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include\dll\sdframework;..\..\..\include/components/framework/protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release_unicode\mmo\balanceserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release_unicode;../../../../bin/win64/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/libiconv/lib/win64/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(SolutionName)\$(ProjectName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release_unicode\components\sdnet.dll ..\..\..\..\bin\win64\release_unicode\mmo\gateserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/gateserver;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include\dll\sdframework;..\..\..\include/components/framework/protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release_unicode\mmo\balanceserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release_unicode;../../../../bin/win64/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/libiconv/lib/win64/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(SolutionName)\$(ProjectName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release_unicode\components\sdnet.dll ..\..\..\..\bin\win64\release_unicode\mmo\gateserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/gateserver;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include\dll\sdframework;..\..\..\include/components/framework/protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN64;_DEBUG;_CONSOLE;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug_unicode\mmo\gateserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/debug_Unicode;../../../../bin/win64/debug_Unicode/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/libiconv/lib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug_unicode\components\sdnet.dll ..\..\..\..\bin\win64\debug_unicode\mmo\gateserver\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\common\server\utility.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\gateserver.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\bindcheckvercode.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\bindmobilehttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\changepwdhttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\getuserexpandhttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\httpmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\basehttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\loginexhttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\logouthttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\mgencrypt.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\noticehttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\noticemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\registerhttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\unbindcheckvercode.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\unbindmobilehttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\user.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\usermgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\net\ls\lspktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogsls.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\framework\gtapplication.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\framework\gtclient.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocligs.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocligt.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protoclils.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocommondata.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtcommon.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtgs.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtls.cpp" />
+    <ClCompile Include="..\..\..\src\server\common\server\packetparser.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\gtconfig.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\gtevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\net\gs\gspktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\net\gs\gsprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\net\common\compktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\net\common\svrpipechannel.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\net\cli\clipktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\net\cli\cliprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\net\ls\lsprocessor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\common\server\ngstring.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\utility.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\bindcheckvercode.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\bindmobilehttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\changepwdhttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\getuserexpandhttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\httpmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\basehttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\loginexhttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\logouthttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\mgencrypt.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\noticehttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\noticemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\registerhttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\unbindcheckvercode.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\unbindmobilehttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\user.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\usermgr.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\net\ls\lspktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\stdafx.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogsls.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\framework\gtapplication.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\framework\gtclient.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocligs.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocligt.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protoclils.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocommondata.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtcommon.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtgs.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtls.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\packetparser.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\gtconfig.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\gtevent.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\net\gs\gspktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\net\gs\gsprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\net\common\compktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\net\common\svrpipechannel.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\net\cli\clipktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\net\cli\cliprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\gateserver\net\ls\lsprocessor.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

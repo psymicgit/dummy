@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="framework">
+      <UniqueIdentifier>{1d0af32d-96aa-49ac-8bb6-5d1ff8c865ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{f1755516-7b4c-4d43-9462-6dda9e93f182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{3de52a3c-0b19-4a40-a3d2-57752b42df04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{9f9bf12a-68f1-46b4-945e-cf6cd65e74e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic">
+      <UniqueIdentifier>{7d14e60b-2071-47f3-8ab6-28152a8cf4e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\debuginfo">
+      <UniqueIdentifier>{a1deaac1-7b76-46f8-9746-181ed011f4f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\ls">
+      <UniqueIdentifier>{2cb23202-1805-4407-88da-5aa8b176cfb4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\common\server\utility.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\server\packetparser.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\server\debuginfo\breakpad.cpp">
+      <Filter>common\debuginfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\net\ls\lsprocessor.cpp">
+      <Filter>net\ls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\net\ls\lspktbuilder.cpp">
+      <Filter>net\ls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\tlcserver.cpp" />
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\framework\tlcconfig.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\framework\tlcapplication.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\logic\authmgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protolstlc.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\net\ls\svrpipechannel.cpp">
+      <Filter>net\ls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\logic\user.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\logic\usermgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\common\client\commondef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\utility.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\packetparser.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\debuginfo\breakpad.h">
+      <Filter>common\debuginfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\net\ls\lspktbuilder.h">
+      <Filter>net\ls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\net\ls\lsprocessor.h">
+      <Filter>net\ls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\framework\tlcconfig.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\framework\tlcapplication.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\auth.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\logic\authmgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protolstlc.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\net\ls\svrpipechannel.h">
+      <Filter>net\ls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\logic\user.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\logic\usermgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

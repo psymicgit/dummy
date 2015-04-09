@@ -1,0 +1,38 @@
+-- MySQL dump 8.23
+--
+-- Host: localhost    Database: sql2class
+---------------------------------------------------------
+-- Server version	3.23.58
+
+--
+-- Table structure for table `example`
+--
+
+CREATE TABLE example (
+  num int(11) NOT NULL auto_increment,
+  a tinyint(3) NOT NULL default '0',
+  b smallint(5) NOT NULL default '0',
+  c mediumint(9) NOT NULL default '0',
+  d int(11) NOT NULL default '0',
+  a_bit char(0) default NULL,
+  namn varchar(40) NOT NULL default '',
+  adress varchar(255) NOT NULL default '',
+  datum date default NULL,
+  tid time default NULL,
+  ts timestamp(14) NOT NULL,
+  add_year year(4) default NULL,
+  modified datetime default NULL,
+  biggie bigint(20) NOT NULL default '0',
+  color enum('Red','Green','Blue') default NULL,
+  colormix set('Red','Green','Blue') default NULL,
+  mtdata mediumtext NOT NULL,
+  PRIMARY KEY  (num)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `example`
+--
+
+
+INSERT INTO example VALUES (1,0,0,0,0,'','','','0000-00-00','00:00:00',20060331092931,0000,'0000-00-00 00:00:00',2467999998766,'Green','Green,Blue','');
+

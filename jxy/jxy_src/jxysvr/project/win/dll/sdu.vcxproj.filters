@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src\algorithm">
+      <UniqueIdentifier>{4edb32e5-aa2a-46cb-a1af-96192b1dcc99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\thread">
+      <UniqueIdentifier>{37b76104-1fb7-4f1b-b543-07ab9ca0d599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\file">
+      <UniqueIdentifier>{edbf0b64-067c-4eb9-9f13-022d91bbeae4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\netutils">
+      <UniqueIdentifier>{20139f02-23d5-47cf-98d6-dca5e345d599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\time">
+      <UniqueIdentifier>{9b630ce5-4268-4a6f-a01d-aacd2b30fd95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\container">
+      <UniqueIdentifier>{c74dc561-bc29-463b-b7c6-23b8b9aa2157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\base">
+      <UniqueIdentifier>{45a9132f-3540-4a0e-a73c-a26bcb85c3e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\string">
+      <UniqueIdentifier>{9d2648cb-8508-46bb-a25c-c2667f6e98d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\database">
+      <UniqueIdentifier>{22e7e0ca-7a9d-41dc-be08-94dcd6263686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="include\algorithm">
+      <UniqueIdentifier>{ac034f1c-aac8-44a8-b422-008ae9930bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\thread">
+      <UniqueIdentifier>{de639c58-4ec0-42ac-b20b-33f37fe9a7d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\container">
+      <UniqueIdentifier>{5b43ad4c-829f-4a38-84eb-89b07175877a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\file">
+      <UniqueIdentifier>{0e0e558e-a795-4c77-8522-431e2d6c64e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\netutils">
+      <UniqueIdentifier>{1d1e6ddb-08d5-4d3f-9314-d85dd4a81392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\pattern">
+      <UniqueIdentifier>{ff4a5abb-9e34-4d2c-a49d-ecd8dbf518ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\base">
+      <UniqueIdentifier>{2bb0d6be-f7da-4b46-bf47-b05e9c009d23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\time">
+      <UniqueIdentifier>{205b522e-613b-4a52-a107-b59c06ab2081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\string">
+      <UniqueIdentifier>{2d048571-342e-44b7-83c2-7148ce7af384}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\database">
+      <UniqueIdentifier>{bbab0654-a1ad-4970-b91a-c5c743ceb585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\other">
+      <UniqueIdentifier>{179dd1aa-489d-4616-baa6-19e8aa0ab0b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\detail">
+      <UniqueIdentifier>{c1eb6f67-882f-436c-82a9-e53f774adefb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\dll\sdu\algorithm\sdbignum.cpp">
+      <Filter>src\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdcrc.cpp">
+      <Filter>src\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\algorithm\sdcryptodes.cpp">
+      <Filter>src\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\algorithm\sdcryptorsa.cpp">
+      <Filter>src\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\algorithm\sddes.cpp">
+      <Filter>src\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\algorithm\sdmd5.cpp">
+      <Filter>src\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\algorithm\sdrsa.cpp">
+      <Filter>src\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\algorithm\sdrsa2.cpp">
+      <Filter>src\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\algorithm\sdrsahlp.cpp">
+      <Filter>src\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdatomic.cpp">
+      <Filter>src\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdcondition.cpp">
+      <Filter>src\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdmutex.cpp">
+      <Filter>src\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdprocess.cpp">
+      <Filter>src\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdthread.cpp">
+      <Filter>src\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdthreadpool.cpp">
+      <Filter>src\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdtimer.cpp">
+      <Filter>src\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdtimer_detail.cpp">
+      <Filter>src\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdtimer_impl.cpp">
+      <Filter>src\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdcsvfile.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sddir.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdfile.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdfilemapping.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdxmlfile.cpp">
+      <Filter>src\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sddatastream.cpp">
+      <Filter>src\netutils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdnetutils.cpp">
+      <Filter>src\netutils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdserverid.cpp">
+      <Filter>src\netutils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdtime.cpp">
+      <Filter>src\time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sddataqueue.cpp">
+      <Filter>src\container</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdloopbuffer.cpp">
+      <Filter>src\container</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdmemorypool.cpp">
+      <Filter>src\container</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdrandom.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdregex.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdshmem.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\vercheck.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdstrencrypt.cpp">
+      <Filter>src\string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdstring.cpp">
+      <Filter>src\string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdtranslate.cpp">
+      <Filter>src\string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdwstring.cpp">
+      <Filter>src\string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\mssqldb.cpp">
+      <Filter>src\database</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\mysqldb.cpp">
+      <Filter>src\database</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\sqlite\sqlite3.c">
+      <Filter>src\database</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sqlite3db.cpp">
+      <Filter>src\database</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\sdexception.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sdu\cjson.c">
+      <Filter>src\other</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\dll\sdu\algorithm\sdbignum.h">
+      <Filter>src\algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sdu\algorithm\sdbignummul.h">
+      <Filter>src\algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sdu\algorithm\sdcryptodes.h">
+      <Filter>src\algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sdu\algorithm\sdcryptorsa.h">
+      <Filter>src\algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sdu\sdtimer_detail.h">
+      <Filter>src\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sdu\sdtimer_impl.h">
+      <Filter>src\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\config.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sdtype.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vercheck.h">
+      <Filter>include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdu.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\algorithm\sdcrc.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\algorithm\sddes.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\algorithm\sdmd5.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\algorithm\sdrsa.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\algorithm\sdrsa2.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\algorithm\sdrsahlp.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\algorithm\sdstrencrypt.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdatomic.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdcondition.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdlock.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdmutex.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdprocess.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdshmem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdthread.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdthreadpool.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdtimer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sddataqueue.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdfifo.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdhashmap.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdidpool.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdindexer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdloopbuffer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdmemorypool.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdobjectpool.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdcsvfile.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sddir.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdfile.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdfilemapping.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdxmlfile.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sddatastream.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdnetutils.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdsingleton.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sddebug.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sderrno.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdexception.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdlimit.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdmath.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdrandom.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdserverid.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdtime.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdregex.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdstring.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sdtranslate.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\mssqldb.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\mysqldb.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\sqlite3db.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\detail\sdobject_dqueue_allocator.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\detail\sdobject_allocator_ex.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sdu\cjson.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\as">
+      <UniqueIdentifier>{7e8a171d-1f2b-48e7-bcdd-c2d03cdf4a0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\java">
+      <UniqueIdentifier>{22a97c26-9ed0-461d-b658-f79b1590e091}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\as">
+      <UniqueIdentifier>{0ad2b2e9-f034-41ec-8625-6da01158c358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\java">
+      <UniqueIdentifier>{b2c9a255-b373-4f2f-a348-62578e8fc28a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\tool\coder\classmaker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\coder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\coderdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\compiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\paraminfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\as\aschecker.cpp">
+      <Filter>Source Files\as</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\as\ascompiler.cpp">
+      <Filter>Source Files\as</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\as\asloader.cpp">
+      <Filter>Source Files\as</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\as\asmaker.cpp">
+      <Filter>Source Files\as</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\as\asprotocolsource.cpp">
+      <Filter>Source Files\as</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\java\javaloader.cpp">
+      <Filter>Source Files\java</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\java\javamaker.cpp">
+      <Filter>Source Files\java</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\tool\coder\java\javaproto.cpp">
+      <Filter>Source Files\java</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\tool\coder\charset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\classmaker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\coder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\coderdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\compiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\paraminfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\as\aschecker.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\as\ascompiler.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\as\asdefinition.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\as\asloader.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\as\asmaker.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\as\asprotocolsource.h">
+      <Filter>Header Files\as</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\java\javaloader.h">
+      <Filter>Header Files\java</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\java\javamaker.h">
+      <Filter>Header Files\java</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\java\javaproto.h">
+      <Filter>Header Files\java</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\tool\coder\java\javaprotosource.h">
+      <Filter>Header Files\java</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\tool\coder\res\coder.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\src\tool\coder\res\coder.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\src\tool\coder\coder.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

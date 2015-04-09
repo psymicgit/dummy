@@ -1,0 +1,65 @@
+###############################################################################
+#
+#                         makefile for building 
+#
+###############################################################################
+
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += 	\
+mail/mail.c 		\
+mail/base64.c	\
+mail/ReadIni.cpp	\
+mail/syssocket.c
+
+OBJS += 	\
+mail/mail.o 		\
+mail/base64.o	\
+mail/ReadIni.o	\
+mail/syssocket.o
+
+C_DEPS += 	\
+mail/mail.d \
+mail/base64.d	\
+mail/ReadIni.d	\
+mail/syssocket.d
+
+
+EXE=bin/mail
+LIBS :=
+
+
+# Each subdirectory must supply rules for building sources it contributes
+%.o: %.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: g++ C Compiler'
+	g++ -O0  -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+	
+	
+RM := rm -rf
+
+# All of the sources participating in the build are defined here
+
+
+# Add inputs and outputs from these tool invocations to the build variables 
+
+# All Target
+all: mail
+
+# Tool invocations
+mail: $(OBJS) $(USER_OBJS)
+	@echo 'Building target: $@'
+	@echo 'Invoking: g++ C Linker'
+	g++  -o$(EXE) $(OBJS) $(USER_OBJS) $(LIBS)
+	@echo 'Finished building target: $@'
+	@echo ' '
+
+# Other Targets
+clean:
+	-$(RM) $(OBJS) $(C_DEPS) $(EXE)
+	-@echo ' '

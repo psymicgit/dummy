@@ -1,0 +1,148 @@
+
+
+CentOS 6.4 安装与 apache、网络的配置（三）
+CentOS 6.4 配置LAMP 环境 与安装 phpmyadmin
+
+安装LAMP 环境：
+
+首先测试一下 yum install httpd 这个命令，如果能够正常安装，把下面这几个代码跳过。如果不行，请执行以下代码，更换一下软件源（我的就不行。。各种悲剧。）
+首先备份/etc/yum.repos.d/CentOS-Base.repo
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+
+下载对应版本repo文件, 放入/etc/yum.repos.d/(操作前请做好相应备份)
+
+    CentOS5
+    CentOS6
+
+运行yum makecache生成缓存
+
+一、安装Apache
+yum install httpd #根据提示，输入Y安装即可成功安装
+/etc/init.d/httpd start #启动Apache
+备注：Apache启动之后会提示错误：
+正在启动 httpd:httpd: Could not reliably determine the server's fully qualif domain name, using ::1 for ServerName
+解决办法：
+vi /etc/httpd/conf/httpd.conf #编辑
+找到 #ServerName www.example.com:80
+修改为 ServerName localhost:80
+:wq! #保存退出
+chkconfig httpd on #设为开机启动
+/etc/init.d/httpd restart #重启Apache
+
+
+二、安装MySQL
+1、安装MySQL
+yum install mysql mysql-server
+询问是否要安装，输入Y即可自动安装,直到安装完成
+/etc/init.d/mysqld start #启动MySQL
+chkconfig mysqld on #设为开机启动
+cp /usr/share/mysql/my-medium.cnf /etc/my.cnf #拷贝配置文件（注意：如果/etc目录下面默认有一个my.cnf，直接覆盖即可）
+2、为root账户设置密码
+mysql_secure_installation
+回车，根据提示输入Y
+输入2次密码，回车
+根据提示一路输入Y
+最后出现：Thanks for using MySQL!
+MySql密码设置完成，重新启动 MySQL：
+/etc/init.d/mysqld stop #停止
+/etc/init.d/mysqld start #启动
+/etc/init.d/mysqld restart #重启
+
+
+三、安装PHP5
+1、安装PHP5
+yum install php
+根据提示输入Y直到安装完成
+2、安装PHP组件，使 PHP5 支持 MySQL
+yum install php php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt php-cli
+这里选择以上安装包进行安装
+根据提示输入Y回车
+/etc/init.d/mysqld restart #重启MySql
+/etc/init.d/httpd restart #重启Apche
+
+3、安装phpmyadmin
+
+rpm –import http://dag.wieers.com/rpm/packages/RPM-GPG-KEY.dag.txt
+yum install http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm (x86_64)
+
+ yum install http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el6.rf.i686.rpm (i386)
+ 
+
+
+yum install phpmyadmin
+
+vim config.inc.php
+
+将里面的$cfg['blowfish_secret'] = ' '; 单引号里面随便写个数（空的会报错“
+配置文件现在需要绝密的短语密码(blowfish_secret)
+”）
+
+访问下 localhost/phpmyadmin 如何 出现提示 “You don’t have permission to access /phpmyadmin/ on this server.”
+改 /etc/httpd/conf.d/phpmyadmin.conf 里面
+将 Allow from 127.0.0.1 改成 Allow from all。（从网上看到很多，无脑复制的博客！！！根本找不到他们说的地方！！强烈鄙视那些无脑复制的。。）
+
+配置篇：（这个可以先不用配置，我就没有配置。）
+
+
+一、Apache配置
+vi /etc/httpd/conf/httpd.conf 编辑文件
+ServerTokens OS　 在44行 修改为：ServerTokens Prod （在出现错误页的时候不显示服务器操作系统的名称）
+ServerSignature On　在536行修改为：ServerSignature Off （在错误页中不显示Apache的版本）
+Options Indexes FollowSymLinks　 在331行 修改为：Options Includes ExecCGI FollowSymLinks（允许服务器执行CGI及SSI，禁止列出目录）
+#AddHandler cgi-script .cgi　在796行 修改为：AddHandler cgi-script .cgi .pl （允许扩展名为.pl的CGI脚本运行）
+AllowOverride None　在338行修改为：AllowOverride All （允许.htaccess）
+AddDefaultCharset UTF-8　在759行 修改为：AddDefaultCharset GB2312　（添加GB2312为默认编码）
+　 Options Indexes MultiViews FollowSymLinks 在554行 修改为 Options MultiViews FollowSymLinks（不在浏览器上显示树状目录结构）
+DirectoryIndex index.html index.html.var 在402行 修改为：DirectoryIndex index.html index.htm Default.html Default.htm index.php Default.php index.html.var （设置默认首页文件，增加index.php）
+KeepAlive Off 在76行 修改为：KeepAlive On （允许程序性联机）
+MaxKeepAliveRequests 100 在83行 修改为：MaxKeepAliveRequests 1000 （增加同时连接数）
+:wq! #保存退出
+/etc/init.d/httpd restart 重启
+rm -f /etc/httpd/conf.d/welcome.conf /var/www/error/noindex.html #删除默认测试页
+
+
+二、php配置
+vi /etc/php.ini #编辑
+date.timezone = PRC #在946行 把前面的分号去掉，改为date.timezone = PRC
+disable_functions = passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_open,proc_get_status,ini_alter,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server,escapeshellcmd,dll,popen,disk_free_space,checkdnsrr,checkdnsrr,getservbyname,getservbyport,disk_total_space,posix_ctermid,posix_get_last_error,posix_getcwd, posix_getegid,posix_geteuid,posix_getgid, posix_getgrgid,posix_getgrnam,posix_getgroups,posix_getlogin,posix_getpgid,posix_getpgrp,posix_getpid, posix_getppid,posix_getpwnam,posix_getpwuid, posix_getrlimit, posix_getsid,posix_getuid,posix_isatty, posix_kill,posix_mkfifo,posix_setegid,posix_seteuid,posix_setgid, posix_setpgid,posix_setsid,posix_setuid,posix_strerror,posix_times,posix_ttyname,posix_uname
+#在386行列出PHP可以禁用的函数，如果某些程序需要用到这个函数，可以删除，取消禁用。
+expose_php = Off #在432行禁止显示php版本的信息
+magic_quotes_gpc = On #在745行 打开magic_quotes_gpc来防止SQL注入
+open_basedir = .:/tmp/ #在380行设置表示允许访问当前目录(即PHP脚本文件所在之目录)和/tmp/目录,可以防止php木马跨站
+:wq! #保存退出
+/etc/init.d/mysqld restart #重启MySql
+/etc/init.d/httpd restart #重启Apche
+测试篇
+cd /var/www/html
+vi index.php #新建index.php文件
+
+
+
+
+/* 
+ * apache配置非80端口的遇到的权限问题的处理办法
+ */
+
+apache报Permission denied: make_sock: could not bind to address 解决方案
+(2012-09-06 15:25:50)
+转载▼
+标签：
+杂谈
+	分类： linux
+在apache中绑定非http标准端口时，一直出现如下的错误提示：
+[root@localhost ~]# /etc/init.d/httpd start
+Starting httpd: (13)Permission denied: make_sock: could not bind to address 0.0.0.0:888
+no listening sockets available, shutting down
+Unable to open logs
+[FAILED]
+解决方案：
+增加selinux中http的端口
+semanage port -l|grep http #查看SELinux下http相关端口
+semanage port -a -t http_port_t -p tcp 888 #增加这个非标准端口即可
+[root@localhost ~]# /etc/init.d/httpd restart 或者 service httpd start
+Stopping httpd: [  OK  ]
+Starting httpd: [  OK  ] 
+
+
+
+

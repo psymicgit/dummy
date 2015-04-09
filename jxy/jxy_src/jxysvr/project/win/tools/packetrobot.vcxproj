@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_Unicode|Win32">
+      <Configuration>Debug_Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Unicode|Win32">
+      <Configuration>Release_Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9665918B-39B0-4D48-B39A-4EF1D52FDE9D}</ProjectGuid>
+    <RootNamespace>PacketRobot</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">..\..\../bin/tool/win32/debug_unicode/packetrobot/</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">../../../obj/$(ProjectName)/$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">true</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">true</EmbedManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">true</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">true</EmbedManifest>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\include\dll\sdlogger;..\..\..\include\dll\sdnet;..\..\..\thirdparty\libiconv\include\win32;..\..\..\thirdparty\tinyxml\include;..\..\..\src\server\protocol\client;D:\work\maxnet\src\tool\packetrobot;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>libiconv.lib;sdu_Debug_Unicode.lib;sdclinet_Debug.lib;tinyxml.lib;uafxcwd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\../bin/tool/win32/debug_unicode/packetrobot/$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\dll\Win32\Debug;..\..\..\thirdparty\libiconv\lib\win32\debug;..\..\..\thirdparty\tinyxml\lib\win32\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\..\..;..\..\..\..\include;..\..\..\..\include\sdu;..\..\..\..\thirdparty\tinyxml\include;..\..\..\..\thirdparty\libiconv\include\win32;..\..\..\..\src\components\server\sdclinet;..\..\..\..\include\components\server;..\..\..\..\src\framework\mmo\mockclient;..\..\..\..\src\framework\mmo\protocol\client;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdu_Release_Unicode.lib;sdclinet_Release.lib;tinyxml.lib;libiconv.lib;uafxcw.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win32\release_unicode\mmo\mockclient\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\thirdparty\libiconv\lib\win32\release;..\..\..\..\thirdparty\tinyxml\lib\win32\release;..\..\..\..\bin\win32\release\components;..\..\..\..\bin\win32\release_unicode;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win32\release\components\sdclinet_Release.dll    ..\..\..\..\bin\win32\release_unicode\mmo\mockclient\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\protocol\client\protindexparse.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\client\protocligs.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\client\protocligt.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\client\protoclils.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\client\protoclizs.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\client\protocommondata.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\clidata.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\clipktparser.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\clisession.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\Common.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\config.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\mgencrypt.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\netdata.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\packetrobot.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\packetrobotDlg.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\protocolmgr.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\sdclientlogin.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\sdmsgimp.cpp" />
+    <ClCompile Include="..\..\..\src\tool\packetrobot\stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\common\client\errdef.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\client\protindexparse.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\client\protocligs.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\client\protocligt.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\client\protoclils.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\client\protoclizs.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\client\protocommondata.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\clidata.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\clidefine.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\clipktparser.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\clisession.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\Common.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\config.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\mgencrypt.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\netdata.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\packetrobot.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\packetrobotDlg.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\protocolmgr.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\resource.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\sdclientlogin.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\sdmsg.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\sdmsgimp.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\stdafx.h" />
+    <ClInclude Include="..\..\..\src\tool\packetrobot\targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\src\tool\packetrobot\packetrobot.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\tool\packetrobot\res\PacketRobot.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

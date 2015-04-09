@@ -1,0 +1,64 @@
+###############################################################################
+#
+#                         makefile for building 
+#
+###############################################################################
+
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += 			\
+notify/notify.cpp	\
+notify/SSLComm.cpp			\
+notify/ReadIni.cpp
+
+OBJS += 			\
+notify/notify.o		\
+notify/SSLComm.o			\
+notify/ReadIni.o
+
+C_DEPS += 		\
+notify/notify.d	\
+notify/SSLComm.d		\
+notify/ReadIni.d
+
+EXE=bin/notify
+LIBS := -lssl
+
+
+
+
+
+# Each subdirectory must supply rules for building sources it contributes
+%.o: %.cpp
+	@echo 'Building file: $<'
+	@echo 'Invoking: g++ C Compiler'
+	g++ -O0  -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+	
+	
+RM := rm -rf
+
+# All of the sources participating in the build are defined here
+
+
+# Add inputs and outputs from these tool invocations to the build variables 
+
+# All Target
+all: notify
+
+# Tool invocations
+notify: $(OBJS) $(USER_OBJS)
+	@echo 'Building target: $@'
+	@echo 'Invoking: g++ C Linker'
+	g++  -o$(EXE) $(OBJS) $(USER_OBJS) $(LIBS)
+	@echo 'Finished building target: $@'
+	@echo ' '
+
+# Other Targets
+clean:
+	-$(RM) $(OBJS) $(C_DEPS) $(EXE)
+	-@echo ' '

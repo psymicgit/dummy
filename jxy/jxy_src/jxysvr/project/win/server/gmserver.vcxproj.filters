@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\common\server\utility.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocommondata.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\net\gs\gsprocessor.cpp">
+      <Filter>net\gs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\net\cli\clipktbuilder.cpp">
+      <Filter>net\cli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\net\cli\cliprocessor.cpp">
+      <Filter>net\cli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\logic\qdes.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\gmserver.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogmgs.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\net\ms\msprocessor.cpp">
+      <Filter>net\ms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protomsgm.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\framework\gmapplication.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\framework\gmclient.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\logic\gmconfig.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\logic\gmevent.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\logic\dbmgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\logic\basedbccmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\logic\recordinfo.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocligs.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\server\jsonpacketparser.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gmserver\stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{b447fb68-e1c0-4452-b797-86db30ac17e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{68cece42-937b-439d-8997-bfcb35a65baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic">
+      <UniqueIdentifier>{387921c5-a696-4d8c-a16d-e64edda359a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{e01fcde9-c1da-4606-8579-cf9bf052c772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{c4124864-861a-4714-86db-e07dff27e5ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\gs">
+      <UniqueIdentifier>{e61a188e-37ea-47f3-88d9-842e4eeea317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\cli">
+      <UniqueIdentifier>{615fc950-b4d3-473a-b30f-6de988bd23cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\ms">
+      <UniqueIdentifier>{d7141480-6356-4971-9b7f-811252372bcc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\common\server\utility.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\logic\error.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocommondata.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\net\gs\gsprocessor.h">
+      <Filter>net\gs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\client\commondef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\net\cli\clipktbuilder.h">
+      <Filter>net\cli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\net\cli\cliprocessor.h">
+      <Filter>net\cli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\logic\qdes.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogmgs.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\net\ms\msprocessor.h">
+      <Filter>net\ms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protomsgm.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\framework\gmapplication.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\framework\gmclient.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\logic\gmconfig.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\logic\gmevent.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\logic\dbmgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\logic\basedbccmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\logic\recordinfo.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocligs.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\jsonpacketparser.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gmserver\stdafx.h" />
+  </ItemGroup>
+</Project>

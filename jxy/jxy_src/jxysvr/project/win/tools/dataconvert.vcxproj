@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\common\server\base64.cpp" />
+    <ClCompile Include="..\..\..\src\tool\dataconvert\convert.cpp" />
+    <ClCompile Include="..\..\..\src\tool\dataconvert\dbmgr.cpp" />
+    <ClCompile Include="..\..\..\src\tool\dataconvert\main.cpp" />
+    <ClCompile Include="..\..\..\src\tool\dataconvert\protocligs.cpp" />
+    <ClCompile Include="..\..\..\src\tool\dataconvert\protocommondata.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\tool\dataconvert\convert.h" />
+    <ClInclude Include="..\..\..\src\tool\dataconvert\dbmgr.h" />
+    <ClInclude Include="..\..\..\src\tool\dataconvert\protocligs.h" />
+    <ClInclude Include="..\..\..\src\tool\dataconvert\protocommondata.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EDAECA61-35D6-47C3-8774-1B47C8825008}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>dataconvert</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\include\dll;..\..\..\include\dll\sdframework;..\..\..\include\dll\sddb;..\..\..\include\dll\sdu;..\..\..\include\dll\sdlogger;..\..\..\include\dll\sdpipe;..\..\..\include\dll\sdconsole;..\..\..\include\dll\sdnet;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\..\thirdparty\mylua\src\lua;..\..\..\thirdparty\mylua\src\luaplus;..\..\..\thirdparty\mylua\src\tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;..\..\..\src\server\gameserver;..\..\../thirdparty/breakpad/src;..\..\../thirdparty/jsoncpp-src/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;tinyxml.lib;libiconv.lib;mysqlclient.lib;sdconsole_Debug.lib;sddb_Debug.lib;sdframework_Debug.lib;sdlogger_Debug.lib;sdnet_Debug.lib;sdpipe_Debug.lib;sdu_Debug.lib;common.lib;crash_generation_client.lib;exception_handler.lib;json_vc71_libmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\../bin/dll/Win32/Debug;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win32/debug;..\..\..\thirdparty\mylua\lib\win32\debug;..\..\../thirdparty/mysql/lib/win32/debug;..\..\../thirdparty/breakpad/src/client/windows/Debug/lib;..\..\../thirdparty/jsoncpp-src/build/vs71/debug/lib_json;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

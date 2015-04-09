@@ -1,0 +1,709 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="framework">
+      <UniqueIdentifier>{1d0af32d-96aa-49ac-8bb6-5d1ff8c865ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{f1755516-7b4c-4d43-9462-6dda9e93f182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{3de52a3c-0b19-4a40-a3d2-57752b42df04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\gt">
+      <UniqueIdentifier>{7dcf359e-5f4e-43ae-a41b-e669f07846e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\db">
+      <UniqueIdentifier>{cfb3e445-57ac-47af-a2ba-d97d887c022b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\cli">
+      <UniqueIdentifier>{37e5e463-b27e-4336-bfee-9a73f3278dc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{9f9bf12a-68f1-46b4-945e-cf6cd65e74e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic">
+      <UniqueIdentifier>{7d14e60b-2071-47f3-8ab6-28152a8cf4e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\player">
+      <UniqueIdentifier>{16ac37df-3b18-4d9f-8847-b2f40e04dabd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\skill">
+      <UniqueIdentifier>{7c563eb4-755d-4b23-8467-b864acc9a3d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\item">
+      <UniqueIdentifier>{0ecde516-b410-4496-b07d-3d8fe9dde529}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\hero">
+      <UniqueIdentifier>{a189acd1-1e6d-4d7f-be66-68b790c26a66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\buff">
+      <UniqueIdentifier>{67999f9a-7f9e-4983-9b5b-f11ed737c5b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\base">
+      <UniqueIdentifier>{dc409a08-c27a-438b-81e3-804269e82f69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\battle">
+      <UniqueIdentifier>{368fff41-9cd8-4743-8bc9-994e583cfb25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\monster">
+      <UniqueIdentifier>{f729fd3c-58c3-4333-8074-b2eed7ab21f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\quality">
+      <UniqueIdentifier>{a6644553-3a45-4fb7-8a76-d51000f608e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\instance">
+      <UniqueIdentifier>{2a755017-7f23-42d3-a117-44c41cefbc92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\hang">
+      <UniqueIdentifier>{239a2e5a-3414-44ab-8aff-219feb700702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\bag">
+      <UniqueIdentifier>{96c1be7d-6239-44dc-917b-2a051605b06d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\build">
+      <UniqueIdentifier>{9ed31a5e-c2b9-4a63-8d52-dab591910de4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\item\equip">
+      <UniqueIdentifier>{69b76cce-3f42-4e44-8f2e-cc4b8f2408cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\item\goods">
+      <UniqueIdentifier>{61316ee1-db34-4bb0-b3d4-0aaad297bc9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\item\box">
+      <UniqueIdentifier>{a6904f6c-913e-42a3-85b2-12bfff571f47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\event">
+      <UniqueIdentifier>{965ede31-1048-4e9a-a67c-249bf90317db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\task">
+      <UniqueIdentifier>{b489ba00-13ac-4db1-a68f-617a9b6df29a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\cd">
+      <UniqueIdentifier>{31cb1a5f-8539-4ec7-9de7-e524eba24f6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="db">
+      <UniqueIdentifier>{6557e6e8-22d4-423f-8174-47de4d37c896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\science">
+      <UniqueIdentifier>{1c61228f-d7d6-4d4f-87d8-4f7d8ffeb15f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\race">
+      <UniqueIdentifier>{75fb6820-ef31-49ce-957f-fc0709dbba96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\shop">
+      <UniqueIdentifier>{a046d8e8-63a1-4d37-a61f-59c60d6eea14}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:/work/maxnet\src\server\gameserver\framework\gsapplication.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="D:/work/maxnet\src\server\gameserver\framework\gsconfig.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocligs.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocommondata.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogsdb.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtcommon.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtgs.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="D:/work/maxnet\src\server\gameserver\net\gt\gtpipechannel.cpp">
+      <Filter>net\gt</Filter>
+    </ClCompile>
+    <ClCompile Include="D:/work/maxnet\src\server\gameserver\net\gt\gtpktbuilder.cpp">
+      <Filter>net\gt</Filter>
+    </ClCompile>
+    <ClCompile Include="D:/work/maxnet\src\server\gameserver\net\gt\gtprocessor.cpp">
+      <Filter>net\gt</Filter>
+    </ClCompile>
+    <ClCompile Include="D:/work/maxnet\src\server\gameserver\net\db\dbpktbuilder.cpp">
+      <Filter>net\db</Filter>
+    </ClCompile>
+    <ClCompile Include="D:/work/maxnet\src\server\gameserver\net\db\dbprocessor.cpp">
+      <Filter>net\db</Filter>
+    </ClCompile>
+    <ClCompile Include="D:/work/maxnet\src\server\gameserver\net\cli\user.cpp">
+      <Filter>net\cli</Filter>
+    </ClCompile>
+    <ClCompile Include="D:/work/maxnet\src\server\gameserver\net\cli\usermgr.cpp">
+      <Filter>net\cli</Filter>
+    </ClCompile>
+    <ClCompile Include="D:/work/maxnet\src\server\gameserver\logic\logicmodel.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="D:/work/maxnet\src\server\gameserver\gameserver.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\player.cpp">
+      <Filter>logic\player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playermgr.cpp">
+      <Filter>logic\player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\server\utility.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\skill.cpp">
+      <Filter>logic\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\skillmgr.cpp">
+      <Filter>logic\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\hero\hero.cpp">
+      <Filter>logic\hero</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\hero\heromgr.cpp">
+      <Filter>logic\hero</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\buff\buff.cpp">
+      <Filter>logic\buff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\skillpropmgr.cpp">
+      <Filter>logic\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\buff\buffmgr.cpp">
+      <Filter>logic\buff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\hero\heropropmgr.cpp">
+      <Filter>logic\hero</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\base\dbconfig.cpp">
+      <Filter>logic\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\buff\buffaffect.cpp">
+      <Filter>logic\buff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\battle\battleobj.cpp">
+      <Filter>logic\battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\buff\buffaffecthandler.cpp">
+      <Filter>logic\buff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\monstermgr.cpp">
+      <Filter>logic\monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\monster.cpp">
+      <Filter>logic\monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\monsterpropmgr.cpp">
+      <Filter>logic\monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\item.cpp">
+      <Filter>logic\item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\quality\quality.cpp">
+      <Filter>logic\quality</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\instance\instance.cpp">
+      <Filter>logic\instance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\hang\hang.cpp">
+      <Filter>logic\hang</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\bag\bag.cpp">
+      <Filter>logic\bag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\hero\heroupgratepropmgr.cpp">
+      <Filter>logic\hero</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\itemhangpropmgr.cpp">
+      <Filter>logic\item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\itemmgr.cpp">
+      <Filter>logic\item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\bag\bagmgr.cpp">
+      <Filter>logic\bag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\bag\bagpropmgr.cpp">
+      <Filter>logic\bag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\instance\instancemgr.cpp">
+      <Filter>logic\instance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\buildpropmgr.cpp">
+      <Filter>logic\build</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\build.cpp">
+      <Filter>logic\build</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\buildmgr.cpp">
+      <Filter>logic\build</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\base\burstprop.cpp">
+      <Filter>logic\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\monstergroup.cpp">
+      <Filter>logic\monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\hang\hangmgr.cpp">
+      <Filter>logic\hang</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\battle\battlemgr.cpp">
+      <Filter>logic\battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\client\errdef.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\base\logicfunc.cpp">
+      <Filter>logic\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\box\boxpropmgr.cpp">
+      <Filter>logic\item\box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\box\box.cpp">
+      <Filter>logic\item\box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\equip\equippropmgr.cpp">
+      <Filter>logic\item\equip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\equip\equip.cpp">
+      <Filter>logic\item\equip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\goods\goodspropmgr.cpp">
+      <Filter>logic\item\goods</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\goods\goods.cpp">
+      <Filter>logic\item\goods</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\goods\goodsaffect.cpp">
+      <Filter>logic\item\goods</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\goods\goodsaffecthandler.cpp">
+      <Filter>logic\item\goods</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\saveevent.cpp">
+      <Filter>logic\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\taskmgr.cpp">
+      <Filter>logic\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\taskprop.cpp">
+      <Filter>logic\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\task.cpp">
+      <Filter>logic\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerupgratepropmgr.cpp">
+      <Filter>logic\player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\science.cpp">
+      <Filter>logic\build</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\smithy.cpp">
+      <Filter>logic\build</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\maintown.cpp">
+      <Filter>logic\build</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\producebuild.cpp">
+      <Filter>logic\build</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\cd\cdpmgr.cpp">
+      <Filter>logic\cd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\cd\cdpropmgr.cpp">
+      <Filter>logic\cd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\instance\instancepropmgr.cpp">
+      <Filter>logic\instance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\recruit.cpp">
+      <Filter>logic\build</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\timereventmgr.cpp">
+      <Filter>logic\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\science\scienceattrpropmgr.cpp">
+      <Filter>logic\science</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\science\scienceattr.cpp">
+      <Filter>logic\science</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\science\sciencemgr.cpp">
+      <Filter>logic\science</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\taskpropmgr.cpp">
+      <Filter>logic\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\finishconditon.cpp">
+      <Filter>logic\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\acceptconditon.cpp">
+      <Filter>logic\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\conditoncheck.cpp">
+      <Filter>logic\task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playersavemgr.cpp">
+      <Filter>logic\player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\db\createplayercmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\db\dbmgr.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\db\dbsessionmgr.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\db\getplayerdatacmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\db\saveinstancerecordcmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\db\saveplayerdatacmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\db\sceneinstancerecordcmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\db\basedbccmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\race\racepropmgr.cpp">
+      <Filter>logic\race</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\race\race.cpp">
+      <Filter>logic\race</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\race\racemgr.cpp">
+      <Filter>logic\race</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\recebuild.cpp">
+      <Filter>logic\build</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerbasedatacachemgr.cpp">
+      <Filter>logic\player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerprotocol.cpp">
+      <Filter>logic\player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\shop\shopmgr.cpp">
+      <Filter>logic\shop</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:/work/maxnet\src\server\gameserver\framework\gsapplication.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="D:/work/maxnet\src\server\gameserver\framework\gsconfig.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocligs.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocommondata.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogsdb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtcommon.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtgs.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="D:/work/maxnet\src\server\gameserver\net\gt\gtpipechannel.h">
+      <Filter>net\gt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:/work/maxnet\src\server\gameserver\net\gt\gtpktbuilder.h">
+      <Filter>net\gt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:/work/maxnet\src\server\gameserver\net\gt\gtprocessor.h">
+      <Filter>net\gt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:/work/maxnet\src\server\gameserver\net\db\dbpktbuilder.h">
+      <Filter>net\db</Filter>
+    </ClInclude>
+    <ClInclude Include="D:/work/maxnet\src\server\gameserver\net\db\dbprocessor.h">
+      <Filter>net\db</Filter>
+    </ClInclude>
+    <ClInclude Include="D:/work/maxnet\src\server\gameserver\net\cli\user.h">
+      <Filter>net\cli</Filter>
+    </ClInclude>
+    <ClInclude Include="D:/work/maxnet\src\server\gameserver\net\cli\usermgr.h">
+      <Filter>net\cli</Filter>
+    </ClInclude>
+    <ClInclude Include="D:/work/maxnet\src\server\gameserver\logic\logicmodel.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\player.h">
+      <Filter>logic\player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playermgr.h">
+      <Filter>logic\player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\utility.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\skillmgr.h">
+      <Filter>logic\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\skill.h">
+      <Filter>logic\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\hero\heromgr.h">
+      <Filter>logic\hero</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\hero\hero.h">
+      <Filter>logic\hero</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\buff\buff.h">
+      <Filter>logic\buff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\skillpropmgr.h">
+      <Filter>logic\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\propcontainer.h">
+      <Filter>logic\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\buff\buffmgr.h">
+      <Filter>logic\buff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\hero\heropropmgr.h">
+      <Filter>logic\hero</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\baseobj.h">
+      <Filter>logic\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\dbconfig.h">
+      <Filter>logic\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\buff\buffaffect.h">
+      <Filter>logic\buff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\battle\battleobj.h">
+      <Filter>logic\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\buff\buffaffecthandler.h">
+      <Filter>logic\buff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\monster.h">
+      <Filter>logic\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\monstermgr.h">
+      <Filter>logic\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\monsterpropmgr.h">
+      <Filter>logic\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\item.h">
+      <Filter>logic\item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\quality\quality.h">
+      <Filter>logic\quality</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\instance\instance.h">
+      <Filter>logic\instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\hang\hang.h">
+      <Filter>logic\hang</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\basedefine.h">
+      <Filter>logic\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\bag\bag.h">
+      <Filter>logic\bag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\hero\heroupgratepropmgr.h">
+      <Filter>logic\hero</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\itemhangpropmgr.h">
+      <Filter>logic\item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\itemmgr.h">
+      <Filter>logic\item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\bag\bagmgr.h">
+      <Filter>logic\bag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\bag\bagpropmgr.h">
+      <Filter>logic\bag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\instance\instancepropmgr.h">
+      <Filter>logic\instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\instance\instancemgr.h">
+      <Filter>logic\instance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\buildmgr.h">
+      <Filter>logic\build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\buildpropmgr.h">
+      <Filter>logic\build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\build.h">
+      <Filter>logic\build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\burstprop.h">
+      <Filter>logic\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\monstergroup.h">
+      <Filter>logic\monster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\hang\hangmgr.h">
+      <Filter>logic\hang</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\battle\battleattrobj.h">
+      <Filter>logic\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\battle\battlemgr.h">
+      <Filter>logic\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\client\commondef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\client\errdef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\logicfunc.h">
+      <Filter>logic\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\box\box.h">
+      <Filter>logic\item\box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\box\boxpropmgr.h">
+      <Filter>logic\item\box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\equip\equippropmgr.h">
+      <Filter>logic\item\equip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\equip\equip.h">
+      <Filter>logic\item\equip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\goods\goodsaffecthandler.h">
+      <Filter>logic\item\goods</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\goods\goodspropmgr.h">
+      <Filter>logic\item\goods</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\goods\goods.h">
+      <Filter>logic\item\goods</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\goods\goodsaffect.h">
+      <Filter>logic\item\goods</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\saveevent.h">
+      <Filter>logic\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\task.h">
+      <Filter>logic\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\taskmgr.h">
+      <Filter>logic\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\taskprop.h">
+      <Filter>logic\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerupgratepropmgr.h">
+      <Filter>logic\player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\producebuild.h">
+      <Filter>logic\build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\science.h">
+      <Filter>logic\build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\smithy.h">
+      <Filter>logic\build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\maintown.h">
+      <Filter>logic\build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\cd\cdpropmgr.h">
+      <Filter>logic\cd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\cd\cdpmgr.h">
+      <Filter>logic\cd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\recruit.h">
+      <Filter>logic\build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\timereventmgr.h">
+      <Filter>logic\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\science\scienceattr.h">
+      <Filter>logic\science</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\science\scienceattrpropmgr.h">
+      <Filter>logic\science</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\science\sciencemgr.h">
+      <Filter>logic\science</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\taskpropmgr.h">
+      <Filter>logic\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\finishconditon.h">
+      <Filter>logic\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\acceptconditon.h">
+      <Filter>logic\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\conditoncheck.h">
+      <Filter>logic\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playersavemgr.h">
+      <Filter>logic\player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\db\createplayercmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\db\dbmgr.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\db\dbsessionmgr.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\db\dbsqlstring.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\db\getplayerdatacmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\db\saveinstancerecordcmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\db\saveplayerdatacmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\db\sceneinstancerecordcmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\db\basedbccmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\race\racemgr.h">
+      <Filter>logic\race</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\race\racepropmgr.h">
+      <Filter>logic\race</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\race\race.h">
+      <Filter>logic\race</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\recebuild.h">
+      <Filter>logic\build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerbasedatacachemgr.h">
+      <Filter>logic\player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerprotocol.h">
+      <Filter>logic\player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\shop\shopmgr.h">
+      <Filter>logic\shop</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

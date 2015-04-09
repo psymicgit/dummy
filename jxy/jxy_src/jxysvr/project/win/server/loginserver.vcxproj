@@ -1,0 +1,728 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_UnicodeMD|Win32">
+      <Configuration>Debug_UnicodeMD</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_UnicodeMD|x64">
+      <Configuration>Debug_UnicodeMD</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Unicode|Win32">
+      <Configuration>Debug_Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Unicode|x64">
+      <Configuration>Debug_Unicode</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_UnicodeMD|Win32">
+      <Configuration>Release_UnicodeMD</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_UnicodeMD|x64">
+      <Configuration>Release_UnicodeMD</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Unicode|Win32">
+      <Configuration>Release_Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Unicode|x64">
+      <Configuration>Release_Unicode</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CE3AB076-C3AA-4A2A-A510-2CB9E1C9A27D}</ProjectGuid>
+    <RootNamespace>loginserver</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../obj/$(ProjectName)/$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">true</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include\dll\;..\..\..\include\dll\sdu;..\..\..\include\dll\sdnet;..\..\..\include\dll\sdconsole;..\..\../thirdparty\;..\..\..\include\dll\sdpipe;..\..\..\include\dll\sddb;..\..\..\include\dll\sdlogger;..\..\..\include;..\..\..\src\server/protocol/server;..\..\..\src\server/loginserver;..\..\..\src\server/;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/libiconv/include/win32;..\..\../thirdparty/breakpad/src;..\..\../thirdparty/jsoncpp-src/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;_SDEXCEPTION;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;wsock32.lib;wldap32.lib;libiconv.lib;tinyxml.lib;mysqlclient.lib;sdconsole_Debug.lib;sddb_Debug.lib;sdframework_Debug.lib;sdlogger_Debug.lib;sdnet_Debug.lib;sdpipe_Debug.lib;sdu_Debug.lib;common.lib;crash_generation_client.lib;exception_handler.lib;json_vc71_libmtd.lib;libcurl.lib;ssleay32.lib;libeay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\dll\Win32\Debug/components;..\..\..\bin\dll\Win32\Debug;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win32/debug;..\..\../thirdparty/mysql/lib/win32/debug;..\..\../thirdparty/breakpad/src/client/windows/Debug/lib;..\..\../thirdparty/jsoncpp-src/build/vs71/debug/lib_json;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\include/components/framework/protocol;..\..\..\include/components/framework;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/loginserver;..\..\..\include\dll\sdframework;..\..\..\src\server/protocol/server;../../../../src/components/server/sddb_module/sddbconfig.h;..\..\..\src\server/common;..\..\../thirdparty/libiconv/include/win32;..\..\..\src\server;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;tinyxml.lib;libiconv.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release/components;../../../../bin/win32/release;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/mysql/lib/win32/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\include/components/framework/protocol;..\..\..\include/components/framework;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/loginserver;..\..\..\include\dll\sdframework;..\..\..\src\server/protocol/server;../../../../src/components/server/sddb_module/sddbconfig.h;..\..\..\src\server/common;..\..\../thirdparty/libiconv/include/win32;..\..\..\src\server;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;libiconv.lib;tinyxml.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\dll\Win32\Debug_unicode/components;..\..\..\bin\dll\Win32\Debug_unicode;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win32/debug;..\..\..\bin\dll\Win32\Debug;..\..\..\bin\dll\Win32\Debug/components;..\..\../thirdparty/mysql/lib/win32/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\include/components/framework/protocol;..\..\..\include/components/framework;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/loginserver;..\..\..\include\dll\sdframework;..\..\..\src\server/protocol/server;../../../../src/components/server/sddb_module/sddbconfig.h;..\..\..\src\server/common;..\..\../thirdparty/libiconv/include/win32;..\..\..\src\server;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;tinyxml.lib;libiconv.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release_unicode/components;../../../../bin/win32/release_unicode;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/mysql/lib/win32/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\include/components/framework/protocol;..\..\..\include/components/framework;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/loginserver;..\..\..\include\dll\sdframework;..\..\..\src\server/protocol/server;../../../../src/components/server/sddb_module/sddbconfig.h;..\..\..\src\server/common;..\..\../thirdparty/libiconv/include/win32;..\..\..\src\server;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;tinyxml.lib;libiconv.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release_unicode/components;../../../../bin/win32/release_unicode;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/mysql/lib/win32/release_md;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\include/components/framework/protocol;..\..\..\include/components/framework;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/loginserver;..\..\..\include\dll\sdframework;..\..\..\src\server/protocol/server;../../../../src/components/server/sddb_module/sddbconfig.h;..\..\..\src\server/common;..\..\../thirdparty/libiconv/include/win32;..\..\..\src\server;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;libiconv.lib;tinyxml.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\dll\Win32\Debug_unicode/components;..\..\..\bin\dll\Win32\Debug_unicode;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win32/debug;..\..\..\bin\dll\Win32\Debug;..\..\..\bin\dll\Win32\Debug/components;..\..\../thirdparty/mysql/lib/win32/debug_md;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/loginserver;..\..\..\include/components/framework;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include/components/framework/protocol;..\..\..\include\dll\sdframework;../../../../src/components/server/sddb_module/sddbconfig.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Ws2_32.lib;ole32.lib;libiconv.lib;sdpipe.lib;sddb.lib;sdconsole.lib;sdu.lib;sdlogger.lib;tinyxml.lib;sdframework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug\mmo\loginserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/Debug/components;../../../../bin/win64/debug;../../../../bin/win64/debug/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug\components\sddb.dll ..\..\..\..\bin\win64\debug\mmo\loginserver\
+copy ..\..\..\..\bin\win64\debug\components\sdnet.dll ..\..\..\..\bin\win64\debug\mmo\loginserver
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/loginserver;..\..\..\include/components/framework;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include/components/framework/protocol;..\..\..\include\dll\sdframework;../../../../src/components/server/sddb_module/sddbconfig.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Ws2_32.lib;ole32.lib;libiconv.lib;sdpipe.lib;sddb.lib;sdconsole.lib;sdu.lib;sdlogger.lib;tinyxml.lib;sdframework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release\mmo\loginserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release/components;../../../../bin/win64/release;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/libiconv/lib/win64/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release\components\sdnet.dll ..\..\..\..\bin\win64\release\mmo\loginserver\
+copy ..\..\..\..\bin\win64\release\components\sddb.dll ..\..\..\..\bin\win64\release\mmo\loginserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/loginserver;..\..\..\include/components/framework;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include/components/framework/protocol;..\..\..\include\dll\sdframework;../../../../src/components/server/sddb_module/sddbconfig.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN64;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Ws2_32.lib;ole32.lib;libiconv.lib;sdpipe.lib;sddb.lib;sdconsole.lib;sdu.lib;sdlogger.lib;tinyxml.lib;sdframework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug_unicode\mmo\loginserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/debug_unicode;../../../../bin/win64/debug_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug_unicode\components\sdnet.dll ..\..\..\..\bin\win64\debug_unicode\mmo\loginserver\
+copy ..\..\..\..\bin\win64\debug_unicode\components\sddb.dll ..\..\..\..\bin\win64\debug_unicode\mmo\loginserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/loginserver;..\..\..\include/components/framework;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include/components/framework/protocol;..\..\..\include\dll\sdframework;../../../../src/components/server/sddb_module/sddbconfig.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Ws2_32.lib;ole32.lib;libiconv.lib;sdpipe.lib;sddb.lib;sdconsole.lib;sdu.lib;sdlogger.lib;tinyxml.lib;sdframework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release_unicode\mmo\loginserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release_unicode/components;../../../../bin/win64/release_unicode;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/libiconv/lib/win64/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release_unicode\components\sddb.dll ..\..\..\..\bin\win64\release_unicode\mmo\loginserver
+copy ..\..\..\..\bin\win64\release_unicode\components\sdnet.dll ..\..\..\..\bin\win64\release_unicode\mmo\loginserver
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/loginserver;..\..\..\include/components/framework;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include/components/framework/protocol;..\..\..\include\dll\sdframework;../../../../src/components/server/sddb_module/sddbconfig.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Ws2_32.lib;ole32.lib;libiconv.lib;sdpipe.lib;sddb.lib;sdconsole.lib;sdu.lib;sdlogger.lib;tinyxml.lib;sdframework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release_unicode\mmo\loginserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release_unicode/components;../../../../bin/win64/release_unicode;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/libiconv/lib/win64/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release_unicode\components\sddb.dll ..\..\..\..\bin\win64\release_unicode\mmo\loginserver
+copy ..\..\..\..\bin\win64\release_unicode\components\sdnet.dll ..\..\..\..\bin\win64\release_unicode\mmo\loginserver
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\..\src\server/common;..\..\..\src\server/loginserver;..\..\..\include/components/framework;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/protocol/server;..\..\..\include/components/framework/protocol;..\..\..\include\dll\sdframework;../../../../src/components/server/sddb_module/sddbconfig.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN64;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Ws2_32.lib;ole32.lib;libiconv.lib;sdpipe.lib;sddb.lib;sdconsole.lib;sdu.lib;sdlogger.lib;tinyxml.lib;sdframework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug_unicode\mmo\loginserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/debug_unicode;../../../../bin/win64/debug_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug_unicode\components\sdnet.dll ..\..\..\..\bin\win64\debug_unicode\mmo\loginserver\
+copy ..\..\..\..\bin\win64\debug_unicode\components\sddb.dll ..\..\..\..\bin\win64\debug_unicode\mmo\loginserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\common\client\commondef.h" />
+    <ClInclude Include="..\..\..\src\server\common\client\errdef.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\auth.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\SHA1.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\utility.h" />
+    <ClInclude Include="..\..\..\src\server\common\third\ppclient.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\activitynotifycmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\basedbccmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\bindcheckvercode.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\bindmobile.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\changepwdcmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\dbmgr.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\getuserexpand.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\logincmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\loginexcmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\logoutcmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\playbindcmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\playerdspnameupgragecmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\playerlevelupgragecmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\playunbindcmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\registerusernamecmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\syncdata.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\unbindcheckvercode.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\db\unbindmobile.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\framework\lsapplication.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\logic\basefunc.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\logic\dbconfig.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\logic\lsevent.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\net\cli\user.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\net\cli\usermgr.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\net\gt\gtpktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\net\gt\gtprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\net\tlc\authuser.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\net\tlc\authusermgr.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\net\tlc\tlcprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\basesmscmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\bindsmscmd.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\smsmgr.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\smsuser.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\smsusermgr.h" />
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\unbindsmscmd.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protoclils.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocommondata.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogsls.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtcommon.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtls.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protolstlc.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\common\server\SHA1.cpp" />
+    <ClCompile Include="..\..\..\src\server\common\server\utility.cpp" />
+    <ClCompile Include="..\..\..\src\server\common\third\ppclient.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\activitynotifycmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\basedbccmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\bindcheckvercode.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\bindmobile.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\changepwdcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\dbmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\getuserexpand.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\logincmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\loginexcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\logoutcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\playbindcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\playerdspnameupgragecmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\playerlevelupgragecmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\playunbindcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\registerusernamecmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\syncdata.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\unbindcheckvercode.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\db\unbindmobile.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\framework\lsapplication.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\logic\basefunc.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\logic\dbconfig.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\logic\lsevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\loginserver.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\net\cli\user.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\net\cli\usermgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\net\gt\gtpktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\net\gt\gtprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\net\tlc\authuser.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\net\tlc\authusermgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\net\tlc\tlcprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\basesmscmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\bindsmscmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\smsmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\smsuser.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\smsusermgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\unbindsmscmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protoclils.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocommondata.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogsls.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtcommon.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtls.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protolstlc.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

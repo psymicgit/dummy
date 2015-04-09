@@ -1,0 +1,866 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_UnicodeMD|Win32">
+      <Configuration>Debug_UnicodeMD</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_UnicodeMD|x64">
+      <Configuration>Debug_UnicodeMD</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Unicode|Win32">
+      <Configuration>Debug_Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Unicode|x64">
+      <Configuration>Debug_Unicode</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_UnicodeMD|Win32">
+      <Configuration>Release_UnicodeMD</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_UnicodeMD|x64">
+      <Configuration>Release_UnicodeMD</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Unicode|Win32">
+      <Configuration>Release_Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Unicode|x64">
+      <Configuration>Release_Unicode</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6831FFE6-FDA2-44E1-BAAE-9721DAB38401}</ProjectGuid>
+    <RootNamespace>SDCenterServer</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../obj/$(ProjectName)/$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">true</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\dll;..\..\..\include\dll\sdframework;..\..\..\include\dll\sddb;..\..\..\include\dll\sdu;..\..\..\include\dll\sdlogger;..\..\..\include\dll\sdpipe;..\..\..\include\dll\sdconsole;..\..\..\include\dll\sdnet;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/thrdlocharge;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/maxnetlua;..\..\../thirdparty/maxnetlua/lua;..\..\../thirdparty/maxnetlua/luaplus;..\..\../thirdparty/maxnetlua/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;..\..\../thirdparty/breakpad/src;..\..\../thirdparty/jsoncpp-src/include;../../../thirdparty/luaplus51;..\..\..\;..\..\../thirdparty/mysql/include;..\..\..\thirdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;_SDEXCEPTION;LUAPLUS_EXCEPTIONS=1;CURL_STATICLIB;BATTLE_TEST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OpenMPSupport>false</OpenMPSupport>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;wsock32.lib;wldap32.lib;tinyxml.lib;libiconv.lib;mysqlclient.lib;sdconsole_Debug.lib;sddb_Debug.lib;sdframework_Debug.lib;sdlogger_Debug.lib;sdnet_Debug.lib;sdpipe_Debug.lib;sdu_Debug.lib;common.lib;crash_generation_client.lib;exception_handler.lib;json_vc71_libmtd.lib;maxnetlua.lib;libcurl.lib;ssleay32.lib;libeay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\../bin/dll/Win32/Debug;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win32/debug;..\..\..\thirdparty\mylua\lib\win32\debug;..\..\../thirdparty/mysql/lib/win32/debug;..\..\../thirdparty/breakpad/src/client/windows/Debug/lib;..\..\../thirdparty/jsoncpp-src/build/vs71/debug/lib_json;../../../thirdparty/luaplus51/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>false</GenerateMapFile>
+      <MapFileName>
+      </MapFileName>
+      <MapExports>false</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include\dll\sdu;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ssleay32.lib;libeay32.lib;Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;luaplus.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release;../../../../bin/win32/release/components;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/luaplus51/luapluslib/win32/release;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/mysql/lib/win32/release;..\..\../thirdparty/breakpad/src/client/windows/Release/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sddb_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include\dll\sdu;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ssleay32.lib;libeay32.lib;Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;luaplusd.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\dll\Win32\Debug_unicode;..\..\..\bin\dll\Win32\Debug_unicode/components;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/luaplus51/luapluslib/win32/debug;..\..\../thirdparty/mysql/lib/win32/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\..\..\..\..\output\map\framework\casual\$(SolutionName)\$(ProjectName)D.map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sddb_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include\dll\sdu;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ssleay32.lib;libeay32.lib;Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;luaplus.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release_unicode;../../../../bin/win32/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/luaplus51/luapluslib/win32/release;..\..\../thirdparty/mysql/lib/win32/release</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sddb_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include\dll\sdu;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ssleay32.lib;libeay32.lib;Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;luaplus.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release_unicode;../../../../bin/win32/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/luaplus51/luapluslib/win32/release;..\..\../thirdparty/mysql/lib/win32/release_md</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sddb_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include\dll\sdu;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ssleay32.lib;libeay32.lib;Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;luaplusd.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\dll\Win32\Debug_unicode;..\..\..\bin\dll\Win32\Debug_unicode/components;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/luaplus51/luapluslib/win32/debug;..\..\../thirdparty/mysql/lib/win32/debug_md;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\..\..\..\..\output\map\framework\casual\$(SolutionName)\$(ProjectName)D.map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sddb_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/debug;../../../../bin/win64/debug/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win64/debug;..\..\../thirdparty/luaplus51/luapluslib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\..\..\..\..\output\pdb\framework\casual\$(SolutionName)\$(ProjectName)D.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\..\..\..\..\output\map\framework\casual\$(SolutionName)\$(ProjectName)D.map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug\components\sdnet.dll ..\..\..\..\bin\win64\debug\mmo\gameserver\
+copy ..\..\..\..\bin\win64\debug\components\sddb.dll ..\..\..\..\bin\win64\debug\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release;../../../../bin/win64/release/components;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/luaplus51/luapluslib/win64/release;..\..\../thirdparty/libiconv/lib/win64/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(SolutionName)\$(ProjectName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release\components\sdnet.dll ..\..\..\..\bin\win64\release\mmo\gameserver\
+copy ..\..\..\..\bin\win64\release\components\sddb.dll ..\..\..\..\bin\win64\release\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug_unicode\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/debug_unicode;../../../../bin/win64/debug_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win64/debug;..\..\../thirdparty/luaplus51/luapluslib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\..\..\..\..\output\pdb\framework\casual\$(SolutionName)\$(ProjectName)D.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\..\..\..\..\output\map\framework\casual\$(SolutionName)\$(ProjectName)D.map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug_unicode\components\sdnet.dll ..\..\..\..\bin\win64\debug_unicode\mmo\gameserver\
+copy ..\..\..\..\bin\win64\debug_unicode\components\sddb.dll ..\..\..\..\bin\win64\Debug_unicode\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release_unicode\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release_unicode;../../../../bin/win64/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/libiconv/lib/win64/release;..\..\../thirdparty/luaplus51/luapluslib/win64/release</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(SolutionName)\$(ProjectName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release_unicode\components\sdnet.dll ..\..\..\..\bin\win64\release_unicode\mmo\gameserver\
+copy ..\..\..\..\bin\win64\release_unicode\components\sddb.dll ..\..\..\..\bin\win64\release_unicode\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release_unicode\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release_unicode;../../../../bin/win64/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/libiconv/lib/win64/release;..\..\../thirdparty/luaplus51/luapluslib/win64/release</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(SolutionName)\$(ProjectName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release_unicode\components\sdnet.dll ..\..\..\..\bin\win64\release_unicode\mmo\gameserver\
+copy ..\..\..\..\bin\win64\release_unicode\components\sddb.dll ..\..\..\..\bin\win64\release_unicode\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug_unicode\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/debug_unicode;../../../../bin/win64/debug_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win64/debug;..\..\../thirdparty/luaplus51/luapluslib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\..\..\..\..\output\pdb\framework\casual\$(SolutionName)\$(ProjectName)D.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\..\..\..\..\output\map\framework\casual\$(SolutionName)\$(ProjectName)D.map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug_unicode\components\sdnet.dll ..\..\..\..\bin\win64\debug_unicode\mmo\gameserver\
+copy ..\..\..\..\bin\win64\debug_unicode\components\sddb.dll ..\..\..\..\bin\win64\Debug_unicode\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\common\server\debuginfo\breakpad.cpp" />
+    <ClCompile Include="..\..\..\src\server\common\server\packetparser.cpp" />
+    <ClCompile Include="..\..\..\src\server\common\server\utility.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protolstlc.cpp" />
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\framework\tlcapplication.cpp" />
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\framework\tlcconfig.cpp" />
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\logic\authmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\logic\user.cpp" />
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\logic\usermgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\net\ls\lspktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\net\ls\lsprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\net\ls\svrpipechannel.cpp" />
+    <ClCompile Include="..\..\..\src\server\thrdlocharge\tlcserver.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\common\client\commondef.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\auth.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\debuginfo\breakpad.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\packetparser.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\utility.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protolstlc.h" />
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\framework\tlcapplication.h" />
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\framework\tlcconfig.h" />
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\logic\authmgr.h" />
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\logic\user.h" />
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\logic\usermgr.h" />
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\net\ls\lspktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\net\ls\lsprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\thrdlocharge\net\ls\svrpipechannel.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\common\server\utility.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\server\packetparser.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\net\cli\cliprocessor.cpp">
+      <Filter>net\cli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protoclizs.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocommondata.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\dbmgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\getzoneinfocmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\basedbccmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\framework\zsapplication.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\framework\zsclient.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\zsconfig.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\selectzone.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\framework\mgencrypt.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\net\cli\clipktbuilder.cpp">
+      <Filter>net\cli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\getversionnoticecmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\zsevent.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\synczonenotice.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\getuserinfo.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\register.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\userdeviceinfo.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\getversionnoticecmd2.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\framework\user.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\framework\usermgr.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\third\ppclient.cpp">
+      <Filter>net\third</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\net\gm\rcclient.cpp">
+      <Filter>net\gm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\net\gm\httppacketparser.cpp">
+      <Filter>net\gm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\changepwdcmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\forbidlogin.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\forbidregistered.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\resetpasswdmobile.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\resetpasswdnewpasswd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\setaccounttype.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\startserver.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\http\basehttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\http\httpmgr.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\http\selectzonehttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\http\getuserinfohttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\http\getversionnoticehttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\http\resetpasswdmobilehttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\http\resetpasswdnewpasswdhttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\http\resetpasswdvercodehttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\http\reportuserdeviceinfohttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\logic\unbinddevice.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\http\unbinddevicehttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\http\registerusernamehttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\zoneserver\zoneserver.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{b447fb68-e1c0-4452-b797-86db30ac17e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{68cece42-937b-439d-8997-bfcb35a65baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic">
+      <UniqueIdentifier>{387921c5-a696-4d8c-a16d-e64edda359a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{e01fcde9-c1da-4606-8579-cf9bf052c772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{c4124864-861a-4714-86db-e07dff27e5ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\cli">
+      <UniqueIdentifier>{e61a188e-37ea-47f3-88d9-842e4eeea317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\third">
+      <UniqueIdentifier>{4caa1f22-4b5e-4a3b-8fad-9b8e7996f150}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\gm">
+      <UniqueIdentifier>{4e7dbe5e-128d-4eba-bf3a-431920735ab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="http">
+      <UniqueIdentifier>{82063153-7f80-4127-bc4f-987a7e72f36a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\common\server\packetparser.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\utility.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\net\cli\cliprocessor.h">
+      <Filter>net\cli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protoclizs.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocommondata.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\dbmgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\getzoneinfocmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\basedbccmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\framework\zsapplication.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\framework\zsclient.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\zsconfig.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\selectzone.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\framework\mgencrypt.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\net\cli\clipktbuilder.h">
+      <Filter>net\cli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\getversionnoticecmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\zsevent.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\synczonenotice.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\getuserinfo.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\register.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\userdeviceinfo.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\getversionnoticecmd2.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\framework\user.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\framework\usermgr.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\third\ppclient.h">
+      <Filter>net\third</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\net\gm\rcclient.h">
+      <Filter>net\gm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\net\gm\httppacketparser.h">
+      <Filter>net\gm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\changepwdcmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\client\commondef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\forbidlogin.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\forbidregistered.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\resetpasswdmobile.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\resetpasswdnewpasswd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\setaccounttype.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\startserver.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\http\basehttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\http\httpmgr.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\http\selectzonehttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\http\getuserinfohttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\http\getversionnoticehttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\http\resetpasswdmobilehttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\http\resetpasswdnewpasswdhttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\http\resetpasswdvercodehttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\http\reportuserdeviceinfohttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\logic\unbinddevice.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\http\unbinddevicehttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\zoneserver\http\registerusernamehttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

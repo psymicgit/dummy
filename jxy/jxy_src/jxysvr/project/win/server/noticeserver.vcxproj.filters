@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\common\server\utility.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\server\packetparser.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocommondata.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\logic\dbmgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\logic\basedbccmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\noticeserver.cpp" />
+    <ClCompile Include="..\..\..\src\server\noticeserver\logic\savefeedback.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\net\gs\gsprocessor.cpp">
+      <Filter>net\gs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\logic\nsconfig.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogsns.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\logic\gmmgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\framework\nsapplication.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\apns\feedback.cpp">
+      <Filter>apns</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\apns\iapns.cpp">
+      <Filter>apns</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\apns\notifications.cpp">
+      <Filter>apns</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\apns\sslcomm.cpp">
+      <Filter>apns</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\logic\twodaysnotonlinenoticeinfo.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\framework\ksclient.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\net\cli\cliprocessor.cpp">
+      <Filter>net\cli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\logic\twodaysnotonlinenotifyevent.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\logic\getplayernotifyinfo.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\noticeserver\logic\getplayernotifyinfoevent.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{b447fb68-e1c0-4452-b797-86db30ac17e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{68cece42-937b-439d-8997-bfcb35a65baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic">
+      <UniqueIdentifier>{387921c5-a696-4d8c-a16d-e64edda359a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{e01fcde9-c1da-4606-8579-cf9bf052c772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{c4124864-861a-4714-86db-e07dff27e5ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\gs">
+      <UniqueIdentifier>{e61a188e-37ea-47f3-88d9-842e4eeea317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="apns">
+      <UniqueIdentifier>{dfe67c14-3c0a-4668-a3b3-ee310699dcb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\cli">
+      <UniqueIdentifier>{8ffa349b-d291-4023-b555-cefb4b0b68ad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\common\server\packetparser.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\utility.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\logic\error.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocommondata.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\logic\dbmgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\logic\basedbccmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\logic\savefeedback.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\net\gs\gsprocessor.h">
+      <Filter>net\gs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\logic\nsconfig.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogsns.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\logic\gmmgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\framework\nsapplication.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\client\commondef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\apns\defapns.h">
+      <Filter>apns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\apns\feedback.h">
+      <Filter>apns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\apns\iapns.h">
+      <Filter>apns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\apns\notifications.h">
+      <Filter>apns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\apns\sslcomm.h">
+      <Filter>apns</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\logic\twodaysnotonlinenoticeinfo.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\framework\ksclient.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\net\cli\cliprocessor.h">
+      <Filter>net\cli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\logic\twodaysnotonlinenotifyevent.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\logic\getplayernotifyinfo.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\noticeserver\logic\getplayernotifyinfoevent.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

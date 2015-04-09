@@ -1,0 +1,109 @@
+<?php
+require_once("db_mysql.php");
+require_once("db_cfg.php");
+
+$db = new mysqlclass;
+$db->connect($dbhost,$dbuser,$dbpwd,$dbname);
+unset($dbhost, $dbuser, $dbpwd, $dbname, $pconnect);
+
+$username = $_GET["username"]; 
+$authtype = $_GET["authtype"]; 
+$sign     = $_GET["sign"];
+
+$srcdata = "username=".urlencode($username)."&authtype=".$authtype;
+//var_dump($srcdata);
+
+$key = "3t+abo!1qsf6K)dsfjas*heAF4=he~%|#aKGasdj";
+
+$chksign = hash_hmac('md5', $srcdata, $key); 
+
+//var_dump($chksign);
+
+
+if ($chksign != $sign) {
+    echo "-1";
+    exit();
+}
+
+if (empty($authtype) || null == $authtype || 3 != $authtype) {
+    echo "-2";
+    exit();
+}
+
+//$username = "jjs361@163.com";
+//$username = "tv070651";
+
+
+if (empty($username) || null ==$username) {
+    echo "-3";
+    exit();
+}
+$username = urldecode($username); 
+//print_r($username);
+//print "<br>";
+
+$sql_str = " select t3.ID zoneID, t3.name zoneName, t2.playerID, t2.playerDspName, t2.playerLevel " .
+           " from ios_app_user.account t1 ".
+           " left join ios_app_user.userzone t2 ".
+           " on t2.userID=t1.userID ".
+           " left join ios_app_user.zone t3 ".
+           " on t3.ID=t2.zoneID ".
+           " where t1.userName='".$username."' ";
+
+$result = $db->query($sql_str);
+
+$rownum = $db->num_rows($result);
+if (0 == $rownum) {
+    echo "-4";
+    exit();
+}
+//print $rownum;
+//print "<br>";
+
+$playerlist = array();
+for ($i = 0 ; $i < $rownum; $i++) {
+    $fetchrow = $db->fetch_array($result);
+    array_push($playerlist , $fetchrow);
+}
+//print_r($playerlist);
+//print "<br>"; 
+
+$zonelist = array();
+$k = 0;
+for ($i=0; $i<$rownum; $i++) {
+    $onerow = $playerlist[$i];
+    $zone = array_slice($onerow, 0, 2);
+    $zone1 = $zone;
+    $player = array_slice($onerow, 2);
+    
+    $j = 0;
+    $zone["playerList"][$j] = $player;
+    
+    for ($i2=$i+1; $i2<$rownum; $i2++) {
+        $onerow2 = $playerlist[$i2];
+        $zone2 = array_slice($onerow2, 0, 2);
+        $player2 = array_slice($onerow2, 2);
+        
+        if (!array_diff($zone1, $zone2)) {
+            $j++;
+            $zone["playerList"][$j] = $player2;
+        } else {
+            break;
+        }
+    }
+    
+    $zonelist[$k++] = $zone;  
+    $i = $i + $j;
+    
+    //print $i;
+    //print "<br>";
+}
+
+$rsp = array("userName" => $username , "zoneList" => $zonelist);
+
+//print_r(json_encode($rsp));
+//print "<br>";
+
+echo json_encode($rsp);
+$db->free_result($result);
+?> 

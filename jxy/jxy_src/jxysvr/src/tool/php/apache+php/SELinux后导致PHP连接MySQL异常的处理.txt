@@ -1,0 +1,44 @@
+[MySQL FAQ]启用SELinux后，PHP连接MySQL异常
+
+
+同事报告一起奇怪的现象，一个最简单的测试PHP代码，在测试环境很正常，但是在正式环境下，无论用何种方式(tcp/ip、unix socket)都无法连接mysql。
+我协助查看了下，确实如此，无论是指定IP、端口的tcp/ip方式连接，或者是用unix socket方式连接，报错信息都类似：
+
+Could not connect: Can't connect to MySQL server on 'MYSQL.SERVER' (13)
+
+无论如何修改MySQL的授权，或者调整php.ini中关于MySQL的设置，或者修改MySQL的监听网口，都无法解决。
+而如果用命令行人工连接MySQL，则一切正常。
+
+问题看起来像是php(with apache)不被允许连接MySQL，但是防火墙也没有限制。想来想去，唯有SELinux的因素会导致这个问题。
+
+getsebool -a|grep -i httpd
+
+可以看到这里设置了httpd进程的许可模式，再仔细看一下，有一个选项：
+
+getsebool -a|grep -i httpd_can_network_connect
+httpd_can_network_connect --> off
+
+现在明白了，原来是SELinux限制了httpd对外访问的权限。将其开启即可：
+
+setsebool -P httpd_can_network_connect=1
+
+如果对SELinux不熟悉，也可以直接修改系统配置文件 /etc/sysconfig/selinux，全局关闭：
+
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+#SELINUX=enforcing
+#把设置改为disabled
+SELINUX=disabled
+# SELINUXTYPE= can take one of these two values:
+#     targeted - Targeted processes are protected,
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+
+然后重启操作系统，即可生效。
+或者，直接执行命令，可在线生效：
+
+[root@imysql~]# setenforce 0
+setenforce: SELinux is disabled

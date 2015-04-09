@@ -1,0 +1,31 @@
+Unsupported stuff:
+	Generated inline header files
+	Generated container class
+
+Only generated .h/.cpp class library files are up-to-date.
+
+
+Types
+=====
+
+tinytext
+	char[256]  or  std::string
+
+text
+	char *	(Must be new'd by application - deleted in class destructor)
+
+mediumtext / longtext
+	std::vector<std::string>
+
+
+TODO
+====
+
+-stl default
+-stl- turns off std::string
+	OK
+
+-global default
+-global- turns off global
+	OK
+

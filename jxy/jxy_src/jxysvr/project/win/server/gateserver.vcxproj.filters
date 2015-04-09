@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="framework">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{7440e124-c1cd-40aa-813a-bfd68218d39b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{63e711d8-efe1-48e2-9f0b-b8125071551f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{087f70ec-02a4-40fb-979c-4c3af0a21675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\gs">
+      <UniqueIdentifier>{1741687e-6f40-4167-82e3-36bd33829f40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\common">
+      <UniqueIdentifier>{3dda4b94-9fe6-4b67-bab0-05e82afc3ad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\cli">
+      <UniqueIdentifier>{0f5c4619-2d0a-43f0-95ba-0d85e521e688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\ls">
+      <UniqueIdentifier>{e9e9af9f-8dab-4b20-87b2-20b133a947fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic">
+      <UniqueIdentifier>{1b4b1dc5-c481-45c8-b161-bca877bcc945}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocligs.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocligt.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protoclils.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocommondata.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtcommon.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtgs.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtls.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\net\common\svrpipechannel.cpp">
+      <Filter>net\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\mgencrypt.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\server\utility.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\user.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\usermgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogsls.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\net\cli\clipktbuilder.cpp">
+      <Filter>net\cli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\net\cli\cliprocessor.cpp">
+      <Filter>net\cli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\net\common\compktbuilder.cpp">
+      <Filter>net\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\net\gs\gsprocessor.cpp">
+      <Filter>net\gs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\net\gs\gspktbuilder.cpp">
+      <Filter>net\gs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\server\packetparser.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\framework\gtapplication.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\framework\gtclient.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\gtconfig.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\gtevent.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\net\ls\lsprocessor.cpp">
+      <Filter>net\ls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\net\ls\lspktbuilder.cpp">
+      <Filter>net\ls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\basehttpcmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\httpmgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\noticehttpcmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\noticemgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\gateserver.cpp" />
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\registerhttpcmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\logouthttpcmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\changepwdhttpcmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\getuserexpandhttpcmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\loginexhttpcmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\bindcheckvercode.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\bindmobilehttpcmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\unbindcheckvercode.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\logic\unbindmobilehttpcmd.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\gateserver\stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocligs.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocligt.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protoclils.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocommondata.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtcommon.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtgs.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtls.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\net\common\svrpipechannel.h">
+      <Filter>net\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\mgencrypt.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\utility.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\user.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\usermgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogsls.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\framework\gtapplication.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\framework\gtclient.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\net\gs\gsprocessor.h">
+      <Filter>net\gs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\net\gs\gspktbuilder.h">
+      <Filter>net\gs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\net\cli\cliprocessor.h">
+      <Filter>net\cli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\net\cli\clipktbuilder.h">
+      <Filter>net\cli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\net\common\compktbuilder.h">
+      <Filter>net\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\gtevent.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\gtconfig.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\net\ls\lsprocessor.h">
+      <Filter>net\ls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\packetparser.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\net\ls\lspktbuilder.h">
+      <Filter>net\ls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\ngstring.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\basehttpcmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\httpmgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\noticehttpcmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\noticemgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\registerhttpcmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\logouthttpcmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\changepwdhttpcmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\getuserexpandhttpcmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\loginexhttpcmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\bindcheckvercode.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\bindmobilehttpcmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\unbindcheckvercode.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\logic\unbindmobilehttpcmd.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\gateserver\stdafx.h" />
+  </ItemGroup>
+</Project>

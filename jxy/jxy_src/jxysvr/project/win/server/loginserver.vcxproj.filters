@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="logic">
+      <UniqueIdentifier>{252c23d2-8b19-4538-9f1a-7de8a68b2ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{d9524ebd-ab20-425a-af6b-f90fa5db739e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{037ca8f9-b796-4106-81e4-f893ae30b4a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{77ad91f8-695c-4d50-8c27-f2adc997e9bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{f08c41de-498a-46a1-964d-f0464e80c3fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\gt">
+      <UniqueIdentifier>{f6480bae-9024-4843-bd43-b326e2fb873c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\cli">
+      <UniqueIdentifier>{64930433-0879-4812-8d7d-7f0d1cf91f4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\third">
+      <UniqueIdentifier>{53d8e085-15bc-47dc-96bd-bbffd57aa786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sms">
+      <UniqueIdentifier>{fbebac3b-e05d-472b-a6f1-261bfd61e8a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\tlc">
+      <UniqueIdentifier>{a393fb60-913a-4c49-8604-53febf11651c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="db">
+      <UniqueIdentifier>{40d947d9-a702-4829-a990-cd2280cfc8e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\server">
+      <UniqueIdentifier>{bb869df0-439f-48ca-a69f-ecb7e3211999}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\loginserver\logic\dbconfig.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\basedbccmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\dbmgr.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtls.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protoclils.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocommondata.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtcommon.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\logincmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\net\gt\gtprocessor.h">
+      <Filter>net\gt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\net\gt\gtpktbuilder.h">
+      <Filter>net\gt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\framework\lsapplication.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\client\commondef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\client\errdef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\registerusernamecmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogsls.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\utility.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\logic\basefunc.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\playerlevelupgragecmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\playerdspnameupgragecmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\playbindcmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\playunbindcmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\loginexcmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\logoutcmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\logic\lsevent.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\activitynotifycmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\changepwdcmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\net\cli\user.h">
+      <Filter>net\cli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\net\cli\usermgr.h">
+      <Filter>net\cli</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\syncdata.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\SHA1.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\third\ppclient.h">
+      <Filter>net\third</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\basesmscmd.h">
+      <Filter>sms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\smsmgr.h">
+      <Filter>sms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\smsuser.h">
+      <Filter>sms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\smsusermgr.h">
+      <Filter>sms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\bindmobile.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\bindsmscmd.h">
+      <Filter>sms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\bindcheckvercode.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\unbindcheckvercode.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\unbindmobile.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\sms\unbindsmscmd.h">
+      <Filter>sms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\db\getuserexpand.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\protocol\server\protolstlc.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\net\tlc\authuser.h">
+      <Filter>net\tlc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\net\tlc\authusermgr.h">
+      <Filter>net\tlc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\loginserver\net\tlc\tlcprocessor.h">
+      <Filter>net\tlc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\server\common\server\auth.h">
+      <Filter>common\server</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\loginserver\logic\dbconfig.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\basedbccmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\dbmgr.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtls.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protoclils.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocommondata.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtcommon.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\logincmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\net\gt\gtpktbuilder.cpp">
+      <Filter>net\gt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\net\gt\gtprocessor.cpp">
+      <Filter>net\gt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\framework\lsapplication.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\registerusernamecmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogsls.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\server\utility.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\logic\basefunc.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\playerlevelupgragecmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\playerdspnameupgragecmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\playbindcmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\playunbindcmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\loginexcmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\logoutcmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\logic\lsevent.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\activitynotifycmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\changepwdcmd.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\net\cli\user.cpp">
+      <Filter>net\cli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\net\cli\usermgr.cpp">
+      <Filter>net\cli</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\syncdata.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\server\SHA1.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\common\third\ppclient.cpp">
+      <Filter>net\third</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\basesmscmd.cpp">
+      <Filter>sms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\smsmgr.cpp">
+      <Filter>sms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\smsuser.cpp">
+      <Filter>sms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\smsusermgr.cpp">
+      <Filter>sms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\bindmobile.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\bindsmscmd.cpp">
+      <Filter>sms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\bindcheckvercode.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\unbindcheckvercode.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\unbindmobile.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\sms\unbindsmscmd.cpp">
+      <Filter>sms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\db\getuserexpand.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\loginserver.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protolstlc.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\net\tlc\authusermgr.cpp">
+      <Filter>net\tlc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\net\tlc\authuser.cpp">
+      <Filter>net\tlc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\loginserver\net\tlc\tlcprocessor.cpp">
+      <Filter>net\tlc</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

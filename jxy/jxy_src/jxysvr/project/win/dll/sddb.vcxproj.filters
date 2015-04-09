@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Connection">
+      <UniqueIdentifier>{8cc7cd02-8c7a-41c1-ad33-53187d2a9b42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RecordSet">
+      <UniqueIdentifier>{13a7bdfb-c771-45aa-9b5e-29c02bfdc3f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{9afc6937-27dc-45ff-ad93-06800528fdd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Connection">
+      <UniqueIdentifier>{2e3e0c5c-8c17-489e-bf55-1eb8e41b6084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RecordSet">
+      <UniqueIdentifier>{ae8e5982-641b-4a30-9f3c-a5a86c48580f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{757927bc-d179-4127-8613-f3ddc1f81304}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_dbmodule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_pool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_session.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\sddbconfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_adoconn.cpp">
+      <Filter>Source Files\Connection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_conn.cpp">
+      <Filter>Source Files\Connection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_connfactory.cpp">
+      <Filter>Source Files\Connection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_mockconn.cpp">
+      <Filter>Source Files\Connection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_mysqlconn.cpp">
+      <Filter>Source Files\Connection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_odbcconn.cpp">
+      <Filter>Source Files\Connection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_wrappedconn.cpp">
+      <Filter>Source Files\Connection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_ado_rs.cpp">
+      <Filter>Source Files\RecordSet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_mysql_rs.cpp">
+      <Filter>Source Files\RecordSet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dll\sddb\db_odbc_rs.cpp">
+      <Filter>Source Files\RecordSet</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_dbmodule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_pool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_session.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\sddbconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_adoconn.h">
+      <Filter>Header Files\Connection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_conn.h">
+      <Filter>Header Files\Connection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_connfactory.h">
+      <Filter>Header Files\Connection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_mockconn.h">
+      <Filter>Header Files\Connection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_mysqlconn.h">
+      <Filter>Header Files\Connection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_odbcconn.h">
+      <Filter>Header Files\Connection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_wrappedconn.h">
+      <Filter>Header Files\Connection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_ado_rs.h">
+      <Filter>Header Files\RecordSet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_mysql_rs.h">
+      <Filter>Header Files\RecordSet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dll\sddb\db_odbc_rs.h">
+      <Filter>Header Files\RecordSet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\dll\sddb\sddb.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

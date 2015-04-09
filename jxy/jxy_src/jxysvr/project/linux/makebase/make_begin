@@ -1,0 +1,6 @@
+compile_type 	= ${shell echo $DEBUG}
+long_bit 	= ${shell getconf LONG_BIT}
+MAXNET_BIN_DIR 	= ${strip ${MAXNET}}/bin
+MAXNET_INC_DIR 	= ${strip ${MAXNET}}/include
+MAXNET_SRC_DIR 	= ${strip ${MAXNET}}/src
+THIRDP_DIR  	= ${strip ${MAXNET}}/thirdparty

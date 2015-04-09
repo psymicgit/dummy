@@ -1,0 +1,57 @@
+###############################################################################
+#
+#                         makefile for building 
+#
+###############################################################################
+
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += 	\
+start/start.c	\
+start/ReadIni.cpp
+
+OBJS += 	\
+start/start.o \
+start/ReadIni.o
+
+C_DEPS += 	\
+start/start.d \
+start/ReadIni.d
+
+EXE=bin/start
+
+
+# Each subdirectory must supply rules for building sources it contributes
+%.o: %.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: g++ C Compiler'
+	g++ -O0  -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+	
+	
+RM := rm -rf
+
+# All of the sources participating in the build are defined here
+
+
+# Add inputs and outputs from these tool invocations to the build variables 
+
+# All Target
+all: start
+
+# Tool invocations
+start: $(OBJS) $(USER_OBJS)
+	@echo 'Building target: $@'
+	@echo 'Invoking: g++ C Linker'
+	g++  -o $(EXE) $(OBJS) $(USER_OBJS) $(LIBS)
+	@echo 'Finished building target: $@'
+	@echo ' '
+
+# Other Targets
+clean:
+	-$(RM) $(OBJS) $(C_DEPS) $(EXE)
+	-@echo ' '

@@ -1,0 +1,15 @@
+
+$#include <sdtype.h>
+$#include <logic/player/player.h>
+$#include <logic/record/recordmgr.h>
+$#include <protocol/server/protocommondata.h>
+$#include <logic/base/basedefine.h>
+$#include <logic/lua/toluafunc.h>
+$#include <logic/lua/luamgr.h>
+
+
+UINT64 GetTimeValue(const CHAR* pszDateTime); //日期格式字符串如 2013/11/28 17:23:37
+
+UINT32 GetRank(CPlayer* poPlayer); //获取排名，0表示没有排名
+
+int LuaRandomReseed(unsigned int dwRange);//重置种子并随机

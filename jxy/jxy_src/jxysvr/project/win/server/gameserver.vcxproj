@@ -1,0 +1,1858 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_UnicodeMD|Win32">
+      <Configuration>Debug_UnicodeMD</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_UnicodeMD|x64">
+      <Configuration>Debug_UnicodeMD</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Unicode|Win32">
+      <Configuration>Debug_Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Unicode|x64">
+      <Configuration>Debug_Unicode</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_UnicodeMD|Win32">
+      <Configuration>Release_UnicodeMD</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_UnicodeMD|x64">
+      <Configuration>Release_UnicodeMD</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Unicode|Win32">
+      <Configuration>Release_Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Unicode|x64">
+      <Configuration>Release_Unicode</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6831FFE6-FDA2-44E1-BAAE-9721DAB38401}</ProjectGuid>
+    <RootNamespace>SDCenterServer</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\1\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../obj/$(ProjectName)/$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">../../../../obj/$(ProjectName)/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">$(OutDir)</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">true</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</GenerateManifest>
+    <RunCodeAnalysis Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\dll;..\..\..\include\dll\sdframework;..\..\..\include\dll\sddb;..\..\..\include\dll\sdu;..\..\..\include\dll\sdlogger;..\..\..\include\dll\sdpipe;..\..\..\include\dll\sdconsole;..\..\..\include\dll\sdnet;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/maxnetlua;..\..\../thirdparty/maxnetlua/lua;..\..\../thirdparty/maxnetlua/luaplus;..\..\../thirdparty/maxnetlua/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;..\..\..\src\server\gameserver;..\..\../thirdparty/breakpad/src;..\..\../thirdparty/jsoncpp-src/include;../../../thirdparty/luaplus51;..\..\..\;..\..\../thirdparty/mysql/include;..\..\..\thirdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;_SDEXCEPTION;LUAPLUS_EXCEPTIONS=1;CURL_STATICLIB;BATTLE_TEST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OpenMPSupport>false</OpenMPSupport>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+      <PreprocessToFile>false</PreprocessToFile>
+      <AdditionalOptions>-Zm117 %(AdditionalOptions)</AdditionalOptions>
+      <EnablePREfast>false</EnablePREfast>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;wsock32.lib;wldap32.lib;tinyxml.lib;libiconv.lib;mysqlclient.lib;sdconsole_Debug.lib;sddb_Debug.lib;sdframework_Debug.lib;sdlogger_Debug.lib;sdnet_Debug.lib;sdpipe_Debug.lib;sdu_Debug.lib;common.lib;crash_generation_client.lib;exception_handler.lib;json_vc71_libmtd.lib;maxnetlua.lib;libcurl.lib;ssleay32.lib;libeay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\1\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\../bin/dll/Win32/Debug;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win32/debug;..\..\..\thirdparty\mylua\lib\win32\debug;..\..\../thirdparty/mysql/lib/win32/debug;..\..\../thirdparty/breakpad/src/client/windows/Debug/lib;..\..\../thirdparty/jsoncpp-src/build/vs71/debug/lib_json;../../../thirdparty/luaplus51/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>false</GenerateMapFile>
+      <MapFileName>
+      </MapFileName>
+      <MapExports>false</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <HeapReserveSize>
+      </HeapReserveSize>
+      <StackReserveSize>2048000</StackReserveSize>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include\dll\sdu;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ssleay32.lib;libeay32.lib;Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;luaplus.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release;../../../../bin/win32/release/components;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/luaplus51/luapluslib/win32/release;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/mysql/lib/win32/release;..\..\../thirdparty/breakpad/src/client/windows/Release/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sddb_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include\dll\sdu;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ssleay32.lib;libeay32.lib;Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;luaplusd.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\dll\Win32\Debug_unicode;..\..\..\bin\dll\Win32\Debug_unicode/components;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/luaplus51/luapluslib/win32/debug;..\..\../thirdparty/mysql/lib/win32/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\..\..\..\..\output\map\framework\casual\$(SolutionName)\$(ProjectName)D.map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sddb_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include\dll\sdu;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ssleay32.lib;libeay32.lib;Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;luaplus.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release_unicode;../../../../bin/win32/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/luaplus51/luapluslib/win32/release;..\..\../thirdparty/mysql/lib/win32/release</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sddb_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include\dll\sdu;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ssleay32.lib;libeay32.lib;Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;luaplus.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win32/release_unicode;../../../../bin/win32/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win32/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/luaplus51/luapluslib/win32/release;..\..\../thirdparty/mysql/lib/win32/release_md</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sddb_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include\dll\sdframework;..\..\..\include\dll\sdu;..\..\..\include;..\..\..\src\server/;..\..\..\src\server/protocol/server;..\..\..\src\server/gameserver;..\..\..\src\server/common/client;..\..\..\src\server/common/server;..\..\..\src\server/common;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/mysql/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\../thirdparty/sqlite;..\..\../thirdparty/libiconv/include/win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ssleay32.lib;libeay32.lib;Version.lib;ws2_32.lib;tinyxml.lib;libiconv.lib;luaplusd.lib;mysqlclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\server\$(Platform)\$(Configuration)\$(ProjectName)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\bin\dll\Win32\Debug_unicode;..\..\..\bin\dll\Win32\Debug_unicode/components;..\..\../thirdparty/tinyxml/lib/win32/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win32/release;..\..\../thirdparty/luaplus51/luapluslib/win32/debug;..\..\../thirdparty/mysql/lib/win32/debug_md;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\..\..\..\..\output\map\framework\casual\$(SolutionName)\$(ProjectName)D.map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sdnet_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+copy ..\..\..\..\bin\$(Platform)\$(Configuration)\components\sddb_$(Configuration).dll ..\..\..\..\bin\$(Platform)\$(Configuration)\mmo\$(ProjectName)\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/debug;../../../../bin/win64/debug/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win64/debug;..\..\../thirdparty/luaplus51/luapluslib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\..\..\..\..\output\pdb\framework\casual\$(SolutionName)\$(ProjectName)D.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\..\..\..\..\output\map\framework\casual\$(SolutionName)\$(ProjectName)D.map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug\components\sdnet.dll ..\..\..\..\bin\win64\debug\mmo\gameserver\
+copy ..\..\..\..\bin\win64\debug\components\sddb.dll ..\..\..\..\bin\win64\debug\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release;../../../../bin/win64/release/components;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/luaplus51/luapluslib/win64/release;..\..\../thirdparty/libiconv/lib/win64/release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(SolutionName)\$(ProjectName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release\components\sdnet.dll ..\..\..\..\bin\win64\release\mmo\gameserver\
+copy ..\..\..\..\bin\win64\release\components\sddb.dll ..\..\..\..\bin\win64\release\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Unicode|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug_unicode\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/debug_unicode;../../../../bin/win64/debug_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win64/debug;..\..\../thirdparty/luaplus51/luapluslib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\..\..\..\..\output\pdb\framework\casual\$(SolutionName)\$(ProjectName)D.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\..\..\..\..\output\map\framework\casual\$(SolutionName)\$(ProjectName)D.map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug_unicode\components\sdnet.dll ..\..\..\..\bin\win64\debug_unicode\mmo\gameserver\
+copy ..\..\..\..\bin\win64\debug_unicode\components\sddb.dll ..\..\..\..\bin\win64\Debug_unicode\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Unicode|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release_unicode\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release_unicode;../../../../bin/win64/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/libiconv/lib/win64/release;..\..\../thirdparty/luaplus51/luapluslib/win64/release</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(SolutionName)\$(ProjectName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release_unicode\components\sdnet.dll ..\..\..\..\bin\win64\release_unicode\mmo\gameserver\
+copy ..\..\..\..\bin\win64\release_unicode\components\sddb.dll ..\..\..\..\bin\win64\release_unicode\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_UnicodeMD|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\release_unicode\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/release_unicode;../../../../bin/win64/release_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/release;..\..\../thirdparty/openssl/win/lib/libmt;..\..\../thirdparty/libiconv/lib/win64/release;..\..\../thirdparty/luaplus51/luapluslib/win64/release</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(SolutionName)\$(ProjectName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(SolutionName)\$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\release_unicode\components\sdnet.dll ..\..\..\..\bin\win64\release_unicode\mmo\gameserver\
+copy ..\..\..\..\bin\win64\release_unicode\components\sddb.dll ..\..\..\..\bin\win64\release_unicode\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_UnicodeMD|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\include\dll\sdu;..\..\../thirdparty/sqlite;..\..\..\src\server;..\..\../thirdparty/tinyxml/include;..\..\../thirdparty/mysql/win/include;..\..\..\src\server/common;..\..\../thirdparty/openssl/win/include;..\..\../thirdparty/luaplus51/luaplussrc;..\..\../thirdparty/libiconv/include/win64;..\..\..\src\server/gameserver;..\..\../thirdparty/luaplus51/luaplussrc/src;..\..\..\src\server/common/client;..\..\../thirdparty/luaplus51/luaplussrc/tolua;..\..\..\src\server/protocol/server;..\..\..\src\server/common/server;..\..\..\include\dll\sdframework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>$(OutDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)vc90.pdb</ProgramDataBaseFileName>
+      <XMLDocumentationFileName>$(OutDir)</XMLDocumentationFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sdnet.lib;Version.lib;ws2_32.lib;tinyxml.lib;sdconsole.lib;sdlogger.lib;sdu.lib;sdframework.lib;libiconv.lib;luaplus.lib;sddb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\..\..\bin\win64\debug_unicode\mmo\gameserver\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../../../bin/win64/debug_unicode;../../../../bin/win64/debug_unicode/components;..\..\../thirdparty/tinyxml/lib/win64/debug;..\..\../thirdparty/openssl/win/lib/libmtd;..\..\../thirdparty/libiconv/lib/win64/debug;..\..\../thirdparty/luaplus51/luapluslib/win64/debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>..\..\..\..\..\output\pdb\framework\casual\$(SolutionName)\$(ProjectName)D.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>..\..\..\..\..\output\map\framework\casual\$(SolutionName)\$(ProjectName)D.map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\..\bin\win64\debug_unicode\components\sdnet.dll ..\..\..\..\bin\win64\debug_unicode\mmo\gameserver\
+copy ..\..\..\..\bin\win64\debug_unicode\components\sddb.dll ..\..\..\..\bin\win64\Debug_unicode\mmo\gameserver\
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\server\common\server\base64.cpp" />
+    <ClCompile Include="..\..\..\src\server\common\server\debuginfo\breakpad.cpp" />
+    <ClCompile Include="..\..\..\src\server\common\server\packetparser.cpp" />
+    <ClCompile Include="..\..\..\src\server\common\server\utility.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\activityencouragecmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\addgvgift.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\addplayergift.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\addplayerslog.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\autosqlbuf.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\basedbccmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\clrplayerdatacmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\createplayercmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\creatfactiondatacmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\dbcommoperate.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\dbmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\dbsessionmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\deleteovergvgift.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\delplayerlog.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\getbattledata.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\getbattledata2.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\getchatcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\getgsnoticecmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\getoprateingactivitycmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\getplayerconsume.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\getplayerdatacmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\getplayerdatacmd2.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\getplayerdatacmd_old.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\leavefactiondatacmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\getprivatemsglog.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\operatingactivitycmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\playersnapshotcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\protocommondata_old.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\playerdiff.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\recordbattledata.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\recordbattledata2.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\recorplayerloginoff.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\registerusernamecmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\savebossbdatacmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\savecouragedatacmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\savefactiondatacmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\savegvgbuildcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\savegvgcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\savegvgvideocmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\saveplayerconsume.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\saveplayerdatacmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\saveplunderdatacmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\saveprivatemsglog.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\saveracedatacmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\setapppayinfo.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\setapppayprocessed.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\setcenterpayprocessed.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\setmypayprocessed.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\setreadprivatemsgcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\setretreatepayprocessed.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\settongbupayinfo.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\settongbupayprocessed.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\db\updatecdkeycmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\framework\gsapi.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\framework\gsapplication.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\framework\gsconfig.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\gameserver.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activityencourage\activityencourage.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activityencourage\activityencouragemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activityencourage\oprateingactivitymgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activity\bossbattle.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activity\bossbattlemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activity\bossbattlepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activity\bossbbattlelog.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activity\courage.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activity\couragemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activity\couragepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activity\eatbread.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activity\eatbreadpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\activity\luaactivit.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\awaken\awaken.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\awaken\awakenpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\awaken\awakenpropmgr2.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\bag\bag.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\bag\bagpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\base\baseobj.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\base\basepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\base\burstprop.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\base\dbconfig.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\base\jsonencourage.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\base\logicfunc.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\base\protocaltool.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\base\stringtool.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\battle\battleattrobj.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\battle\battlemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\battle\battleobj.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\battle\otherlife.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\begbluegas\begblue.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\begbluegas\begbluepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\build.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\buildmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\build\buildpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\chat\chatmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\chat\wordfilter.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\climbtower\climbtower.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\crop\crop.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\crop\cropfieldpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\crop\croppropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\crop\cropseedpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\encourage\encouragemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\encourage\loginencouragemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\encourage\loginencouragerecord.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\encourage\onlineencouragemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\encourage\onlineencouragerecord.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\enemy\enemy.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\enemy\enemymgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\equipmaster\equipmaster.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\equipmaster\equipmasterpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\activityencourageevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\activitynotifyevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\bossbattleevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\chatevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\courageevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\couragerefreshevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\crossdayevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\drinkwine.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\givewineevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\gsnoticeevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\httpsyncevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\huntingevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\noticeevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\rechargeevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\saveckofflineevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\releasecaptureevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\saveckonlineevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\savepvpevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\timereventmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\event\yabiaoevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\factionshade\shade.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\factionshade\shadepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\faction\faction.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\faction\factionauthorityprop.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\faction\factionbattlelog.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\faction\factiondonate.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\faction\factionmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\faction\factionplayer.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\faction\factionprop.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\fly\flypropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\formation\formation.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\formation\formationmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\formation\formationpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\friendsys\friends.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\friendsys\privatemsgmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\friendsys\sendflowerpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gm\gmmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\godweapon\godweapon.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\godweapon\godweaponbasepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\godweapon\godweaponmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\godweapon\godweaponpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\global\gvgarena.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\global\gvgevent.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\global\gvgmember.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\global\gvgmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\global\pullgroup.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\global\pullplayermgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\gvgpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\gvgvideomgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\local\gvgbuild.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\local\gvgfactionmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\local\gvggiftmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gvg\playergvg.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gymnasium\gymnasium.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\gymnasium\gymnasiumpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\hero\hero.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\hero\heromgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\hero\heropropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\hotspring\hotspring.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\hotspring\hotspringpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\http\apppayhttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\http\basehttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\http\chatencouragehttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\http\getconfigshttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\http\getmaxplayerid_addgift.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\http\httpmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\http\levelhttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\http\namehttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\http\pushplayerinfohttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\http\rechargehttpcmd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\http\urlpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\instance\instance.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\instance\instancebattlercd.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\instance\instancemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\instance\instancepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\instance\instancerecord.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\itemexchange\itemexchangemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\equip\equip.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\equip\equipmakemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\equip\equippropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\equip\openlightpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\equip\strengthenpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\goods\goods.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\goods\goodspropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\item.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\itemcomposepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\itemmakemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\itemmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\jewelry\jewelry.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\item\jewelry\jewelrypropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\jingjie\jingjie.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\jingjie\jingjiepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\logicmodel.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\lua\luamgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\lua\toluafunc.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\lua\toluainterface.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\mark\mark.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\limittime\bosshurtmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\limittime\bosskillmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\limittime\gvgmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\limittime\racemedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\medal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\medalpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\awakenmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\blackroomarrestmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\blackroomdrivemedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\climbotwermedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\gathersciencecoinmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\gathersciencegoldmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\gvecouragemedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\interceptmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\jiebiaomedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\phystrengthmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\playerlevelmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\playerloginmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\playerpowermedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\playerviplevelmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\racecontinuekillmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\reseteliteinstancemedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\resettowermedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\rockmoneymedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\smilemedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\worshipgodmedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\nonetime\worshipplayermedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\medal\playermedal.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\moneytree\moneytree.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\moneytree\moneytreepropbasemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\moneytree\moneytreepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\monster.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\monstergodweapon.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\monstergroup.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\monstermgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\monsterpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\monsterupgradepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\shademonster.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\playergroup.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\playergroupmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\shademonstergroup.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\monster\shademonstermgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\notice\noticemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\onhook\onhook.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\onhook\onhookmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\challengepromgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\commoninfomgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\crossdaymgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\equipcompose.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\errmsgmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\exchange.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\fewparam.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\gatherscience.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\gsnoticemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\hpgridmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\jsonopmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\locale.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\logicconfigmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\phystrength.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\phystrengthmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\playerbattledata2recordmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\playerbattledatarecordmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\ratemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\rdchallenge.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\rdchallengepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\robotmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\singleprammgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\state.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\worship.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\worshippropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\other\xiangqianmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\pet\neidan.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\pet\pet.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\pet\petmng.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\pet\petobjmng.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\pet\petpropmng.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\pet\petskill.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\pet\playerpet.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\player.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playeractivity.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerbasedatacachemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerbattle.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerbuild.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerenemy.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playergetdatamgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerguide.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerhero.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playeritem.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playermgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerprompt.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playersavemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerset.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerslogmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playersnapshotmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playertask.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\player\playerupdateattr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\plunder\plunder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\plunder\plunderbasepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\plunder\plunderbattlelog.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\plunder\plunderbattlelogmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\plunder\plundercapture.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\plunder\plundercapturemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\plunder\plundergridpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\plunder\plundermgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\race\race.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\race\racebattlelog.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\race\racebattlelogmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\race\racemgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\race\racepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\rareitemroom\rareitemroom.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\rareitemroom\rareitemroompropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\record\recordmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\record\recordmodule.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\science\sciencetree.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\science\scienceupdatepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\score\score.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\score\scorepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\shmem\shmemmap.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\shop\shopmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\buff.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\buffaffect.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\buffaffecthandler.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\buffmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\collectgas.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\collectgaspropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\skill.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\skillaffect.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\skillaffecthandler.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\skillmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\skill\skillpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\soul\playersoul.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\soul\soul.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\soul\soulmanager.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\soul\soulpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\specialeffects\specialeffects.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\specialeffects\specialeffectsmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\talent\drug.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\talent\drugmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\talent\drugpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\talent\drugupgradepropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\talent\experiencedrugpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\acceptconditon.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\finishconditon.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\task.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\taskmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\taskprop.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\task\taskpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\updateattr\updateattr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\updateattr\updateattrpropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\vip\vipextdata.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\vip\vippropmgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\yabiao\yabiaobattlelog.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\yabiao\yabiaoinfo.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\logic\yabiao\yabiaomgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\cli\user.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\cli\usermgr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\db\dbpktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\db\dbprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\gs\gspipechannel.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\gs\gspktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\gs\gsprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\gt\gtpipechannel.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\gt\gtpktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\gt\gtprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\ks\kspktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\ks\ksprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\ns\nspktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\ns\nsprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\pk\pkpipechannel.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\pk\pkpktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\pk\pkprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe01.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe02.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe03.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe04.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe05.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe06.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe07.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe08.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe09.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe10.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe11.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe12.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe13.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe14.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe15.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe16.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe17.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe18.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe19.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe20.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe21.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe22.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe23.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe24.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe25.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe26.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe27.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe28.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe29.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe30.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe31.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe32.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe33.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe34.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe35.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe36.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe37.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe38.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe39.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe40.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe41.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe42.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe43.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe44.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe45.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe46.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe47.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe48.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe49.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe50.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe51.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe52.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe53.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe54.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe55.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe56.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe57.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe58.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe59.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe60.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe61.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe62.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe63.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe64.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe65.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe66.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe67.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe68.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe69.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe75showgvgpair.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe76setgvgpair.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframeaddgift73.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframeaddjewelry.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframechangename72.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframeoperatingactivity74.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframepower.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\gmdealframe.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframebluegas.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframecoin.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframedoorstribute.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframeexperience.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframefactionfunds.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframegold.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframeitem.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframejingjie.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframepet.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframephystrength.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframepurplegas.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframescience.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframesoul.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframestory.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframestudy.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframestudycli.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframestudyexp.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframestudynoattr.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframegold1.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\rsdealframe.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\httppacketparser.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\rcclient.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\rechargeclient.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\rechargepktbuilder.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\net\recharge\rechargeprocessor.cpp" />
+    <ClCompile Include="..\..\..\src\server\gameserver\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocligs.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protocommondata.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogmgs.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogsdb.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogsgs.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogsls.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogsns.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogspk.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtcommon.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protogtgs.cpp" />
+    <ClCompile Include="..\..\..\src\server\protocol\server\protorechargegs.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\server\common\client\commondef.h" />
+    <ClInclude Include="..\..\..\src\server\common\client\errdef.h" />
+    <ClInclude Include="..\..\..\src\server\common\client\gmdef.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\base64.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\dblock.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\debuginfo\breakpad.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\ngstring.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\packetparser.h" />
+    <ClInclude Include="..\..\..\src\server\common\server\utility.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\activityencouragecmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\addgvgift.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\addplayergift.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\addplayerslog.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\autosqlbuf.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\basedbccmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\clrplayerdatacmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\createplayercmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\creatfactiondatacmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\dbcommoperate.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\dbmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\dbsessionmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\dbsqlstring.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\deleteovergvgift.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\delplayerlog.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\getbattledata.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\getbattledata2.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\getchatcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\getgsnoticecmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\getoprateingactivitycmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\getplayerconsume.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\getplayerdatacmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\getplayerdatacmd2.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\getplayerdatacmd_old.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\leavefactiondatacmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\getprivatemsglog.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\operatingactivitycmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\playersnapshotcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\protocommondata_old.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\playerdiff.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\recordbattledata.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\recordbattledata2.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\recorplayerloginoff.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\registerusernamecmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\savebossbdatacmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\savecouragedatacmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\savefactiondatacmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\savegvgbuildcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\savegvgcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\savegvgvideocmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\saveplayerconsume.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\saveplayerdatacmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\saveplunderdatacmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\saveprivatemsglog.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\saveracedatacmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\setapppayinfo.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\setapppayprocessed.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\setcenterpayprocessed.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\setmypayprocessed.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\setreadprivatemsgcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\setretreatepayprocessed.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\settongbupayinfo.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\settongbupayprocessed.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\db\updatecdkeycmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\framework\gsapi.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\framework\gsapplication.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\framework\gsconfig.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\framework\singleton.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activityencourage\activityencourage.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activityencourage\activityencouragemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activityencourage\oprateingactivitymgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activity\activity.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activity\bossbattle.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activity\bossbattlemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activity\bossbattlepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activity\bossbbattlelog.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activity\courage.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activity\couragemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activity\couragepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activity\eatbread.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activity\eatbreadpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\activity\luaactivity.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\awaken\awaken.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\awaken\awakenpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\awaken\awakenpropmgr2.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\bag\bag.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\bag\bagpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\basedefine.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\baseobj.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\basepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\burstprop.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\dbconfig.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\jsonencourage.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\logicfunc.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\propcontainer.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\protocaltool.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\randomodds.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\singleton.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\base\stringtool.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\battle\battleattrobj.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\battle\battlemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\battle\battleobj.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\battle\otherlife.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\begbluegas\begblue.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\begbluegas\begbluepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\build.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\buildmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\build\buildpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\chat\chatmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\chat\wordfilter.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\climbtower\climbtower.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\crop\crop.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\crop\cropfieldpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\crop\croppropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\crop\cropseedpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\encourage\encouragemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\encourage\loginencouragemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\encourage\loginencouragerecord.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\encourage\onlineencouragemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\encourage\onlineencouragerecord.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\enemy\enemy.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\enemy\enemymgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\equipmaster\equipmaster.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\equipmaster\equipmasterpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\activityencourageevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\activitynotifyevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\bossbattleevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\chatevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\courageevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\couragerefreshevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\crossdayevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\drinkwine.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\givewineevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\gsnoticeevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\httpsyncevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\huntingevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\noticeevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\rechargeevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\saveckofflineevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\releasecaptureevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\saveckonlineevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\savepvpevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\timereventmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\event\yabiaoevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\factionshade\shade.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\factionshade\shadepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\faction\faction.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\faction\factionauthorityprop.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\faction\factionbattlelog.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\faction\factiondonate.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\faction\factionmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\faction\factionplayer.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\faction\factionprop.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\fly\flydef.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\fly\flypropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\formation\formation.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\formation\formationmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\formation\formationpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\friendsys\friends.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\friendsys\privatemsgmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\friendsys\sendflowerpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gm\gmmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\godweapon\godweapon.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\godweapon\godweaponbasepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\godweapon\godweaponmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\godweapon\godweaponpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\global\gvgarena.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\global\gvgevent.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\global\gvgmember.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\global\gvgmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\global\pullgroup.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\global\pullplayermgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\gvgdef.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\gvgpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\gvgvideomgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\local\gvgbuild.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\local\gvgfactionmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\local\gvggiftmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gvg\playergvg.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gymnasium\gymnasium.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\gymnasium\gymnasiumpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\hero\hero.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\hero\heromgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\hero\heropropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\hotspring\hotspring.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\hotspring\hotspringpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\http\apppayhttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\http\basehttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\http\chatencouragehttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\http\getconfigshttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\http\getmaxplayerid_addgift.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\http\httpmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\http\levelhttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\http\namehttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\http\pushplayerinfohttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\http\rechargehttpcmd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\http\urlpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\instance\instance.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\instance\instancebattlercd.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\instance\instancemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\instance\instancepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\instance\instancerecord.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\itemexchange\itemexchangemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\equip\equip.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\equip\equipmakemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\equip\equippropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\equip\openlightpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\equip\strengthenpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\goods\goods.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\goods\goodspropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\item.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\itemcomposepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\itemmakemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\itemmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\jewelry\jewelry.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\item\jewelry\jewelrypropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\jingjie\jingjie.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\jingjie\jingjiepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\logicmodel.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\lua\luamgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\lua\toluafunc.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\mark\mark.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\limittime\bosshurtmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\limittime\bosskillmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\limittime\gvgmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\limittime\racemedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\medal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\medaldef.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\medalpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\awakenmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\blackroomarrestmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\blackroomdrivemedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\climbtowermedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\gathersciencecoinmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\gathersciencegoldmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\gvecouragemedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\interceptmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\jiebiaomedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\phystrengthmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\playerlevelmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\playerloginmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\playerpowermedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\playerviplevelmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\racecontinuekillmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\reseteliteinstancemedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\resettowermedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\rockmoneymedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\smilemedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\worshipgodmedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\nonetime\worshipplayermedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\medal\playermedal.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\moneytree\moneytree.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\moneytree\moneytreepropbasemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\moneytree\moneytreepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\monster.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\monstergodweapon.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\monstergroup.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\monstermgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\monsterpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\monsterupgradepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\shademonster.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\playergroup.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\playergroupmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\shademonstergroup.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\monster\shademonstermgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\notice\noticemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\onhook\onhook.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\onhook\onhookmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\challengepromgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\commoninfomgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\crossdaymgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\equipcompose.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\errmsgmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\exchange.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\fewparam.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\gatherscience.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\gsnoticemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\hpgridmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\jsonopmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\locale.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\logicconfigmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\phystrength.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\phystrengthmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\playerbattledata2recordmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\playerbattledatarecordmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\ratemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\rdchallenge.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\rdchallengepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\robotmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\singleprammgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\state.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\worship.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\worshippropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\other\xiangqianmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\pet\neidan.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\pet\pet.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\pet\petdef.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\pet\petmng.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\pet\petobjmng.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\pet\petpropmng.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\pet\petskill.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\pet\playerpet.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\player.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playeractivity.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerbasedatacachemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerbattle.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerbuild.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerenemy.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playergetdatamgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerguide.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerhero.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playeritem.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playermgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerprompt.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playersavemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerset.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerslogmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playersnapshotmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playertask.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\player\playerupdateattr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\plunder\plunder.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\plunder\plunderbasepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\plunder\plunderbattlelog.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\plunder\plunderbattlelogmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\plunder\plundercapture.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\plunder\plundercapturemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\plunder\plundergridpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\plunder\plundermgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\race\race.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\race\racebattlelog.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\race\racebattlelogmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\race\racemgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\race\racepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\rareitemroom\rareitemroom.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\rareitemroom\rareitemroompropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\record\recordmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\record\recordmodule.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\science\sciencetree.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\science\scienceupdatepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\score\score.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\score\scorepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\shmem\shmemmap.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\shop\shopmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\buff.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\buffaffect.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\buffaffecthandler.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\buffmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\collectgas.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\collectgaspropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\skill.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\skillaffect.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\skillaffecthandler.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\skillmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\skill\skillpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\soul\playersoul.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\soul\soul.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\soul\souldef.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\soul\soulmanager.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\soul\soulpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\specialeffects\specialeffects.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\specialeffects\specialeffectsmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\talent\drug.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\talent\drugmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\talent\drugpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\talent\drugupgradepropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\talent\experiencedrugpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\acceptconditon.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\finishconditon.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\task.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\taskmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\taskprop.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\task\taskpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\updateattr\updateattr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\updateattr\updateattrpropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\vip\vipextdata.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\vip\vippropmgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\yabiao\yabiaobattlelog.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\yabiao\yabiaoinfo.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\logic\yabiao\yabiaomgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\cli\user.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\cli\usermgr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\db\dbpktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\db\dbprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\gs\gspipechannel.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\gs\gspktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\gs\gsprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\gt\gtpipechannel.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\gt\gtpktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\gt\gtprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\ks\kspktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\ks\ksprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\ns\nspktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\ns\nsprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\pk\pkpipechannel.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\pk\pkpktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\pk\pkprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe01.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe02.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe03.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe04.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe05.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe06.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe07.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe08.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe09.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe10.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe11.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe12.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe13.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe14.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe15.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe16.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe17.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe18.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe19.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe20.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe21.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe22.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe23.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe24.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe25.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe26.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe27.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe28.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe29.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe30.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe31.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe32.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe33.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe34.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe35.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe36.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe37.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe38.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe39.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe40.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe41.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe42.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe43.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe44.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe45.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe46.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe47.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe48.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe49.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe50.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe51.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe52.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe53.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe54.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe55.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe56.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe57.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe58.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe59.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe60.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe61.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe62.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe63.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe64.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe65.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe66.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe67.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe68.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe69.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe75showgvgpair.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframe76setgvgpair.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframeaddgift73.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframeaddjewelry.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframechangename72.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframeoperatingactivity74.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\dealframepower.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\gmdealframe.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframebluegas.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframecoin.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframedoorstribute.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframeexperience.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframefactionfunds.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframegold.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframeitem.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframejingjie.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframepet.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframephystrength.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframepurplegas.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframescience.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframesoul.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframestory.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframestudy.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframestudycli.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframestudyexp.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframestudynoattr.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\dealframegold1.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\deal\rsdeal\rsdealframe.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\httppacketparser.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\rcclient.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\rechargeclient.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\rechargepktbuilder.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\net\recharge\rechargeprocessor.h" />
+    <ClInclude Include="..\..\..\src\server\gameserver\stdafx.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocligs.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protocommondata.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogmgs.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogsdb.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogsgs.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogsls.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogsns.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogspk.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtcommon.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protogtgs.h" />
+    <ClInclude Include="..\..\..\src\server\protocol\server\protorechargegs.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\server\gameserver\logic\lua\gsextend.pkg" />
+    <None Include="..\..\..\src\server\gameserver\logic\lua\package.pkg" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
