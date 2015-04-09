@@ -10,6 +10,7 @@
 #define _log_h_
 
 #include "tool/sockettool.h"
+#include "tool/echotool.h"
 
 #define GLOG_NO_ABBREVIATED_SEVERITIES
 #define GOOGLE_GLOG_DLL_DECL
@@ -21,6 +22,7 @@
 #define  __STDC_FORMAT_MACROS
 #include <glog/logging.h>
 
+#define LOG_OK(...) echotool::changeToColor(COLOR_GREEN); LOG(INFO) << "" _FUNC_ "() " << __VA_ARGS__; echotool::changeToOldColor();
 #define LOG_TRACE LOG(INFO) << "" _FUNC_ "() "
 #define LOG_INFO LOG(INFO) << "" _FUNC_ "() "
 #define LOG_DEBUG LOG(INFO) << "" _FUNC_ "() "

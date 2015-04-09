@@ -41,6 +41,8 @@ void Link::close()
 	}
 
 	m_isClosing = true;
+
+	socktool::closeSocket(m_sockfd);
 	m_net->disableAll(this);
 
 	// LOG_WARN << "close socket<" << m_sockfd << ">";
@@ -65,7 +67,6 @@ void Link::onNetClose()
 	// LOG_INFO << "Link::onNetClose, socket = " << m_sockfd;
 
 	m_net->delFd(this);
-	socktool::closeSocket(m_sockfd);
 }
 
 void Link::onSend(Buffer &buf)

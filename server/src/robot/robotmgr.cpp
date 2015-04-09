@@ -17,9 +17,11 @@ bool RobotMgr::init()
 	global::init();
 	logging::init("robot", "log_robot_");
 
+	LOG_OK("starting robotmgr ...");
+
 	m_wan.init(4);
 
-	for(int i = 0; i < 500; i++) {
+	for(int i = 0; i < 1000; i++) {
 		Robot *robot = createRobot();
 
 		// LOG_INFO << "robot " << i << " start connecting to server";
@@ -29,6 +31,8 @@ bool RobotMgr::init()
 	m_dispatcher.addMsgHandler(new RobotMsgHandler(&m_dispatcher));
 
 	m_run = true;
+
+	LOG_OK("start robotmgr successfully!");
 	return true;
 }
 

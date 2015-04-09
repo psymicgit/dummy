@@ -127,7 +127,7 @@ void Server::start()
 	}
 
 	uninit();
-	LOG_WARN << "stop <" << getServerName() << "> successfully!";
+	LOG_OK("stop <" << getServerName() << "> successfully!");
 }
 
 std::string& Server::getServerName()

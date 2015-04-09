@@ -27,6 +27,9 @@ namespace global
 //  ±º‰
 	static char g_formatBuf[32] = {0};
 
+// ¥Ú”°
+	static thread_local char g_sprintfBuf[4096] = {0};
+
 	void init();
 	void uninit();
 }

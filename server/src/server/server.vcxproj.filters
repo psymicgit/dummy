@@ -138,6 +138,9 @@
     <ClInclude Include="def\define.h">
       <Filter>def</Filter>
     </ClInclude>
+    <ClInclude Include="tool\echotool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -257,6 +260,9 @@
     </ClCompile>
     <ClCompile Include="def\define.cpp">
       <Filter>def</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\echotool.cpp">
+      <Filter>tool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

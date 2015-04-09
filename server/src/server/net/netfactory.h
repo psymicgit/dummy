@@ -28,6 +28,9 @@ class NetFactory
 	friend class Listener;
 	friend class Connector;
 
+	typedef std::vector<Listener*> ListenerVec;
+	typedef std::vector<Connector*> ConnectorVec;
+
 public:
 	static void runNet(void *e);
 
@@ -53,6 +56,9 @@ public:
 	int m_threadCnt; /* = 2 */
 
 	ObjectPool<Link> m_linkPool;
+
+	ListenerVec m_listeners;
+	ConnectorVec m_connectors;
 };
 
 #endif //_netfactory_h_

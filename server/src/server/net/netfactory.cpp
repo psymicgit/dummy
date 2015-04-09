@@ -84,6 +84,7 @@ Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor
 		return listener;
 	}
 
+	m_listeners.push_back(listener);
 	return listener;
 }
 
@@ -94,5 +95,7 @@ Connector* NetFactory::connect(const string& ip, int port, INetReactor &netReact
 	// LOG_DEBUG << "NetFactory::connect addr = " << connector;
 
 	connector->connect();
+
+	m_connectors.push_back(connector);
 	return connector;
 }

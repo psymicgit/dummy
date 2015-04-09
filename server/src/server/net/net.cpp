@@ -136,7 +136,7 @@ void Epoll::addFd(IFd* pfd)
 
 void Epoll::delFd(IFd* pfd)
 {
-	disableAll(pfd);
+	// disableAll(pfd);
 
 	{
 		lock_guard_t<fast_mutex> lock(m_mutex);
@@ -297,7 +297,6 @@ void Select::updateFd(IFd *pfd, FDOperator op)
 			}
 		}
 
-		updateFd(pfd, FD_DISABLE_ALL);
 		// m_links.erase(remove(m_links.begin(), m_links.end(), pfd), m_links.end());
 		delete pfd;
 		break;
