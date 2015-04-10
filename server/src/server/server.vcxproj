@@ -159,7 +159,6 @@
     <ClCompile Include="..\protocol\protocol.pb.cc" />
     <ClCompile Include="basic\buffer.cpp" />
     <ClCompile Include="basic\lock.cpp" />
-    <ClCompile Include="basic\taskqueue.cpp" />
     <ClCompile Include="basic\thread.cpp" />
     <ClCompile Include="basic\timerqueue.cpp" />
     <ClCompile Include="db\dbconnection.cpp" />

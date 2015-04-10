@@ -66,9 +66,6 @@
     <ClInclude Include="tool\timertool.h">
       <Filter>tool</Filter>
     </ClInclude>
-    <ClInclude Include="basic\bind.h">
-      <Filter>basic</Filter>
-    </ClInclude>
     <ClInclude Include="net\msgdispatcher.h">
       <Filter>net</Filter>
     </ClInclude>
@@ -141,6 +138,9 @@
     <ClInclude Include="tool\echotool.h">
       <Filter>tool</Filter>
     </ClInclude>
+    <ClInclude Include="basic\bind.h">
+      <Filter>basic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -190,9 +190,6 @@
     </ClCompile>
     <ClCompile Include="net\netfactory.cpp">
       <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="basic\taskqueue.cpp">
-      <Filter>basic</Filter>
     </ClCompile>
     <ClCompile Include="basic\thread.cpp">
       <Filter>basic</Filter>
