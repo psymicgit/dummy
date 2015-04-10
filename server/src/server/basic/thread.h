@@ -37,7 +37,7 @@ public:
 	}
 
 public:
-	int create_thread(task_t func, int num);
+	int create_thread(Task func, int num);
 	int join();
 
 private:

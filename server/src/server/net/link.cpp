@@ -46,7 +46,7 @@ void Link::close()
 	m_net->disableAll(this);
 
 	// LOG_WARN << "close socket<" << m_sockfd << ">";
-	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&Link::onLogicClose, this));
+	m_pNetReactor->getTaskQueue().put(boost::bind(&Link::onLogicClose, this));
 }
 
 void Link::erase()
@@ -62,9 +62,9 @@ void Link::onLogicClose()
 	m_pNetReactor->onDisconnect(this, m_localAddr, m_peerAddr);
 
 #ifdef WIN
-	m_net->getTaskQueue()->put(task_binder_t::gen(&Link::onNetClose, this));
+	m_net->getTaskQueue()->put(boost::bind(&Link::onNetClose, this));
 #else
-	m_taskQueue->produce(task_binder_t::gen(&Link::onNetClose, this));
+	m_taskQueue->produce(boost::bind(&Link::onNetClose, this));
 #endif
 }
 
@@ -114,9 +114,9 @@ void Link::sendBuffer(Buffer *buf)
 	}
 
 #ifdef WIN
-	m_net->getTaskQueue()->put(task_binder_t::gen(&Link::onSend, this, buf));
+	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this, buf));
 #else
-	m_taskQueue->produce(task_binder_t::gen(&Link::onSend, this, buf));
+	m_taskQueue->produce(boost::bind(&Link::onSend, this, buf));
 #endif
 }
 
@@ -177,7 +177,7 @@ int Link::handleRead()
 #ifdef WIN32
 	handleReadTask();
 #else
-	m_taskQueue->produce(task_binder_t::gen(&Link::handleReadTask, this));
+	m_taskQueue->produce(boost::bind(&Link::handleReadTask, this));
 #endif
 
 	return 0;
@@ -188,7 +188,7 @@ int Link::handleWrite()
 #ifdef WIN32
 	handleWriteTask();
 #else
-	m_taskQueue->produce(task_binder_t::gen(&Link::handleWriteTask, this));
+	m_taskQueue->produce(boost::bind(&Link::handleWriteTask, this));
 #endif
 
 	return 0;

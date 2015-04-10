@@ -46,7 +46,7 @@ void NetFactory::start()
 	m_thread.create_thread(task_queue_pool_t::gen_task(m_taskQueuePool), m_threadCnt);
 #endif
 
-	m_thread.create_thread(task_t(&runNet, this), 1);
+	m_thread.create_thread(Task(&runNet, this), 1);
 }
 
 void NetFactory::stop()

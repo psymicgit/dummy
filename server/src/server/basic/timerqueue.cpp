@@ -53,7 +53,7 @@ void TimerQueue::runAt(Timer *pTask, Timestamp at)
 	m_taskqueue.push(pTask);
 }
 
-void TimerQueue::runAfter(const task_t &task, TimeInMs delay)
+void TimerQueue::runAfter(const Task &task, TimeInMs delay)
 {
 	TaskTimer *taskTimer = new TaskTimer(task);
 	runAfter(taskTimer, delay);

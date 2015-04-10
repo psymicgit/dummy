@@ -15,16 +15,16 @@
 	void* thread_t::thread_func(void* p)
 #endif
 {
-	task_t* t = (task_t*)p;
+	Task* t = (Task*)p;
 	t->run();
 	delete t;
 	return 0;
 }
 
-int thread_t::create_thread(task_t func, int num)
+int thread_t::create_thread(Task func, int num)
 {
 	for (int i = 0; i < num; ++i) {
-		task_t* t = new task_t(func);
+		Task* t = new Task(func);
 
 #ifdef WIN
 		HANDLE handle = (HANDLE)_beginthreadex(NULL, 0, thread_func, t, 0, NULL);

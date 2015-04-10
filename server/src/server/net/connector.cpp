@@ -134,8 +134,8 @@ bool Connector::onConnected()
 	this->close();
 
 	link->open();
-	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&INetReactor::onConnected, m_pNetReactor, link, link->m_localAddr, m_peerAddr));
-	m_pNetReactor->getTaskQueue().put(task_binder_t::gen(&Link::enableRead, link));
+	m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onConnected, m_pNetReactor, link, link->m_localAddr, m_peerAddr));
+	m_pNetReactor->getTaskQueue().put(boost::bind(&Link::enableRead, link));
 
 	return true;
 }
@@ -178,7 +178,7 @@ bool Connector::retry()
 	}
 
 	TimerQueue &timerQueue = m_net->getTimerQueue();
-	timerQueue.runAfter(task_binder_t::gen(&Connector::connect, this), m_retryDelayMs);
+	timerQueue.runAfter(boost::bind(&Connector::connect, this), m_retryDelayMs);
 
 	m_retryDelayMs = MIN(m_retryDelayMs * 2, MaxRetryDelayMs);
 	return true;

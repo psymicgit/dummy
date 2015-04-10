@@ -258,42 +258,42 @@ bool Select::init(int initLinkCount, int linkGrowCount)
 
 void Select::addFd(IFd *pfd)
 {
-	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_ADD));
+	m_tasks.put(boost::bind(&Select::updateFd, this, pfd, FD_ADD));
 }
 
 void Select::delFd(IFd *pfd)
 {
-	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_DEL));
+	m_tasks.put(boost::bind(&Select::updateFd, this, pfd, FD_DEL));
 }
 
 void Select::enableRead(IFd *pfd)
 {
-	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_ENABLE_READ));
+	m_tasks.put(boost::bind(&Select::updateFd, this, pfd, FD_ENABLE_READ));
 }
 
 void Select::enableWrite(IFd *pfd)
 {
-	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_ENABLE_WRITE));
+	m_tasks.put(boost::bind(&Select::updateFd, this, pfd, FD_ENABLE_WRITE));
 }
 
 void Select::enableAll(IFd *pfd)
 {
-	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_ENABLE_ALL));
+	m_tasks.put(boost::bind(&Select::updateFd, this, pfd, FD_ENABLE_ALL));
 }
 
 void Select::disableRead(IFd *pfd)
 {
-	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_DISABLE_READ));
+	m_tasks.put(boost::bind(&Select::updateFd, this, pfd, FD_DISABLE_READ));
 }
 
 void Select::disableWrite(IFd *pfd)
 {
-	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_DISABLE_WRITE));
+	m_tasks.put(boost::bind(&Select::updateFd, this, pfd, FD_DISABLE_WRITE));
 }
 
 void Select::disableAll(IFd *pfd)
 {
-	m_tasks.put(task_binder_t::gen(&Select::updateFd, this, pfd, FD_DISABLE_ALL));
+	m_tasks.put(boost::bind(&Select::updateFd, this, pfd, FD_DISABLE_ALL));
 }
 
 void Select::updateFd(IFd *pfd, FDOperator op)
@@ -433,7 +433,7 @@ int Select::eventLoop()
 
 void Select::close()
 {
-	m_tasks.put(task_binder_t::gen(&Select::closing, this));
+	m_tasks.put(boost::bind(&Select::closing, this));
 }
 
 void Select::closing()

@@ -45,7 +45,7 @@ bool DBSession::init(DBAccount &dbaccount, int minPoolSize, int maxPoolSize)
 		}
 	}
 
-	m_dbthread.create_thread(task_binder_t::gen(&DBSession::threadrun, this), m_maxPoolSize);
+	m_dbthread.create_thread(boost::bind(&DBSession::threadrun, this), m_maxPoolSize);
 	return true;
 }
 

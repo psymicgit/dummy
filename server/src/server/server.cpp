@@ -86,7 +86,7 @@ void Server::onRecv(Link *link, Buffer& buf)
 
 		buf.retrieve(msgHead->msgLen);
 
-		m_taskQueue.put(task_binder_t::gen(&Server::handleMsg, this, link, msgHead->msgId, msg));
+		m_taskQueue.put(boost::bind(&Server::handleMsg, this, link, msgHead->msgId, msg));
 	}
 }
 
@@ -142,7 +142,7 @@ void Server::stop()
 	LOG_WARN << "start closing " << getServerName() << " ...";
 	LOG_WARN << "	<m_taskQueue.size() = " << m_taskQueue.size() << ">";
 
-	m_taskQueue.put(task_binder_t::gen(&Server::stopping, this));
+	m_taskQueue.put(boost::bind(&Server::stopping, this));
 }
 
 void Server::stopping()

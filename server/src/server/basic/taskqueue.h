@@ -16,13 +16,13 @@
 class task_queue_i
 {
 public:
-	typedef std::list<task_t> task_list_t;
+	typedef std::list<Task> task_list_t;
 public:
 	virtual ~task_queue_i() {}
 	virtual void close() = 0;
-	virtual void produce(const task_t& task_) = 0;
+	virtual void produce(const Task& task_) = 0;
 	virtual void multi_produce(const task_list_t& task_) = 0;
-	virtual int  consume(task_t& task_) = 0;
+	virtual int  consume(Task& task_) = 0;
 	virtual int  consume_all(task_list_t&) = 0;
 	virtual int run() = 0;
 	virtual int batch_run() = 0;
@@ -59,7 +59,7 @@ public:
 			m_cond.notify();
 		}
 	}
-	void produce(const task_t& task_)
+	void produce(const Task& task_)
 	{
 		lock_guard_t<> lock(m_mutex);
 		bool need_sig = m_tasklist.empty();
@@ -70,7 +70,7 @@ public:
 		}
 	}
 
-	int   consume(task_t& task_)
+	int   consume(Task& task_)
 	{
 		lock_guard_t<> lock(m_mutex);
 		while (m_tasklist.empty()) {
@@ -88,7 +88,7 @@ public:
 
 	int run()
 	{
-		task_t t;
+		Task t;
 		while (0 == consume(t)) {
 			t.run();
 		}
@@ -135,13 +135,13 @@ private:
 class TaskQueue
 {
 public:
-	void put(const task_t& task_)
+	void put(const Task& task_)
 	{
 		lock_guard_t<> lock(m_mutex);
 		m_tasklist.push_back(task_);
 	}
 
-	int take(task_t& task_)
+	int take(Task& task_)
 	{
 		lock_guard_t<> lock(m_mutex);
 		task_ = m_tasklist.front();
@@ -155,7 +155,7 @@ public:
 		int ret = takeAll(tasks);
 
 		for (task_queue_i::task_list_t::iterator it = tasks.begin(); it != tasks.end(); ++it) {
-			task_t &t = *it;
+			Task &t = *it;
 			t.run();
 		}
 
@@ -193,9 +193,9 @@ class task_queue_pool_t
 		t->run();
 	}
 public:
-	static task_t gen_task(task_queue_pool_t* p)
+	static Task gen_task(task_queue_pool_t* p)
 	{
-		return task_t(&task_func, p);
+		return Task(&task_func, p);
 	}
 public:
 	task_queue_pool_t(int n) :

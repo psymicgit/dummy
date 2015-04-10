@@ -68,7 +68,7 @@ private:
 class TaskTimer : public Timer
 {
 public:
-	TaskTimer(const task_t &task)
+	TaskTimer(const Task &task)
 		: m_task(task)
 	{
 	}
@@ -79,7 +79,7 @@ public:
 	}
 
 private:
-	task_t m_task;
+	Task m_task;
 };
 
 class TimerQueue
@@ -91,7 +91,7 @@ public:
 	void runAt(Timer*, Timestamp clock);
 
 	// 延时一段时间执行task任务
-	void runAfter(const task_t&, TimeInMs delay);
+	void runAfter(const Task&, TimeInMs delay);
 
 	// 延时一段时间执行task任务
 	void runAfter(Timer*, TimeInMs delay);
