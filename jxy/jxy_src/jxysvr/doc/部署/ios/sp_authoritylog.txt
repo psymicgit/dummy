@@ -1,0 +1,37 @@
+CREATE DEFINER=`root`@`218.5.83.234` PROCEDURE `sp_authority`(IN v_StartIdx int,IN v_EndIdx int)
+    SQL SECURITY INVOKER
+lable_1:
+begin    
+
+		declare idx integer;
+		set idx = v_StartIdx;
+		while idx <= v_EndIdx  do
+		begin
+
+			set @sqlstr =concat("CREATE DATABASE `ios_app_s", lpad(idx, 3, 0), "_log` CHARACTER SET utf8 COLLATE utf8_general_ci");
+			select @sqlstr;
+			prepare m_str from @sqlstr;
+			execute m_str;
+
+
+			set @sqlstr =concat("CREATE USER 'ios_app_s", lpad(idx, 3, 0) , "'@'127.0.0.1' IDENTIFIED BY 'i#os_app_s", lpad(idx, 3, 0), "'");
+			select @sqlstr;
+			prepare m_str from @sqlstr;
+			execute m_str;
+
+			set @sqlstr =concat("GRANT SELECT, INSERT, UPDATE, REFERENCES, DELETE, CREATE, DROP, ALTER, INDEX, TRIGGER, CREATE VIEW, SHOW VIEW, EXECUTE, ALTER ROUTINE, CREATE ROUTINE, CREATE TEMPORARY TABLES, LOCK TABLES, EVENT ON `ios_app_s", lpad(idx, 3, 0), "_log`.* TO 'ios_app_s", lpad(idx, 3, 0), "'@'127.0.0.1';");
+			select @sqlstr;
+			prepare m_str from @sqlstr;
+			execute m_str;   
+
+
+			set @sqlstr =concat("GRANT GRANT OPTION ON `ios_app_s", lpad(idx, 3, 0) ,"_log`.* TO 'ios_app_s", lpad(idx, 3, 0), "'@'127.0.0.1'");
+			select @sqlstr;
+			prepare m_str from @sqlstr;
+			execute m_str;  
+
+			set idx = idx + 1;  
+
+		end;
+		end while;
+end

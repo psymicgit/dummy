@@ -1,0 +1,47 @@
+CREATE DEFINER=`root`@`218.5.83.234` PROCEDURE `sp_DelExpiresBattleLog`()
+    SQL SECURITY INVOKER
+lable_1:
+begin    
+	declare done int default 0; 
+	declare v_dbName varchar(255) default ''; 
+	declare v_dbTable varchar(255) default ''; 
+	declare v_TableName varchar(255) default ''; 
+	-- declare cur1 cursor for select CurTableName  from moduletablename where CurTableName like 'oprecord_%'
+
+	declare cur CURSOR for( select TABLE_SCHEMA,TABLE_NAME from information_schema.TABLES where TABLE_SCHEMA like 'and_app_%' AND TABLE_NAME like 'battlelog');  
+	declare continue handler for sqlstate '02000' set done = 1;
+	declare continue handler for sqlstate '23000' set done = 0;
+
+
+	declare exit handler for sqlexception
+	begin
+			rollback;
+	end; 
+
+		open cur;
+		repeat
+			fetch cur into v_dbName, v_dbTable;
+			if not done then
+			begin
+
+				start transaction; 
+				#删除7天前的数据
+				#delete from battlelog where DATE_SUB(CURDATE(), INTERVAL 7 DAY) >= date(CreateTime)
+				#set @sqlstr = concat('delete from ', v_dbName, '.', v_dbTable, ' where DATE_SUB(CURDATE(), INTERVAL 7 DAY) >= date(CreateTime)');
+				#select @sqlstr;
+				#prepare m_str from @sqlstr;
+				#execute m_str;
+
+				set @sqlstr = concat('TRUNCATE TABLE ', v_dbName, '.', 'battlelog');
+				select @sqlstr;
+				prepare m_str from @sqlstr;
+				execute m_str;
+
+				commit; 
+
+			end;
+			end if;
+		until done end repeat;
+		close cur; 
+
+end

@@ -1,0 +1,1 @@
+ALTER TABLE factionplayer add COLUMN jointime datetime NOT NULL default '2014-03-06 00:00:00'

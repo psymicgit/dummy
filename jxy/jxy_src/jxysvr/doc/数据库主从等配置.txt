@@ -1,0 +1,43 @@
+
+//创建root账号，指定IP:218.5.83.234
+CREATE USER 'root'@'218.5.83.234' IDENTIFIED BY 'Maxnet.1234';
+GRANT GRANT OPTION ON *.* TO 'root'@'218.5.83.234';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, RELOAD, SHUTDOWN, PROCESS, FILE, REFERENCES, INDEX, ALTER, SHOW DATABASES, SUPER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, REPLICATION SLAVE, REPLICATION CLIENT, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, CREATE USER, EVENT, TRIGGER ON *.* TO 'root'@'218.5.83.234';
+
+//创建slave账号，指定IP:127.0.0.1
+CREATE USER 'slave'@'127.0.0.1' IDENTIFIED BY 'slave';
+GRANT REPLICATION SLAVE ON *.* TO 'slave'@'127.0.0.1';
+
+//查询主库当前的状态
+show master status;
+mysql-bin.003649	970092218	
+
+//修改从库的连接等信息		
+change master to master_host='127.0.0.1',master_port=63306, master_user='slave',master_password='slave', master_log_file='mysql-bin.000002',master_log_pos=1592;
+
+start slave;
+show slave status;
+
+
+//增加游力的ip,其中XX代表服务器的IP最后2位
+CREATE USER 'youliXX'@'218.5.98.114' IDENTIFIED BY 'you123li';
+GRANT SELECT, SHOW DATABASES ON *.* TO 'youliXX'@'218.5.98.114';
+
+CREATE USER 'youliXX'@'118.26.233.54' IDENTIFIED BY 'you123li';
+GRANT SELECT, SHOW DATABASES ON *.* TO 'youliXX'@'118.26.233.54';
+
+CREATE USER 'youliXX'@'118.26.201.%' IDENTIFIED BY 'you123li';
+GRANT SELECT, SHOW DATABASES ON *.* TO 'youliXX'@'118.26.201.%';
+
+//如果是在运行的库的主从备份，指定要导出的库，以及去年那指定的表
+mysqldump -uroot -pMaxnet.1234 -h127.0.0.1 --port=63306 --databases --hex-blob --default-character-set=utf8 --master-data=1 --single-transaction 
+ios_app_s061  ios_app_s062  ios_app_s063  ios_app_s064 ios_app_s065 ios_app_s066 ios_app_s067  ios_app_s068  ios_app_s069  ios_app_s070 
+ios_app_s031  ios_app_s032  ios_app_s033  ios_app_s034 ios_app_s035 ios_app_s036 ios_app_s026  ios_app_s027  ios_app_s028  ios_app_s029  ios_app_s080 
+> 63306.sql
+mysqldump -uroot -pMaxnet.1234 -S /tmp/mysql_63301.sock --databases --hex-blob --default-character-set=utf8 --master-data=1 ----single-transaction ios_app_config  ios_app_user  ios_app_pay > 63301.sql
+mysqldump -uroot -pMaxnet.1234 -h127.0.0.1 --port=63306 --databases --hex-blob --default-character-set=utf8 --single-transaction  ios_app_s001 --ignore-table=ios_app_s001.battlelog > ios_app_s001.sql
+scp -P 65522 root@192.168.2.102:/home/server/ios_app/gameserver.tar.gz /home/server/ios_app
+e-jkas2
+
+//数据库重启方式
+/etc/init.d/mysqld start my63306

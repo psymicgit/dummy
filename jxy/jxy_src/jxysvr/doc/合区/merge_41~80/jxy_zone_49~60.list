@@ -1,0 +1,13 @@
+区号	区名		合区礼包		游戏库名			游戏库ip			本地socket位置
+49		囧49区		10049			ios_app_s049		192.168.2.99		/tmp/mysql.sock63306
+50		囧50区		10050			ios_app_s050		192.168.2.99		/tmp/mysql.sock63306
+51		囧51区		10051			ios_app_s051		192.168.2.99		/tmp/mysql.sock63306
+52		囧52区		10052			ios_app_s052		192.168.2.99		/tmp/mysql.sock63306
+53		囧53区		10053			ios_app_s053		192.168.2.99		/tmp/mysql.sock63306
+54		囧54区		10054			ios_app_s054		192.168.2.99		/tmp/mysql.sock63306
+55		囧55区		10055			ios_app_s055		192.168.2.99		/tmp/mysql.sock63306
+56		囧56区		10056			ios_app_s056		192.168.2.99		/tmp/mysql.sock63306
+57		囧57区		10057			ios_app_s057		192.168.2.99		/tmp/mysql.sock63306
+58		囧58区		10058			ios_app_s058		192.168.2.98		null
+59		囧59区		10059			ios_app_s059		192.168.2.98		null
+60		囧60区		10060			ios_app_s060		192.168.2.98		null

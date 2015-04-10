@@ -1,0 +1,7 @@
+
+1 * * * * /home/tool/backup_game.sh
+0 3 * * * /home/tool/deldbback.sh
+0 1 * * * /home/tool/dellog.sh
+0 3 * * * /home/tool/deldbbinlog.sh
+0 0 * * * /home/tool/delplayerdack.sh
+

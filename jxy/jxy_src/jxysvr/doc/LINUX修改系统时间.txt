@@ -1,0 +1,1 @@
+ntpdate asia.pool.ntp.org
