@@ -207,10 +207,10 @@ public:
 private:
 
 	char* begin()
-	{ return &*buffer_.begin(); }
+	{ return &buffer_[0]; }
 
 	const char* begin() const
-	{ return &*buffer_.begin(); }
+	{ return &buffer_[0]; }
 
 	void makeSpace(size_t len)
 	{

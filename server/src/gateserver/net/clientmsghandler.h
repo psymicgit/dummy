@@ -15,6 +15,7 @@
 #include "net/msghandler.h"
 #include "tool/servertool.h"
 #include "protocol/message.h"
+#include <tool/ticktool.h>
 
 class ClientMsgHandler : public MsgHandler<Client>
 {
@@ -33,6 +34,8 @@ public:
 private:
 	static void OnLoginReq(Client* client, LoginReq *req, Timestamp receiveTime)
 	{
+		static Tick tick("task_t test");
+
 		// LOG_INFO << "OnLoginReq :" << msgtool::getMsgString(*req);
 		static int loginCnt = 0;
 
@@ -42,7 +45,12 @@ private:
 			LOG_INFO << "loginCnt = " << loginCnt;
 		}
 
-		if (loginCnt == 100000) {
+		if (loginCnt == 50000) {
+			double speed = tick.endTick() / loginCnt;
+			double count = 1.0f / speed;
+			LOG_WARN << "avg cost time = " << speed << ", exe count per second = " << count;
+
+
 			Server::instance->stop();
 		}
 	}

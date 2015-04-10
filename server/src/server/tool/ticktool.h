@@ -22,6 +22,7 @@ public:
 	Tick(const char* msg)
 		: m_msg(msg)
 	{
+		LOG_WARN << "start " << m_msg << std::endl;
 		startTick();
 	}
 

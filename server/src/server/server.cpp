@@ -30,6 +30,8 @@ bool Server::init()
 {
 	global::init();
 
+	m_bufferPool.init(5000, 5000);
+
 	m_dispatcher.addMsgHandler(new NetMsgHandler(&m_dispatcher));
 	return true;
 }
@@ -79,8 +81,8 @@ void Server::onRecv(Link *link, Buffer& buf)
 			return;
 		}
 
-		Buffer msg;
-		msg.append(buf.peek() + sizeof(NetMsgHead), msgHead->msgLen - sizeof(NetMsgHead));
+		Buffer *msg = m_bufferPool.alloc(msgHead->msgLen - sizeof(NetMsgHead));
+		msg->append(buf.peek() + sizeof(NetMsgHead), msgHead->msgLen - sizeof(NetMsgHead));
 
 		buf.retrieve(msgHead->msgLen);
 
@@ -88,11 +90,11 @@ void Server::onRecv(Link *link, Buffer& buf)
 	}
 }
 
-void Server::handleMsg(Link* link, int msgId, Buffer &buf)
+void Server::handleMsg(Link* link, int msgId, Buffer *buf)
 {
 	// LOG_INFO << "<Server> recv msg from <" << link->m_peerAddr.toIpPort() << "> :" << buffer->retrieveAllAsString();
-
-	m_dispatcher.dispatch(*link, msgId, buf.peek(), buf.readableBytes(), 0);
+	m_dispatcher.dispatch(*link, msgId, buf->peek(), buf->readableBytes(), 0);
+	m_bufferPool.free(buf);
 }
 
 int Server::getServerId(ServerType svrType, int zoneId)

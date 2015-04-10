@@ -91,7 +91,6 @@ void Link::onSend(Buffer *buf)
 	}
 
 	int ret = trySend(*buf);
-	global::g_bufferPool.free(buf);
 
 	if (ret < 0) {
 		this ->close();
@@ -104,6 +103,8 @@ void Link::onSend(Buffer *buf)
 	else {
 		// ·¢ËÍ³É¹¦
 	}
+
+	global::g_bufferPool.free(buf);
 }
 
 void Link::sendBuffer(Buffer *buf)
@@ -146,7 +147,7 @@ void Link::send(int msgId, Message & msg)
 	NetMsgHead msgHead = {0, 0};
 	msgtool::buildNetHeader(&msgHead, msgId, size);
 
-	Buffer *buf = global::g_bufferPool.alloc();
+	Buffer *buf = global::g_bufferPool.alloc(sizeof(msgHead) + size);
 	buf->append((const char*)&msgHead, sizeof(msgHead));
 
 	msg.SerializeToArray((void*)buf->beginWrite(), size);

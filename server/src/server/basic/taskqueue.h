@@ -12,7 +12,7 @@
 #include <stdexcept>
 #include "lock.h"
 
-typedef void (*task_func_t)(void*);
+typedef void (*task_func)(void*);
 
 class task_impl_i
 {
@@ -25,7 +25,7 @@ public:
 class task_impl_t: public task_impl_i
 {
 public:
-	task_impl_t(task_func_t func_, void* arg_):
+	task_impl_t(task_func func_, void* arg_):
 		m_func(func_),
 		m_arg(arg_)
 	{}
@@ -41,13 +41,13 @@ public:
 	}
 
 protected:
-	task_func_t m_func;
+	task_func m_func;
 	void*       m_arg;
 };
 
 struct task_t {
 	static void dumy(void*) {}
-	task_t(task_func_t f_, void* d_):
+	task_t(task_func f_, void* d_):
 		task_impl(new task_impl_t(f_, d_))
 	{
 	}

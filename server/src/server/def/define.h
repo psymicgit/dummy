@@ -33,7 +33,7 @@ namespace global
 	static thread_local char g_sprintfBuf[4096] = {0};
 
 // 全局缓冲区区
-	static ObjectPool<Buffer> g_bufferPool;
+	static ObjectPool<Buffer, mutex_t> g_bufferPool;
 
 	void init();
 	void uninit();
