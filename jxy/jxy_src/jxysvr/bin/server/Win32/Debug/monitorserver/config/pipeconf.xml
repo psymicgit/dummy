@@ -1,0 +1,10 @@
+<config>
+    <connections>
+    <!-- monitor server id -->
+    <server id="109-12-1" />
+    <connection mode="connect">
+		<!-- gm server -->
+    	<item id="0-11-1" remoteip="127.0.0.1" remoteport="20003" recvbuf="131072" sendbuf="131072" />
+  	</connection>
+    </connections>
+</config>

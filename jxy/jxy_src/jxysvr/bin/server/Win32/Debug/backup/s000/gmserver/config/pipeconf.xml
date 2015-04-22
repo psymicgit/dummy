@@ -1,0 +1,10 @@
+<config>
+    <connections>
+    <!-- Game Server ID -->
+    <server id="0-11-1" />
+    <connection mode="connect">
+    	<!-- <item id="1-1-10-1" remoteip="127.0.0.1" remoteport="48501" recvbuf="131072" sendbuf="131072" /> -->
+  	</connection>
+		<connection mode="listen" localip="0" localport="20003" recvbuf="1048576" sendbuf="1048576" />        
+    </connections>
+</config>

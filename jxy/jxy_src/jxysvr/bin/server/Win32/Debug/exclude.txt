@@ -1,0 +1,8 @@
+.pdb
+log
+.ilk
+.exp
+.dat
+KeepAlive
+.manifest
+.dmp

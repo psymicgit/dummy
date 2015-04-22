@@ -1,0 +1,19 @@
+<config>
+    <connections>
+        <!-- Game Server ID -->
+        <server id="108-4-1" />
+        <connection mode="connect">
+        	<!-- NS -->
+        	<item id="0-10-1" remoteip="127.0.0.1" remoteport="49010" recvbuf="131072" sendbuf="131072" />
+			<!-- GM -->
+        	<item id="0-11-1" remoteip="127.0.0.1" remoteport="20003" recvbuf="131072" sendbuf="131072" />   
+        	<!-- GT -->
+        	<item id="108-3-1" remoteip="127.0.0.1" remoteport="41063" recvbuf="131072" sendbuf="131072" />   
+        	<!-- GS -->
+        	<item id="108-4-1" remoteip="127.0.0.1" remoteport="41065" recvbuf="131072" sendbuf="131072" />
+        	<!-- 跨服战服务器 -->
+        	<item id="0-14-1" remoteip="127.0.0.1" remoteport="20008" recvbuf="131072" sendbuf="10048576" />
+        </connection>
+		<connection mode="listen" localip="0" localport="41064" recvbuf="10048576" sendbuf="100485760" />          
+	</connections>
+</config>

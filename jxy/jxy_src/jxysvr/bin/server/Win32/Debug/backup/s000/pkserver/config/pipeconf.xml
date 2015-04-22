@@ -1,0 +1,11 @@
+<config>
+    <connections>
+        <!-- PK Server ID -->
+        <server id="0-14-1" />
+        <connection mode="connect">
+			<!-- GM -->
+        	<item id="0-11-1" remoteip="127.0.0.1" remoteport="20003" recvbuf="131072" sendbuf="131072" />   
+        </connection>
+		<connection mode="listen" localip="0" localport="20008" recvbuf="100485760" sendbuf="100485760" />          
+	</connections>
+</config>

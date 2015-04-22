@@ -1,0 +1,8 @@
+﻿<iplist>
+	<ip type="single" val="127.0.0.1" />
+	<ip type="single" val="172.30.20.81" />
+	<ip type="single" val="172.30.20.59" />
+	<ip type="single" val="172.30.20.90" />	
+	<ip type="single" val="172.30.29.62" />	
+	<ip type="mask" val="172.30.29.*"/>				
+</iplist>

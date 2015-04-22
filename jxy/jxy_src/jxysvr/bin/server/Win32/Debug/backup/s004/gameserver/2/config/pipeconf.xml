@@ -1,0 +1,17 @@
+<config>
+    <connections>
+        <!-- Game Server ID -->
+        <server id="106-4-1" />
+        <connection mode="connect">
+        	<!-- NS -->
+        	<item id="0-10-1" remoteip="127.0.0.1" remoteport="49010" recvbuf="131072" sendbuf="131072" />
+			<!-- GM -->
+        	<item id="0-11-1" remoteip="127.0.0.1" remoteport="20003" recvbuf="131072" sendbuf="131072" />   
+        	<!-- GT -->
+        	<item id="106-3-1" remoteip="127.0.0.1" remoteport="21063" recvbuf="131072" sendbuf="131072" />   
+        	<!-- GS -->
+        	<item id="106-4-1" remoteip="127.0.0.1" remoteport="21064" recvbuf="131072" sendbuf="131072" />             	             	 
+        </connection>
+		<connection mode="listen" localip="0" localport="21065" recvbuf="10048576" sendbuf="10048576" />          
+	</connections>
+</config>

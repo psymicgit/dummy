@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< .mine
+<config servername="GateServer" serverid="109-3-1">
+=======
+<config servername="GateServer" serverid="9-3-1">
+>>>>>>> .r5957
+	<CkSessionTimerElapse>7</CkSessionTimerElapse>
+	<DealSessionNum>500</DealSessionNum>		
+	<CloseSessionElapse>600</CloseSessionElapse>
+	<ShowConnectionStatus>true</ShowConnectionStatus>
+<<<<<<< .mine
+	<listen ip="0" port="51061" recvbuf="65535" sendbuf="65535"/>
+=======
+	<listen ip="0" port="19011" recvbuf="65535" sendbuf="65535"/>
+>>>>>>> .r5957
+	<Encrypt value="true" />
+    <pipeconf file="config/pipeconf.xml" />
+    <!--File to limit IP of incoming connection-->
+    <iplist file="config/iplist.xml" />
+	<LoginExUrl>http://192.168.4.59/gateserver/verifyplayer</LoginExUrl>
+	<LoginUrl>http://192.168.4.59/old_gateserver/login</LoginUrl>
+	<NoticeUrl>http://192.168.4.59/gateserver/getmaintancenotice</NoticeUrl>
+	<RegisterUrl>http://192.168.4.59/old_gateserver/regist</RegisterUrl>
+	<LogoutUrl>http://192.168.4.59/old_gateserver/logout</LogoutUrl>
+	<ChangePwdUrl>http://192.168.4.59/old_gateserver/changepwd</ChangePwdUrl>
+	<GetUserExpand>http://192.168.4.59/old_gateserver/getuserexpand</GetUserExpand>
+	<BindMobileUrl>http://192.168.4.59/old_gateserver/bindmobile_sendsmscode</BindMobileUrl>
+	<UnBindMobileUrl>http://192.168.4.59/old_gateserver/unbindmobile_sendsmscode</UnBindMobileUrl>
+	<BindCheckVerCode>http://192.168.4.59/old_gateserver/bindmobile</BindCheckVerCode>
+	<UnBindCheckVerCode>http://192.168.4.59/old_gateserver/unbindmobile</UnBindCheckVerCode>
+	<NetModuleCount>-1</NetModuleCount>
+	<PipeModuleCount>-1</PipeModuleCount>
+	<!--
+        Log configuration information to enable which log to record and where
+        these log will be recorded.
+    -->
+    <log>
+        <!--
+        Log levels, it shows which kind of log to record
+        
+        The system log records those which are related to system function when
+        the program is running, it includes three levels:
+        
+        SYS_CRITICAL:   Critical system log. It records the most crucial and the
+                        top level errors and information
+        SYS_IMPORTANT： Important system log. It records important errors and
+                        information, the importance is lower than SYS_CRITICAL
+        SYS_INFO：      Common system log. It records common information, and it
+                        can be disabled in operation enviroment
+        
+        The user log records those which are related to errors and infomation
+        caused by specific user.
+        
+        USR_CRITICAL：  Critical user log. It records the most crucial and the
+                        top level user errors and information
+        USR_IMPORTANT： Important user log. It records important errors and
+                        informaiton, the importance is lower than USER_CRITICAL
+        USR_INFO:       Common user log. It records common information, and it
+                        can be disabled in operation enviroment
+        
+        DBG_INFO：      Debug information. It can be enabled when developing
+        -->
+        <levels>
+            <level log="SYS_CRITICAL">y</level>
+			<level log="SYS_IMPORTANT">y</level>
+			<level log="SYS_INFO">y</level>
+			<level log="USR_CRITICAL">y</level>
+			<level log="USR_IMPORTANT">y</level>
+			<level log="USR_INFO">y</level>
+			<level log="DBG_INFO">y</level>
+        </levels>
+        
+        <!--Log output
+        FILE：      The log will be write to specific file, "y" to enable while
+                    "n" to disable
+        DEBUGGER：  The log will be write to debugger, and it can show in the
+                    output window of Visual C++, "y" to enable while "n" to disable
+        -->
+        <targets>
+            <target id="FILE"         log="y" />
+            <target id="DEBUGGER"     log="y" />
+        </targets>
+    </log>
+</config>

@@ -1,0 +1,21 @@
+<config>
+	  <connections>
+		<!-- Gate Server ID -->
+<<<<<<< .mine
+		<server id="109-3-1"/>
+=======
+		<server id="9-3-1"/>
+>>>>>>> .r5957
+		<connection mode="connect">
+		  <!-- Login Server --> 
+<<<<<<< .mine
+		  <item id="109-2-1" remoteip="127.0.0.1" remoteport="51062" recvbuf="131072" sendbuf="131072"/>
+=======
+		  <item id="9-2-1"remoteip="127.0.0.1"remoteport="49012"recvbuf="131072"sendbuf="131072"/>
+>>>>>>> .r5957
+		</connection>
+		
+		<!-- Game Server --> 
+		<connection mode="listen" localip="0" localport="51063" recvbuf="10048576" sendbuf="10048576" />     
+	  </connections>
+</config>

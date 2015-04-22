@@ -1,0 +1,6 @@
+<config>
+	  <connections>
+		<!-- Zone Server ID -->
+		<server id="0-1-1"/>		
+	  </connections>
+</config>
