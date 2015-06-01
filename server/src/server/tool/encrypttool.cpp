@@ -12,21 +12,14 @@ namespace encrypttool
 {
 	static const int g_usedKeyLength = 8;
 
-	unsigned char shiftRight(unsigned char val , unsigned char bits)
+	inline uint8 cycleLeft(unsigned char val , unsigned char bits)
 	{
-		for (int i = 0 ; i < bits; i++) {
-			val = (val  << 7) | (val >> 1);
-		}
-		return val;
+		return (val << bits) | (val >> (8 - bits));
 	}
 
-	unsigned char shiftLeft(unsigned char val, unsigned char bits)
+	inline uint8 cycleRight(unsigned char val , unsigned char bits)
 	{
-		for (int i = 0 ; i < bits; i++) {
-			val = (val >> 7) | (val << 1);
-		}
-
-		return val;
+		return (val >> bits) | (val << (8 - bits));
 	}
 
 	void encrypt(uint8 *data, int dataLen, uint8 encryptKey[], uint32 keyLen)
@@ -52,7 +45,8 @@ namespace encrypttool
 			else {
 				cumulative += *data;
 			}
-			*data  = shiftLeft(*data, bitOffset);
+
+			*data  = cycleLeft(*data, bitOffset);
 			*data ^= encryptKey[keyOffset + i % g_usedKeyLength];
 			data++;
 		}
@@ -72,7 +66,7 @@ namespace encrypttool
 
 		for (int i = 0; i < dataLen ; i++) {
 			*data ^= encryptKey[keyOffset + i % g_usedKeyLength];
-			*data  = shiftRight(*data, bitOffset);
+			*data  = cycleRight(*data, bitOffset);
 			if( i < (int)dataSize) cumulative += *data;
 			data++;
 		}

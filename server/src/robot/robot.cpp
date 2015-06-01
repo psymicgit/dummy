@@ -67,7 +67,7 @@ void Robot::onRecv(Link *link, Buffer &buf)
 			Buffer copyBuf;
 			copyBuf.append(buf.peek() + sizeof(NetMsgHead), msgLen - sizeof(NetMsgHead));
 
-			m_robotMgr->m_taskQueue.put(task_binder_t::gen(&RobotMgr::handleMsg, m_robotMgr, *this, msgId, copyBuf, 0));
+			m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, *this, msgId, copyBuf, 0));
 			buf.retrieve(msgLen);
 			return;
 		}
@@ -88,7 +88,7 @@ void Robot::onRecv(Link *link, Buffer &buf)
 		copyBuf.append(msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen);
 
 		// 直接本地进行处理
-		m_robotMgr->m_taskQueue.put(task_binder_t::gen(&RobotMgr::handleMsg, m_robotMgr, *this, msgId, copyBuf, 0));
+		m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, *this, msgId, copyBuf, 0));
 		buf.retrieve(msgLen);
 	}
 }

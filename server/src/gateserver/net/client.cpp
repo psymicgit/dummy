@@ -95,7 +95,7 @@ void Client::onRecv(Link *link, Buffer &buf)
 			// 直接本地进行处理
 			Buffer deepCopyBuf;
 			deepCopyBuf.append(msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen);
-			Server::instance->getTaskQueue().put(task_binder_t::gen(&ClientMgr::handleMsg, m_clientMgr, *this, msgId, deepCopyBuf, 0));
+			Server::instance->getTaskQueue().put(boost::bind(&ClientMgr::handleMsg, m_clientMgr, *this, msgId, deepCopyBuf, 0));
 		}
 
 		buf.retrieve(msgLen);

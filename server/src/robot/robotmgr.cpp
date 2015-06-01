@@ -73,7 +73,7 @@ void RobotMgr::stop()
 	LOG_WARN << "start closing robotmgr ...";
 	LOG_WARN << "	<m_taskQueue.size() = " << m_taskQueue.size() << ">";
 
-	m_taskQueue.put(task_binder_t::gen(&RobotMgr::stopping, this));
+	m_taskQueue.put(boost::bind(&RobotMgr::stopping, this));
 }
 
 void RobotMgr::stopping()
