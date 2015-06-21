@@ -40,6 +40,11 @@ bool GameServer::init()
 		return false;
 	}
 
+	if (!m_httpMgr.init()) {
+		LOG_ERROR << "gamehttpmgr init failed, aborted";
+		return false;
+	}
+
 	return true;
 }
 
@@ -61,6 +66,7 @@ void GameServer::run()
 	Server::run();
 
 	m_dbmgr.run();
+	m_httpMgr.run();
 	sleep(10);
 }
 

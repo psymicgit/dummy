@@ -11,7 +11,7 @@
 
 #include "protocol/protocol.h"
 
-// 运行体类型定义
+// 服务器类型定义
 enum ServerType {
 	eNullServer		= 0,
 	eGameServer		= 1,

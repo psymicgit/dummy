@@ -11,6 +11,8 @@
 
 #include "server.h"
 #include "db/dbmgr.h"
+#include "logic/clientmgr.h"
+#include "net/http/gamehttpmgr.h"
 
 class GateLink;
 
@@ -23,7 +25,7 @@ public:
 
 	void start();
 
-	void stoppping();
+	virtual void stoppping();
 
 	void run();
 
@@ -34,6 +36,9 @@ public:
 private:
 	GateLink *m_gateLink;
 	DBMgr m_dbmgr;
+
+	ClientMgr m_clientMgr;
+	GameHttpMgr m_httpMgr;
 };
 
 #endif //_gameserver_h_

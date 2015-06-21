@@ -21,11 +21,18 @@ bool RobotMgr::init()
 
 	m_wan.init(4);
 
-	for(int i = 0; i < 1000; i++) {
+	if (!m_httpMgr.init()) {
+		LOG_ERROR << "robothttpmgr init failed, aborted";
+		return false;
+	}
+
+	for(int i = 0; i < 200; i++) {
 		Robot *robot = createRobot();
+		robot->start();
 
 		// LOG_INFO << "robot " << i << " start connecting to server";
-		m_wan.connect("127.0.0.1", 20001, *robot);
+		// m_wan.connect("127.0.0.1", 20001, *robot);
+		// m_wan.connect("127.0.0.1", 80, *robot);
 	}
 
 	m_dispatcher.addMsgHandler(new RobotMsgHandler(&m_dispatcher));
@@ -48,7 +55,6 @@ Robot* RobotMgr::createRobot()
 {
 	Robot *robot = new Robot;
 
-	robot->m_taskQueue = &m_taskQueue;
 	robot->m_robotMgr = this;
 	robot->m_robotId = allocRobotId();
 
@@ -88,6 +94,8 @@ void RobotMgr::stopping()
 void RobotMgr::run()
 {
 	m_taskQueue.run();
+
+	m_httpMgr.run();
 	sleep(10);
 }
 

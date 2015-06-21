@@ -12,6 +12,21 @@
     <ClInclude Include="db\dbmgr.h">
       <Filter>db</Filter>
     </ClInclude>
+    <ClInclude Include="net\clientmsghandler.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\client.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\clientmgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\client.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="net\http\gamehttpmgr.h">
+      <Filter>net\http</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameserver.cpp" />
@@ -26,6 +41,18 @@
     <ClCompile Include="db\dbmgr.cpp">
       <Filter>db</Filter>
     </ClCompile>
+    <ClCompile Include="logic\client.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\clientmgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\client.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="net\http\gamehttpmgr.cpp">
+      <Filter>net\http</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocol">
@@ -39,6 +66,9 @@
     </Filter>
     <Filter Include="db">
       <UniqueIdentifier>{ba936bd3-d8b4-421e-8ba8-082e31284a81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net\http">
+      <UniqueIdentifier>{469fff4e-e51f-4a36-8dd4-dbcce49d3cac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

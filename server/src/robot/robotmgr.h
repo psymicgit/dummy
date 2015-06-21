@@ -13,9 +13,11 @@
 #include <basic/taskqueue.h>
 #include <net/msgdispatcher.h>
 #include <net/netfactory.h>
+
+#include "http/robothttpmgr.h"
 #include "robot.h"
 
-class RobotMgr
+class RobotMgr : public Singleton<RobotMgr>
 {
 	typedef std::map<uint32, Robot*> RobotMap;
 
@@ -57,6 +59,8 @@ public:
 
 	MsgDispatcher<Robot> m_dispatcher;
 	NetFactory m_wan;
+
+	RobotHttpMgr m_httpMgr;
 };
 
 #endif //_robotmgr_h_

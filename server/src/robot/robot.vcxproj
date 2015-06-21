@@ -90,6 +90,9 @@
   <ItemGroup>
     <ClCompile Include="..\protocol\client.pb.cc" />
     <ClCompile Include="..\protocol\protocol.pb.cc" />
+    <ClCompile Include="http\authhttpcmd.cpp" />
+    <ClCompile Include="http\handshakehttpcmd.cpp" />
+    <ClCompile Include="http\robothttpmgr.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="robot.cpp" />
     <ClCompile Include="robotmgr.cpp" />
@@ -98,6 +101,9 @@
   <ItemGroup>
     <ClInclude Include="..\protocol\client.pb.h" />
     <ClInclude Include="..\protocol\protocol.pb.h" />
+    <ClInclude Include="http\authhttpcmd.h" />
+    <ClInclude Include="http\handshakehttpcmd.h" />
+    <ClInclude Include="http\robothttpmgr.h" />
     <ClInclude Include="robot.h" />
     <ClInclude Include="robotmgr.h" />
     <ClInclude Include="robotmsghandler.h" />

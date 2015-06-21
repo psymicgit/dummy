@@ -21,7 +21,7 @@ ClientMgr::ClientMgr()
 	: m_taskQueue(NULL)
 	, m_allocClientId(0)
 {
-	ClientMsgHandler *netMsgMgr = new ClientMsgHandler(&m_dispatcher);
+	m_dispatcher.addMsgHandler(new ClientMsgHandler(&m_dispatcher));
 }
 
 void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)

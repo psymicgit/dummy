@@ -55,7 +55,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../3rd;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
@@ -85,7 +85,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../3rd;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -107,10 +107,12 @@
   <ItemGroup>
     <ClInclude Include="..\protocol\net.pb.h" />
     <ClInclude Include="..\protocol\protocol.pb.h" />
+    <ClInclude Include="basic\base64.h" />
     <ClInclude Include="basic\bind.h" />
     <ClInclude Include="basic\buffer.h" />
     <ClInclude Include="basic\lock.h" />
     <ClInclude Include="basic\objectpool.h" />
+    <ClInclude Include="basic\rsa.h" />
     <ClInclude Include="basic\singleton.h" />
     <ClInclude Include="basic\taskqueue.h" />
     <ClInclude Include="basic\thread.h" />
@@ -124,6 +126,8 @@
     <ClInclude Include="def\define.h" />
     <ClInclude Include="def\platform.h" />
     <ClInclude Include="def\type.h" />
+    <ClInclude Include="http\httpcmd.h" />
+    <ClInclude Include="http\httpmgr.h" />
     <ClInclude Include="log\log.h" />
     <ClInclude Include="net\connector.h" />
     <ClInclude Include="net\imsghandler.h" />
@@ -157,8 +161,10 @@
   <ItemGroup>
     <ClCompile Include="..\protocol\net.pb.cc" />
     <ClCompile Include="..\protocol\protocol.pb.cc" />
+    <ClCompile Include="basic\base64.cpp" />
     <ClCompile Include="basic\buffer.cpp" />
     <ClCompile Include="basic\lock.cpp" />
+    <ClCompile Include="basic\rsa.cpp" />
     <ClCompile Include="basic\thread.cpp" />
     <ClCompile Include="basic\timerqueue.cpp" />
     <ClCompile Include="db\dbconnection.cpp" />
@@ -166,6 +172,8 @@
     <ClCompile Include="db\dbrecordset.cpp" />
     <ClCompile Include="db\dbsession.cpp" />
     <ClCompile Include="def\define.cpp" />
+    <ClCompile Include="http\httpcmd.cpp" />
+    <ClCompile Include="http\httpmgr.cpp" />
     <ClCompile Include="log\log.cpp" />
     <ClCompile Include="net\connector.cpp" />
     <ClCompile Include="net\link.cpp" />

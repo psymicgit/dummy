@@ -9,10 +9,12 @@
 #include "serverlink.h"
 #include "server.h"
 
+#include "protocol/message.h"
+
 void ServerLink::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	int svrId = Server::instance->getServerId(m_remoteSvrType, m_svrId);
-	Server::instance->eraseSvrLink(svrId);
+	Server::instance->delSvrLink(svrId);
 
 	Server::instance->onDisconnect(link, localAddr, peerAddr);
 	Server::instance->onDisconnectServer(*link, m_remoteSvrType, m_svrId);
@@ -25,4 +27,15 @@ void ServerLink::onDisconnect(Link *link, const NetAddress& localAddr, const Net
 void ServerLink::onRecv(Link *link, Buffer &buf)
 {
 	Server::instance->onRecv(link, buf);
+}
+
+void ServerLink::send(uint32 routeId, uint16 msgId, const char *data, int len)
+{
+	char *netBuf = global::g_packetBuf;
+	LanMsgHead *msgHead = (LanMsgHead*)netBuf;
+
+	memcpy(netBuf + sizeof(LanMsgHead), data, len);
+	msgtool::buildLanMsgHeader(msgHead, routeId, msgId, len);
+
+	m_link->send(netBuf, msgHead->msgLen);
 }

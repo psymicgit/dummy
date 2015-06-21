@@ -32,8 +32,10 @@ void  protobuf_AddDesc_client_2eproto();
 void protobuf_AssignDesc_client_2eproto();
 void protobuf_ShutdownFile_client_2eproto();
 
-class EncryptKeyNtf;
 class LoginReq;
+class EncryptKeyNtf;
+class AuthReq;
+class AuthAck;
 
 enum LoginReq_LoginType {
   LoginReq_LoginType_NewRole = 0,
@@ -57,7 +59,10 @@ inline bool LoginReq_LoginType_Parse(
 enum EncryptKeyDef {
   EncryptKeyLen = 32,
   EncryptHeadLen = 2,
-  EncryptTailLen = 4
+  EncryptTailLen = 4,
+  AuthKeyLen = 16,
+  PublicKeyLen = 8,
+  PrivateKeyLen = 20
 };
 bool EncryptKeyDef_IsValid(int value);
 const EncryptKeyDef EncryptKeyDef_MIN = EncryptHeadLen;
@@ -74,94 +79,26 @@ inline bool EncryptKeyDef_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EncryptKeyDef>(
     EncryptKeyDef_descriptor(), name, value);
 }
-// ===================================================================
-
-class EncryptKeyNtf : public ::google::protobuf::Message {
- public:
-  EncryptKeyNtf();
-  virtual ~EncryptKeyNtf();
-
-  EncryptKeyNtf(const EncryptKeyNtf& from);
-
-  inline EncryptKeyNtf& operator=(const EncryptKeyNtf& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const EncryptKeyNtf& default_instance();
-
-  void Swap(EncryptKeyNtf* other);
-
-  // implements Message ----------------------------------------------
-
-  EncryptKeyNtf* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const EncryptKeyNtf& from);
-  void MergeFrom(const EncryptKeyNtf& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required string encryptKey = 1;
-  inline bool has_encryptkey() const;
-  inline void clear_encryptkey();
-  static const int kEncryptKeyFieldNumber = 1;
-  inline const ::std::string& encryptkey() const;
-  inline void set_encryptkey(const ::std::string& value);
-  inline void set_encryptkey(const char* value);
-  inline void set_encryptkey(const char* value, size_t size);
-  inline ::std::string* mutable_encryptkey();
-  inline ::std::string* release_encryptkey();
-  inline void set_allocated_encryptkey(::std::string* encryptkey);
-
-  // @@protoc_insertion_point(class_scope:EncryptKeyNtf)
- private:
-  inline void set_has_encryptkey();
-  inline void clear_has_encryptkey();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::std::string* encryptkey_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
-
-  friend void  protobuf_AddDesc_client_2eproto();
-  friend void protobuf_AssignDesc_client_2eproto();
-  friend void protobuf_ShutdownFile_client_2eproto();
-
-  void InitAsDefaultInstance();
-  static EncryptKeyNtf* default_instance_;
+enum AuthResult {
+  AUTH_OK = 0,
+  AUTH_FAIL = 1
 };
-// -------------------------------------------------------------------
+bool AuthResult_IsValid(int value);
+const AuthResult AuthResult_MIN = AUTH_OK;
+const AuthResult AuthResult_MAX = AUTH_FAIL;
+const int AuthResult_ARRAYSIZE = AuthResult_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* AuthResult_descriptor();
+inline const ::std::string& AuthResult_Name(AuthResult value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    AuthResult_descriptor(), value);
+}
+inline bool AuthResult_Parse(
+    const ::std::string& name, AuthResult* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<AuthResult>(
+    AuthResult_descriptor(), name, value);
+}
+// ===================================================================
 
 class LoginReq : public ::google::protobuf::Message {
  public:
@@ -392,84 +329,311 @@ class LoginReq : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static LoginReq* default_instance_;
 };
-// ===================================================================
-
-
-// ===================================================================
-
-// EncryptKeyNtf
-
-// required string encryptKey = 1;
-inline bool EncryptKeyNtf::has_encryptkey() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void EncryptKeyNtf::set_has_encryptkey() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void EncryptKeyNtf::clear_has_encryptkey() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void EncryptKeyNtf::clear_encryptkey() {
-  if (encryptkey_ != &::google::protobuf::internal::kEmptyString) {
-    encryptkey_->clear();
-  }
-  clear_has_encryptkey();
-}
-inline const ::std::string& EncryptKeyNtf::encryptkey() const {
-  return *encryptkey_;
-}
-inline void EncryptKeyNtf::set_encryptkey(const ::std::string& value) {
-  set_has_encryptkey();
-  if (encryptkey_ == &::google::protobuf::internal::kEmptyString) {
-    encryptkey_ = new ::std::string;
-  }
-  encryptkey_->assign(value);
-}
-inline void EncryptKeyNtf::set_encryptkey(const char* value) {
-  set_has_encryptkey();
-  if (encryptkey_ == &::google::protobuf::internal::kEmptyString) {
-    encryptkey_ = new ::std::string;
-  }
-  encryptkey_->assign(value);
-}
-inline void EncryptKeyNtf::set_encryptkey(const char* value, size_t size) {
-  set_has_encryptkey();
-  if (encryptkey_ == &::google::protobuf::internal::kEmptyString) {
-    encryptkey_ = new ::std::string;
-  }
-  encryptkey_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* EncryptKeyNtf::mutable_encryptkey() {
-  set_has_encryptkey();
-  if (encryptkey_ == &::google::protobuf::internal::kEmptyString) {
-    encryptkey_ = new ::std::string;
-  }
-  return encryptkey_;
-}
-inline ::std::string* EncryptKeyNtf::release_encryptkey() {
-  clear_has_encryptkey();
-  if (encryptkey_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = encryptkey_;
-    encryptkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void EncryptKeyNtf::set_allocated_encryptkey(::std::string* encryptkey) {
-  if (encryptkey_ != &::google::protobuf::internal::kEmptyString) {
-    delete encryptkey_;
-  }
-  if (encryptkey) {
-    set_has_encryptkey();
-    encryptkey_ = encryptkey;
-  } else {
-    clear_has_encryptkey();
-    encryptkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
 // -------------------------------------------------------------------
+
+class EncryptKeyNtf : public ::google::protobuf::Message {
+ public:
+  EncryptKeyNtf();
+  virtual ~EncryptKeyNtf();
+
+  EncryptKeyNtf(const EncryptKeyNtf& from);
+
+  inline EncryptKeyNtf& operator=(const EncryptKeyNtf& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const EncryptKeyNtf& default_instance();
+
+  void Swap(EncryptKeyNtf* other);
+
+  // implements Message ----------------------------------------------
+
+  EncryptKeyNtf* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const EncryptKeyNtf& from);
+  void MergeFrom(const EncryptKeyNtf& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string publicKey = 1;
+  inline bool has_publickey() const;
+  inline void clear_publickey();
+  static const int kPublicKeyFieldNumber = 1;
+  inline const ::std::string& publickey() const;
+  inline void set_publickey(const ::std::string& value);
+  inline void set_publickey(const char* value);
+  inline void set_publickey(const char* value, size_t size);
+  inline ::std::string* mutable_publickey();
+  inline ::std::string* release_publickey();
+  inline void set_allocated_publickey(::std::string* publickey);
+
+  // required string privateKey = 2;
+  inline bool has_privatekey() const;
+  inline void clear_privatekey();
+  static const int kPrivateKeyFieldNumber = 2;
+  inline const ::std::string& privatekey() const;
+  inline void set_privatekey(const ::std::string& value);
+  inline void set_privatekey(const char* value);
+  inline void set_privatekey(const char* value, size_t size);
+  inline ::std::string* mutable_privatekey();
+  inline ::std::string* release_privatekey();
+  inline void set_allocated_privatekey(::std::string* privatekey);
+
+  // required string authKey = 3;
+  inline bool has_authkey() const;
+  inline void clear_authkey();
+  static const int kAuthKeyFieldNumber = 3;
+  inline const ::std::string& authkey() const;
+  inline void set_authkey(const ::std::string& value);
+  inline void set_authkey(const char* value);
+  inline void set_authkey(const char* value, size_t size);
+  inline ::std::string* mutable_authkey();
+  inline ::std::string* release_authkey();
+  inline void set_allocated_authkey(::std::string* authkey);
+
+  // @@protoc_insertion_point(class_scope:EncryptKeyNtf)
+ private:
+  inline void set_has_publickey();
+  inline void clear_has_publickey();
+  inline void set_has_privatekey();
+  inline void clear_has_privatekey();
+  inline void set_has_authkey();
+  inline void clear_has_authkey();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* publickey_;
+  ::std::string* privatekey_;
+  ::std::string* authkey_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_client_2eproto();
+  friend void protobuf_AssignDesc_client_2eproto();
+  friend void protobuf_ShutdownFile_client_2eproto();
+
+  void InitAsDefaultInstance();
+  static EncryptKeyNtf* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AuthReq : public ::google::protobuf::Message {
+ public:
+  AuthReq();
+  virtual ~AuthReq();
+
+  AuthReq(const AuthReq& from);
+
+  inline AuthReq& operator=(const AuthReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AuthReq& default_instance();
+
+  void Swap(AuthReq* other);
+
+  // implements Message ----------------------------------------------
+
+  AuthReq* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AuthReq& from);
+  void MergeFrom(const AuthReq& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string authKey = 1;
+  inline bool has_authkey() const;
+  inline void clear_authkey();
+  static const int kAuthKeyFieldNumber = 1;
+  inline const ::std::string& authkey() const;
+  inline void set_authkey(const ::std::string& value);
+  inline void set_authkey(const char* value);
+  inline void set_authkey(const char* value, size_t size);
+  inline ::std::string* mutable_authkey();
+  inline ::std::string* release_authkey();
+  inline void set_allocated_authkey(::std::string* authkey);
+
+  // @@protoc_insertion_point(class_scope:AuthReq)
+ private:
+  inline void set_has_authkey();
+  inline void clear_has_authkey();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* authkey_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_client_2eproto();
+  friend void protobuf_AssignDesc_client_2eproto();
+  friend void protobuf_ShutdownFile_client_2eproto();
+
+  void InitAsDefaultInstance();
+  static AuthReq* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AuthAck : public ::google::protobuf::Message {
+ public:
+  AuthAck();
+  virtual ~AuthAck();
+
+  AuthAck(const AuthAck& from);
+
+  inline AuthAck& operator=(const AuthAck& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AuthAck& default_instance();
+
+  void Swap(AuthAck* other);
+
+  // implements Message ----------------------------------------------
+
+  AuthAck* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AuthAck& from);
+  void MergeFrom(const AuthAck& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .AuthResult result = 1;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 1;
+  inline ::AuthResult result() const;
+  inline void set_result(::AuthResult value);
+
+  // required string encryptKey = 2;
+  inline bool has_encryptkey() const;
+  inline void clear_encryptkey();
+  static const int kEncryptKeyFieldNumber = 2;
+  inline const ::std::string& encryptkey() const;
+  inline void set_encryptkey(const ::std::string& value);
+  inline void set_encryptkey(const char* value);
+  inline void set_encryptkey(const char* value, size_t size);
+  inline ::std::string* mutable_encryptkey();
+  inline ::std::string* release_encryptkey();
+  inline void set_allocated_encryptkey(::std::string* encryptkey);
+
+  // @@protoc_insertion_point(class_scope:AuthAck)
+ private:
+  inline void set_has_result();
+  inline void clear_has_result();
+  inline void set_has_encryptkey();
+  inline void clear_has_encryptkey();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* encryptkey_;
+  int result_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_client_2eproto();
+  friend void protobuf_AssignDesc_client_2eproto();
+  friend void protobuf_ShutdownFile_client_2eproto();
+
+  void InitAsDefaultInstance();
+  static AuthAck* default_instance_;
+};
+// ===================================================================
+
+
+// ===================================================================
 
 // LoginReq
 
@@ -956,6 +1120,391 @@ inline void LoginReq::set_allocated_authkey(::std::string* authkey) {
   }
 }
 
+// -------------------------------------------------------------------
+
+// EncryptKeyNtf
+
+// required string publicKey = 1;
+inline bool EncryptKeyNtf::has_publickey() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void EncryptKeyNtf::set_has_publickey() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void EncryptKeyNtf::clear_has_publickey() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void EncryptKeyNtf::clear_publickey() {
+  if (publickey_ != &::google::protobuf::internal::kEmptyString) {
+    publickey_->clear();
+  }
+  clear_has_publickey();
+}
+inline const ::std::string& EncryptKeyNtf::publickey() const {
+  return *publickey_;
+}
+inline void EncryptKeyNtf::set_publickey(const ::std::string& value) {
+  set_has_publickey();
+  if (publickey_ == &::google::protobuf::internal::kEmptyString) {
+    publickey_ = new ::std::string;
+  }
+  publickey_->assign(value);
+}
+inline void EncryptKeyNtf::set_publickey(const char* value) {
+  set_has_publickey();
+  if (publickey_ == &::google::protobuf::internal::kEmptyString) {
+    publickey_ = new ::std::string;
+  }
+  publickey_->assign(value);
+}
+inline void EncryptKeyNtf::set_publickey(const char* value, size_t size) {
+  set_has_publickey();
+  if (publickey_ == &::google::protobuf::internal::kEmptyString) {
+    publickey_ = new ::std::string;
+  }
+  publickey_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* EncryptKeyNtf::mutable_publickey() {
+  set_has_publickey();
+  if (publickey_ == &::google::protobuf::internal::kEmptyString) {
+    publickey_ = new ::std::string;
+  }
+  return publickey_;
+}
+inline ::std::string* EncryptKeyNtf::release_publickey() {
+  clear_has_publickey();
+  if (publickey_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = publickey_;
+    publickey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void EncryptKeyNtf::set_allocated_publickey(::std::string* publickey) {
+  if (publickey_ != &::google::protobuf::internal::kEmptyString) {
+    delete publickey_;
+  }
+  if (publickey) {
+    set_has_publickey();
+    publickey_ = publickey;
+  } else {
+    clear_has_publickey();
+    publickey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string privateKey = 2;
+inline bool EncryptKeyNtf::has_privatekey() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void EncryptKeyNtf::set_has_privatekey() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void EncryptKeyNtf::clear_has_privatekey() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void EncryptKeyNtf::clear_privatekey() {
+  if (privatekey_ != &::google::protobuf::internal::kEmptyString) {
+    privatekey_->clear();
+  }
+  clear_has_privatekey();
+}
+inline const ::std::string& EncryptKeyNtf::privatekey() const {
+  return *privatekey_;
+}
+inline void EncryptKeyNtf::set_privatekey(const ::std::string& value) {
+  set_has_privatekey();
+  if (privatekey_ == &::google::protobuf::internal::kEmptyString) {
+    privatekey_ = new ::std::string;
+  }
+  privatekey_->assign(value);
+}
+inline void EncryptKeyNtf::set_privatekey(const char* value) {
+  set_has_privatekey();
+  if (privatekey_ == &::google::protobuf::internal::kEmptyString) {
+    privatekey_ = new ::std::string;
+  }
+  privatekey_->assign(value);
+}
+inline void EncryptKeyNtf::set_privatekey(const char* value, size_t size) {
+  set_has_privatekey();
+  if (privatekey_ == &::google::protobuf::internal::kEmptyString) {
+    privatekey_ = new ::std::string;
+  }
+  privatekey_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* EncryptKeyNtf::mutable_privatekey() {
+  set_has_privatekey();
+  if (privatekey_ == &::google::protobuf::internal::kEmptyString) {
+    privatekey_ = new ::std::string;
+  }
+  return privatekey_;
+}
+inline ::std::string* EncryptKeyNtf::release_privatekey() {
+  clear_has_privatekey();
+  if (privatekey_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = privatekey_;
+    privatekey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void EncryptKeyNtf::set_allocated_privatekey(::std::string* privatekey) {
+  if (privatekey_ != &::google::protobuf::internal::kEmptyString) {
+    delete privatekey_;
+  }
+  if (privatekey) {
+    set_has_privatekey();
+    privatekey_ = privatekey;
+  } else {
+    clear_has_privatekey();
+    privatekey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string authKey = 3;
+inline bool EncryptKeyNtf::has_authkey() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void EncryptKeyNtf::set_has_authkey() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void EncryptKeyNtf::clear_has_authkey() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void EncryptKeyNtf::clear_authkey() {
+  if (authkey_ != &::google::protobuf::internal::kEmptyString) {
+    authkey_->clear();
+  }
+  clear_has_authkey();
+}
+inline const ::std::string& EncryptKeyNtf::authkey() const {
+  return *authkey_;
+}
+inline void EncryptKeyNtf::set_authkey(const ::std::string& value) {
+  set_has_authkey();
+  if (authkey_ == &::google::protobuf::internal::kEmptyString) {
+    authkey_ = new ::std::string;
+  }
+  authkey_->assign(value);
+}
+inline void EncryptKeyNtf::set_authkey(const char* value) {
+  set_has_authkey();
+  if (authkey_ == &::google::protobuf::internal::kEmptyString) {
+    authkey_ = new ::std::string;
+  }
+  authkey_->assign(value);
+}
+inline void EncryptKeyNtf::set_authkey(const char* value, size_t size) {
+  set_has_authkey();
+  if (authkey_ == &::google::protobuf::internal::kEmptyString) {
+    authkey_ = new ::std::string;
+  }
+  authkey_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* EncryptKeyNtf::mutable_authkey() {
+  set_has_authkey();
+  if (authkey_ == &::google::protobuf::internal::kEmptyString) {
+    authkey_ = new ::std::string;
+  }
+  return authkey_;
+}
+inline ::std::string* EncryptKeyNtf::release_authkey() {
+  clear_has_authkey();
+  if (authkey_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = authkey_;
+    authkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void EncryptKeyNtf::set_allocated_authkey(::std::string* authkey) {
+  if (authkey_ != &::google::protobuf::internal::kEmptyString) {
+    delete authkey_;
+  }
+  if (authkey) {
+    set_has_authkey();
+    authkey_ = authkey;
+  } else {
+    clear_has_authkey();
+    authkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AuthReq
+
+// required string authKey = 1;
+inline bool AuthReq::has_authkey() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AuthReq::set_has_authkey() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AuthReq::clear_has_authkey() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AuthReq::clear_authkey() {
+  if (authkey_ != &::google::protobuf::internal::kEmptyString) {
+    authkey_->clear();
+  }
+  clear_has_authkey();
+}
+inline const ::std::string& AuthReq::authkey() const {
+  return *authkey_;
+}
+inline void AuthReq::set_authkey(const ::std::string& value) {
+  set_has_authkey();
+  if (authkey_ == &::google::protobuf::internal::kEmptyString) {
+    authkey_ = new ::std::string;
+  }
+  authkey_->assign(value);
+}
+inline void AuthReq::set_authkey(const char* value) {
+  set_has_authkey();
+  if (authkey_ == &::google::protobuf::internal::kEmptyString) {
+    authkey_ = new ::std::string;
+  }
+  authkey_->assign(value);
+}
+inline void AuthReq::set_authkey(const char* value, size_t size) {
+  set_has_authkey();
+  if (authkey_ == &::google::protobuf::internal::kEmptyString) {
+    authkey_ = new ::std::string;
+  }
+  authkey_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AuthReq::mutable_authkey() {
+  set_has_authkey();
+  if (authkey_ == &::google::protobuf::internal::kEmptyString) {
+    authkey_ = new ::std::string;
+  }
+  return authkey_;
+}
+inline ::std::string* AuthReq::release_authkey() {
+  clear_has_authkey();
+  if (authkey_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = authkey_;
+    authkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AuthReq::set_allocated_authkey(::std::string* authkey) {
+  if (authkey_ != &::google::protobuf::internal::kEmptyString) {
+    delete authkey_;
+  }
+  if (authkey) {
+    set_has_authkey();
+    authkey_ = authkey;
+  } else {
+    clear_has_authkey();
+    authkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AuthAck
+
+// required .AuthResult result = 1;
+inline bool AuthAck::has_result() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AuthAck::set_has_result() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AuthAck::clear_has_result() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AuthAck::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::AuthResult AuthAck::result() const {
+  return static_cast< ::AuthResult >(result_);
+}
+inline void AuthAck::set_result(::AuthResult value) {
+  assert(::AuthResult_IsValid(value));
+  set_has_result();
+  result_ = value;
+}
+
+// required string encryptKey = 2;
+inline bool AuthAck::has_encryptkey() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AuthAck::set_has_encryptkey() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AuthAck::clear_has_encryptkey() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AuthAck::clear_encryptkey() {
+  if (encryptkey_ != &::google::protobuf::internal::kEmptyString) {
+    encryptkey_->clear();
+  }
+  clear_has_encryptkey();
+}
+inline const ::std::string& AuthAck::encryptkey() const {
+  return *encryptkey_;
+}
+inline void AuthAck::set_encryptkey(const ::std::string& value) {
+  set_has_encryptkey();
+  if (encryptkey_ == &::google::protobuf::internal::kEmptyString) {
+    encryptkey_ = new ::std::string;
+  }
+  encryptkey_->assign(value);
+}
+inline void AuthAck::set_encryptkey(const char* value) {
+  set_has_encryptkey();
+  if (encryptkey_ == &::google::protobuf::internal::kEmptyString) {
+    encryptkey_ = new ::std::string;
+  }
+  encryptkey_->assign(value);
+}
+inline void AuthAck::set_encryptkey(const char* value, size_t size) {
+  set_has_encryptkey();
+  if (encryptkey_ == &::google::protobuf::internal::kEmptyString) {
+    encryptkey_ = new ::std::string;
+  }
+  encryptkey_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AuthAck::mutable_encryptkey() {
+  set_has_encryptkey();
+  if (encryptkey_ == &::google::protobuf::internal::kEmptyString) {
+    encryptkey_ = new ::std::string;
+  }
+  return encryptkey_;
+}
+inline ::std::string* AuthAck::release_encryptkey() {
+  clear_has_encryptkey();
+  if (encryptkey_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = encryptkey_;
+    encryptkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AuthAck::set_allocated_encryptkey(::std::string* encryptkey) {
+  if (encryptkey_ != &::google::protobuf::internal::kEmptyString) {
+    delete encryptkey_;
+  }
+  if (encryptkey) {
+    set_has_encryptkey();
+    encryptkey_ = encryptkey;
+  } else {
+    clear_has_encryptkey();
+    encryptkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -970,6 +1519,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::LoginReq_LoginType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::EncryptKeyDef>() {
   return ::EncryptKeyDef_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::AuthResult>() {
+  return ::AuthResult_descriptor();
 }
 
 }  // namespace google

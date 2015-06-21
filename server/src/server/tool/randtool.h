@@ -27,6 +27,9 @@ namespace randtool
 
 	// 必须命中算法，返回命中的概率序号(hitVec中的顺序),没有概率返回0序号
 	uint32 rollHit(HitVec &hitVec);
+
+	// 获取一串随机数，基于加密的伪随机数生成器（Cryptographically Secure Pseudo-Random Number Generator – CSPRNG）
+	void secureRandom(uint8 nums[], uint32 cnt, int beg, int end);
 }
 
 #endif //_randtool_h_

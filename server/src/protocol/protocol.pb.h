@@ -55,6 +55,8 @@ enum ClientGateMsgId {
   eLoginReq = 1001,
   eLoginAck = 1002,
   eEncryptKeyNtf = 1003,
+  eAuthReq = 1004,
+  eAuthAck = 1005,
   eClientGateMsgIdMax = 2000
 };
 bool ClientGateMsgId_IsValid(int value);

@@ -1,0 +1,9 @@
+Log file created at: 2015/03/29 03:54:21
+Running on machine: localhost.localdomain
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0329 03:54:21.723170 12829 netfactory.cpp:64] <listen> start listening at <127.0.0.1:10000>
+E0329 03:54:22.041303 12829 dbconnection.cpp:40] <connect> mysql_real_connect failed, error str: <Can't connect to MySQL server on '127.0.0.1' (111)> failed
+I0329 03:54:22.041651 12829 dbconnection.cpp:86] <release> close db successfully ----	svrip:127.0.0.1	dbname:gamedb	unicsocket:
+E0329 03:54:22.041663 12829 dbsession.cpp:35] <init> create connection failed, alrealy created 0
+E0329 03:54:22.041690 12829 dbmgr.cpp:178] <init> create gamedb seesion failed
+E0329 03:54:22.041715 12829 gameserver.cpp:39] <init> dbmgr init failed, aborted

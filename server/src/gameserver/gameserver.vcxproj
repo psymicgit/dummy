@@ -86,18 +86,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\protocol\client.pb.h" />
     <ClInclude Include="..\protocol\net.pb.h" />
     <ClInclude Include="db\dbmgr.h" />
     <ClInclude Include="gameserver.h" />
+    <ClInclude Include="logic\client.h" />
+    <ClInclude Include="logic\clientmgr.h" />
+    <ClInclude Include="net\clientmsghandler.h" />
     <ClInclude Include="net\gatelink.h" />
+    <ClInclude Include="net\http\gamehttpmgr.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\protocol\client.pb.cc" />
     <ClCompile Include="..\protocol\net.pb.cc" />
     <ClCompile Include="db\dbmgr.cpp" />
     <ClCompile Include="gameserver.cpp" />
+    <ClCompile Include="logic\client.cpp" />
+    <ClCompile Include="logic\clientmgr.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="net\gatelink.cpp" />
+    <ClCompile Include="net\http\gamehttpmgr.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

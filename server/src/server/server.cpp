@@ -115,7 +115,7 @@ void Server::addSvrLink(int svrId, ServerLink *svrLink)
 	m_svrLinkMap[svrId] = svrLink;
 }
 
-void Server::eraseSvrLink(int svrId)
+void Server::delSvrLink(int svrId)
 {
 	m_svrLinkMap.erase(svrId);
 }

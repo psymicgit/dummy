@@ -8,6 +8,12 @@
 
 #include "randtool.h"
 
+#ifdef WIN
+	#include <WinCrypt.h>
+#else
+
+#endif
+
 namespace randtool
 {
 	void initSeed()
@@ -58,5 +64,25 @@ namespace randtool
 		}
 
 		return 0;
+	}
+
+	void secureRandom(uint8 nums[], uint32 cnt, int beg, int end)
+	{
+		int range = end - beg;
+
+#ifdef WIN
+		HCRYPTPROV  hCryptProv = 0;
+		CryptGenRandom(hCryptProv, cnt, nums);
+
+		for (uint32 i = 0; i < cnt; i++) {
+			nums[i] = random();
+
+			nums[i] = nums[i] % range + beg;
+		}
+#else
+		for (uint32 i = 0; i < cnt; i++) {
+			nums[i] = random() % range + beg;
+		}
+#endif
 	}
 }

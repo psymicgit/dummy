@@ -189,10 +189,24 @@ namespace socktool
 
 	int geterrno()
 	{
+		int err = 0;
+
 #ifdef WIN
-		return WSAGetLastError();
+		err = WSAGetLastError();
 #else
-		return errno;
+		err = errno;
+#endif
+
+		clearerrno();
+		return err;
+	}
+
+	void clearerrno()
+	{
+#ifdef WIN
+		WSASetLastError(0);
+#else
+		errno = 0;
 #endif
 	}
 

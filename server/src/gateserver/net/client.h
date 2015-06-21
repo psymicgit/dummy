@@ -33,6 +33,8 @@ public:
 
 	bool send(int msgId, const char* data, int len);
 
+	bool send(int msgId, Message&);
+
 private:
 	bool needRoute(int msgId);
 
@@ -44,6 +46,8 @@ public:
 	ClientMgr *m_clientMgr;
 
 	uint8 m_encryptKey[EncryptKeyLen];
+
+	uint8 m_authKey[AuthKeyLen];
 };
 
 #endif //_client_h_

@@ -23,7 +23,7 @@
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="net\client.cpp">
-      <Filter>logic</Filter>
+      <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

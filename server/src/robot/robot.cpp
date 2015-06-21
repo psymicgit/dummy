@@ -16,21 +16,43 @@
 #include <protocol.pb.h>
 #include "robotmgr.h"
 
+#include "http/handshakehttpcmd.h"
+#include <tool/randtool.h>
+#include <tool/echotool.h>
+
 Robot::Robot()
 	: m_link(NULL)
-	, m_taskQueue(NULL)
 	, m_robotMgr(NULL)
 	, m_isEncrypt(false)
 	, m_robotId(0)
+	, m_cliversion(110)
 {
 	bzero(m_encryptKey, sizeof(m_encryptKey));
+
+	randomRobot();
 }
+
+void Robot::randomRobot()
+{
+	uint8 randNum[64] = {0};
+
+	m_cliversion = randtool::random(1, 1200);
+
+	randtool::secureRandom(randNum, sizeof(randNum) - 1, 65, 97);
+	m_deviceid = std::string("deviceid_") + (const char*)randNum;
+	m_username = std::string("username_") + (const char*)randNum;
+	m_password = std::string("password_") + (const char*)randNum;
+	m_ip = std::string("127.0.0.") + echotool::getmsg("%u", randtool::random(1, 254));
+}
+
 
 void Robot::onConnected(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	m_link = link;
 
 	LOG_INFO << "robot <" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success";
+
+	m_link->send("1\r\n");
 }
 
 void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
@@ -93,6 +115,11 @@ void Robot::onRecv(Link *link, Buffer &buf)
 	}
 }
 
+TaskQueue& Robot::getTaskQueue()
+{
+	return RobotMgr::Instance().m_taskQueue;
+}
+
 bool Robot::send(int msgId, Message &msg)
 {
 	if (!m_link->isopen()) {
@@ -145,7 +172,23 @@ bool Robot::send(int msgId, const char* data, int len)
 	return true;
 }
 
-void Robot::close()
+void Robot::start()
 {
-	m_link->close();
+	handshake();
+}
+
+void Robot::handshake()
+{
+	HandShakeHttpCmd *handshakeHttpCmd = new HandShakeHttpCmd;
+	RobotHttpMgr::Instance().addCmd(handshakeHttpCmd);
+}
+
+void Robot::auth()
+{
+
+}
+
+void Robot::login()
+{
+
 }

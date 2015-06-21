@@ -19,6 +19,10 @@ class GateServer : public Singleton<GateServer>, public Server
 public:
 	GateServer();
 
+	void addnum(std::string *str);
+
+	void test();
+
 	bool init();
 
 	void start();
@@ -31,10 +35,15 @@ public:
 
 	virtual void onDisconnectServer(Link&, ServerType, int serverId);
 
+public:
+	void sendToGameServer(uint32 clientId, uint16 msgId, const char* data, uint32 len);
+
 private:
 	NetFactory m_wan;
 	GameSvrLink *m_gamesvrLink;
 	ClientMgr m_clientMgr;
+
+	int m_num;
 };
 
 #endif //_gateserver_h_

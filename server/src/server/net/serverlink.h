@@ -32,6 +32,8 @@ public:
 
 	virtual TaskQueue& getTaskQueue() { return *m_taskQueue; }
 
+	void send(uint32 routeId, uint16 msgId, const char *data, int len);
+
 public:
 	virtual void onEstablish() {}
 

@@ -141,6 +141,18 @@
     <ClInclude Include="basic\bind.h">
       <Filter>basic</Filter>
     </ClInclude>
+    <ClInclude Include="basic\base64.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\rsa.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="http\httpmgr.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="http\httpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -163,6 +175,9 @@
     </Filter>
     <Filter Include="db">
       <UniqueIdentifier>{ba04841f-4721-42b0-a8e3-6d1567ddd729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="http">
+      <UniqueIdentifier>{5ab3f19e-c72d-4e06-85d7-f7bf46f7bbeb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -260,6 +275,18 @@
     </ClCompile>
     <ClCompile Include="tool\echotool.cpp">
       <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\base64.cpp">
+      <Filter>basic</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\rsa.cpp">
+      <Filter>basic</Filter>
+    </ClCompile>
+    <ClCompile Include="http\httpmgr.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="http\httpcmd.cpp">
+      <Filter>http</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

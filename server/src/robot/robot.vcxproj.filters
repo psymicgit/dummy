@@ -11,6 +11,15 @@
       <Filter>protocol</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="http\robothttpmgr.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="http\handshakehttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="http\authhttpcmd.cpp">
+      <Filter>http</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="robot.h" />
@@ -23,10 +32,22 @@
     </ClInclude>
     <ClInclude Include="robotmsghandler.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="http\robothttpmgr.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="http\handshakehttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="http\authhttpcmd.h">
+      <Filter>http</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocol">
       <UniqueIdentifier>{6f23cb59-f93b-4133-9682-711d44bff426}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="http">
+      <UniqueIdentifier>{af21a45b-00ea-4043-bae4-55d490205948}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

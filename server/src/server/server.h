@@ -65,7 +65,7 @@ public:
 
 	bool isSvrLinkExist(ServerType, int zoneId);
 	void addSvrLink(int svrId, ServerLink*);
-	void eraseSvrLink(int svrId);
+	void delSvrLink(int svrId);
 
 	std::string& getServerName();
 

@@ -59,10 +59,11 @@ void protobuf_AddDesc_protocol_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\016protocol.proto*2\n\010NetMsgId\022\022\n\016eConnect"
-    "SvrReq\020\001\022\022\n\016eConnectSvrAck\020\002*z\n\017ClientGa"
-    "teMsgId\022\030\n\023eClientGateMsgIdMin\020\350\007\022\016\n\teLo"
-    "ginReq\020\351\007\022\016\n\teLoginAck\020\352\007\022\023\n\016eEncryptKey"
-    "Ntf\020\353\007\022\030\n\023eClientGateMsgIdMax\020\320\017", 192);
+    "SvrReq\020\001\022\022\n\016eConnectSvrAck\020\002*\230\001\n\017ClientG"
+    "ateMsgId\022\030\n\023eClientGateMsgIdMin\020\350\007\022\016\n\teL"
+    "oginReq\020\351\007\022\016\n\teLoginAck\020\352\007\022\023\n\016eEncryptKe"
+    "yNtf\020\353\007\022\r\n\010eAuthReq\020\354\007\022\r\n\010eAuthAck\020\355\007\022\030\n"
+    "\023eClientGateMsgIdMax\020\320\017", 223);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protocol.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_protocol_2eproto);
@@ -98,6 +99,8 @@ bool ClientGateMsgId_IsValid(int value) {
     case 1001:
     case 1002:
     case 1003:
+    case 1004:
+    case 1005:
     case 2000:
       return true;
     default:

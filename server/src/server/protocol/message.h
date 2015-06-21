@@ -13,7 +13,15 @@
 
 // namespace google {namespace protobuf { class Message; }}
 
+// 外网消息头
 struct NetMsgHead {
+	uint16 msgId;
+	uint32 msgLen;
+};
+
+// 内网消息头
+struct LanMsgHead {
+	uint32 clientId;
 	uint16 msgId;
 	uint32 msgLen;
 };
@@ -23,7 +31,10 @@ namespace msgtool
 	string getMsgString(const Message &msg);
 
 	// 构建网络包头
-	int buildNetHeader(NetMsgHead *pstHead, uint16 msgId, uint32 msgLen);
+	int buildNetHeader(NetMsgHead *msgHead, uint16 msgId, uint32 msgLen);
+
+	// 构建内网消息包头
+	int buildLanMsgHeader(LanMsgHead *msgHead, uint32 clientId, uint16 msgId, uint32 msgLen);
 
 	// 在预先分配好的内存上申请一个Message
 	template<typename T>

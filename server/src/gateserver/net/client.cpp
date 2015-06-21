@@ -13,20 +13,11 @@
 #include <protocol/message.h>
 
 #include "clientmgr.h"
+#include "gateserver.h"
 #include <net/netaddress.h>
 #include <server.h>
 #include <tool/encrypttool.h>
-
-namespace clienttool
-{
-	// 获取随机数组，结果输出到nums
-	void generateRandomNums(uint8 nums[], uint32 cnt)
-	{
-		for (uint32 i = 0; i < cnt; i++) {
-			nums[i] = rand() % 10 + 48;
-		}
-	}
-}
+#include <tool/randtool.h>
 
 Client::Client()
 	: m_link(NULL)
@@ -39,11 +30,16 @@ Client::Client()
 
 void Client::onEstablish()
 {
-	//发送加解密密钥
-	clienttool::generateRandomNums(m_encryptKey, sizeof(m_encryptKey));
+	// 随机生成认证串
+	randtool::secureRandom(m_authKey, sizeof(m_authKey), '0', 'z');
 
+
+
+	//发送加解密密钥
 	EncryptKeyNtf *ntf = msgtool::allocPacket<EncryptKeyNtf>();
-	ntf->set_encryptkey((const char*)m_encryptKey, sizeof(m_encryptKey));
+	ntf->set_publickey((const char*)m_encryptKey, sizeof(m_encryptKey));
+	ntf->set_privatekey((const char*)m_encryptKey, sizeof(m_encryptKey));
+	ntf->set_authkey((const char*)m_authKey, sizeof(m_authKey));
 
 	m_link->send(eEncryptKeyNtf, *ntf);
 }
@@ -65,10 +61,10 @@ void Client::onRecv(Link *link, Buffer &buf)
 
 		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
 		uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
-		uint32 msgLen = endiantool::networkToHost32(msgHead->msgLen);
+		uint32 dataLen = endiantool::networkToHost32(msgHead->msgLen);
 
 		// 检测半包
-		if (msgLen > bytes) {
+		if (dataLen > bytes) {
 // 			LOG_WARN << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
 // 			          << "] msgLen(" << msgLen << ") > bytes(" << bytes << ")";
 			return;
@@ -76,29 +72,31 @@ void Client::onRecv(Link *link, Buffer &buf)
 
 		//先解密
 		uint8* encryptBuf =  (uint8*)(buf.peek() + sizeof(NetMsgHead));
-		int encryptBufLen = msgLen - sizeof(NetMsgHead);
+		int encryptBufLen = dataLen - sizeof(NetMsgHead);
 
 		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
 			LOG_ERROR << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
 			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
-			buf.retrieve(msgLen);
+			buf.retrieve(dataLen);
 			return;
 		}
 
 		char *msg = (char*)buf.peek() + sizeof(NetMsgHead) + EncryptHeadLen;
+		uint32 msgLen = dataLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen;
 
 		// 判断是否需要转发，
 		if (needRoute(msgId)) {
 			// 转发给游戏服务器
+			GateServer::Instance().sendToGameServer(m_clientId, msgId, msg, msgLen);
 		}
 		else {
 			// 直接本地进行处理
 			Buffer deepCopyBuf;
-			deepCopyBuf.append(msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen);
+			deepCopyBuf.append(msg, msgLen);
 			Server::instance->getTaskQueue().put(boost::bind(&ClientMgr::handleMsg, m_clientMgr, *this, msgId, deepCopyBuf, 0));
 		}
 
-		buf.retrieve(msgLen);
+		buf.retrieve(dataLen);
 	};
 }
 
@@ -135,5 +133,22 @@ bool Client::send(int msgId, const char* data, int len)
 	int packetLen = msgtool::buildNetHeader(pHeader, msgId, len);
 	m_link->send(netBuf, packetLen);
 
+	return true;
+}
+
+bool Client::send(int msgId, Message &msg)
+{
+	if (!m_link->isopen()) {
+		return false;
+	}
+
+	int size = msg.ByteSize();
+
+	Buffer buf;
+
+	msg.SerializeToArray((void*)buf.beginWrite(), size);
+	buf.hasWritten(size);
+
+	this->send(msgId, buf.peek(), buf.readableBytes());
 	return true;
 }

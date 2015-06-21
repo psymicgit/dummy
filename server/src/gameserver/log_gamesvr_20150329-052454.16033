@@ -1,0 +1,498 @@
+Log file created at: 2015/03/29 05:24:54
+Running on machine: localhost.localdomain
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0329 05:24:54.750067 16033 netfactory.cpp:64] <listen> start listening at <127.0.0.1:10000>
+I0329 05:24:54.784993 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.802229 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.804788 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.807565 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.815033 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.817641 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.821225 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.824385 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.827246 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.831482 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.834986 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.839105 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.841864 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.844455 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.846969 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.849411 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.851824 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.854281 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.858054 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.860602 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.863955 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.866597 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.869091 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.871912 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.874480 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.876957 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.879601 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.882572 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.885184 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.887655 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.890373 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.892926 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.896085 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.898789 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.901454 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.904201 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.906946 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.909718 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.912325 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.915307 16033 dbconnection.cpp:330] <getCharsets> db charset Info : 
+ {
+[varname] : [charset]
+character_set_client : utf8
+character_set_connection : utf8
+character_set_database : utf8
+character_set_filesystem : binary
+character_set_results : utf8
+character_set_server : utf8
+character_set_system : utf8
+character_sets_dir : C:\Program Files\MySQL\MySQL Server 5.5\share\charsets\
+}
+I0329 05:24:54.916103 16033 dbmgr.cpp:80] <test> start test
+W0329 05:24:54.940811 16033 dbmgr.cpp:134] <test> 平均每条耗时 = 0.0024352, 每秒可执行410.644
+W0329 05:24:54.941223 16033 ticktool.h:30] <~Tick> 游戏库插入测试 = 24.99
+I0329 05:25:00.639053 16033 dbmgr.cpp:150] <test> executing 1000
+I0329 05:25:01.546042 16033 dbmgr.cpp:150] <test> executing 2000
+I0329 05:25:06.415985 16033 dbmgr.cpp:150] <test> executing 3000
+I0329 05:25:17.684646 16033 dbmgr.cpp:150] <test> executing 4000
+I0329 05:25:29.013294 16033 dbmgr.cpp:150] <test> executing 5000
+I0329 05:25:42.461566 16033 dbmgr.cpp:150] <test> executing 6000
+I0329 05:25:56.787587 16033 dbmgr.cpp:150] <test> executing 7000
+I0329 05:26:32.505765 16033 dbmgr.cpp:150] <test> executing 8000
+I0329 05:26:46.053717 16033 dbmgr.cpp:150] <test> executing 9000
+W0329 05:26:58.664809 16033 dbmgr.cpp:156] <test> 平均每条耗时 = 1.84467e+12, 每秒可执行5.42101e-13
+W0329 05:26:58.665232 16033 ticktool.h:30] <~Tick> 游戏库select速度测试 = 1.84467e+16

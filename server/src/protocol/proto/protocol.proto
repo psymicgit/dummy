@@ -10,6 +10,8 @@ enum ClientGateMsgId
 	eLoginReq	= 1001; // 登录到网关请求
 	eLoginAck	= 1002; // 登录到网关答复
 	eEncryptKeyNtf = 1003; // 通知加密串
+	eAuthReq = 1004;
+	eAuthAck = 1005; 
 
 	eClientGateMsgIdMax = 2000;
 }

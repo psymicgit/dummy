@@ -15,6 +15,10 @@
 class TaskQueue;
 class RobotMgr;
 
+enum RobotState {
+	ROBOT_STATE_AUTHED, // 已经过认证
+};
+
 class Robot : public INetReactor
 {
 public:
@@ -27,22 +31,42 @@ public:
 
 	virtual void onRecv(Link*, Buffer&);
 
+	virtual TaskQueue& getTaskQueue();
+
 	bool send(int msgId, const char* data, int len);
 
 	bool send(int msgId, Message&);
 
-	void close();
+	void start();
 
-	virtual TaskQueue& getTaskQueue() { return *m_taskQueue;}
+	// 1. 与认证中心进行握手
+	void handshake();
+
+	// 2. 到认证中心进行认证
+	void auth();
+
+	// 3. 登录到游戏服
+	void login();
+
+private:
+	void randomRobot();
 
 public:
 	Link *m_link;
-	TaskQueue *m_taskQueue;
 	RobotMgr *m_robotMgr;
 
 	uint8 m_encryptKey[EncryptKeyLen];
 	bool m_isEncrypt;
 	uint32 m_robotId;
+
+	std::string m_publickey; // 认证中心发送过来的公钥
+
+public:
+	int m_cliversion;
+	std::string m_deviceid;
+	std::string m_username;
+	std::string m_password;
+	std::string m_ip;
 };
 
 #endif //_robot_h_

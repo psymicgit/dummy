@@ -29,9 +29,24 @@ public:
 	void init()
 	{
 		registerMsg(eLoginReq, OnLoginReq);
+		registerMsg(eAuthReq, OnAuthReq);
 	}
 
 private:
+	static void OnAuthReq(Client* client, AuthReq *req, Timestamp receiveTime)
+	{
+		AuthAck ack;
+
+		if(req->authkey().compare(std::string((const char*)client->m_authKey))) {
+			ack.set_result(AUTH_OK);
+		}
+		else {
+			ack.set_result(AUTH_FAIL);
+		}
+
+		client->send(eAuthAck, ack);
+	}
+
 	static void OnLoginReq(Client* client, LoginReq *req, Timestamp receiveTime)
 	{
 		static Tick tick("task_t test");

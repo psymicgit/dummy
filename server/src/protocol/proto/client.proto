@@ -1,12 +1,17 @@
 enum EncryptKeyDef {
-	EncryptKeyLen = 32; // 新创建角色
+	EncryptKeyLen = 32; // 加密密钥长度
 	EncryptHeadLen = 2; // 加解密头大小，保存使用的密钥偏移量和使用的密钥字节数
 	EncryptTailLen = 4; // 加解密尾大小，保存检验和
+
+	AuthKeyLen = 16; // 认证串长度
+	PublicKeyLen = 8; // 公钥长度
+	PrivateKeyLen = 20; // 私钥长度
 }
 
-message EncryptKeyNtf
+enum AuthResult
 {
-	required string encryptKey = 1;
+	AUTH_OK = 0;
+	AUTH_FAIL = 1;
 }
 
 message LoginReq
@@ -27,4 +32,26 @@ message LoginReq
 	required LoginType loginType = 9; // 操作类别
 	required int32 authType = 10; //认证类型
 	required string authKey = 11; //认证字符串
+}
+
+// 加解密密钥通知
+message EncryptKeyNtf
+{
+	required string publicKey = 1; // 公钥，用于客户端进行加密
+	required string privateKey = 2; // 私钥，用于客户端进行解密
+
+	required string authKey = 3; // 认证串，已经过加密，需要客户端解出
+}
+
+// 身份验证请求
+message AuthReq
+{
+	required string authKey = 1; // 认证串，已经过加密，需要服务端解出
+}
+
+// 身份验证答复
+message AuthAck
+{
+	required AuthResult result = 1; // 认证结果[成功/失败]
+	required string encryptKey = 2; // 密钥，此后的消息包均用此密钥加解密
 }

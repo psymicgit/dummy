@@ -18,14 +18,21 @@
 
 namespace {
 
-const ::google::protobuf::Descriptor* EncryptKeyNtf_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  EncryptKeyNtf_reflection_ = NULL;
 const ::google::protobuf::Descriptor* LoginReq_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   LoginReq_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* LoginReq_LoginType_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* EncryptKeyNtf_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  EncryptKeyNtf_reflection_ = NULL;
+const ::google::protobuf::Descriptor* AuthReq_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  AuthReq_reflection_ = NULL;
+const ::google::protobuf::Descriptor* AuthAck_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  AuthAck_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* EncryptKeyDef_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* AuthResult_descriptor_ = NULL;
 
 }  // namespace
 
@@ -36,22 +43,7 @@ void protobuf_AssignDesc_client_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "client.proto");
   GOOGLE_CHECK(file != NULL);
-  EncryptKeyNtf_descriptor_ = file->message_type(0);
-  static const int EncryptKeyNtf_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EncryptKeyNtf, encryptkey_),
-  };
-  EncryptKeyNtf_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      EncryptKeyNtf_descriptor_,
-      EncryptKeyNtf::default_instance_,
-      EncryptKeyNtf_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EncryptKeyNtf, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EncryptKeyNtf, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(EncryptKeyNtf));
-  LoginReq_descriptor_ = file->message_type(1);
+  LoginReq_descriptor_ = file->message_type(0);
   static const int LoginReq_offsets_[11] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoginReq, clientversion_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoginReq, deviceid_),
@@ -77,7 +69,56 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(LoginReq));
   LoginReq_LoginType_descriptor_ = LoginReq_descriptor_->enum_type(0);
+  EncryptKeyNtf_descriptor_ = file->message_type(1);
+  static const int EncryptKeyNtf_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EncryptKeyNtf, publickey_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EncryptKeyNtf, privatekey_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EncryptKeyNtf, authkey_),
+  };
+  EncryptKeyNtf_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      EncryptKeyNtf_descriptor_,
+      EncryptKeyNtf::default_instance_,
+      EncryptKeyNtf_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EncryptKeyNtf, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EncryptKeyNtf, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(EncryptKeyNtf));
+  AuthReq_descriptor_ = file->message_type(2);
+  static const int AuthReq_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AuthReq, authkey_),
+  };
+  AuthReq_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      AuthReq_descriptor_,
+      AuthReq::default_instance_,
+      AuthReq_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AuthReq, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AuthReq, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(AuthReq));
+  AuthAck_descriptor_ = file->message_type(3);
+  static const int AuthAck_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AuthAck, result_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AuthAck, encryptkey_),
+  };
+  AuthAck_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      AuthAck_descriptor_,
+      AuthAck::default_instance_,
+      AuthAck_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AuthAck, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AuthAck, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(AuthAck));
   EncryptKeyDef_descriptor_ = file->enum_type(0);
+  AuthResult_descriptor_ = file->enum_type(1);
 }
 
 namespace {
@@ -91,18 +132,26 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    LoginReq_descriptor_, &LoginReq::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     EncryptKeyNtf_descriptor_, &EncryptKeyNtf::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    LoginReq_descriptor_, &LoginReq::default_instance());
+    AuthReq_descriptor_, &AuthReq::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    AuthAck_descriptor_, &AuthAck::default_instance());
 }
 
 }  // namespace
 
 void protobuf_ShutdownFile_client_2eproto() {
-  delete EncryptKeyNtf::default_instance_;
-  delete EncryptKeyNtf_reflection_;
   delete LoginReq::default_instance_;
   delete LoginReq_reflection_;
+  delete EncryptKeyNtf::default_instance_;
+  delete EncryptKeyNtf_reflection_;
+  delete AuthReq::default_instance_;
+  delete AuthReq_reflection_;
+  delete AuthAck::default_instance_;
+  delete AuthAck_reflection_;
 }
 
 void protobuf_AddDesc_client_2eproto() {
@@ -112,22 +161,32 @@ void protobuf_AddDesc_client_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\014client.proto\"#\n\rEncryptKeyNtf\022\022\n\nencry"
-    "ptKey\030\001 \002(\t\"\210\002\n\010LoginReq\022\025\n\rclientVersio"
-    "n\030\001 \002(\005\022\020\n\010deviceid\030\002 \002(\t\022\020\n\010notifyid\030\003 "
-    "\002(\t\022\020\n\010username\030\004 \002(\t\022\016\n\006zoneid\030\005 \002(\005\022\016\n"
-    "\006userid\030\006 \002(\005\022\020\n\010playerid\030\007 \002(\005\022\013\n\003job\030\010"
-    " \002(\t\022&\n\tloginType\030\t \002(\0162\023.LoginReq.Login"
-    "Type\022\020\n\010authType\030\n \002(\005\022\017\n\007authKey\030\013 \002(\t\""
-    "%\n\tLoginType\022\013\n\007NewRole\020\000\022\013\n\007OldRole\020\001*J"
-    "\n\rEncryptKeyDef\022\021\n\rEncryptKeyLen\020 \022\022\n\016En"
-    "cryptHeadLen\020\002\022\022\n\016EncryptTailLen\020\004", 394);
+    "\n\014client.proto\"\210\002\n\010LoginReq\022\025\n\rclientVer"
+    "sion\030\001 \002(\005\022\020\n\010deviceid\030\002 \002(\t\022\020\n\010notifyid"
+    "\030\003 \002(\t\022\020\n\010username\030\004 \002(\t\022\016\n\006zoneid\030\005 \002(\005"
+    "\022\016\n\006userid\030\006 \002(\005\022\020\n\010playerid\030\007 \002(\005\022\013\n\003jo"
+    "b\030\010 \002(\t\022&\n\tloginType\030\t \002(\0162\023.LoginReq.Lo"
+    "ginType\022\020\n\010authType\030\n \002(\005\022\017\n\007authKey\030\013 \002"
+    "(\t\"%\n\tLoginType\022\013\n\007NewRole\020\000\022\013\n\007OldRole\020"
+    "\001\"G\n\rEncryptKeyNtf\022\021\n\tpublicKey\030\001 \002(\t\022\022\n"
+    "\nprivateKey\030\002 \002(\t\022\017\n\007authKey\030\003 \002(\t\"\032\n\007Au"
+    "thReq\022\017\n\007authKey\030\001 \002(\t\":\n\007AuthAck\022\033\n\006res"
+    "ult\030\001 \002(\0162\013.AuthResult\022\022\n\nencryptKey\030\002 \002"
+    "(\t*\177\n\rEncryptKeyDef\022\021\n\rEncryptKeyLen\020 \022\022"
+    "\n\016EncryptHeadLen\020\002\022\022\n\016EncryptTailLen\020\004\022\016"
+    "\n\nAuthKeyLen\020\020\022\020\n\014PublicKeyLen\020\010\022\021\n\rPriv"
+    "ateKeyLen\020\024*(\n\nAuthResult\022\013\n\007AUTH_OK\020\000\022\r"
+    "\n\tAUTH_FAIL\020\001", 613);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "client.proto", &protobuf_RegisterTypes);
-  EncryptKeyNtf::default_instance_ = new EncryptKeyNtf();
   LoginReq::default_instance_ = new LoginReq();
-  EncryptKeyNtf::default_instance_->InitAsDefaultInstance();
+  EncryptKeyNtf::default_instance_ = new EncryptKeyNtf();
+  AuthReq::default_instance_ = new AuthReq();
+  AuthAck::default_instance_ = new AuthAck();
   LoginReq::default_instance_->InitAsDefaultInstance();
+  EncryptKeyNtf::default_instance_->InitAsDefaultInstance();
+  AuthReq::default_instance_->InitAsDefaultInstance();
+  AuthAck::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_client_2eproto);
 }
 
@@ -145,6 +204,9 @@ bool EncryptKeyDef_IsValid(int value) {
   switch(value) {
     case 2:
     case 4:
+    case 8:
+    case 16:
+    case 20:
     case 32:
       return true;
     default:
@@ -152,230 +214,18 @@ bool EncryptKeyDef_IsValid(int value) {
   }
 }
 
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int EncryptKeyNtf::kEncryptKeyFieldNumber;
-#endif  // !_MSC_VER
-
-EncryptKeyNtf::EncryptKeyNtf()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void EncryptKeyNtf::InitAsDefaultInstance() {
-}
-
-EncryptKeyNtf::EncryptKeyNtf(const EncryptKeyNtf& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void EncryptKeyNtf::SharedCtor() {
-  _cached_size_ = 0;
-  encryptkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-EncryptKeyNtf::~EncryptKeyNtf() {
-  SharedDtor();
-}
-
-void EncryptKeyNtf::SharedDtor() {
-  if (encryptkey_ != &::google::protobuf::internal::kEmptyString) {
-    delete encryptkey_;
-  }
-  if (this != default_instance_) {
-  }
-}
-
-void EncryptKeyNtf::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* EncryptKeyNtf::descriptor() {
+const ::google::protobuf::EnumDescriptor* AuthResult_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return EncryptKeyNtf_descriptor_;
+  return AuthResult_descriptor_;
 }
-
-const EncryptKeyNtf& EncryptKeyNtf::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_client_2eproto();
-  return *default_instance_;
-}
-
-EncryptKeyNtf* EncryptKeyNtf::default_instance_ = NULL;
-
-EncryptKeyNtf* EncryptKeyNtf::New() const {
-  return new EncryptKeyNtf;
-}
-
-void EncryptKeyNtf::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_encryptkey()) {
-      if (encryptkey_ != &::google::protobuf::internal::kEmptyString) {
-        encryptkey_->clear();
-      }
-    }
+bool AuthResult_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
   }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool EncryptKeyNtf::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string encryptKey = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_encryptkey()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->encryptkey().data(), this->encryptkey().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void EncryptKeyNtf::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string encryptKey = 1;
-  if (has_encryptkey()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->encryptkey().data(), this->encryptkey().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->encryptkey(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* EncryptKeyNtf::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required string encryptKey = 1;
-  if (has_encryptkey()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->encryptkey().data(), this->encryptkey().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->encryptkey(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int EncryptKeyNtf::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string encryptKey = 1;
-    if (has_encryptkey()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->encryptkey());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void EncryptKeyNtf::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const EncryptKeyNtf* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const EncryptKeyNtf*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void EncryptKeyNtf::MergeFrom(const EncryptKeyNtf& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_encryptkey()) {
-      set_encryptkey(from.encryptkey());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void EncryptKeyNtf::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void EncryptKeyNtf::CopyFrom(const EncryptKeyNtf& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool EncryptKeyNtf::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
-
-  return true;
-}
-
-void EncryptKeyNtf::Swap(EncryptKeyNtf* other) {
-  if (other != this) {
-    std::swap(encryptkey_, other->encryptkey_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata EncryptKeyNtf::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = EncryptKeyNtf_descriptor_;
-  metadata.reflection = EncryptKeyNtf_reflection_;
-  return metadata;
 }
 
 
@@ -1102,6 +952,844 @@ void LoginReq::Swap(LoginReq* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = LoginReq_descriptor_;
   metadata.reflection = LoginReq_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int EncryptKeyNtf::kPublicKeyFieldNumber;
+const int EncryptKeyNtf::kPrivateKeyFieldNumber;
+const int EncryptKeyNtf::kAuthKeyFieldNumber;
+#endif  // !_MSC_VER
+
+EncryptKeyNtf::EncryptKeyNtf()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void EncryptKeyNtf::InitAsDefaultInstance() {
+}
+
+EncryptKeyNtf::EncryptKeyNtf(const EncryptKeyNtf& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void EncryptKeyNtf::SharedCtor() {
+  _cached_size_ = 0;
+  publickey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  privatekey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  authkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+EncryptKeyNtf::~EncryptKeyNtf() {
+  SharedDtor();
+}
+
+void EncryptKeyNtf::SharedDtor() {
+  if (publickey_ != &::google::protobuf::internal::kEmptyString) {
+    delete publickey_;
+  }
+  if (privatekey_ != &::google::protobuf::internal::kEmptyString) {
+    delete privatekey_;
+  }
+  if (authkey_ != &::google::protobuf::internal::kEmptyString) {
+    delete authkey_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void EncryptKeyNtf::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* EncryptKeyNtf::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return EncryptKeyNtf_descriptor_;
+}
+
+const EncryptKeyNtf& EncryptKeyNtf::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_client_2eproto();
+  return *default_instance_;
+}
+
+EncryptKeyNtf* EncryptKeyNtf::default_instance_ = NULL;
+
+EncryptKeyNtf* EncryptKeyNtf::New() const {
+  return new EncryptKeyNtf;
+}
+
+void EncryptKeyNtf::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_publickey()) {
+      if (publickey_ != &::google::protobuf::internal::kEmptyString) {
+        publickey_->clear();
+      }
+    }
+    if (has_privatekey()) {
+      if (privatekey_ != &::google::protobuf::internal::kEmptyString) {
+        privatekey_->clear();
+      }
+    }
+    if (has_authkey()) {
+      if (authkey_ != &::google::protobuf::internal::kEmptyString) {
+        authkey_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool EncryptKeyNtf::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string publicKey = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_publickey()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->publickey().data(), this->publickey().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_privateKey;
+        break;
+      }
+
+      // required string privateKey = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_privateKey:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_privatekey()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->privatekey().data(), this->privatekey().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_authKey;
+        break;
+      }
+
+      // required string authKey = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_authKey:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_authkey()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->authkey().data(), this->authkey().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void EncryptKeyNtf::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required string publicKey = 1;
+  if (has_publickey()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->publickey().data(), this->publickey().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->publickey(), output);
+  }
+
+  // required string privateKey = 2;
+  if (has_privatekey()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->privatekey().data(), this->privatekey().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->privatekey(), output);
+  }
+
+  // required string authKey = 3;
+  if (has_authkey()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->authkey().data(), this->authkey().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->authkey(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* EncryptKeyNtf::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required string publicKey = 1;
+  if (has_publickey()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->publickey().data(), this->publickey().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->publickey(), target);
+  }
+
+  // required string privateKey = 2;
+  if (has_privatekey()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->privatekey().data(), this->privatekey().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->privatekey(), target);
+  }
+
+  // required string authKey = 3;
+  if (has_authkey()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->authkey().data(), this->authkey().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->authkey(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int EncryptKeyNtf::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string publicKey = 1;
+    if (has_publickey()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->publickey());
+    }
+
+    // required string privateKey = 2;
+    if (has_privatekey()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->privatekey());
+    }
+
+    // required string authKey = 3;
+    if (has_authkey()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->authkey());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void EncryptKeyNtf::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const EncryptKeyNtf* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const EncryptKeyNtf*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void EncryptKeyNtf::MergeFrom(const EncryptKeyNtf& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_publickey()) {
+      set_publickey(from.publickey());
+    }
+    if (from.has_privatekey()) {
+      set_privatekey(from.privatekey());
+    }
+    if (from.has_authkey()) {
+      set_authkey(from.authkey());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void EncryptKeyNtf::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void EncryptKeyNtf::CopyFrom(const EncryptKeyNtf& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool EncryptKeyNtf::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  return true;
+}
+
+void EncryptKeyNtf::Swap(EncryptKeyNtf* other) {
+  if (other != this) {
+    std::swap(publickey_, other->publickey_);
+    std::swap(privatekey_, other->privatekey_);
+    std::swap(authkey_, other->authkey_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata EncryptKeyNtf::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = EncryptKeyNtf_descriptor_;
+  metadata.reflection = EncryptKeyNtf_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int AuthReq::kAuthKeyFieldNumber;
+#endif  // !_MSC_VER
+
+AuthReq::AuthReq()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void AuthReq::InitAsDefaultInstance() {
+}
+
+AuthReq::AuthReq(const AuthReq& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void AuthReq::SharedCtor() {
+  _cached_size_ = 0;
+  authkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+AuthReq::~AuthReq() {
+  SharedDtor();
+}
+
+void AuthReq::SharedDtor() {
+  if (authkey_ != &::google::protobuf::internal::kEmptyString) {
+    delete authkey_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void AuthReq::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* AuthReq::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return AuthReq_descriptor_;
+}
+
+const AuthReq& AuthReq::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_client_2eproto();
+  return *default_instance_;
+}
+
+AuthReq* AuthReq::default_instance_ = NULL;
+
+AuthReq* AuthReq::New() const {
+  return new AuthReq;
+}
+
+void AuthReq::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_authkey()) {
+      if (authkey_ != &::google::protobuf::internal::kEmptyString) {
+        authkey_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool AuthReq::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string authKey = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_authkey()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->authkey().data(), this->authkey().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void AuthReq::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required string authKey = 1;
+  if (has_authkey()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->authkey().data(), this->authkey().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->authkey(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* AuthReq::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required string authKey = 1;
+  if (has_authkey()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->authkey().data(), this->authkey().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->authkey(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int AuthReq::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string authKey = 1;
+    if (has_authkey()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->authkey());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void AuthReq::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const AuthReq* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const AuthReq*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void AuthReq::MergeFrom(const AuthReq& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_authkey()) {
+      set_authkey(from.authkey());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void AuthReq::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AuthReq::CopyFrom(const AuthReq& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AuthReq::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void AuthReq::Swap(AuthReq* other) {
+  if (other != this) {
+    std::swap(authkey_, other->authkey_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata AuthReq::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = AuthReq_descriptor_;
+  metadata.reflection = AuthReq_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int AuthAck::kResultFieldNumber;
+const int AuthAck::kEncryptKeyFieldNumber;
+#endif  // !_MSC_VER
+
+AuthAck::AuthAck()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void AuthAck::InitAsDefaultInstance() {
+}
+
+AuthAck::AuthAck(const AuthAck& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void AuthAck::SharedCtor() {
+  _cached_size_ = 0;
+  result_ = 0;
+  encryptkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+AuthAck::~AuthAck() {
+  SharedDtor();
+}
+
+void AuthAck::SharedDtor() {
+  if (encryptkey_ != &::google::protobuf::internal::kEmptyString) {
+    delete encryptkey_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void AuthAck::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* AuthAck::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return AuthAck_descriptor_;
+}
+
+const AuthAck& AuthAck::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_client_2eproto();
+  return *default_instance_;
+}
+
+AuthAck* AuthAck::default_instance_ = NULL;
+
+AuthAck* AuthAck::New() const {
+  return new AuthAck;
+}
+
+void AuthAck::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    result_ = 0;
+    if (has_encryptkey()) {
+      if (encryptkey_ != &::google::protobuf::internal::kEmptyString) {
+        encryptkey_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool AuthAck::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .AuthResult result = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::AuthResult_IsValid(value)) {
+            set_result(static_cast< ::AuthResult >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_encryptKey;
+        break;
+      }
+
+      // required string encryptKey = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_encryptKey:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_encryptkey()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->encryptkey().data(), this->encryptkey().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void AuthAck::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .AuthResult result = 1;
+  if (has_result()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->result(), output);
+  }
+
+  // required string encryptKey = 2;
+  if (has_encryptkey()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->encryptkey().data(), this->encryptkey().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->encryptkey(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* AuthAck::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .AuthResult result = 1;
+  if (has_result()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->result(), target);
+  }
+
+  // required string encryptKey = 2;
+  if (has_encryptkey()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->encryptkey().data(), this->encryptkey().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->encryptkey(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int AuthAck::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .AuthResult result = 1;
+    if (has_result()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->result());
+    }
+
+    // required string encryptKey = 2;
+    if (has_encryptkey()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->encryptkey());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void AuthAck::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const AuthAck* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const AuthAck*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void AuthAck::MergeFrom(const AuthAck& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_result()) {
+      set_result(from.result());
+    }
+    if (from.has_encryptkey()) {
+      set_encryptkey(from.encryptkey());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void AuthAck::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AuthAck::CopyFrom(const AuthAck& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AuthAck::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void AuthAck::Swap(AuthAck* other) {
+  if (other != this) {
+    std::swap(result_, other->result_);
+    std::swap(encryptkey_, other->encryptkey_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata AuthAck::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = AuthAck_descriptor_;
+  metadata.reflection = AuthAck_reflection_;
   return metadata;
 }
 
