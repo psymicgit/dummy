@@ -13,7 +13,7 @@
 
 bool AuthHttpCmd::init()
 {
-	m_url = "http://127.0.0.1/auth";
+	m_url = "http://127.0.0.1/auth.php";
 
 	std::string encryptPwd = "encrypted_" + m_robot->m_password + "_encrypted";
 
