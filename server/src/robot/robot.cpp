@@ -180,7 +180,10 @@ void Robot::start()
 void Robot::handshake()
 {
 	HandShakeHttpCmd *handshakeHttpCmd = new HandShakeHttpCmd;
-	RobotHttpMgr::Instance().addCmd(handshakeHttpCmd);
+	handshakeHttpCmd->m_robot = this;
+	handshakeHttpCmd->init();
+
+	m_robotMgr->m_httpMgr.addCmd(handshakeHttpCmd);
 }
 
 void Robot::auth()

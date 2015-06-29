@@ -8,6 +8,23 @@
 
 #include "httpcmd.h"
 
+HttpCmd::HttpCmd()
+	: m_lastAddTime(0)
+	, m_ok(true)
+{
+	m_curl = curl_easy_init();
+	memset(m_errorBuf, 0x00, sizeof(m_errorBuf));
+}
+
+void HttpCmd::bind()
+{
+	curl_easy_setopt(m_curl, CURLOPT_URL, m_url.c_str());
+	curl_easy_setopt(m_curl, CURLOPT_ERRORBUFFER, m_errorBuf);
+	curl_easy_setopt(m_curl, CURLOPT_WRITEDATA, this);
+	curl_easy_setopt(m_curl, CURLOPT_POST, 1 );
+	curl_easy_setopt(m_curl, CURLOPT_POSTFIELDS, m_fields.c_str());
+}
+
 void HttpCmd::syncExecute()
 {
 

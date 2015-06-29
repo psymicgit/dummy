@@ -68,7 +68,7 @@
       <AdditionalDependencies>ws2_32.lib;libglog_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>ws2_32.lib;libglog_static.lib;libprotobuf.lib;libmysql.lib;libcurl-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;libglog_static.lib;libprotobuf.lib;libmysql.lib;libcurl-debug.lib;Wldap32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -97,7 +97,7 @@
       <AdditionalDependencies>ws2_32.lib;libglog_static.lib;libprotobuf.lib;libprotobuf-lite.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>ws2_32.lib;libglog_static-release.lib;libprotobuf-release.lib;libmysql.lib;libcurl-release.lib</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;libglog_static-release.lib;libprotobuf-release.lib;libmysql.lib;libcurl-release.lib;Wldap32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>../../lib;</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>

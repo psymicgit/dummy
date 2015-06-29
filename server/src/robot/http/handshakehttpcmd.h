@@ -16,12 +16,12 @@ class Robot;
 // Œ’ ÷«Î«Û
 class HandShakeHttpCmd : public HttpCmd
 {
-private:
+public:
 	virtual bool init();
 
 	virtual void onExecuted();
 
-private:
+public:
 	Robot *m_robot;
 };
 

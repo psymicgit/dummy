@@ -9,6 +9,8 @@
 #ifndef _httpmgr_h_
 #define _httpmgr_h_
 
+#include <curl/curl.h>
+
 class HttpCmd;
 
 // 发送到用户中心的http请求类型
@@ -32,10 +34,12 @@ public:
 
 private:
 	// 一旦返回http结果时将调用此函数
-	static size_t onRecvResponse(void *buffer, size_t size, size_t count, void *pointer);
+	static size_t onRecvHtml(void *buffer, size_t size, size_t count, void *pointer);
 
 private:
 	HttpCmdList m_httpCmdList;
+
+	CURL *m_currentCurl;
 };
 
 #endif //_httpmgr_h_

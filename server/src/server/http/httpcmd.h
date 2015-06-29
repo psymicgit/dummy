@@ -11,6 +11,8 @@
 
 #include "httpmgr.h"
 
+#include <curl/curl.h>
+
 #define HTTP_URL_SIGN	"Bef^3rwsvn!29jcx57ng"
 
 class HttpCmd
@@ -18,13 +20,15 @@ class HttpCmd
 	friend class HttpMgr;
 
 public:
-	HttpCmd() {}
+	HttpCmd();
 	virtual ~HttpCmd() {};
 
 	void release() { delete this; }
 
 public:
 	virtual bool init() = 0;
+
+	void bind();
 
 	// virtual HttpCmdType getHttpCmdType() = 0;
 
@@ -39,6 +43,8 @@ public:
 	void syncExecute();
 
 protected:
+	CURL *m_curl; // URL的信息
+
 	Timestamp m_lastAddTime; // 上次添加URL请求时间
 
 	char m_errorBuf[256]; //错误信息

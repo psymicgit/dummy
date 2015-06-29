@@ -130,6 +130,10 @@
 
 using namespace std;
 
+// libcurlÔ¤¶¨Òå
+#define CURL_STATICLIB
+#define HTTP_ONLY
+
 // Ì×½Ó×Ö¡¢ÍøÂç
 #ifdef WIN
 	#define NetModel Select
