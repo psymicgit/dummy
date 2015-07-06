@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2015, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2011, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -19,10 +19,9 @@
  * KIND, either express or implied.
  *
  ***************************************************************************/
-/* <DESC>
- * Source code using the multi interface to download many
- * files, with a capped maximum amount of simultaneous transfers.
- * </DESC>
+/* Example application source code using the multi interface to download many
+ * files, but with a capped maximum amount of simultaneous transfers.
+ *
  * Written by Michael Wallner
  */
 
