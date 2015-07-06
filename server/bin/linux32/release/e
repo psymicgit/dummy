@@ -15,7 +15,7 @@ declare -a svr_process_list=(
 echo "1. kill current running server"
     for svr_process in ${svr_process_list[@]}
     do
-        # echo killing $svr_process
+        echo "----> killing "$svr_process ...
 		killall -9 $svr_process
     done
 

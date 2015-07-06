@@ -16,5 +16,6 @@ echo "start clean servers"
 
 find -name "core.*" -exec rm -f {} \;
 find -name "log_*.*" -exec rm -f {} \;
+find -name "nohup.out" -exec rm -f {} \;
 
 exit
