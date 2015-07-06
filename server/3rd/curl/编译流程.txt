@@ -1,0 +1,8 @@
+见libcurl源码编译及使用[http://blog.csdn.net/b_h_l/article/details/19985061]
+
+1. ./configure --prefix=/usr/local/curl --disable-shared --enable-static --without-libidn --without-ssl --without-librtmp --without-gnutls --without-nss --without-libssh2 --without-zlib --without-winidn --disable-rtsp --disable-ldap --disable-ldaps --disable-ipv6
+注意：不需要其它功能就disable，不然会在连接时报错， 如果你没有disable掉，但你的机器上又没有安装相应的库，link时会报错。
+
+2. make && make install
+
+3. 链接时加上 -lrt选项防止libcurl undefined reference to `clock_gettime' 编译错误
