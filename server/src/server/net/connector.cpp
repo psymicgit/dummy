@@ -29,7 +29,7 @@ Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *ne
 {
 	m_sockfd = socktool::createSocket();
 	socktool::setNonBlocking(m_sockfd);
-	socktool::setTcpNoDelay(m_sockfd);
+	//socktool::setTcpNoDelay(m_sockfd);
 }
 
 bool Connector::connect()

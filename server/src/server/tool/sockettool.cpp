@@ -65,42 +65,30 @@ namespace socktool
 
 	bool setTcpNoDelay(socket_t sockfd)
 	{
-#ifdef WIN
-		char flag = 1;
-#else
-		socklen_t flag = 1;
-#endif
+		socklen_t on = 1;
 
-		/* Disable the Nagle (TCP No Delay) algorithm */
-		int ret = setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (char *)&flag, sizeof(flag) );
+		// 禁用Nagle算法
+		int ret = setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (const char*)&on, sizeof(on));
 		if (ret == -1) {
 			LOG_SYSTEM_ERR << "set socket " << sockfd << " TCP_NODELAY failed";
-			exit(-1);
-
 			return false;
 		}
 
 		return true;
 	}
 
-	void setKeepAlive(socket_t sockfd, bool on, int keepAliveTime)
+	void setKeepAlive(socket_t sockfd, bool on, int keepIdleTime)
 	{
-#ifdef WIN
-		char keepalive;
-#else
-		socklen_t keepalive;
-#endif
-
-		keepalive = on ? 1 : 0;
-
-		::setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, (const char*)&keepalive, static_cast<socklen_t>(sizeof keepalive));
-
+		socklen_t keepAlive = on ? 1 : 0;
+		::setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, (const char*)&keepAlive, sizeof(keepAlive));
 		if (!on) {
+			LOG_SYSTEM_ERR << "set socket " << sockfd << " SO_KEEPALIVE failed";
 			return;
 		}
 
 #ifndef WIN
-		setsockopt(sockfd, IPPROTO_TCP, TCP_KEEPIDLE, (void*)(&keepAliveTime), (socklen_t)sizeof(keepAliveTime));
+		// 如该连接在指定秒内没有任何数据往来,则进行探测
+		setsockopt(sockfd, IPPROTO_TCP, TCP_KEEPIDLE, (void*)(&keepIdleTime), (socklen_t)sizeof(keepIdleTime));
 #endif
 	}
 
@@ -108,10 +96,7 @@ namespace socktool
 	{
 		linger ling;
 
-		// (在closesocket()调用, 在还有数据没发送完毕的时候容许逗留)
-		ling.l_onoff = 1;
-
-		// 如果m_sLinger.l_onoff=0;则功能和2.)作用相同;
+		ling.l_onoff = 1; // (在closesocket()调用, 在还有数据没发送完毕的时候容许逗留)
 		ling.l_linger = waitTime; // 延迟关闭socket的时间
 		setsockopt(sock, SOL_SOCKET, SO_LINGER, (const char*)&ling, sizeof(linger));
 	}
@@ -209,7 +194,7 @@ namespace socktool
 		err = errno;
 #endif
 
-		clearerrno();
+		// clearerrno();
 		return err;
 	}
 

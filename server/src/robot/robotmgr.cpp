@@ -28,10 +28,10 @@ bool RobotMgr::init()
 
 	for(int i = 0; i < 200; i++) {
 		Robot *robot = createRobot();
-		robot->start();
+		// robot->start();
 
 		// LOG_INFO << "robot " << i << " start connecting to server";
-		// m_wan.connect("127.0.0.1", 20001, *robot);
+		m_wan.connect("127.0.0.1", 20001, *robot, "gateserver");
 		// m_wan.connect("127.0.0.1", 80, *robot);
 	}
 

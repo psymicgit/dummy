@@ -22,7 +22,12 @@
 void Link::open()
 {
 	socktool::setNonBlocking(m_sockfd);
-	socktool::setTcpNoDelay(m_sockfd);
+	socktool::setKeepAlive(m_sockfd, true, 120);
+
+	if (!socktool::setTcpNoDelay(m_sockfd)) {
+		LOG_WARN << "local port = " << m_localAddr.toPort();
+	}
+
 
 	m_net->addFd(this);
 }

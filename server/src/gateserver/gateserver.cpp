@@ -122,7 +122,21 @@ void GateServer::test()
 		for(int i = 0; i < times; i++) {
 			Buffer *buf = new Buffer(1024);
 			buf->append(text, strlen(text));
-			delete buf;
+			// delete buf;
+		}
+
+		double speed = tick.endTick() / times;
+		double count = 1.0f / speed;
+		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
+	}
+
+	{
+		Tick tick("公共缓存");
+
+		Buffer publicBuf(strlen(text) * times);
+
+		for(int i = 0; i < times; i++) {
+			publicBuf.append(text, strlen(text));
 		}
 
 		double speed = tick.endTick() / times;

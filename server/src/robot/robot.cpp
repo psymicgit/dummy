@@ -117,7 +117,7 @@ void Robot::onRecv(Link *link, Buffer &buf)
 
 TaskQueue& Robot::getTaskQueue()
 {
-	return RobotMgr::Instance().m_taskQueue;
+	return m_robotMgr->m_taskQueue;
 }
 
 bool Robot::send(int msgId, Message &msg)
