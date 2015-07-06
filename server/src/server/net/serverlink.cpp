@@ -10,6 +10,7 @@
 #include "server.h"
 
 #include "protocol/message.h"
+#include "tool/servertool.h"
 
 void ServerLink::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
@@ -20,7 +21,7 @@ void ServerLink::onDisconnect(Link *link, const NetAddress& localAddr, const Net
 	Server::instance->onDisconnectServer(*link, m_remoteSvrType, m_svrId);
 
 	if (link->m_isCreateByConnector) {
-		Server::instance->m_lan.connect(peerAddr.toIp(), peerAddr.toPort(), *Server::instance);
+		Server::instance->m_lan.connect(peerAddr.toIp(), peerAddr.toPort(), *Server::instance, svrtool::getSvrName(m_remoteSvrType).c_str());
 	}
 }
 

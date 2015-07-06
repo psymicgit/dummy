@@ -11,6 +11,8 @@
 #ifdef WIN
 	#include <windows.h>
 	#include <io.h>
+#else
+	#include <stdarg.h>
 #endif
 
 /* 下面颜色改变的代码摘自gtest，只稍微做了一些调整 */
@@ -115,7 +117,6 @@ namespace echotool
 #endif
 	}
 
-#ifdef WIN
 	const char* getmsg(const char* fmt, ...)
 	{
 		va_list args;
@@ -126,6 +127,5 @@ namespace echotool
 		va_end(args);
 		return global::g_sprintfBuf;
 	}
-#endif
 }
 

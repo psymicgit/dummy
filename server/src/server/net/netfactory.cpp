@@ -85,10 +85,10 @@ Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor
 	return listener;
 }
 
-Connector* NetFactory::connect(const string& ip, int port, INetReactor &netReactor)
+Connector* NetFactory::connect(const string& ip, int port, INetReactor &netReactor, const char* remoteHostName)
 {
 	NetAddress peerAddr(ip, port);
-	Connector* connector = new Connector(peerAddr, &netReactor, &m_net, m_taskQueuePool);
+	Connector* connector = new Connector(peerAddr, &netReactor, &m_net, m_taskQueuePool, remoteHostName);
 	// LOG_DEBUG << "NetFactory::connect addr = " << connector;
 
 	connector->connect();

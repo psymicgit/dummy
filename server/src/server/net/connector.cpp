@@ -17,7 +17,7 @@
 #include "basic/timerqueue.h"
 #include "basic/taskqueue.h"
 
-Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *net, task_queue_pool_t *taskQueuePool)
+Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *net, task_queue_pool_t *taskQueuePool, const char* remoteHostName)
 	: m_peerAddr(peerAddr)
 	, m_pNetReactor(netReactor)
 	, m_net(net)
@@ -25,6 +25,7 @@ Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *ne
 	, m_retryDelayMs(InitRetryDelayMs)
 	, m_state(kDisconnected)
 	, m_errno(0)
+	, m_remoteHostName(remoteHostName)
 {
 	m_sockfd = socktool::createSocket();
 	socktool::setNonBlocking(m_sockfd);
@@ -166,7 +167,7 @@ bool Connector::retry()
 		}
 	}
 
-	LOG_SOCKET_ERR(m_sockfd, m_errno) << "socket<" << m_sockfd << "> connect to peer<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
+	LOG_SOCKET_ERR(m_sockfd, m_errno) << "socket<" << m_sockfd << "> connect to " << m_remoteHostName << "<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
 	m_errno = 0;
 
 	if (m_state == kConnecting) {

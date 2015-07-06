@@ -133,7 +133,7 @@ bool Robot::send(int msgId, Message &msg)
 
 	int size = msg.ByteSize();
 
-	Buffer buf;
+	Buffer buf(size);
 
 	msg.SerializeToArray((void*)buf.beginWrite(), size);
 	buf.hasWritten(size);

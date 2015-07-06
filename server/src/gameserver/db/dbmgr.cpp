@@ -156,7 +156,7 @@ void DBMgr::test()
 bool DBMgr::init()
 {
 	DBAccount gamedbAccnt;
-	gamedbAccnt.m_dbIp = "192.168.2.100";
+	gamedbAccnt.m_dbIp = "192.168.2.102";
 	gamedbAccnt.m_dbName = "gamedb";
 	gamedbAccnt.m_dbPort = 3306;
 	gamedbAccnt.m_loginName = "root";

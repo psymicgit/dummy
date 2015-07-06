@@ -32,7 +32,7 @@ bool GameServer::init()
 
 	for(int i = 0; i < 2; i++) {
 		// m_wan.connect("115.239.211.112", 20001, *this);
-		m_lan.connect("127.0.0.1", 10001, *this);
+		m_lan.connect("127.0.0.1", 10001, *this, "gateserver");
 	}
 
 	if (!m_dbmgr.init()) {

@@ -44,7 +44,7 @@ namespace timetool
 		return nowIn100ns / 10000; //转化为ms单位
 	}
 
-	Timestamp GetLocalTime()
+	Timestamp getLocalTime()
 	{
 		FILETIME local;
 		GetSystemTimeAsFileTime (&local); // 获得系统UTC格式时间
@@ -79,8 +79,8 @@ namespace timetool
 		FileTimeToLocalFileTime(&local, &local); // 转换为本地时间
 		FileTimeToSystemTime(&local, &systime);
 
-		sprintf_s(global::g_formatBuf, sizeof global::g_formatBuf, "%02d/%02d/%d-%02d:%02d:%02d:%-6d",
-		          systime.wDay, systime.wMonth, systime.wYear,
+		sprintf_s(global::g_formatBuf, sizeof global::g_formatBuf, "%02d/%02d/%02d-%02d:%02d:%02d:%-6d",
+		          systime.wYear, systime.wMonth, systime.wDay,
 		          systime.wHour, systime.wMinute, systime.wSecond, systime.wMilliseconds
 		         );
 
@@ -94,6 +94,21 @@ namespace timetool
 		gettimeofday(&tv, NULL);
 		Timestamp seconds = tv.tv_sec;
 		return seconds * 1000 + tv.tv_usec / 1000;
+	}
+
+	const char* FormatNow()
+	{
+		time_t now;
+		time(&now);// time函数读取现在的时间(国际标准时间非北京时间)，然后传值给now
+
+		tm *localnow = localtime(&now); // 转为本时区时间
+
+		sprintf_s(global::g_formatBuf, sizeof global::g_formatBuf, "%02d/%02d/%02d-%02d:%02d:%02d",
+		          localnow->tm_year, localnow->tm_mon, localnow->tm_mday,
+		          localnow->tm_hour, localnow->tm_min, localnow->tm_sec
+		         );
+
+		return global::g_formatBuf;
 	}
 #endif
 }

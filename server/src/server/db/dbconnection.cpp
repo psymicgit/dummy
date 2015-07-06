@@ -23,7 +23,7 @@ bool DBConnection::connect()
 	char autoReconnect = 1;
 	mysql_options(m_mysql, MYSQL_OPT_RECONNECT, &autoReconnect);
 
-	char timeout = 3;
+	char timeout = 5;
 	mysql_options(m_mysql, MYSQL_OPT_CONNECT_TIMEOUT, &timeout);
 
 	//如果客户设置了特殊的字符集，设置MYSQL的字符集属性

@@ -45,7 +45,7 @@ public:
 
 	Listener* listen(const string& ip, int port, INetReactor&);
 
-	Connector* connect(const string& ip, int port, INetReactor&);
+	Connector* connect(const string& ip, int port, INetReactor&, const char* remoteHostName);
 
 public:
 	NetModel m_net;

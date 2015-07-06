@@ -22,7 +22,7 @@ class Connector : public IFd
 	enum States { kDisconnected, kConnecting, kConnected };
 
 public:
-	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, task_queue_pool_t*);
+	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, task_queue_pool_t*, const char* remoteHostName);
 
 	virtual socket_t socket() const {return m_sockfd;}
 	virtual int handleRead();
@@ -53,6 +53,7 @@ private:
 	States m_state;
 
 	int m_errno; // socketµÄ´íÎóÂë
+	std::string m_remoteHostName;
 };
 
 #endif //_connector_h_

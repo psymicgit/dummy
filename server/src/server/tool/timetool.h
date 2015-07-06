@@ -20,7 +20,7 @@ namespace timetool
 	// µ•Œª: ∫¡√Î
 	Timestamp getTimeOfDay();
 
-	Timestamp GetLocalTime();
+	Timestamp getLocalTime();
 
 	const char* FormatTime(const Timestamp& time);
 

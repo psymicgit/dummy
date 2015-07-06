@@ -9,6 +9,7 @@
 #include "handshakehttpcmd.h"
 #include "robot.h"
 #include <tool/echotool.h>
+#include <tool/timetool.h>
 
 bool HandShakeHttpCmd::init()
 {
