@@ -20,8 +20,11 @@ bool DBConnection::connect()
 	m_mysql = mysql_init(NULL);
 
 	// 设置自动重连
-	char value = 1;
-	mysql_options(m_mysql, MYSQL_OPT_RECONNECT, &value);
+	char autoReconnect = 1;
+	mysql_options(m_mysql, MYSQL_OPT_RECONNECT, &autoReconnect);
+
+	char timeout = 3;
+	mysql_options(m_mysql, MYSQL_OPT_CONNECT_TIMEOUT, &timeout);
 
 	//如果客户设置了特殊的字符集，设置MYSQL的字符集属性
 	if(!m_account.m_charactset.empty()) {
@@ -37,7 +40,7 @@ bool DBConnection::connect()
 
 	if(NULL == mysql) {
 		const char *err = (char*)mysql_error(m_mysql);
-		LOG_ERROR << "mysql_real_connect failed, error str: <" << err << "> failed";
+		LOG_ERROR << "mysql_real_connect failed, error message = <" << err << ">";
 		this->release();
 
 		return false;
@@ -83,7 +86,7 @@ void DBConnection::release()
 		mysql_stmt_close(stmt);
 	}
 
-	LOG_INFO << "close dbconnection successfully! ----\tsvrip:" << m_account.m_dbIp << "\tdbname:" << m_account.m_dbName << "\tunicsocket:" << m_account.m_unixSocket;
+	LOG_INFO << "close dbconnection[svrip=" << m_account.m_dbIp << "\tdbname=" << m_account.m_dbName << "\tunixsocket=" << m_account.m_unixSocket << "] successfully!";
 }
 
 bool DBConnection::reconnect()
@@ -99,7 +102,7 @@ bool DBConnection::escape(const char *pSrc, int nSrcSize, char *pDest, int nDstS
 	}
 
 	if((2 * nSrcSize + 1) > nDstSize) {
-		LOG_ERROR << "escape exception: DestSize < 2 * nSrcSize + 1";
+		LOG_ERROR << "escape exception: DestSize[" << nDstSize << "] < 2 * nSrcSize[" << nSrcSize << "] + 1";
 		return false;
 	}
 
@@ -160,10 +163,10 @@ DB::DBExecuteCode DBConnection::execute(const char *sql, uint32 sqlLength, uint6
 
 		const char* errmsg = mysql_error(m_mysql);
 		if(errmsg != NULL) {
-			LOG_ERROR << "execute exception, sql" << sql << ", errno = " << errnum << ", errmsg = " << errmsg;
+			LOG_ERROR << "execute exception, sql = " << sql << ", errno = " << errnum << ", errmsg = " << errmsg;
 		}
 		else {
-			LOG_ERROR << "execute exception, sql" << sql << ", errno = " << errnum;
+			LOG_ERROR << "execute exception, sql = " << sql << ", errno = " << errnum;
 		}
 		//==================打印日志完毕==================
 
@@ -173,7 +176,7 @@ DB::DBExecuteCode DBConnection::execute(const char *sql, uint32 sqlLength, uint6
 			}
 
 			if (false == execute(sql, sqlLength, pInsertId, pEffectRowNum)) {
-				LOG_ERROR << "svr lost, execute exception again, sql" << sql << ", errno = " << errnum;
+				LOG_ERROR << "svr lost, execute exception again, sql = " << sql << ", errno = " << errnum;
 				return DB::EXECUTE_ERR_CONN;
 			}
 		}

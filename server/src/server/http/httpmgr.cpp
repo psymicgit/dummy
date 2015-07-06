@@ -54,7 +54,7 @@ void HttpMgr::run()
 	CURLMsg* pMsg = NULL;
 
 	// 获取已返回结果的http请求
-	while( pMsg = curl_multi_info_read( m_currentCurl, &MsgNumLeft ) ) {
+	while((pMsg = curl_multi_info_read( m_currentCurl, &MsgNumLeft)) != NULL) {
 		if( pMsg->msg != CURLMSG_DONE ) {
 			continue;
 		}

@@ -25,7 +25,7 @@ namespace socktool
 	{
 		socket_t sockfd = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 		if (sockfd < 0) {
-			LOG_SYSTEM_ERR << "sockets::createNonblockingOrDie";
+			LOG_SYSTEM_ERR << "socktool::createSocket";
 		}
 
 		return sockfd;
@@ -102,6 +102,18 @@ namespace socktool
 #ifndef WIN
 		setsockopt(sockfd, IPPROTO_TCP, TCP_KEEPIDLE, (void*)(&keepAliveTime), (socklen_t)sizeof(keepAliveTime));
 #endif
+	}
+
+	void setLinger(socket_t sock, int waitTime)
+	{
+		linger ling;
+
+		// (在closesocket()调用, 在还有数据没发送完毕的时候容许逗留)
+		ling.l_onoff = 1;
+
+		// 如果m_sLinger.l_onoff=0;则功能和2.)作用相同;
+		ling.l_linger = waitTime; // 延迟关闭socket的时间
+		setsockopt(sock, SOL_SOCKET, SO_LINGER, (const char*)&ling, sizeof(linger));
 	}
 
 	void setReuseAddr(socket_t sockfd, bool on)

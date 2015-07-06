@@ -33,8 +33,8 @@ namespace socktool
 
 	void setKeepAlive(socket_t, bool on, int keepAliveTime);
 
-	// 延缓面向连接的socket的close操作
-	void setLinger(socket_t, bool on);
+	// 设置延迟关闭socket的时间，等待套接字发送缓冲区中的数据发送完成（慎用，不要依赖这个选项，最好结合业务和场景自行处理）
+	void setLinger(socket_t, int waitTime);
 
 	// 获取socket的错误码并置错误码为0
 	int getSocketError(socket_t sockfd);

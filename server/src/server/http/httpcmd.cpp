@@ -37,11 +37,11 @@ string HttpCmd::signUrl(const char *sign)
 	// 1. 进行md5消息摘要
 
 	// 2. 取md5的前16位转为十六进制串
-	CHAR hex[32] = {0};
+	char hex[32] = {0};
 
-	CHAR hexDigest[256] = {0};
-	for (UINT8 byIdx = 0; byIdx < 16; byIdx++) {
-		sprintf(hex, "%02x", (UINT8)hexDigest[byIdx]);
+	char hexDigest[256] = {0};
+	for (uint8 byIdx = 0; byIdx < 16; byIdx++) {
+		sprintf(hex, "%02x", (uint8)hexDigest[byIdx]);
 		strcat(hexDigest, hex);
 	}
 

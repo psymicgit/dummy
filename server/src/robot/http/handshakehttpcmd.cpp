@@ -8,6 +8,7 @@
 
 #include "handshakehttpcmd.h"
 #include "robot.h"
+#include <tool/echotool.h>
 
 bool HandShakeHttpCmd::init()
 {
