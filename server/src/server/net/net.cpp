@@ -257,6 +257,7 @@ Select::Select()
 bool Select::init(int initLinkCount, int linkGrowCount)
 {
 	m_linkPool.init(initLinkCount, linkGrowCount);
+	m_links.reserve(initLinkCount);
 	return true;
 }
 

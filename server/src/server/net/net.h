@@ -171,9 +171,10 @@ private:
 
 private:
 	LinkerList m_links; // 当前维持的连接
+	LinkPool m_linkPool;
+
 	TaskQueue m_tasks;
 	TimerQueue m_timers;
-	LinkPool m_linkPool;
 
 	int m_maxfd;
 
