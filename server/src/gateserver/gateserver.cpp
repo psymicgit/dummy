@@ -156,7 +156,7 @@ bool GateServer::init()
 	logging::init("gateserver", "log_gatesvr_");
 
 	m_lan.init(1);
-	m_wan.init(4);
+	m_wan.init(1);
 
 	test();
 

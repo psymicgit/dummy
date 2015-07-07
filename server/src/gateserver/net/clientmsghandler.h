@@ -57,13 +57,13 @@ private:
 		loginCnt++;
 
 		if (loginCnt % 1000 == 0) {
-			LOG_INFO << "loginCnt = " << loginCnt;
+			LOG_INFO << "loginCnt = " << loginCnt << ", loginReq size = " << req->ByteSize();
 		}
 
-		if (loginCnt == 10000) {
+		if (loginCnt % 10000 == 0) {
 			double speed = tick.endTick() / loginCnt;
 			double count = 1.0f / speed;
-			LOG_WARN << "avg cost time = " << speed << ", exe count per second = " << count;
+			LOG_WARN << "loginCnt = " << loginCnt << ", avg cost time = " << speed << ", exe count per second = " << count;
 			// Server::instance->stop();
 		}
 	}
