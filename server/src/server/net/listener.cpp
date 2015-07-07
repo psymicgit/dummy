@@ -108,6 +108,6 @@ void Listener::onAccepted(Link &link)
 Link* Listener::createLink(socket_t newfd, NetAddress &peerAddr)
 {
 	LinkPool &linkPool = m_net->getLinkPool();
-	return linkPool.alloc(newfd, m_listenAddr, peerAddr, m_netFactory->m_taskQueuePool->alloc(newfd), m_net, m_pNetReactor);
+	return linkPool.alloc(newfd, m_listenAddr, peerAddr, m_net, m_pNetReactor);
 	// return new Link(newfd, m_listenAddr, peerAddr, m_netFactory->m_taskQueuePool->alloc(newfd), m_net, m_pNetReactor);
 }

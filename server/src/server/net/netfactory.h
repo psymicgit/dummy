@@ -37,7 +37,7 @@ private:
 public:
 	NetFactory();
 
-	bool init(int threadCnt, int initLinkCnt = 500);
+	bool init(int threadCnt, int initLinkCnt = 1000);
 
 	void start();
 

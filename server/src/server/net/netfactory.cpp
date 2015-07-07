@@ -43,7 +43,7 @@ void NetFactory::start()
 	m_started = true;
 
 #ifndef WIN
-	m_thread.create_thread(task_queue_pool_t::gen_task(m_taskQueuePool), m_threadCnt);
+	// m_thread.create_thread(task_queue_pool_t::gen_task(m_taskQueuePool), m_threadCnt);
 #endif
 
 	m_thread.create_thread(Task(&runNet, this), 1);

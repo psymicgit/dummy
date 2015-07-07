@@ -23,7 +23,7 @@ namespace google {namespace protobuf {class Message;}}
 class Link : public IFd
 {
 public:
-	explicit Link(int sockfd, NetAddress &localAddr, NetAddress &peerAddr, task_queue_i *pQueue, NetModel *pNet, INetReactor *pNetReactor)
+	explicit Link(int sockfd, NetAddress &localAddr, NetAddress &peerAddr, NetModel *pNet, INetReactor *pNetReactor)
 		: m_localAddr(localAddr)
 		, m_peerAddr(peerAddr)
 		, m_pNetReactor(pNetReactor)
@@ -31,7 +31,6 @@ public:
 		, m_isClosing(false)
 		, m_sockfd(sockfd)
 		, m_net(pNet)
-		, m_taskQueue(pQueue)
 	{
 	}
 

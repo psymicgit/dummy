@@ -69,7 +69,7 @@ void Link::onLogicClose()
 #ifdef WIN
 	m_net->getTaskQueue()->put(boost::bind(&Link::onNetClose, this));
 #else
-	m_taskQueue->produce(boost::bind(&Link::onNetClose, this));
+	onNetClose();
 #endif
 }
 
@@ -121,7 +121,7 @@ void Link::sendBuffer(Buffer *buf)
 #ifdef WIN
 	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this, buf));
 #else
-	m_taskQueue->produce(boost::bind(&Link::onSend, this, buf));
+	onSend(buf);
 #endif
 }
 
@@ -179,23 +179,13 @@ void Link::send(int msgId, const char *data, int len)
 
 int Link::handleRead()
 {
-#ifdef WIN32
 	handleReadTask();
-#else
-	m_taskQueue->produce(boost::bind(&Link::handleReadTask, this));
-#endif
-
 	return 0;
 }
 
 int Link::handleWrite()
 {
-#ifdef WIN32
 	handleWriteTask();
-#else
-	m_taskQueue->produce(boost::bind(&Link::handleWriteTask, this));
-#endif
-
 	return 0;
 }
 
