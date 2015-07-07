@@ -52,7 +52,7 @@ void Robot::onConnected(Link *link, const NetAddress& localAddr, const NetAddres
 
 	LOG_INFO << "robot <" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success";
 
-	m_link->send("1\r\n");
+	// m_link->send("1\r\n");
 }
 
 void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)

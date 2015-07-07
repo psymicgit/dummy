@@ -32,6 +32,7 @@ void Client::onEstablish()
 {
 	// 随机生成认证串
 	randtool::secureRandom(m_authKey, sizeof(m_authKey), '0', 'z');
+	randtool::secureRandom(m_encryptKey, sizeof(m_encryptKey), '0', 'z');
 
 
 

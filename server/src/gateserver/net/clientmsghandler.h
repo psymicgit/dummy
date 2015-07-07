@@ -56,17 +56,15 @@ private:
 
 		loginCnt++;
 
-		if (loginCnt % 10 == 0) {
+		if (loginCnt % 1000 == 0) {
 			LOG_INFO << "loginCnt = " << loginCnt;
 		}
 
-		if (loginCnt == 50000) {
+		if (loginCnt == 10000) {
 			double speed = tick.endTick() / loginCnt;
 			double count = 1.0f / speed;
 			LOG_WARN << "avg cost time = " << speed << ", exe count per second = " << count;
-
-
-			Server::instance->stop();
+			// Server::instance->stop();
 		}
 	}
 };

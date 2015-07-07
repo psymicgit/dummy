@@ -45,7 +45,7 @@ private:
 
 		// LOG_INFO << "OnEncryptKeyNtf :" << msgtool::getMsgString(*ntf);
 
-		memcpy(robot->m_encryptKey, ntf->authkey().data(), sizeof(robot->m_encryptKey));
+		memcpy(robot->m_encryptKey, ntf->publickey().data(), sizeof(robot->m_encryptKey));
 		robot->m_isEncrypt = true;
 
 		LoginReq *req = msgtool::allocPacket<LoginReq>();
@@ -61,7 +61,7 @@ private:
 		req->set_authtype(1);
 		req->set_authkey("2ab456b6b2b1b6b1bb2b");
 
-		for(int i = 0; i < 1000; i++) {
+		for(int i = 0; i < 10000; i++) {
 			robot->send(eLoginReq, *req);
 		}
 	}
