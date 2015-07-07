@@ -92,6 +92,44 @@ namespace socktool
 #endif
 	}
 
+	void setSendBufSize(socket_t sock, int size)
+	{
+		socklen_t sendBuf  = 0;
+		socklen_t optlen = static_cast<socklen_t>(sizeof sendBuf);
+
+		if (::getsockopt(sock, SOL_SOCKET, SO_SNDBUF, (char*)&sendBuf, &optlen) < 0) {
+			LOG_SYSTEM_ERR << "socket " << sock << " SO_SNDBUF = [" << size << "]";
+			return;
+		}
+
+		LOG_INFO << "socket " << sock << " SO_SNDBUF = [" << sendBuf << "]";
+
+
+		int ret = setsockopt(sock, SOL_SOCKET, SO_SNDBUF, (char *)&size, sizeof(size) );
+		if (ret == -1) {
+			LOG_SYSTEM_ERR << "set socket " << sock << " SO_SNDBUF to [" << size << "] failed";
+		}
+	}
+
+	void setRecvBufSize(socket_t sock, int size)
+	{
+		socklen_t recvBuf  = 0;
+		socklen_t optlen = static_cast<socklen_t>(sizeof recvBuf);
+
+		if (::getsockopt(sock, SOL_SOCKET, SO_RCVBUF, (char*)&recvBuf, &optlen) < 0) {
+			LOG_SYSTEM_ERR << "socket " << sock << " SO_RCVBUF = [" << size << "]";
+			return;
+		}
+
+		LOG_INFO << "socket " << sock << " SO_RCVBUF = [" << recvBuf << "]";
+
+
+		int ret = setsockopt(sock, SOL_SOCKET, SO_RCVBUF, (char *)&size, sizeof(size) );
+		if (ret == -1) {
+			LOG_SYSTEM_ERR << "set socket " << sock << " SO_RCVBUF to [" << size << "] failed";
+		}
+	}
+
 	void setLinger(socket_t sock, int waitTime)
 	{
 		linger ling;
@@ -136,15 +174,10 @@ namespace socktool
 
 	int getSocketError(socket_t sockfd)
 	{
-#ifdef WIN
-		char err  = 0;
-#else
 		socklen_t err  = 0;
-#endif
-
 		socklen_t optlen = static_cast<socklen_t>(sizeof err);
 
-		if (::getsockopt(sockfd, SOL_SOCKET, SO_ERROR, &err, &optlen) < 0) {
+		if (::getsockopt(sockfd, SOL_SOCKET, SO_ERROR, (char*)&err, &optlen) < 0) {
 			return err;
 		}
 

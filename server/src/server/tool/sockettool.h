@@ -33,6 +33,12 @@ namespace socktool
 
 	void setKeepAlive(socket_t, bool on, int keepAliveTime);
 
+	// windows下默认发送缓冲区大小 = 8192，linux下默认发送缓冲区大小 = 171480
+	void setSendBufSize(socket_t, int size);
+
+	// windows下默认接收缓冲区大小 = 8192，linux下默认接收缓冲区大小 = 87380
+	void setRecvBufSize(socket_t, int size);
+
 	// 设置延迟关闭socket的时间，等待套接字发送缓冲区中的数据发送完成（慎用，不要依赖这个选项，最好结合业务和场景自行处理）
 	void setLinger(socket_t, int waitTime);
 

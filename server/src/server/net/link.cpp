@@ -24,6 +24,9 @@ void Link::open()
 	socktool::setNonBlocking(m_sockfd);
 	socktool::setKeepAlive(m_sockfd, true, 120);
 
+	// socktool::setSendBufSize(m_sockfd, 256 * 1024);
+	// socktool::setRecvBufSize(m_sockfd, 256 * 1024);
+
 	if (!socktool::setTcpNoDelay(m_sockfd)) {
 		LOG_WARN << "local port = " << m_localAddr.toPort();
 	}
