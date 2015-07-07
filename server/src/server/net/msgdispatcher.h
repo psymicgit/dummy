@@ -19,7 +19,7 @@ template <typename LinkType>
 class MsgDispatcher
 {
 private:
-	typedef std::map<int, IMsgHandler<LinkType>*> MsgHandlerMap;
+	typedef tr1::unordered_map<int, IMsgHandler<LinkType>*> MsgHandlerMap;
 	typedef std::vector<IMsgHandler<LinkType>*> MsgHandlerVec;
 
 public:

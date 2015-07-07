@@ -63,7 +63,7 @@ template <typename LinkType>
 class MsgHandler : public IMsgHandler<LinkType>
 {
 private:
-	typedef std::map<int, Callback<LinkType>*> CallbackMap;
+	typedef tr1::unordered_map<int, Callback<LinkType>*> CallbackMap;
 
 public:
 	MsgHandler(MsgDispatcher<LinkType> *msgDispacher)

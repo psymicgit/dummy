@@ -19,7 +19,7 @@
 
 class RobotMgr : public Singleton<RobotMgr>
 {
-	typedef std::map<uint32, Robot*> RobotMap;
+	typedef tr1::unordered_map<uint32, Robot*> RobotMap;
 
 public:
 	RobotMgr()

@@ -18,7 +18,8 @@
 #ifndef WIN
 
 #define EPOLL_EVENTS_SIZE  1024
-//! 100 ms
+
+//! ∫¡√Î
 #define EPOLL_WAIT_TIME    50
 
 Epoll::Epoll()
@@ -69,8 +70,10 @@ int Epoll::eventLoop()
 	int i = 0, nfds = 0;
 	struct epoll_event ev_set[EPOLL_EVENTS_SIZE];
 
+	int waitTime = EPOLL_WAIT_TIME;
 	do {
-		nfds  = ::epoll_wait(m_efd, ev_set, EPOLL_EVENTS_SIZE, EPOLL_WAIT_TIME);
+		// LOG_WARN << "waitTime = " << waitTime;
+		nfds  = ::epoll_wait(m_efd, ev_set, EPOLL_EVENTS_SIZE, waitTime);
 
 		if (nfds < 0 && EINTR == errno) {
 			nfds = 0;
@@ -109,7 +112,7 @@ int Epoll::eventLoop()
 			}
 		}
 
-		m_timers.run();
+		waitTime = m_timers.run();
 	}
 	while(nfds >= 0);
 

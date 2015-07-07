@@ -15,7 +15,7 @@ class DBConnection
 {
 	friend class DBSession;
 
-	typedef std::map<std::string, std::string> Charsets;
+	typedef tr1::unordered_map<std::string, std::string> Charsets;
 
 public:
 	DBConnection()

@@ -27,7 +27,7 @@ class Server : public INetReactor
 public:
 	static Server *instance;
 
-	typedef std::map<int, ServerLink*> ServerLinkMap;
+	typedef tr1::unordered_map<int, ServerLink*> ServerLinkMap;
 
 public:
 	Server();

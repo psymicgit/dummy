@@ -10,10 +10,10 @@
 
 #define FOREVER_ALIVE -1
 
-void TimerQueue::run()
+int TimerQueue::run()
 {
 	if(m_taskqueue.empty()) {
-		return;
+		return -1;
 	}
 
 	Timestamp now = timetool::getTimeOfDay();
@@ -21,6 +21,7 @@ void TimerQueue::run()
 	while(!m_taskqueue.empty()) {
 		Timer &task = *m_taskqueue.top();
 		if(task.m_expired > now) {
+			return task.m_expired - now;
 			break;
 		}
 
@@ -45,6 +46,8 @@ void TimerQueue::run()
 			delete &task;
 		}
 	}
+
+	return -1;
 }
 
 void TimerQueue::runAt(Timer *pTask, Timestamp at)
