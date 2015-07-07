@@ -19,7 +19,7 @@
 
 #define EPOLL_EVENTS_SIZE  1024
 //! 100 ms
-#define EPOLL_WAIT_TIME    500
+#define EPOLL_WAIT_TIME    50
 
 Epoll::Epoll()
 	: m_running(true)

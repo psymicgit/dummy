@@ -122,7 +122,7 @@ void GateServer::test()
 		for(int i = 0; i < times; i++) {
 			Buffer *buf = new Buffer(1024);
 			buf->append(text, strlen(text));
-			// delete buf;
+			delete buf;
 		}
 
 		double speed = tick.endTick() / times;
