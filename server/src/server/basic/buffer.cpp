@@ -11,4 +11,4 @@
 const char Buffer::kCRLF[] = "\r\n";
 
 const size_t Buffer::kCheapPrepend = 0;
-const size_t Buffer::kInitialSize = 512;
+const size_t Buffer::kInitialSize = 128;

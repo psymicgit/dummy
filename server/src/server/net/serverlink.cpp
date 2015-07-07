@@ -20,7 +20,7 @@ void ServerLink::onDisconnect(Link *link, const NetAddress& localAddr, const Net
 	Server::instance->onDisconnect(link, localAddr, peerAddr);
 	Server::instance->onDisconnectServer(*link, m_remoteSvrType, m_svrId);
 
-	if (link->m_isCreateByConnector) {
+	if (link->m_isAutoReconnect) {
 		Server::instance->m_lan.connect(peerAddr.toIp(), peerAddr.toPort(), *Server::instance, svrtool::getSvrName(m_remoteSvrType).c_str());
 	}
 }

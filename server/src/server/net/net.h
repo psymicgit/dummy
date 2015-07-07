@@ -67,8 +67,6 @@ public:
 	virtual TaskQueue* getTaskQueue()	= 0;
 	virtual TimerQueue& getTimerQueue() = 0;
 	virtual LinkPool& getLinkPool()		= 0;
-	virtual BufferPool& getBufferPool()	= 0;
-
 };
 
 #ifndef WIN
@@ -101,7 +99,6 @@ public:
 	virtual TaskQueue* getTaskQueue() { return NULL;}
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
 	inline virtual LinkPool& getLinkPool() { return m_linkPool; }
-	inline virtual BufferPool& getBufferPool() { return m_bufferPool; }
 
 protected:
 	void recycleFds();
@@ -118,9 +115,8 @@ protected:
 	fast_mutex                  m_mutex;
 
 	TimerQueue m_timers;
-	volatile int m_curFdCount;
+	// volatile int m_curFdCount;
 	LinkPool m_linkPool;
-	BufferPool m_bufferPool;
 };
 
 #else
@@ -167,7 +163,6 @@ public:
 	virtual TaskQueue* getTaskQueue() { return &m_tasks;}
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
 	inline virtual LinkPool& getLinkPool() { return m_linkPool; }
-	inline virtual BufferPool& getBufferPool() { return m_bufferPool; }
 
 private:
 	void updateFd(IFd*, FDOperator);
@@ -187,7 +182,6 @@ private:
 	fd_set m_eset;
 
 	bool m_running;
-	BufferPool m_bufferPool;
 };
 
 #endif

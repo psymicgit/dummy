@@ -27,7 +27,7 @@ public:
 		: m_localAddr(localAddr)
 		, m_peerAddr(peerAddr)
 		, m_pNetReactor(pNetReactor)
-		, m_isCreateByConnector(false)
+		, m_isAutoReconnect(false)
 		, m_isClosing(false)
 		, m_sockfd(sockfd)
 		, m_net(pNet)
@@ -78,7 +78,7 @@ public:
 
 	INetReactor *m_pNetReactor;
 
-	bool m_isCreateByConnector;
+	bool m_isAutoReconnect;
 
 private:
 	volatile bool m_isClosing;

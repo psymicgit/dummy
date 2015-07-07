@@ -187,8 +187,10 @@ bool Connector::retry()
 
 Link* Connector::createLink(socket_t newfd, NetAddress &peerAddr)
 {
+	LinkPool &linkPool = m_net->getLinkPool();
 	NetAddress localAddr(socktool::getLocalAddr(newfd));
-	Link *link = new Link(newfd, localAddr, peerAddr, m_net, m_pNetReactor);
-	link->m_isCreateByConnector = true;
+
+	Link *link = linkPool.alloc(newfd, localAddr, peerAddr, m_net, m_pNetReactor);
+	link->m_isAutoReconnect = true;
 	return link;
 }

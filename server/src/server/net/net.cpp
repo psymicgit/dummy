@@ -25,13 +25,14 @@
 Epoll::Epoll()
 	: m_running(true)
 	, m_efd(-1)
-	, m_curFdCount(0)
+	  // , m_curFdCount(0)
 {
 	m_efd = ::epoll_create(1);
 
 	m_interupt_sockets[0] = -1;
 	m_interupt_sockets[1] = -1;
 	assert( 0 == ::socketpair(AF_LOCAL, SOCK_STREAM, 0, m_interupt_sockets));
+
 	struct epoll_event ee = { 0, { 0 } };
 	ee.data.ptr  = this;
 	ee.events    = EPOLLIN | EPOLLPRI | EPOLLOUT | EPOLLHUP | EPOLLET;;
@@ -122,7 +123,7 @@ int Epoll::eventLoop()
 void Epoll::close()
 {
 	LOG_WARN << "closing net...";
-	LOG_WARN << "	<link count = " << m_curFdCount << ", timer size = " << m_timers.size() << ">";
+	// LOG_WARN << "	<link count = " << m_curFdCount << ", timer size = " << m_timers.size() << ">";
 
 	m_running = false;
 	interruptLoop();
@@ -148,7 +149,7 @@ void Epoll::addFd(IFd* pfd)
 	pfd->m_events = ee.events;
 	::epoll_ctl(m_efd, EPOLL_CTL_ADD, pfd->socket(), &ee);
 
-	atomictool::inc(&m_curFdCount);
+	// atomictool::inc(&m_curFdCount);
 }
 
 void Epoll::delFd(IFd* pfd)
@@ -162,7 +163,7 @@ void Epoll::delFd(IFd* pfd)
 
 	interruptLoop();
 
-	atomictool::dec(&m_curFdCount);
+	// atomictool::dec(&m_curFdCount);
 }
 
 void Epoll::reopen(IFd* pfd)

@@ -21,7 +21,7 @@ int TimerQueue::run()
 	while(!m_taskqueue.empty()) {
 		Timer &task = *m_taskqueue.top();
 		if(task.m_expired > now) {
-			return task.m_expired - now;
+			return (int)(task.m_expired - now);
 			break;
 		}
 
