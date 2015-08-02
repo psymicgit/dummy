@@ -35,7 +35,7 @@ public:
 
 	void delClient(Client*);
 
-	void handleMsg(Client &client, int msgId, Buffer&, Timestamp receiveTime);
+	void handleMsg(Client *client, int msgId, Buffer&, Timestamp receiveTime);
 
 private:
 	uint32 allocClientId();

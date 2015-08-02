@@ -24,6 +24,8 @@ class Robot : public INetReactor
 public:
 	Robot();
 
+	~Robot();
+
 public:
 	virtual void onConnected(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 

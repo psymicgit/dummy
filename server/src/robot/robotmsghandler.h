@@ -30,6 +30,8 @@ public:
 	void init()
 	{
 		registerMsg(eEncryptKeyNtf, OnEncryptKeyNtf);
+		registerMsg(eLoginAck, OnLoginAck);
+		registerMsg(eAuthAck, OnAuthAck);
 	}
 
 private:
@@ -61,9 +63,21 @@ private:
 		req->set_authtype(1);
 		req->set_authkey("2ab456b6b2b1b6b1bb2b");
 
-		for(int i = 0; i < 1000; i++) {
+		for(int i = 0; i < 1; i++) {
 			robot->send(eLoginReq, *req);
 		}
+	}
+
+	// 收到登录答复（测试用）
+	static void OnLoginAck(Robot* robot, LoginReq *req, Timestamp receiveTime)
+	{
+		robot->send(eLoginReq, *req);
+	}
+
+	// 收到登录答复（测试用）
+	static void OnAuthAck(Robot* robot, AuthAck *ack, Timestamp receiveTime)
+	{
+		LOG_INFO << msgtool::getMsgString(*ack);
 	}
 };
 

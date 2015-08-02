@@ -44,7 +44,8 @@ public:
 
 		bool ok = t->ParseFromArray(data, len);
 		if (!ok) {
-			LOG_INFO << "decode packet <" << t->SerializeAsString() << "> error";
+			LOG_ERROR << "decode packet <" << t->GetTypeName() << "> = <" << t->SerializeAsString() << "> error, data len = " << len;
+			// LOG_INFO << "decode packet <" << msgtool::getMsgString(*t) << "> error";
 			return;
 		}
 
@@ -75,7 +76,7 @@ public:
 	{
 		typename CallbackMap::const_iterator it = m_callbackMap.find(msgId);
 		if (it == m_callbackMap.end()) {
-			//discardMessage(link, message, receiveTime);
+			LOG_DEBUG << "Discard msg[id=" << msgId << "]";
 			return;
 		}
 

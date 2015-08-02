@@ -51,6 +51,13 @@ private:
 	{
 		static Tick tick("task_t test");
 
+		client->send(eLoginAck, *req);
+
+// 		AuthAck ack;
+// 		ack.set_result(AUTH_OK);
+// 		ack.set_encryptkey("123213");
+// 		client->send(eAuthAck, ack);
+
 		// LOG_INFO << "OnLoginReq :" << msgtool::getMsgString(*req);
 		static int loginCnt = 0;
 
@@ -66,6 +73,9 @@ private:
 			LOG_WARN << "loginCnt = " << loginCnt << ", avg cost time = " << speed << ", exe count per second = " << count;
 			// Server::instance->stop();
 		}
+
+		// ≤‚ ‘
+
 	}
 };
 

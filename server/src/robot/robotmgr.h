@@ -43,7 +43,7 @@ public:
 
 	void onRobotDisconnect(Robot*);
 
-	void handleMsg(Robot &robot, int msgId, Buffer&, Timestamp receiveTime);
+	void handleMsg(Robot *robot, int msgId, Buffer&, Timestamp receiveTime);
 
 	Robot* createRobot();
 

@@ -61,6 +61,10 @@ namespace msgtool
 		if (obj) {
 			obj->~T();
 		}
+
+		if(global::g_lastMessage == obj) {
+			global::g_lastMessage = NULL;
+		}
 	}
 }
 

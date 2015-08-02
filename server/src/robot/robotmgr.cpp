@@ -26,7 +26,7 @@ bool RobotMgr::init()
 		return false;
 	}
 
-	for(int i = 0; i < 100; i++) {
+	for(int i = 0; i < 1; i++) {
 		Robot *robot = createRobot();
 		// robot->start();
 
@@ -99,13 +99,13 @@ void RobotMgr::run()
 	sleep(10);
 }
 
-void RobotMgr::handleMsg(Robot &robot, int msgId, Buffer &buf, Timestamp receiveTime)
+void RobotMgr::handleMsg(Robot *robot, int msgId, Buffer &buf, Timestamp receiveTime)
 {
 	if (!m_run) {
 		return;
 	}
 
-	m_dispatcher.dispatch(robot, msgId, buf.peek(), buf.readableBytes(), receiveTime);
+	m_dispatcher.dispatch(*robot, msgId, buf.peek(), buf.readableBytes(), receiveTime);
 }
 
 void RobotMgr::onRobotDisconnect(Robot *robot)

@@ -59,9 +59,9 @@ void ClientMgr::onRecv(Link *link, Buffer &buf)
 	Server::instance->onRecv(link, buf);
 }
 
-void ClientMgr::handleMsg(Client &client, int msgId, Buffer &buf, Timestamp receiveTime)
+void ClientMgr::handleMsg(Client *client, int msgId, Buffer &buf, Timestamp receiveTime)
 {
-	m_dispatcher.dispatch(client, msgId, buf.peek(), buf.readableBytes(), receiveTime);
+	m_dispatcher.dispatch(*client, msgId, buf.peek(), buf.readableBytes(), receiveTime);
 }
 
 uint32 ClientMgr::allocClientId()

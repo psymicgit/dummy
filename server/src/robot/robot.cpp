@@ -32,6 +32,11 @@ Robot::Robot()
 	randomRobot();
 }
 
+Robot::~Robot()
+{
+	LOG_WARN << "robot ~robot";
+}
+
 void Robot::randomRobot()
 {
 	uint8 randNum[64] = {0};
@@ -89,9 +94,9 @@ void Robot::onRecv(Link *link, Buffer &buf)
 			Buffer copyBuf;
 			copyBuf.append(buf.peek() + sizeof(NetMsgHead), msgLen - sizeof(NetMsgHead));
 
-			m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, *this, msgId, copyBuf, 0));
+			m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, this, msgId, copyBuf, 0));
 			buf.skip(msgLen);
-			return;
+			continue;
 		}
 
 		//先解密
@@ -110,7 +115,7 @@ void Robot::onRecv(Link *link, Buffer &buf)
 		copyBuf.append(msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen);
 
 		// 直接本地进行处理
-		m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, *this, msgId, copyBuf, 0));
+		m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, this, msgId, copyBuf, 0));
 		buf.skip(msgLen);
 	}
 }
@@ -135,7 +140,14 @@ bool Robot::send(int msgId, Message &msg)
 
 	Buffer buf(size);
 
-	msg.SerializeToArray((void*)buf.beginWrite(), size);
+	bool ok = msg.SerializeToArray((void*)buf.beginWrite(), size);
+	if (!ok) {
+		LOG_ERROR << "robot [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort()
+		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgString(msg) << "]";
+
+		return false;
+	}
+
 	buf.hasWritten(size);
 
 	this->send(msgId, buf.peek(), buf.readableBytes());
