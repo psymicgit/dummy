@@ -12,7 +12,7 @@
 #include "basic/objectpool.h"
 #include "basic/buffer.h"
 
-#define MAX_PACKET_LEN (1024 * 1024)
+#define MAX_PACKET_LEN (1024 * 1024) // 1MB
 
 namespace global
 {

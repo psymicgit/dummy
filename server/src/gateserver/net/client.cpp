@@ -118,7 +118,7 @@ bool Client::send(int msgId, const char* data, int len)
 	}
 
 	//œ»º”√‹
-	char netBuf[102400] = {0};
+	char *netBuf = global::g_packetBuf;
 	uint32 headSize = sizeof(NetMsgHead);
 
 	memcpy(netBuf + headSize + EncryptHeadLen, data, len);
