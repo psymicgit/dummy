@@ -26,7 +26,7 @@ bool RobotMgr::init()
 		return false;
 	}
 
-	for(int i = 0; i < 1000; i++) {
+	for(int i = 0; i < 100; i++) {
 		Robot *robot = createRobot();
 		// robot->start();
 

@@ -303,7 +303,7 @@ int Link::trySend(Buffer &buffer)
 		nleft  -= nwritten;
 		buff   += nwritten;
 
-		buffer.retrieve(nwritten);
+		buffer.skip(nwritten);
 	}
 
 	return nleft;

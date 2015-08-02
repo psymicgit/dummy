@@ -30,18 +30,18 @@
 class Buffer
 {
 public:
-	static const size_t kCheapPrepend;
-	static const size_t kInitialSize;
+	static const size_t g_cheapPrepend;
+	static const size_t g_initSize;
 	static const char kCRLF[];
 
-	explicit Buffer(size_t initialSize = kInitialSize)
-		: buffer_(kCheapPrepend + initialSize),
-		  readerIndex_(kCheapPrepend),
-		  writerIndex_(kCheapPrepend)
+	explicit Buffer(size_t initialSize = g_initSize)
+		: m_buffer(g_cheapPrepend + initialSize),
+		  readerIndex_(g_cheapPrepend),
+		  writerIndex_(g_cheapPrepend)
 	{
 		assert(readableBytes() == 0);
 		assert(writableBytes() == initialSize);
-		assert(prependableBytes() == kCheapPrepend);
+		assert(prependableBytes() == g_cheapPrepend);
 	}
 
 	// implicit copy-ctor, move-ctor, dtor and assignment are fine
@@ -49,14 +49,14 @@ public:
 
 	void swap(Buffer& rhs)
 	{
-		buffer_.swap(rhs.buffer_);
+		m_buffer.swap(rhs.m_buffer);
 		std::swap(readerIndex_, rhs.readerIndex_);
 		std::swap(writerIndex_, rhs.writerIndex_);
 	}
 
 	inline size_t readableBytes() const { return writerIndex_ - readerIndex_; }
 
-	inline size_t writableBytes() const { return buffer_.size() - writerIndex_; }
+	inline size_t writableBytes() const { return m_buffer.size() - writerIndex_; }
 
 	inline size_t prependableBytes() const { return readerIndex_; }
 
@@ -67,41 +67,41 @@ public:
 	// retrieve returns void, to prevent
 	// string str(retrieve(readableBytes()), readableBytes());
 	// the evaluation of two functions are unspecified
-	void retrieve(size_t len)
+	void skip(size_t len)
 	{
 		assert(len <= readableBytes());
 		if (len < readableBytes()) {
 			readerIndex_ += len;
 		}
 		else {
-			retrieveAll();
+			clear();
 		}
 	}
 
-	void retrieveUntil(const char* end)
+	void skipTo(const char* end)
 	{
 		assert(peek() <= end);
 		assert(end <= beginWrite());
-		retrieve(end - peek());
+		skip(end - peek());
 	}
 
-	void retrieveAll()
+	void clear()
 	{
-		readerIndex_ = kCheapPrepend;
-		writerIndex_ = kCheapPrepend;
+		readerIndex_ = g_cheapPrepend;
+		writerIndex_ = g_cheapPrepend;
 	}
 
-	std::string retrieveAllAsString()
+	std::string takeAllAsString()
 	{
-		return retrieveAsString(readableBytes());;
+		return takeAsString(readableBytes());;
 	}
 
-	std::string retrieveAsString(size_t len)
+	std::string takeAsString(size_t len)
 	{
 		assert(len <= readableBytes());
 
 		std::string result(peek(), len);
-		retrieve(len);
+		skip(len);
 		return result;
 	}
 
@@ -201,38 +201,38 @@ public:
 
 	size_t capacity() const
 	{
-		return buffer_.capacity();
+		return m_buffer.capacity();
 	}
 
 private:
 
 	char* begin()
-	{ return &buffer_[0]; }
+	{ return &m_buffer[0]; }
 
 	const char* begin() const
-	{ return &buffer_[0]; }
+	{ return &m_buffer[0]; }
 
 	void makeSpace(size_t len)
 	{
-		if (writableBytes() + prependableBytes() < len + kCheapPrepend) {
+		if (writableBytes() + prependableBytes() < len + g_cheapPrepend) {
 			// FIXME: move readable data
-			buffer_.resize(writerIndex_ + len);
+			m_buffer.resize(writerIndex_ + len);
 		}
 		else {
 			// move readable data to the front, make space inside buffer
-			assert(kCheapPrepend < readerIndex_);
+			assert(g_cheapPrepend < readerIndex_);
 			size_t readable = readableBytes();
 			std::copy(begin() + readerIndex_,
 			          begin() + writerIndex_,
-			          begin() + kCheapPrepend);
-			readerIndex_ = kCheapPrepend;
+			          begin() + g_cheapPrepend);
+			readerIndex_ = g_cheapPrepend;
 			writerIndex_ = readerIndex_ + readable;
 			assert(readable == readableBytes());
 		}
 	}
 
 private:
-	std::vector<char> buffer_;
+	std::vector<char> m_buffer;
 	size_t readerIndex_;
 	size_t writerIndex_;
 };

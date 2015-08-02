@@ -78,7 +78,7 @@ void Client::onRecv(Link *link, Buffer &buf)
 		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
 			LOG_ERROR << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
 			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
-			buf.retrieve(dataLen);
+			buf.skip(dataLen);
 			return;
 		}
 
@@ -97,7 +97,7 @@ void Client::onRecv(Link *link, Buffer &buf)
 			Server::instance->getTaskQueue().put(boost::bind(&ClientMgr::handleMsg, m_clientMgr, *this, msgId, deepCopyBuf, 0));
 		}
 
-		buf.retrieve(dataLen);
+		buf.skip(dataLen);
 	};
 }
 

@@ -50,6 +50,6 @@ void GateLink::OnRecv(Link *link, Buffer &buf)
 		deepCopyBuf.append(msg, msgLen);
 		Server::instance->getTaskQueue().put(boost::bind(&ClientMgr::handleMsg, &ClientMgr::Instance(), *client, msgId, deepCopyBuf, 0));
 
-		buf.retrieve(dataLen);
+		buf.skip(dataLen);
 	};
 }

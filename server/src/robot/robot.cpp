@@ -90,7 +90,7 @@ void Robot::onRecv(Link *link, Buffer &buf)
 			copyBuf.append(buf.peek() + sizeof(NetMsgHead), msgLen - sizeof(NetMsgHead));
 
 			m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, *this, msgId, copyBuf, 0));
-			buf.retrieve(msgLen);
+			buf.skip(msgLen);
 			return;
 		}
 
@@ -111,7 +111,7 @@ void Robot::onRecv(Link *link, Buffer &buf)
 
 		// 直接本地进行处理
 		m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, *this, msgId, copyBuf, 0));
-		buf.retrieve(msgLen);
+		buf.skip(msgLen);
 	}
 }
 

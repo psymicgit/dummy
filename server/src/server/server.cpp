@@ -84,7 +84,7 @@ void Server::onRecv(Link *link, Buffer& buf)
 		Buffer *msg = m_bufferPool.alloc(msgHead->msgLen - sizeof(NetMsgHead));
 		msg->append(buf.peek() + sizeof(NetMsgHead), msgHead->msgLen - sizeof(NetMsgHead));
 
-		buf.retrieve(msgHead->msgLen);
+		buf.skip(msgHead->msgLen);
 
 		m_taskQueue.put(boost::bind(&Server::handleMsg, this, link, msgHead->msgId, msg));
 	}
