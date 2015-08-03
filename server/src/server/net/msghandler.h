@@ -40,7 +40,7 @@ public:
 
 	virtual void onMessage(LinkType& link, const char* data, int len, Timestamp receiveTime) const
 	{
-		MessageType *t = msgtool::allocPacket<MessageType>();
+		MessageType *t = msgtool::allocRecvPacket<MessageType>();
 
 		bool ok = t->ParseFromArray(data, len);
 		if (!ok) {

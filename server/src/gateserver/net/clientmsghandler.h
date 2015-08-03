@@ -44,6 +44,7 @@ private:
 			ack.set_result(AUTH_FAIL);
 		}
 
+		ack.set_encryptkey("123213");
 		client->send(eAuthAck, ack);
 	}
 
@@ -52,11 +53,6 @@ private:
 		static Tick tick("task_t test");
 
 		client->send(eLoginAck, *req);
-
-// 		AuthAck ack;
-// 		ack.set_result(AUTH_OK);
-// 		ack.set_encryptkey("123213");
-// 		client->send(eAuthAck, ack);
 
 		// LOG_INFO << "OnLoginReq :" << msgtool::getMsgString(*req);
 		static int loginCnt = 0;

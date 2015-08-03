@@ -34,7 +34,7 @@ Robot::Robot()
 
 Robot::~Robot()
 {
-	LOG_WARN << "robot ~robot";
+	// LOG_WARN << "robot ~robot";
 }
 
 void Robot::randomRobot()
@@ -166,7 +166,7 @@ bool Robot::send(int msgId, const char* data, int len)
 	}
 
 	//ÏÈ¼ÓÃÜ
-	char *netBuf = global::g_packetBuf;
+	char *netBuf = global::g_netBuf;
 	uint32 headSize = sizeof(NetMsgHead);
 
 	memcpy(netBuf + headSize + EncryptHeadLen, data, len);

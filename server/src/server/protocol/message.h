@@ -36,6 +36,21 @@ namespace msgtool
 	// 构建内网消息包头
 	int buildLanMsgHeader(LanMsgHead *msgHead, uint32 clientId, uint16 msgId, uint32 msgLen);
 
+	// 在预先分配好的接收消息包内存上申请一个Message
+	template<typename T>
+	T* allocRecvPacket()
+	{
+		if (global::g_recvPacketBufSize < sizeof(T)) {
+			delete[] global::g_recvPacketBuf;
+			global::g_recvPacketBuf = new char[sizeof(T)];
+			global::g_recvPacketBufSize = sizeof(T);
+		}
+
+		T* t = new ((T*)global::g_recvPacketBuf)T();
+		return t;
+	}
+
+
 	// 在预先分配好的内存上申请一个Message
 	template<typename T>
 	T* allocPacket()
@@ -60,10 +75,6 @@ namespace msgtool
 	{
 		if (obj) {
 			obj->~T();
-		}
-
-		if(global::g_lastMessage == obj) {
-			global::g_lastMessage = NULL;
 		}
 	}
 }
