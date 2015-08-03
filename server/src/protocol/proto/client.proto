@@ -1,3 +1,4 @@
+// 加解密玥定义
 enum EncryptKeyDef {
 	EncryptKeyLen = 32; // 加密密钥长度
 	EncryptHeadLen = 2; // 加解密头大小，保存使用的密钥偏移量和使用的密钥字节数
@@ -8,12 +9,14 @@ enum EncryptKeyDef {
 	PrivateKeyLen = 20; // 私钥长度
 }
 
+// 认证结果
 enum AuthResult
 {
 	AUTH_OK = 0;
 	AUTH_FAIL = 1;
 }
 
+// 登录请求
 message LoginReq
 {
 	enum LoginType {
@@ -54,4 +57,10 @@ message AuthAck
 {
 	required AuthResult result = 1; // 认证结果[成功/失败]
 	required string encryptKey = 2; // 密钥，此后的消息包均用此密钥加解密
+}
+
+// pingpong测试包
+message PingPong
+{
+	required string pingpong = 1;
 }

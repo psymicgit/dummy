@@ -31,6 +31,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* AuthAck_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AuthAck_reflection_ = NULL;
+const ::google::protobuf::Descriptor* PingPong_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  PingPong_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* EncryptKeyDef_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* AuthResult_descriptor_ = NULL;
 
@@ -117,6 +120,21 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AuthAck));
+  PingPong_descriptor_ = file->message_type(4);
+  static const int PingPong_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PingPong, pingpong_),
+  };
+  PingPong_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      PingPong_descriptor_,
+      PingPong::default_instance_,
+      PingPong_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PingPong, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PingPong, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(PingPong));
   EncryptKeyDef_descriptor_ = file->enum_type(0);
   AuthResult_descriptor_ = file->enum_type(1);
 }
@@ -139,6 +157,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     AuthReq_descriptor_, &AuthReq::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     AuthAck_descriptor_, &AuthAck::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    PingPong_descriptor_, &PingPong::default_instance());
 }
 
 }  // namespace
@@ -152,6 +172,8 @@ void protobuf_ShutdownFile_client_2eproto() {
   delete AuthReq_reflection_;
   delete AuthAck::default_instance_;
   delete AuthAck_reflection_;
+  delete PingPong::default_instance_;
+  delete PingPong_reflection_;
 }
 
 void protobuf_AddDesc_client_2eproto() {
@@ -172,21 +194,24 @@ void protobuf_AddDesc_client_2eproto() {
     "\nprivateKey\030\002 \002(\t\022\017\n\007authKey\030\003 \002(\t\"\032\n\007Au"
     "thReq\022\017\n\007authKey\030\001 \002(\t\":\n\007AuthAck\022\033\n\006res"
     "ult\030\001 \002(\0162\013.AuthResult\022\022\n\nencryptKey\030\002 \002"
-    "(\t*\177\n\rEncryptKeyDef\022\021\n\rEncryptKeyLen\020 \022\022"
-    "\n\016EncryptHeadLen\020\002\022\022\n\016EncryptTailLen\020\004\022\016"
-    "\n\nAuthKeyLen\020\020\022\020\n\014PublicKeyLen\020\010\022\021\n\rPriv"
-    "ateKeyLen\020\024*(\n\nAuthResult\022\013\n\007AUTH_OK\020\000\022\r"
-    "\n\tAUTH_FAIL\020\001", 613);
+    "(\t\"\034\n\010PingPong\022\020\n\010pingpong\030\001 \002(\t*\177\n\rEncr"
+    "yptKeyDef\022\021\n\rEncryptKeyLen\020 \022\022\n\016EncryptH"
+    "eadLen\020\002\022\022\n\016EncryptTailLen\020\004\022\016\n\nAuthKeyL"
+    "en\020\020\022\020\n\014PublicKeyLen\020\010\022\021\n\rPrivateKeyLen\020"
+    "\024*(\n\nAuthResult\022\013\n\007AUTH_OK\020\000\022\r\n\tAUTH_FAI"
+    "L\020\001", 643);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "client.proto", &protobuf_RegisterTypes);
   LoginReq::default_instance_ = new LoginReq();
   EncryptKeyNtf::default_instance_ = new EncryptKeyNtf();
   AuthReq::default_instance_ = new AuthReq();
   AuthAck::default_instance_ = new AuthAck();
+  PingPong::default_instance_ = new PingPong();
   LoginReq::default_instance_->InitAsDefaultInstance();
   EncryptKeyNtf::default_instance_->InitAsDefaultInstance();
   AuthReq::default_instance_->InitAsDefaultInstance();
   AuthAck::default_instance_->InitAsDefaultInstance();
+  PingPong::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_client_2eproto);
 }
 
@@ -1790,6 +1815,232 @@ void AuthAck::Swap(AuthAck* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = AuthAck_descriptor_;
   metadata.reflection = AuthAck_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int PingPong::kPingpongFieldNumber;
+#endif  // !_MSC_VER
+
+PingPong::PingPong()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void PingPong::InitAsDefaultInstance() {
+}
+
+PingPong::PingPong(const PingPong& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void PingPong::SharedCtor() {
+  _cached_size_ = 0;
+  pingpong_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+PingPong::~PingPong() {
+  SharedDtor();
+}
+
+void PingPong::SharedDtor() {
+  if (pingpong_ != &::google::protobuf::internal::kEmptyString) {
+    delete pingpong_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void PingPong::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* PingPong::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PingPong_descriptor_;
+}
+
+const PingPong& PingPong::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_client_2eproto();
+  return *default_instance_;
+}
+
+PingPong* PingPong::default_instance_ = NULL;
+
+PingPong* PingPong::New() const {
+  return new PingPong;
+}
+
+void PingPong::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_pingpong()) {
+      if (pingpong_ != &::google::protobuf::internal::kEmptyString) {
+        pingpong_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool PingPong::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string pingpong = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_pingpong()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->pingpong().data(), this->pingpong().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void PingPong::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required string pingpong = 1;
+  if (has_pingpong()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->pingpong().data(), this->pingpong().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->pingpong(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* PingPong::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required string pingpong = 1;
+  if (has_pingpong()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->pingpong().data(), this->pingpong().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->pingpong(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int PingPong::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string pingpong = 1;
+    if (has_pingpong()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->pingpong());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void PingPong::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const PingPong* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const PingPong*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void PingPong::MergeFrom(const PingPong& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_pingpong()) {
+      set_pingpong(from.pingpong());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void PingPong::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PingPong::CopyFrom(const PingPong& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PingPong::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void PingPong::Swap(PingPong* other) {
+  if (other != this) {
+    std::swap(pingpong_, other->pingpong_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata PingPong::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = PingPong_descriptor_;
+  metadata.reflection = PingPong_reflection_;
   return metadata;
 }
 

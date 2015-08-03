@@ -20,12 +20,16 @@
 #include <tool/randtool.h>
 #include <tool/echotool.h>
 
+#include <protocol.pb.h>
+#include <client.pb.h>
+
 Robot::Robot()
 	: m_link(NULL)
 	, m_robotMgr(NULL)
 	, m_isEncrypt(false)
 	, m_robotId(0)
 	, m_cliversion(110)
+	, m_pingpongCount(0)
 {
 	bzero(m_encryptKey, sizeof(m_encryptKey));
 
@@ -206,4 +210,32 @@ void Robot::auth()
 void Robot::login()
 {
 
+}
+
+void Robot::pingpongTest()
+{
+	PingPong *p = msgtool::allocPacket<PingPong>();
+	p->set_pingpong("123456789|");
+
+	send(ePing, *p);
+}
+
+void Robot::speedTest()
+{
+	PingPong *p = msgtool::allocPacket<PingPong>();
+	p->set_pingpong("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+
+	for (int i = 0; i < 100000; i++) {
+		send(eSpeedTest, *p);
+	}
+}
+
+void Robot::latencyTest()
+{
+	PingPong *p = msgtool::allocPacket<PingPong>();
+	p->set_pingpong("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+
+	for (int i = 0; i < 100000; i++) {
+		send(eLatencyTest, *p);
+	}
 }

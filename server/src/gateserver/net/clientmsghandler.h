@@ -30,6 +30,11 @@ public:
 	{
 		registerMsg(eLoginReq, OnLoginReq);
 		registerMsg(eAuthReq, OnAuthReq);
+
+		// ≤‚ ‘
+		registerMsg(ePing, OnPingTest);
+		registerMsg(eSpeedTest, OnSpeedTest);
+		registerMsg(eLatencyTest, OnLatencyTest);
 	}
 
 private:
@@ -50,27 +55,71 @@ private:
 
 	static void OnLoginReq(Client* client, LoginReq *req, Timestamp receiveTime)
 	{
-		static Tick tick("task_t test");
 
-		client->send(eLoginAck, *req);
+	}
 
-		// LOG_INFO << "OnLoginReq :" << msgtool::getMsgString(*req);
-		static int loginCnt = 0;
+	static void OnPingTest(Client* client, PingPong *p, Timestamp receiveTime)
+	{
+		static int pingCount = 0;
+		static Tick tick("pingpong test");
 
-		loginCnt++;
+		if (++pingCount % 100 == 0) {
+			// LOG_INFO << msgtool::getMsgString(*p);
+			LOG_INFO << "pingpong count = " << pingCount << ", PingPong size = " << p->ByteSize();
 
-		if (loginCnt % 1000 == 0) {
-			LOG_INFO << "loginCnt = " << loginCnt << ", loginReq size = " << req->ByteSize();
+			if (pingCount % 1000 == 0) {
+				double speed = tick.endTick() / pingCount;
+				double count = 1.0f / speed;
+				LOG_WARN << "pingpong count = " << pingCount << ", avg cost time = " << speed << ", exe count per second = " << count;
+			}
 		}
 
-		if (loginCnt % 10000 == 0) {
-			double speed = tick.endTick() / loginCnt;
-			double count = 1.0f / speed;
-			LOG_WARN << "loginCnt = " << loginCnt << ", avg cost time = " << speed << ", exe count per second = " << count;
-			// Server::instance->stop();
+		client->send(ePong, *p);
+	}
+
+	static void OnSpeedTest(Client* client, PingPong *p, Timestamp receiveTime)
+	{
+		static int speedTestCount = 0;
+		static Tick tick("speed test");
+
+		if (++speedTestCount % 1000 == 0) {
+			// LOG_INFO << msgtool::getMsgString(*p);
+			LOG_INFO << "speedtest count = " << speedTestCount << ", speedtest size = " << p->ByteSize();
+
+			if (speedTestCount % 10000 == 0) {
+				double speed = tick.endTick() / speedTestCount;
+				double count = 1.0f / speed;
+				LOG_WARN << "speedtest count = " << speedTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
+			}
+
+			if (speedTestCount % 100000 == 0) {
+				client->send(eSpeedTest, *p);
+				Server::instance->stop();
+			}
 		}
 
-		// ≤‚ ‘
+	}
+
+	static void OnLatencyTest(Client* client, PingPong *p, Timestamp receiveTime)
+	{
+		static int latencyTestCount = 0;
+		static Tick tick("latency test");
+
+		if (++latencyTestCount % 1000 == 0) {
+			// LOG_INFO << msgtool::getMsgString(*p);
+			LOG_INFO << "latencytest count = " << latencyTestCount << ", latencytest size = " << p->ByteSize();
+
+			if (latencyTestCount % 10000 == 0) {
+				double speed = tick.endTick() / latencyTestCount;
+				double count = 1.0f / speed;
+				LOG_WARN << "latencytest count = " << latencyTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
+
+				if (latencyTestCount % 100000 == 0) {
+					client->send(eLatencyTest, *p);
+					Server::instance->stop();
+				}
+			}
+		}
 
 	}
 };

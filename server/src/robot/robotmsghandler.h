@@ -29,9 +29,14 @@ public:
 
 	void init()
 	{
-		registerMsg(eEncryptKeyNtf, OnEncryptKeyNtf);
 		registerMsg(eLoginAck, OnLoginAck);
+		registerMsg(eEncryptKeyNtf, OnEncryptKeyNtf);
 		registerMsg(eAuthAck, OnAuthAck);
+
+		// ≤‚ ‘
+		registerMsg(ePong, OnPongTest);
+		registerMsg(eSpeedTest, OnSpeedTestDone);
+		registerMsg(eLatencyTest, OnLatencyTestDone);
 	}
 
 private:
@@ -66,6 +71,8 @@ private:
 		for(int i = 0; i < 1; i++) {
 			robot->send(eLoginReq, *req);
 		}
+
+		robot->pingpongTest();
 	}
 
 	//  ’µΩµ«¬º¥∏¥£®≤‚ ‘”√£©
@@ -78,6 +85,27 @@ private:
 	static void OnAuthAck(Robot* robot, AuthAck *ack, Timestamp receiveTime)
 	{
 		LOG_INFO << msgtool::getMsgString(*ack);
+	}
+
+	static void OnPongTest(Robot* robot, PingPong *p, Timestamp receiveTime)
+	{
+		robot->m_pingpongCount++;
+
+		if (robot->m_pingpongCount % 1000) {
+			robot->send(ePing, *p);
+		}
+		else {
+			robot->speedTest();
+		}
+	}
+
+	static void OnSpeedTestDone(Robot* robot, PingPong *p, Timestamp receiveTime)
+	{
+		robot->latencyTest();
+	}
+
+	static void OnLatencyTestDone(Robot* robot, PingPong *p, Timestamp receiveTime)
+	{
 	}
 };
 

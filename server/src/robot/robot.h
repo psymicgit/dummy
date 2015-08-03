@@ -50,6 +50,13 @@ public:
 	// 3. µÇÂ¼µ½ÓÎÏ··þ
 	void login();
 
+public:
+	void pingpongTest();
+
+	void speedTest();
+
+	void latencyTest();
+
 private:
 	void randomRobot();
 
@@ -69,6 +76,8 @@ public:
 	std::string m_username;
 	std::string m_password;
 	std::string m_ip;
+
+	int m_pingpongCount;
 };
 
 #endif //_robot_h_
