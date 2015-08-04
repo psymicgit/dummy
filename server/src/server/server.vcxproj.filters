@@ -153,6 +153,9 @@
     <ClInclude Include="http\httpcmd.h">
       <Filter>http</Filter>
     </ClInclude>
+    <ClInclude Include="basic\ringbuffer.h">
+      <Filter>basic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -287,6 +290,9 @@
     </ClCompile>
     <ClCompile Include="http\httpcmd.cpp">
       <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\ringbuffer.cpp">
+      <Filter>basic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

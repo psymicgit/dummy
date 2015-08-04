@@ -16,6 +16,7 @@
 
 class NetAddress;
 class INetReactor;
+struct RingBufferBlock;
 
 namespace google {namespace protobuf {class Message;}}
 
@@ -31,6 +32,8 @@ public:
 		, m_isClosing(false)
 		, m_sockfd(sockfd)
 		, m_net(pNet)
+		, m_head(NULL)
+		, m_tail(NULL)
 	{
 	}
 
@@ -79,6 +82,9 @@ public:
 	INetReactor *m_pNetReactor;
 
 	bool m_isAutoReconnect;
+
+	RingBufferBlock *m_head;
+	RingBufferBlock *m_tail;
 
 private:
 	volatile bool m_isClosing;

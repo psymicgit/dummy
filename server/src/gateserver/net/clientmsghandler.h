@@ -94,7 +94,7 @@ private:
 
 			if (speedTestCount % 100000 == 0) {
 				client->send(eSpeedTest, *p);
-				Server::instance->stop();
+				// Server::instance->stop();
 			}
 		}
 

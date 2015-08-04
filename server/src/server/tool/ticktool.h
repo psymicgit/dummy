@@ -22,13 +22,13 @@ public:
 	Tick(const char* msg)
 		: m_msg(msg)
 	{
-		LOG_WARN << "start " << m_msg << std::endl;
+		LOG_WARN << "------- start " << m_msg << std::endl;
 		startTick();
 	}
 
 	~Tick()
 	{
-		LOG_WARN << m_msg << " = " << endTick() << std::endl;
+		LOG_WARN << "------ end " << m_msg << " , cost time = " << endTick() << std::endl;
 	}
 
 	// 开始计时

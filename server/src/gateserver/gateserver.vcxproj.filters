@@ -25,6 +25,7 @@
     <ClCompile Include="net\client.cpp">
       <Filter>net</Filter>
     </ClCompile>
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gateserver.h" />
@@ -56,6 +57,7 @@
     <ClInclude Include="net\clientmsghandler.h">
       <Filter>net</Filter>
     </ClInclude>
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="net">
