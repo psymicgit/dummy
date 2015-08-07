@@ -44,6 +44,13 @@ public:
 		assert(prependableBytes() == g_cheapPrepend);
 	}
 
+	explicit Buffer(char *data, int size)
+		: m_buffer(data, data + size)
+		, readerIndex_(0)
+		, writerIndex_(size)
+	{
+	}
+
 	// implicit copy-ctor, move-ctor, dtor and assignment are fine
 	// NOTE: implicit move-ctor is added in g++ 4.6
 

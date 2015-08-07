@@ -141,7 +141,6 @@
     <ClInclude Include="net\netfactory.h" />
     <ClInclude Include="net\netreactor.h" />
     <ClInclude Include="net\serverlink.h" />
-    <ClInclude Include="net\session.h" />
     <ClInclude Include="protocol\message.h" />
     <ClInclude Include="protocol\netmsghandler.h" />
     <ClInclude Include="protocol\protocol.h" />

@@ -9,6 +9,7 @@
 #ifndef _session_h_
 #define _session_h_
 
+/*
 // 会话，基于连接
 class ISession
 {
@@ -29,4 +30,5 @@ public:
 	virtual ISession* createSession(Link&) = 0;
 };
 
+*/
 #endif //_session_h_

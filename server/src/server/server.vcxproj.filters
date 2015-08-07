@@ -87,9 +87,6 @@
     <ClInclude Include="..\protocol\protocol.pb.h">
       <Filter>protocol</Filter>
     </ClInclude>
-    <ClInclude Include="net\session.h">
-      <Filter>net</Filter>
-    </ClInclude>
     <ClInclude Include="tool\encrypttool.h">
       <Filter>tool</Filter>
     </ClInclude>

@@ -64,8 +64,73 @@ void Server::onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& 
 	LOG_INFO << "<" << localAddr.toIpPort() << "> peer connection <" << peerAddr.toIpPort() << "> broken";
 }
 
-void Server::onRecv(Link *link, Buffer& buf, RingBufferBlock&)
+void Server::onRecvBlock(Link *link, RingBufferBlock *block)
 {
+	int bytes = block->getTotalLength();
+
+	while(bytes > 0) {
+		if (bytes < sizeof(NetMsgHead)) {
+			break;
+		}
+
+		NetMsgHead *msgHead = NULL;
+		Buffer buf(sizeof(NetMsgHead));
+
+		// 有效数据部分
+		if (block->size() < sizeof(NetMsgHead)) {
+			block->take(buf, sizeof(NetMsgHead));
+			msgHead = (NetMsgHead*)buf.peek();
+		}
+		else {
+			msgHead = (NetMsgHead*)block->begin();
+		}
+
+		msgHead->msgId = endiantool::networkToHost16(msgHead->msgId);
+		msgHead->msgLen = endiantool::networkToHost32(msgHead->msgLen);
+
+		// 检测半包
+		if ((int)msgHead->msgLen > bytes) {
+			break;
+		}
+
+		block = block->skip(sizeof(NetMsgHead));
+
+		//先解密
+		char* encryptBuf =  NULL;
+		int encryptBufLen = msgHead->msgLen - sizeof(NetMsgHead);
+
+		// 检测当前block是否已包含整个消息包
+		if (block->size() >= encryptBufLen) {
+			encryptBuf = block->begin();
+		}
+		else {
+			buf.clear();
+
+			block->take(buf, encryptBufLen);
+			encryptBuf = (char*)buf.peek();
+		}
+
+		block = block->skip(encryptBufLen);
+		link->m_head = block;
+
+		if (link->m_head == NULL) {
+			link->m_tail = NULL;
+		}
+
+		bytes -= msgHead->msgLen;
+
+		Buffer *msg = m_bufferPool.alloc(encryptBuf, msgHead->msgLen - sizeof(NetMsgHead));
+		m_taskQueue.put(boost::bind(&Server::handleMsg, this, link, msgHead->msgId, msg));
+	}
+}
+
+void Server::onRecv(Link *link, Buffer& buf, RingBufferBlock &block)
+{
+	onRecvBlock(link, &block);
+	while(true) {
+		return;
+	}
+
 	while(true) {
 		// 检测半包
 		size_t bytes = buf.readableBytes();
