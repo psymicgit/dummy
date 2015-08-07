@@ -229,7 +229,6 @@ int Link::handleReadTask()
 			}
 
 			m_net->m_ringbuffer.skip(block->m_length + sizeof(RingBufferBlock));
-
 			block->bind(this);
 
 			// LOG_WARN << "read task socket<" << m_sockfd << "> recv nread = " << nread;
@@ -245,17 +244,15 @@ int Link::handleReadTask()
 		}
 		else {
 			int err = socktool::geterrno();
-			switch(err) {
-			case EINTR:
+			if(EINTR == err) {
 				// LOG_WARN << "socket<" << m_sockfd << "> error = EINTR " << err;
 				continue;
-
-			case EAGAIN:
-			case EWOULDBLOCK:
+			}
+			else if(EAGAIN == err || EWOULDBLOCK == err) {
 				// LOG_WARN << "read task socket<" << m_sockfd << "> EWOULDBLOCK || EAGAIN, err = " << err;
 				break;
-
-			default:
+			}
+			else {
 				LOG_WARN << "socket<" << m_sockfd << "> error = " << err;
 				this->close();
 				return -1;
@@ -400,26 +397,28 @@ int Link::trySend(Buffer &buffer)
 
 	while(nleft > 0) {
 		nwritten = ::send(m_sockfd, buffer.peek(), nleft, MSG_NOSIGNAL);
-		if(SOCKET_ERROR == nwritten) {
+		if (nwritten > 0) {
+			nleft  -= nwritten;
+			buffer.skip(nwritten);
+		}
+		else if(SOCKET_ERROR == nwritten) {
 			int err = socktool::geterrno();
 			switch(err) {
 			case EINTR:
-				// 忽略(不过正常来说非阻塞socket进行send操作并不会触发EINTR信号)
-				continue;
+				// 忽略(正常来说非阻塞socket进行send操作并不会触发EINTR信号，这里以防万一)
+				break;
 
 			case EAGAIN:
+#ifdef WIN
 			case EWOULDBLOCK:
-				break;
+#endif
+				return nleft;
 
 			default:
 				LOG_SOCKET_ERR(m_sockfd, err) << "socket<" << m_sockfd << "> send fail, err = " << err << ",nleft = " << nleft << ", nwritten = " << nwritten;
 				return -1;
 			}
 		}
-
-		nleft  -= nwritten;
-
-		buffer.skip(nwritten);
 	}
 
 	return nleft;

@@ -82,7 +82,7 @@ private:
 		static int speedTestCount = 0;
 		static Tick tick("speed test");
 
-		if (++speedTestCount % 100 == 0) {
+		if (++speedTestCount % 1000 == 0) {
 			// LOG_INFO << msgtool::getMsgString(*p);
 			LOG_INFO << "speedtest count = " << speedTestCount << ", speedtest size = " << p->ByteSize();
 
