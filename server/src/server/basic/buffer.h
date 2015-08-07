@@ -130,6 +130,12 @@ public:
 		writerIndex_ += len;
 	}
 
+	void unread(size_t len)
+	{
+		assert(len <= prependableBytes());
+		readerIndex_ -= len;
+	}
+
 	void unwrite(size_t len)
 	{
 		assert(len <= readableBytes());
@@ -204,14 +210,13 @@ public:
 		return m_buffer.capacity();
 	}
 
-private:
-
 	char* begin()
 	{ return &m_buffer[0]; }
 
 	const char* begin() const
 	{ return &m_buffer[0]; }
 
+private:
 	void makeSpace(size_t len)
 	{
 		if (writableBytes() + prependableBytes() < len + g_cheapPrepend) {

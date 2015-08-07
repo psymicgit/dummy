@@ -67,7 +67,7 @@ private:
 			// LOG_INFO << msgtool::getMsgString(*p);
 			LOG_INFO << "pingpong count = " << pingCount << ", PingPong size = " << p->ByteSize();
 
-			if (pingCount % 1000 == 0) {
+			if (pingCount % 100 == 0) {
 				double speed = tick.endTick() / pingCount;
 				double count = 1.0f / speed;
 				LOG_WARN << "pingpong count = " << pingCount << ", avg cost time = " << speed << ", exe count per second = " << count;
@@ -82,7 +82,7 @@ private:
 		static int speedTestCount = 0;
 		static Tick tick("speed test");
 
-		if (++speedTestCount % 1000 == 0) {
+		if (++speedTestCount % 100 == 0) {
 			// LOG_INFO << msgtool::getMsgString(*p);
 			LOG_INFO << "speedtest count = " << speedTestCount << ", speedtest size = " << p->ByteSize();
 

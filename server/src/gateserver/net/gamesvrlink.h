@@ -18,7 +18,7 @@ class Buffer;
 
 class GameSvrLink : public ServerLink
 {
-	virtual void onRecv(Link*, Buffer &buf);
+	virtual void onRecv(Link*, Buffer &buf, RingBufferBlock&);
 };
 
 #endif //_gamesvrlink_h_

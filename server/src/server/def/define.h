@@ -29,9 +29,11 @@ namespace global
 	// 预先申请的网络数据缓冲区: 用于发送和接收数据时进行加解密运算
 	static char g_netBuf[MAX_PACKET_LEN] = {0};
 
+	//
+	static thread_local char g_recvBuf[80 * 1024] = {0};
+
 // 数据库
 	static thread_local char g_sql[2048] = {0};
-	static thread_local char g_recvBuf[80960] = {0};
 
 // 时间
 	static char g_formatBuf[32] = {0};

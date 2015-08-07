@@ -19,6 +19,8 @@
 #include "tool/sockettool.h"
 #include "protocol/message.h"
 
+#define READ_BLOCK_SIZE 40960
+
 void Link::open()
 {
 	socktool::setNonBlocking(m_sockfd);
@@ -101,6 +103,7 @@ void Link::onSend(Buffer *buf)
 	int ret = trySend(*buf);
 
 	if (ret < 0) {
+		LOG_ERROR << "socket<" << m_sockfd << "> trySend fail, ret = " << ret;
 		this ->close();
 	}
 	else if (ret > 0) {
@@ -194,7 +197,7 @@ int Link::handleWrite()
 
 int Link::handleError()
 {
-	// LOG_WARN << "socket<" << m_sockfd << "> error";
+	LOG_WARN << "socket<" << m_sockfd << "> error";
 	this->close();
 	return 0;
 }
@@ -209,13 +212,123 @@ int Link::handleReadTask()
 
 	int nread = 0;
 	do {
-		nread = ::recv(m_sockfd, global::g_recvBuf, sizeof(global::g_recvBuf) - 1, NULL);
+		RingBufferBlock *block = m_net->m_ringbuffer.allocFreeBlock(READ_BLOCK_SIZE);
+		if (NULL == block) {
+			LOG_ERROR << "alloc block fail!";
+
+			m_net->m_ringbuffer.statistic();
+			exit(0);
+		}
+
+		nread = ::recv(m_sockfd, block->begin(), block->m_length, NULL);
 		if (nread > 0) {
-			m_recvBuf.append(global::g_recvBuf, nread);
+			m_recvBuf.append(block->begin(), nread);
+
+			if (nread < block->m_length) {
+				m_net->m_ringbuffer.splitBlock(block->m_length + sizeof(RingBufferBlock), nread);
+			}
+
+			m_net->m_ringbuffer.skip(block->m_length + sizeof(RingBufferBlock));
+
+			block->bind(this);
 
 			// LOG_WARN << "read task socket<" << m_sockfd << "> recv nread = " << nread;
 
-			if (nread < int(sizeof(global::g_recvBuf) - 1)) {
+			if (nread < READ_BLOCK_SIZE) {
+				break; // 相当于EWOULDBLOCK
+			}
+		}
+		else if (0 == nread) {   // eof
+			LOG_WARN << "socket<" << m_sockfd << "> read 0, closed! buffer len = " << block->m_length;
+			this->close();
+			return -1;
+		}
+		else {
+			int err = socktool::geterrno();
+			switch(err) {
+			case EINTR:
+				// LOG_WARN << "socket<" << m_sockfd << "> error = EINTR " << err;
+				continue;
+
+			case EAGAIN:
+			case EWOULDBLOCK:
+				// LOG_WARN << "read task socket<" << m_sockfd << "> EWOULDBLOCK || EAGAIN, err = " << err;
+				break;
+
+			default:
+				LOG_WARN << "socket<" << m_sockfd << "> error = " << err;
+				this->close();
+				return -1;
+			}
+		}
+	}
+	while(true);
+
+	m_pNetReactor->onRecv(this, m_recvBuf, *m_head);
+	return 0;
+}
+
+/*
+int Link::handleReadTask()
+{
+	// LOG_WARN << "socket<" << m_sockfd << "> read task";
+
+	if (!isopen()) {
+		return 0;
+	}
+
+	Buffer &recvBuf = m_net->m_recvBuf;
+	recvBuf.clear();
+
+	int skip = 0;
+	int max = recvBuf.writableBytes();
+
+	// 先将历史数据填充进全局缓冲区，因为历史数据一般都构不成一个消息包，所以大小不大
+	if (m_head != NULL) {
+		int historyLen = m_head->getTotalLength();
+		m_head->take(recvBuf, historyLen);
+		m_head->skip(historyLen);
+
+		m_head = NULL;
+
+		skip = historyLen;
+	}
+
+	RingBufferBlock block;
+	int nread = 0;
+	do {
+		nread = ::recv(m_sockfd, recvBuf.begin() + skip, max - skip, NULL);
+		if (nread > 0) {
+			recvBuf.hasWritten(nread);
+
+			skip += nread;
+
+			if (skip >= max) {
+				// LOG_WARN << "recv too much skip =" << skip << ", nread = " << nread << ", max = " << max;
+				m_pNetReactor->onRecv(this, recvBuf, block);
+
+				if (!recvBuf.empty()) {
+					int remain = recvBuf.readableBytes();
+					memcpy(recvBuf.begin(), recvBuf.peek(), remain);
+					recvBuf.clear();
+					recvBuf.hasWritten(remain);
+
+					skip = remain;
+				}
+				else {
+					skip = 0;
+				}
+
+				continue;
+			}
+
+			// m_recvBuf.append(global::g_recvBuf, nread);
+
+			// m_net->m_ringbuffer.add(global::g_recvBuf, nread, this);
+
+			// LOG_WARN << "read task socket<" << m_sockfd << "> recv nread = " << nread;
+
+			if (nread < max - skip) {
 				break; // 相当于EWOULDBLOCK
 			}
 		}
@@ -242,9 +355,11 @@ int Link::handleReadTask()
 	}
 	while(true);
 
-	m_pNetReactor->onRecv(this, m_recvBuf);
+	m_pNetReactor->onRecv(this, recvBuf, block);
+	m_net->m_ringbuffer.add(recvBuf.peek(), recvBuf.readableBytes(), this);
 	return 0;
 }
+*/
 
 int Link::handleWriteTask()
 {
@@ -280,28 +395,29 @@ int Link::handleWriteTask()
 
 int Link::trySend(Buffer &buffer)
 {
-	size_t nleft     = buffer.readableBytes();
-	const char* buff = buffer.peek();
-
+	size_t nleft = buffer.readableBytes();
 	int nwritten = 0;
 
 	while(nleft > 0) {
-		if((nwritten = ::send(m_sockfd, buff, nleft, MSG_NOSIGNAL)) <= 0) {
+		nwritten = ::send(m_sockfd, buffer.peek(), nleft, MSG_NOSIGNAL);
+		if(SOCKET_ERROR == nwritten) {
 			int err = socktool::geterrno();
-			if (EINTR == err) {
-				nwritten = 0;
-			}
-			else if (EWOULDBLOCK == err || EAGAIN == err) {
+			switch(err) {
+			case EINTR:
+				// 忽略(不过正常来说非阻塞socket进行send操作并不会触发EINTR信号)
+				continue;
+
+			case EAGAIN:
+			case EWOULDBLOCK:
 				break;
-			}
-			else {
-				// LOG_SYSTEM_ERR << "close socket<" << m_sockfd << ">";
+
+			default:
+				LOG_SOCKET_ERR(m_sockfd, err) << "socket<" << m_sockfd << "> send fail, err = " << err << ",nleft = " << nleft << ", nwritten = " << nwritten;
 				return -1;
 			}
 		}
 
 		nleft  -= nwritten;
-		buff   += nwritten;
 
 		buffer.skip(nwritten);
 	}

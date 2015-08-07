@@ -69,10 +69,10 @@ private:
 		req->set_authkey("2ab456b6b2b1b6b1bb2b");
 
 		for(int i = 0; i < 1; i++) {
-			robot->send(eLoginReq, *req);
+			//robot->send(eLoginReq, *req);
 		}
 
-		robot->pingpongTest();
+		robot->speedTest();
 	}
 
 	// ÊÕµ½µÇÂ¼´ð¸´£¨²âÊÔÓÃ£©
@@ -91,7 +91,7 @@ private:
 	{
 		robot->m_pingpongCount++;
 
-		if (robot->m_pingpongCount % 1000) {
+		if (robot->m_pingpongCount % 100) {
 			robot->send(ePing, *p);
 		}
 		else {

@@ -51,8 +51,99 @@ void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddr
 	m_clientMgr->delClient(this);
 }
 
-void Client::onRecv(Link *link, Buffer &buf)
+void Client::onRecvBlock(Link *link, RingBufferBlock *block)
 {
+	int size = block->getTotalLength();
+
+	while(size > 0) {
+		if (size < sizeof(NetMsgHead)) {
+			break;
+		}
+
+		NetMsgHead *msgHead = NULL;
+		Buffer buf(sizeof(NetMsgHead));
+
+		// 有效数据部分
+		if (block->size() < sizeof(NetMsgHead)) {
+			block->take(buf, sizeof(NetMsgHead));
+			msgHead = (NetMsgHead*)buf.peek();
+		}
+		else {
+			msgHead = (NetMsgHead*)block->begin();
+		}
+
+		uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
+		uint32 dataLen = endiantool::networkToHost32(msgHead->msgLen);
+
+		// 检测半包
+		if ((int)dataLen > size) {
+			break;
+		}
+
+		block = block->skip(sizeof(NetMsgHead));
+
+		//先解密
+		uint8* encryptBuf =  NULL;
+		int encryptBufLen = dataLen - sizeof(NetMsgHead);
+
+		// 检测当前block是否已包含整个消息包
+		if (block->size() >= encryptBufLen) {
+			encryptBuf =  (uint8*)(block->begin());
+		}
+		else {
+			buf.clear();
+
+			block->take(buf, encryptBufLen);
+			encryptBuf = (uint8*)(buf.peek());
+		}
+
+		block = block->skip(encryptBufLen);
+		link->m_head = block;
+
+		if (link->m_head == NULL) {
+			link->m_tail = NULL;
+		}
+
+		size -= dataLen;
+
+		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
+			LOG_ERROR << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
+			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
+			continue;
+		}
+
+		char *msg = (char*)encryptBuf + EncryptHeadLen;
+		uint32 msgLen = dataLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen;
+
+		// 判断是否需要转发，
+		if (needRoute(msgId)) {
+			// 转发给游戏服务器
+			GateServer::Instance().sendToGameServer(m_clientId, msgId, msg, msgLen);
+		}
+		else {
+			// 直接本地进行处理
+			Buffer deepCopyBuf;
+			deepCopyBuf.append(msg, msgLen);
+			Server::instance->getTaskQueue().put(boost::bind(&ClientMgr::handleMsg, m_clientMgr, this, msgId, deepCopyBuf, 0));
+		}
+	}
+
+	/*
+	RingBufferBlock *head = link->m_head;
+	size = head->getTotalLength();
+	if (size > 100) {
+		LOG_ERROR << "remain size too much, size = " << size;
+	}
+	*/
+}
+
+void Client::onRecv(Link *link, Buffer &buf, RingBufferBlock &block)
+{
+	onRecvBlock(link, &block);
+	while(1) {
+		return;
+	}
+
 	while(true) {
 		// 检测包头长度
 		size_t bytes = buf.readableBytes();

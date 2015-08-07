@@ -14,6 +14,7 @@
 #include "basic/taskqueue.h"
 #include "basic/objectpool.h"
 #include "basic/buffer.h"
+#include "basic/ringbuffer.h"
 
 class Listener;
 class Link;
@@ -110,13 +111,17 @@ protected:
 	int                      m_efd;
 	int                      m_interupt_sockets[2];
 
-	//! 待销毁的error socket
+//! 待销毁的error socket
 	std::list<IFd*>   		     m_deletingFdList;
 	fast_mutex                  m_mutex;
 
 	TimerQueue m_timers;
-	// volatile int m_curFdCount;
+// volatile int m_curFdCount;
 	LinkPool m_linkPool;
+
+public:
+	RingBuffer m_ringbuffer;
+	Buffer m_recvBuf;
 };
 
 #else
@@ -183,6 +188,10 @@ private:
 	fd_set m_eset;
 
 	bool m_running;
+
+public:
+	RingBuffer m_ringbuffer;
+	Buffer m_recvBuf;
 };
 
 #endif

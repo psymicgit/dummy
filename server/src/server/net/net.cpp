@@ -25,6 +25,8 @@
 Epoll::Epoll()
 	: m_running(true)
 	, m_efd(-1)
+	, m_ringbuffer(100 * 1024 * 1024)
+	, m_recvBuf(80 * 1024)
 	  // , m_curFdCount(0)
 {
 	m_efd = ::epoll_create(1);
@@ -242,6 +244,8 @@ void Epoll::recycleFds()
 
 Select::Select()
 	: m_maxfd(0)
+	, m_ringbuffer(100 * 1024 * 1024)
+	, m_recvBuf(80 * 1024)
 {
 	WSADATA wsa;
 	WSAStartup(MAKEWORD(2, 2), &wsa);
@@ -378,7 +382,7 @@ int Select::eventLoop()
 	fd_set eset;
 
 	//这里我们打算让select等待两秒后返回，避免被锁死，也避免马上返回
-	struct timeval tv = {2, 0};
+	struct timeval tv = {0, 50};
 
 	while(m_running) {
 		rset = m_rset;

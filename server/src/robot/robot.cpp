@@ -76,7 +76,7 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	m_robotMgr->onRobotDisconnect(this);
 }
 
-void Robot::onRecv(Link *link, Buffer &buf)
+void Robot::onRecv(Link *link, Buffer &buf, RingBufferBlock&)
 {
 	while(true) {
 		// ¼ì²â°ë°ü
@@ -222,6 +222,8 @@ void Robot::pingpongTest()
 
 void Robot::speedTest()
 {
+	LOG_WARN << "start speed test";
+
 	PingPong *p = msgtool::allocPacket<PingPong>();
 	p->set_pingpong("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 
