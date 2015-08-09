@@ -55,13 +55,15 @@ void Client::onRecvBlock(Link *link, RingBufferBlock *block)
 {
 	int size = block->getTotalLength();
 
+	Buffer buf(sizeof(NetMsgHead));
+
 	while(size > 0) {
 		if (size < sizeof(NetMsgHead)) {
 			break;
 		}
 
 		NetMsgHead *msgHead = NULL;
-		Buffer buf(sizeof(NetMsgHead));
+		buf.clear();
 
 		// 有效数据部分
 		if (block->size() < sizeof(NetMsgHead)) {
@@ -74,6 +76,8 @@ void Client::onRecvBlock(Link *link, RingBufferBlock *block)
 
 		uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
 		uint32 dataLen = endiantool::networkToHost32(msgHead->msgLen);
+
+		buf.clear();
 
 		// 检测半包
 		if ((int)dataLen > size) {
@@ -91,8 +95,6 @@ void Client::onRecvBlock(Link *link, RingBufferBlock *block)
 			encryptBuf =  (uint8*)(block->begin());
 		}
 		else {
-			buf.clear();
-
 			block->take(buf, encryptBufLen);
 			encryptBuf = (uint8*)(buf.peek());
 		}
@@ -113,7 +115,7 @@ void Client::onRecvBlock(Link *link, RingBufferBlock *block)
 		}
 
 		char *msg = (char*)encryptBuf + EncryptHeadLen;
-		uint32 msgLen = dataLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen;
+		uint32 msgLen = encryptBufLen - EncryptHeadLen - EncryptTailLen;
 
 		// 判断是否需要转发，
 		if (needRoute(msgId)) {
@@ -122,9 +124,17 @@ void Client::onRecvBlock(Link *link, RingBufferBlock *block)
 		}
 		else {
 			// 直接本地进行处理
-			Buffer deepCopyBuf;
-			deepCopyBuf.append(msg, msgLen);
-			Server::instance->getTaskQueue().put(boost::bind(&ClientMgr::handleMsg, m_clientMgr, this, msgId, deepCopyBuf, 0));
+
+			if (buf.empty()) {
+				Buffer copy(msg, msgLen);
+				Server::instance->getTaskQueue().put(boost::bind(&ClientMgr::handleMsg, m_clientMgr, this, msgId, copy, 0));
+			}
+			else {
+				buf.skip(EncryptHeadLen);
+				buf.unwrite(EncryptTailLen);
+				Server::instance->getTaskQueue().put(boost::bind(&ClientMgr::handleMsg, m_clientMgr, this, msgId, buf, 0));
+			}
+
 		}
 	}
 
@@ -139,6 +149,7 @@ void Client::onRecvBlock(Link *link, RingBufferBlock *block)
 
 void Client::onRecv(Link *link, Buffer &buf, RingBufferBlock &block)
 {
+	buf.clear();
 	onRecvBlock(link, &block);
 	while(1) {
 		return;

@@ -76,8 +76,105 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	m_robotMgr->onRobotDisconnect(this);
 }
 
-void Robot::onRecv(Link *link, Buffer &buf, RingBufferBlock&)
+void Robot::onRecvBlock(Link *link, RingBufferBlock *block)
 {
+	int size = block->getTotalLength();
+
+	Buffer buf(sizeof(NetMsgHead));
+
+	while(size > 0) {
+		if (size < sizeof(NetMsgHead)) {
+			break;
+		}
+
+		NetMsgHead *msgHead = NULL;
+		buf.clear();
+
+		// 有效数据部分
+		if (block->size() < sizeof(NetMsgHead)) {
+			block->take(buf, sizeof(NetMsgHead));
+			msgHead = (NetMsgHead*)buf.peek();
+		}
+		else {
+			msgHead = (NetMsgHead*)block->begin();
+		}
+
+		uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
+		uint32 dataLen = endiantool::networkToHost32(msgHead->msgLen);
+
+		buf.clear();
+
+		// 检测半包
+		if ((int)dataLen > size) {
+			break;
+		}
+
+		block = block->skip(sizeof(NetMsgHead));
+
+		//先解密
+		uint8* encryptBuf =  NULL;
+		int encryptBufLen = dataLen - sizeof(NetMsgHead);
+
+		// 检测当前block是否已包含整个消息包
+		if (block->size() >= encryptBufLen) {
+			encryptBuf =  (uint8*)(block->begin());
+		}
+		else {
+			block->take(buf, encryptBufLen);
+			encryptBuf = (uint8*)(buf.peek());
+		}
+
+		block = block->skip(encryptBufLen);
+		link->m_head = block;
+
+		if (link->m_head == NULL) {
+			link->m_tail = NULL;
+		}
+
+		size -= dataLen;
+
+		// 未加密
+		if (!m_isEncrypt) {
+			// 直接本地进行处理
+			if (buf.empty()) {
+				Buffer copy((char*)encryptBuf, encryptBufLen);
+				m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, this, msgId, copy, 0));
+			}
+			else {
+				m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, this, msgId, buf, 0));
+			}
+			continue;
+		}
+
+		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
+			LOG_ERROR << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
+			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
+			continue;
+		}
+
+		char *msg = (char*)encryptBuf + EncryptHeadLen;
+		uint32 msgLen = encryptBufLen - EncryptHeadLen - EncryptTailLen;
+
+		// 直接本地进行处理
+		if (buf.empty()) {
+			Buffer copy(msg, msgLen);
+			m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, this, msgId, copy, 0));
+		}
+		else {
+			buf.skip(EncryptHeadLen);
+			buf.unwrite(EncryptTailLen);
+			m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, this, msgId, buf, 0));
+		}
+	}
+}
+
+void Robot::onRecv(Link *link, Buffer &buf, RingBufferBlock &block)
+{
+// 	onRecvBlock(link, &block);
+// 	while(true) {
+// 		return;
+// 	}
+
 	while(true) {
 		// 检测半包
 		size_t bytes = buf.readableBytes();

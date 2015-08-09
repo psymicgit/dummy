@@ -68,13 +68,15 @@ void Server::onRecvBlock(Link *link, RingBufferBlock *block)
 {
 	int bytes = block->getTotalLength();
 
+	Buffer buf(sizeof(NetMsgHead));
+
 	while(bytes > 0) {
 		if (bytes < sizeof(NetMsgHead)) {
 			break;
 		}
 
 		NetMsgHead *msgHead = NULL;
-		Buffer buf(sizeof(NetMsgHead));
+		buf.clear();
 
 		// 有效数据部分
 		if (block->size() < sizeof(NetMsgHead)) {
@@ -87,6 +89,8 @@ void Server::onRecvBlock(Link *link, RingBufferBlock *block)
 
 		msgHead->msgId = endiantool::networkToHost16(msgHead->msgId);
 		msgHead->msgLen = endiantool::networkToHost32(msgHead->msgLen);
+
+		buf.clear();
 
 		// 检测半包
 		if ((int)msgHead->msgLen > bytes) {
@@ -104,8 +108,6 @@ void Server::onRecvBlock(Link *link, RingBufferBlock *block)
 			encryptBuf = block->begin();
 		}
 		else {
-			buf.clear();
-
 			block->take(buf, encryptBufLen);
 			encryptBuf = (char*)buf.peek();
 		}
@@ -126,10 +128,10 @@ void Server::onRecvBlock(Link *link, RingBufferBlock *block)
 
 void Server::onRecv(Link *link, Buffer& buf, RingBufferBlock &block)
 {
-	onRecvBlock(link, &block);
-	while(true) {
-		return;
-	}
+// 	onRecvBlock(link, &block);
+// 	while(true) {
+// 		return;
+// 	}
 
 	while(true) {
 		// 检测半包

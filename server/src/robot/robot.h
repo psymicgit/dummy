@@ -31,6 +31,8 @@ public:
 
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
+	void onRecvBlock(Link*, RingBufferBlock*);
+
 	virtual void onRecv(Link*, Buffer&, RingBufferBlock&);
 
 	virtual TaskQueue& getTaskQueue();
