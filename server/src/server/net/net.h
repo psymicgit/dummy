@@ -97,7 +97,7 @@ public:
 	virtual void enableAll(IFd*);
 	virtual void disableAll(IFd*);
 
-	virtual TaskQueue* getTaskQueue() { return NULL;}
+	virtual TaskQueue* getTaskQueue() { return &m_tasks;}
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
 	inline virtual LinkPool& getLinkPool() { return m_linkPool; }
 
@@ -115,13 +115,10 @@ protected:
 	std::list<IFd*>   		     m_deletingFdList;
 	fast_mutex                  m_mutex;
 
+	TaskQueue m_tasks;
 	TimerQueue m_timers;
 // volatile int m_curFdCount;
 	LinkPool m_linkPool;
-
-public:
-	RingBuffer m_ringbuffer;
-	Buffer m_recvBuf;
 };
 
 #else
@@ -188,10 +185,6 @@ private:
 	fd_set m_eset;
 
 	bool m_running;
-
-public:
-	RingBuffer m_ringbuffer;
-	Buffer m_recvBuf;
 };
 
 #endif

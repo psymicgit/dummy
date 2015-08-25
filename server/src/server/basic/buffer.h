@@ -96,6 +96,14 @@ public:
 	{
 		readerIndex_ = g_cheapPrepend;
 		writerIndex_ = g_cheapPrepend;
+
+		recycle();
+	}
+
+	// 重新回收空间
+	void recycle()
+	{
+		m_buffer.swap(std::vector<char>());
 	}
 
 	std::string takeAllAsString()

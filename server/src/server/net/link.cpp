@@ -94,7 +94,7 @@ void Link::onSend(Buffer *buf)
 	// LOG_INFO << "Link::onSend, socket = " << m_sockfd;
 
 	// 如果发送缓存区仍有数据未发送，则直接append
-	if (m_sendBuf.readableBytes() > 0) {
+	if (!m_sendBuf.empty()) {
 		// LOG_WARN << "socket<" << m_sockfd << "> m_sendBuf.append(buf.peek(), buf.readableBytes());";
 		m_sendBuf.append(buf->peek(), buf->readableBytes());
 		return;
@@ -127,7 +127,8 @@ void Link::sendBuffer(Buffer *buf)
 #ifdef WIN
 	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this, buf));
 #else
-	onSend(buf);
+	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this, buf));
+	//onSend(buf);
 #endif
 }
 
@@ -185,25 +186,6 @@ void Link::send(int msgId, const char *data, int len)
 
 int Link::handleRead()
 {
-	handleReadTask();
-	return 0;
-}
-
-int Link::handleWrite()
-{
-	handleWriteTask();
-	return 0;
-}
-
-int Link::handleError()
-{
-	LOG_WARN << "socket<" << m_sockfd << "> error";
-	this->close();
-	return 0;
-}
-
-int Link::handleReadTask()
-{
 	// LOG_WARN << "socket<" << m_sockfd << "> read task";
 
 	if (!isopen()) {
@@ -212,33 +194,37 @@ int Link::handleReadTask()
 
 	int nread = 0;
 	do {
-		RingBufferBlock *block = m_net->m_ringbuffer.allocFreeBlock(READ_BLOCK_SIZE);
-		if (NULL == block) {
-			LOG_ERROR << "alloc block fail!";
+		// RingBufferBlock *block = m_net->m_ringbuffer.allocFreeBlock(READ_BLOCK_SIZE);
+		// if (NULL == block) {
+		// 	LOG_ERROR << "alloc block fail!";
+		// 
+		// 	m_net->m_ringbuffer.statistic();
+		// 	exit(0);
+		// }
 
-			m_net->m_ringbuffer.statistic();
-			exit(0);
-		}
+		// nread = ::recv(m_sockfd, block->begin(), block->m_length, NULL);
+		// if (nread > 0) {
+		// 	m_recvBuf.append(block->begin(), nread);
 
-		nread = ::recv(m_sockfd, block->begin(), block->m_length, NULL);
+		// if (nread < block->m_length) {
+		// 	m_net->m_ringbuffer.splitBlock(block->m_length + sizeof(RingBufferBlock), nread);
+		// }
+		// 
+		// m_net->m_ringbuffer.skip(block->m_length + sizeof(RingBufferBlock));
+		// block->bind(this);
+
+		// LOG_WARN << "read task socket<" << m_sockfd << "> recv nread = " << nread;
+
+		nread = ::recv(m_sockfd, global::g_recvBuf, MAX_PACKET_LEN, NULL);
 		if (nread > 0) {
-			m_recvBuf.append(block->begin(), nread);
+			m_recvBuf.append(global::g_recvBuf, nread);
 
-			if (nread < block->m_length) {
-				m_net->m_ringbuffer.splitBlock(block->m_length + sizeof(RingBufferBlock), nread);
-			}
-
-			m_net->m_ringbuffer.skip(block->m_length + sizeof(RingBufferBlock));
-			block->bind(this);
-
-			// LOG_WARN << "read task socket<" << m_sockfd << "> recv nread = " << nread;
-
-			if (nread < READ_BLOCK_SIZE) {
+			if (nread < MAX_PACKET_LEN) {
 				break; // 相当于EWOULDBLOCK
 			}
 		}
 		else if (0 == nread) {   // eof
-			LOG_WARN << "socket<" << m_sockfd << "> read 0, closed! buffer len = " << block->m_length;
+			// LOG_WARN << "socket<" << m_sockfd << "> read 0, closed! buffer len = " << MAX_PACKET_LEN;
 			this->close();
 			return -1;
 		}
@@ -262,6 +248,47 @@ int Link::handleReadTask()
 	while(true);
 
 	m_pNetReactor->onRecv(this, m_recvBuf, *m_head);
+	return 0;
+}
+
+int Link::handleWrite()
+{
+	// LOG_INFO << "socket <" << m_sockfd << "> is writable";
+	if (!isopen()) {
+		return 0;
+	}
+
+	int ret = 0;
+	string left_buff;
+
+#ifdef WIN
+	// windows下select模型属于LT，需要屏蔽可写事件
+	m_net->disableWrite(this);
+#endif
+
+	if (m_sendBuf.empty()) {
+		return 0;
+	}
+
+	do {
+		ret = trySend(m_sendBuf);
+
+		if (ret < 0) {
+			// LOG_WARN << "close socket<" << m_sockfd << ">";
+			this->close();
+			return -1;
+		}
+	}
+	while (m_sendBuf.readableBytes() > 0);
+
+	m_sendBuf.clear();
+	return 0;
+}
+
+int Link::handleError()
+{
+	LOG_WARN << "socket<" << m_sockfd << "> error";
+	this->close();
 	return 0;
 }
 
@@ -357,38 +384,6 @@ int Link::handleReadTask()
 	return 0;
 }
 */
-
-int Link::handleWriteTask()
-{
-	// LOG_INFO << "socket <" << m_sockfd << "> is writable";
-	if (!isopen()) {
-		return 0;
-	}
-
-	int ret = 0;
-	string left_buff;
-
-#ifdef WIN
-	// windows下select模型属于LT，需要屏蔽可写事件
-	m_net->disableWrite(this);
-#endif
-
-	if (m_sendBuf.empty()) {
-		return 0;
-	}
-
-	do {
-		ret = trySend(m_sendBuf);
-
-		if (ret < 0) {
-			// LOG_WARN << "close socket<" << m_sockfd << ">";
-			this->close();
-			return -1;
-		}
-	}
-	while (m_sendBuf.readableBytes() > 0);
-	return 0;
-}
 
 int Link::trySend(Buffer &buffer)
 {

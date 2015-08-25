@@ -25,8 +25,6 @@
 Epoll::Epoll()
 	: m_running(true)
 	, m_efd(-1)
-	, m_ringbuffer(100 * 1024 * 1024)
-	, m_recvBuf(80 * 1024)
 	  // , m_curFdCount(0)
 {
 	m_efd = ::epoll_create(1);
@@ -115,6 +113,7 @@ int Epoll::eventLoop()
 			}
 		}
 
+		m_tasks.run();
 		waitTime = m_timers.run();
 	}
 	while(nfds >= 0);
@@ -244,8 +243,6 @@ void Epoll::recycleFds()
 
 Select::Select()
 	: m_maxfd(0)
-	, m_ringbuffer(100 * 1024 * 1024)
-	, m_recvBuf(80 * 1024)
 {
 	WSADATA wsa;
 	WSAStartup(MAKEWORD(2, 2), &wsa);

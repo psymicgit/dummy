@@ -73,6 +73,7 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	}
 	*/
 
+	LOG_INFO << "robot <" << localAddr.toIpPort() << "> to gateserver <" << peerAddr.toIpPort() << "> closed!";
 	m_robotMgr->onRobotDisconnect(this);
 }
 

@@ -72,9 +72,6 @@ private:
 	void onNetClose();
 	void onSend(Buffer *buff);
 
-	int handleReadTask();
-	int handleWriteTask();
-
 public:
 	const NetAddress m_localAddr;
 	const NetAddress m_peerAddr;

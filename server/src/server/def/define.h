@@ -30,7 +30,7 @@ namespace global
 	static char g_netBuf[MAX_PACKET_LEN] = {0};
 
 	//
-	static thread_local char g_recvBuf[80 * 1024] = {0};
+	static thread_local char g_recvBuf[MAX_PACKET_LEN] = {0};
 
 // Êý¾Ý¿â
 	static thread_local char g_sql[2048] = {0};

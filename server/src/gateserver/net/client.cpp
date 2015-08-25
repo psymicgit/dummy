@@ -149,11 +149,11 @@ void Client::onRecvBlock(Link *link, RingBufferBlock *block)
 
 void Client::onRecv(Link *link, Buffer &buf, RingBufferBlock &block)
 {
-	buf.clear();
-	onRecvBlock(link, &block);
-	while(1) {
-		return;
-	}
+	// buf.clear();
+	// onRecvBlock(link, &block);
+	// 	while(1) {
+	// 		return;
+	// 	}
 
 	while(true) {
 		// 检测包头长度
