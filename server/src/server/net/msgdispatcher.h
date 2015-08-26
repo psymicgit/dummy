@@ -54,6 +54,7 @@ public:
 		}
 
 		m_msgHandlerVec.clear();
+		m_msgMap.clear();
 	}
 
 private:

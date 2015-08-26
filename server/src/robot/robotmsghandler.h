@@ -72,7 +72,7 @@ private:
 			//robot->send(eLoginReq, *req);
 		}
 
-		robot->pingpongTest();
+		robot->speedTest();
 	}
 
 	// ÊÕµ½µÇÂ¼´ğ¸´£¨²âÊÔÓÃ£©
@@ -93,8 +93,7 @@ private:
 
 		if (robot->m_pingpongCount % 100) {
 			robot->send(ePing, *p);
-		}
-		else {
+		} else {
 			robot->speedTest();
 		}
 	}
