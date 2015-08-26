@@ -14,6 +14,9 @@
 namespace ticktool
 {
 	uint64 tick();
+
+	// 返回两次时钟周期的秒差
+	double tickDiff(uint64 old_tick);
 }
 
 class Tick

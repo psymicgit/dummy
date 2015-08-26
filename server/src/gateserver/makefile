@@ -8,6 +8,7 @@ MACD            =
 LIBA_FILE 		= 
 LIBSO_FILE		= 
 EXEC_FILE 		= gateserver
+PROJ_RELY		= ${lib_dir}/libserver.a
 
 OTHER_SRC		= $(shell find ../protocol -name "*.cc")
 

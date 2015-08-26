@@ -93,7 +93,7 @@ ${LIBSO_FILE} : ${ALL_OBJS}
 ${EXEC_FILE} : ${ALL_OBJS}
 	${EXEC_LINK} $@ ${ALL_OBJS} ${INLIB_FILE} ${INLIB_DIR} ${INC_PATH} 
 
-${ALL_OBJS} : $(PCH)
+${ALL_OBJS} : $(PCH) $(PROJ_RELY)
 
 # $@ = 目标文件的完整名称
 # $< = 指所有依赖文件中的第一个文件

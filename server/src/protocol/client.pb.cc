@@ -121,8 +121,9 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AuthAck));
   PingPong_descriptor_ = file->message_type(4);
-  static const int PingPong_offsets_[1] = {
+  static const int PingPong_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PingPong, pingpong_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PingPong, time_),
   };
   PingPong_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -194,12 +195,12 @@ void protobuf_AddDesc_client_2eproto() {
     "\nprivateKey\030\002 \002(\t\022\017\n\007authKey\030\003 \002(\t\"\032\n\007Au"
     "thReq\022\017\n\007authKey\030\001 \002(\t\":\n\007AuthAck\022\033\n\006res"
     "ult\030\001 \002(\0162\013.AuthResult\022\022\n\nencryptKey\030\002 \002"
-    "(\t\"\034\n\010PingPong\022\020\n\010pingpong\030\001 \002(\t*\177\n\rEncr"
-    "yptKeyDef\022\021\n\rEncryptKeyLen\020 \022\022\n\016EncryptH"
-    "eadLen\020\002\022\022\n\016EncryptTailLen\020\004\022\016\n\nAuthKeyL"
-    "en\020\020\022\020\n\014PublicKeyLen\020\010\022\021\n\rPrivateKeyLen\020"
-    "\024*(\n\nAuthResult\022\013\n\007AUTH_OK\020\000\022\r\n\tAUTH_FAI"
-    "L\020\001", 643);
+    "(\t\"*\n\010PingPong\022\020\n\010pingpong\030\001 \002(\t\022\014\n\004time"
+    "\030\002 \002(\004*\177\n\rEncryptKeyDef\022\021\n\rEncryptKeyLen"
+    "\020 \022\022\n\016EncryptHeadLen\020\002\022\022\n\016EncryptTailLen"
+    "\020\004\022\016\n\nAuthKeyLen\020\020\022\020\n\014PublicKeyLen\020\010\022\021\n\r"
+    "PrivateKeyLen\020\024*(\n\nAuthResult\022\013\n\007AUTH_OK"
+    "\020\000\022\r\n\tAUTH_FAIL\020\001", 657);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "client.proto", &protobuf_RegisterTypes);
   LoginReq::default_instance_ = new LoginReq();
@@ -1823,6 +1824,7 @@ void AuthAck::Swap(AuthAck* other) {
 
 #ifndef _MSC_VER
 const int PingPong::kPingpongFieldNumber;
+const int PingPong::kTimeFieldNumber;
 #endif  // !_MSC_VER
 
 PingPong::PingPong()
@@ -1842,6 +1844,7 @@ PingPong::PingPong(const PingPong& from)
 void PingPong::SharedCtor() {
   _cached_size_ = 0;
   pingpong_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  time_ = GOOGLE_ULONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1885,6 +1888,7 @@ void PingPong::Clear() {
         pingpong_->clear();
       }
     }
+    time_ = GOOGLE_ULONGLONG(0);
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -1905,6 +1909,22 @@ bool PingPong::MergePartialFromCodedStream(
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
             this->pingpong().data(), this->pingpong().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_time;
+        break;
+      }
+
+      // required uint64 time = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_time:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &time_)));
+          set_has_time();
         } else {
           goto handle_uninterpreted;
         }
@@ -1939,6 +1959,11 @@ void PingPong::SerializeWithCachedSizes(
       1, this->pingpong(), output);
   }
 
+  // required uint64 time = 2;
+  if (has_time()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->time(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -1957,6 +1982,11 @@ void PingPong::SerializeWithCachedSizes(
         1, this->pingpong(), target);
   }
 
+  // required uint64 time = 2;
+  if (has_time()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->time(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -1973,6 +2003,13 @@ int PingPong::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->pingpong());
+    }
+
+    // required uint64 time = 2;
+    if (has_time()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->time());
     }
 
   }
@@ -2005,6 +2042,9 @@ void PingPong::MergeFrom(const PingPong& from) {
     if (from.has_pingpong()) {
       set_pingpong(from.pingpong());
     }
+    if (from.has_time()) {
+      set_time(from.time());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -2022,7 +2062,7 @@ void PingPong::CopyFrom(const PingPong& from) {
 }
 
 bool PingPong::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
@@ -2030,6 +2070,7 @@ bool PingPong::IsInitialized() const {
 void PingPong::Swap(PingPong* other) {
   if (other != this) {
     std::swap(pingpong_, other->pingpong_);
+    std::swap(time_, other->time_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

@@ -73,17 +73,13 @@ int Epoll::eventLoop()
 
 	int waitTime = EPOLL_WAIT_TIME;
 	do {
+		waitTime = EPOLL_WAIT_TIME;
+
 		// LOG_WARN << "waitTime = " << waitTime;
 		nfds  = ::epoll_wait(m_efd, ev_set, EPOLL_EVENTS_SIZE, waitTime);
-
-		if (nfds < 0 && EINTR == errno) {
+		if (nfds < 0/* && EINTR == errno*/) {
 			nfds = 0;
-			continue;
 		}
-
-// 		if (nfds > 0) {
-// 			LOG_INFO << "nfds = <" << nfds << ">";
-// 		}
 
 		for (i = 0; i < nfds; ++i) {
 			epoll_event& cur_ev = ev_set[i];

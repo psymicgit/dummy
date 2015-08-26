@@ -19,6 +19,7 @@
 #include "http/handshakehttpcmd.h"
 #include <tool/randtool.h>
 #include <tool/echotool.h>
+#include <tool/ticktool.h>
 
 #include <protocol.pb.h>
 #include <client.pb.h>
@@ -73,7 +74,7 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	}
 	*/
 
-	LOG_INFO << "robot <" << localAddr.toIpPort() << "> to gateserver <" << peerAddr.toIpPort() << "> closed!";
+	LOG_INFO << "robot<" << m_robotId << "> <" << localAddr.toIpPort() << "> to gateserver <" << peerAddr.toIpPort() << "> closed!";
 	m_robotMgr->onRobotDisconnect(this);
 }
 
@@ -314,18 +315,22 @@ void Robot::pingpongTest()
 {
 	PingPong *p = msgtool::allocPacket<PingPong>();
 	p->set_pingpong("123456789|");
+	p->set_time(0);
+
+	LOG_WARN << "robot <" << m_robotId << "> start pingpong test, pingpong packet size = " << p->ByteSize();
 
 	send(ePing, *p);
 }
 
 void Robot::speedTest()
 {
-	LOG_WARN << "start speed test";
-
 	PingPong *p = msgtool::allocPacket<PingPong>();
 	p->set_pingpong("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+	p->set_time(0);
 
-	for (int i = 0; i < 100000; i++) {
+	LOG_WARN << "robot <" << m_robotId << "> start speed test, speed packet size = " << p->ByteSize();
+
+	for (int i = 0; i < 1000; i++) {
 		send(eSpeedTest, *p);
 	}
 }
@@ -335,7 +340,10 @@ void Robot::latencyTest()
 	PingPong *p = msgtool::allocPacket<PingPong>();
 	p->set_pingpong("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 
-	for (int i = 0; i < 100000; i++) {
+	LOG_WARN << "robot <" << m_robotId << "> start latency test, latency packet size = " << p->ByteSize();
+
+	for (int i = 0; i < 1000; i++) {
+		p->set_time(ticktool::tick());
 		send(eLatencyTest, *p);
 	}
 }

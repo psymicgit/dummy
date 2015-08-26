@@ -46,11 +46,11 @@ void Link::close()
 {
 	// LOG_INFO << "Link::close, socket = " << m_sockfd;
 
-	if (m_isClosing) {
+	if (m_closed) {
 		return;
 	}
 
-	m_isClosing = true;
+	m_closed = true;
 
 	socktool::closeSocket(m_sockfd);
 	m_net->disableAll(this);
@@ -97,13 +97,14 @@ void Link::onSend(Buffer *buf)
 	if (!m_sendBuf.empty()) {
 		// LOG_WARN << "socket<" << m_sockfd << "> m_sendBuf.append(buf.peek(), buf.readableBytes());";
 		m_sendBuf.append(buf->peek(), buf->readableBytes());
+		global::g_bufferPool.free(buf);
 		return;
 	}
 
 	int ret = trySend(*buf);
 
 	if (ret < 0) {
-		LOG_ERROR << "socket<" << m_sockfd << "> trySend fail, ret = " << ret;
+		// LOG_ERROR << "socket<" << m_sockfd << "> trySend fail, ret = " << ret;
 		this ->close();
 	}
 	else if (ret > 0) {
@@ -239,7 +240,7 @@ int Link::handleRead()
 				break;
 			}
 			else {
-				LOG_WARN << "socket<" << m_sockfd << "> error = " << err;
+				LOG_SOCKET_ERR(m_sockfd, err) << "socket<" << m_sockfd << "> recv fail, err = " << err << ", history recv buf size = " << m_recvBuf.readableBytes();
 				this->close();
 				return -1;
 			}

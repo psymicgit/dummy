@@ -60,17 +60,20 @@ private:
 
 	static void OnPingTest(Client* client, PingPong *p, Timestamp receiveTime)
 	{
-		static int pingCount = 0;
+		static int g_pingCount = 0;
 		static Tick tick("pingpong test");
 
-		if (++pingCount % 100 == 0) {
-			// LOG_INFO << msgtool::getMsgString(*p);
-			LOG_INFO << "pingpong count = " << pingCount << ", PingPong size = " << p->ByteSize();
+		++g_pingCount;
+		++client->m_pingCount;
 
-			if (pingCount % 100 == 0) {
-				double speed = tick.endTick() / pingCount;
+		if (g_pingCount % 100 == 0) {
+			// LOG_INFO << msgtool::getMsgString(*p);
+			LOG_INFO << "pingpong count = " << g_pingCount << ", PingPong size = " << p->ByteSize();
+
+			if (g_pingCount % 100 == 0) {
+				double speed = tick.endTick() / g_pingCount;
 				double count = 1.0f / speed;
-				LOG_WARN << "pingpong count = " << pingCount << ", avg cost time = " << speed << ", exe count per second = " << count;
+				LOG_WARN << "pingpong count = " << g_pingCount << ", avg cost time = " << speed << ", exe count per second = " << count;
 			}
 		}
 
@@ -79,48 +82,59 @@ private:
 
 	static void OnSpeedTest(Client* client, PingPong *p, Timestamp receiveTime)
 	{
-		static int speedTestCount = 0;
+		static int g_speedTestCount = 0;
 		static Tick tick("speed test");
 
-		if (++speedTestCount % 1000 == 0) {
+		++g_speedTestCount;
+		++client->m_speedTestCount;
+
+		if (g_speedTestCount % 5000 == 0) {
 			// LOG_INFO << msgtool::getMsgString(*p);
-			LOG_INFO << "speedtest count = " << speedTestCount << ", speedtest size = " << p->ByteSize();
+			LOG_INFO << "speedtest count = " << g_speedTestCount << ", speedtest size = " << p->ByteSize();
 
-			if (speedTestCount % 10000 == 0) {
-				double speed = tick.endTick() / speedTestCount;
+			if (g_speedTestCount % 10000 == 0) {
+				double speed = tick.endTick() / g_speedTestCount;
 				double count = 1.0f / speed;
-				LOG_WARN << "speedtest count = " << speedTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
-			}
-
-			if (speedTestCount % 100000 == 0) {
-				client->send(eSpeedTest, *p);
-				// Server::instance->stop();
+				LOG_WARN << "speedtest count = " << g_speedTestCount << ", avg cost=" << speed << ", exe count per second = " << count;
 			}
 		}
 
+		if (client->m_speedTestCount % 1000 == 0) {
+			client->send(eSpeedTest, *p);
+			// Server::instance->stop();
+		}
 	}
 
 	static void OnLatencyTest(Client* client, PingPong *p, Timestamp receiveTime)
 	{
-		static int latencyTestCount = 0;
+		static int g_latencyTestCount = 0;
 		static Tick tick("latency test");
 
-		if (++latencyTestCount % 1000 == 0) {
+		++g_latencyTestCount;
+		++client->m_latencyTestCount;
+
+		uint64 now = ticktool::tick();
+
+		if (g_latencyTestCount % 5000 == 0) {
 			// LOG_INFO << msgtool::getMsgString(*p);
-			LOG_INFO << "latencytest count = " << latencyTestCount << ", latencytest size = " << p->ByteSize();
+			LOG_INFO << "latencytest count = " << g_latencyTestCount << ", latencytest size = " << p->ByteSize();
 
-			if (latencyTestCount % 10000 == 0) {
-				double speed = tick.endTick() / latencyTestCount;
+			if (g_latencyTestCount % 10000 == 0) {
+				double speed = tick.endTick() / g_latencyTestCount;
 				double count = 1.0f / speed;
-				LOG_WARN << "latencytest count = " << latencyTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
+				LOG_WARN << "latencytest count = " << g_latencyTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
 
-				if (latencyTestCount % 100000 == 0) {
-					client->send(eLatencyTest, *p);
+				if (g_latencyTestCount % 1000000 == 0) {
+					// client->send(eLatencyTest, *p);
 					Server::instance->stop();
 				}
 			}
 		}
 
+		if (client->m_latencyTestCount % 1000 == 0) {
+			double diff = ticktool::tickDiff(p->time());
+			LOG_WARN << "avg latency = " << diff;
+		}
 	}
 };
 

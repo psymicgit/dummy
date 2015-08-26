@@ -24,6 +24,9 @@ Client::Client()
 	, m_clientId(0)
 	, m_taskQueue(NULL)
 	, m_clientMgr(NULL)
+	, m_pingCount(0)
+	, m_speedTestCount(0)
+	, m_latencyTestCount(0)
 {
 	memset(m_encryptKey, 0, sizeof(m_encryptKey));
 }

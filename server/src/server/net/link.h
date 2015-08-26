@@ -29,7 +29,7 @@ public:
 		, m_peerAddr(peerAddr)
 		, m_pNetReactor(pNetReactor)
 		, m_isAutoReconnect(false)
-		, m_isClosing(false)
+		, m_closed(false)
 		, m_sockfd(sockfd)
 		, m_net(pNet)
 		, m_head(NULL)
@@ -57,7 +57,7 @@ public:
 	void send(int msgId, Message &msg);
 	void send(int msgId, const char *data, int len);
 
-	bool isopen() { return !m_isClosing; }
+	bool isopen() { return !m_closed; }
 
 private:
 	void sendBuffer(Buffer*);
@@ -84,7 +84,7 @@ public:
 	RingBufferBlock *m_tail;
 
 private:
-	volatile bool m_isClosing;
+	volatile bool m_closed;
 
 	socket_t m_sockfd;
 	NetModel *m_net;

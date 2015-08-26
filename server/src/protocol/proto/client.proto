@@ -63,4 +63,5 @@ message AuthAck
 message PingPong
 {
 	required string pingpong = 1;
+	required uint64 time = 2;
 }

@@ -699,17 +699,27 @@ class PingPong : public ::google::protobuf::Message {
   inline ::std::string* release_pingpong();
   inline void set_allocated_pingpong(::std::string* pingpong);
 
+  // required uint64 time = 2;
+  inline bool has_time() const;
+  inline void clear_time();
+  static const int kTimeFieldNumber = 2;
+  inline ::google::protobuf::uint64 time() const;
+  inline void set_time(::google::protobuf::uint64 value);
+
   // @@protoc_insertion_point(class_scope:PingPong)
  private:
   inline void set_has_pingpong();
   inline void clear_has_pingpong();
+  inline void set_has_time();
+  inline void clear_has_time();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* pingpong_;
+  ::google::protobuf::uint64 time_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void  protobuf_AddDesc_client_2eproto();
   friend void protobuf_AssignDesc_client_2eproto();
@@ -1665,6 +1675,28 @@ inline void PingPong::set_allocated_pingpong(::std::string* pingpong) {
     clear_has_pingpong();
     pingpong_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
+}
+
+// required uint64 time = 2;
+inline bool PingPong::has_time() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void PingPong::set_has_time() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void PingPong::clear_has_time() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void PingPong::clear_time() {
+  time_ = GOOGLE_ULONGLONG(0);
+  clear_has_time();
+}
+inline ::google::protobuf::uint64 PingPong::time() const {
+  return time_;
+}
+inline void PingPong::set_time(::google::protobuf::uint64 value) {
+  set_has_time();
+  time_ = value;
 }
 
 

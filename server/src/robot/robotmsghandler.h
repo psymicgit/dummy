@@ -72,7 +72,7 @@ private:
 			//robot->send(eLoginReq, *req);
 		}
 
-		robot->speedTest();
+		robot->pingpongTest();
 	}
 
 	// สีตฝตวยผด๐ธดฃจฒโสิำรฃฉ

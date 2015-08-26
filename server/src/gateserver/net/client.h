@@ -50,6 +50,11 @@ public:
 	uint8 m_encryptKey[EncryptKeyLen];
 
 	uint8 m_authKey[AuthKeyLen];
+
+public:
+	int m_pingCount;
+	int m_speedTestCount;
+	int m_latencyTestCount;
 };
 
 #endif //_client_h_
