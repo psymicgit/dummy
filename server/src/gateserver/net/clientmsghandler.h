@@ -113,8 +113,6 @@ private:
 		++g_latencyTestCount;
 		++client->m_latencyTestCount;
 
-		uint64 now = ticktool::tick();
-
 		if (g_latencyTestCount % 5000 == 0) {
 			// LOG_INFO << msgtool::getMsgString(*p);
 			LOG_INFO << "latencytest count = " << g_latencyTestCount << ", latencytest size = " << p->ByteSize();
@@ -124,7 +122,7 @@ private:
 				double count = 1.0f / speed;
 				LOG_WARN << "latencytest count = " << g_latencyTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
 
-				if (g_latencyTestCount % 1000000 == 0) {
+				if (g_latencyTestCount % 10000 == 0) {
 					// client->send(eLatencyTest, *p);
 					Server::instance->stop();
 				}

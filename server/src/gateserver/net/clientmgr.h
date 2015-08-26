@@ -24,6 +24,8 @@ private:
 public:
 	ClientMgr();
 
+	void close();
+
 public:
 	virtual void onAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
@@ -36,6 +38,8 @@ public:
 	void delClient(Client*);
 
 	void handleMsg(Client *client, int msgId, Buffer&, Timestamp receiveTime);
+
+	void clear();
 
 private:
 	uint32 allocClientId();

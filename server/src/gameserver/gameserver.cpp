@@ -58,6 +58,10 @@ void GameServer::stoppping()
 	LOG_WARN << "stopping game server ...";
 	Server::stopping();
 	m_dbmgr.stop();
+
+	// 将关闭网络时产生的网络任务执行完
+	run();
+
 	LOG_WARN << "stop game server successfully!";
 }
 

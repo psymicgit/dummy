@@ -26,7 +26,7 @@ bool RobotMgr::init()
 		return false;
 	}
 
-	for(int i = 0; i < 1000; i++) {
+	for(int i = 0; i < 10; i++) {
 		Robot *robot = createRobot();
 		// robot->start();
 
@@ -87,6 +87,9 @@ void RobotMgr::stopping()
 	run();
 
 	m_wan.stop();
+
+	// 将关闭网络时产生的网络任务执行完
+	run();
 
 	m_run = false;
 }

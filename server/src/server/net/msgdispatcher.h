@@ -48,7 +48,9 @@ public:
 	void clear()
 	{
 		for (size_t i = 0; i < m_msgHandlerVec.size(); i++) {
-			delete m_msgHandlerVec[i];
+			IMsgHandler<LinkType> *msgHandler = m_msgHandlerVec[i];
+			msgHandler->clear();
+			delete msgHandler;
 		}
 
 		m_msgHandlerVec.clear();

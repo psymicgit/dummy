@@ -156,13 +156,12 @@ private:
 
 		//对于在内存池中的对象数据，当超过一定空闲个数时释放，防止内存出现暴涨
 		if (m_objects.size() > (uint32)(m_initSize + m_growSize)) {
-			T * first = m_objects.front();
-			::operator delete (first);
-
-			m_objects[0] = obj;
-			m_totalSize--;
-		}
-		else {
+// 			T * first = m_objects.front();
+			::operator delete (obj);
+//
+// 			m_objects[0] = obj;
+// 			m_totalSize--;
+		} else {
 			m_objects.push_back(obj);
 		}
 	}

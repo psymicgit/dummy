@@ -22,7 +22,7 @@ class Connector : public IFd
 	enum States { kDisconnected, kConnecting, kConnected };
 
 public:
-	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, task_queue_pool_t*, const char* remoteHostName);
+	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, const char* remoteHostName);
 
 	virtual socket_t socket() const {return m_sockfd;}
 	virtual int handleRead();
@@ -46,7 +46,6 @@ private:
 	NetAddress m_peerAddr;
 	INetReactor *m_pNetReactor;
 	NetModel *m_net;
-	task_queue_pool_t* m_taskQueuePool;
 
 	socket_t m_sockfd;
 	int m_retryDelayMs;

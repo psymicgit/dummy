@@ -35,6 +35,8 @@ public:
 
 	bool send(int msgId, Message&);
 
+	void close();
+
 private:
 	bool needRoute(int msgId);
 

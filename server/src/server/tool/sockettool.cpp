@@ -123,7 +123,6 @@ namespace socktool
 
 		LOG_INFO << "socket " << sock << " SO_RCVBUF = [" << recvBuf << "]";
 
-
 		int ret = setsockopt(sock, SOL_SOCKET, SO_RCVBUF, (char *)&size, sizeof(size) );
 		if (ret == -1) {
 			LOG_SYSTEM_ERR << "set socket " << sock << " SO_RCVBUF to [" << size << "] failed";

@@ -92,8 +92,7 @@ void Client::onRecv(Link *link, Buffer &buf, RingBufferBlock &block)
 		if (needRoute(msgId)) {
 			// 转发给游戏服务器
 			GateServer::Instance().sendToGameServer(m_clientId, msgId, msg, msgLen);
-		}
-		else {
+		} else {
 			// 直接本地进行处理
 			Buffer deepCopyBuf;
 			deepCopyBuf.append(msg, msgLen);
@@ -161,4 +160,9 @@ bool Client::send(int msgId, Message &msg)
 
 	this->send(msgId, buf.peek(), buf.readableBytes());
 	return true;
+}
+
+void Client::close()
+{
+	m_link->close();
 }

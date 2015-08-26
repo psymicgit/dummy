@@ -31,9 +31,13 @@ namespace global
 
 	void uninit()
 	{
+		delete[] g_recvPacketBuf;
+
 		msgtool::freePacket(global::g_lastMessage);
 		delete[] g_packetBuf;
 
 		google::protobuf::ShutdownProtobufLibrary();
+
+		g_bufferPool.clear();
 	}
 }

@@ -30,7 +30,7 @@ bool Server::init()
 {
 	global::init();
 
-	m_bufferPool.init(5000, 5000);
+	m_bufferPool.init(1000, 500);
 
 	m_dispatcher.addMsgHandler(new NetMsgHandler(&m_dispatcher));
 	return true;
@@ -39,6 +39,8 @@ bool Server::init()
 bool Server::uninit()
 {
 	m_dispatcher.clear();
+	m_bufferPool.clear();
+
 	global::uninit();
 	return false;
 }
@@ -151,6 +153,9 @@ void Server::stopping()
 
 	run();
 	m_lan.stop();
+
+	// 将关闭网络时产生的网络任务执行完
+	run();
 }
 
 void Server::run()

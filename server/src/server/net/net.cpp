@@ -111,8 +111,7 @@ int Epoll::eventLoop()
 
 		m_tasks.run();
 		waitTime = m_timers.run();
-	}
-	while(nfds >= 0);
+	} while(nfds >= 0);
 
 	return 0;
 }
@@ -435,6 +434,11 @@ int Select::eventLoop()
 
 void Select::close()
 {
+	for(size_t i = 0; i < m_links.size(); ++i) {
+		IFd *pfd = m_links[i];
+		pfd->close();
+	}
+
 	m_tasks.put(boost::bind(&Select::closing, this));
 }
 

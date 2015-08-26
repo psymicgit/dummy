@@ -15,6 +15,8 @@ class IMsgHandler
 {
 public:
 	virtual void onMessage(LinkType& link, int msgId, const char* data, int len, Timestamp receiveTime) const = 0;
+
+	virtual void clear() = 0;
 };
 
 #endif //_imsghandler_h_

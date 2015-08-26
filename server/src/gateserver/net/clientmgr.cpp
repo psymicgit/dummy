@@ -24,6 +24,16 @@ ClientMgr::ClientMgr()
 	m_dispatcher.addMsgHandler(new ClientMsgHandler(&m_dispatcher));
 }
 
+void ClientMgr::close()
+{
+	for(ClientMap::iterator itr = m_clientMap.begin(); itr != m_clientMap.end(); ++itr) {
+		Client *client = itr->second;
+		client->close();
+	}
+
+	clear();
+}
+
 void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	LOG_INFO << "<" << localAddr.toIpPort() << "> accept new client from <" << peerAddr.toIpPort() << ">";
@@ -75,4 +85,10 @@ void ClientMgr::delClient(Client *client)
 
 	m_clientMap.erase(client->m_clientId);
 	m_clientPool.free(client);
+}
+
+void ClientMgr::clear()
+{
+	m_clientPool.clear();
+	m_dispatcher.clear();
 }

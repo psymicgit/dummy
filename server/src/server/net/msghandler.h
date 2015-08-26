@@ -98,6 +98,19 @@ public:
 		LOG_DEBUG << "Discarding " << msgtool::getMsgString(message);
 	}
 
+	void clear()
+	{
+		typename CallbackMap::iterator itr(m_callbackMap.begin());
+		typename CallbackMap::iterator end(m_callbackMap.end());
+
+		for (; itr != end; ++itr) {
+			Callback<LinkType> *callBack = itr->second;
+			delete callBack;
+		}
+
+		m_callbackMap.clear();
+	}
+
 	CallbackMap m_callbackMap;
 	MsgDispatcher<LinkType> *m_msgDispacher;
 };

@@ -49,6 +49,10 @@ void GateServer::stopping()
 	LOG_WARN << "stopping gate server ...";
 	Server::stopping();
 	m_wan.stop();
+	m_clientMgr.close();
+
+	// 将关闭网络时产生的网络任务执行完
+	run();
 }
 
 void GateServer::run()

@@ -28,7 +28,7 @@ bool NetFactory::init(int threadCnt, int initLinkCnt)
 	assert(threadCnt > 0);
 
 	m_threadCnt = threadCnt;
-	m_taskQueuePool = new task_queue_pool_t(m_threadCnt);
+	// m_taskQueuePool = new task_queue_pool_t(m_threadCnt);
 
 	m_net.init(initLinkCnt, 1000);
 	return true;
@@ -57,15 +57,29 @@ void NetFactory::stop()
 
 	LOG_WARN << "stopping net ...";
 
-	m_taskQueuePool->close();
+	// m_taskQueuePool->close();
 
 	m_net.close();
 	m_thread.join();
 
-	delete m_taskQueuePool;
-	m_taskQueuePool = NULL;
+	// 	delete m_taskQueuePool;
+	// 	m_taskQueuePool = NULL;
 
 	m_started = false;
+
+	for(size_t i = 0; i < m_listeners.size(); i++) {
+		Listener *listener = m_listeners[i];
+		listener->close();
+	}
+//
+// 	for(size_t i = 0; i < m_connectors.size(); i++) {
+// 		Connector *connector = m_connectors[i];
+// 		connector->close();
+// 	}
+
+	m_listeners.clear();
+	m_connectors.clear();
+
 	LOG_WARN << "stop net successful";
 }
 
@@ -88,7 +102,7 @@ Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor
 Connector* NetFactory::connect(const string& ip, int port, INetReactor &netReactor, const char* remoteHostName)
 {
 	NetAddress peerAddr(ip, port);
-	Connector* connector = new Connector(peerAddr, &netReactor, &m_net, m_taskQueuePool, remoteHostName);
+	Connector* connector = new Connector(peerAddr, &netReactor, &m_net, remoteHostName);
 	// LOG_DEBUG << "NetFactory::connect addr = " << connector;
 
 	connector->connect();

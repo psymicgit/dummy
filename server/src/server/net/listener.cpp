@@ -48,6 +48,8 @@ bool Listener::open(const string & ip, int port)
 
 void Listener::close()
 {
+	LOG_DEBUG << "stop listening at <" << m_listenAddr.toIpPort() << ">";
+
 	socktool::closeSocket(m_listenFd);
 	m_net->delFd(this);
 }
@@ -68,9 +70,8 @@ int Listener::handleRead()
 			if (errno == EINTR) {
 				LOG_ERROR << "errno == EINTR";
 				continue;
-			}
-			else if (errno == EINTR || errno == EMFILE || errno == ECONNABORTED || errno == ENFILE ||
-			         errno == EPERM || errno == ENOBUFS || errno == ENOMEM) {
+			} else if (errno == EINTR || errno == EMFILE || errno == ECONNABORTED || errno == ENFILE ||
+			           errno == EPERM || errno == ENOBUFS || errno == ENOMEM) {
 				LOG_ERROR << "accept failed, restart listenning now";//! if too many open files occur, need to restart epoll event
 				m_net->reopen(this);
 				break;
@@ -87,8 +88,7 @@ int Listener::handleRead()
 
 		m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onAccepted, m_pNetReactor, link, m_listenAddr, peerAddr));
 		m_pNetReactor->getTaskQueue().put(boost::bind(&Link::enableRead, link));
-	}
-	while (true);
+	} while (true);
 
 	return 0;
 }

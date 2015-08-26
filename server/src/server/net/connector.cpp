@@ -17,11 +17,10 @@
 #include "basic/timerqueue.h"
 #include "basic/taskqueue.h"
 
-Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *net, task_queue_pool_t *taskQueuePool, const char* remoteHostName)
+Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *net, const char* remoteHostName)
 	: m_peerAddr(peerAddr)
 	, m_pNetReactor(netReactor)
 	, m_net(net)
-	, m_taskQueuePool(taskQueuePool)
 	, m_retryDelayMs(InitRetryDelayMs)
 	, m_state(kDisconnected)
 	, m_errno(0)
@@ -148,8 +147,7 @@ bool Connector::connecting()
 		m_net->enableWrite(this);
 
 		m_state = kConnecting;
-	}
-	else if(m_state == kConnecting) {
+	} else if(m_state == kConnecting) {
 		m_net->enableWrite(this);
 	}
 
