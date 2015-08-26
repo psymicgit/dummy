@@ -45,7 +45,6 @@ void Link::enableRead()
 void Link::close()
 {
 	// LOG_INFO << "Link::close, socket = " << m_sockfd;
-
 	if (m_closed) {
 		return;
 	}
@@ -67,8 +66,6 @@ void Link::erase()
 
 void Link::onLogicClose()
 {
-	// LOG_INFO << "Link::onLogicClose, socket = " << m_sockfd;
-
 	m_pNetReactor->onDisconnect(this, m_localAddr, m_peerAddr);
 
 #ifdef WIN
@@ -81,7 +78,6 @@ void Link::onLogicClose()
 void Link::onNetClose()
 {
 	// LOG_INFO << "Link::onNetClose, socket = " << m_sockfd;
-
 	m_net->delFd(this);
 }
 
@@ -195,27 +191,6 @@ int Link::handleRead()
 
 	int nread = 0;
 	do {
-		// RingBufferBlock *block = m_net->m_ringbuffer.allocFreeBlock(READ_BLOCK_SIZE);
-		// if (NULL == block) {
-		// 	LOG_ERROR << "alloc block fail!";
-		// 
-		// 	m_net->m_ringbuffer.statistic();
-		// 	exit(0);
-		// }
-
-		// nread = ::recv(m_sockfd, block->begin(), block->m_length, NULL);
-		// if (nread > 0) {
-		// 	m_recvBuf.append(block->begin(), nread);
-
-		// if (nread < block->m_length) {
-		// 	m_net->m_ringbuffer.splitBlock(block->m_length + sizeof(RingBufferBlock), nread);
-		// }
-		// 
-		// m_net->m_ringbuffer.skip(block->m_length + sizeof(RingBufferBlock));
-		// block->bind(this);
-
-		// LOG_WARN << "read task socket<" << m_sockfd << "> recv nread = " << nread;
-
 		nread = ::recv(m_sockfd, global::g_recvBuf, MAX_PACKET_LEN, NULL);
 		if (nread > 0) {
 			m_recvBuf.append(global::g_recvBuf, nread);
@@ -292,99 +267,6 @@ int Link::handleError()
 	this->close();
 	return 0;
 }
-
-/*
-int Link::handleReadTask()
-{
-	// LOG_WARN << "socket<" << m_sockfd << "> read task";
-
-	if (!isopen()) {
-		return 0;
-	}
-
-	Buffer &recvBuf = m_net->m_recvBuf;
-	recvBuf.clear();
-
-	int skip = 0;
-	int max = recvBuf.writableBytes();
-
-	// 先将历史数据填充进全局缓冲区，因为历史数据一般都构不成一个消息包，所以大小不大
-	if (m_head != NULL) {
-		int historyLen = m_head->getTotalLength();
-		m_head->take(recvBuf, historyLen);
-		m_head->skip(historyLen);
-
-		m_head = NULL;
-
-		skip = historyLen;
-	}
-
-	RingBufferBlock block;
-	int nread = 0;
-	do {
-		nread = ::recv(m_sockfd, recvBuf.begin() + skip, max - skip, NULL);
-		if (nread > 0) {
-			recvBuf.hasWritten(nread);
-
-			skip += nread;
-
-			if (skip >= max) {
-				// LOG_WARN << "recv too much skip =" << skip << ", nread = " << nread << ", max = " << max;
-				m_pNetReactor->onRecv(this, recvBuf, block);
-
-				if (!recvBuf.empty()) {
-					int remain = recvBuf.readableBytes();
-					memcpy(recvBuf.begin(), recvBuf.peek(), remain);
-					recvBuf.clear();
-					recvBuf.hasWritten(remain);
-
-					skip = remain;
-				}
-				else {
-					skip = 0;
-				}
-
-				continue;
-			}
-
-			// m_recvBuf.append(global::g_recvBuf, nread);
-
-			// m_net->m_ringbuffer.add(global::g_recvBuf, nread, this);
-
-			// LOG_WARN << "read task socket<" << m_sockfd << "> recv nread = " << nread;
-
-			if (nread < max - skip) {
-				break; // 相当于EWOULDBLOCK
-			}
-		}
-		else if (0 == nread) {   //! eof
-			// LOG_WARN << "socket<" << m_sockfd << "> read 0, closed";
-			this->close();
-			return -1;
-		}
-		else {
-			int err = socktool::geterrno();
-			if (err == EINTR) {
-				continue;
-			}
-			else if (err == EWOULDBLOCK || err == EAGAIN) {
-				// LOG_WARN << "read task socket<" << m_sockfd << "> EWOULDBLOCK || EAGAIN, err = " << err;
-				break;
-			}
-			else {
-				// LOG_WARN << "socket<" << m_sockfd << "> error = " << err;
-				this->close();
-				return -1;
-			}
-		}
-	}
-	while(true);
-
-	m_pNetReactor->onRecv(this, recvBuf, block);
-	m_net->m_ringbuffer.add(recvBuf.peek(), recvBuf.readableBytes(), this);
-	return 0;
-}
-*/
 
 int Link::trySend(Buffer &buffer)
 {

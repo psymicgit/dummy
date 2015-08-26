@@ -8,6 +8,7 @@ LOCAL_SRC = $(shell find . -name "*.cpp" -o -name "*.cc")
 ALL_SRC  = $(LOCAL_SRC) ${OTHER_SRC}
 ALL_OBJS = $(patsubst %.cc,%.o, $(patsubst %.cpp,%.o,${ALL_SRC}))
 ALL_DEPS = $(patsubst %.o,%.d,$(patsubst %.cc,%.o, $(patsubst %.cpp,%.o,${LOCAL_SRC}))) 
+TARGET = $(LIBA_FILE) $(EXEC_FILE) $(LIBSO_FILE)
 
 MISSING_DEPS :=$(filter-out $(wildcard $(ALL_DEPS)),$(ALL_DEPS)) 
 
@@ -38,7 +39,7 @@ else
 	EXEC_LINK   = g++ ${CPPFLAGS} -g -o
 endif
 
-all : $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) 
+all : $(TARGET) 
 
 clean : 
 	rm -f *.o *.a *.so $(ALL_OBJS) $(ALL_DEPS) $(LIBA_FILE) $(LIBSO_FILE) $(EXEC_FILE) $(PCH)
@@ -46,22 +47,12 @@ clean :
 touch :
 	touch *.h; touch *.c; touch *.cpp
 
-install:$(LIBA_FILE) $(EXEC_FILE) $(LIBSO_FILE)
+install:$(TARGET)
 	@mkdir -p ${OUT_DIR}; 
 
-	@if [ -n '$(LIBA_FILE)' ] ;  \
+	@if [ -n '$(TARGET)' ] ;  \
 	then  \
-    		cp -rf $(LIBA_FILE) $(OUT_DIR) ; \
-	fi
-
-	@if [ -n '$(LIBSO_FILE)' ] ;  \
-	then  \
-    		cp -rf $(LIBSO_FILE) $(OUT_DIR) ; \
-	fi
-
-	@if [ -n '$(EXEC_FILE)' ] ;  \
-	then  \
-    		cp -rf $(EXEC_FILE) $(OUT_DIR) ; \
+    		cp -rfu $(TARGET) $(OUT_DIR) ; \
 	fi
 
 print:
@@ -83,17 +74,19 @@ print:
 	@echo ALL_DEPS = $(ALL_DEPS)
 	@echo ----------------------
 	@echo MISSING_DEPS = $(MISSING_DEPS)
+	@echo ----------------------
+	@echo PROJ_RELY = $(PROJ_RELY)
 
-$(LIBA_FILE) : $(ALL_OBJS)
+$(LIBA_FILE) : $(ALL_OBJS) ${PROJ_RELY}
 	$(A_LINK) $@ $(ALL_OBJS)
 
-${LIBSO_FILE} : ${ALL_OBJS}
+${LIBSO_FILE} : ${ALL_OBJS} ${PROJ_RELY}
 	${SO_LINK} $@ ${ALL_OBJS} ${INLIB_FILE} ${INLIB_DIR} ${INC_PATH}
 
-${EXEC_FILE} : ${ALL_OBJS}
+${EXEC_FILE} : ${ALL_OBJS} ${PROJ_RELY}
 	${EXEC_LINK} $@ ${ALL_OBJS} ${INLIB_FILE} ${INLIB_DIR} ${INC_PATH} 
 
-${ALL_OBJS} : $(PCH) $(PROJ_RELY)
+${ALL_OBJS} : $(PCH)
 
 # $@ = 目标文件的完整名称
 # $< = 指所有依赖文件中的第一个文件
