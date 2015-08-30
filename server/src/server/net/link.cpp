@@ -240,7 +240,10 @@ int Link::handleRead()
 	do {
 		nread = ::recv(m_sockfd, global::g_recvBuf, MAX_PACKET_LEN, NULL);
 		if (nread > 0) {
-			m_recvBuf.append(global::g_recvBuf, nread);
+			{
+				lock_guard_t<fast_mutex> lock(m_recvBufLock);
+				m_recvBuf.append(global::g_recvBuf, nread);
+			}
 
 			if (nread < MAX_PACKET_LEN) {
 				break; // Ïàµ±ÓÚEWOULDBLOCK

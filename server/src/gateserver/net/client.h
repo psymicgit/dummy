@@ -37,7 +37,6 @@ public:
 
 	void close();
 
-private:
 	bool needRoute(int msgId);
 
 public:

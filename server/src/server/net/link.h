@@ -35,6 +35,7 @@ public:
 		, m_head(NULL)
 		, m_tail(NULL)
 		, m_isWaitingWrite(0)
+		, m_isWaitingRead(false)
 	{
 	}
 
@@ -84,7 +85,7 @@ public:
 	RingBufferBlock *m_head;
 	RingBufferBlock *m_tail;
 
-private:
+public:
 	volatile bool m_closed;
 
 	socket_t m_sockfd;
@@ -99,6 +100,7 @@ private:
 	fast_mutex m_recvBufLock;
 
 	volatile int m_isWaitingWrite;
+	bool m_isWaitingRead;
 };
 
 #endif //_link_h_
