@@ -54,7 +54,7 @@ void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddr
 	m_clientMgr->delClient(this);
 }
 
-void Client::onRecv(Link *link, Buffer &buf, RingBufferBlock &block)
+void Client::onRecv(Link *link, Buffer &buf)
 {
 	while(true) {
 		// 检测包头长度

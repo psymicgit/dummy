@@ -78,7 +78,7 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	m_robotMgr->onRobotDisconnect(this);
 }
 
-void Robot::onRecv(Link *link, Buffer &buf, RingBufferBlock &block)
+void Robot::onRecv(Link *link, Buffer &buf)
 {
 	while(true) {
 		// ¼ì²â°ë°ü

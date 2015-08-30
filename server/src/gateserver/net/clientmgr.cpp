@@ -64,9 +64,9 @@ void ClientMgr::onDisconnect(Link *link, const NetAddress& localAddr, const NetA
 
 }
 
-void ClientMgr::onRecv(Link *link, Buffer &buf, RingBufferBlock &block)
+void ClientMgr::onRecv(Link *link, Buffer &buf)
 {
-	Server::instance->onRecv(link, buf, block);
+	Server::instance->onRecv(link, buf);
 }
 
 void ClientMgr::handleMsg(Client *client, int msgId, Buffer &buf, Timestamp receiveTime)

@@ -23,7 +23,7 @@ public:
 
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr) = 0;
 
-	virtual void onRecv(Link*, Buffer&, RingBufferBlock&) = 0;
+	virtual void onRecv(Link*, Buffer&) = 0;
 
 	virtual TaskQueue& getTaskQueue() = 0;
 };

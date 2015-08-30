@@ -96,6 +96,7 @@ private:
 	Buffer m_sendBuf;
 
 	fast_mutex m_sendBufLock;
+	fast_mutex m_recvBufLock;
 
 	volatile int m_isWaitingWrite;
 };

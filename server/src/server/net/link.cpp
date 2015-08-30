@@ -265,7 +265,9 @@ int Link::handleRead()
 		}
 	} while(true);
 
-	m_pNetReactor->onRecv(this, m_recvBuf, *m_head);
+	//m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onRecv, m_pNetReactor, this, m_recvBuf));
+
+	m_pNetReactor->onRecv(this, m_recvBuf);
 	return 0;
 }
 

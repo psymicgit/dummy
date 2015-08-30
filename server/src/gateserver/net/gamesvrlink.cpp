@@ -17,5 +17,5 @@
 
 void GameSvrLink::onRecv(Link *link, Buffer &buf, RingBufferBlock &block)
 {
-	ServerLink::onRecv(link, buf, block);
+	ServerLink::onRecv(link, buf);
 }

@@ -66,7 +66,7 @@ void Server::onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& 
 	LOG_INFO << "<" << localAddr.toIpPort() << "> peer connection <" << peerAddr.toIpPort() << "> broken";
 }
 
-void Server::onRecv(Link *link, Buffer& buf, RingBufferBlock &block)
+void Server::onRecv(Link *link, Buffer& buf)
 {
 	while(true) {
 		// ¼ì²â°ë°ü
