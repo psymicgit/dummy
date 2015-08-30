@@ -144,9 +144,7 @@ bool Robot::send(int msgId, Message &msg)
 
 	int size = msg.ByteSize();
 
-	Buffer buf(size);
-
-	bool ok = msg.SerializeToArray((void*)buf.beginWrite(), size);
+	bool ok = msg.SerializeToArray(global::g_sendBuf, size);
 	if (!ok) {
 		LOG_ERROR << "robot [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort()
 		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgString(msg) << "]";
@@ -154,9 +152,7 @@ bool Robot::send(int msgId, Message &msg)
 		return false;
 	}
 
-	buf.hasWritten(size);
-
-	this->send(msgId, buf.peek(), buf.readableBytes());
+	this->send(msgId, global::g_sendBuf, size);
 	return true;
 }
 
@@ -233,9 +229,18 @@ void Robot::speedTest()
 
 	LOG_WARN << "robot <" << m_robotId << "> start speed test, speed packet size = " << p->ByteSize();
 
-	for (int i = 0; i < 1000; i++) {
+	int count = 1000;
+// 	Tick tick("send() speed test");
+
+	for (int i = 0; i < count; i++) {
 		send(eSpeedTest, *p);
 	}
+
+// 	double costTime = tick.endTick();
+// 	double avgTime = costTime / count;
+// 	double speed = 1.0f / avgTime;
+// 	LOG_WARN << "send packet count = " << count << ", avg cost time = " << avgTime << ", total cost time = " << costTime << ", exe count per second = " << speed;
+// 	exit(0);
 }
 
 void Robot::latencyTest()

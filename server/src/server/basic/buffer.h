@@ -44,7 +44,7 @@ public:
 		assert(prependableBytes() == g_cheapPrepend);
 	}
 
-	explicit Buffer(char *data, int size)
+	explicit Buffer(const char *data, int size)
 		: m_buffer(data, data + size)
 		, readerIndex_(0)
 		, writerIndex_(size)
@@ -79,8 +79,7 @@ public:
 		assert(len <= readableBytes());
 		if (len < readableBytes()) {
 			readerIndex_ += len;
-		}
-		else {
+		} else {
 			clear();
 		}
 	}
@@ -97,7 +96,9 @@ public:
 		readerIndex_ = g_cheapPrepend;
 		writerIndex_ = g_cheapPrepend;
 
-		recycle();
+		if (m_buffer.capacity() > 2 * g_initSize) {
+			recycle();
+		}
 	}
 
 	// 重新回收空间
@@ -237,8 +238,7 @@ private:
 		if (writableBytes() + prependableBytes() < len + g_cheapPrepend) {
 			// FIXME: move readable data
 			m_buffer.resize(writerIndex_ + len);
-		}
-		else {
+		} else {
 			// move readable data to the front, make space inside buffer
 			assert(g_cheapPrepend < readerIndex_);
 			size_t readable = readableBytes();

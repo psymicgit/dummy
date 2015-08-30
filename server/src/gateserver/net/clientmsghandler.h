@@ -44,8 +44,7 @@ private:
 
 		if(req->authkey().compare(std::string((const char*)client->m_authKey))) {
 			ack.set_result(AUTH_OK);
-		}
-		else {
+		} else {
 			ack.set_result(AUTH_FAIL);
 		}
 
@@ -122,7 +121,7 @@ private:
 				double count = 1.0f / speed;
 				LOG_WARN << "latencytest count = " << g_latencyTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
 
-				if (g_latencyTestCount % 10000 == 0) {
+				if (g_latencyTestCount % 1000000 == 0) {
 					// client->send(eLatencyTest, *p);
 					Server::instance->stop();
 				}

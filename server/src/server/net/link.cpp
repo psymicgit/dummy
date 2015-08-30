@@ -102,13 +102,11 @@ void Link::onSend(Buffer *buf)
 	if (ret < 0) {
 		// LOG_ERROR << "socket<" << m_sockfd << "> trySend fail, ret = " << ret;
 		this ->close();
-	}
-	else if (ret > 0) {
+	} else if (ret > 0) {
 		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
 		m_net->enableWrite(this);
 		m_sendBuf.append(buf->peek(), buf->readableBytes());
-	}
-	else {
+	} else {
 		// 发送成功
 	}
 
@@ -121,12 +119,7 @@ void Link::sendBuffer(Buffer *buf)
 		return;
 	}
 
-#ifdef WIN
 	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this, buf));
-#else
-	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this, buf));
-	//onSend(buf);
-#endif
 }
 
 void Link::send(const char *data, int len)
@@ -135,8 +128,7 @@ void Link::send(const char *data, int len)
 		return;
 	}
 
-	Buffer *buf = global::g_bufferPool.alloc(len);
-	buf->append(data, len);
+	Buffer *buf = global::g_bufferPool.alloc(data, len);
 	this->sendBuffer(buf);
 }
 
@@ -198,30 +190,25 @@ int Link::handleRead()
 			if (nread < MAX_PACKET_LEN) {
 				break; // 相当于EWOULDBLOCK
 			}
-		}
-		else if (0 == nread) {   // eof
+		} else if (0 == nread) { // eof
 			// LOG_WARN << "socket<" << m_sockfd << "> read 0, closed! buffer len = " << MAX_PACKET_LEN;
 			this->close();
 			return -1;
-		}
-		else {
+		} else {
 			int err = socktool::geterrno();
 			if(EINTR == err) {
 				// LOG_WARN << "socket<" << m_sockfd << "> error = EINTR " << err;
 				continue;
-			}
-			else if(EAGAIN == err || EWOULDBLOCK == err) {
+			} else if(EAGAIN == err || EWOULDBLOCK == err) {
 				// LOG_WARN << "read task socket<" << m_sockfd << "> EWOULDBLOCK || EAGAIN, err = " << err;
 				break;
-			}
-			else {
+			} else {
 				LOG_SOCKET_ERR(m_sockfd, err) << "socket<" << m_sockfd << "> recv fail, err = " << err << ", history recv buf size = " << m_recvBuf.readableBytes();
 				this->close();
 				return -1;
 			}
 		}
-	}
-	while(true);
+	} while(true);
 
 	m_pNetReactor->onRecv(this, m_recvBuf, *m_head);
 	return 0;
@@ -234,9 +221,6 @@ int Link::handleWrite()
 		return 0;
 	}
 
-	int ret = 0;
-	string left_buff;
-
 #ifdef WIN
 	// windows下select模型属于LT，需要屏蔽可写事件
 	m_net->disableWrite(this);
@@ -247,15 +231,13 @@ int Link::handleWrite()
 	}
 
 	do {
-		ret = trySend(m_sendBuf);
-
+		int ret = trySend(m_sendBuf);
 		if (ret < 0) {
 			// LOG_WARN << "close socket<" << m_sockfd << ">";
 			this->close();
 			return -1;
 		}
-	}
-	while (m_sendBuf.readableBytes() > 0);
+	} while (m_sendBuf.readableBytes() > 0);
 
 	m_sendBuf.clear();
 	return 0;
@@ -278,8 +260,7 @@ int Link::trySend(Buffer &buffer)
 		if (nwritten > 0) {
 			nleft  -= nwritten;
 			buffer.skip(nwritten);
-		}
-		else if(SOCKET_ERROR == nwritten) {
+		} else if(SOCKET_ERROR == nwritten) {
 			int err = socktool::geterrno();
 			switch(err) {
 			case EINTR:

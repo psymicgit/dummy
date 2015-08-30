@@ -31,6 +31,7 @@ namespace global
 
 	//
 	static thread_local char g_recvBuf[MAX_PACKET_LEN] = {0};
+	static thread_local char g_sendBuf[MAX_PACKET_LEN] = {0};
 
 // Êý¾Ý¿â
 	static thread_local char g_sql[2048] = {0};

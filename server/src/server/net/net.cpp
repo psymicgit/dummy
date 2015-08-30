@@ -454,6 +454,7 @@ void Select::closing()
 
 	m_running = false;
 	m_links.clear();
+	m_linkPool.clear();
 	LOG_WARN << "close net successful";
 }
 

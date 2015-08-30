@@ -94,9 +94,7 @@ void Client::onRecv(Link *link, Buffer &buf, RingBufferBlock &block)
 			GateServer::Instance().sendToGameServer(m_clientId, msgId, msg, msgLen);
 		} else {
 			// 直接本地进行处理
-			Buffer deepCopyBuf;
-			deepCopyBuf.append(msg, msgLen);
-			Server::instance->getTaskQueue().put(boost::bind(&ClientMgr::handleMsg, m_clientMgr, this, msgId, deepCopyBuf, 0));
+			Server::instance->getTaskQueue().put(boost::bind(&ClientMgr::handleMsg, m_clientMgr, this, msgId, Buffer(msg, msgLen), 0));
 		}
 
 		buf.skip(dataLen);
