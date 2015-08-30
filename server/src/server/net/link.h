@@ -34,6 +34,7 @@ public:
 		, m_net(pNet)
 		, m_head(NULL)
 		, m_tail(NULL)
+		, m_isWaitingWrite(0)
 	{
 	}
 
@@ -60,7 +61,7 @@ public:
 	bool isopen() { return !m_closed; }
 
 private:
-	void sendBuffer(Buffer*);
+	void sendBuffer();
 
 	NetAddress getLocalAddr();
 
@@ -70,7 +71,7 @@ private:
 
 	void onLogicClose();
 	void onNetClose();
-	void onSend(Buffer *buff);
+	void onSend();
 
 public:
 	const NetAddress m_localAddr;
@@ -93,6 +94,10 @@ private:
 
 	Buffer m_recvBuf;
 	Buffer m_sendBuf;
+
+	fast_mutex m_sendBufLock;
+
+	volatile int m_isWaitingWrite;
 };
 
 #endif //_link_h_

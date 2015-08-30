@@ -61,6 +61,14 @@ public:
 		std::swap(writerIndex_, rhs.writerIndex_);
 	}
 
+	void copy(Buffer& rhs)
+	{
+		m_buffer = rhs.m_buffer;
+
+		readerIndex_ = rhs.readerIndex_;
+		writerIndex_ = rhs.writerIndex_;
+	}
+
 	inline size_t readableBytes() const { return writerIndex_ - readerIndex_; }
 
 	inline size_t writableBytes() const { return m_buffer.size() - writerIndex_; }

@@ -19,6 +19,8 @@
 #include "tool/sockettool.h"
 #include "protocol/message.h"
 
+#include "tool/atomictool.h"
+
 #define READ_BLOCK_SIZE 40960
 
 void Link::open()
@@ -47,6 +49,10 @@ void Link::close()
 	// LOG_INFO << "Link::close, socket = " << m_sockfd;
 	if (m_closed) {
 		return;
+	}
+
+	if (!m_sendBuf.empty()) {
+		LOG_ERROR << "Link::close, m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
 	}
 
 	m_closed = true;
@@ -81,7 +87,7 @@ void Link::onNetClose()
 	m_net->delFd(this);
 }
 
-void Link::onSend(Buffer *buf)
+void Link::onSend()
 {
 	if (!isopen()) {
 		return;
@@ -89,37 +95,73 @@ void Link::onSend(Buffer *buf)
 
 	// LOG_INFO << "Link::onSend, socket = " << m_sockfd;
 
-	// 如果发送缓存区仍有数据未发送，则直接append
-	if (!m_sendBuf.empty()) {
-		// LOG_WARN << "socket<" << m_sockfd << "> m_sendBuf.append(buf.peek(), buf.readableBytes());";
-		m_sendBuf.append(buf->peek(), buf->readableBytes());
-		global::g_bufferPool.free(buf);
-		return;
+	{
+		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		if (m_sendBuf.empty()) {
+			LOG_ERROR << "Link::onSend, m_sendBuf.empty(), socket = " << m_sockfd;
+			return;
+		}
 	}
 
-	int ret = trySend(*buf);
+	Buffer buf;
 
-	if (ret < 0) {
+	{
+		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		buf.swap(m_sendBuf);
+	}
+
+	int len = buf.readableBytes();
+
+	int left = trySend(buf);
+	if (left < 0) {
 		// LOG_ERROR << "socket<" << m_sockfd << "> trySend fail, ret = " << ret;
 		this ->close();
-	} else if (ret > 0) {
+		return;
+	} else if (left > 0) {
 		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
-		m_net->enableWrite(this);
-		m_sendBuf.append(buf->peek(), buf->readableBytes());
-	} else {
-		// 发送成功
-	}
+		LOG_ERROR << "Link::onSend, register write, socket = " << m_sockfd;
+		{
+			lock_guard_t<fast_mutex> lock(m_sendBufLock);
+			if (!m_sendBuf.empty()) {
+				buf.append(m_sendBuf.peek(), m_sendBuf.readableBytes());
+				m_sendBuf.swap(buf);
+			} else {
+				m_sendBuf.swap(buf);
+			}
+		}
 
-	global::g_bufferPool.free(buf);
+		m_net->enableWrite(this);
+	} else {
+		{
+			// 发送成功
+			lock_guard_t<fast_mutex> lock(m_sendBufLock);
+
+			if (m_isWaitingWrite) {
+				atomictool::dec(&m_isWaitingWrite);
+			}
+
+			// 检测期间是否有新的数据被添加到发送缓冲区
+			if (!m_sendBuf.empty()) {
+				sendBuffer();
+				LOG_ERROR << "Link::onSend, m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
+			}
+		}
+	}
 }
 
-void Link::sendBuffer(Buffer *buf)
+void Link::sendBuffer()
 {
 	if (!isopen()) {
 		return;
 	}
 
-	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this, buf));
+	if (m_isWaitingWrite) {
+		return;
+	}
+
+	atomictool::inc(&m_isWaitingWrite);
+
+	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this));
 }
 
 void Link::send(const char *data, int len)
@@ -128,8 +170,12 @@ void Link::send(const char *data, int len)
 		return;
 	}
 
-	Buffer *buf = global::g_bufferPool.alloc(data, len);
-	this->sendBuffer(buf);
+	{
+		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		m_sendBuf.append(data, len);
+	}
+
+	this->sendBuffer();
 }
 
 void Link::send(const char *text)
@@ -148,13 +194,15 @@ void Link::send(int msgId, Message & msg)
 	NetMsgHead msgHead = {0, 0};
 	msgtool::buildNetHeader(&msgHead, msgId, size);
 
-	Buffer *buf = global::g_bufferPool.alloc(sizeof(msgHead) + size);
-	buf->append((const char*)&msgHead, sizeof(msgHead));
+	memcpy(global::g_sendBuf, (const char*)&msgHead, sizeof(msgHead));
+	msg.SerializeToArray(global::g_sendBuf + sizeof(msgHead), size);
 
-	msg.SerializeToArray((void*)buf->beginWrite(), size);
-	buf->hasWritten(size);
+	{
+		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		m_sendBuf.append(global::g_sendBuf, sizeof(msgHead) + size);
+	}
 
-	this->sendBuffer(buf);
+	this->sendBuffer();
 }
 
 void Link::send(int msgId, const char *data, int len)
@@ -166,11 +214,15 @@ void Link::send(int msgId, const char *data, int len)
 	NetMsgHead msgHead = {0, 0};
 	msgtool::buildNetHeader(&msgHead, msgId, len);
 
-	Buffer *buf = global::g_bufferPool.alloc(msgHead.msgLen);
-	buf->append((const char*)&msgHead, sizeof(msgHead));
-	buf->append(data, len);
+	memcpy(global::g_sendBuf, (const char*)&msgHead, sizeof(msgHead));
+	memcpy(global::g_sendBuf + sizeof(msgHead), data, len);
 
-	this->sendBuffer(buf);
+	{
+		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		m_sendBuf.append(global::g_sendBuf, sizeof(msgHead) + len);
+	}
+
+	this->sendBuffer();
 }
 
 int Link::handleRead()
@@ -216,7 +268,7 @@ int Link::handleRead()
 
 int Link::handleWrite()
 {
-	// LOG_INFO << "socket <" << m_sockfd << "> is writable";
+	LOG_INFO << "socket <" << m_sockfd << "> is writable";
 	if (!isopen()) {
 		return 0;
 	}
@@ -226,20 +278,7 @@ int Link::handleWrite()
 	m_net->disableWrite(this);
 #endif
 
-	if (m_sendBuf.empty()) {
-		return 0;
-	}
-
-	do {
-		int ret = trySend(m_sendBuf);
-		if (ret < 0) {
-			// LOG_WARN << "close socket<" << m_sockfd << ">";
-			this->close();
-			return -1;
-		}
-	} while (m_sendBuf.readableBytes() > 0);
-
-	m_sendBuf.clear();
+	onSend();
 	return 0;
 }
 
