@@ -49,7 +49,7 @@ public:
 
 	virtual TaskQueue& getTaskQueue() { return m_taskQueue; }
 
-	virtual void handleMsg(Link*, int msgId, Buffer*);
+	virtual void handleMsg(Link*);
 
 	void start();
 
@@ -81,7 +81,7 @@ protected:
 	MsgDispatcher<Link> m_dispatcher;
 	ServerLinkMap m_svrLinkMap;
 
-	ObjectPool<Buffer> m_bufferPool;
+	// ObjectPool<Buffer> m_bufferPool;
 };
 
 #endif //_server_h_

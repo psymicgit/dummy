@@ -30,7 +30,7 @@ bool Server::init()
 {
 	global::init();
 
-	m_bufferPool.init(1000, 500);
+	//m_bufferPool.init(1000, 500);
 
 	m_dispatcher.addMsgHandler(new NetMsgHandler(&m_dispatcher));
 	return true;
@@ -39,7 +39,7 @@ bool Server::init()
 bool Server::uninit()
 {
 	m_dispatcher.clear();
-	m_bufferPool.clear();
+	//m_bufferPool.clear();
 
 	global::uninit();
 	return false;
@@ -68,11 +68,33 @@ void Server::onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& 
 
 void Server::onRecv(Link *link, Buffer& buf)
 {
+	{
+		lock_guard_t<fast_mutex> lock(link->m_sendBufLock);
+		if (link->m_isWaitingRead) {
+			return;
+		}
+
+		link->m_isWaitingRead = true;
+	}
+
+	m_taskQueue.put(boost::bind(&Server::handleMsg, this, link));
+}
+
+void Server::handleMsg(Link *link)
+{
+	Buffer buf;
+
+	{
+		lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
+		link->m_isWaitingRead = false;
+		buf.swap(link->m_recvBuf);
+	}
+
 	while(true) {
 		// ¼ì²â°ë°ü
 		size_t bytes = buf.readableBytes();
 		if (bytes < sizeof(NetMsgHead)) {
-			return;
+			break;
 		}
 
 		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
@@ -80,23 +102,28 @@ void Server::onRecv(Link *link, Buffer& buf)
 		msgHead->msgLen = endiantool::networkToHost32(msgHead->msgLen);
 
 		if (msgHead->msgLen > bytes) {
-			return;
+			break;
 		}
 
-		Buffer *msg = m_bufferPool.alloc(msgHead->msgLen - sizeof(NetMsgHead));
-		msg->append(buf.peek() + sizeof(NetMsgHead), msgHead->msgLen - sizeof(NetMsgHead));
-
+		m_dispatcher.dispatch(*link, msgHead->msgId, buf.peek() + sizeof(NetMsgHead), msgHead->msgLen - sizeof(NetMsgHead), 0);
 		buf.skip(msgHead->msgLen);
-
-		m_taskQueue.put(boost::bind(&Server::handleMsg, this, link, msgHead->msgId, msg));
 	}
-}
 
-void Server::handleMsg(Link* link, int msgId, Buffer *buf)
-{
+	if (!buf.empty()) {
+		{
+			lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
+			if (!link->m_recvBuf.empty()) {
+				buf.append(link->m_recvBuf.peek(), link->m_recvBuf.readableBytes());
+				link->m_recvBuf.swap(buf);
+			} else {
+				link->m_recvBuf.swap(buf);
+			}
+		}
+	}
+
 	// LOG_INFO << "<Server> recv msg from <" << link->m_peerAddr.toIpPort() << "> :" << buffer->retrieveAllAsString();
-	m_dispatcher.dispatch(*link, msgId, buf->peek(), buf->readableBytes(), 0);
-	m_bufferPool.free(buf);
+	// m_dispatcher.dispatch(*link, msgId, buf->peek(), buf->readableBytes(), 0);
+	// m_bufferPool.free(buf);
 }
 
 int Server::getServerId(ServerType svrType, int zoneId)
