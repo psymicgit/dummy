@@ -139,12 +139,12 @@ void Link::onSend()
 			if (m_isWaitingWrite) {
 				atomictool::dec(&m_isWaitingWrite);
 			}
+		}
 
-			// 检测期间是否有新的数据被添加到发送缓冲区
-			if (!m_sendBuf.empty()) {
-				sendBuffer();
-				LOG_ERROR << "Link::onSend, m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
-			}
+		// 检测期间是否有新的数据被添加到发送缓冲区
+		if (!m_sendBuf.empty()) {
+			sendBuffer();
+			LOG_ERROR << "Link::onSend, m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
 		}
 	}
 }
@@ -155,11 +155,14 @@ void Link::sendBuffer()
 		return;
 	}
 
-	if (m_isWaitingWrite) {
-		return;
-	}
+	{
+		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		if (m_isWaitingWrite) {
+			return;
+		}
 
-	atomictool::inc(&m_isWaitingWrite);
+		atomictool::inc(&m_isWaitingWrite);
+	}
 
 	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this));
 }
