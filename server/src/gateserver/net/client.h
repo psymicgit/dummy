@@ -37,6 +37,8 @@ public:
 
 	void close();
 
+	void handleMsg();
+
 	bool needRoute(int msgId);
 
 public:

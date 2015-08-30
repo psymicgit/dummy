@@ -135,10 +135,7 @@ void Link::onSend()
 		{
 			// 发送成功
 			lock_guard_t<fast_mutex> lock(m_sendBufLock);
-
-			if (m_isWaitingWrite) {
-				atomictool::dec(&m_isWaitingWrite);
-			}
+			m_isWaitingWrite = false;
 		}
 
 		// 检测期间是否有新的数据被添加到发送缓冲区
@@ -161,7 +158,7 @@ void Link::sendBuffer()
 			return;
 		}
 
-		atomictool::inc(&m_isWaitingWrite);
+		m_isWaitingWrite = true;
 	}
 
 	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this));

@@ -73,16 +73,19 @@ void ClientMgr::onRecv(Link *link, Buffer &buf)
 void ClientMgr::handleMsg(Client *client)
 {
 	Link *link = client->m_link;
-	Buffer &buf = link->m_recvBuf;
+	Buffer buf;
 
-	lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
-	link->m_isWaitingRead = false;
+	{
+		lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
+		link->m_isWaitingRead = false;
+		buf.swap(link->m_recvBuf);
+	}
 
 	while(true) {
 		// 检测包头长度
 		size_t bytes = buf.readableBytes();
 		if (bytes < sizeof(NetMsgHead)) {
-			return;
+			break;
 		}
 
 		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
@@ -93,7 +96,7 @@ void ClientMgr::handleMsg(Client *client)
 		if (dataLen > bytes) {
 			// 			LOG_WARN << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
 			// 			          << "] msgLen(" << msgLen << ") > bytes(" << bytes << ")";
-			return;
+			break;
 		}
 
 		//先解密
@@ -122,11 +125,17 @@ void ClientMgr::handleMsg(Client *client)
 		buf.skip(dataLen);
 	};
 
-
-// 	{
-// 		lock_guard_t<fast_mutex> lock(client->m_link->m_recvBufLock);
-// 		char *msg = client->m_link->m_recvBuf.begin() + start;
-// 	}
+	if (!buf.empty()) {
+		{
+			lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
+			if (!link->m_recvBuf.empty()) {
+				buf.append(link->m_recvBuf.peek(), link->m_recvBuf.readableBytes());
+				link->m_recvBuf.swap(buf);
+			} else {
+				link->m_recvBuf.swap(buf);
+			}
+		}
+	}
 }
 
 uint32 ClientMgr::allocClientId()

@@ -34,7 +34,7 @@ public:
 		, m_net(pNet)
 		, m_head(NULL)
 		, m_tail(NULL)
-		, m_isWaitingWrite(0)
+		, m_isWaitingWrite(false)
 		, m_isWaitingRead(false)
 	{
 	}
@@ -99,7 +99,7 @@ public:
 	fast_mutex m_sendBufLock;
 	fast_mutex m_recvBufLock;
 
-	volatile int m_isWaitingWrite;
+	bool m_isWaitingWrite;
 	bool m_isWaitingRead;
 };
 
