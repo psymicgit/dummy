@@ -118,6 +118,11 @@ int Epoll::eventLoop()
 
 void Epoll::close()
 {
+	m_tasks.put(boost::bind(&Epoll::closing, this));
+}
+
+void Epoll::closing()
+{
 	LOG_WARN << "closing net...";
 	// LOG_WARN << "	<link count = " << m_curFdCount << ", timer size = " << m_timers.size() << ">";
 
@@ -153,7 +158,7 @@ void Epoll::delFd(IFd* pfd)
 	// disableAll(pfd);
 
 	{
-		lock_guard_t<fast_mutex> lock(m_mutex);
+		lock_guard_t<> lock(m_mutex);
 		m_deletingFdList.push_back(pfd);
 	}
 
@@ -221,7 +226,7 @@ void Epoll::mod(IFd *pfd, uint32 events)
 
 void Epoll::recycleFds()
 {
-	lock_guard_t<fast_mutex> lock(m_mutex);
+	lock_guard_t<> lock(m_mutex);
 	list<IFd*>::iterator itr = m_deletingFdList.begin();
 
 	IFd *pfd = NULL;

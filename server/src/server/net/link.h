@@ -96,8 +96,8 @@ public:
 	Buffer m_recvBuf;
 	Buffer m_sendBuf;
 
-	fast_mutex m_sendBufLock;
-	fast_mutex m_recvBufLock;
+	mutex_t m_sendBufLock;
+	mutex_t m_recvBufLock;
 
 	bool m_isWaitingWrite;
 	bool m_isWaitingRead;

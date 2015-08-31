@@ -51,9 +51,13 @@ void Link::close()
 		return;
 	}
 
-	if (!m_sendBuf.empty()) {
-		LOG_ERROR << "Link::close, m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
+	{
+		lock_guard_t<> lock(m_sendBufLock);
+		if (!m_sendBuf.empty()) {
+			LOG_ERROR << "Link::close, m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
+		}
 	}
+
 
 	m_closed = true;
 
@@ -96,7 +100,7 @@ void Link::onSend()
 	// LOG_INFO << "Link::onSend, socket = " << m_sockfd;
 
 	{
-		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		lock_guard_t<> lock(m_sendBufLock);
 		if (m_sendBuf.empty()) {
 			LOG_ERROR << "Link::onSend, m_sendBuf.empty(), socket = " << m_sockfd;
 			return;
@@ -106,7 +110,7 @@ void Link::onSend()
 	Buffer buf;
 
 	{
-		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		lock_guard_t<> lock(m_sendBufLock);
 		buf.swap(m_sendBuf);
 	}
 
@@ -121,7 +125,7 @@ void Link::onSend()
 		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
 		LOG_ERROR << "Link::onSend, register write, socket = " << m_sockfd;
 		{
-			lock_guard_t<fast_mutex> lock(m_sendBufLock);
+			lock_guard_t<> lock(m_sendBufLock);
 			if (!m_sendBuf.empty()) {
 				buf.append(m_sendBuf.peek(), m_sendBuf.readableBytes());
 				m_sendBuf.swap(buf);
@@ -132,16 +136,22 @@ void Link::onSend()
 
 		m_net->enableWrite(this);
 	} else {
+		bool isNewData = false;
 		{
 			// 发送成功
-			lock_guard_t<fast_mutex> lock(m_sendBufLock);
+			lock_guard_t<> lock(m_sendBufLock);
 			m_isWaitingWrite = false;
+
+			isNewData = !m_sendBuf.empty();
+
+			if (isNewData) {
+				LOG_ERROR << "Link::onSend, m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
+			}
 		}
 
 		// 检测期间是否有新的数据被添加到发送缓冲区
-		if (!m_sendBuf.empty()) {
+		if (isNewData) {
 			sendBuffer();
-			LOG_ERROR << "Link::onSend, m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
 		}
 	}
 }
@@ -153,7 +163,7 @@ void Link::sendBuffer()
 	}
 
 	{
-		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		lock_guard_t<> lock(m_sendBufLock);
 		if (m_isWaitingWrite) {
 			return;
 		}
@@ -171,7 +181,7 @@ void Link::send(const char *data, int len)
 	}
 
 	{
-		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		lock_guard_t<> lock(m_sendBufLock);
 		m_sendBuf.append(data, len);
 	}
 
@@ -198,7 +208,7 @@ void Link::send(int msgId, Message & msg)
 	msg.SerializeToArray(global::g_sendBuf + sizeof(msgHead), size);
 
 	{
-		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		lock_guard_t<> lock(m_sendBufLock);
 		m_sendBuf.append(global::g_sendBuf, sizeof(msgHead) + size);
 	}
 
@@ -218,7 +228,7 @@ void Link::send(int msgId, const char *data, int len)
 	memcpy(global::g_sendBuf + sizeof(msgHead), data, len);
 
 	{
-		lock_guard_t<fast_mutex> lock(m_sendBufLock);
+		lock_guard_t<> lock(m_sendBufLock);
 		m_sendBuf.append(global::g_sendBuf, sizeof(msgHead) + len);
 	}
 
@@ -238,7 +248,7 @@ int Link::handleRead()
 		nread = ::recv(m_sockfd, global::g_recvBuf, MAX_PACKET_LEN, NULL);
 		if (nread > 0) {
 			{
-				lock_guard_t<fast_mutex> lock(m_recvBufLock);
+				lock_guard_t<> lock(m_recvBufLock);
 				m_recvBuf.append(global::g_recvBuf, nread);
 			}
 
@@ -268,7 +278,7 @@ int Link::handleRead()
 	//m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onRecv, m_pNetReactor, this, m_recvBuf));
 
 	{
-		lock_guard_t<fast_mutex> lock(m_recvBufLock);
+		lock_guard_t<> lock(m_recvBufLock);
 		if (m_isWaitingRead) {
 			return 0;
 		}

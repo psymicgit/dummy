@@ -83,6 +83,7 @@ public:
 
 	virtual int eventLoop();
 	virtual void close();
+
 	virtual void reopen(IFd*);
 
 	virtual void addFd(IFd*);
@@ -106,6 +107,7 @@ protected:
 	int interruptLoop();
 	void mod(IFd*, uint32 events);
 	void stop();
+	void closing();
 
 	volatile bool            m_running;
 	int                      m_efd;
@@ -113,7 +115,7 @@ protected:
 
 //! ´ýÏú»ÙµÄerror socket
 	std::list<IFd*>   		     m_deletingFdList;
-	fast_mutex                  m_mutex;
+	mutex_t                  m_mutex;
 
 	TaskQueue m_tasks;
 	TimerQueue m_timers;

@@ -90,7 +90,7 @@ void Robot::handleMsg()
 	Buffer buf;
 
 	{
-		lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
+		lock_guard_t<> lock(link->m_recvBufLock);
 		link->m_isWaitingRead = false;
 		buf.swap(link->m_recvBuf);
 	}
@@ -140,7 +140,7 @@ void Robot::handleMsg()
 
 	if (!buf.empty()) {
 		{
-			lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
+			lock_guard_t<> lock(link->m_recvBufLock);
 			if (!link->m_recvBuf.empty()) {
 				buf.append(link->m_recvBuf.peek(), link->m_recvBuf.readableBytes());
 				link->m_recvBuf.swap(buf);

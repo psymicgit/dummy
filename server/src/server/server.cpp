@@ -69,7 +69,7 @@ void Server::onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& 
 void Server::onRecv(Link *link, Buffer& buf)
 {
 	{
-		lock_guard_t<fast_mutex> lock(link->m_sendBufLock);
+		lock_guard_t<> lock(link->m_sendBufLock);
 		if (link->m_isWaitingRead) {
 			return;
 		}
@@ -85,7 +85,7 @@ void Server::handleMsg(Link *link)
 	Buffer buf;
 
 	{
-		lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
+		lock_guard_t<> lock(link->m_recvBufLock);
 		link->m_isWaitingRead = false;
 		buf.swap(link->m_recvBuf);
 	}
@@ -111,7 +111,7 @@ void Server::handleMsg(Link *link)
 
 	if (!buf.empty()) {
 		{
-			lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
+			lock_guard_t<> lock(link->m_recvBufLock);
 			if (!link->m_recvBuf.empty()) {
 				buf.append(link->m_recvBuf.peek(), link->m_recvBuf.readableBytes());
 				link->m_recvBuf.swap(buf);
