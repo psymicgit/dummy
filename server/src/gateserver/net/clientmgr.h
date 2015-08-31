@@ -28,7 +28,7 @@ public:
 	void close();
 
 public:
-	virtual std::string name() { return "robotmgr"; }
+	virtual std::string name() { return "clientmgr"; }
 
 	virtual void onAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 

@@ -256,7 +256,7 @@ void Robot::speedTest()
 
 	LOG_WARN << "robot <" << m_robotId << "> start speed test, g_speedTestCnt = " << g_speedTestCnt << ", speed packet size = " << p->ByteSize();
 
-	int count = 10;
+	int count = 100;
 // 	Tick tick("send() speed test");
 
 	for (int i = 0; i < count; i++) {
@@ -281,7 +281,7 @@ void Robot::latencyTest()
 
 	LOG_WARN << "robot <" << m_robotId << "> start latency test, g_latencyTestCnt = " << g_latencyTestCnt << ", latency packet size = " << p->ByteSize();
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 100; i++) {
 		p->set_time(ticktool::tick());
 		send(eLatencyTest, *p);
 	}

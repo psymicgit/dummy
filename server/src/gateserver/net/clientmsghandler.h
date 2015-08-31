@@ -98,7 +98,7 @@ private:
 			}
 		}
 
-		if (client->m_speedTestCount % 10 == 0) {
+		if (client->m_speedTestCount % 100 == 0) {
 			client->send(eSpeedTest, *p);
 			// Server::instance->stop();
 		}
@@ -121,14 +121,14 @@ private:
 				double count = 1.0f / speed;
 				LOG_WARN << "latencytest count = " << g_latencyTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
 
-				if (g_latencyTestCount % 200000 == 0) {
+				if (g_latencyTestCount % 1000000 == 0) {
 					// client->send(eLatencyTest, *p);
 					Server::instance->stop();
 				}
 			}
 		}
 
-		if (client->m_latencyTestCount % 1000 == 0) {
+		if (client->m_latencyTestCount % 100 == 0) {
 			double diff = ticktool::tickDiff(p->time());
 			LOG_WARN << "avg latency = " << diff;
 		}
