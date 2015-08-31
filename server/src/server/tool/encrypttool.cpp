@@ -24,6 +24,10 @@ namespace encrypttool
 
 	void encrypt(uint8 *data, int dataLen, uint8 encryptKey[], uint32 keyLen)
 	{
+		if (dataLen >= 0) {
+			return;
+		}
+
 		unsigned char keyOffsetval = rand() % 256;
 		unsigned char bitOffsetval = rand() % 256;
 		unsigned char keyOffset = keyOffsetval % (keyLen - g_usedKeyLength);
@@ -54,6 +58,10 @@ namespace encrypttool
 
 	bool decrypt(uint8 *data, int dataLen, const uint8 encryptKey[], uint32 keyLen)
 	{
+		if(dataLen >= 0) {
+			return true;
+		}
+
 		unsigned char bitOffset = data[0] % 7 + 1;
 		unsigned char keyOffset = data[1] % (keyLen - g_usedKeyLength);
 		unsigned int cumulative = 0; //Ð£ÑéºÍ
