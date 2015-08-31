@@ -59,6 +59,18 @@ void NetFactory::stop()
 
 	// m_taskQueuePool->close();
 
+#ifndef WIN
+	for(size_t i = 0; i < m_listeners.size(); i++) {
+		Listener *listener = m_listeners[i];
+		listener->close();
+	}
+
+// 	for(size_t i = 0; i < m_connectors.size(); i++) {
+// 		Connector *connector = m_connectors[i];
+// 		connector->close();
+// 	}
+#endif
+
 	m_net.close();
 	m_thread.join();
 
@@ -66,16 +78,6 @@ void NetFactory::stop()
 	// 	m_taskQueuePool = NULL;
 
 	m_started = false;
-
-	for(size_t i = 0; i < m_listeners.size(); i++) {
-		Listener *listener = m_listeners[i];
-		listener->close();
-	}
-//
-// 	for(size_t i = 0; i < m_connectors.size(); i++) {
-// 		Connector *connector = m_connectors[i];
-// 		connector->close();
-// 	}
 
 	m_listeners.clear();
 	m_connectors.clear();

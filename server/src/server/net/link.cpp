@@ -114,7 +114,7 @@ void Link::onSend()
 
 	int left = trySend(buf);
 	if (left < 0) {
-		// LOG_ERROR << "socket<" << m_sockfd << "> trySend fail, ret = " << ret;
+		LOG_ERROR << "socket<" << m_sockfd << "> trySend fail, ret = " << left;
 		this ->close();
 		return;
 	} else if (left > 0) {
@@ -266,6 +266,15 @@ int Link::handleRead()
 	} while(true);
 
 	//m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onRecv, m_pNetReactor, this, m_recvBuf));
+
+	{
+		lock_guard_t<fast_mutex> lock(m_recvBufLock);
+		if (m_isWaitingRead) {
+			return 0;
+		}
+
+		m_isWaitingRead = true;
+	}
 
 	m_pNetReactor->onRecv(this, m_recvBuf);
 	return 0;

@@ -37,8 +37,6 @@ void Client::onEstablish()
 	randtool::secureRandom(m_authKey, sizeof(m_authKey), '0', 'z');
 	randtool::secureRandom(m_encryptKey, sizeof(m_encryptKey), '0', 'z');
 
-
-
 	//∑¢ÀÕº”Ω‚√‹√‹‘ø
 	EncryptKeyNtf *ntf = msgtool::allocPacket<EncryptKeyNtf>();
 	ntf->set_publickey((const char*)m_encryptKey, sizeof(m_encryptKey));
@@ -46,6 +44,9 @@ void Client::onEstablish()
 	ntf->set_authkey((const char*)m_authKey, sizeof(m_authKey));
 
 	m_link->send(eEncryptKeyNtf, *ntf);
+//
+// 	Message *msg = ntf;
+// 	msgtool::freePacket(msg);
 }
 
 void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
@@ -56,15 +57,6 @@ void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddr
 
 void Client::onRecv(Link *link, Buffer &buf)
 {
-	{
-		lock_guard_t<fast_mutex> lock(link->m_sendBufLock);
-		if (link->m_isWaitingRead) {
-			return;
-		}
-
-		link->m_isWaitingRead = true;
-	}
-
 	m_taskQueue->put(boost::bind(&Client::handleMsg, this));
 }
 

@@ -33,6 +33,8 @@ public:
 
 	virtual void onRecv(Link*, Buffer&);
 
+	void handleMsg();
+
 	virtual TaskQueue& getTaskQueue();
 
 	bool send(int msgId, const char* data, int len);

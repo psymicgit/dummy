@@ -52,4 +52,9 @@ namespace logging
 		google::InstallFailureWriter(&SignalHandle);
 #endif
 	}
+
+	void uninit()
+	{
+		google::ShutdownGoogleLogging();
+	}
 }

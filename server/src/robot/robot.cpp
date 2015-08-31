@@ -80,11 +80,26 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 
 void Robot::onRecv(Link *link, Buffer &buf)
 {
+	// 直接本地进行处理
+	m_robotMgr->m_taskQueue.put(boost::bind(&Robot::handleMsg, this));
+}
+
+void Robot::handleMsg()
+{
+	Link *link = m_link;
+	Buffer buf;
+
+	{
+		lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
+		link->m_isWaitingRead = false;
+		buf.swap(link->m_recvBuf);
+	}
+
 	while(true) {
 		// 检测半包
 		size_t bytes = buf.readableBytes();
 		if (bytes < sizeof(NetMsgHead)) {
-			return;
+			break;
 		}
 
 		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
@@ -92,15 +107,12 @@ void Robot::onRecv(Link *link, Buffer &buf)
 		uint32 msgLen = endiantool::networkToHost32(msgHead->msgLen);
 
 		if (msgLen > bytes) {
-			return;
+			break;
 		}
 
 		// 未加密
 		if (!m_isEncrypt) {
-			Buffer copyBuf;
-			copyBuf.append(buf.peek() + sizeof(NetMsgHead), msgLen - sizeof(NetMsgHead));
-
-			m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, this, msgId, copyBuf, 0));
+			m_robotMgr->m_dispatcher.dispatch(*this, msgId, buf.peek() + sizeof(NetMsgHead), msgLen - sizeof(NetMsgHead), 0);
 			buf.skip(msgLen);
 			continue;
 		}
@@ -112,7 +124,8 @@ void Robot::onRecv(Link *link, Buffer &buf)
 		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
 			LOG_ERROR << "robot [" << link->m_localAddr.toIpPort() << "] <-> gatesvr [" << link->m_peerAddr.toIpPort()
 			          << "] receive invalid msg[len=" << encryptBufLen << "]";
-			return;
+			buf.skip(msgLen);
+			continue;
 		}
 
 		char *msg = (char*)buf.peek() + sizeof(NetMsgHead) + EncryptHeadLen;
@@ -121,8 +134,20 @@ void Robot::onRecv(Link *link, Buffer &buf)
 		copyBuf.append(msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen);
 
 		// 直接本地进行处理
-		m_robotMgr->m_taskQueue.put(boost::bind(&RobotMgr::handleMsg, m_robotMgr, this, msgId, copyBuf, 0));
+		m_robotMgr->m_dispatcher.dispatch(*this, msgId, msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen, 0);
 		buf.skip(msgLen);
+	}
+
+	if (!buf.empty()) {
+		{
+			lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
+			if (!link->m_recvBuf.empty()) {
+				buf.append(link->m_recvBuf.peek(), link->m_recvBuf.readableBytes());
+				link->m_recvBuf.swap(buf);
+			} else {
+				link->m_recvBuf.swap(buf);
+			}
+		}
 	}
 }
 

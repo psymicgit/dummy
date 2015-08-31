@@ -47,6 +47,8 @@ public:
 
 	void clear()
 	{
+		// LOG_INFO << "clear";
+
 		for (size_t i = 0; i < m_msgHandlerVec.size(); i++) {
 			IMsgHandler<LinkType> *msgHandler = m_msgHandlerVec[i];
 			msgHandler->clear();

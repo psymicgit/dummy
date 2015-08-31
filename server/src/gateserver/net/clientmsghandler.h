@@ -121,7 +121,7 @@ private:
 				double count = 1.0f / speed;
 				LOG_WARN << "latencytest count = " << g_latencyTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
 
-				if (g_latencyTestCount % 1000000 == 0) {
+				if (g_latencyTestCount % 100000 == 0) {
 					// client->send(eLatencyTest, *p);
 					Server::instance->stop();
 				}

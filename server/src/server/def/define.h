@@ -12,38 +12,35 @@
 #include "basic/objectpool.h"
 #include "basic/buffer.h"
 
-#define MAX_PACKET_LEN (2 * 1024 * 1024) // 2MB
+#define MAX_PACKET_LEN (1 * 1024 * 1024) // 2MB
 
 namespace global
 {
 // 网络
 	// 预先申请的消息包内存：用于构造接收到的消息包
-	static char* g_recvPacketBuf = new char[MAX_PACKET_LEN];
-	static uint32 g_recvPacketBufSize = MAX_PACKET_LEN;
+	extern char* g_recvPacketBuf;
+	extern uint32 g_recvPacketBufSize;
 
 	// 预先申请的消息包内存: 用于构造返回的消息包
-	static char* g_packetBuf = new char[MAX_PACKET_LEN];
-	static uint32 g_packetBufSize = MAX_PACKET_LEN;
-	static Message *g_lastMessage = NULL;
+	extern char* g_packetBuf;
+	extern uint32 g_packetBufSize;
+	extern Message *g_lastMessage;
 
 	// 预先申请的网络数据缓冲区: 用于发送和接收数据时进行加解密运算
-	static char g_netBuf[MAX_PACKET_LEN] = {0};
+	extern char g_netBuf[MAX_PACKET_LEN];
 
 	//
-	static thread_local char g_recvBuf[MAX_PACKET_LEN] = {0};
-	static thread_local char g_sendBuf[MAX_PACKET_LEN] = {0};
+	extern char g_recvBuf[MAX_PACKET_LEN];
+	extern char g_sendBuf[MAX_PACKET_LEN];
 
 // 数据库
-	static thread_local char g_sql[2048] = {0};
+	extern char g_sql[2048];
 
 // 时间
-	static char g_formatBuf[32] = {0};
+	extern char g_formatBuf[32];
 
 // 打印
-	static thread_local char g_sprintfBuf[4096] = {0};
-
-// 全局缓冲区区
-	static ObjectPool<Buffer, mutex_t> g_bufferPool;
+	extern char g_sprintfBuf[4096];
 
 	void init();
 	void uninit();

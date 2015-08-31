@@ -37,6 +37,7 @@
 namespace logging
 {
 	void init(const char* program, const char* log_path);
+	void uninit();
 }
 
 #endif //_log_h_

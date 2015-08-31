@@ -8,7 +8,7 @@
 
 #include "rsa.h"
 
-
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
@@ -18,7 +18,7 @@
 #include <stdio.h>
 
 #include <openssl/rsa.h>
-#include <openssl/pem.h>  
+#include <openssl/pem.h>
 #include <openssl/ossl_typ.h>
 #include <openssl/err.h>
 
@@ -63,7 +63,7 @@ namespace openssl_rsa
     }
 
     // 根据给定的公钥获取RSA结构
-    // 
+    //
     // 本函数从openssl源码中crypto/pem/pem_all.c中第252行:
     //         IMPLEMENT_PEM_rw(RSA_PUBKEY, RSA, PEM_STRING_PUBLIC, RSA_PUBKEY)
     // 的定义修改而来，由从pem文件读取改为从内存中读取
@@ -88,7 +88,7 @@ namespace openssl_rsa
     }
 
     // 根据给定的私钥获取RSA结构
-    // 
+    //
     // 本函数从openssl源码中crypto/pem/pem_all.c中第186行:
     //         RSA *PEM_read_RSAPrivateKey(FILE *fp, RSA **rsa, pem_password_cb *cb, void *u)
     // 的函数修改而来，由从pem文件读取改为从内存中读取
@@ -306,7 +306,7 @@ char* private_key_encrypt_from_file(const char* plain_text, int plain_len, const
     RSA *rsa = PEM_read_RSAPrivateKey(priv_fp, NULL, NULL, NULL);
     if(NULL == rsa){
         get_err(rsa_err, "fail: unable to read private key from %s!\n", pri_key_file);
-        return NULL; 
+        return NULL;
     }
 
     int rsa_size  = RSA_size(rsa);
@@ -405,3 +405,4 @@ bool public_key_verify_pem(const char* plain_text, int plain_len, const char* si
     int ret = RSA_verify(NID_sha1, (unsigned char*)buf, SHA_DIGEST_LENGTH, (unsigned char*)sign_text, sign_len, rsa);
     return (ret == 1);
 }
+*/

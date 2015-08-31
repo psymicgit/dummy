@@ -15,6 +15,38 @@
 
 namespace global
 {
+	// 网络
+	// 预先申请的消息包内存：用于构造接收到的消息包
+	char* g_recvPacketBuf = new char[MAX_PACKET_LEN];
+	uint32 g_recvPacketBufSize = MAX_PACKET_LEN;
+
+	// 预先申请的消息包内存: 用于构造返回的消息包
+	char* g_packetBuf = new char[MAX_PACKET_LEN];
+	uint32 g_packetBufSize = MAX_PACKET_LEN;
+	Message *g_lastMessage = NULL;
+
+	// 预先申请的网络数据缓冲区: 用于发送和接收数据时进行加解密运算
+	char g_netBuf[MAX_PACKET_LEN] = {0};
+
+	//
+	char g_recvBuf[MAX_PACKET_LEN] = {0};
+	char g_sendBuf[MAX_PACKET_LEN] = {0};
+
+	// 数据库
+	char g_sql[2048] = {0};
+
+	// 时间
+	char g_formatBuf[32] = {0};
+
+	// 打印
+	char g_sprintfBuf[4096] = {0};
+
+	// 全局缓冲区区
+	// ObjectPool<Buffer, mutex_t> g_bufferPool;
+}
+
+namespace global
+{
 	bool g_inited = false;
 
 	void init()
@@ -24,7 +56,7 @@ namespace global
 		}
 
 		g_inited = true;
-		g_bufferPool.init(1000, 500);
+		// g_bufferPool.init(1000, 500);
 
 		randtool::initSeed();
 	}
@@ -37,7 +69,7 @@ namespace global
 		delete[] g_packetBuf;
 
 		google::protobuf::ShutdownProtobufLibrary();
-
-		g_bufferPool.clear();
+		logging::uninit();
+		// g_bufferPool.clear();
 	}
 }

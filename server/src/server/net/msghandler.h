@@ -23,7 +23,7 @@ template <typename LinkType>
 class Callback
 {
 public:
-	virtual ~Callback() {};
+	// virtual ~Callback() {};
 	virtual void onMessage(LinkType&, const char* data, int len, Timestamp) const = 0;
 };
 
@@ -105,6 +105,8 @@ public:
 
 		for (; itr != end; ++itr) {
 			Callback<LinkType> *callBack = itr->second;
+
+			// LOG_INFO << "delete";
 			delete callBack;
 		}
 

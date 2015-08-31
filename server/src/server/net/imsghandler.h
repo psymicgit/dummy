@@ -14,6 +14,8 @@ template <typename LinkType>
 class IMsgHandler
 {
 public:
+	virtual ~IMsgHandler() {}
+
 	virtual void onMessage(LinkType& link, int msgId, const char* data, int len, Timestamp receiveTime) const = 0;
 
 	virtual void clear() = 0;

@@ -23,6 +23,7 @@ private:
 
 public:
 	ClientMgr();
+	~ClientMgr();
 
 	void close();
 
@@ -36,10 +37,6 @@ public:
 	virtual TaskQueue& getTaskQueue() { return *m_taskQueue; }
 
 	void delClient(Client*);
-
-	void handleMsg(Client *client);
-
-	void clear();
 
 private:
 	uint32 allocClientId();

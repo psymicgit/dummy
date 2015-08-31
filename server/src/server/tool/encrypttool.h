@@ -13,7 +13,7 @@ namespace encrypttool
 {
 	void encrypt(uint8 *data, int dataLen, uint8 encryptKey[], uint32 keyLen);
 
-	bool decrypt(uint8 *data, int dataLen, uint8 encryptKey[], uint32 keyLen);
+	bool decrypt(uint8 *data, int dataLen, const uint8 encryptKey[], uint32 keyLen);
 }
 
 #endif //_encrypttool_h_

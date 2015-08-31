@@ -41,6 +41,8 @@ namespace msgtool
 	T* allocRecvPacket()
 	{
 		if (global::g_recvPacketBufSize < sizeof(T)) {
+			LOG_WARN << "global::g_recvPacketBufSize old = " << global::g_recvPacketBufSize << ", new = " << sizeof(T);
+
 			delete[] global::g_recvPacketBuf;
 			global::g_recvPacketBuf = new char[sizeof(T)];
 			global::g_recvPacketBufSize = sizeof(T);
@@ -55,14 +57,16 @@ namespace msgtool
 	template<typename T>
 	T* allocPacket()
 	{
+		if (global::g_lastMessage) {
+			global::g_lastMessage->~Message();
+		}
+
 		if (global::g_packetBufSize < sizeof(T)) {
+			LOG_WARN << "global::g_packetBufSize old = " << global::g_packetBufSize << ", new = " << sizeof(T);
+
 			delete[] global::g_packetBuf;
 			global::g_packetBuf = new char[sizeof(T)];
 			global::g_packetBufSize = sizeof(T);
-		}
-
-		if (global::g_lastMessage) {
-			global::g_lastMessage->~Message();
 		}
 
 		T* t = new ((T*)global::g_packetBuf)T();

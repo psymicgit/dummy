@@ -25,6 +25,12 @@ ClientMgr::ClientMgr()
 	m_dispatcher.addMsgHandler(new ClientMsgHandler(&m_dispatcher));
 }
 
+ClientMgr::~ClientMgr()
+{
+	m_clientPool.clear();
+	m_dispatcher.clear();
+}
+
 void ClientMgr::close()
 {
 	for(ClientMap::iterator itr = m_clientMap.begin(); itr != m_clientMap.end(); ++itr) {
@@ -32,7 +38,7 @@ void ClientMgr::close()
 		client->close();
 	}
 
-	clear();
+	m_clientMap.clear();
 }
 
 void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
@@ -70,74 +76,6 @@ void ClientMgr::onRecv(Link *link, Buffer &buf)
 	Server::instance->onRecv(link, buf);
 }
 
-void ClientMgr::handleMsg(Client *client)
-{
-	Link *link = client->m_link;
-	Buffer buf;
-
-	{
-		lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
-		link->m_isWaitingRead = false;
-		buf.swap(link->m_recvBuf);
-	}
-
-	while(true) {
-		// 检测包头长度
-		size_t bytes = buf.readableBytes();
-		if (bytes < sizeof(NetMsgHead)) {
-			break;
-		}
-
-		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
-		uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
-		uint32 dataLen = endiantool::networkToHost32(msgHead->msgLen);
-
-		// 检测半包
-		if (dataLen > bytes) {
-			// 			LOG_WARN << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
-			// 			          << "] msgLen(" << msgLen << ") > bytes(" << bytes << ")";
-			break;
-		}
-
-		//先解密
-		uint8* encryptBuf =  (uint8*)(buf.peek() + sizeof(NetMsgHead));
-		int encryptBufLen = dataLen - sizeof(NetMsgHead);
-
-		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, client->m_encryptKey, sizeof(client->m_encryptKey))) {
-			LOG_ERROR << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
-			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
-			buf.skip(dataLen);
-			continue;
-		}
-
-		char *msg = (char*)buf.peek() + sizeof(NetMsgHead) + EncryptHeadLen;
-		uint32 msgLen = dataLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen;
-
-		// 判断是否需要转发，
-		if (client->needRoute(msgId)) {
-			// 转发给游戏服务器
-			//GateServer::Instance().sendToGameServer(client->m_clientId, msgId, msg, msgLen);
-		} else {
-			// 直接本地进行处理
-			m_dispatcher.dispatch(*client, msgId, msg, msgLen, 0);
-		}
-
-		buf.skip(dataLen);
-	};
-
-	if (!buf.empty()) {
-		{
-			lock_guard_t<fast_mutex> lock(link->m_recvBufLock);
-			if (!link->m_recvBuf.empty()) {
-				buf.append(link->m_recvBuf.peek(), link->m_recvBuf.readableBytes());
-				link->m_recvBuf.swap(buf);
-			} else {
-				link->m_recvBuf.swap(buf);
-			}
-		}
-	}
-}
-
 uint32 ClientMgr::allocClientId()
 {
 	return ++m_allocClientId;
@@ -149,10 +87,4 @@ void ClientMgr::delClient(Client *client)
 
 	m_clientMap.erase(client->m_clientId);
 	m_clientPool.free(client);
-}
-
-void ClientMgr::clear()
-{
-	m_clientPool.clear();
-	m_dispatcher.clear();
 }

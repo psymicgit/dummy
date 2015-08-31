@@ -41,8 +41,7 @@ namespace encrypttool
 		for (int i = 0; i < dataLen ; i++ ) {
 			if(i == dataSize) {
 				*((unsigned int *)data) = cumulative;
-			}
-			else {
+			} else {
 				cumulative += *data;
 			}
 
@@ -53,7 +52,7 @@ namespace encrypttool
 	}
 
 
-	bool decrypt(uint8 *data, int dataLen, uint8 encryptKey[], uint32 keyLen)
+	bool decrypt(uint8 *data, int dataLen, const uint8 encryptKey[], uint32 keyLen)
 	{
 		unsigned char bitOffset = data[0] % 7 + 1;
 		unsigned char keyOffset = data[1] % (keyLen - g_usedKeyLength);
