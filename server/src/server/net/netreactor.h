@@ -17,6 +17,8 @@ class TaskQueue;
 class INetReactor
 {
 public:
+	virtual std::string name() = 0;
+
 	virtual void onConnected(Link*, const NetAddress& localAddr, const NetAddress& peerAddr) {}
 
 	virtual void onAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr) {}

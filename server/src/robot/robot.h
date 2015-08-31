@@ -26,6 +26,8 @@ public:
 
 	~Robot();
 
+	virtual std::string name();
+
 public:
 	virtual void onConnected(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
@@ -36,8 +38,6 @@ public:
 	void handleMsg();
 
 	virtual TaskQueue& getTaskQueue();
-
-	bool send(int msgId, const char* data, int len);
 
 	bool send(int msgId, Message&);
 

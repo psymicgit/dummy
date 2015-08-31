@@ -42,6 +42,11 @@ Robot::~Robot()
 	// LOG_WARN << "robot ~robot";
 }
 
+std::string Robot::name()
+{
+	return echotool::getmsg("robot<%d>", m_robotId);
+}
+
 void Robot::randomRobot()
 {
 	uint8 randNum[64] = {0};
@@ -58,9 +63,12 @@ void Robot::randomRobot()
 
 void Robot::onConnected(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
+	static int g_connectedRobotCnt = 0;
+	++g_connectedRobotCnt;
+
 	m_link = link;
 
-	LOG_INFO << "robot <" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success";
+	LOG_INFO << "robot <" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success, g_connectedRobotCnt = " << g_connectedRobotCnt;
 
 	// m_link->send("1\r\n");
 }
@@ -159,6 +167,9 @@ TaskQueue& Robot::getTaskQueue()
 bool Robot::send(int msgId, Message &msg)
 {
 	if (!m_link->isopen()) {
+		LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort()
+		          << "] is not open";
+
 		return false;
 	}
 
@@ -167,46 +178,33 @@ bool Robot::send(int msgId, Message &msg)
 		return true;
 	}
 
+	uint32 headSize = sizeof(NetMsgHead);
 	int size = msg.ByteSize();
 
-	bool ok = msg.SerializeToArray(global::g_sendBuf, size);
+	bool ok = msg.SerializeToArray(global::g_encryptBuf + headSize + EncryptHeadLen, size);
 	if (!ok) {
-		LOG_ERROR << "robot [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort()
+		LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort()
 		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgString(msg) << "]";
 
 		return false;
 	}
 
-	this->send(msgId, global::g_sendBuf, size);
-	return true;
-}
-
-bool Robot::send(int msgId, const char* data, int len)
-{
-	if (!m_link->isopen()) {
-		return false;
-	}
-
-	if (!m_isEncrypt) {
-		m_link->send(msgId, data, len);
-		return true;
-	}
-
-	//先加密
-	char *netBuf = global::g_netBuf;
-	uint32 headSize = sizeof(NetMsgHead);
-
-	memcpy(netBuf + headSize + EncryptHeadLen, data, len);
-
-	uint8* decryptBuf = (uint8*)(netBuf + headSize);
-	int decryptBufLen = len + EncryptHeadLen + EncryptTailLen;//添加加解密头尾
+	// 添加加解密头尾
+	uint8* decryptBuf = (uint8*)(global::g_encryptBuf + headSize);
+	int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
 
 	encrypttool::encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));
 
-	NetMsgHead* pHeader = (NetMsgHead*)netBuf;
+	NetMsgHead* pHeader = (NetMsgHead*)global::g_encryptBuf;
 
 	int packetLen = msgtool::buildNetHeader(pHeader, msgId, decryptBufLen);
-	m_link->send(netBuf, packetLen);
+	if (packetLen <= 0) {
+		LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort()
+		          << "] pakcetLen = " << packetLen;
+		return false;
+	}
+
+	m_link->send(global::g_encryptBuf, packetLen);
 
 	return true;
 }
@@ -248,13 +246,17 @@ void Robot::pingpongTest()
 
 void Robot::speedTest()
 {
+	static int g_speedTestCnt = 0;
+
+	g_speedTestCnt++;
+
 	PingPong *p = msgtool::allocPacket<PingPong>();
 	p->set_pingpong("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 	p->set_time(0);
 
-	LOG_WARN << "robot <" << m_robotId << "> start speed test, speed packet size = " << p->ByteSize();
+	LOG_WARN << "robot <" << m_robotId << "> start speed test, g_speedTestCnt = " << g_speedTestCnt << ", speed packet size = " << p->ByteSize();
 
-	int count = 1000;
+	int count = 10;
 // 	Tick tick("send() speed test");
 
 	for (int i = 0; i < count; i++) {
@@ -270,12 +272,16 @@ void Robot::speedTest()
 
 void Robot::latencyTest()
 {
+	static int g_latencyTestCnt = 0;
+
+	g_latencyTestCnt++;
+
 	PingPong *p = msgtool::allocPacket<PingPong>();
 	p->set_pingpong("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 
-	LOG_WARN << "robot <" << m_robotId << "> start latency test, latency packet size = " << p->ByteSize();
+	LOG_WARN << "robot <" << m_robotId << "> start latency test, g_latencyTestCnt = " << g_latencyTestCnt << ", latency packet size = " << p->ByteSize();
 
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 10; i++) {
 		p->set_time(ticktool::tick());
 		send(eLatencyTest, *p);
 	}

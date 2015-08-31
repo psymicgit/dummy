@@ -96,21 +96,20 @@ int Connector::handleWrite()
 	// 先检测套接字是否发生异常
 	m_errno = socktool::getSocketError(m_sockfd);
 	if (m_errno > 0) {
-		// LOG_SYSTEM_ERR << "Connector::handleWrite - SOCK_ERROR = " << err;
+		LOG_SOCKET_ERR(m_sockfd, m_errno) << m_pNetReactor->name();
 		retry();
 
 		return -1;
 	}
 
 	// 成功建立连接
-
 	onConnected();
 	return 0;
 }
 
 int Connector::handleError()
 {
-	// LOG_ERROR << "Connector::handleError socket<" << m_sockfd << ">";
+	LOG_SYSTEM_ERR << m_pNetReactor->name() << " socket<" << m_sockfd << ">";
 	retry();
 	return true;
 }

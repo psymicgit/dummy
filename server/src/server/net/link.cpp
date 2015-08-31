@@ -32,9 +32,8 @@ void Link::open()
 	// socktool::setRecvBufSize(m_sockfd, 256 * 1024);
 
 	if (!socktool::setTcpNoDelay(m_sockfd)) {
-		LOG_WARN << "local port = " << m_localAddr.toPort();
+		LOG_WARN << m_pNetReactor->name() << " local port = " << m_localAddr.toPort();
 	}
-
 
 	m_net->addFd(this);
 }
@@ -54,7 +53,7 @@ void Link::close()
 	{
 		lock_guard_t<> lock(m_sendBufLock);
 		if (!m_sendBuf.empty()) {
-			LOG_ERROR << "Link::close, m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
+			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
 		}
 	}
 
@@ -102,7 +101,7 @@ void Link::onSend()
 	{
 		lock_guard_t<> lock(m_sendBufLock);
 		if (m_sendBuf.empty()) {
-			LOG_ERROR << "Link::onSend, m_sendBuf.empty(), socket = " << m_sockfd;
+			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
 			return;
 		}
 	}
@@ -112,18 +111,20 @@ void Link::onSend()
 	{
 		lock_guard_t<> lock(m_sendBufLock);
 		buf.swap(m_sendBuf);
+
+		m_isWaitingWrite = false;
 	}
 
 	int len = buf.readableBytes();
 
 	int left = trySend(buf);
 	if (left < 0) {
-		LOG_ERROR << "socket<" << m_sockfd << "> trySend fail, ret = " << left;
+		LOG_ERROR << m_pNetReactor->name() << " = socket<" << m_sockfd << "> trySend fail, ret = " << left;
 		this ->close();
 		return;
 	} else if (left > 0) {
 		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
-		LOG_ERROR << "Link::onSend, register write, socket = " << m_sockfd;
+		LOG_ERROR << m_pNetReactor->name() << " register write, socket = " << m_sockfd;
 		{
 			lock_guard_t<> lock(m_sendBufLock);
 			if (!m_sendBuf.empty()) {
@@ -140,18 +141,18 @@ void Link::onSend()
 		{
 			// 发送成功
 			lock_guard_t<> lock(m_sendBufLock);
-			m_isWaitingWrite = false;
+			// m_isWaitingWrite = false;
 
 			isNewData = !m_sendBuf.empty();
 
 			if (isNewData) {
-				LOG_ERROR << "Link::onSend, m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
+				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd;
 			}
 		}
 
 		// 检测期间是否有新的数据被添加到发送缓冲区
 		if (isNewData) {
-			sendBuffer();
+			// sendBuffer();
 		}
 	}
 }
@@ -165,6 +166,11 @@ void Link::sendBuffer()
 	{
 		lock_guard_t<> lock(m_sendBufLock);
 		if (m_isWaitingWrite) {
+			return;
+		}
+
+		if (m_sendBuf.empty()) {
+			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
 			return;
 		}
 
@@ -268,7 +274,7 @@ int Link::handleRead()
 				// LOG_WARN << "read task socket<" << m_sockfd << "> EWOULDBLOCK || EAGAIN, err = " << err;
 				break;
 			} else {
-				LOG_SOCKET_ERR(m_sockfd, err) << "socket<" << m_sockfd << "> recv fail, err = " << err << ", history recv buf size = " << m_recvBuf.readableBytes();
+				LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " recv fail, err = " << err << ", history recv buf size = " << m_recvBuf.readableBytes();
 				this->close();
 				return -1;
 			}
@@ -292,7 +298,7 @@ int Link::handleRead()
 
 int Link::handleWrite()
 {
-	LOG_INFO << "socket <" << m_sockfd << "> is writable";
+	LOG_INFO << m_pNetReactor->name() << " socket <" << m_sockfd << "> is writable";
 	if (!isopen()) {
 		return 0;
 	}
@@ -308,7 +314,7 @@ int Link::handleWrite()
 
 int Link::handleError()
 {
-	LOG_WARN << "socket<" << m_sockfd << "> error";
+	LOG_WARN << m_pNetReactor->name() << " socket<" << m_sockfd << "> error";
 	this->close();
 	return 0;
 }
@@ -337,7 +343,7 @@ int Link::trySend(Buffer &buffer)
 				return nleft;
 
 			default:
-				LOG_SOCKET_ERR(m_sockfd, err) << "socket<" << m_sockfd << "> send fail, err = " << err << ",nleft = " << nleft << ", nwritten = " << nwritten;
+				LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << "  send fail, err = " << err << ",nleft = " << nleft << ", nwritten = " << nwritten;
 				return -1;
 			}
 		}

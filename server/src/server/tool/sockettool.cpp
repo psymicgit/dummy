@@ -274,7 +274,11 @@ namespace socktool
 
 	bool listen(socket_t sockfd)
 	{
-		int ret = ::listen(sockfd, SOMAXCONN);
+		// 此处记得还需要在/etc/sysctl.conf添加内核参数:
+		// net.core.somaxconn = 51200（accept queue则由somaxconn决定，listen(fd, backlog)中的backlog上限也由somaxconn决定）
+		// 然后执行sysctl -p
+		int ret = ::listen(sockfd, 51200);
+		// int ret = ::listen(sockfd, SOMAXCONN);
 		if (ret < 0) {
 			LOG_SYSTEM_ERR << "sockets::listen fail, fd = " << sockfd;
 			return false;

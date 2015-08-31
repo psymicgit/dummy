@@ -33,6 +33,9 @@ public:
 	Server();
 
 	bool init();
+
+	virtual std::string name();
+
 	virtual bool uninit();
 
 	virtual ServerLink* onAcceptServer(Link&, ServerType, int svrId) = 0;
@@ -64,10 +67,8 @@ public:
 	int getServerId(ServerType, int zoneId);
 
 	bool isSvrLinkExist(ServerType, int zoneId);
-	void addSvrLink(int svrId, ServerLink*);
-	void delSvrLink(int svrId);
-
-	std::string& getServerName();
+	void registerServer(int svrId, ServerLink*);
+	void unregisterServer(int svrId);
 
 public:
 	ServerType m_svrType;

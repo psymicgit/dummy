@@ -26,6 +26,11 @@ Server::Server()
 	instance = this;
 }
 
+std::string Server::name()
+{
+	return svrtool::getSvrName(m_svrType);
+}
+
 bool Server::init()
 {
 	global::init();
@@ -139,12 +144,12 @@ bool Server::isSvrLinkExist(ServerType svrType, int zoneId)
 	return m_svrLinkMap.find(svrId) != m_svrLinkMap.end();
 }
 
-void Server::addSvrLink(int svrId, ServerLink *svrLink)
+void Server::registerServer(int svrId, ServerLink *svrLink)
 {
 	m_svrLinkMap[svrId] = svrLink;
 }
 
-void Server::delSvrLink(int svrId)
+void Server::unregisterServer(int svrId)
 {
 	m_svrLinkMap.erase(svrId);
 }
@@ -158,17 +163,12 @@ void Server::start()
 	}
 
 	uninit();
-	LOG_WARN << "stop <" << getServerName() << "> successfully!";
-}
-
-std::string& Server::getServerName()
-{
-	return svrtool::getSvrName(m_svrType);
+	LOG_WARN << "stop <" << name() << "> successfully!";
 }
 
 void Server::stop()
 {
-	LOG_WARN << "start closing " << getServerName() << " ...";
+	LOG_WARN << "start closing " << name() << " ...";
 	LOG_WARN << "	<m_taskQueue.size() = " << m_taskQueue.size() << ">";
 
 	m_taskQueue.put(boost::bind(&Server::stopping, this));

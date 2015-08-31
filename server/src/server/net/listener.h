@@ -28,11 +28,10 @@ public:
 
 	virtual socket_t socket() const {return m_listenFd;}
 	virtual int handleRead();
-	virtual int handleWrite() {return -1;}
-	virtual int handleError() {return -1;}
-private:
-	void onAccepted(Link &link);
+	virtual int handleWrite();
+	virtual int handleError();
 
+private:
 	Link* createLink(socket_t newfd, NetAddress &peerAddr);
 
 public:

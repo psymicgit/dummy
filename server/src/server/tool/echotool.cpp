@@ -122,7 +122,7 @@ namespace echotool
 		va_list args;
 		va_start(args, fmt);
 
-		sprintf_s(global::g_sprintfBuf, sizeof(global::g_sprintfBuf), fmt, args);
+		vsprintf_s(global::g_sprintfBuf, sizeof(global::g_sprintfBuf), fmt, args);
 
 		va_end(args);
 		return global::g_sprintfBuf;

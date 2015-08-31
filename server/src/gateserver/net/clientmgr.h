@@ -28,6 +28,8 @@ public:
 	void close();
 
 public:
+	virtual std::string name() { return "robotmgr"; }
+
 	virtual void onAccepted(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);

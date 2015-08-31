@@ -49,6 +49,11 @@ void Client::onEstablish()
 // 	msgtool::freePacket(msg);
 }
 
+std::string Client::name()
+{
+	return echotool::getmsg("client<%u>", m_clientId);
+}
+
 void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	LOG_INFO << "client [" << peerAddr.toIpPort() << "] <-> gatesvr [" << localAddr.toIpPort() << "] broken";
@@ -138,42 +143,16 @@ bool Client::needRoute(int msgId)
 	return true;
 }
 
-bool Client::send(int msgId, const char* data, int len)
-{
-	if (!m_link->isopen()) {
-		return false;
-	}
-
-	//先加密
-	char *netBuf = global::g_netBuf;
-	uint32 headSize = sizeof(NetMsgHead);
-
-	memcpy(netBuf + headSize + EncryptHeadLen, data, len);
-
-	uint8* decryptBuf = (uint8*)(netBuf + headSize);
-	int decryptBufLen = len + EncryptHeadLen + EncryptTailLen;//添加加解密头尾
-
-	encrypttool::encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));
-
-	NetMsgHead* pHeader = (NetMsgHead*)netBuf;
-
-	int packetLen = msgtool::buildNetHeader(pHeader, msgId, decryptBufLen);
-	m_link->send(netBuf, packetLen);
-
-	return true;
-}
-
 bool Client::send(int msgId, Message &msg)
 {
 	if (!m_link->isopen()) {
 		return false;
 	}
 
+	uint32 headSize = sizeof(NetMsgHead);
 	int size = msg.ByteSize();
 
-	Buffer buf(size);
-
-	bool ok = msg.SerializeToArray((void*)buf.beginWrite(), size);
+	bool ok = msg.SerializeToArray(global::g_encryptBuf + headSize + EncryptHeadLen, size);
 	if (!ok) {
 		LOG_ERROR << "client [" << m_link->m_peerAddr.toIpPort()
 		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgString(msg) << "]";
@@ -181,9 +160,17 @@ bool Client::send(int msgId, Message &msg)
 		return false;
 	}
 
-	buf.hasWritten(size);
+	// 添加加解密头尾
+	uint8* decryptBuf = (uint8*)(global::g_encryptBuf + headSize);
+	int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
 
-	this->send(msgId, buf.peek(), buf.readableBytes());
+	encrypttool::encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));
+
+	NetMsgHead* pHeader = (NetMsgHead*)global::g_encryptBuf;
+
+	int packetLen = msgtool::buildNetHeader(pHeader, msgId, decryptBufLen);
+	m_link->send(global::g_encryptBuf, packetLen);
+
 	return true;
 }
 

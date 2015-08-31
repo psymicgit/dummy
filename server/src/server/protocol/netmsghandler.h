@@ -54,14 +54,12 @@ private:
 		if(Server::instance->isSvrLinkExist((ServerType)req->svrtype(), req->svrid())) {
 			LOG_WARN << "reject server<" << svrtool::getSvrName((ServerType)req->svrtype()) << ", zoneId=" << req->svrid() << "> connect : found same server connection! \n" << msgtool::getMsgString(*req);
 			res.set_ret(CONNECT_FAIL_FOUND_SAME_SERVER);
-		}
-		else {
+		} else {
 			// LOG_DEBUG << "OnAcceptConnect : \n" << msgtool::getMsgString(*req);
 			ServerLink *svrLink = Server::instance->onAcceptServer(*link, (ServerType)req->svrtype(), req->svrid());
 			if (NULL == svrLink) {
 				res.set_ret(CONNECT_FAIL_UNKNOWN_SERVER_TYPE);
-			}
-			else {
+			} else {
 				svrLink->m_link = link;
 				svrLink->m_remoteSvrType = peerSvrType;
 				svrLink->m_svrId = peerSvrId;
@@ -69,7 +67,7 @@ private:
 
 				link->m_pNetReactor = svrLink;
 
-				Server::instance->addSvrLink(svrId, svrLink);
+				Server::instance->registerServer(svrId, svrLink);
 				svrLink->onEstablish();
 			}
 		}
@@ -120,7 +118,7 @@ private:
 			link->m_pNetReactor = svrLink;
 
 			int svrId = Server::instance->getServerId((ServerType)res->svrtype(), res->svrid());
-			Server::instance->addSvrLink(svrId, svrLink);
+			Server::instance->registerServer(svrId, svrLink);
 			svrLink->onEstablish();
 		}
 	}

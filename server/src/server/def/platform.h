@@ -89,6 +89,7 @@
 	#define sleep Sleep
 #else
 	#define sprintf_s snprintf
+	#define vsprintf_s vsnprintf
 	#define sleep(ms) usleep(ms * 1000)
 #endif
 

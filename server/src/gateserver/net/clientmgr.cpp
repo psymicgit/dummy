@@ -43,7 +43,6 @@ void ClientMgr::close()
 
 void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
-	LOG_INFO << "<" << localAddr.toIpPort() << "> accept new client from <" << peerAddr.toIpPort() << ">";
 
 	uint32 newClientId = allocClientId();
 
@@ -58,12 +57,14 @@ void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAdd
 
 	m_clientMap[newClientId] = client;
 
-	static int clientNum = 0;
-	clientNum++;
+// 	static int clientNum = 0;
+// 	clientNum++;
+//
+// 	if (clientNum % 10 == 0) {
+// 		LOG_INFO << "clientNum = " << clientNum << ", m_clientMap.size() = " << m_clientMap.size();
+// 	}
 
-	if (clientNum % 10 == 0) {
-		LOG_INFO << "clientNum = " << clientNum << ", m_clientMap.size() = " << m_clientMap.size();
-	}
+	LOG_INFO << "<" << localAddr.toIpPort() << "> accept new client from <" << peerAddr.toIpPort() << ">, m_clientMap.size()=" << m_clientMap.size();
 }
 
 void ClientMgr::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)

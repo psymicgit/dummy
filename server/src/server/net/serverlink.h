@@ -25,6 +25,8 @@ public:
 	}
 
 public:
+	virtual std::string name();
+
 	// @override
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 

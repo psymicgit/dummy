@@ -98,7 +98,7 @@ private:
 			}
 		}
 
-		if (client->m_speedTestCount % 1000 == 0) {
+		if (client->m_speedTestCount % 10 == 0) {
 			client->send(eSpeedTest, *p);
 			// Server::instance->stop();
 		}
@@ -121,7 +121,7 @@ private:
 				double count = 1.0f / speed;
 				LOG_WARN << "latencytest count = " << g_latencyTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
 
-				if (g_latencyTestCount % 100000 == 0) {
+				if (g_latencyTestCount % 200000 == 0) {
 					// client->send(eLatencyTest, *p);
 					Server::instance->stop();
 				}

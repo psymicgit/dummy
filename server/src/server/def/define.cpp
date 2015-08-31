@@ -25,8 +25,8 @@ namespace global
 	uint32 g_packetBufSize = MAX_PACKET_LEN;
 	Message *g_lastMessage = NULL;
 
-	// 预先申请的网络数据缓冲区: 用于发送和接收数据时进行加解密运算
-	char g_netBuf[MAX_PACKET_LEN] = {0};
+	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
+	char g_encryptBuf[MAX_PACKET_LEN] = {0};
 
 	//
 	char g_recvBuf[MAX_PACKET_LEN] = {0};

@@ -28,6 +28,8 @@ public:
 	{
 	}
 
+	virtual std::string name() { return string("robotmgr"); }
+
 public:
 	bool init();
 

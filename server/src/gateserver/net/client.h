@@ -21,6 +21,8 @@ public:
 	Client();
 
 public:
+	std::string name();
+
 	// @override
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
@@ -30,8 +32,6 @@ public:
 
 public:
 	void onEstablish();
-
-	bool send(int msgId, const char* data, int len);
 
 	bool send(int msgId, Message&);
 

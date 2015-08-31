@@ -27,7 +27,7 @@ namespace global
 	extern Message *g_lastMessage;
 
 	// 预先申请的网络数据缓冲区: 用于发送和接收数据时进行加解密运算
-	extern char g_netBuf[MAX_PACKET_LEN];
+	extern char g_encryptBuf[MAX_PACKET_LEN];
 
 	//
 	extern char g_recvBuf[MAX_PACKET_LEN];
