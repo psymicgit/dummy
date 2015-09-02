@@ -98,7 +98,7 @@ private:
 			}
 		}
 
-		if (client->m_speedTestCount % 100 == 0) {
+		if (client->m_speedTestCount % 1000 == 0) {
 			client->send(eSpeedTest, *p);
 			// Server::instance->stop();
 		}
@@ -128,7 +128,7 @@ private:
 			}
 		}
 
-		if (client->m_latencyTestCount % 100 == 0) {
+		if (client->m_latencyTestCount % 1000 == 0) {
 			double diff = ticktool::tickDiff(p->time());
 			LOG_WARN << "avg latency = " << diff;
 		}

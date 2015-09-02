@@ -21,8 +21,6 @@
 
 #include "tool/atomictool.h"
 
-#define READ_BLOCK_SIZE 40960
-
 void Link::open()
 {
 	socktool::setNonBlocking(m_sockfd);
@@ -32,7 +30,7 @@ void Link::open()
 	// socktool::setRecvBufSize(m_sockfd, 256 * 1024);
 
 	if (!socktool::setTcpNoDelay(m_sockfd)) {
-		LOG_WARN << m_pNetReactor->name() << " local port = " << m_localAddr.toPort();
+		LOG_ERROR << m_pNetReactor->name() << " " << getLocalAddr().toIpPort() << "<-->" << getPeerAddr().toIpPort() << " setTcpNoDelay failed = " << m_localAddr.toPort();
 	}
 
 	m_net->addFd(this);
@@ -61,9 +59,11 @@ void Link::close()
 	m_closed = true;
 
 	socktool::closeSocket(m_sockfd);
+
+	// 首先屏蔽本连接上的所有网络输出
 	m_net->disableAll(this);
 
-	// LOG_WARN << "close socket<" << m_sockfd << ">";
+	// 等业务层处理好关闭操作
 	m_pNetReactor->getTaskQueue().put(boost::bind(&Link::onLogicClose, this));
 }
 
@@ -76,17 +76,6 @@ void Link::erase()
 void Link::onLogicClose()
 {
 	m_pNetReactor->onDisconnect(this, m_localAddr, m_peerAddr);
-
-#ifdef WIN
-	m_net->getTaskQueue()->put(boost::bind(&Link::onNetClose, this));
-#else
-	onNetClose();
-#endif
-}
-
-void Link::onNetClose()
-{
-	// LOG_INFO << "Link::onNetClose, socket = " << m_sockfd;
 	m_net->delFd(this);
 }
 
@@ -115,8 +104,6 @@ void Link::onSend()
 		m_isWaitingWrite = false;
 	}
 
-	int len = buf.readableBytes();
-
 	int left = trySend(buf);
 	if (left < 0) {
 		LOG_ERROR << m_pNetReactor->name() << " = socket<" << m_sockfd << "> trySend fail, ret = " << left;
@@ -137,23 +124,23 @@ void Link::onSend()
 
 		m_net->enableWrite(this);
 	} else {
-		bool isNewData = false;
-		{
-			// 发送成功
-			lock_guard_t<> lock(m_sendBufLock);
-			// m_isWaitingWrite = false;
-
-			isNewData = !m_sendBuf.empty();
-
-			if (isNewData) {
-				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd;
-			}
-		}
-
-		// 检测期间是否有新的数据被添加到发送缓冲区
-		if (isNewData) {
-			// sendBuffer();
-		}
+		// bool isNewData = false;
+		// {
+		// 	// 发送成功
+		// 	lock_guard_t<> lock(m_sendBufLock);
+		// 	// m_isWaitingWrite = false;
+		//
+		// 	isNewData = !m_sendBuf.empty();
+		//
+		// 	if (isNewData) {
+		// 		LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd;
+		// 	}
+		// }
+		//
+		// // 检测期间是否有新的数据被添加到发送缓冲区
+		// if (isNewData) {
+		// 	sendBuffer();
+		// }
 	}
 }
 
@@ -210,12 +197,12 @@ void Link::send(int msgId, Message & msg)
 	NetMsgHead msgHead = {0, 0};
 	msgtool::buildNetHeader(&msgHead, msgId, size);
 
-	memcpy(global::g_sendBuf, (const char*)&msgHead, sizeof(msgHead));
-	msg.SerializeToArray(global::g_sendBuf + sizeof(msgHead), size);
+	msg.SerializeToArray(global::g_sendBuf, size);
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		m_sendBuf.append(global::g_sendBuf, sizeof(msgHead) + size);
+		m_sendBuf.append((const char*)&msgHead, sizeof(msgHead));
+		m_sendBuf.append(global::g_sendBuf, size);
 	}
 
 	this->sendBuffer();
@@ -227,15 +214,13 @@ void Link::send(int msgId, const char *data, int len)
 		return;
 	}
 
-	NetMsgHead msgHead = {0, 0};
-	msgtool::buildNetHeader(&msgHead, msgId, len);
-
-	memcpy(global::g_sendBuf, (const char*)&msgHead, sizeof(msgHead));
-	memcpy(global::g_sendBuf + sizeof(msgHead), data, len);
+	NetMsgHead *msgHead = (NetMsgHead*)global::g_sendBuf;
+	msgtool::buildNetHeader(msgHead, msgId, len);
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		m_sendBuf.append(global::g_sendBuf, sizeof(msgHead) + len);
+		m_sendBuf.append(global::g_sendBuf, sizeof(msgHead));
+		m_sendBuf.append(data, len);
 	}
 
 	this->sendBuffer();
@@ -355,4 +340,9 @@ int Link::trySend(Buffer &buffer)
 NetAddress Link::getLocalAddr()
 {
 	return NetAddress(socktool::getLocalAddr(m_sockfd));
+}
+
+NetAddress Link::getPeerAddr()
+{
+	return NetAddress(socktool::getPeerAddr(m_sockfd));
 }

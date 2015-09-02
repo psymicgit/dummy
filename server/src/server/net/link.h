@@ -65,13 +65,16 @@ private:
 	void sendBuffer();
 
 	NetAddress getLocalAddr();
+	NetAddress getPeerAddr();
 
 private:
-	// 尝试一次性发送数据，返回尚未发送的数据长度
+	// 网络层：尝试一次性发送数据，返回尚未发送的数据长度
 	int trySend(Buffer&);
 
+	// 业务层：处理本连接的关闭
 	void onLogicClose();
-	void onNetClose();
+
+	// 网络层：开始发送数据
 	void onSend();
 
 public:

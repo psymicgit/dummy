@@ -56,7 +56,7 @@ std::string Client::name()
 
 void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
-	LOG_INFO << "client [" << peerAddr.toIpPort() << "] <-> gatesvr [" << localAddr.toIpPort() << "] broken";
+	LOG_INFO << name() << " [" << peerAddr.toIpPort() << "] <-> gatesvr [" << localAddr.toIpPort() << "] broken";
 	m_clientMgr->delClient(this);
 }
 

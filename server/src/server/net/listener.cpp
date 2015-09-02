@@ -102,6 +102,8 @@ int Listener::handleRead()
 		link->open();
 
 		m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onAccepted, m_pNetReactor, link, m_listenAddr, peerAddr));
+
+		// 等业务层处理完新连接后，才允许该连接开始读
 		m_pNetReactor->getTaskQueue().put(boost::bind(&Link::enableRead, link));
 	} while (true);
 
