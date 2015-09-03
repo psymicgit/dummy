@@ -13,9 +13,39 @@
 #include "protocol/netmsghandler.h"
 #include "tool/randtool.h"
 
+#include <signal.h>
+
 #include <net.pb.h>
 
 Server* Server::instance = NULL;
+
+void registerSignal();
+
+void handleSignal(int sig)
+{
+	LOG_WARN << Server::instance->name() << " pid = " << getpid() << ", handle signal = " << sig;
+	if (sig == SIGTERM) {
+		Server::instance->stop();
+	} else if(sig == SIGINT) {
+		Server::instance->stop();
+	}
+}
+
+void registerSignal()
+{
+#ifdef WIN
+	signal(SIGTERM, &handleSignal);
+	signal(SIGINT, &handleSignal);
+#else
+	struct sigaction act;
+	act.sa_handler = handleSignal;
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = 0;
+
+	sigaction(SIGINT, &act, 0);
+	sigaction(SIGTERM, &act, 0);
+#endif
+}
 
 Server::Server()
 	: m_svrType(eNullServer)
@@ -34,6 +64,8 @@ std::string Server::name()
 bool Server::init()
 {
 	global::init();
+
+	registerSignal();
 
 	//m_bufferPool.init(1000, 500);
 
@@ -163,22 +195,26 @@ void Server::start()
 	}
 
 	uninit();
-	LOG_WARN << "stop <" << name() << "> successfully!";
+	LOG_INFO << "stop <" << name() << "> successfully!";
 }
 
 void Server::stop()
 {
+	if (m_isquit) {
+		return;
+	}
+
 	LOG_WARN << "start closing " << name() << " ...";
-	LOG_WARN << "	<m_taskQueue.size() = " << m_taskQueue.size() << ">";
+	LOG_INFO << "	<m_taskQueue.size() = " << m_taskQueue.size() << ">";
+
+	m_isquit = true;
 
 	m_taskQueue.put(boost::bind(&Server::stopping, this));
+	run();
 }
 
 void Server::stopping()
 {
-	m_isquit = true;
-
-	run();
 	m_lan.stop();
 
 	// 将关闭网络时产生的网络任务执行完

@@ -83,7 +83,7 @@ int Listener::handleRead()
 		// netstat -s | grep LISTEN 对比前后是否有增长
 		if ((newfd = ::accept(m_listenFd, (struct sockaddr *)&addr, &addrlen)) == -1) {
 			int err = errno;
-			LOG_ERROR<< "err = " << err;
+			// LOG_ERROR<< "err = " << err;
 			if (err == EAGAIN ) {
 				break;
 			} else if (err == ECONNABORTED && err == EPROTO && err == EINTR) {

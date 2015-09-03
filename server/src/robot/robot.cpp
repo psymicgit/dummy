@@ -63,12 +63,9 @@ void Robot::randomRobot()
 
 void Robot::onConnected(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
-	static int g_connectedRobotCnt = 0;
-	++g_connectedRobotCnt;
-
 	m_link = link;
 
-	LOG_INFO << "robot <" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success, g_connectedRobotCnt = " << g_connectedRobotCnt;
+	LOG_INFO << name() << " <" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success, current robot cnt = " << m_robotMgr->m_robotMap.size();
 
 	// m_link->send("1\r\n");
 }
@@ -82,7 +79,7 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	}
 	*/
 
-	LOG_INFO << "robot<" << m_robotId << "> <" << localAddr.toIpPort() << "> to gateserver <" << peerAddr.toIpPort() << "> closed!";
+	LOG_INFO << "robot<" << m_robotId << "> <" << localAddr.toIpPort() << "> to gateserver <" << peerAddr.toIpPort() << "> closed! current robot cnt = " << m_robotMgr->m_robotMap.size() - 1;
 	m_robotMgr->onRobotDisconnect(this);
 }
 
@@ -235,13 +232,13 @@ void Robot::login()
 
 void Robot::pingpongTest()
 {
-	PingPong *p = msgtool::allocPacket<PingPong>();
-	p->set_pingpong("123456789|");
-	p->set_time(0);
+	PingPong p;
+	p.set_pingpong("123456789|");
+	p.set_time(0);
 
-	LOG_WARN << "robot <" << m_robotId << "> start pingpong test, pingpong packet size = " << p->ByteSize();
+	LOG_WARN << "robot <" << m_robotId << "> start pingpong test, pingpong packet size = " << p.ByteSize();
 
-	send(ePing, *p);
+	send(ePing, p);
 }
 
 void Robot::speedTest()
@@ -250,24 +247,24 @@ void Robot::speedTest()
 
 	g_speedTestCnt++;
 
-	PingPong *p = msgtool::allocPacket<PingPong>();
-	p->set_pingpong("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
-	p->set_time(0);
+	PingPong p;
+	p.set_pingpong("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+	p.set_time(0);
 
-	LOG_WARN << "robot <" << m_robotId << "> start speed test, g_speedTestCnt = " << g_speedTestCnt << ", speed packet size = " << p->ByteSize();
+	LOG_WARN << name() << " start speed test, g_speedTestCnt = " << g_speedTestCnt << ", speed packet size = " << p.ByteSize();
 
 	int count = 1000;
-// 	Tick tick("send() speed test");
+	// 	Tick tick("send() speed test");
 
 	for (int i = 0; i < count; i++) {
-		send(eSpeedTest, *p);
+		send(eSpeedTest, p);
 	}
 
-// 	double costTime = tick.endTick();
-// 	double avgTime = costTime / count;
-// 	double speed = 1.0f / avgTime;
-// 	LOG_WARN << "send packet count = " << count << ", avg cost time = " << avgTime << ", total cost time = " << costTime << ", exe count per second = " << speed;
-// 	exit(0);
+	// 	double costTime = tick.endTick();
+	// 	double avgTime = costTime / count;
+	// 	double speed = 1.0f / avgTime;
+	// 	LOG_WARN << "send packet count = " << count << ", avg cost time = " << avgTime << ", total cost time = " << costTime << ", exe count per second = " << speed;
+	// 	exit(0);
 }
 
 void Robot::latencyTest()
@@ -276,13 +273,15 @@ void Robot::latencyTest()
 
 	g_latencyTestCnt++;
 
-	PingPong *p = msgtool::allocPacket<PingPong>();
-	p->set_pingpong("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+	PingPong p;
+	p.set_pingpong("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 
-	LOG_WARN << "robot <" << m_robotId << "> start latency test, g_latencyTestCnt = " << g_latencyTestCnt << ", latency packet size = " << p->ByteSize();
+	LOG_WARN << "robot <" << m_robotId << "> start latency test, g_latencyTestCnt = " << g_latencyTestCnt << ", latency packet size = " << p.ByteSize();
 
 	for (int i = 0; i < 1000; i++) {
-		p->set_time(ticktool::tick());
-		send(eLatencyTest, *p);
+		p.set_time(ticktool::tick());
+		send(eLatencyTest, p);
 	}
+
+	m_link->close();
 }

@@ -64,6 +64,7 @@ public:
 
 	virtual void enableAll(IFd*)		= 0;
 	virtual void disableAll(IFd*)		= 0;
+	virtual int interruptLoop()			= 0;
 
 	virtual TaskQueue* getTaskQueue()	= 0;
 	virtual TimerQueue& getTimerQueue() = 0;
@@ -101,10 +102,10 @@ public:
 	virtual TaskQueue* getTaskQueue() { return &m_tasks;}
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
 	inline virtual LinkPool& getLinkPool() { return m_linkPool; }
+	int interruptLoop();
 
 protected:
 	void recycleFds();
-	int interruptLoop();
 	void mod(IFd*, uint32 events);
 	void stop();
 	void closing();
@@ -167,10 +168,10 @@ public:
 	virtual TaskQueue* getTaskQueue() { return &m_tasks;}
 	virtual TimerQueue& getTimerQueue() { return m_timers; }
 	inline virtual LinkPool& getLinkPool() { return m_linkPool; }
+	int interruptLoop() { return 0; }
 
 private:
 	void updateFd(IFd*, FDOperator);
-
 	void closing();
 
 private:

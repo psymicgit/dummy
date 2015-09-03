@@ -7,14 +7,51 @@
 ///<------------------------------------------------------------------------------
 
 #include "robotmgr.h"
+
+#include <signal.h>
+
 #include "robot.h"
 #include "robotmsghandler.h"
 
 #include <log/log.h>
 
+void registerSignal();
+
+void handleSignal(int sig)
+{
+	LOG_WARN << RobotMgr::Instance().name() << " pid = " << getpid() << ", handle signal = " << sig;
+	if (sig == SIGTERM) {
+		RobotMgr::Instance().stop();
+	} else if(sig == SIGINT) {
+		RobotMgr::Instance().stop();
+	}
+
+	// 重新注册，因为捕捉到信号后已经恢复成原来的信号处理行为
+	// registerSignal();
+}
+
+void registerSignal()
+{
+#ifdef WIN
+	signal(SIGTERM, &handleSignal);
+	signal(SIGINT, &handleSignal);
+#else
+	struct sigaction act;
+	act.sa_handler = handleSignal;
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = 0;
+
+	sigaction(SIGINT, &act, 0);
+	sigaction(SIGTERM, &act, 0);
+#endif
+}
+
 bool RobotMgr::init()
 {
 	global::init();
+
+	registerSignal();
+
 	logging::init("robot", "log_robot_");
 
 	LOG_WARN << "starting robotmgr ...";
@@ -78,22 +115,27 @@ void RobotMgr::start()
 
 void RobotMgr::stop()
 {
+	if (!m_run) {
+		return;
+	}
+
+	m_run = false;
+
 	LOG_WARN << "start closing robotmgr ...";
 	LOG_WARN << "	<m_taskQueue.size() = " << m_taskQueue.size() << ">";
 
 	m_taskQueue.put(boost::bind(&RobotMgr::stopping, this));
+	run();
 }
 
 void RobotMgr::stopping()
 {
-	run();
+	LOG_WARN << "stopping robotmgr ...";
 
 	m_wan.stop();
 
 	// 将关闭网络时产生的网络任务执行完
 	run();
-
-	m_run = false;
 }
 
 void RobotMgr::run()
@@ -121,4 +163,9 @@ void RobotMgr::onRobotDisconnect(Robot *robot)
 	if (m_robotMap.empty()) {
 		stop();
 	}
+
+// 	if (m_robotMap.size() == 1) {
+// 		Robot *robot = m_robotMap.begin()->second;
+// 		LOG_INFO << robot->name() << " sendbuf.size = " << robot->m_link->m_sendBuf.readableBytes();
+// 	}
 }

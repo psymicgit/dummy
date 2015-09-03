@@ -43,27 +43,45 @@ void Link::enableRead()
 
 void Link::close()
 {
-	// LOG_INFO << "Link::close, socket = " << m_sockfd;
+	// 检测是否重复close
 	if (m_closed) {
 		return;
 	}
 
-	{
+	// LOG_INFO << m_pNetReactor->name() << " Link::close, socket = " << m_sockfd;
+
+	// 如果未发生错误，则先将未发送的数据发送完毕
+	if (!m_error) {
 		lock_guard_t<> lock(m_sendBufLock);
+
+		// 若数据未发送完毕，则暂缓关闭，停止接收数据，并等待之前的发送操作执行完毕
 		if (!m_sendBuf.empty()) {
-			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << "socket = " << m_sockfd;
+			if (m_isWaitingClose) {
+				return;
+			}
+
+			m_isWaitingClose = true;
+			m_net->disableRead(this);
+
+			if (!m_isWaitingWrite) {
+				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd;
+			}
+
+			return;
 		}
 	}
 
-
 	m_closed = true;
 
+// 首先屏蔽本连接上的所有网络输出
 	socktool::closeSocket(m_sockfd);
 
-	// 首先屏蔽本连接上的所有网络输出
+#ifdef WIN
+	// windows需要从读写集上取消注册
 	m_net->disableAll(this);
+#endif
 
-	// 等业务层处理好关闭操作
+// 等业务层处理好关闭操作
 	m_pNetReactor->getTaskQueue().put(boost::bind(&Link::onLogicClose, this));
 }
 
@@ -87,12 +105,15 @@ void Link::onSend()
 
 	// LOG_INFO << "Link::onSend, socket = " << m_sockfd;
 
+	bool isSendBufEmpty = false;
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		if (m_sendBuf.empty()) {
-			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
-			return;
-		}
+		isSendBufEmpty = m_sendBuf.empty();
+	}
+
+	if (isSendBufEmpty) {
+		LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
+		return;
 	}
 
 	Buffer buf;
@@ -107,6 +128,7 @@ void Link::onSend()
 	int left = trySend(buf);
 	if (left < 0) {
 		LOG_ERROR << m_pNetReactor->name() << " = socket<" << m_sockfd << "> trySend fail, ret = " << left;
+		m_error = true;
 		this ->close();
 		return;
 	} else if (left > 0) {
@@ -124,23 +146,23 @@ void Link::onSend()
 
 		m_net->enableWrite(this);
 	} else {
-		// bool isNewData = false;
-		// {
-		// 	// 发送成功
-		// 	lock_guard_t<> lock(m_sendBufLock);
-		// 	// m_isWaitingWrite = false;
-		//
-		// 	isNewData = !m_sendBuf.empty();
-		//
-		// 	if (isNewData) {
-		// 		LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd;
-		// 	}
-		// }
-		//
-		// // 检测期间是否有新的数据被添加到发送缓冲区
-		// if (isNewData) {
-		// 	sendBuffer();
-		// }
+		bool isWaitingClose = false;
+		{
+			lock_guard_t<> lock(m_sendBufLock);
+			isWaitingClose = (m_isWaitingClose && m_sendBuf.empty());
+
+			if (!m_sendBuf.empty() && !m_isWaitingWrite) {
+				LOG_ERROR << "m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes() << "&& m_isWaitingWrite = " << m_isWaitingWrite;
+			}
+		}
+
+		// 若已发送完全部数据且本连接正在等待关闭，则执行close操作
+		if(isWaitingClose) {
+			// LOG_ERROR << m_pNetReactor->name() << "isWaitingClose = true m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes() << " && m_isWaitingWrite = " << m_isWaitingWrite;
+			close();
+		} else {
+			// LOG_ERROR << m_pNetReactor->name() << "isWaitingClose = false m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes() << " && m_isWaitingWrite = " << m_isWaitingWrite;
+		}
 	}
 }
 
@@ -157,13 +179,14 @@ void Link::sendBuffer()
 		}
 
 		if (m_sendBuf.empty()) {
-			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
+			// LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
 			return;
 		}
 
 		m_isWaitingWrite = true;
 	}
 
+	// m_net->interruptLoop();
 	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this));
 }
 
@@ -248,6 +271,7 @@ int Link::handleRead()
 			}
 		} else if (0 == nread) { // eof
 			// LOG_WARN << "socket<" << m_sockfd << "> read 0, closed! buffer len = " << MAX_PACKET_LEN;
+			// 检测到对端关闭，则直接关闭本连接，不再处理未发送的数据
 			this->close();
 			return -1;
 		} else {
@@ -260,6 +284,7 @@ int Link::handleRead()
 				break;
 			} else {
 				LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " recv fail, err = " << err << ", history recv buf size = " << m_recvBuf.readableBytes();
+				m_error = true;
 				this->close();
 				return -1;
 			}
@@ -300,6 +325,7 @@ int Link::handleWrite()
 int Link::handleError()
 {
 	LOG_WARN << m_pNetReactor->name() << " socket<" << m_sockfd << "> error";
+	m_error = true;
 	this->close();
 	return 0;
 }

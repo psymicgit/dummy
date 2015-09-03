@@ -40,6 +40,8 @@ public:
 
 	void delClient(Client*);
 
+	int getClientCount() { return m_clientMap.size(); }
+
 private:
 	uint32 allocClientId();
 

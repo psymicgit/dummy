@@ -10,6 +10,10 @@
 
 #include <tool/ticktool.h>
 #include <tool/atomictool.h>
+
+#include <protocol/message.h>
+#include <client.pb.h>
+
 #include <basic/lock.h>
 
 #include <basic/ringbuffer.h>
@@ -70,6 +74,19 @@ public:
 	}
 
 	int m_num;
+};
+
+
+union epoll_data_fake {
+	void *ptr;
+	int fd;
+	uint32_t u32;
+	uint64_t u64;
+} ;
+
+struct epoll_event_fake {
+	uint32_t events;  /* Epoll events */
+	epoll_data_fake data;    /* User data variable */
 };
 
 void test()
@@ -183,6 +200,57 @@ void test()
 		double speed = tick.endTick() / times;
 		double count = 1.0f / speed;
 		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
+	}
+
+	int variableTestNum = 1000000;
+	{
+		Tick tick("local variable test");
+
+		for(int i = 0; i < variableTestNum; i++) {
+			LoginReq *req = msgtool::allocRecvPacket<LoginReq>();
+			req->set_clientversion(100);
+			req->set_deviceid("1273ab23c3390fe840a9e0");
+			req->set_notifyid("notifyid-00134678");
+			req->set_username("psy_micgit");
+			req->set_zoneid(1);
+			req->set_userid(100000001);
+			req->set_playerid(14560034);
+			req->set_job("sword");
+			req->set_logintype(LoginReq_LoginType_NewRole);
+			req->set_authtype(1);
+			req->set_authkey("2ab456b6b2b1b6b1bb2b");
+
+			msgtool::freePacket(req);
+		}
+
+		double speed = tick.endTick() / variableTestNum;
+		double count = 1.0f / speed;
+		LOG_WARN << "avg cost = " << speed << ", per second = " << count;
+	}
+
+	{
+		Tick tick("global variable test");
+
+		for(int i = 0; i < variableTestNum; i++) {
+			LoginReq localreq;
+
+			LoginReq *req = &localreq;
+			req->set_clientversion(100);
+			req->set_deviceid("1273ab23c3390fe840a9e0");
+			req->set_notifyid("notifyid-00134678");
+			req->set_username("psy_micgit");
+			req->set_zoneid(1);
+			req->set_userid(100000001);
+			req->set_playerid(14560034);
+			req->set_job("sword");
+			req->set_logintype(LoginReq_LoginType_NewRole);
+			req->set_authtype(1);
+			req->set_authkey("2ab456b6b2b1b6b1bb2b");
+		}
+
+		double speed = tick.endTick() / variableTestNum;
+		double count = 1.0f / speed;
+		LOG_WARN << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	//ringbufferTest();

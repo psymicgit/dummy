@@ -10,7 +10,7 @@
 
 int main(int argc, char **argv)
 {
-	RobotMgr robotMgr;
+	RobotMgr &robotMgr = RobotMgr::Instance();
 	robotMgr.init();
 	robotMgr.start();
 	return 0;

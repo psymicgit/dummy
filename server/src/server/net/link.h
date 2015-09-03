@@ -30,12 +30,14 @@ public:
 		, m_pNetReactor(pNetReactor)
 		, m_isAutoReconnect(false)
 		, m_closed(false)
+		, m_error(false)
 		, m_sockfd(sockfd)
 		, m_net(pNet)
 		, m_head(NULL)
 		, m_tail(NULL)
 		, m_isWaitingWrite(false)
 		, m_isWaitingRead(false)
+		, m_isWaitingClose(false)
 	{
 	}
 
@@ -89,7 +91,9 @@ public:
 	RingBufferBlock *m_tail;
 
 public:
-	volatile bool m_closed;
+	bool m_closed;
+	bool m_error; // 错误标志位：标示本连接是否曾发生过导致需要关闭连接的错误
+	bool m_isWaitingClose; // 是否正在等待关闭中
 
 	socket_t m_sockfd;
 	NetModel *m_net;

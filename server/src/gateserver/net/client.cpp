@@ -38,12 +38,12 @@ void Client::onEstablish()
 	randtool::secureRandom(m_encryptKey, sizeof(m_encryptKey), '0', 'z');
 
 	//∑¢ÀÕº”Ω‚√‹√‹‘ø
-	EncryptKeyNtf *ntf = msgtool::allocPacket<EncryptKeyNtf>();
-	ntf->set_publickey((const char*)m_encryptKey, sizeof(m_encryptKey));
-	ntf->set_privatekey((const char*)m_encryptKey, sizeof(m_encryptKey));
-	ntf->set_authkey((const char*)m_authKey, sizeof(m_authKey));
+	EncryptKeyNtf ntf;
+	ntf.set_publickey((const char*)m_encryptKey, sizeof(m_encryptKey));
+	ntf.set_privatekey((const char*)m_encryptKey, sizeof(m_encryptKey));
+	ntf.set_authkey((const char*)m_authKey, sizeof(m_authKey));
 
-	m_link->send(eEncryptKeyNtf, *ntf);
+	m_link->send(eEncryptKeyNtf, ntf);
 //
 // 	Message *msg = ntf;
 // 	msgtool::freePacket(msg);
@@ -56,7 +56,7 @@ std::string Client::name()
 
 void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
-	LOG_INFO << name() << " [" << peerAddr.toIpPort() << "] <-> gatesvr [" << localAddr.toIpPort() << "] broken";
+	LOG_INFO << name() << " [" << peerAddr.toIpPort() << "] <-> gatesvr [" << localAddr.toIpPort() << "] broken! current client cnt = " << m_clientMgr->getClientCount() - 1;
 	m_clientMgr->delClient(this);
 }
 
@@ -99,7 +99,7 @@ void Client::handleMsg()
 		int encryptBufLen = dataLen - sizeof(NetMsgHead);
 
 		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
-			LOG_ERROR << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
+			LOG_ERROR << "gatesvr [" << link->m_peerAddr.toIpPort() << "] <-> " << name() << " [" << link->m_localAddr.toIpPort()
 			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
 			buf.skip(dataLen);
 			continue;

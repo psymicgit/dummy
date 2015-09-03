@@ -40,18 +40,18 @@ public:
 
 	virtual void onMessage(LinkType& link, const char* data, int len, Timestamp receiveTime) const
 	{
-		MessageType *t = msgtool::allocRecvPacket<MessageType>();
+		MessageType t; //  = msgtool::allocRecvPacket<MessageType>();
 
-		bool ok = t->ParseFromArray(data, len);
+		bool ok = t.ParseFromArray(data, len);
 		if (!ok) {
-			LOG_ERROR << "decode packet <" << t->GetTypeName() << "> = <" << t->SerializeAsString() << "> error, data len = " << len;
+			LOG_ERROR << "decode packet <" << t.GetTypeName() << "> = <" << t.SerializeAsString() << "> error, data len = " << len;
 			// LOG_INFO << "decode packet <" << msgtool::getMsgString(*t) << "> error";
 			return;
 		}
 
 		// assert(t != NULL);
-		m_callback(&link, t, receiveTime);
-		msgtool::freePacket(t);
+		m_callback(&link, &t, receiveTime);
+		// msgtool::freePacket(t);
 	}
 
 private:

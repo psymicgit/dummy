@@ -38,7 +38,7 @@ void ClientMgr::close()
 		client->close();
 	}
 
-	m_clientMap.clear();
+	// m_clientMap.clear();
 }
 
 void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
