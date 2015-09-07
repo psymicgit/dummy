@@ -286,42 +286,4 @@ namespace socktool
 
 		return true;
 	}
-
-	socket_t accept(socket_t listensock, NetAddress &peerAddr)
-	{
-		sockaddr_in remoteAddr;
-		bzero(&remoteAddr, sizeof remoteAddr);
-
-		socklen_t addrlen = (socklen_t)(sizeof remoteAddr);
-		socket_t connfd = ::accept(listensock, (struct sockaddr *)&remoteAddr, &addrlen);
-
-		if (connfd < 0) {
-			int err = errno;
-			switch (err) {
-			case EAGAIN:
-			case ECONNABORTED:
-			case EINTR:
-			case EPROTO: // ???
-			case EPERM:
-			case EMFILE: // per-process lmit of open file desctiptor ???
-				// expected errors
-				break;
-
-			default:
-				LOG_SYSTEM_ERR << "unknown error of ::accept " << err;
-			}
-		}
-
-		if (connfd >= 0) {
-			LOG_INFO << "Accept connection from " << inet_ntoa(remoteAddr.sin_addr);
-			peerAddr.setSockAddr(remoteAddr);
-		}
-
-		return connfd;
-	}
-
-	int connect(int sockfd, const struct sockaddr_in& addr)
-	{
-		return ::connect(sockfd, (struct sockaddr *)&addr, static_cast<socklen_t>(sizeof addr));
-	}
 }
