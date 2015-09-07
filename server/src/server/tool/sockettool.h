@@ -67,6 +67,9 @@ namespace socktool
 
 	// 监听socket
 	bool listen(socket_t);
+
+	// 连接指定地址
+	int connect(socket_t, NetAddress&);
 }
 
 #endif //_sockettool_h_

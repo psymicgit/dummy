@@ -81,7 +81,7 @@ namespace socktool
 	{
 		socklen_t keepAlive = on ? 1 : 0;
 		int ret = ::setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, (const char*)&keepAlive, sizeof(keepAlive));
-		if (!ret) {
+		if (ret == -1) {
 			LOG_SYSTEM_ERR << "set socket " << sockfd << " SO_KEEPALIVE failed";
 			return;
 		}
@@ -285,5 +285,13 @@ namespace socktool
 		}
 
 		return true;
+	}
+
+	int connect(socket_t sockfd, NetAddress &peerAddr)
+	{
+		const struct sockaddr_in &addr = peerAddr.getSockAddr();
+
+		int ret = ::connect(sockfd, (struct sockaddr *)&addr, static_cast<socklen_t>(sizeof addr));
+		return ret;
 	}
 }

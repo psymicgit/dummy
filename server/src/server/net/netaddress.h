@@ -33,10 +33,10 @@ public:
 	uint16 toPort() const;
 
 	// 获取sockaddr_in结构体
-	const struct sockaddr_in& getSockAddr() const { return m_addr; }
+	inline const struct sockaddr_in& getSockAddr() const { return m_addr; }
 
 	// 重新设置地址
-	void setSockAddr(const struct sockaddr_in& addr) { m_addr = addr; }
+	inline void setSockAddr(const struct sockaddr_in& addr) { m_addr = addr; }
 
 	// 获取网络字节序的ip
 	uint32 ipNetEndian() const { return m_addr.sin_addr.s_addr; }

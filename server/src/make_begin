@@ -1,4 +1,4 @@
-compile_type = debug
+compile_type = release
 # ${shell echo $DEBUG}
 long_bit 	 = ${shell getconf LONG_BIT}
 

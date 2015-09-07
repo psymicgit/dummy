@@ -164,9 +164,7 @@ TaskQueue& Robot::getTaskQueue()
 bool Robot::send(int msgId, Message &msg)
 {
 	if (!m_link->isopen()) {
-		LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort()
-		          << "] is not open";
-
+		// LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort() << "] is not open";
 		return false;
 	}
 
@@ -260,7 +258,7 @@ void Robot::speedTest()
 		send(eSpeedTest, p);
 	}
 
-	RobotMgr::Instance().stop();
+	// RobotMgr::Instance().stop();
 	// 	double costTime = tick.endTick();
 	// 	double avgTime = costTime / count;
 	// 	double speed = 1.0f / avgTime;

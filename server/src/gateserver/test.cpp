@@ -262,10 +262,10 @@ void test()
 
 		Tick tick("socket get address test");
 
-		Listener *listener = Server::instance->m_lan.listen("127.0.0.1", 20005, *Server::instance);
+		Listener *listener = Server::instance->m_lan.listen("127.0.0.1", 21005, *Server::instance);
 
 		for(int i = 0; i < getTimes; i++) {
-			NetAddress peeraddr(socktool::getPeerAddr(listener->socket()));
+			NetAddress peeraddr(socktool::getLocalAddr(listener->socket()));
 		}
 
 		double speed = tick.endTick() / getTimes;

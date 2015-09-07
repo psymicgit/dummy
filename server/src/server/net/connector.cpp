@@ -36,7 +36,9 @@ void Connector::connect()
 	// 直接连接
 	// 注意：这里是非阻塞connect，一般会立即返回 EINPROGRESS 错误，表示连接操作正在进行中，但是仍未完成，与此同时 TCP 三次握手操作会同时进行
 	// 在这之后，我们可以捕获可写事件以及error事件来检查这个链接是否建立成功
-	int ret = ::connect(m_sockfd, (struct sockaddr *)&m_peerAddr.getSockAddr(), static_cast<socklen_t>(sizeof sockaddr_in));
+
+	int ret = ::connect(m_sockfd, (struct sockaddr *)&m_peerAddr.getSockAddr(), static_cast<socklen_t>(sizeof m_peerAddr.getSockAddr()));
+	// int ret = socktool::connect(m_sockfd, m_peerAddr);
 
 	int err = ((ret == SOCKET_ERROR) ? socktool::geterrno() : 0);
 	switch (err) {

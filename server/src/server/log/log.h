@@ -37,7 +37,7 @@
 #define LOG_WARN LOG(WARNING) << "" _FUNC_ "() "
 
 // 记录警告（红色字体）
-#define LOG_ERROR PLOG(ERROR) << "" _FUNC_ "() "
+#define LOG_ERROR LOG(ERROR) << "" _FUNC_ "() "
 
 // 记录致命操作
 #define LOG_FATAL LOG(FATAL) << "" _FUNC_ "() "

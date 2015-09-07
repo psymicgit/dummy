@@ -233,7 +233,7 @@ void Epoll::recycleFds()
 		delFds.swap(m_deletingFdList);
 	}
 
-	for(int i = 0; i < delFds.size(); ++i) {
+	for(size_t i = 0; i < delFds.size(); ++i) {
 		IFd *pfd = delFds[i];
 		pfd->erase();
 	}
