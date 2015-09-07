@@ -20,7 +20,7 @@ struct RingBufferBlock;
 
 namespace google {namespace protobuf {class Message;}}
 
-// Link = tcp连接，相当于connection
+// 网络连接：Link = tcp连接，相当于connection
 class Link : public IFd
 {
 public:
@@ -45,6 +45,7 @@ public:
 
 public:
 	virtual socket_t socket() const {return m_sockfd;}
+
 	virtual int handleRead();
 	virtual int handleWrite();
 	virtual int handleError();
@@ -52,22 +53,33 @@ public:
 	virtual void erase();
 
 public:
+	// 设置本连接参数，并注册到网络
 	void open();
 
-	void enableRead();
-
+	// 发送数据
 	void send(const char *data, int len);
+
+	// 发送文本
 	void send(const char *text);
+
+	// 发送未加密的消息包
 	void send(int msgId, Message &msg);
+
+	// 发送经过加密或调整的消息包
 	void send(int msgId, const char *data, int len);
 
+	// 本连接是否打开
 	bool isopen() { return !m_closed; }
 
 private:
+	// 发送本连接尚未发送完的数据
 	void sendBuffer();
 
-	NetAddress getLocalAddr();
-	NetAddress getPeerAddr();
+	// 获取本连接的本地地址
+	NetAddress getLocalAddr() const;
+
+	// 获取本连接的对端地址
+	NetAddress getPeerAddr() const;
 
 private:
 	// 网络层：尝试一次性发送数据，返回尚未发送的数据长度
@@ -83,30 +95,50 @@ public:
 	const NetAddress m_localAddr;
 	const NetAddress m_peerAddr;
 
+	// 本连接所对应的逻辑实例
 	INetReactor *m_pNetReactor;
 
+	// 自动重连标志位：标示本连接断开后是否需要自动重连
 	bool m_isAutoReconnect;
 
 	RingBufferBlock *m_head;
 	RingBufferBlock *m_tail;
 
 public:
+	// 是否已关闭标志位：防止重复close
 	bool m_closed;
-	bool m_error; // 错误标志位：标示本连接是否曾发生过导致需要关闭连接的错误
-	bool m_isWaitingClose; // 是否正在等待关闭中
 
+	// 错误标志位：标示本连接是否曾发生过导致需要关闭连接的错误
+	bool m_error;
+
+	// 是否正在等待关闭中
+	bool m_isWaitingClose;
+
+	// 套接字
 	socket_t m_sockfd;
+
+	// 网络中心
 	NetModel *m_net;
 
-	task_queue_i *m_taskQueue;
+	// 网络任务队列
+	ITaskQueue *m_taskQueue;
 
-	Buffer m_recvBuf;
+	// 发送缓冲区
 	Buffer m_sendBuf;
 
+	// 接收缓冲区
+	Buffer m_recvBuf;
+
+	// 发送缓冲区锁
 	mutex_t m_sendBufLock;
+
+	// 接收缓冲区锁
 	mutex_t m_recvBufLock;
 
+	// 是否已在等待写
 	bool m_isWaitingWrite;
+
+	// 是否已在等待读
 	bool m_isWaitingRead;
 };
 

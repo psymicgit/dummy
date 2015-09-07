@@ -111,12 +111,15 @@
 	#define bzero(buf, len) memset(buf, 0, len)
 #endif
 
+// 公用头文件
 #include <string>
 #include <list>
 #include <vector>
 #include <map>
 #include <iterator>
 #include <algorithm>
+
+// 本项目公用头文件
 #include <basic/singleton.h>
 #include <log/log.h>
 

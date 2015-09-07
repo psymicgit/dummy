@@ -18,6 +18,7 @@
 
 #include "robot.h"
 
+// 处理机器人收到的各类消息
 class RobotMsgHandler : public MsgHandler<Robot>
 {
 public:
@@ -84,7 +85,7 @@ private:
 	// 收到登录答复（测试用）
 	static void OnAuthAck(Robot* robot, AuthAck *ack, Timestamp receiveTime)
 	{
-		LOG_INFO << msgtool::getMsgString(*ack);
+		LOG_INFO << msgtool::getMsgDebugString(*ack);
 	}
 
 	static void OnPongTest(Robot* robot, PingPong *p, Timestamp receiveTime)

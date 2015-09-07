@@ -84,7 +84,7 @@ private:
 
 	volatile int m_connCount;
 
-	thread_t m_dbthread;
+	Thread m_dbthread;
 };
 
 #endif //_dbsession_h_

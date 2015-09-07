@@ -30,7 +30,7 @@ bool GateServer::init()
 	m_lan.init(1);
 	m_wan.init(1);
 
-	// test();
+	test();
 
 	m_lan.listen("127.0.0.1", 10001, *this);
 	m_wan.listen("127.0.0.1", 20001, m_clientMgr);
@@ -67,6 +67,7 @@ ServerLink* GateServer::onAcceptServer(Link &tcpLink, ServerType peerSvrType, in
 	ServerLink *svrLink = NULL;
 
 	switch(peerSvrType) {
+	// 游戏服
 	case eGameServer:
 		svrLink = m_gamesvrLink = new GameSvrLink;
 		LOG_INFO << "gateserver <-> gatmserver <svrId = " << peerSvrId << "> connection established";
@@ -86,6 +87,7 @@ void GateServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int serve
 	ServerLink *link = NULL;
 
 	switch(svrType) {
+	// 游戏服
 	case eGameServer:
 		link = m_gamesvrLink;
 		m_gamesvrLink = NULL;

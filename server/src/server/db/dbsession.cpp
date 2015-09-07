@@ -45,7 +45,7 @@ bool DBSession::init(DBAccount &dbaccount, int minPoolSize, int maxPoolSize)
 		}
 	}
 
-	m_dbthread.create_thread(boost::bind(&DBSession::threadrun, this), m_maxPoolSize);
+	m_dbthread.createThread(boost::bind(&DBSession::threadrun, this), m_maxPoolSize);
 	return true;
 }
 
@@ -192,8 +192,7 @@ DBConnection* DBSession::getConnection(int groupId)
 		if(NULL != conn) {
 			m_connMap.insert(std::make_pair(groupId, conn));
 		}
-	}
-	else {
+	} else {
 		conn = itr->second;
 		conn = onUsed(conn);
 	}

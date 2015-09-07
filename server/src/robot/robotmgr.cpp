@@ -19,7 +19,7 @@ void registerSignal();
 
 void handleSignal(int sig)
 {
-	LOG_WARN << RobotMgr::Instance().name() << " pid = " << getpid() << ", handle signal = " << sig;
+	SAFE_LOG("%s pid = %u, handle signal = %u", RobotMgr::Instance().name().c_str(), getpid(), sig);
 	if (sig == SIGTERM) {
 		RobotMgr::Instance().stop();
 	} else if(sig == SIGINT) {
@@ -48,9 +48,9 @@ void registerSignal()
 
 bool RobotMgr::init()
 {
-	global::init();
-
 	registerSignal();
+
+	global::init();
 
 	logging::init("robot", "log_robot_");
 

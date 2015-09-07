@@ -2,13 +2,15 @@
 //< @file:   server\basic\singleton.h
 //< @author: hongkunan
 //< @date:   2015年1月13日 16:2:11
-//< @brief:
+//< @brief:	 单例模式
 //< Copyright (c) 2015 heihuo. All rights reserved.
 ///<------------------------------------------------------------------------------
 
 #ifndef _singleton_h_
 #define _singleton_h_
 
+// 单例类
+// 比如：若希望某个类A拥有单例方法，则可定义class A : public Singleton<A>，便可调用A::instance()
 template <typename T>
 class Singleton
 {

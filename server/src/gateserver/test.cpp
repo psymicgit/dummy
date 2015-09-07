@@ -9,6 +9,7 @@
 #include "test.h"
 
 #include <tool/ticktool.h>
+#include <tool/sockettool.h>
 #include <tool/atomictool.h>
 
 #include <protocol/message.h>
@@ -18,6 +19,9 @@
 
 #include <basic/ringbuffer.h>
 #include <net/link.h>
+#include <net/listener.h>
+
+#include <server.h>
 
 void ringbufferTest()
 {
@@ -91,7 +95,7 @@ struct epoll_event_fake {
 
 void test()
 {
-	size_t times = 100;
+	int times = 100;
 	{
 		Tick tick("mutex performance test");
 
@@ -202,9 +206,9 @@ void test()
 		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
 	}
 
-	int variableTestNum = 1000000;
+	int variableTestNum = 10000;
 	{
-		Tick tick("local variable test");
+		Tick tick("global packet test");
 
 		for(int i = 0; i < variableTestNum; i++) {
 			LoginReq *req = msgtool::allocRecvPacket<LoginReq>();
@@ -229,7 +233,7 @@ void test()
 	}
 
 	{
-		Tick tick("global variable test");
+		Tick tick("stack allocate packet test");
 
 		for(int i = 0; i < variableTestNum; i++) {
 			LoginReq localreq;
@@ -252,6 +256,23 @@ void test()
 		double count = 1.0f / speed;
 		LOG_WARN << "avg cost = " << speed << ", per second = " << count;
 	}
+
+	{
+		int getTimes = 1000;
+
+		Tick tick("socket get address test");
+
+		Listener *listener = Server::instance->m_lan.listen("127.0.0.1", 20005, *Server::instance);
+
+		for(int i = 0; i < getTimes; i++) {
+			NetAddress peeraddr(socktool::getPeerAddr(listener->socket()));
+		}
+
+		double speed = tick.endTick() / getTimes;
+		double per = 1.0f / speed;
+		LOG_WARN << "avg cost = " << speed << ", per second = " << per;
+	}
+
 
 	//ringbufferTest();
 }

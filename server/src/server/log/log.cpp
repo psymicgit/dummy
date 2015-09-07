@@ -12,7 +12,7 @@
 //将信息输出到单独的文件和 LOG(ERROR)
 void SignalHandle(const char* data, int size)
 {
-	std::string str = std::string(data, size);
+	std::string str(data, size);
 	LOG_ERROR << str;
 
 	// std::ofstream fs("glog_dump.log", std::ios::app);

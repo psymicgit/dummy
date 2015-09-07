@@ -80,8 +80,8 @@ namespace socktool
 	void setKeepAlive(socket_t sockfd, bool on, int keepIdleTime)
 	{
 		socklen_t keepAlive = on ? 1 : 0;
-		::setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, (const char*)&keepAlive, sizeof(keepAlive));
-		if (!on) {
+		int ret = ::setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, (const char*)&keepAlive, sizeof(keepAlive));
+		if (!ret) {
 			LOG_SYSTEM_ERR << "set socket " << sockfd << " SO_KEEPALIVE failed";
 			return;
 		}

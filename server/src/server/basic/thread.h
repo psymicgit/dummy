@@ -11,7 +11,7 @@
 
 #include "taskqueue.h"
 
-class thread_t
+class Thread
 {
 #ifdef WIN
 	typedef vector<HANDLE> ThreadIdList;
@@ -21,9 +21,9 @@ class thread_t
 
 public:
 #ifdef WIN
-	static unsigned int __stdcall thread_func(void* p);
+	static unsigned int __stdcall run(void* p);
 #else
-	static void* thread_func(void* p);
+	static void* run(void* p);
 #endif
 
 
@@ -37,11 +37,14 @@ public:
 	}
 
 public:
-	int create_thread(Task func, int num);
+	// 创建num个线程，每个线程一启动将执行传入的任务
+	int createThread(Task &task, int num);
+
+	// 等待直至所有线程退出
 	int join();
 
 private:
-	ThreadIdList m_tid_list;
+	ThreadIdList m_tidList;
 };
 
 #endif //_thread_h_

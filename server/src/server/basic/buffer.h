@@ -17,27 +17,26 @@
 
 #include "tool/endiantool.h"
 
-/// A buffer class modeled after org.jboss.netty.buffer.ChannelBuffer
-///
-/// @code
-/// +-------------------+------------------+------------------+
-/// | prependable bytes |  readable bytes  |  writable bytes  |
-/// |                   |     (CONTENT)    |                  |
-/// +-------------------+------------------+------------------+
-/// |                   |                  |                  |
-/// 0      <=      readerIndex   <=   writerIndex    <=     size
-/// @endcode
+// 缓冲类
+
+// 本Buffer类模仿自muduo的Buffer类
+//
+// +-------------------+------------------+------------------+
+// | prependable bytes |  readable bytes  |  writable bytes  |
+// |                   |     (CONTENT)    |                  |
+// +-------------------+------------------+------------------+
+// |                   |                  |                  |
+// 0      <=      readerIndex   <=   writerIndex    <=     size
 class Buffer
 {
 public:
 	static const size_t g_cheapPrepend;
 	static const size_t g_initSize;
-	static const char kCRLF[];
 
 	explicit Buffer(size_t initialSize = g_initSize)
 		: m_buffer(g_cheapPrepend + initialSize),
-		  readerIndex_(g_cheapPrepend),
-		  writerIndex_(g_cheapPrepend)
+		  m_readPos(g_cheapPrepend),
+		  m_writePos(g_cheapPrepend)
 	{
 		assert(readableBytes() == 0);
 		assert(writableBytes() == initialSize);
@@ -46,36 +45,36 @@ public:
 
 	explicit Buffer(const char *data, int size)
 		: m_buffer(data, data + size)
-		, readerIndex_(0)
-		, writerIndex_(size)
+		, m_readPos(0)
+		, m_writePos(size)
 	{
 	}
 
 	// implicit copy-ctor, move-ctor, dtor and assignment are fine
 	// NOTE: implicit move-ctor is added in g++ 4.6
 
-	void swap(Buffer& rhs)
+	void swap(Buffer& buffer)
 	{
-		m_buffer.swap(rhs.m_buffer);
-		std::swap(readerIndex_, rhs.readerIndex_);
-		std::swap(writerIndex_, rhs.writerIndex_);
+		m_buffer.swap(buffer.m_buffer);
+		std::swap(m_readPos, buffer.m_readPos);
+		std::swap(m_writePos, buffer.m_writePos);
 	}
 
 	void copy(Buffer& rhs)
 	{
 		m_buffer = rhs.m_buffer;
 
-		readerIndex_ = rhs.readerIndex_;
-		writerIndex_ = rhs.writerIndex_;
+		m_readPos = rhs.m_readPos;
+		m_writePos = rhs.m_writePos;
 	}
 
-	inline size_t readableBytes() const { return writerIndex_ - readerIndex_; }
+	inline size_t readableBytes() const { return m_writePos - m_readPos; }
 
-	inline size_t writableBytes() const { return m_buffer.size() - writerIndex_; }
+	inline size_t writableBytes() const { return m_buffer.size() - m_writePos; }
 
-	inline size_t prependableBytes() const { return readerIndex_; }
+	inline size_t prependableBytes() const { return m_readPos; }
 
-	inline const char* peek() const { return begin() + readerIndex_; }
+	inline const char* peek() const { return begin() + m_readPos; }
 
 	inline bool empty() const { return readableBytes() == 0; }
 
@@ -86,7 +85,7 @@ public:
 	{
 		assert(len <= readableBytes());
 		if (len < readableBytes()) {
-			readerIndex_ += len;
+			m_readPos += len;
 		} else {
 			clear();
 		}
@@ -101,15 +100,15 @@ public:
 
 	void clear()
 	{
-		readerIndex_ = g_cheapPrepend;
-		writerIndex_ = g_cheapPrepend;
+		m_readPos = g_cheapPrepend;
+		m_writePos = g_cheapPrepend;
 
 		if (m_buffer.capacity() > 2 * g_initSize) {
 			recycle();
 		}
 	}
 
-	// 重新回收空间
+	// 重新回收内存
 	void recycle()
 	{
 		m_buffer.swap(std::vector<char>());
@@ -145,88 +144,33 @@ public:
 		append(static_cast<const char*>(data), len);
 	}
 
-	char* beginWrite() { return begin() + writerIndex_; }
-	const char* beginWrite() const { return begin() + writerIndex_; }
+	char* beginWrite() { return begin() + m_writePos; }
+	const char* beginWrite() const { return begin() + m_writePos; }
 
 	void hasWritten(size_t len)
 	{
 		assert(len <= writableBytes());
-		writerIndex_ += len;
+		m_writePos += len;
 	}
 
 	void unread(size_t len)
 	{
 		assert(len <= prependableBytes());
-		readerIndex_ -= len;
+		m_readPos -= len;
 	}
 
 	void unwrite(size_t len)
 	{
 		assert(len <= readableBytes());
-		writerIndex_ -= len;
-	}
-
-	// Append int64_t using network endian
-	void appendInt64(int64 x)
-	{
-		int64 be64 = endiantool::hostToNetwork64(x);
-		append(&be64, sizeof be64);
-	}
-
-	// Append int32_t using network endian
-	void appendInt32(int32 x)
-	{
-		int32 be32 = endiantool::hostToNetwork32(x);
-		append(&be32, sizeof be32);
-	}
-
-	void appendInt16(int16 x)
-	{
-		int16 be16 = endiantool::hostToNetwork16(x);
-		append(&be16, sizeof be16);
-	}
-
-	void appendInt8(char x)
-	{
-		append(&x, sizeof x);
-	}
-	int64 peekInt64() const
-	{
-		assert(readableBytes() >= sizeof(int64));
-		int64 be64 = 0;
-		::memcpy(&be64, peek(), sizeof be64);
-		return endiantool::networkToHost64(be64);
-	}
-
-	int32 peekInt32() const
-	{
-		assert(readableBytes() >= sizeof(int32));
-		int32 be32 = 0;
-		::memcpy(&be32, peek(), sizeof be32);
-		return endiantool::networkToHost32(be32);
-	}
-
-	int16 peekInt16() const
-	{
-		assert(readableBytes() >= sizeof(int16));
-		int16 be16 = 0;
-		::memcpy(&be16, peek(), sizeof be16);
-		return endiantool::networkToHost16(be16);
-	}
-
-	char peekInt8() const
-	{
-		assert(readableBytes() >= sizeof(char));
-		char x = *peek();
-		return x;
+		m_writePos -= len;
 	}
 
 	void prepend(const void* /*restrict*/ data, size_t len)
 	{
 		assert(len <= prependableBytes());
-		readerIndex_ -= len;
+		m_readPos -= len;
 		const char* d = static_cast<const char*>(data);
-		std::copy(d, d + len, begin() + readerIndex_);
+		std::copy(d, d + len, begin() + m_readPos);
 	}
 
 	size_t capacity() const
@@ -245,24 +189,24 @@ private:
 	{
 		if (writableBytes() + prependableBytes() < len + g_cheapPrepend) {
 			// FIXME: move readable data
-			m_buffer.resize(writerIndex_ + len);
+			m_buffer.resize(m_writePos + len);
 		} else {
 			// move readable data to the front, make space inside buffer
-			assert(g_cheapPrepend < readerIndex_);
+			assert(g_cheapPrepend < m_readPos);
 			size_t readable = readableBytes();
-			std::copy(begin() + readerIndex_,
-			          begin() + writerIndex_,
+			std::copy(begin() + m_readPos,
+			          begin() + m_writePos,
 			          begin() + g_cheapPrepend);
-			readerIndex_ = g_cheapPrepend;
-			writerIndex_ = readerIndex_ + readable;
+			m_readPos = g_cheapPrepend;
+			m_writePos = m_readPos + readable;
 			assert(readable == readableBytes());
 		}
 	}
 
 private:
 	std::vector<char> m_buffer;
-	size_t readerIndex_;
-	size_t writerIndex_;
+	size_t m_readPos;
+	size_t m_writePos;
 };
 
 #endif //_buffer_h_

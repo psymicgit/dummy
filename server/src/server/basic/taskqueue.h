@@ -2,7 +2,7 @@
 //< @file:   server\basic\taskqueue.h
 //< @author: 洪坤安
 //< @date:   2014年11月27日 16:26:55
-//< @brief:
+//< @brief:	 任务队列
 //< Copyright (c) 2014 Tokit. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -13,12 +13,12 @@
 #include "lock.h"
 #include "bind.h"
 
-class task_queue_i
+class ITaskQueue
 {
 public:
 	typedef std::list<Task> task_list_t;
 public:
-	virtual ~task_queue_i() {}
+	virtual ~ITaskQueue() {}
 	virtual void close() = 0;
 	virtual void produce(const Task& task_) = 0;
 	virtual void multi_produce(const task_list_t& task_) = 0;
@@ -28,7 +28,8 @@ public:
 	virtual int batch_run() = 0;
 };
 
-class BlockingTaskQueue: public task_queue_i
+// 阻塞任务队列
+class BlockingTaskQueue: public ITaskQueue
 {
 public:
 	BlockingTaskQueue():
@@ -132,29 +133,30 @@ private:
 	condition_var_t                 m_cond;
 };
 
+// 非阻塞任务队列
 class TaskQueue
 {
 public:
-	void put(const Task& task_)
+	void put(const Task& task)
 	{
 		lock_guard_t<> lock(m_mutex);
-		m_tasklist.push_back(task_);
+		m_tasklist.push_back(task);
 	}
 
-	int take(Task& task_)
+	int take(Task& task)
 	{
 		lock_guard_t<> lock(m_mutex);
-		task_ = m_tasklist.front();
+		task = m_tasklist.front();
 		m_tasklist.pop_front();
 		return 0;
 	}
 
 	int run()
 	{
-		task_queue_i::task_list_t tasks;
+		ITaskQueue::task_list_t tasks;
 		int ret = takeAll(tasks);
 
-		for (task_queue_i::task_list_t::iterator it = tasks.begin(); it != tasks.end(); ++it) {
+		for (ITaskQueue::task_list_t::iterator it = tasks.begin(); it != tasks.end(); ++it) {
 			Task &t = *it;
 			t.run();
 		}
@@ -162,12 +164,10 @@ public:
 		return ret;
 	}
 
-	int takeAll(task_queue_i::task_list_t& tasks)
+	int takeAll(ITaskQueue::task_list_t& tasks)
 	{
 		lock_guard_t<> lock(m_mutex);
-		tasks = m_tasklist;
-
-		m_tasklist.clear();
+		tasks.swap(m_tasklist);
 		return tasks.size();
 	}
 
@@ -178,27 +178,27 @@ public:
 	}
 
 private:
-	task_queue_i::task_list_t m_tasklist;
+	ITaskQueue::task_list_t m_tasklist;
 	mutex_t                         m_mutex;
 };
 
-
-class task_queue_pool_t
+// 任务队列池，含多个线程，每个线程将运行一个阻塞任务队列
+class TaskQueuePool
 {
-	typedef task_queue_i::task_list_t task_list_t;
+	typedef ITaskQueue::task_list_t task_list_t;
 	typedef std::vector<BlockingTaskQueue*>    task_queue_vt_t;
 	static void task_func(void* pd_)
 	{
-		task_queue_pool_t* t = (task_queue_pool_t*)pd_;
+		TaskQueuePool* t = (TaskQueuePool*)pd_;
 		t->run();
 	}
 public:
-	static Task gen_task(task_queue_pool_t* p)
+	static Task gen_task(TaskQueuePool* p)
 	{
 		return Task(&task_func, p);
 	}
 public:
-	task_queue_pool_t(int n) :
+	TaskQueuePool(int n) :
 		m_index(0)
 	{
 		for (int i = 0; i < n; ++i) {
@@ -221,7 +221,7 @@ public:
 		p->batch_run();
 	}
 
-	~task_queue_pool_t()
+	~TaskQueuePool()
 	{
 		task_queue_vt_t::iterator it = m_tqs.begin();
 		for (; it != m_tqs.end(); ++it) {
@@ -240,11 +240,11 @@ public:
 
 	size_t size() const { return m_tqs.size(); }
 
-	task_queue_i* alloc(long id_)
+	ITaskQueue* alloc(long id_)
 	{
 		return m_tqs[id_ %  m_tqs.size()];
 	}
-	task_queue_i* rand_alloc()
+	ITaskQueue* rand_alloc()
 	{
 		static unsigned long id_ = 0;
 		return m_tqs[++id_ %  m_tqs.size()];

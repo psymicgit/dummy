@@ -23,7 +23,7 @@ void registerSignal();
 
 void handleSignal(int sig)
 {
-	LOG_WARN << Server::instance->name() << " pid = " << getpid() << ", handle signal = " << sig;
+	SAFE_LOG("%s pid = %u, handle signal = %u", Server::instance->name().c_str(), getpid(), sig);
 	if (sig == SIGTERM) {
 		Server::instance->stop();
 	} else if(sig == SIGINT) {
@@ -31,6 +31,7 @@ void handleSignal(int sig)
 	}
 }
 
+// 监听系统信号：防止一般的kill操作导致服务器不正常关闭
 void registerSignal()
 {
 #ifdef WIN
@@ -65,6 +66,7 @@ bool Server::init()
 {
 	global::init();
 
+	// 注册系统信号：防止一般的kill操作导致服务器不正常关闭
 	registerSignal();
 
 	//m_bufferPool.init(1000, 500);
@@ -121,12 +123,14 @@ void Server::handleMsg(Link *link)
 {
 	Buffer buf;
 
+	// 1. 将接收缓冲区的数据全部取出
 	{
 		lock_guard_t<> lock(link->m_recvBufLock);
 		link->m_isWaitingRead = false;
 		buf.swap(link->m_recvBuf);
 	}
 
+	// 2. 循环处理消息数据
 	while(true) {
 		// 检测半包
 		size_t bytes = buf.readableBytes();
@@ -146,6 +150,7 @@ void Server::handleMsg(Link *link)
 		buf.skip(msgHead->msgLen);
 	}
 
+	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
 	if (!buf.empty()) {
 		{
 			lock_guard_t<> lock(link->m_recvBufLock);
@@ -188,6 +193,7 @@ void Server::unregisterServer(int svrId)
 
 void Server::start()
 {
+	// 启动内网通信
 	m_lan.start();
 
 	while(!m_isquit) {
@@ -215,6 +221,7 @@ void Server::stop()
 
 void Server::stopping()
 {
+	// 停止内网通信
 	m_lan.stop();
 
 	// 将关闭网络时产生的网络任务执行完

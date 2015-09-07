@@ -2,7 +2,7 @@
 //< @file:   server\basic\bind.h
 //< @author: 洪坤安
 //< @date:   2015年4月10日 18:11:9
-//< @brief:
+//< @brief:	 模仿自boost的bind（本文件大部分内容来自fflib中的bind）
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 

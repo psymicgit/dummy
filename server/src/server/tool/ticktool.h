@@ -2,7 +2,7 @@
 //< @file:   server\tool\ticktool.h
 //< @author: 洪坤安
 //< @date:   2015年3月27日 21:42:31
-//< @brief:
+//< @brief:	 时钟周期工具
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -13,12 +13,14 @@
 
 namespace ticktool
 {
+	// 返回时钟周期
 	uint64 tick();
 
 	// 返回两次时钟周期的秒差
 	double tickDiff(uint64 old_tick);
 }
 
+// 计时器，用于测量时间耗费
 class Tick
 {
 public:

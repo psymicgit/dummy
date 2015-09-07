@@ -2,7 +2,7 @@
 //< @file:   server\tool\atomictool.h
 //< @author: 洪坤安
 //< @date:   2015年3月27日 15:15:8
-//< @brief:
+//< @brief:	 原子操作算法
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 

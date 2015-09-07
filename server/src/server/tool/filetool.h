@@ -2,7 +2,7 @@
 //< @file:   server\tool\filetool.h
 //< @author: 洪坤安
 //< @date:   2014年11月20日 10:45:10
-//< @brief:
+//< @brief:	 文件操作方法
 //< Copyright (c) 2014 Tokit. All rights reserved.
 ///<------------------------------------------------------------------------------
 

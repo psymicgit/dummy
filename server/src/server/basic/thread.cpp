@@ -10,9 +10,9 @@
 #include "taskqueue.h"
 
 #ifdef WIN
-	unsigned int __stdcall thread_t::thread_func(void* p)
+	unsigned int __stdcall Thread::run(void* p)
 #else
-	void* thread_t::thread_func(void* p)
+	void* Thread::run(void* p)
 #endif
 {
 	Task* t = (Task*)p;
@@ -21,47 +21,49 @@
 	return 0;
 }
 
-int thread_t::create_thread(Task func, int num)
+int Thread::createThread(Task &task, int num)
 {
 	for (int i = 0; i < num; ++i) {
-		Task* t = new Task(func);
+		Task* t = new Task(task);
 
 #ifdef WIN
-		HANDLE handle = (HANDLE)_beginthreadex(NULL, 0, thread_func, t, 0, NULL);
-		m_tid_list.push_back(handle);
+		HANDLE handle = (HANDLE)_beginthreadex(NULL, 0, run, t, 0, NULL);
+		m_tidList.push_back(handle);
 #else
-		pthread_t ntid;
+		pthread_t tid;
 
-		if (0 == ::pthread_create(&ntid, NULL, thread_func, t)) {
-			m_tid_list.push_back(ntid);
+		if (0 == ::pthread_create(&tid, NULL, run, t)) {
+			m_tidList.push_back(tid);
+		} else {
+			LOG_FATAL << "createThread num = " << num << "failed";
 		}
 #endif
 	}
 	return 0;
 }
 
-int thread_t::join()
+int Thread::join()
 {
-	if (m_tid_list.empty()) {
+	if (m_tidList.empty()) {
 		return 0;
 	}
 
 #ifdef WIN
-	size_t threadCnt = m_tid_list.size();
+	size_t threadCnt = m_tidList.size();
 
-	WaitForMultipleObjects(threadCnt, &m_tid_list[0], TRUE, INFINITE);
+	WaitForMultipleObjects(threadCnt, &m_tidList[0], TRUE, INFINITE);
 
 	for (size_t i = 0; i < threadCnt; i++) {
-		HANDLE thread = m_tid_list[i];
+		HANDLE thread = m_tidList[i];
 		CloseHandle(thread);
 	}
 #else
-	for (ThreadIdList::iterator itr = m_tid_list.begin(); itr != m_tid_list.end(); ++itr) {
+	for (ThreadIdList::iterator itr = m_tidList.begin(); itr != m_tidList.end(); ++itr) {
 		pthread_t tid = *itr;
 		pthread_join(tid, NULL);
 	}
 #endif
 
-	m_tid_list.clear();
+	m_tidList.clear();
 	return 0;
 }

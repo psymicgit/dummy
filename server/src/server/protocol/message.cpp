@@ -13,7 +13,7 @@
 
 namespace msgtool
 {
-	string getMsgString(const Message &msg)
+	string getMsgDebugString(const Message &msg)
 	{
 		string text = msg.GetDescriptor()->DebugString();
 		text += "\nvalue = {\n" + msg.DebugString() + "}";

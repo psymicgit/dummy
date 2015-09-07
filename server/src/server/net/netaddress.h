@@ -16,17 +16,14 @@ using namespace std;
 class NetAddress
 {
 public:
-	/// Constructs an endpoint with given port number.
-	/// Mostly used in TcpServer listening.
+	// 根据端口进行构造，一般用于listen
 	explicit NetAddress(uint16 port = 0);
 
-	/// Constructs an endpoint with given ip and port.
-	/// @c ip should be "1.2.3.4"
-	NetAddress(const std::string &ip, uint16 port);
+	// 根据ip和端口进行构造，ip格式："x.x.x.x"
+	explicit NetAddress(const std::string &ip, uint16 port);
 
-	/// Constructs an endpoint with given struct @c sockaddr_in
-	/// Mostly used when accepting new connections
-	NetAddress(const struct sockaddr_in& addr)
+	// 根据sockaddr_in进行构造，一般在接收新连接时会用到
+	explicit NetAddress(const struct sockaddr_in& addr)
 		: m_addr(addr)
 	{
 	}
@@ -35,14 +32,19 @@ public:
 	string toIpPort() const;
 	uint16 toPort() const;
 
-	// default copy/assignment are Okay
-
+	// 获取sockaddr_in结构体
 	const struct sockaddr_in& getSockAddr() const { return m_addr; }
+
+	// 重新设置地址
 	void setSockAddr(const struct sockaddr_in& addr) { m_addr = addr; }
 
+	// 获取网络字节序的ip
 	uint32 ipNetEndian() const { return m_addr.sin_addr.s_addr; }
+
+	// 获取网络字节序的端口
 	uint16 portNetEndian() const { return m_addr.sin_port; }
 
+	// 解析指定的host
 	static bool resolve(string hostname, NetAddress* result);
 
 public:

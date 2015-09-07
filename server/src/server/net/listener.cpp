@@ -14,34 +14,44 @@
 #include "net/netreactor.h"
 #include "net/netfactory.h"
 
-Listener::Listener(NetModel *pNet, INetReactor *pNetReactor, NetFactory *netFactory)
+Listener::Listener(NetModel *pNet, INetReactor *pNetReactor)
 	: m_net(pNet)
 	, m_pNetReactor(pNetReactor)
 	, m_listenFd(0)
-	, m_netFactory(netFactory)
 {
 
 }
 
 bool Listener::open(const string & ip, int port)
 {
+	LOG_DEBUG << m_pNetReactor->name() << " start listening at <" << ip << ": " << port << ">";
+
 	NetAddress listenAddr(ip, port);
 	m_listenAddr = NetAddress(ip, port);
 
 	m_listenFd = socktool::createSocket();
+	if (m_listenFd <= 0) {
+		return false;
+	}
 
 	socktool::setReuseAddr(m_listenFd, true);
+
+	// 设置为非阻塞
 	socktool::setNonBlocking(m_listenFd);
 
 	if(!socktool::bindAddress(m_listenFd, m_listenAddr)) {
 		return false;
 	}
 
+	// 开始监听
 	if(!socktool::listen(m_listenFd)) {
 		return false;
 	}
 
+	// 将本监听器注册到网络
 	m_net->addFd(this);
+
+	// 注册可读事件：对于非阻塞listen，当接收到新连接时，描述符变成可读
 	m_net->enableRead(this);
 	return true;
 }
@@ -61,12 +71,13 @@ void Listener::erase()
 
 int Listener::handleRead()
 {
-	struct sockaddr_storage addr;
+	sockaddr_storage addr;
 	socklen_t addrlen = sizeof(addr);
 
+	// 循环接收新连接直到连接队列为空
 	int newfd = -1;
 	do {
-		// 建立socket连接的过程：
+		// 注意：这里首先要知道建立socket连接的过程：
 		// 	1.client发syn请求给server
 		// 	2.server收到后把请求存放在SYN queue里，这个半连接队列的最大值是系统参数tcp_max_syn_backlog定义的
 		// 	3.存放在半连接队列后发送syn+ack给client，client收到后再发syn+ack给server完成三次握手，然后server把连接存放在accept queue，这个队列长度就是程序里调用socket的时候定义的backlog定义大小。
@@ -90,7 +101,8 @@ int Listener::handleRead()
 				LOG_ERROR << "errno == " << err;
 				continue;
 			} else {
-				LOG_ERROR << m_pNetReactor->name() << " accept failed, restart listenning now";//! if too many open files occur, need to restart epoll event
+				LOG_ERROR << m_pNetReactor->name() << " accept failed, restart listenning now";
+				//! if too many open files occur, need to restart epoll event
 				m_net->reopen(this);
 				break;
 			}
@@ -99,12 +111,20 @@ int Listener::handleRead()
 		NetAddress peerAddr(*((struct sockaddr_in*)&addr));
 
 		Link* link = createLink(newfd, peerAddr);
+		if (NULL == link) {
+			socktool::closeSocket(newfd);
+
+			LOG_ERROR << m_pNetReactor->name() << " listener create link failed, new socket = " << newfd;
+			break;
+		}
+
 		link->open();
 
+		// 将接收到新连接的消息投到业务层
 		m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onAccepted, m_pNetReactor, link, m_listenAddr, peerAddr));
 
 		// 等业务层处理完新连接后，才允许该连接开始读
-		m_pNetReactor->getTaskQueue().put(boost::bind(&Link::enableRead, link));
+		m_pNetReactor->getTaskQueue().put(boost::bind(&NetModel::enableRead, m_net, link));
 	} while (true);
 
 	return 0;
@@ -126,5 +146,4 @@ Link* Listener::createLink(socket_t newfd, NetAddress &peerAddr)
 {
 	LinkPool &linkPool = m_net->getLinkPool();
 	return linkPool.alloc(newfd, m_listenAddr, peerAddr, m_net, m_pNetReactor);
-	// return new Link(newfd, m_listenAddr, peerAddr, m_netFactory->m_taskQueuePool->alloc(newfd), m_net, m_pNetReactor);
 }

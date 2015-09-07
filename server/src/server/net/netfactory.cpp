@@ -46,7 +46,7 @@ void NetFactory::start()
 	// m_thread.create_thread(task_queue_pool_t::gen_task(m_taskQueuePool), m_threadCnt);
 #endif
 
-	m_thread.create_thread(Task(&runNet, this), 1);
+	m_thread.createThread(Task(&runNet, this), 1);
 }
 
 void NetFactory::stop()
@@ -62,6 +62,7 @@ void NetFactory::stop()
 	// m_taskQueuePool->close();
 
 #ifndef WIN
+	// 关闭所有监听器
 	for(size_t i = 0; i < m_listeners.size(); i++) {
 		Listener *listener = m_listeners[i];
 		listener->close();
@@ -73,6 +74,7 @@ void NetFactory::stop()
 // 	}
 #endif
 
+	// 关闭网络，并等待直到网络线程退出
 	m_net.close();
 	m_thread.join();
 
@@ -89,9 +91,7 @@ void NetFactory::stop()
 
 Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor)
 {
-	Listener* listener = new Listener(&m_net, &netReactor, this);
-	LOG_DEBUG << "start listening at <" << ip << ": " << port << ">";
-
+	Listener* listener = new Listener(&m_net, &netReactor);
 	if (!listener->open(ip, port)) {
 		LOG_SYSTEM_ERR << "listen at <" << ip << ": " << port << "> failed";
 
@@ -106,9 +106,8 @@ Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor
 Connector* NetFactory::connect(const string& ip, int port, INetReactor &netReactor, const char* remoteHostName)
 {
 	NetAddress peerAddr(ip, port);
-	Connector* connector = new Connector(peerAddr, &netReactor, &m_net, remoteHostName);
-	// LOG_DEBUG << "NetFactory::connect addr = " << connector;
 
+	Connector* connector = new Connector(peerAddr, &netReactor, &m_net, remoteHostName);
 	connector->connect();
 
 	m_connectors.push_back(connector);

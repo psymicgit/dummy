@@ -12,11 +12,10 @@
 #include <deque>
 
 // 对象池
-template <typename T, typename MutexType = NonMutex>
+template <typename T, typename MutexType = NonMutex /* 默认不持锁 */>
 class ObjectPool
 {
 	typedef std::vector<T*> ObjectQueue;
-	typedef typename ObjectQueue::iterator ObjectQueueItr;
 
 	enum {
 		POOL_EXPAND_SIZE = 100,
@@ -137,6 +136,7 @@ private:
 		return first;
 	}
 
+	// 回收一个对象
 	void deallocate(T* obj)
 	{
 		lock_guard_t<MutexType> lock(m_mutex);

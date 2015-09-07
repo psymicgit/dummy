@@ -27,16 +27,23 @@ public:
 
 	virtual void run();
 
+	// 接收到新的服务器连接
 	virtual ServerLink* onAcceptServer(Link&, ServerType, int serverId);
 
+	// 与服务器断开连接
 	virtual void onDisconnectServer(Link&, ServerType, int serverId);
 
 public:
 	void sendToGameServer(uint32 clientId, uint16 msgId, const char* data, uint32 len);
 
 private:
+	// 外网中心：管理与外网的连接，如：与玩家的连接
 	NetFactory m_wan;
+
+	// 与游戏服的连接
 	GameSvrLink *m_gamesvrLink;
+
+	// 客户端管理中心
 	ClientMgr m_clientMgr;
 };
 

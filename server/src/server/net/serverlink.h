@@ -13,13 +13,14 @@
 #include "protocol/protocol.h"
 #include "tool/servertool.h"
 
+// 服务器与服务器间的连接
 class ServerLink : public INetReactor
 {
 public:
 	ServerLink()
 		: m_link(NULL)
-		, m_remoteSvrType(eNullServer)
-		, m_svrId(0)
+		, m_peerSvrType(eNullServer)
+		, m_peerSvrId(0)
 		, m_taskQueue(NULL)
 	{
 	}
@@ -27,7 +28,7 @@ public:
 public:
 	virtual std::string name();
 
-	// @override
+	// 对端服务器断开连接
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
 	virtual void onRecv(Link*, Buffer&);
@@ -44,8 +45,11 @@ public:
 public:
 	Link *m_link;
 
-	ServerType m_remoteSvrType;
-	int m_svrId;
+	// 对端服务器的类别
+	ServerType m_peerSvrType;
+
+	// 对端服务器的id
+	int m_peerSvrId;
 
 	TaskQueue *m_taskQueue;
 };

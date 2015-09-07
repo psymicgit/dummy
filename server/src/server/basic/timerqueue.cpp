@@ -8,41 +8,31 @@
 
 #include "timerqueue.h"
 
-#define FOREVER_ALIVE -1
-
 int TimerQueue::run()
 {
-	if(m_taskqueue.empty()) {
+	if(m_timers.empty()) {
 		return -1;
 	}
 
+	// 获取当前时间
 	Timestamp now = timetool::getTimeOfDay();
 
-	while(!m_taskqueue.empty()) {
-		Timer &task = *m_taskqueue.top();
-		if(task.m_expired > now) {
-			return (int)(task.m_expired - now);
-			break;
+	// 依次取出离已到期的定时器并执行
+	while(!m_timers.empty()) {
+		Timer &task = *m_timers.top();
+		if(task.m_at > now) {
+			return (int)(task.m_at - now);
 		}
 
-		m_taskqueue.pop();
-
-		if(task.m_life == 0) {
-			delete &task;
-			continue;
-		}
+		m_timers.pop();
 
 		task.run();
-
-		if(task.m_life != FOREVER_ALIVE) {
-			task.gotoDead();
-		}
+		task.gotoDead();
 
 		if(task.m_life != 0) {
-			task.m_expired = now + task.m_interval;
-			m_taskqueue.push(&task);
-		}
-		else {
+			task.m_at = now + task.m_interval;
+			m_timers.push(&task);
+		} else {
 			delete &task;
 		}
 	}
@@ -52,8 +42,8 @@ int TimerQueue::run()
 
 void TimerQueue::runAt(Timer *pTask, Timestamp at)
 {
-	pTask->m_expired = at;
-	m_taskqueue.push(pTask);
+	pTask->m_at = at;
+	m_timers.push(pTask);
 }
 
 void TimerQueue::runAfter(const Task &task, TimeInMs delay)

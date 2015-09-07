@@ -42,7 +42,10 @@ namespace global
 // 打印
 	extern char g_sprintfBuf[4096];
 
+	// 全局初始化
 	void init();
+
+	// 全局回收资源
 	void uninit();
 }
 

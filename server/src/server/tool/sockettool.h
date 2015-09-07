@@ -2,7 +2,7 @@
 //< @file:   server\tool\sockettool.h
 //< @author: 洪坤安
 //< @date:   2014年11月25日 14:4:34
-//< @brief:
+//< @brief:  操作socket
 //< Copyright (c) 2014 Tokit. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -15,8 +15,10 @@ class NetAddress;
 
 namespace socktool
 {
+	// 申请新的socket
 	socket_t createSocket();
 
+	// 关闭socket
 	void closeSocket(socket_t);
 
 	// 设置socket为非阻塞
@@ -31,6 +33,7 @@ namespace socktool
 
 	void setReusePort(socket_t, bool on);
 
+	// 如该连接在指定秒内没有任何数据往来,则进行探测
 	void setKeepAlive(socket_t, bool on, int keepAliveTime);
 
 	// windows下默认发送缓冲区大小 = 8192，linux下默认发送缓冲区大小 = 171480
@@ -45,22 +48,25 @@ namespace socktool
 	// 获取socket的错误码并置错误码为0
 	int getSocketError(socket_t sockfd);
 
+	// 打印出错误号对应的错误文本
 	const char* getErrorMsg(int err);
 
+	// 获取系统保存的错误号
 	int geterrno();
 
+	// 清空系统保存的错误号
 	void clearerrno();
 
+	// 获取本端地址
 	struct sockaddr_in getLocalAddr(int sockfd);
+
+	// 获取对端地址
 	struct sockaddr_in getPeerAddr(int sockfd);
 
 	bool bindAddress(socket_t sockfd, const NetAddress& localaddr);
 
+	// 监听socket
 	bool listen(socket_t);
-
-	socket_t accept(socket_t listensock, NetAddress &peerAddr);
-
-	int connect(int sockfd, const struct sockaddr_in& addr);
 }
 
 #endif //_sockettool_h_

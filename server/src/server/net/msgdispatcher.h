@@ -15,6 +15,8 @@
 #include "tool/timetool.h"
 #include "imsghandler.h"
 
+// 消息派发器：负责把消息包派发给合适的消息处理器
+// 注意：<消息派发器>管理多个<消息处理器>，而每个<消息处理器>内又注册了不同的<消息回调函数>
 template <typename LinkType>
 class MsgDispatcher
 {
@@ -29,13 +31,16 @@ public:
 		m_msgMap[msgId] = msgHandler;
 	}
 
+	// 派发消息包
 	void dispatch(LinkType& link, int msgId, const char* data, int len, Timestamp receiveTime)
 	{
+		// 首先根据消息id找到预先注册好的对应的消息包处理器
 		typename MsgHandlerMap::const_iterator itr = m_msgMap.find(msgId);
 		if (itr == m_msgMap.end()) {
 			return;
 		}
 
+		// 再由该消息处理器处理对应的消息包
 		IMsgHandler<LinkType> *msgMgr = itr->second;
 		msgMgr->onMessage(link, msgId, data, len, receiveTime);
 	}

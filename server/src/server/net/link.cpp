@@ -36,11 +36,6 @@ void Link::open()
 	m_net->addFd(this);
 }
 
-void Link::enableRead()
-{
-	m_net->enableRead(this);
-}
-
 void Link::close()
 {
 	// 检测是否重复close
@@ -54,7 +49,7 @@ void Link::close()
 	if (!m_error) {
 		lock_guard_t<> lock(m_sendBufLock);
 
-		// 若数据未发送完毕，则暂缓关闭，停止接收数据，并等待之前的发送操作执行完毕
+		// 若数据未发送完毕，则暂缓关闭，只停止接收数据，等待之前的发送操作执行完毕后再关闭
 		if (!m_sendBuf.empty()) {
 			if (m_isWaitingClose) {
 				return;
@@ -77,7 +72,7 @@ void Link::close()
 	socktool::closeSocket(m_sockfd);
 
 #ifdef WIN
-	// windows需要从读写集上取消注册
+	// 若是windows平台，则需要再从读写集上取消注册
 	m_net->disableAll(this);
 #endif
 
@@ -104,7 +99,6 @@ void Link::onSend()
 	}
 
 	// LOG_INFO << "Link::onSend, socket = " << m_sockfd;
-
 	bool isSendBufEmpty = false;
 	{
 		lock_guard_t<> lock(m_sendBufLock);
@@ -116,6 +110,7 @@ void Link::onSend()
 		return;
 	}
 
+	// 1. 将发送缓冲区的数据全部取出
 	Buffer buf;
 
 	{
@@ -125,14 +120,18 @@ void Link::onSend()
 		m_isWaitingWrite = false;
 	}
 
+	// 2. 尝试发送数据，若数据未能全部发送，则注册写事件
 	int left = trySend(buf);
 	if (left < 0) {
+		// 若发送异常，则关闭连接
 		LOG_ERROR << m_pNetReactor->name() << " = socket<" << m_sockfd << "> trySend fail, ret = " << left;
 		m_error = true;
 		this ->close();
 		return;
 	} else if (left > 0) {
 		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
+
+		// 若数据未能全部发送，则将残余数据重新拷贝到发送缓冲区的头部以保持正确的发送顺序
 		LOG_ERROR << m_pNetReactor->name() << " register write, socket = " << m_sockfd;
 		{
 			lock_guard_t<> lock(m_sendBufLock);
@@ -144,6 +143,7 @@ void Link::onSend()
 			}
 		}
 
+		// 注册写事件，以待当本连接可写时再尝试发送
 		m_net->enableWrite(this);
 	} else {
 		bool isWaitingClose = false;
@@ -156,7 +156,7 @@ void Link::onSend()
 			}
 		}
 
-		// 若已发送完全部数据且本连接正在等待关闭，则执行close操作
+		// 若本次数据已全部发送成功且在此期间没有新的数据等待发送，则检查本连接是否已被标记为<待关闭>，是的话执行close操作
 		if(isWaitingClose) {
 			// LOG_ERROR << m_pNetReactor->name() << "isWaitingClose = true m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes() << " && m_isWaitingWrite = " << m_isWaitingWrite;
 			close();
@@ -271,7 +271,7 @@ int Link::handleRead()
 			}
 		} else if (0 == nread) { // eof
 			// LOG_WARN << "socket<" << m_sockfd << "> read 0, closed! buffer len = " << MAX_PACKET_LEN;
-			// 检测到对端关闭，则直接关闭本连接，不再处理未发送的数据
+			// 接收到0字节的数据，则说明已检测到对端关闭，此时直接关闭本连接，不再处理未发送的数据
 			this->close();
 			return -1;
 		} else {
@@ -335,6 +335,7 @@ int Link::trySend(Buffer &buffer)
 	size_t nleft = buffer.readableBytes();
 	int nwritten = 0;
 
+	// 循环发送数据直到无法再发送
 	while(nleft > 0) {
 		nwritten = ::send(m_sockfd, buffer.peek(), nleft, MSG_NOSIGNAL);
 		if (nwritten > 0) {
@@ -363,12 +364,12 @@ int Link::trySend(Buffer &buffer)
 	return nleft;
 }
 
-NetAddress Link::getLocalAddr()
+NetAddress Link::getLocalAddr() const
 {
 	return NetAddress(socktool::getLocalAddr(m_sockfd));
 }
 
-NetAddress Link::getPeerAddr()
+NetAddress Link::getPeerAddr() const
 {
 	return NetAddress(socktool::getPeerAddr(m_sockfd));
 }

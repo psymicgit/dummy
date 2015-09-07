@@ -14,19 +14,19 @@
 
 std::string ServerLink::name()
 {
-	return std::string(svrtool::getSvrName(m_remoteSvrType)) + "Link";
+	return std::string(svrtool::getSvrName(m_peerSvrType)) + "Link";
 }
 
 void ServerLink::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
-	int svrId = Server::instance->getServerId(m_remoteSvrType, m_svrId);
+	int svrId = Server::instance->getServerId(m_peerSvrType, m_peerSvrId);
 	Server::instance->unregisterServer(svrId);
 
 	Server::instance->onDisconnect(link, localAddr, peerAddr);
-	Server::instance->onDisconnectServer(*link, m_remoteSvrType, m_svrId);
+	Server::instance->onDisconnectServer(*link, m_peerSvrType, m_peerSvrId);
 
 	if (link->m_isAutoReconnect) {
-		Server::instance->m_lan.connect(peerAddr.toIp(), peerAddr.toPort(), *Server::instance, svrtool::getSvrName(m_remoteSvrType).c_str());
+		Server::instance->m_lan.connect(peerAddr.toIp(), peerAddr.toPort(), *Server::instance, svrtool::getSvrName(m_peerSvrType).c_str());
 	}
 }
 

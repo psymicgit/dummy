@@ -27,7 +27,10 @@ public:
 
 	void init()
 	{
+		// 连接服务器请求
 		registerMsg(eConnectSvrReq, OnConnectServerReq);
+
+		// 连接服务器答复
 		registerMsg(eConnectSvrAck, OnConnectServerAck);
 	}
 
@@ -44,7 +47,7 @@ private:
 		res.set_ret(CONNECT_OK);
 
 		if(authKey != g_serverHandshakeAuthKey) {
-			LOG_WARN << "reject server<" << svrtool::getSvrName((ServerType)req->svrtype()) << ", zoneId=" << req->svrid() << "> connect : auth failed, auth key invalid! \n" << msgtool::getMsgString(*req);
+			LOG_WARN << "reject server<" << svrtool::getSvrName((ServerType)req->svrtype()) << ", zoneId=" << req->svrid() << "> connect : auth failed, auth key invalid! \n" << msgtool::getMsgDebugString(*req);
 			res.set_ret(CONNECT_FAIL_AUTH_KEY_INVALID);
 			link->send(eConnectSvrAck, res);
 
@@ -52,7 +55,7 @@ private:
 		}
 
 		if(Server::instance->isSvrLinkExist((ServerType)req->svrtype(), req->svrid())) {
-			LOG_WARN << "reject server<" << svrtool::getSvrName((ServerType)req->svrtype()) << ", zoneId=" << req->svrid() << "> connect : found same server connection! \n" << msgtool::getMsgString(*req);
+			LOG_WARN << "reject server<" << svrtool::getSvrName((ServerType)req->svrtype()) << ", zoneId=" << req->svrid() << "> connect : found same server connection! \n" << msgtool::getMsgDebugString(*req);
 			res.set_ret(CONNECT_FAIL_FOUND_SAME_SERVER);
 		} else {
 			// LOG_DEBUG << "OnAcceptConnect : \n" << msgtool::getMsgString(*req);
@@ -61,8 +64,8 @@ private:
 				res.set_ret(CONNECT_FAIL_UNKNOWN_SERVER_TYPE);
 			} else {
 				svrLink->m_link = link;
-				svrLink->m_remoteSvrType = peerSvrType;
-				svrLink->m_svrId = peerSvrId;
+				svrLink->m_peerSvrType = peerSvrType;
+				svrLink->m_peerSvrId = peerSvrId;
 				svrLink->m_taskQueue = &Server::instance->getTaskQueue();
 
 				link->m_pNetReactor = svrLink;
@@ -101,7 +104,7 @@ private:
 				break;
 			}
 
-			LOG_ERROR << "connect failed: peer server<" << svrtool::getSvrName((ServerType)res->svrtype()) << ", zoneId=" << res->svrid() << "> reject connection : " << failMsg << "! \n" << msgtool::getMsgString(*res);
+			LOG_ERROR << "connect failed: peer server<" << svrtool::getSvrName((ServerType)res->svrtype()) << ", zoneId=" << res->svrid() << "> reject connection : " << failMsg << "! \n" << msgtool::getMsgDebugString(*res);
 
 			link->close();
 			return;
@@ -111,8 +114,8 @@ private:
 		ServerLink *svrLink = Server::instance->onAcceptServer(*link, (ServerType)res->svrtype(), res->svrid());
 		if (svrLink) {
 			svrLink->m_link = link;
-			svrLink->m_remoteSvrType = (ServerType)res->svrtype();
-			svrLink->m_svrId = res->svrid();
+			svrLink->m_peerSvrType = (ServerType)res->svrtype();
+			svrLink->m_peerSvrId = res->svrid();
 			svrLink->m_taskQueue = &Server::instance->getTaskQueue();
 
 			link->m_pNetReactor = svrLink;

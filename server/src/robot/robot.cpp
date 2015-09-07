@@ -181,7 +181,7 @@ bool Robot::send(int msgId, Message &msg)
 	bool ok = msg.SerializeToArray(global::g_encryptBuf + headSize + EncryptHeadLen, size);
 	if (!ok) {
 		LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort()
-		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgString(msg) << "]";
+		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgDebugString(msg) << "]";
 
 		return false;
 	}
@@ -260,6 +260,7 @@ void Robot::speedTest()
 		send(eSpeedTest, p);
 	}
 
+	RobotMgr::Instance().stop();
 	// 	double costTime = tick.endTick();
 	// 	double avgTime = costTime / count;
 	// 	double speed = 1.0f / avgTime;

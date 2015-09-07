@@ -2,7 +2,7 @@
 //< @file:   src\robot\robotmgr.h
 //< @author: 洪坤安
 //< @date:   2015年3月16日 11:43:59
-//< @brief:
+//< @brief:  机器人中心
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -37,10 +37,13 @@ public:
 
 	void start();
 
+	// 停止执行：将产生一个停止任务投到任务队列
 	void stop();
 
+	// 执行所有停止操作
 	void stopping();
 
+	// 每次游戏循环所执行的操作
 	void run();
 
 	void onRobotDisconnect(Robot*);

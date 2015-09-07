@@ -28,7 +28,8 @@ struct LanMsgHead {
 
 namespace msgtool
 {
-	string getMsgString(const Message &msg);
+	// 获取msg的详细内容
+	string getMsgDebugString(const Message &msg);
 
 	// 构建网络包头
 	int buildNetHeader(NetMsgHead *msgHead, uint16 msgId, uint32 msgLen);

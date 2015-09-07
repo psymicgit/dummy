@@ -16,13 +16,14 @@
 
 class Epoll;
 class Select;
-class task_queue_pool_t;
-class thread_t;
+class TaskQueuePool;
+class Thread;
 class Listener;
 class Link;
 class Connector;
 class INetReactor;
 
+// 网络通信中心，提供listen、connect等网络操作接口
 class NetFactory
 {
 	friend class Listener;
@@ -32,31 +33,44 @@ class NetFactory
 	typedef std::vector<Connector*> ConnectorVec;
 
 private:
+	// 网络线程启动后开始执行本方法
 	static void runNet(void *e);
 
 public:
 	NetFactory();
 
+	// 初始化网络：定义开启线程数、连接池空间
 	bool init(int threadCnt, int initLinkCnt = 1000);
 
+	// 开始执行网络操作
 	void start();
 
+	// 停止执行网络操作（将阻塞直到所有网络线程关闭）
 	void stop();
 
+	// 监听指定的ip和端口，由传入的INetReactor处理新连接
 	Listener* listen(const string& ip, int port, INetReactor&);
 
+	// 主动连接指定的ip和端口，由传入的INetReactor执行连接接收成功后的操作
 	Connector* connect(const string& ip, int port, INetReactor&, const char* remoteHostName);
 
 public:
+	// 网络模型: linux下epoll / windows下select
 	NetModel m_net;
-	task_queue_pool_t* m_taskQueuePool;
-	thread_t m_thread;
+	TaskQueuePool* m_taskQueuePool;
 
+	// 网络线程
+	Thread m_thread;
+
+	// 是否已启动标志
 	bool m_started;
 
 	int m_threadCnt; /* = 2 */
 
+	// 网络监听器列表
 	ListenerVec m_listeners;
+
+	// 网络连接器列表
 	ConnectorVec m_connectors;
 };
 

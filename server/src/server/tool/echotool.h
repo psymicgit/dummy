@@ -26,12 +26,13 @@ void ColoredPrintf(ECHO_COLOR color, const char* fmt, ...);
 
 namespace echotool
 {
+	// 改变控制台颜色
 	void changeToColor(ECHO_COLOR);
 
+	// 恢复控制台颜色
 	void changeToOldColor();
 
-	// std::string getmsg(const char* fmt, ...);
-
+	// 根据传入的格式文本和参数返回最终的文本串
 	const char* getmsg(const char* fmt, ...);
 }
 

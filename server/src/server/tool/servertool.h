@@ -14,8 +14,8 @@
 // 服务器类型定义
 enum ServerType {
 	eNullServer		= 0,
-	eGameServer		= 1,
-	eGateServer		= 2,
+	eGameServer		= 1, // 游戏服
+	eGateServer		= 2, // 网关
 	eServerTypeMax
 };
 
@@ -23,6 +23,7 @@ const static std::string g_serverHandshakeAuthKey = "*={[(8b1a4e5f8a7d7d)]}*==";
 
 namespace svrtool
 {
+	// 获取服务器名称
 	string& getSvrName(ServerType svrType);
 }
 

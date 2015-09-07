@@ -8,7 +8,5 @@
 
 #include "buffer.h"
 
-const char Buffer::kCRLF[] = "\r\n";
-
 const size_t Buffer::g_cheapPrepend = 0;
 const size_t Buffer::g_initSize = 128;

@@ -226,17 +226,17 @@ void Epoll::mod(IFd *pfd, uint32 events)
 
 void Epoll::recycleFds()
 {
-	lock_guard_t<> lock(m_mutex);
-	list<IFd*>::iterator itr = m_deletingFdList.begin();
+	FdList delFds;
 
-	IFd *pfd = NULL;
-	for (; itr != m_deletingFdList.end(); ++itr) {
-		// LOG_INFO << "add fd " << (*it)->socket();
-		pfd = *itr;
-		pfd->erase();
+	{
+		lock_guard_t<> lock(m_mutex);
+		delFds.swap(m_deletingFdList);
 	}
 
-	m_deletingFdList.clear();
+	for(int i = 0; i < delFds.size(); ++i) {
+		IFd *pfd = delFds[i];
+		pfd->erase();
+	}
 }
 
 #else
@@ -244,6 +244,7 @@ void Epoll::recycleFds()
 Select::Select()
 	: m_maxfd(0)
 {
+	// windows下需先执行WSAStartup进行初始化
 	WSADATA wsa;
 	WSAStartup(MAKEWORD(2, 2), &wsa);
 
@@ -378,7 +379,7 @@ int Select::eventLoop()
 	fd_set wset;
 	fd_set eset;
 
-	//这里我们打算让select等待两秒后返回，避免被锁死，也避免马上返回
+	//这里我们打算让select等待50豪秒后返回，避免被锁死，也避免马上返回
 	struct timeval tv = {0, 50};
 
 	while(m_running) {
@@ -391,7 +392,7 @@ int Select::eventLoop()
 		if(n < 0) {
 			//LOG_SOCKET_ERR << "select()";
 			if(EINTR == errno) {
-				LOG_DEBUG << "get EINTR. We cotinue.";
+				LOG_DEBUG << "get EINTR. We continue.";
 				continue;
 			}
 
@@ -410,12 +411,10 @@ int Select::eventLoop()
 					if(--readyfds == 0) break;
 				}
 				if(FD_ISSET(fd, &wset)) {
-					// LOG_DEBUG << "write fds";
 					pfd->handleWrite();
 					if(--readyfds == 0) break;
 				}
 				if(FD_ISSET(fd, &eset)) {
-					// LOG_DEBUG << "exception fd";
 					pfd->handleError();
 					if(--readyfds == 0) break;
 				}

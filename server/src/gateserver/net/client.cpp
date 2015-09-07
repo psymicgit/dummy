@@ -28,7 +28,7 @@ Client::Client()
 	, m_speedTestCount(0)
 	, m_latencyTestCount(0)
 {
-	memset(m_encryptKey, 0, sizeof(m_encryptKey));
+	bzero(m_encryptKey, sizeof(m_encryptKey));
 }
 
 void Client::onEstablish()
@@ -155,7 +155,7 @@ bool Client::send(int msgId, Message &msg)
 	bool ok = msg.SerializeToArray(global::g_encryptBuf + headSize + EncryptHeadLen, size);
 	if (!ok) {
 		LOG_ERROR << "client [" << m_link->m_peerAddr.toIpPort()
-		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgString(msg) << "]";
+		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgDebugString(msg) << "]";
 
 		return false;
 	}

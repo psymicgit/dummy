@@ -2,7 +2,7 @@
 //< @file:   src\robot\robot.h
 //< @author: 洪坤安
 //< @date:   2015年3月16日 11:32:28
-//< @brief:
+//< @brief:  机器人
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -19,6 +19,7 @@ enum RobotState {
 	ROBOT_STATE_AUTHED, // 已经过认证
 };
 
+// 机器人
 class Robot : public INetReactor
 {
 public:
@@ -53,10 +54,13 @@ public:
 	void login();
 
 public:
+	// 开始ping-pong测试
 	void pingpongTest();
 
+	// 开始速度测试
 	void speedTest();
 
+	// 开始延迟测试
 	void latencyTest();
 
 private:

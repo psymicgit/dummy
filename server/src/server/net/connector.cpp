@@ -22,7 +22,7 @@ Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *ne
 	, m_pNetReactor(netReactor)
 	, m_net(net)
 	, m_retryDelayMs(InitRetryDelayMs)
-	, m_state(kDisconnected)
+	, m_state(StateDisconnected)
 	, m_errno(0)
 	, m_remoteHostName(remoteHostName)
 {
@@ -31,9 +31,12 @@ Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *ne
 	//socktool::setTcpNoDelay(m_sockfd);
 }
 
-bool Connector::connect()
+void Connector::connect()
 {
-	int ret = socktool::connect(m_sockfd, m_peerAddr.getSockAddr());
+	// 直接连接
+	// 注意：这里是非阻塞connect，一般会立即返回 EINPROGRESS 错误，表示连接操作正在进行中，但是仍未完成，与此同时 TCP 三次握手操作会同时进行
+	// 在这之后，我们可以捕获可写事件以及error事件来检查这个链接是否建立成功
+	int ret = ::connect(m_sockfd, (struct sockaddr *)&m_peerAddr.getSockAddr(), static_cast<socklen_t>(sizeof sockaddr_in));
 
 	int err = ((ret == SOCKET_ERROR) ? socktool::geterrno() : 0);
 	switch (err) {
@@ -82,13 +85,13 @@ bool Connector::connect()
 		retry();
 		break;
 	}
-
-	return true;
 }
 
 int Connector::handleRead()
 {
-	return handleWrite();
+	// 一般是不会接收到读事件的，所以这里打印error
+	LOG_ERROR << m_pNetReactor->name() << "recv read event, socket = " << m_sockfd;
+	return 0;
 }
 
 int Connector::handleWrite()
@@ -96,6 +99,7 @@ int Connector::handleWrite()
 	// 先检测套接字是否发生异常
 	m_errno = socktool::getSocketError(m_sockfd);
 	if (m_errno > 0) {
+		// 若检测到异常，则重连
 		LOG_SOCKET_ERR(m_sockfd, m_errno) << m_pNetReactor->name();
 		retry();
 
@@ -117,8 +121,6 @@ int Connector::handleError()
 void Connector::close()
 {
 	//LOG_INFO << "Connector::close, socket = " << m_sockfd;
-
-
 	m_net->disableAll(this);
 	m_net->delFd(this);
 }
@@ -132,23 +134,38 @@ bool Connector::onConnected()
 {
 	// 成功连接上对端
 	Link* link = createLink(m_sockfd, m_peerAddr);
+	if (NULL == link) {
+		LOG_ERROR << m_pNetReactor->name() << " connector create link failed, socket = " << m_sockfd;
+		this->close();
+		socktool::closeSocket(m_sockfd);
+		return false;
+	}
+
 	this->close();
 
 	link->open();
+
+	// 将连接成功的消息投到业务层
 	m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onConnected, m_pNetReactor, link, link->m_localAddr, m_peerAddr));
-	m_pNetReactor->getTaskQueue().put(boost::bind(&Link::enableRead, link));
+
+	// 等业务层处理完新连接后，才允许该连接开始读
+	m_pNetReactor->getTaskQueue().put(boost::bind(&NetModel::enableRead, m_net, link));
 
 	return true;
 }
 
 bool Connector::connecting()
 {
-	if (m_state == kDisconnected) {
+	if (m_state == StateDisconnected) {
+		// 将本连接器注册到网络
 		m_net->addFd(this);
+
+		// 注册写事件
 		m_net->enableWrite(this);
 
-		m_state = kConnecting;
-	} else if(m_state == kConnecting) {
+		m_state = StateConnecting;
+	} else if(m_state == StateConnecting) {
+		// 重新注册写事件（但不需要将本连接器重新注册到网络）
 		m_net->enableWrite(this);
 	}
 
@@ -169,17 +186,20 @@ bool Connector::retry()
 	LOG_SOCKET_ERR(m_sockfd, m_errno) << "socket<" << m_sockfd << "> connect to " << m_remoteHostName << "<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
 	m_errno = 0;
 
-	if (m_state == kConnecting) {
+	if (m_state == StateConnecting) {
+		// 屏蔽所有事件，防止无限触发exception
 		m_net->disableAll(this);
 
 #ifndef WIN
-		m_state = kDisconnected;
+		m_state = StateDisconnected;
 #endif
 	}
 
+	// 设置定时任务：隔一段时间后重新连接
 	TimerQueue &timerQueue = m_net->getTimerQueue();
 	timerQueue.runAfter(boost::bind(&Connector::connect, this), m_retryDelayMs);
 
+	// 重连时间 = 重连时间 * 2
 	m_retryDelayMs = MIN(m_retryDelayMs * 2, MaxRetryDelayMs);
 	return true;
 }
@@ -190,6 +210,10 @@ Link* Connector::createLink(socket_t newfd, NetAddress &peerAddr)
 	NetAddress localAddr(socktool::getLocalAddr(newfd));
 
 	Link *link = linkPool.alloc(newfd, localAddr, peerAddr, m_net, m_pNetReactor);
+	if (NULL == link) {
+		return NULL;
+	}
+
 	link->m_isAutoReconnect = true;
 	return link;
 }

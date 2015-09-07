@@ -16,6 +16,7 @@
 
 class Client;
 
+// 客户端管理中心，管理当前在线的客户端连接实例
 class ClientMgr : public INetReactor
 {
 private:
@@ -50,13 +51,14 @@ public:
 
 	uint32 m_allocClientId;
 
+	// 当前在线的客户端列表
 	ClientMap m_clientMap;
 
+	// 客户端消息派发器，派发客户端发来的消息
 	MsgDispatcher<Client> m_dispatcher;
 
+	// 客户端池
 	ObjectPool<Client> m_clientPool;
-
-	Buffer m_msgBuf;
 };
 
 #endif //_clientmgr_h_
