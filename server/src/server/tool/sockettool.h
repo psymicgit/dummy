@@ -27,11 +27,10 @@ namespace socktool
 	// 关闭Nagle算法
 	bool setTcpNoDelay(socket_t);
 
-	bool checkNonBlocking(socket_t);
-
+	// 设置端口重用，使得处于TIME_WAIT状态下的socket可以重复绑定使用
+	// (一般来说，一个端口释放后会等待两分钟（即TIME_WAIT状态的时间）之后才能再被使用，SO_REUSEADDR是让端口释放后立即就可以被再次使用，否则将提示"地址正在使用中"
+	// 服务端程序应该调用bind()之前设置SO_REUSEADDR套接字选项。TCP中先调用close()的一方会进入TIME_WAIT状态)
 	void setReuseAddr(socket_t, bool on);
-
-	void setReusePort(socket_t, bool on);
 
 	// 如该连接在指定秒内没有任何数据往来,则进行探测
 	void setKeepAlive(socket_t, bool on, int keepAliveTime);
@@ -63,6 +62,7 @@ namespace socktool
 	// 获取对端地址
 	struct sockaddr_in getPeerAddr(int sockfd);
 
+	// 为套接字命名：调用bind()函数之后，为socket()函数创建的套接字关联一个相应地址，发送到这个地址的数据可以通过该套接字读取与使用。
 	bool bindAddress(socket_t sockfd, const NetAddress& localaddr);
 
 	// 监听socket

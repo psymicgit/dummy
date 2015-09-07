@@ -34,6 +34,7 @@ bool Listener::open(const string & ip, int port)
 		return false;
 	}
 
+	// 设置
 	socktool::setReuseAddr(m_listenFd, true);
 
 	// 设置为非阻塞
