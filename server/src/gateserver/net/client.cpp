@@ -70,12 +70,14 @@ void Client::handleMsg()
 	Link *link = m_link;
 	Buffer buf;
 
+	// 1. 将接收缓冲区的数据全部取出
 	{
 		lock_guard_t<> lock(link->m_recvBufLock);
 		link->m_isWaitingRead = false;
 		buf.swap(link->m_recvBuf);
 	}
 
+	// 2. 循环处理消息数据
 	while(true) {
 		// 检测包头长度
 		size_t bytes = buf.readableBytes();
@@ -120,6 +122,7 @@ void Client::handleMsg()
 		buf.skip(dataLen);
 	};
 
+	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
 	if (!buf.empty()) {
 		{
 			lock_guard_t<> lock(link->m_recvBufLock);
@@ -152,6 +155,7 @@ bool Client::send(int msgId, Message &msg)
 	uint32 headSize = sizeof(NetMsgHead);
 	int size = msg.ByteSize();
 
+	// 将消息包序列化为二进制数据
 	bool ok = msg.SerializeToArray(global::g_encryptBuf + headSize + EncryptHeadLen, size);
 	if (!ok) {
 		LOG_ERROR << "client [" << m_link->m_peerAddr.toIpPort()

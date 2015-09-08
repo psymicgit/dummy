@@ -129,8 +129,6 @@ void Link::onSend()
 		this ->close();
 		return;
 	} else if (left > 0) {
-		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
-
 		// 若数据未能全部发送，则将残余数据重新拷贝到发送缓冲区的头部以保持正确的发送顺序
 		LOG_ERROR << m_pNetReactor->name() << " register write, socket = " << m_sockfd;
 		{
@@ -145,7 +143,9 @@ void Link::onSend()
 
 		// 注册写事件，以待当本连接可写时再尝试发送
 		m_net->enableWrite(this);
+		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
 	} else {
+		// 检查本连接是否已被标记为<待关闭>，是的话，若本次数据已全部发送成功且在此期间没有新的数据等待发送，则执行close操作
 		bool isWaitingClose = false;
 		{
 			lock_guard_t<> lock(m_sendBufLock);
@@ -156,12 +156,9 @@ void Link::onSend()
 			}
 		}
 
-		// 若本次数据已全部发送成功且在此期间没有新的数据等待发送，则检查本连接是否已被标记为<待关闭>，是的话执行close操作
 		if(isWaitingClose) {
 			// LOG_ERROR << m_pNetReactor->name() << "isWaitingClose = true m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes() << " && m_isWaitingWrite = " << m_isWaitingWrite;
 			close();
-		} else {
-			// LOG_ERROR << m_pNetReactor->name() << "isWaitingClose = false m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes() << " && m_isWaitingWrite = " << m_isWaitingWrite;
 		}
 	}
 }
@@ -257,24 +254,29 @@ int Link::handleRead()
 		return 0;
 	}
 
+	// 循环接收数据直到无法再接收
 	int nread = 0;
 	do {
 		nread = ::recv(m_sockfd, global::g_recvBuf, MAX_PACKET_LEN, NULL);
 		if (nread > 0) {
+			// 若成功接收到数据，则将本次接收到的数据拷贝到接收缓冲区末尾
 			{
 				lock_guard_t<> lock(m_recvBufLock);
 				m_recvBuf.append(global::g_recvBuf, nread);
 			}
 
+			// 若本次接收数据长度并未超出最大接收长度，则说明目前本连接上的数据已全部接收完毕
 			if (nread < MAX_PACKET_LEN) {
 				break; // 相当于EWOULDBLOCK
 			}
 		} else if (0 == nread) { // eof
+			// 若接收到0字节的数据，则说明已检测到对端关闭，此时直接关闭本连接，不再处理未发送的数据
+
 			// LOG_WARN << "socket<" << m_sockfd << "> read 0, closed! buffer len = " << MAX_PACKET_LEN;
-			// 接收到0字节的数据，则说明已检测到对端关闭，此时直接关闭本连接，不再处理未发送的数据
 			this->close();
 			return -1;
 		} else {
+			// 发生异常：EAGAIN及EWOULDBLOCK信号说明已接收完毕，EINTR信号应忽略，其余信号说明本连接发生错误
 			int err = socktool::geterrno();
 			if(EINTR == err) {
 				// LOG_WARN << "socket<" << m_sockfd << "> error = EINTR " << err;
@@ -293,6 +295,7 @@ int Link::handleRead()
 
 	//m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onRecv, m_pNetReactor, this, m_recvBuf));
 
+	// 检测业务层是否已存在处理本连接接收数据的任务，若有则无需再次通知业务层，由之前的数据处理任务一并处理本次接收到的所有数据
 	{
 		lock_guard_t<> lock(m_recvBufLock);
 		if (m_isWaitingRead) {
@@ -302,6 +305,7 @@ int Link::handleRead()
 		m_isWaitingRead = true;
 	}
 
+	// 由业务层进行数据接收处理
 	m_pNetReactor->onRecv(this, m_recvBuf);
 	return 0;
 }
@@ -324,7 +328,9 @@ int Link::handleWrite()
 
 int Link::handleError()
 {
-	LOG_WARN << m_pNetReactor->name() << " socket<" << m_sockfd << "> error";
+	int err = socktool::getSocketError(m_sockfd);
+	LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " socket<" << m_sockfd << "> error";
+
 	m_error = true;
 	this->close();
 	return 0;
@@ -352,6 +358,7 @@ int Link::trySend(Buffer &buffer)
 #ifdef WIN
 			case EWOULDBLOCK:
 #endif
+				// 说明已无法再发送，中断发送
 				return nleft;
 
 			default:

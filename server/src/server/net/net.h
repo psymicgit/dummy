@@ -125,8 +125,13 @@ protected:
 	void stop();
 	void closing();
 
+	// <网络是否正在运行>标志位
 	bool m_running;
+
+	// epoll句柄
 	int m_efd;
+
+	// 用于唤醒epoll的socketpair
 	int m_interupt_sockets[2];
 
 	// 待销毁的socket列表
@@ -222,6 +227,7 @@ private:
 	// exception文件描述符集
 	fd_set m_eset;
 
+	// <网络是否正在运行>标志位
 	bool m_running;
 };
 

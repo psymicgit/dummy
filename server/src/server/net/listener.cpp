@@ -14,10 +14,11 @@
 #include "net/netreactor.h"
 #include "net/netfactory.h"
 
-Listener::Listener(NetModel *pNet, INetReactor *pNetReactor)
+Listener::Listener(NetModel *pNet, INetReactor *pNetReactor, NetFactory *pNetFactory)
 	: m_net(pNet)
 	, m_pNetReactor(pNetReactor)
 	, m_listenFd(0)
+	, m_netNetFactory(pNetFactory)
 {
 
 }
@@ -125,7 +126,7 @@ int Listener::handleRead()
 		m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onAccepted, m_pNetReactor, link, m_listenAddr, peerAddr));
 
 		// 等业务层处理完新连接后，才允许该连接开始读
-		m_pNetReactor->getTaskQueue().put(boost::bind(&NetModel::enableRead, m_net, link));
+		m_pNetReactor->getTaskQueue().put(boost::bind(&NetModel::enableRead, link->m_net, link));
 	} while (true);
 
 	return 0;
@@ -145,6 +146,8 @@ int Listener::handleError()
 
 Link* Listener::createLink(socket_t newfd, NetAddress &peerAddr)
 {
-	LinkPool &linkPool = m_net->getLinkPool();
-	return linkPool.alloc(newfd, m_listenAddr, peerAddr, m_net, m_pNetReactor);
+	NetModel *net = m_netNetFactory->nextNet();
+
+	LinkPool &linkPool = net->getLinkPool();
+	return linkPool.alloc(newfd, m_listenAddr, peerAddr, net, m_pNetReactor);
 }

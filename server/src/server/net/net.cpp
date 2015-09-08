@@ -27,6 +27,7 @@ Epoll::Epoll()
 	, m_efd(-1)
 	  // , m_curFdCount(0)
 {
+	// 创建一个epoll的句柄
 	m_efd = ::epoll_create(1);
 
 	m_interupt_sockets[0] = -1;

@@ -11,6 +11,7 @@
 
 #include "taskqueue.h"
 
+// 线程类：可管理多个系统线程
 class Thread
 {
 #ifdef WIN
@@ -44,6 +45,7 @@ public:
 	int join();
 
 private:
+	// 持有的系统线程id列表
 	ThreadIdList m_tidList;
 };
 

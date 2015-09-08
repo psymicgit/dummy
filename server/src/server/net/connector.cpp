@@ -13,11 +13,12 @@
 #include "tool/sockettool.h"
 #include "net/netaddress.h"
 #include "net/netreactor.h"
+#include "net/netfactory.h"
 #include "net/link.h"
 #include "basic/timerqueue.h"
 #include "basic/taskqueue.h"
 
-Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *net, const char* remoteHostName)
+Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *net, const char* remoteHostName, NetFactory *pNetFactory)
 	: m_peerAddr(peerAddr)
 	, m_pNetReactor(netReactor)
 	, m_net(net)
@@ -25,6 +26,7 @@ Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *ne
 	, m_state(StateDisconnected)
 	, m_errno(0)
 	, m_remoteHostName(remoteHostName)
+	, m_netNetFactory(pNetFactory)
 {
 	m_sockfd = socktool::createSocket();
 	socktool::setNonBlocking(m_sockfd);
@@ -151,7 +153,7 @@ bool Connector::onConnected()
 	m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onConnected, m_pNetReactor, link, link->m_localAddr, m_peerAddr));
 
 	// 等业务层处理完新连接后，才允许该连接开始读
-	m_pNetReactor->getTaskQueue().put(boost::bind(&NetModel::enableRead, m_net, link));
+	m_pNetReactor->getTaskQueue().put(boost::bind(&NetModel::enableRead, link->m_net, link));
 
 	return true;
 }
@@ -208,10 +210,12 @@ bool Connector::retry()
 
 Link* Connector::createLink(socket_t newfd, NetAddress &peerAddr)
 {
-	LinkPool &linkPool = m_net->getLinkPool();
+	NetModel *net = m_netNetFactory->nextNet();
+
+	LinkPool &linkPool = net->getLinkPool();
 	NetAddress localAddr(socktool::getLocalAddr(newfd));
 
-	Link *link = linkPool.alloc(newfd, localAddr, peerAddr, m_net, m_pNetReactor);
+	Link *link = linkPool.alloc(newfd, localAddr, peerAddr, net, m_pNetReactor);
 	if (NULL == link) {
 		return NULL;
 	}

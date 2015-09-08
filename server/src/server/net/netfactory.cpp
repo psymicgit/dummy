@@ -14,12 +14,14 @@
 
 void NetFactory::runNet(void *e)
 {
-	NetFactory *netFactory = (NetFactory*)e;
-	netFactory->m_net.eventLoop();
+	NetModel *net = (NetModel*)e;
+	net->eventLoop();
 }
+
 
 NetFactory::NetFactory()
 	: m_started(false)
+	, m_curNetIdx(0)
 {
 }
 
@@ -27,10 +29,21 @@ bool NetFactory::init(int threadCnt, int initLinkCnt)
 {
 	assert(threadCnt > 0);
 
-	m_threadCnt = threadCnt;
 	// m_taskQueuePool = new task_queue_pool_t(m_threadCnt);
 
-	m_net.init(initLinkCnt, 1000);
+	// m_net.init(initLinkCnt, 1000);
+
+	for (int i = 0; i < threadCnt; i++) {
+		NetModel *net = new NetModel;
+		if (NULL == net) {
+			LOG_SYSTEM_ERR << "net resource allocate failed not enough memory, aborted!";
+			return false;
+		}
+
+		net->init(initLinkCnt, initLinkCnt);
+		m_nets.push_back(net);
+	}
+
 	return true;
 }
 
@@ -46,7 +59,12 @@ void NetFactory::start()
 	// m_thread.create_thread(task_queue_pool_t::gen_task(m_taskQueuePool), m_threadCnt);
 #endif
 
-	m_thread.createThread(Task(&runNet, this), 1);
+	// m_thread.createThread(Task(&runNet, this), 1);
+
+	for (size_t i = 0; i < m_nets.size(); i++) {
+		NetModel *net = m_nets[i];
+		m_netThread.createThread(Task(&runNet, net), 1);
+	}
 }
 
 void NetFactory::stop()
@@ -58,8 +76,6 @@ void NetFactory::stop()
 	}
 
 	LOG_WARN << "stopping net ...";
-
-	// m_taskQueuePool->close();
 
 #ifndef WIN
 	// 关闭所有监听器
@@ -74,9 +90,14 @@ void NetFactory::stop()
 // 	}
 #endif
 
-	// 关闭网络，并等待直到网络线程退出
-	m_net.close();
-	m_thread.join();
+	// 关闭网络
+	for (size_t i = 0; i < m_nets.size(); i++) {
+		NetModel *net = m_nets[i];
+		net->close();
+	}
+
+	// 等待直到网络线程退出
+	m_netThread.join();
 
 	// 	delete m_taskQueuePool;
 	// 	m_taskQueuePool = NULL;
@@ -91,7 +112,13 @@ void NetFactory::stop()
 
 Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor)
 {
-	Listener* listener = new Listener(&m_net, &netReactor);
+	// 创建一个网络监听器，该网络监听器将被注册到网络中
+	Listener* listener = new Listener(nextNet(), &netReactor, this);
+	if (NULL == listener) {
+		LOG_SYSTEM_ERR << "listen at <" << ip << ": " << port << "> failed, not enough memory";
+		return NULL;
+	}
+
 	if (!listener->open(ip, port)) {
 		LOG_SYSTEM_ERR << "listen at <" << ip << ": " << port << "> failed";
 
@@ -107,9 +134,23 @@ Connector* NetFactory::connect(const string& ip, int port, INetReactor &netReact
 {
 	NetAddress peerAddr(ip, port);
 
-	Connector* connector = new Connector(peerAddr, &netReactor, &m_net, remoteHostName);
+	// 创建一个网络连接器，该网络监听器将被注册到网络中
+	Connector* connector = new Connector(peerAddr, &netReactor, nextNet(), remoteHostName, this);
+	if (NULL == connector) {
+		LOG_SYSTEM_ERR << "connect to <" << ip << ": " << port << "> failed, not enough memory";
+		return NULL;
+	}
+
 	connector->connect();
 
 	m_connectors.push_back(connector);
 	return connector;
+}
+
+NetModel* NetFactory::nextNet()
+{
+	NetModel *net = m_nets[m_curNetIdx];
+	m_curNetIdx = (m_curNetIdx + 1) % m_nets.size();
+
+	return net;
 }

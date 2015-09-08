@@ -21,7 +21,7 @@ class NetFactory;
 class Listener : public IFd
 {
 public:
-	Listener(NetModel*, INetReactor*);
+	Listener(NetModel*, INetReactor*, NetFactory*);
 
 	// 开始监听
 	virtual bool open(const string& ip, int port);
@@ -60,6 +60,8 @@ private:
 
 	// 正在监听的socket
 	socket_t m_listenFd;
+
+	NetFactory *m_netNetFactory;
 };
 
 #endif //_listener_h_

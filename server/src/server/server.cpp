@@ -132,12 +132,13 @@ void Server::handleMsg(Link *link)
 
 	// 2. 循环处理消息数据
 	while(true) {
-		// 检测半包
+		// 检测包头长度
 		size_t bytes = buf.readableBytes();
 		if (bytes < sizeof(NetMsgHead)) {
 			break;
 		}
 
+		// 检测半包
 		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
 		msgHead->msgId = endiantool::networkToHost16(msgHead->msgId);
 		msgHead->msgLen = endiantool::networkToHost32(msgHead->msgLen);

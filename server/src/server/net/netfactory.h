@@ -33,14 +33,14 @@ class NetFactory
 	typedef std::vector<Connector*> ConnectorVec;
 
 private:
-	// 网络线程启动后开始执行本方法
+	// 网络线程启动后将开始执行本方法
 	static void runNet(void *e);
 
 public:
 	NetFactory();
 
 	// 初始化网络：定义开启线程数、连接池空间
-	bool init(int threadCnt, int initLinkCnt = 1000);
+	bool init(int threadCnt, int initLinkCnt = 200);
 
 	// 开始执行网络操作
 	void start();
@@ -54,18 +54,20 @@ public:
 	// 主动连接指定的ip和端口，由传入的INetReactor执行连接接收成功后的操作
 	Connector* connect(const string& ip, int port, INetReactor&, const char* remoteHostName);
 
+	// 从下一个网络线程中取出网络通信中心指针
+	NetModel *nextNet();
+
 public:
 	// 网络模型: linux下epoll / windows下select
-	NetModel m_net;
-	TaskQueuePool* m_taskQueuePool;
+	std::vector<NetModel*> m_nets;
+
+	int m_curNetIdx;
 
 	// 网络线程
-	Thread m_thread;
+	Thread m_netThread;
 
 	// 是否已启动标志
 	bool m_started;
-
-	int m_threadCnt; /* = 2 */
 
 	// 网络监听器列表
 	ListenerVec m_listeners;

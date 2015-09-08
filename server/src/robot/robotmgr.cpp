@@ -56,7 +56,7 @@ bool RobotMgr::init()
 
 	LOG_WARN << "starting robotmgr ...";
 
-	m_wan.init(4);
+	m_wan.init(1);
 
 	if (!m_httpMgr.init()) {
 		LOG_ERROR << "robothttpmgr init failed, aborted";

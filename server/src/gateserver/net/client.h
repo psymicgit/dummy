@@ -15,6 +15,7 @@
 class Link;
 class ClientMgr;
 
+// 客户端连接
 class Client : public INetReactor
 {
 public:
@@ -31,25 +32,32 @@ public:
 	virtual TaskQueue& getTaskQueue() { return *m_taskQueue; }
 
 public:
+	// 执行本客户端连接成功建立时所需要执行的初始化操作
 	void onEstablish();
 
+	// 发送消息包
 	bool send(int msgId, Message&);
 
+	// 关闭本客户端连接
 	void close();
 
+	// 出来本客户端连接已收到的数据
 	void handleMsg();
 
 	bool needRoute(int msgId);
 
 public:
+	// 与客户端的tcp原始连接
 	Link *m_link;
 	uint32 m_clientId;
 
 	TaskQueue *m_taskQueue;
 	ClientMgr *m_clientMgr;
 
+	// 加密密钥
 	uint8 m_encryptKey[EncryptKeyLen];
 
+	// 认证密钥
 	uint8 m_authKey[AuthKeyLen];
 
 public:

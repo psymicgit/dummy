@@ -12,6 +12,8 @@
 #include "netaddress.h"
 #include "net/net.h"
 
+class NetFactory;
+
 class INetReactor;
 
 // 网络连接器，主动向指定的<ip,端口>发起连接，如果连接不上将定时尝试重连直到成功
@@ -28,7 +30,7 @@ class Connector : public IFd
 	};
 
 public:
-	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, const char* remoteHostName);
+	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, const char* remoteHostName, NetFactory *pNetFactory);
 
 	virtual socket_t socket() const {return m_sockfd;}
 
@@ -87,6 +89,8 @@ private:
 
 	// 对端的业务名称
 	std::string m_remoteHostName;
+
+	NetFactory *m_netNetFactory;
 };
 
 #endif //_connector_h_

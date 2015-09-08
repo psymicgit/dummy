@@ -17,6 +17,7 @@
 #include "protocol/message.h"
 #include <tool/ticktool.h>
 
+// 处理客户端发给网关的各类消息
 class ClientMsgHandler : public MsgHandler<Client>
 {
 public:

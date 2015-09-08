@@ -74,7 +74,7 @@ public:
 
 	inline size_t prependableBytes() const { return m_readPos; }
 
-	inline const char* peek() const { return begin() + m_readPos; }
+	inline char* peek() { return begin() + m_readPos; }
 
 	inline bool empty() const { return readableBytes() == 0; }
 
@@ -89,13 +89,6 @@ public:
 		} else {
 			clear();
 		}
-	}
-
-	void skipTo(const char* end)
-	{
-		assert(peek() <= end);
-		assert(end <= beginWrite());
-		skip(end - peek());
 	}
 
 	void clear()
@@ -114,20 +107,6 @@ public:
 		m_buffer.swap(std::vector<char>());
 	}
 
-	std::string takeAllAsString()
-	{
-		return takeAsString(readableBytes());;
-	}
-
-	std::string takeAsString(size_t len)
-	{
-		assert(len <= readableBytes());
-
-		std::string result(peek(), len);
-		skip(len);
-		return result;
-	}
-
 	void append(const char* data, size_t len)
 	{
 		if (writableBytes() < len) {
@@ -135,17 +114,11 @@ public:
 		}
 		assert(writableBytes() >= len);
 
-		std::copy(data, data + len, beginWrite());
+		memcpy(beginWrite(), data, len);
 		hasWritten(len);
 	}
 
-	void append(const void* /*restrict*/ data, size_t len)
-	{
-		append(static_cast<const char*>(data), len);
-	}
-
 	char* beginWrite() { return begin() + m_writePos; }
-	const char* beginWrite() const { return begin() + m_writePos; }
 
 	void hasWritten(size_t len)
 	{
@@ -169,8 +142,8 @@ public:
 	{
 		assert(len <= prependableBytes());
 		m_readPos -= len;
-		const char* d = static_cast<const char*>(data);
-		std::copy(d, d + len, begin() + m_readPos);
+
+		memcpy(peek(), data, len);
 	}
 
 	size_t capacity() const
@@ -178,25 +151,20 @@ public:
 		return m_buffer.capacity();
 	}
 
-	char* begin()
-	{ return &m_buffer[0]; }
-
-	const char* begin() const
-	{ return &m_buffer[0]; }
+	char* begin() { return &m_buffer[0]; }
 
 private:
+	// 分配空间使得空闲空间足够再容纳下len字节
 	void makeSpace(size_t len)
 	{
 		if (writableBytes() + prependableBytes() < len + g_cheapPrepend) {
-			// FIXME: move readable data
+			// 重新分配空间
 			m_buffer.resize(m_writePos + len);
 		} else {
-			// move readable data to the front, make space inside buffer
-			assert(g_cheapPrepend < m_readPos);
+			// 将数据移动到开头
 			size_t readable = readableBytes();
-			std::copy(begin() + m_readPos,
-			          begin() + m_writePos,
-			          begin() + g_cheapPrepend);
+
+			memcpy(begin() + g_cheapPrepend, begin() + m_readPos, readableBytes());
 			m_readPos = g_cheapPrepend;
 			m_writePos = m_readPos + readable;
 			assert(readable == readableBytes());

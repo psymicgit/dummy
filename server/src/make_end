@@ -30,7 +30,7 @@ CPPFLAGS = -W -Wall -Wno-unused -Wno-reorder -m${long_bit} $(MACD) -pipe -std=c+
 A_LINK      = ar rv
 
 ifeq (${compile_type}, release)
-	GCC   		= g++ -O2 ${CPPFLAGS} -fPIC -c
+	GCC   		= g++ -O2 ${CPPFLAGS} -fPIC -c -DNDEBUG
 	SO_LINK     = g++ -O2 ${CPPFLAGS} -fPIC -shared -o 
 	EXEC_LINK   = g++ -O2 ${CPPFLAGS} -o	
 else
