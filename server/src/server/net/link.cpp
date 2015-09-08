@@ -130,7 +130,7 @@ void Link::onSend()
 		return;
 	} else if (left > 0) {
 		// 若数据未能全部发送，则将残余数据重新拷贝到发送缓冲区的头部以保持正确的发送顺序
-		LOG_ERROR << m_pNetReactor->name() << " register write, socket = " << m_sockfd;
+		// LOG_ERROR << m_pNetReactor->name() << " register write, socket = " << m_sockfd;
 		{
 			lock_guard_t<> lock(m_sendBufLock);
 			if (!m_sendBuf.empty()) {

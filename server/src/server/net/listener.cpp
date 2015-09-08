@@ -97,13 +97,14 @@ int Listener::handleRead()
 		if ((newfd = ::accept(m_listenFd, (struct sockaddr *)&addr, &addrlen)) == -1) {
 			int err = errno;
 			// LOG_ERROR<< "err = " << err;
-			if (err == EAGAIN ) {
+			if (err == EAGAIN || err == EWOULDBLOCK) {
+				// 在non-blocking模式下，如果accept返回值为-1，且errno == EAGAIN或errno == EWOULDBLOCK表示没有新连接请求
 				break;
 			} else if (err == ECONNABORTED && err == EPROTO && err == EINTR) {
 				LOG_ERROR << "errno == " << err;
 				continue;
 			} else {
-				LOG_ERROR << m_pNetReactor->name() << " accept failed, restart listenning now";
+				LOG_SYSTEM_ERR << m_pNetReactor->name() << " accept failed, restart listenning now";
 				//! if too many open files occur, need to restart epoll event
 				m_net->reopen(this);
 				break;

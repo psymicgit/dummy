@@ -126,13 +126,13 @@ protected:
 	void closing();
 
 	// <网络是否正在运行>标志位
-	bool m_running;
+	volatile bool m_running;
 
 	// epoll句柄
 	int m_efd;
 
-	// 用于唤醒epoll的socketpair
-	int m_interupt_sockets[2];
+	// 用于唤醒epoll的socketpair，实际上是半双工通信，但这里我们只用来单工通信，所以命名为pipe
+	int m_pipe[2];
 
 	// 待销毁的socket列表
 	FdList m_deletingFdList;

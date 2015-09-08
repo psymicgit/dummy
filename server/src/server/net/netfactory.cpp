@@ -69,8 +69,6 @@ void NetFactory::start()
 
 void NetFactory::stop()
 {
-	LOG_WARN << "stopping net ..." << "m_started=" << m_started;
-
 	if (!m_started) {
 		return;
 	}

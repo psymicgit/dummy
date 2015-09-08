@@ -30,7 +30,7 @@ bool GateServer::init()
 	m_lan.init(1);
 	m_wan.init(2);
 
-	test();
+	// test();
 
 	m_lan.listen("127.0.0.1", 10001, *this);
 	m_wan.listen("127.0.0.1", 20001, m_clientMgr);

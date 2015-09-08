@@ -30,14 +30,19 @@ Epoll::Epoll()
 	// 创建一个epoll的句柄
 	m_efd = ::epoll_create(1);
 
-	m_interupt_sockets[0] = -1;
-	m_interupt_sockets[1] = -1;
-	assert( 0 == ::socketpair(AF_LOCAL, SOCK_STREAM, 0, m_interupt_sockets));
+	m_pipe[0] = -1;
+	m_pipe[1] = -1;
+
+	int err = ::socketpair(AF_LOCAL, SOCK_STREAM, 0, m_pipe);
+	assert(0 == err);
+	if (err) {
+		LOG_SYSTEM_ERR << "socketpair failed";
+	}
 
 	struct epoll_event ee = { 0, { 0 } };
 	ee.data.ptr  = this;
 	ee.events    = EPOLLIN | EPOLLPRI | EPOLLOUT | EPOLLHUP | EPOLLET;;
-	::epoll_ctl(m_efd, EPOLL_CTL_ADD, m_interupt_sockets[0], &ee);
+	::epoll_ctl(m_efd, EPOLL_CTL_ADD, m_pipe[0], &ee);
 
 	// 如果客户端关闭套接字close，而服务器调用一次write, 服务器会接收一个RST segment（tcp传输层）
 	// 如果服务器端再次调用了write，这个时候就会产生SIGPIPE信号，默认终止进程。
@@ -55,14 +60,16 @@ Epoll::~Epoll()
 {
 	m_linkPool.clear();
 
-	::close(m_interupt_sockets[0]);
-	::close(m_interupt_sockets[1]);
+	::close(m_pipe[0]);
+	::close(m_pipe[1]);
 	::close(m_efd);
 	m_efd = -1;
 }
 
 void Epoll::stop()
 {
+	recycleFds();
+
 	LOG_WARN << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
 	LOG_WARN << "close net successful";
 }
@@ -137,7 +144,7 @@ int Epoll::interruptLoop()
 	ee.data.ptr  = this;
 	ee.events    = EPOLLIN | EPOLLOUT | EPOLLPRI | EPOLLHUP | EPOLLET;;
 
-	return ::epoll_ctl(m_efd, EPOLL_CTL_MOD, m_interupt_sockets[0], &ee);
+	return ::epoll_ctl(m_efd, EPOLL_CTL_MOD, m_pipe[0], &ee);
 }
 
 void Epoll::addFd(IFd* pfd)
