@@ -13,9 +13,9 @@ exit
 
   
     echo 启动%svrdir%下的gameserver服务器
-    cd gameserver
-    start "%svrdir%\gameserver.exe" "%svrdir%\gameserver.exe"
-    cd ..
+    rem cd gameserver
+    rem start "%svrdir%\gameserver.exe" "%svrdir%\gameserver.exe"
+    rem cd ..
 
     echo 启动%svrdir%下的gateserver服务器
     cd gateserver

@@ -13,20 +13,20 @@ cd $bin_dir
 echo "start run servers"
 	echo launching gameserver
 		cd gameserver
-		nohup ./gameserver &
+		# nohup ./gameserver >/dev/null 2>&1 &
 		cd ../
 
 	echo launching gateserver
 		cd gateserver
-		# nohup ./gateserver &
+		nohup ./gateserver >/dev/null 2>&1 &
 		cd ../
 
 	echo launching robot
 		cd robot
 
-		for ((i=0;i<20;i++))
+		for ((i=0;i<1;i++))
 		{
-			nohup ./robot &
+			nohup ./robot >/dev/null 2>&1 &
 		}
 
 		cd ../
