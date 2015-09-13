@@ -63,9 +63,14 @@ void Robot::randomRobot()
 
 void Robot::onConnected(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
+	static int g_connectedRobotCnt = 0;
+	++g_connectedRobotCnt;
+
 	m_link = link;
 
-	LOG_INFO << name() << " <" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success, current robot cnt = " << m_robotMgr->m_robotMap.size();
+	if (g_connectedRobotCnt % 100 == 0) {
+		LOG_INFO << name() << " <" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success, current robot cnt = " << g_connectedRobotCnt;
+	}
 
 	// m_link->send("1\r\n");
 }
@@ -79,7 +84,10 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	}
 	*/
 
-	LOG_INFO << "robot<" << m_robotId << "> <" << localAddr.toIpPort() << "> to gateserver <" << peerAddr.toIpPort() << "> closed! current robot cnt = " << m_robotMgr->m_robotMap.size() - 1;
+	if (m_robotMgr->m_robotMap.size() - 1 % 100 == 0) {
+		LOG_INFO << "robot<" << m_robotId << "> <" << localAddr.toIpPort() << "> to gateserver <" << peerAddr.toIpPort() << "> closed! current robot cnt = " << m_robotMgr->m_robotMap.size() - 1;
+	}
+
 	m_robotMgr->onRobotDisconnect(this);
 }
 
@@ -249,7 +257,9 @@ void Robot::speedTest()
 	p.set_pingpong("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 	p.set_time(0);
 
-	LOG_WARN << name() << " start speed test, g_speedTestCnt = " << g_speedTestCnt << ", speed packet size = " << p.ByteSize();
+	if (g_speedTestCnt % 100 == 0) {
+		LOG_WARN << name() << " start speed test, g_speedTestCnt = " << g_speedTestCnt << ", speed packet size = " << p.ByteSize();
+	}
 
 	int count = 1000;
 	// 	Tick tick("send() speed test");
@@ -275,7 +285,9 @@ void Robot::latencyTest()
 	PingPong p;
 	p.set_pingpong("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 
-	LOG_WARN << "robot <" << m_robotId << "> start latency test, g_latencyTestCnt = " << g_latencyTestCnt << ", latency packet size = " << p.ByteSize();
+	if (g_latencyTestCnt % 100 == 0) {
+		LOG_WARN << "robot <" << m_robotId << "> start latency test, g_latencyTestCnt = " << g_latencyTestCnt << ", latency packet size = " << p.ByteSize();
+	}
 
 	for (int i = 0; i < 1000; i++) {
 		p.set_time(ticktool::tick());

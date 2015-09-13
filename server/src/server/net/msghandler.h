@@ -34,12 +34,6 @@ public:
 	{
 	}
 
-	// 处理接收到的数据
-	void onMessage(LinkType& link, int msgId, const char* data, int len, Timestamp receiveTime) const
-	{
-
-	}
-
 	// 对某个消息id注册对应的回调函数
 	template <typename MessageType>
 	void registerMsg(int msgId, void (*callback)(LinkType*, MessageType* message, Timestamp))
@@ -48,11 +42,6 @@ public:
 		m_callbackMap[msgId] = pd;
 
 		m_msgDispacher->registerMsg(msgId, pd);
-	}
-
-	void discardMessage(Link& link, const Message& message, Timestamp receiveTime) const
-	{
-		LOG_DEBUG << "Discarding " << msgtool::getMsgDebugString(message);
 	}
 
 	// 回收所有资源，包括内存

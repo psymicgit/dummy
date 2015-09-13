@@ -187,7 +187,7 @@ bool Connector::retry()
 		}
 	}
 
-	LOG_SOCKET_ERR(m_sockfd, m_errno) << "socket<" << m_sockfd << "> connect to " << m_remoteHostName << "<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
+	LOG_SOCKET_ERR(m_sockfd, m_errno) << m_pNetReactor->name() << " connect to " << m_remoteHostName << "<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
 	m_errno = 0;
 
 	if (m_state == StateConnecting) {

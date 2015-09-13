@@ -64,7 +64,9 @@ void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAdd
 // 		LOG_INFO << "clientNum = " << clientNum << ", m_clientMap.size() = " << m_clientMap.size();
 // 	}
 
-	LOG_INFO << "<" << localAddr.toIpPort() << "> accept new client from <" << peerAddr.toIpPort() << ">, m_clientMap.size()=" << m_clientMap.size();
+	if (m_clientMap.size() % 100 == 0) {
+		LOG_INFO << "<" << localAddr.toIpPort() << "> accept new client from <" << peerAddr.toIpPort() << ">, m_clientMap.size()=" << m_clientMap.size();
+	}
 }
 
 void ClientMgr::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)

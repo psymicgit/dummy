@@ -10,13 +10,12 @@
 #define _imsghandler_h_
 
 // 消息处理器
+// （这里之所以提取出IMsgHandler接口是为了防止模板文件互相包含导致编译不过）
 template <typename LinkType>
 class IMsgHandler
 {
 public:
 	virtual ~IMsgHandler() {}
-
-	virtual void onMessage(LinkType& link, int msgId, const char* data, int len, Timestamp receiveTime) const = 0;
 
 	virtual void clear() = 0;
 };

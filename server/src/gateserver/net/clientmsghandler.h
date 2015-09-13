@@ -88,11 +88,11 @@ private:
 		++g_speedTestCount;
 		++client->m_speedTestCount;
 
-		if (g_speedTestCount % 5000 == 0) {
+		if (g_speedTestCount % 50000 == 0) {
 			// LOG_INFO << msgtool::getMsgString(*p);
 			LOG_INFO << "speedtest count = " << g_speedTestCount << ", speedtest size = " << p->ByteSize();
 
-			if (g_speedTestCount % 10000 == 0) {
+			if (g_speedTestCount % 100000 == 0) {
 				double speed = tick.endTick() / g_speedTestCount;
 				double count = 1.0f / speed;
 				LOG_WARN << "speedtest count = " << g_speedTestCount << ", avg cost=" << speed << ", exe count per second = " << count;
@@ -113,11 +113,11 @@ private:
 		++g_latencyTestCount;
 		++client->m_latencyTestCount;
 
-		if (g_latencyTestCount % 5000 == 0) {
+		if (g_latencyTestCount % 50000 == 0) {
 			// LOG_INFO << msgtool::getMsgString(*p);
 			LOG_INFO << "latencytest count = " << g_latencyTestCount << ", latencytest size = " << p->ByteSize();
 
-			if (g_latencyTestCount % 10000 == 0) {
+			if (g_latencyTestCount % 100000 == 0) {
 				double speed = tick.endTick() / g_latencyTestCount;
 				double count = 1.0f / speed;
 				LOG_WARN << "latencytest count = " << g_latencyTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
@@ -129,10 +129,10 @@ private:
 			}
 		}
 
-		if (client->m_latencyTestCount % 1000 == 0) {
-			double diff = ticktool::tickDiff(p->time());
-			LOG_WARN << "avg latency = " << diff;
-		}
+// 		if (client->m_latencyTestCount % 1000 == 0) {
+// 			double diff = ticktool::tickDiff(p->time());
+// 			LOG_WARN << "avg latency = " << diff;
+// 		}
 	}
 };
 

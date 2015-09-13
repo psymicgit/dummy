@@ -15,7 +15,6 @@
 #include "tool/timetool.h"
 #include "imsghandler.h"
 
-
 // 消息回调基类
 template <typename LinkType>
 class Callback
@@ -79,7 +78,7 @@ public:
 		// 寻找到对应的消息回调函数
 		typename CallbackMap::const_iterator it = m_callbackMap.find(msgId);
 		if (it == m_callbackMap.end()) {
-			LOG_DEBUG << "Discard msg[id=" << msgId << "]";
+			LOG_DEBUG << "Discard msg[id=" << msgId << "][len=" << len << "]";
 			return;
 		}
 
@@ -95,13 +94,20 @@ public:
 
 	void clear()
 	{
+		// LOG_INFO << "clear";
 
+		for (size_t i = 0; i < m_msgHandlerVec.size(); i++) {
+			IMsgHandler<LinkType> *msgHandler = m_msgHandlerVec[i];
+			msgHandler->clear();
+			delete msgHandler;
+		}
+
+		m_msgHandlerVec.clear();
 	}
 
 private:
 	// 消息回调map
 	CallbackMap m_callbackMap;
-	MsgHandlerMap m_msgMap;
 	MsgHandlerVec m_msgHandlerVec;;
 };
 
