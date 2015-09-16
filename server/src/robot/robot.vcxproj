@@ -54,7 +54,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/curl/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/curl/include;../../3rd/rapidjson/include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
@@ -95,6 +95,7 @@
     <ClCompile Include="http\robothttpmgr.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="robot.cpp" />
+    <ClCompile Include="robotconfig.cpp" />
     <ClCompile Include="robotmgr.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
@@ -105,6 +106,7 @@
     <ClInclude Include="http\handshakehttpcmd.h" />
     <ClInclude Include="http\robothttpmgr.h" />
     <ClInclude Include="robot.h" />
+    <ClInclude Include="robotconfig.h" />
     <ClInclude Include="robotmgr.h" />
     <ClInclude Include="robotmsghandler.h" />
     <ClInclude Include="stdafx.h" />

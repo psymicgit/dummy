@@ -11,7 +11,7 @@
 int main(int argc, char **argv)
 {
 	GateServer &svr = GateServer::Instance();
-	if (!svr.init()) {
+	if (!svr.init("gateconfig.json")) {
 		svr.uninit();
 		return 0;
 	}

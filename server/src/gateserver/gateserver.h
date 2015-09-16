@@ -11,6 +11,7 @@
 
 #include "server.h"
 #include "net/clientmgr.h"
+#include "config/gateconfig.h"
 
 class GameSvrLink;
 
@@ -19,7 +20,7 @@ class GateServer : public Singleton<GateServer>, public Server
 public:
 	GateServer();
 
-	bool init();
+	bool init(const char* jsonConfig);
 
 	void start();
 
@@ -45,6 +46,9 @@ private:
 
 	// 客户端管理中心
 	ClientMgr m_clientMgr;
+
+	// 网关配置
+	GateConfig m_config;
 };
 
 #endif //_gateserver_h_

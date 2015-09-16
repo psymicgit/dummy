@@ -46,7 +46,7 @@ void registerSignal()
 #endif
 }
 
-bool RobotMgr::init()
+bool RobotMgr::init(const char* jsonConfig)
 {
 	registerSignal();
 
@@ -56,19 +56,24 @@ bool RobotMgr::init()
 
 	LOG_WARN << "starting robotmgr ...";
 
-	m_wan.init(1);
+	if (!m_config.load(jsonConfig)) {
+		LOG_INFO << name() << "load config failed! aborted!";
+		return false;
+	}
+
+	m_wan.init(m_config.m_wanThreadNum);
 
 	if (!m_httpMgr.init()) {
 		LOG_ERROR << "robothttpmgr init failed, aborted";
 		return false;
 	}
 
-	for(int i = 0; i < 10000; i++) {
+	for(int i = 0; i < m_config.m_robotNum; i++) {
 		Robot *robot = createRobot();
 		// robot->start();
 
 		// LOG_INFO << "robot " << i << " start connecting to server";
-		m_wan.connect("127.0.0.1", 20001, *robot, "gateserver");
+		m_wan.connect(m_config.m_gateserver.ip, m_config.m_gateserver.port, *robot, "gateserver");
 		// m_wan.connect("127.0.0.1", 80, *robot);
 	}
 

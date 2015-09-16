@@ -26,6 +26,9 @@
       <Filter>net</Filter>
     </ClCompile>
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="config\gateconfig.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gateserver.h" />
@@ -58,6 +61,9 @@
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="test.h" />
+    <ClInclude Include="config\gateconfig.h">
+      <Filter>config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="net">
@@ -68,6 +74,9 @@
     </Filter>
     <Filter Include="logic">
       <UniqueIdentifier>{cce8e00c-7ca4-4b22-8477-286a799ffba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{3a6b0e3d-435d-4ea6-8c5c-93346217e0e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -19,7 +19,7 @@ GateServer::GateServer()
 	m_clientMgr.m_taskQueue = &m_taskQueue;
 }
 
-bool GateServer::init()
+bool GateServer::init(const char* jsonConfig)
 {
 	if (!Server::init()) {
 		return false;
@@ -27,13 +27,22 @@ bool GateServer::init()
 
 	logging::init("gateserver", "log_gatesvr_");
 
-	m_lan.init(1);
-	m_wan.init(2);
+	if (!m_config.load(jsonConfig)) {
+		LOG_INFO << name() << "load config failed! aborted!";
+		return false;
+	}
+
+	m_lan.init(m_config.m_lanThreadNum);
+	m_wan.init(m_config.m_wanThreadNum);
 
 	// test();
+	m_wan.listen(m_config.m_wanListen.ip, m_config.m_wanListen.port, m_clientMgr);
 
-	m_lan.listen("127.0.0.1", 10001, *this);
-	m_wan.listen("127.0.0.1", 20001, m_clientMgr);
+	std::vector<IpPort> &lanListens = m_config.m_lanListens;
+	for(size_t i = 0; i < lanListens.size(); i++) {
+		m_wan.listen(lanListens[i].ip, lanListens[i].port, *this);
+	}
+
 	return true;
 }
 

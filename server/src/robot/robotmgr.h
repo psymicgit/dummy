@@ -16,6 +16,7 @@
 
 #include "http/robothttpmgr.h"
 #include "robot.h"
+#include "robotconfig.h"
 
 class RobotMgr : public Singleton<RobotMgr>
 {
@@ -31,7 +32,7 @@ public:
 	virtual std::string name() { return string("robotmgr"); }
 
 public:
-	bool init();
+	bool init(const char* jsonConfig);
 
 	bool uninit();
 
@@ -66,6 +67,8 @@ public:
 	NetFactory m_wan;
 
 	RobotHttpMgr m_httpMgr;
+
+	RobotConfig m_config;
 };
 
 #endif //_robotmgr_h_

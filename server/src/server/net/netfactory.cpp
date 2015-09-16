@@ -110,6 +110,11 @@ void NetFactory::stop()
 
 Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor)
 {
+	if (0 == port) {
+		LOG_SYSTEM_ERR << "listen at <" << ip << ": " << port << "> failed, port = 0!";
+		return NULL;
+	}
+
 	// 创建一个网络监听器，该网络监听器将被注册到网络中
 	Listener* listener = new Listener(nextNet(), &netReactor, this);
 	if (NULL == listener) {
