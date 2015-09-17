@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FetchWndContent", "FetchWndContent\FetchWndContent.vcproj", "{618726A7-8D23-4121-A0D6-77B7025A1D33}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fetch_wnd_content", "fetch_wnd_content\fetch_wnd_content.vcproj", "{0BBB63BE-483E-43F0-BA0F-68F102C5C52A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{618726A7-8D23-4121-A0D6-77B7025A1D33}.Debug|Win32.ActiveCfg = Debug|Win32
+		{618726A7-8D23-4121-A0D6-77B7025A1D33}.Debug|Win32.Build.0 = Debug|Win32
+		{618726A7-8D23-4121-A0D6-77B7025A1D33}.Release|Win32.ActiveCfg = Release|Win32
+		{618726A7-8D23-4121-A0D6-77B7025A1D33}.Release|Win32.Build.0 = Release|Win32
+		{0BBB63BE-483E-43F0-BA0F-68F102C5C52A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0BBB63BE-483E-43F0-BA0F-68F102C5C52A}.Debug|Win32.Build.0 = Debug|Win32
+		{0BBB63BE-483E-43F0-BA0F-68F102C5C52A}.Release|Win32.ActiveCfg = Release|Win32
+		{0BBB63BE-483E-43F0-BA0F-68F102C5C52A}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
