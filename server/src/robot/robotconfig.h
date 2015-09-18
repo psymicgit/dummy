@@ -23,7 +23,7 @@ struct RobotConfig {
 	int m_robotNum;
 	int m_robotsPerSecond;
 
-	// 缃戝叧鏈嶅姟鍣ㄥ湴鍧�
+	// 网关服务器地址
 	IpPort m_gateserver;
 };
 

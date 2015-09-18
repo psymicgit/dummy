@@ -26,12 +26,6 @@ namespace filetool
 	// 又如：path = "../../"
 	bool exist(const std::string &path);
 
-	// 列出指定文件夹下的文件名列表（子文件夹将被忽略），含义如windows命令行下的dir
-	// 例如：path = ../../*.*,   则 files = { "a.txt", "b.txt", "c.exe" }
-	// 又如：path = ../../*.txt, 则 files = { "a.txt", "b.txt" }
-	typedef std::vector<string> filevec_t;
-	bool dir(const std::string &path, /* out */filevec_t &files);
-
 	// 以二进制方式读取整个文件，根据文件大小分配缓冲区，将文件内容存入缓冲区中并返回
 	// 该缓冲区通过new分配，所以要手动delete[]
 	char* get_whole_file_buf(const std::string &path);

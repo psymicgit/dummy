@@ -28,13 +28,13 @@ bool RobotConfig::load(const char* jsonConfig)
 	}
 
 	{
-		// è¯»å–æœºå™¨äººæ•°é‡ç­‰é…ç½®
+		// ¶ÁÈ¡»úÆ÷ÈËÊıÁ¿µÈÅäÖÃ
 		m_wanThreadNum = doc["robot-num"].GetInt();
 		m_robotNum = doc["robots-per-second"].GetInt();
 	}
 
 	{
-		// è¯»å–ç½‘å…³æœåŠ¡å™¨åœ°å€å’Œç½‘ç»œé…ç½®
+		// ¶ÁÈ¡Íø¹Ø·şÎñÆ÷µØÖ·ºÍÍøÂçÅäÖÃ
 		const Value& wan = doc["wan"];
 		const Value& gateserver = wan["connect"];
 
