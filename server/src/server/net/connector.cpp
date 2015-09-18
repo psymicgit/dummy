@@ -33,6 +33,20 @@ Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *ne
 	//socktool::setTcpNoDelay(m_sockfd);
 }
 
+bool Connector::open()
+{
+	m_sockfd = socktool::createSocket();
+	if (m_sockfd <= 0) {
+		return false;
+	}
+
+	if (!socktool::setNonBlocking(m_sockfd)) {
+		return false;
+	}
+
+	return true;
+}
+
 void Connector::connect()
 {
 	// 直接连接

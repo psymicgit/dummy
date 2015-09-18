@@ -106,7 +106,7 @@ void Link::onSend()
 	}
 
 	if (isSendBufEmpty) {
-		LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
+		// LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
 		return;
 	}
 
@@ -124,7 +124,7 @@ void Link::onSend()
 	int left = trySend(buf);
 	if (left < 0) {
 		// 若发送异常，则关闭连接
-		LOG_ERROR << m_pNetReactor->name() << " = socket<" << m_sockfd << "> trySend fail, ret = " << left;
+		// LOG_ERROR << m_pNetReactor->name() << " = socket<" << m_sockfd << "> trySend fail, ret = " << left;
 		m_error = true;
 		this ->close();
 		return;
@@ -285,7 +285,7 @@ int Link::handleRead()
 				// LOG_WARN << "read task socket<" << m_sockfd << "> EWOULDBLOCK || EAGAIN, err = " << err;
 				break;
 			} else {
-				LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " recv fail, err = " << err << ", history recv buf size = " << m_recvBuf.readableBytes();
+				// LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " recv fail, err = " << err << ", history recv buf size = " << m_recvBuf.readableBytes();
 				m_error = true;
 				this->close();
 				return -1;
@@ -312,7 +312,7 @@ int Link::handleRead()
 
 int Link::handleWrite()
 {
-	LOG_INFO << m_pNetReactor->name() << " socket <" << m_sockfd << "> is writable";
+	// LOG_INFO << m_pNetReactor->name() << " socket <" << m_sockfd << "> is writable";
 	if (!isopen()) {
 		return 0;
 	}
@@ -328,8 +328,12 @@ int Link::handleWrite()
 
 int Link::handleError()
 {
-	int err = socktool::getSocketError(m_sockfd);
-	LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " socket<" << m_sockfd << "> error";
+	if (m_error || m_isWaitingClose || !isopen()) {
+		return 0;
+	}
+
+	// int err = socktool::getSocketError(m_sockfd);
+	// LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " socket<" << m_sockfd << "> error";
 
 	m_error = true;
 	this->close();
@@ -362,7 +366,7 @@ int Link::trySend(Buffer &buffer)
 				return nleft;
 
 			default:
-				LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << "  send fail, err = " << err << ",nleft = " << nleft << ", nwritten = " << nwritten;
+				// LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << "  send fail, err = " << err << ",nleft = " << nleft << ", nwritten = " << nwritten;
 				return -1;
 			}
 		}

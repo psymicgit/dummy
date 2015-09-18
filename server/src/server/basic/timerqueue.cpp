@@ -52,6 +52,12 @@ void TimerQueue::runAfter(const Task &task, TimeInMs delay)
 	runAfter(taskTimer, delay);
 }
 
+void TimerQueue::runEvery(const Task &task, TimeInMs interval)
+{
+	TaskTimer *taskTimer = new TaskTimer(task);
+	runEvery(taskTimer, interval);
+}
+
 void TimerQueue::runAfter(Timer *pTask, TimeInMs delay)
 {
 	Timestamp now = timetool::getTimeOfDay();
@@ -61,12 +67,13 @@ void TimerQueue::runAfter(Timer *pTask, TimeInMs delay)
 
 void TimerQueue::runEvery(Timer *pTask, TimeInMs interval, int times/* ´¥·¢´ÎÊı */)
 {
-	pTask->m_life = times;
 	runAfter(pTask, interval);
+	pTask->m_life = times;
 }
 
 void TimerQueue::runEvery(Timer *pTask, TimeInMs interval)
 {
-	pTask->m_life = -1;
 	runAfter(pTask, interval);
+	pTask->m_life = FOREVER_ALIVE;
+	pTask->m_interval = interval;
 }

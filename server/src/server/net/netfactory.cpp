@@ -144,6 +144,12 @@ Connector* NetFactory::connect(const string& ip, int port, INetReactor &netReact
 		return NULL;
 	}
 
+	if (!connector->open()) {
+		LOG_SYSTEM_ERR << "connect to <" << ip << ": " << port << "> failed, open failed";
+		delete connector;
+		return NULL;
+	}
+
 	connector->connect();
 
 	m_connectors.push_back(connector);

@@ -254,20 +254,18 @@ void Robot::speedTest()
 	g_speedTestCnt++;
 
 	PingPong p;
-	p.set_pingpong("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+	p.set_pingpong("0", m_robotMgr->m_config.m_speedTestPacketSize);
 	p.set_time(0);
 
 	if (g_speedTestCnt % 100 == 0) {
 		LOG_WARN << name() << " start speed test, g_speedTestCnt = " << g_speedTestCnt << ", speed packet size = " << p.ByteSize();
 	}
 
-	int count = 1000;
-	// 	Tick tick("send() speed test");
-
-	for (int i = 0; i < count; i++) {
+	for (int i = 0; i < m_robotMgr->m_config.m_speedTestPacketNum; i++) {
 		send(eSpeedTest, p);
 	}
 
+	m_link->close();
 	// RobotMgr::Instance().stop();
 	// 	double costTime = tick.endTick();
 	// 	double avgTime = costTime / count;

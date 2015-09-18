@@ -69,7 +69,7 @@ public:
 	void send(int msgId, const char *data, int len);
 
 	// 本连接是否打开
-	bool isopen() { return !m_closed; }
+	inline bool isopen() { return !m_closed; }
 
 private:
 	// 发送本连接尚未发送完的数据

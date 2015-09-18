@@ -114,6 +114,9 @@ public:
 	// 延时一段时间执行task任务
 	void runAfter(const Task&, TimeInMs delay);
 
+	// 每隔interval毫秒执行一次task任务，不会终结
+	void runEvery(const Task&, TimeInMs interval);
+
 	// 延时一段时间执行task任务
 	void runAfter(Timer*, TimeInMs delay);
 

@@ -212,7 +212,7 @@ private:
 	// 任务队列
 	TaskQueue m_tasks;
 
-	// 定时器
+	// 定时器队列
 	TimerQueue m_timers;
 
 	// 当前最大fd

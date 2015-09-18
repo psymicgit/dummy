@@ -32,6 +32,8 @@ class Connector : public IFd
 public:
 	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, const char* remoteHostName, NetFactory *pNetFactory);
 
+	bool open();
+
 	virtual socket_t socket() const {return m_sockfd;}
 
 	// 处理可读事件

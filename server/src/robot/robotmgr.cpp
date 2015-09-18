@@ -68,14 +68,17 @@ bool RobotMgr::init(const char* jsonConfig)
 		return false;
 	}
 
-	for(int i = 0; i < m_config.m_robotNum; i++) {
-		Robot *robot = createRobot();
-		// robot->start();
+	creareRobots();
+	m_timers.runEvery(boost::bind(&RobotMgr::creareRobots, this), m_config.m_robotsInterval);
 
-		// LOG_INFO << "robot " << i << " start connecting to server";
-		m_wan.connect(m_config.m_gateserver.ip, m_config.m_gateserver.port, *robot, "gateserver");
-		// m_wan.connect("127.0.0.1", 80, *robot);
-	}
+// 	for(int i = 0; i < m_config.m_robotNum; i++) {
+// 		Robot *robot = createRobot();
+// 		// robot->start();
+//
+// 		// LOG_INFO << "robot " << i << " start connecting to server";
+// 		m_wan.connect(m_config.m_gateserver.ip, m_config.m_gateserver.port, *robot, "gateserver");
+// 		// m_wan.connect("127.0.0.1", 80, *robot);
+// 	}
 
 	m_dispatcher.addMsgHandler(new RobotMsgHandler(&m_dispatcher));
 
@@ -104,6 +107,18 @@ Robot* RobotMgr::createRobot()
 
 	m_robotMap[robot->m_robotId]  = robot;
 	return robot;
+}
+
+void RobotMgr::creareRobots()
+{
+	for(int i = 0; i < m_config.m_robotsPerSecond; i++) {
+		Robot *robot = createRobot();
+		// robot->start();
+
+		// LOG_INFO << "robot " << i << " start connecting to server";
+		m_wan.connect(m_config.m_gateserver.ip, m_config.m_gateserver.port, *robot, "gateserver");
+		// m_wan.connect("127.0.0.1", 80, *robot);
+	}
 }
 
 void RobotMgr::start()
@@ -146,7 +161,7 @@ void RobotMgr::stopping()
 void RobotMgr::run()
 {
 	m_taskQueue.run();
-
+	m_timers.run();
 	m_httpMgr.run();
 	sleep(10);
 }
@@ -166,7 +181,7 @@ void RobotMgr::onRobotDisconnect(Robot *robot)
 	delete robot;
 
 	if (m_robotMap.empty()) {
-		stop();
+		// stop();
 	}
 
 // 	if (m_robotMap.size() == 1) {

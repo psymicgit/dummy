@@ -29,8 +29,10 @@ bool RobotConfig::load(const char* jsonConfig)
 
 	{
 		// 读取机器人数量等配置
-		m_wanThreadNum = doc["robot-num"].GetInt();
-		m_robotNum = doc["robots-per-second"].GetInt();
+		m_robotsPerSecond = doc["robots-per-second"].GetInt();
+		m_robotsInterval = doc["robots-interval"].GetInt();
+		m_speedTestPacketSize = doc["robots-speedtest-packet-size"].GetInt();
+		m_speedTestPacketNum = doc["robots-speedtest-packet-num"].GetInt();
 	}
 
 	{

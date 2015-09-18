@@ -13,15 +13,19 @@ struct IpPort {
 struct RobotConfig {
 	RobotConfig ()
 		: m_wanThreadNum(0)
-		, m_robotNum(0)
 		, m_robotsPerSecond(0)
+		, m_robotsInterval(0)
+		, m_speedTestPacketSize(0)
+		, m_speedTestPacketNum(0)
 	{}
 
 	bool load(const char* configFile);
 
 	int m_wanThreadNum;
-	int m_robotNum;
 	int m_robotsPerSecond;
+	int m_robotsInterval;
+	int m_speedTestPacketSize;
+	int m_speedTestPacketNum;
 
 	// 网关服务器地址
 	IpPort m_gateserver;
