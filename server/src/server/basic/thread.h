@@ -17,7 +17,7 @@ class Thread
 #ifdef WIN
 	typedef vector<HANDLE> ThreadIdList;
 #else
-	typedef list<pthread_t> ThreadIdList;
+	typedef vector<pthread_t> ThreadIdList;
 #endif
 
 public:

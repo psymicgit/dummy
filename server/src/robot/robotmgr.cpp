@@ -139,17 +139,17 @@ void RobotMgr::stop()
 		return;
 	}
 
-	m_run = false;
-
 	LOG_WARN << "start closing robotmgr ...";
 	LOG_WARN << "	<m_taskQueue.size() = " << m_taskQueue.size() << ">";
 
 	m_taskQueue.put(boost::bind(&RobotMgr::stopping, this));
-	run();
+	// run();
 }
 
 void RobotMgr::stopping()
 {
+	m_run = false;
+
 	LOG_WARN << "stopping robotmgr ...";
 
 	m_wan.stop();

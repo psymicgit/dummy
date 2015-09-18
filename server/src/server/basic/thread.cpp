@@ -58,8 +58,8 @@ int Thread::join()
 		CloseHandle(thread);
 	}
 #else
-	for (ThreadIdList::iterator itr = m_tidList.begin(); itr != m_tidList.end(); ++itr) {
-		pthread_t tid = *itr;
+	for (size_t i = 0; i < m_tidList.size(); i++) {
+		pthread_t tid = m_tidList[i];
 		pthread_join(tid, NULL);
 	}
 #endif

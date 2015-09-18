@@ -214,14 +214,13 @@ void Server::stop()
 	LOG_WARN << "start closing " << name() << " ...";
 	LOG_INFO << "	<m_taskQueue.size() = " << m_taskQueue.size() << ">";
 
-	m_isquit = true;
-
 	m_taskQueue.put(boost::bind(&Server::stopping, this));
-	run();
 }
 
 void Server::stopping()
 {
+	m_isquit = true;
+
 	// Í£Ö¹ÄÚÍøÍ¨ĞÅ
 	m_lan.stop();
 
