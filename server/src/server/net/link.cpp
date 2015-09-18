@@ -47,23 +47,22 @@ void Link::close()
 
 	// 如果未发生错误，则先将未发送的数据发送完毕
 	if (!m_error) {
-		lock_guard_t<> lock(m_sendBufLock);
-
-		// 若数据未发送完毕，则暂缓关闭，只停止接收数据，等待之前的发送操作执行完毕后再关闭
-		if (!m_sendBuf.empty()) {
-			if (m_isWaitingClose) {
+		if (m_isWaitingClose) {
+			lock_guard_t<> lock(m_sendBufLock);
+			if (!m_sendBuf.empty()) {
 				return;
 			}
-
+		} else {
+			// 若数据未发送完毕，则暂缓关闭，只停止接收数据，等待之前的发送操作执行完毕后再关闭
 			m_isWaitingClose = true;
 			m_net->disableRead(this);
 
-			if (!m_isWaitingWrite) {
-				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd;
-			}
+// 			if (!m_isWaitingWrite) {
+// 				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd << ", waiting left data to be sent";
+// 			}
 
 			return;
-		}
+		};
 	}
 
 	m_closed = true;
@@ -99,15 +98,12 @@ void Link::onSend()
 	}
 
 	// LOG_INFO << "Link::onSend, socket = " << m_sockfd;
-	bool isSendBufEmpty = false;
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		isSendBufEmpty = m_sendBuf.empty();
-	}
-
-	if (isSendBufEmpty) {
-		// LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
-		return;
+		if(m_sendBuf.empty()) {
+			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), m_isWaitingWrite = " << m_isWaitingWrite;
+			return;
+		}
 	}
 
 	// 1. 将发送缓冲区的数据全部取出
@@ -139,20 +135,24 @@ void Link::onSend()
 			} else {
 				m_sendBuf.swap(buf);
 			}
+
+			m_isWaitingWrite = true;
 		}
 
 		// 注册写事件，以待当本连接可写时再尝试发送
 		m_net->enableWrite(this);
 		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
 	} else {
-		// 检查本连接是否已被标记为<待关闭>，是的话，若本次数据已全部发送成功且在此期间没有新的数据等待发送，则执行close操作
+		// 本次数据已发送成功
+		// 接下来，检查本连接是否已<待关闭>，是的话，若本次数据已全部发送成功且在此期间没有新的数据等待发送，则执行close操作
 		bool isWaitingClose = false;
 		{
 			lock_guard_t<> lock(m_sendBufLock);
 			isWaitingClose = (m_isWaitingClose && m_sendBuf.empty());
 
 			if (!m_sendBuf.empty() && !m_isWaitingWrite) {
-				LOG_ERROR << "m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes() << "&& m_isWaitingWrite = " << m_isWaitingWrite;
+				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes()
+				          << "&& m_isWaitingWrite = " << m_isWaitingWrite << ", m_isWaitingClose = " << m_isWaitingClose;
 			}
 		}
 
@@ -196,6 +196,10 @@ void Link::send(const char *data, int len)
 	{
 		lock_guard_t<> lock(m_sendBufLock);
 		m_sendBuf.append(data, len);
+
+		if (m_isWaitingWrite) {
+			return;
+		}
 	}
 
 	this->sendBuffer();
@@ -223,6 +227,10 @@ void Link::send(int msgId, Message & msg)
 		lock_guard_t<> lock(m_sendBufLock);
 		m_sendBuf.append((const char*)&msgHead, sizeof(msgHead));
 		m_sendBuf.append(global::g_sendBuf, size);
+
+		if (m_isWaitingWrite) {
+			return;
+		}
 	}
 
 	this->sendBuffer();
@@ -241,6 +249,10 @@ void Link::send(int msgId, const char *data, int len)
 		lock_guard_t<> lock(m_sendBufLock);
 		m_sendBuf.append(global::g_sendBuf, sizeof(msgHead));
 		m_sendBuf.append(data, len);
+
+		if (m_isWaitingWrite) {
+			return;
+		}
 	}
 
 	this->sendBuffer();
@@ -312,7 +324,7 @@ int Link::handleRead()
 
 int Link::handleWrite()
 {
-	// LOG_INFO << m_pNetReactor->name() << " socket <" << m_sockfd << "> is writable";
+	LOG_INFO << m_pNetReactor->name() << " socket <" << m_sockfd << "> is writable";
 	if (!isopen()) {
 		return 0;
 	}

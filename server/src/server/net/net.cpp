@@ -76,7 +76,6 @@ void Epoll::stop()
 
 int Epoll::eventLoop()
 {
-	int i = 0, nfds = 0;
 	struct epoll_event ev_set[EPOLL_EVENTS_SIZE];
 
 	int waitTime = EPOLL_WAIT_TIME;
@@ -84,25 +83,17 @@ int Epoll::eventLoop()
 		waitTime = EPOLL_WAIT_TIME;
 
 		// LOG_WARN << "waitTime = " << waitTime;
-		nfds  = ::epoll_wait(m_efd, ev_set, EPOLL_EVENTS_SIZE, waitTime);
-		if (nfds < 0/* && EINTR == errno*/) {
-			nfds = 0;
-		}
+		int nfds = ::epoll_wait(m_efd, ev_set, EPOLL_EVENTS_SIZE, waitTime);
 
-		for (i = 0; i < nfds; ++i) {
+		bool running = true;
+
+		for (int i = 0; i < nfds; ++i) {
 			epoll_event& cur_ev = ev_set[i];
-			IFd* pfd = (IFd*)cur_ev.data.ptr;
-
-			if (cur_ev.data.ptr == this) { //! iterupte event
-				if (false == m_running) {
-					stop();
-					return 0;
-				}
-
-				//! 删除那些已被标记为垃圾的socket对象
-				recycleFds();
+			if (cur_ev.data.ptr == this) {
 				continue;
 			}
+
+			IFd* pfd = (IFd*)cur_ev.data.ptr;
 
 			if (cur_ev.events & (EPOLLIN | EPOLLPRI)) {
 				pfd->handleRead();
@@ -119,8 +110,9 @@ int Epoll::eventLoop()
 
 		m_tasks.run();
 		waitTime = m_timers.run();
-	} while(nfds >= 0);
+	} while(m_running);
 
+	stop();
 	return 0;
 }
 
@@ -163,16 +155,7 @@ void Epoll::addFd(IFd* pfd)
 
 void Epoll::delFd(IFd* pfd)
 {
-	// disableAll(pfd);
-
-	{
-		lock_guard_t<> lock(m_mutex);
-		m_deletingFdList.push_back(pfd);
-	}
-
-	interruptLoop();
-
-	// atomictool::dec(&m_curFdCount);
+	m_tasks.put(boost::bind(&IFd::erase, pfd));
 }
 
 void Epoll::reopen(IFd* pfd)
