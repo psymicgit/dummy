@@ -46,9 +46,9 @@ public:
 public:
 	virtual socket_t socket() const {return m_sockfd;}
 
-	virtual int handleRead();
-	virtual int handleWrite();
-	virtual int handleError();
+	virtual void handleRead();
+	virtual void handleWrite();
+	virtual void handleError();
 	virtual void close();
 	virtual void erase();
 

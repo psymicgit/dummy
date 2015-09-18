@@ -20,7 +20,6 @@ class Listener;
 class Link;
 
 // 文件描述符接口(file descriptor)，套接字和监听器将从此类派生
-typedef int socket_t;
 class IFd
 {
 public:
@@ -28,13 +27,13 @@ public:
 	virtual socket_t socket() const = 0;
 
 	// 处理可读信号
-	virtual int handleRead()  = 0;
+	virtual void handleRead()  = 0;
 
 	// 处理可写信号
-	virtual int handleWrite() = 0;
+	virtual void handleWrite() = 0;
 
 	// 处理异常信号
-	virtual int handleError()   = 0;
+	virtual void handleError() = 0;
 
 	// 关闭
 	virtual void close() = 0;
@@ -51,42 +50,10 @@ public:
 typedef ObjectPool<Link> LinkPool;
 typedef ObjectPool<Buffer> BufferPool;
 
-//! 网络事件分发器
-class INet
-{
-public:
-	virtual ~INet() {}
-
-	virtual bool init(int initLinkCount, int linkGrowCount) = 0;
-
-	// 网络事件处理循环
-	virtual int eventLoop() 		    = 0;
-	virtual void close() 				= 0;
-	virtual int interruptLoop()			= 0;
-
-	virtual void addFd(IFd*)			= 0;
-	virtual void delFd(IFd*)			= 0;
-
-	virtual void enableRead(IFd*)		= 0;
-	virtual void disableRead(IFd*)		= 0;
-
-	virtual void enableWrite(IFd*)		= 0;
-	virtual void disableWrite(IFd*)		= 0;
-
-	virtual void enableAll(IFd*)		= 0;
-	virtual void disableAll(IFd*)		= 0;
-
-	virtual void reopen(IFd*)			= 0;
-
-	virtual TaskQueue* getTaskQueue()	= 0;
-	virtual TimerQueue& getTimerQueue() = 0;
-	virtual LinkPool& getLinkPool()		= 0;
-};
-
 #ifndef WIN
 
 // linux下epoll
-class Epoll : public INet
+class Epoll
 {
 private:
 	typedef std::vector<IFd*> FdList;
@@ -126,7 +93,7 @@ protected:
 	void closing();
 
 	// <网络是否正在运行>标志位
-	volatile bool m_running;
+	bool m_running;
 
 	// epoll句柄
 	int m_efd;
@@ -153,7 +120,7 @@ protected:
 #else
 
 // windows下select
-class Select : public INet
+class Select
 {
 private:
 	// 定义对单个文件描述符的操作类别

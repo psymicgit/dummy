@@ -36,13 +36,13 @@ public:
 	virtual socket_t socket() const {return m_listenFd;}
 
 	// 处理可读事件：对于非阻塞listen，当接收到新连接时，描述符变成可读
-	virtual int handleRead();
+	virtual void handleRead();
 
 	// 处理可写事件
-	virtual int handleWrite();
+	virtual void handleWrite();
 
 	// 处理异常事件
-	virtual int handleError();
+	virtual void handleError();
 
 private:
 	Link* createLink(socket_t newfd, NetAddress &peerAddr);

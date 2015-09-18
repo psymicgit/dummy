@@ -75,7 +75,7 @@ void Listener::erase()
 	delete this;
 }
 
-int Listener::handleRead()
+void Listener::handleRead()
 {
 	sockaddr_storage addr;
 	socklen_t addrlen = sizeof(addr);
@@ -133,20 +133,16 @@ int Listener::handleRead()
 		// 等业务层处理完新连接后，才允许该连接开始读
 		m_pNetReactor->getTaskQueue().put(boost::bind(&NetModel::enableRead, link->m_net, link));
 	} while (true);
-
-	return 0;
 }
 
-int Listener::handleWrite()
+void Listener::handleWrite()
 {
 	LOG_ERROR << m_pNetReactor->name();
-	return 0;
 }
 
-int Listener::handleError()
+void Listener::handleError()
 {
 	LOG_ERROR << m_pNetReactor->name();
-	return 0;
 }
 
 Link* Listener::createLink(socket_t newfd, NetAddress &peerAddr)

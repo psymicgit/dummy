@@ -9,8 +9,6 @@
 #ifndef _sockettool_h_
 #define _sockettool_h_
 
-#include "net/net.h"
-
 class NetAddress;
 
 namespace socktool

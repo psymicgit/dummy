@@ -105,14 +105,13 @@ void Connector::connect()
 	}
 }
 
-int Connector::handleRead()
+void Connector::handleRead()
 {
 	// 一般是不会接收到读事件的，所以这里打印error
 	LOG_ERROR << m_pNetReactor->name() << "recv read event, socket = " << m_sockfd;
-	return 0;
 }
 
-int Connector::handleWrite()
+void Connector::handleWrite()
 {
 	// 先检测套接字是否发生异常
 	m_errno = socktool::getSocketError(m_sockfd);
@@ -121,19 +120,17 @@ int Connector::handleWrite()
 		LOG_SOCKET_ERR(m_sockfd, m_errno) << m_pNetReactor->name();
 		retry();
 
-		return -1;
+		return;
 	}
 
 	// 成功建立连接
 	onConnected();
-	return 0;
 }
 
-int Connector::handleError()
+void Connector::handleError()
 {
 	// LOG_SYSTEM_ERR << m_pNetReactor->name() << " socket<" << m_sockfd << ">";
 	retry();
-	return true;
 }
 
 void Connector::close()

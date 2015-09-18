@@ -259,12 +259,11 @@ void Link::send(int msgId, const char *data, int len)
 	this->sendBuffer();
 }
 
-int Link::handleRead()
+void Link::handleRead()
 {
 	// LOG_WARN << "socket<" << m_sockfd << "> read task";
-
 	if (!isopen()) {
-		return 0;
+		return;
 	}
 
 	// 循环接收数据直到无法再接收
@@ -287,7 +286,7 @@ int Link::handleRead()
 
 			// LOG_WARN << "socket<" << m_sockfd << "> read 0, closed! buffer len = " << MAX_PACKET_LEN;
 			this->close();
-			return -1;
+			return;
 		} else {
 			// 发生异常：EAGAIN及EWOULDBLOCK信号说明已接收完毕，EINTR信号应忽略，其余信号说明本连接发生错误
 			int err = socktool::geterrno();
@@ -301,7 +300,7 @@ int Link::handleRead()
 				// LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " recv fail, err = " << err << ", history recv buf size = " << m_recvBuf.readableBytes();
 				m_error = true;
 				this->close();
-				return -1;
+				return;
 			}
 		}
 	} while(true);
@@ -312,7 +311,7 @@ int Link::handleRead()
 	{
 		lock_guard_t<> lock(m_recvBufLock);
 		if (m_isWaitingRead) {
-			return 0;
+			return;
 		}
 
 		m_isWaitingRead = true;
@@ -320,14 +319,13 @@ int Link::handleRead()
 
 	// 由业务层进行数据接收处理
 	m_pNetReactor->onRecv(this, m_recvBuf);
-	return 0;
 }
 
-int Link::handleWrite()
+void Link::handleWrite()
 {
 	// LOG_INFO << m_pNetReactor->name() << " socket <" << m_sockfd << "> is writable";
 	if (!isopen()) {
-		return 0;
+		return;
 	}
 
 #ifdef WIN
@@ -336,13 +334,13 @@ int Link::handleWrite()
 #endif
 
 	onSend();
-	return 0;
+	return;
 }
 
-int Link::handleError()
+void Link::handleError()
 {
 	if (m_error || m_isWaitingClose || !isopen()) {
-		return 0;
+		return;
 	}
 
 	// int err = socktool::getSocketError(m_sockfd);
@@ -350,7 +348,7 @@ int Link::handleError()
 
 	m_error = true;
 	this->close();
-	return 0;
+	return;
 }
 
 int Link::trySend(Buffer &buffer)

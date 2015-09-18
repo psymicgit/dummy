@@ -37,13 +37,13 @@ public:
 	virtual socket_t socket() const {return m_sockfd;}
 
 	// 处理可读事件
-	virtual int handleRead();
+	virtual void handleRead();
 
 	// 处理可写事件：对于非阻塞connect，当连接成功建立时，描述符变成可写
-	virtual int handleWrite();
+	virtual void handleWrite();
 
 	// 处理异常：发生异常将隔一段时间尝试重连
-	virtual int handleError();
+	virtual void handleError();
 
 	// 关闭本连接器：将屏蔽本连接器上的所有网络事件，并准备回收内存
 	virtual void close();

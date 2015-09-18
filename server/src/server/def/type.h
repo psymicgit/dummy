@@ -19,4 +19,6 @@ typedef uint32_t uint32;
 typedef int64_t int64;
 typedef uint64_t uint64;
 
+typedef int socket_t;
+
 #endif //_type_h_

@@ -12,6 +12,7 @@
 #include "httpmgr.h"
 
 #include <curl/curl.h>
+#include <tool/timetool.h>
 
 #define HTTP_URL_SIGN	"Bef^3rwsvn!29jcx57ng"
 

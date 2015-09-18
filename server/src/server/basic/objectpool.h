@@ -10,6 +10,7 @@
 #define _objectpool_h_
 
 #include <deque>
+#include "lock.h"
 
 // 对象池
 template <typename T, typename MutexType = NonMutex /* 默认不持锁 */>
