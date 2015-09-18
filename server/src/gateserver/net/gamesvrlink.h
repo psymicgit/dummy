@@ -15,7 +15,7 @@
 class Link;
 class NetAddress;
 class Buffer;
-class RingBufferBlock;
+struct RingBufferBlock;
 
 class GameSvrLink : public ServerLink
 {

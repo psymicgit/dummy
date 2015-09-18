@@ -25,7 +25,6 @@
 Epoll::Epoll()
 	: m_running(true)
 	, m_efd(-1)
-	  // , m_curFdCount(0)
 {
 	// 创建一个epoll的句柄
 	m_efd = ::epoll_create(1);
@@ -68,8 +67,6 @@ Epoll::~Epoll()
 
 void Epoll::stop()
 {
-	recycleFds();
-
 	LOG_WARN << "	<link pool size = " << m_linkPool.m_totalSize << ", remain size = " << m_linkPool.size() << ", growSize = " << m_linkPool.m_growSize << ">";
 	LOG_WARN << "close net successful";
 }

@@ -222,12 +222,12 @@ void Link::send(int msgId, Message & msg)
 	NetMsgHead msgHead = {0, 0};
 	msgtool::buildNetHeader(&msgHead, msgId, size);
 
-	msg.SerializeToArray(global::g_sendBuf, size);
+	msg.SerializeToArray(m_net->g_sendBuf, size);
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
 		m_sendBuf.append((const char*)&msgHead, sizeof(msgHead));
-		m_sendBuf.append(global::g_sendBuf, size);
+		m_sendBuf.append(m_net->g_sendBuf, size);
 
 		if (m_isWaitingWrite) {
 			return;
@@ -243,12 +243,12 @@ void Link::send(int msgId, const char *data, int len)
 		return;
 	}
 
-	NetMsgHead *msgHead = (NetMsgHead*)global::g_sendBuf;
+	NetMsgHead *msgHead = (NetMsgHead*)m_net->g_sendBuf;
 	msgtool::buildNetHeader(msgHead, msgId, len);
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		m_sendBuf.append(global::g_sendBuf, sizeof(msgHead));
+		m_sendBuf.append(m_net->g_sendBuf, sizeof(msgHead));
 		m_sendBuf.append(data, len);
 
 		if (m_isWaitingWrite) {
@@ -269,12 +269,12 @@ void Link::handleRead()
 	// 循环接收数据直到无法再接收
 	int nread = 0;
 	do {
-		nread = ::recv(m_sockfd, global::g_recvBuf, MAX_PACKET_LEN, NULL);
+		nread = ::recv(m_sockfd, m_net->g_recvBuf, MAX_PACKET_LEN, NULL);
 		if (nread > 0) {
 			// 若成功接收到数据，则将本次接收到的数据拷贝到接收缓冲区末尾
 			{
 				lock_guard_t<> lock(m_recvBufLock);
-				m_recvBuf.append(global::g_recvBuf, nread);
+				m_recvBuf.append(m_net->g_recvBuf, nread);
 			}
 
 			// 若本次接收数据长度并未超出最大接收长度，则说明目前本连接上的数据已全部接收完毕

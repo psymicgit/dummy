@@ -26,13 +26,6 @@ namespace global
 	extern uint32 g_packetBufSize;
 	extern Message *g_lastMessage;
 
-	// 预先申请的网络数据缓冲区: 用于发送和接收数据时进行加解密运算
-	extern thread_local char g_encryptBuf[MAX_PACKET_LEN];
-
-	//
-	extern thread_local char g_recvBuf[MAX_PACKET_LEN];
-	extern thread_local char g_sendBuf[MAX_PACKET_LEN];
-
 // 数据库
 	extern char g_sql[2048];
 

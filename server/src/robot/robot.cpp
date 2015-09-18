@@ -184,7 +184,7 @@ bool Robot::send(int msgId, Message &msg)
 	uint32 headSize = sizeof(NetMsgHead);
 	int size = msg.ByteSize();
 
-	bool ok = msg.SerializeToArray(global::g_encryptBuf + headSize + EncryptHeadLen, size);
+	bool ok = msg.SerializeToArray(m_link->m_net->g_encryptBuf + headSize + EncryptHeadLen, size);
 	if (!ok) {
 		LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort()
 		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgDebugString(msg) << "]";
@@ -193,12 +193,12 @@ bool Robot::send(int msgId, Message &msg)
 	}
 
 	// 添加加解密头尾
-	uint8* decryptBuf = (uint8*)(global::g_encryptBuf + headSize);
+	uint8* decryptBuf = (uint8*)(m_link->m_net->g_encryptBuf + headSize);
 	int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
 
 	encrypttool::encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));
 
-	NetMsgHead* pHeader = (NetMsgHead*)global::g_encryptBuf;
+	NetMsgHead* pHeader = (NetMsgHead*)m_link->m_net->g_encryptBuf;
 
 	int packetLen = msgtool::buildNetHeader(pHeader, msgId, decryptBufLen);
 	if (packetLen <= 0) {
@@ -207,7 +207,7 @@ bool Robot::send(int msgId, Message &msg)
 		return false;
 	}
 
-	m_link->send(global::g_encryptBuf, packetLen);
+	m_link->send(m_link->m_net->g_encryptBuf, packetLen);
 
 	return true;
 }

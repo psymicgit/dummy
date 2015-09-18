@@ -37,7 +37,7 @@ void ServerLink::onRecv(Link *link, Buffer &buf)
 
 void ServerLink::send(uint32 routeId, uint16 msgId, const char *data, int len)
 {
-	char *netBuf = global::g_encryptBuf;
+	char *netBuf = m_link->m_net->g_encryptBuf;
 	LanMsgHead *msgHead = (LanMsgHead*)netBuf;
 
 	memcpy(netBuf + sizeof(LanMsgHead), data, len);

@@ -50,6 +50,8 @@ public:
 typedef ObjectPool<Link> LinkPool;
 typedef ObjectPool<Buffer> BufferPool;
 
+#define MAX_PACKET_LEN (1 * 1024 * 1024) // 2MB
+
 #ifndef WIN
 
 // linux下epoll
@@ -115,6 +117,12 @@ protected:
 
 	// 连接池，保存预先分配好的连接
 	LinkPool m_linkPool;
+
+public:
+	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
+	char g_encryptBuf[MAX_PACKET_LEN];
+	char g_recvBuf[MAX_PACKET_LEN];
+	char g_sendBuf[MAX_PACKET_LEN];
 };
 
 #else
@@ -196,6 +204,12 @@ private:
 
 	// <网络是否正在运行>标志位
 	bool m_running;
+
+public:
+	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
+	char g_encryptBuf[MAX_PACKET_LEN];
+	char g_recvBuf[MAX_PACKET_LEN];
+	char g_sendBuf[MAX_PACKET_LEN];
 };
 
 #endif
