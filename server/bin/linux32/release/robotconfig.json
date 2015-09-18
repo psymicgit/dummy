@@ -1,0 +1,10 @@
+{
+	"name": "robot",
+	"robot-num": 10000,
+	"robots-per-second": 1000,
+
+	"wan": {
+		"threads": 2,
+		"connect": {"ip": "127.0.0.1", "port": 20001}
+	}
+}
