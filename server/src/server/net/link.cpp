@@ -100,14 +100,18 @@ void Link::onSend()
 		return;
 	}
 
-	// LOG_INFO << "Link::onSend, socket = " << m_sockfd;
-	{
-		lock_guard_t<> lock(m_sendBufLock);
-		if(m_sendBuf.empty()) {
-			// LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), m_isWaitingWrite = " << m_isWaitingWrite;
-			return;
-		}
+	if (!m_isWaitingWrite) {
+		return;
 	}
+
+	// LOG_INFO << "Link::onSend, socket = " << m_sockfd;
+// 	{
+// 		lock_guard_t<> lock(m_sendBufLock);
+// 		if(m_sendBuf.empty()) {
+// 			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), m_isWaitingWrite = " << m_isWaitingWrite;
+// 			return;
+// 		}
+// 	}
 
 	// 1. 将发送缓冲区的数据全部取出
 	Buffer buf;
@@ -151,10 +155,10 @@ void Link::onSend()
 			lock_guard_t<> lock(m_sendBufLock);
 			isWaitingClose = (m_isWaitingClose && m_sendBuf.empty());
 
-			if (!m_sendBuf.empty() && !m_isWaitingWrite) {
-				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes()
-				          << "&& m_isWaitingWrite = " << m_isWaitingWrite << ", m_isWaitingClose = " << m_isWaitingClose;
-			}
+// 			if (!m_sendBuf.empty() && !m_isWaitingWrite) {
+// 				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes()
+// 				          << "&& m_isWaitingWrite = " << m_isWaitingWrite << ", m_isWaitingClose = " << m_isWaitingClose;
+// 			}
 		}
 
 		if(isWaitingClose) {
