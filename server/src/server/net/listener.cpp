@@ -35,11 +35,15 @@ bool Listener::open(const string & ip, int port)
 		return false;
 	}
 
-	// 设置
-	socktool::setReuseAddr(m_listenFd, true);
+	// 设置端口复用
+	if(!socktool::setReuseAddr(m_listenFd, true)) {
+		return false;
+	}
 
 	// 设置为非阻塞
-	socktool::setNonBlocking(m_listenFd);
+	if(!socktool::setNonBlocking(m_listenFd)) {
+		return false;
+	}
 
 	if(!socktool::bindAddress(m_listenFd, m_listenAddr)) {
 		return false;

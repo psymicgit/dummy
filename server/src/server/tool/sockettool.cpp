@@ -138,37 +138,22 @@ namespace socktool
 		setsockopt(sock, SOL_SOCKET, SO_LINGER, (const char*)&ling, sizeof(linger));
 	}
 
-	void setReuseAddr(socket_t sockfd, bool on)
+	bool setReuseAddr(socket_t sockfd, bool on)
 	{
-#ifndef WIN
 		int optval = on ? 1 : 0;
 
 		/* REUSEADDR on Unix means, "don't hang on to this address after the
 		 * listener is closed."  On Windows, though, it means "don't keep other
 		 * processes from binding to this address while we're using it. */
 		int ret = ::setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR,
-		                       &optval, static_cast<socklen_t>(sizeof optval));
+		                       (const char*)&optval, static_cast<socklen_t>(sizeof optval));
 
 		if (-1 == ret) {
 			LOG_SYSTEM_ERR << "acceptor_impl_t::open when setsockopt";
+			return false;
 		}
-#endif
-	}
 
-	void setReusePort(socket_t sockfd, bool on)
-	{
-#ifdef SO_REUSEPORT
-		int optval = on ? 1 : 0;
-		int ret = ::setsockopt(sockfd, SOL_SOCKET, SO_REUSEPORT,
-		                       &optval, static_cast<socklen_t>(sizeof optval));
-		if (ret < 0) {
-			LOG_SYSERR << "SO_REUSEPORT failed.";
-		}
-#else
-		if (on) {
-			LOG_ERROR << "SO_REUSEPORT is not supported.";
-		}
-#endif
+		return true;
 	}
 
 	int getSocketError(socket_t sockfd)

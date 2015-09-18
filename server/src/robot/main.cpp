@@ -11,7 +11,7 @@
 int main(int argc, char **argv)
 {
 	RobotMgr &robotMgr = RobotMgr::Instance();
-	robotMgr.init("robotconfig.json");
+	robotMgr.init("../robotconfig.json");
 	robotMgr.start();
 	return 0;
 }

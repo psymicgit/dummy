@@ -33,6 +33,7 @@ namespace filetool
 	char* get_whole_file_buf(const std::string &path)
 	{
 		if(false == exist(path)) {
+			LOG_SYSTEM_ERR << "open <" << path << "> file failed: not found";
 			return NULL;
 		}
 
@@ -67,7 +68,7 @@ namespace filetool
 
 		/* 将文件拷贝到buffer中 */
 		size_t ret = fread (buf, 1, size, file);
-		if (ret != size) {
+		if (ret != (size_t)size) {
 			LOG_SYSTEM_ERR << "载入<" << path << ">文件失败，错误原因:文件读取大小不符" << ret << " != " << size;
 			delete[] buf;
 			return NULL;

@@ -123,10 +123,10 @@ Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor
 	}
 
 	if (!listener->open(ip, port)) {
-		LOG_SYSTEM_ERR << "listen at <" << ip << ": " << port << "> failed";
+		LOG_ERROR << "listen at <" << ip << ": " << port << "> failed";
 
 		delete listener;
-		return listener;
+		return NULL;
 	}
 
 	m_listeners.push_back(listener);
