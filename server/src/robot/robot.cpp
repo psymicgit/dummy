@@ -242,7 +242,7 @@ void Robot::pingpongTest()
 	p.set_pingpong("123456789|");
 	p.set_time(0);
 
-	LOG_WARN << "robot <" << m_robotId << "> start pingpong test, pingpong packet size = " << p.ByteSize();
+	LOG_INFO << "robot <" << m_robotId << "> start pingpong test, pingpong packet size = " << p.ByteSize();
 
 	send(ePing, p);
 }
@@ -258,7 +258,7 @@ void Robot::speedTest()
 	p.set_time(0);
 
 	if (g_speedTestCnt % 100 == 0) {
-		LOG_WARN << name() << " start speed test, g_speedTestCnt = " << g_speedTestCnt << ", speed packet size = " << p.ByteSize();
+		LOG_INFO << name() << " start speed test, g_speedTestCnt = " << g_speedTestCnt << ", speed packet size = " << p.ByteSize();
 	}
 
 	for (int i = 0; i < m_robotMgr->m_config.m_speedTestPacketNum; i++) {
@@ -284,7 +284,7 @@ void Robot::latencyTest()
 	p.set_pingpong("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 
 	if (g_latencyTestCnt % 100 == 0) {
-		LOG_WARN << "robot <" << m_robotId << "> start latency test, g_latencyTestCnt = " << g_latencyTestCnt << ", latency packet size = " << p.ByteSize();
+		LOG_INFO << "robot <" << m_robotId << "> start latency test, g_latencyTestCnt = " << g_latencyTestCnt << ", latency packet size = " << p.ByteSize();
 	}
 
 	for (int i = 0; i < 1000; i++) {

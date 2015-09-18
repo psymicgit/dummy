@@ -34,6 +34,9 @@ void Link::open()
 	}
 
 	m_net->addFd(this);
+
+	// 注册写事件，以待当本连接可写时再尝试发送
+	m_net->enableWrite(this);
 }
 
 void Link::close()
@@ -101,7 +104,7 @@ void Link::onSend()
 	{
 		lock_guard_t<> lock(m_sendBufLock);
 		if(m_sendBuf.empty()) {
-			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), m_isWaitingWrite = " << m_isWaitingWrite;
+			// LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), m_isWaitingWrite = " << m_isWaitingWrite;
 			return;
 		}
 	}
@@ -137,10 +140,8 @@ void Link::onSend()
 			}
 
 			m_isWaitingWrite = true;
+			// LOG_INFO << m_pNetReactor->name() << " register write, m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes();
 		}
-
-		// 注册写事件，以待当本连接可写时再尝试发送
-		m_net->enableWrite(this);
 		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
 	} else {
 		// 本次数据已发送成功
@@ -324,7 +325,7 @@ int Link::handleRead()
 
 int Link::handleWrite()
 {
-	LOG_INFO << m_pNetReactor->name() << " socket <" << m_sockfd << "> is writable";
+	// LOG_INFO << m_pNetReactor->name() << " socket <" << m_sockfd << "> is writable";
 	if (!isopen()) {
 		return 0;
 	}

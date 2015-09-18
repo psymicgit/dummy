@@ -88,21 +88,16 @@ private:
 		++g_speedTestCount;
 		++client->m_speedTestCount;
 
-		if (g_speedTestCount % 50000 == 0) {
-			// LOG_INFO << msgtool::getMsgString(*p);
-			LOG_INFO << "speedtest count = " << g_speedTestCount << ", speedtest size = " << p->ByteSize();
-
-			if (g_speedTestCount % 100000 == 0) {
-				double speed = tick.endTick() / g_speedTestCount;
-				double count = 1.0f / speed;
-				LOG_WARN << "speedtest count = " << g_speedTestCount << ", avg cost=" << speed << ", exe count per second = " << count;
-			}
+		if (g_speedTestCount % 100000 == 0) {
+			double speed = tick.endTick() / g_speedTestCount;
+			double count = 1.0f / speed;
+			LOG_INFO << "speedtest count = " << g_speedTestCount << ", avg cost=" << speed << ", size = " << p->ByteSize() << ", exe count per second = " << count;
 		}
 
-		if (client->m_speedTestCount % 1000 == 0) {
-			client->send(eSpeedTest, *p);
-			// Server::instance->stop();
-		}
+// 		if (client->m_speedTestCount % 1000 == 0) {
+// 			client->send(eSpeedTest, *p);
+// 			// Server::instance->stop();
+// 		}
 	}
 
 	static void OnLatencyTest(Client* client, PingPong *p, Timestamp receiveTime)
