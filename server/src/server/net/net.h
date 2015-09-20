@@ -64,28 +64,28 @@ public:
 	Epoll();
 	~Epoll();
 
-	virtual bool init(int initLinkCount, int linkGrowCount);
+	bool init(int initLinkCount, int linkGrowCount);
 
-	virtual int eventLoop();
-	virtual void close();
+	int eventLoop();
+	void close();
 
-	virtual void reopen(IFd*);
+	void reopen(IFd*);
 
-	virtual void addFd(IFd*);
-	virtual void delFd(IFd*);
+	void addFd(IFd*);
+	void delFd(IFd*);
 
-	virtual void enableRead(IFd*);
-	virtual void disableRead(IFd*);
+	void enableRead(IFd*);
+	void disableRead(IFd*);
 
-	virtual void enableWrite(IFd*);
-	virtual void disableWrite(IFd*);
+	void enableWrite(IFd*);
+	void disableWrite(IFd*);
 
-	virtual void enableAll(IFd*);
-	virtual void disableAll(IFd*);
+	void enableAll(IFd*);
+	void disableAll(IFd*);
 
-	virtual TaskQueue* getTaskQueue() { return &m_tasks;}
-	virtual TimerQueue& getTimerQueue() { return m_timers; }
-	inline virtual LinkPool& getLinkPool() { return m_linkPool; }
+	inline TaskQueue* getTaskQueue() { return &m_tasks;}
+	inline TimerQueue& getTimerQueue() { return m_timers; }
+	inline LinkPool& getLinkPool() { return m_linkPool; }
 	int interruptLoop();
 
 protected:
@@ -150,27 +150,27 @@ private:
 public:
 	Select();
 
-	virtual bool init(int initLinkCount, int linkGrowCount);
+	bool init(int initLinkCount, int linkGrowCount);
 
-	virtual int eventLoop();
-	virtual void reopen(IFd*) {}
-	virtual void close();
+	int eventLoop();
+	void reopen(IFd*) {}
+	void close();
 
-	virtual void addFd(IFd*);
-	virtual void delFd(IFd*);
+	void addFd(IFd*);
+	void delFd(IFd*);
 
-	virtual void enableRead(IFd*);
-	virtual void disableRead(IFd*);
+	void enableRead(IFd*);
+	void disableRead(IFd*);
 
-	virtual void enableWrite(IFd*);
-	virtual void disableWrite(IFd*);
+	void enableWrite(IFd*);
+	void disableWrite(IFd*);
 
-	virtual void enableAll(IFd*);
-	virtual void disableAll(IFd*);
+	void enableAll(IFd*);
+	void disableAll(IFd*);
 
-	virtual TaskQueue* getTaskQueue() { return &m_tasks;}
-	virtual TimerQueue& getTimerQueue() { return m_timers; }
-	inline virtual LinkPool& getLinkPool() { return m_linkPool; }
+	inline TaskQueue* getTaskQueue() { return &m_tasks;}
+	inline TimerQueue& getTimerQueue() { return m_timers; }
+	inline LinkPool& getLinkPool() { return m_linkPool; }
 	int interruptLoop() { return 0; }
 
 private:

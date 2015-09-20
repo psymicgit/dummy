@@ -38,6 +38,7 @@ public:
 		, m_isWaitingWrite(false)
 		, m_isWaitingRead(false)
 		, m_isWaitingClose(false)
+		, m_isPeerClosed(false)
 	{
 	}
 
@@ -69,17 +70,17 @@ public:
 	void send(int msgId, const char *data, int len);
 
 	// 本连接是否打开
-	inline bool isopen() { return !m_closed; }
-
-private:
-	// 发送本连接尚未发送完的数据
-	void sendBuffer();
+	inline bool isopen() const { return !m_closed; }
 
 	// 获取本连接的本地地址
 	NetAddress getLocalAddr() const;
 
 	// 获取本连接的对端地址
 	NetAddress getPeerAddr() const;
+
+private:
+	// 发送本连接尚未发送完的数据
+	void sendBuffer();
 
 private:
 	// 网络层：尝试一次性发送数据，返回尚未发送的数据长度
@@ -140,6 +141,12 @@ public:
 
 	// 是否已在等待读
 	bool m_isWaitingRead;
+
+	// 对端是否已关闭
+	bool m_isPeerClosed;
+
+	// 是否已注册了写事件（写事件注册一次就行）
+	bool m_isRegisterWrite;
 };
 
 #endif //_link_h_

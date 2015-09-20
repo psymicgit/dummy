@@ -56,7 +56,7 @@ std::string Client::name()
 
 void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
-	if ((m_clientMgr->getClientCount() - 1) % 100 == 0) {
+	if ((m_clientMgr->getClientCount() - 1) % 100 >= 0) {
 		LOG_INFO << name() << " [" << peerAddr.toIpPort() << "] <-> gatesvr [" << localAddr.toIpPort() << "] broken! current client cnt = " << m_clientMgr->getClientCount() - 1;
 	}
 
@@ -104,7 +104,7 @@ void Client::handleMsg()
 		int encryptBufLen = dataLen - sizeof(NetMsgHead);
 
 		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
-			LOG_ERROR << "gatesvr [" << link->m_peerAddr.toIpPort() << "] <-> " << name() << " [" << link->m_localAddr.toIpPort()
+			LOG_ERROR << "gatesvr [" << link->getPeerAddr().toIpPort() << "] <-> " << name() << " [" << link->getLocalAddr().toIpPort()
 			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
 			buf.skip(dataLen);
 			continue;
@@ -161,7 +161,7 @@ bool Client::send(int msgId, Message &msg)
 	// 将消息包序列化为二进制数据
 	bool ok = msg.SerializeToArray(m_link->m_net->g_encryptBuf + headSize + EncryptHeadLen, size);
 	if (!ok) {
-		LOG_ERROR << "client [" << m_link->m_peerAddr.toIpPort()
+		LOG_ERROR << "client [" << m_link->getPeerAddr().toIpPort()
 		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgDebugString(msg) << "]";
 
 		return false;

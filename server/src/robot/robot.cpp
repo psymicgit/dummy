@@ -84,7 +84,7 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	}
 	*/
 
-	if (m_robotMgr->m_robotMap.size() - 1 % 100 == 0) {
+	if (m_robotMgr->m_robotMap.size() - 1 % 100 >= 0) {
 		LOG_INFO << "robot<" << m_robotId << "> <" << localAddr.toIpPort() << "> to gateserver <" << peerAddr.toIpPort() << "> closed! current robot cnt = " << m_robotMgr->m_robotMap.size() - 1;
 	}
 
@@ -135,7 +135,7 @@ void Robot::handleMsg()
 		int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
 		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
-			LOG_ERROR << "robot [" << link->m_localAddr.toIpPort() << "] <-> gatesvr [" << link->m_peerAddr.toIpPort()
+			LOG_ERROR << "robot [" << link->getLocalAddr().toIpPort() << "] <-> gatesvr [" << link->getPeerAddr().toIpPort()
 			          << "] receive invalid msg[len=" << encryptBufLen << "]";
 			buf.skip(msgLen);
 			continue;
@@ -186,7 +186,7 @@ bool Robot::send(int msgId, Message &msg)
 
 	bool ok = msg.SerializeToArray(m_link->m_net->g_encryptBuf + headSize + EncryptHeadLen, size);
 	if (!ok) {
-		LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort()
+		LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->getLocalAddr().toIpPort() << "] <-> gatesvr [" << m_link->getPeerAddr().toIpPort()
 		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgDebugString(msg) << "]";
 
 		return false;
@@ -202,7 +202,7 @@ bool Robot::send(int msgId, Message &msg)
 
 	int packetLen = msgtool::buildNetHeader(pHeader, msgId, decryptBufLen);
 	if (packetLen <= 0) {
-		LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->m_localAddr.toIpPort() << "] <-> gatesvr [" << m_link->m_peerAddr.toIpPort()
+		LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->getLocalAddr().toIpPort() << "] <-> gatesvr [" << m_link->getPeerAddr().toIpPort()
 		          << "] pakcetLen = " << packetLen;
 		return false;
 	}

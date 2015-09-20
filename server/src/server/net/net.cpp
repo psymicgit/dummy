@@ -81,9 +81,6 @@ int Epoll::eventLoop()
 
 		// LOG_WARN << "waitTime = " << waitTime;
 		int nfds = ::epoll_wait(m_efd, ev_set, EPOLL_EVENTS_SIZE, waitTime);
-
-		bool running = true;
-
 		for (int i = 0; i < nfds; ++i) {
 			epoll_event& cur_ev = ev_set[i];
 			if (cur_ev.data.ptr == this) {
