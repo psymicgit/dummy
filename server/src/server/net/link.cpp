@@ -57,7 +57,9 @@ void Link::close()
 			}
 
 			m_isWaitingClose = true;
-			m_net->disableRead(this);
+			shutdown(m_sockfd, SHUT_RD);
+
+			// m_net->disableRead(this);
 
 			if (!m_isWaitingWrite) {
 				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd;
@@ -67,11 +69,16 @@ void Link::close()
 		}
 	}
 
-	if (!m_sendBuf.empty()) {
-		LOG_ERROR << m_pNetReactor->name() << " close, left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd;
+	{
+		lock_guard_t<> lock(m_sendBufLock);
+		if (!m_sendBuf.empty()) {
+			LOG_ERROR << m_pNetReactor->name() << " close, left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd;
+		}
 	}
 
 	m_closed = true;
+
+	shutdown(m_sockfd, SHUT_RDWR);
 
 // 首先屏蔽本连接上的所有网络输出
 	socktool::closeSocket(m_sockfd);

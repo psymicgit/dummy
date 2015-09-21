@@ -74,6 +74,10 @@
 	#include <winsock2.h>
 	#include <ws2tcpip.h>
 	#include <io.h>
+
+	#define SHUT_RD SD_RECEIVE
+	#define SHUT_WR SD_SEND
+	#define SHUT_RDWR SD_BOTH
 #else
 	#include <netinet/in.h>
 	#include <sys/socket.h>
