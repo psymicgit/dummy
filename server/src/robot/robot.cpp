@@ -84,7 +84,7 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	}
 	*/
 
-	if (m_robotMgr->m_robotMap.size() - 1 % 100 >= 0) {
+	if (m_robotMgr->m_robotMap.size() - 1 % 100 == 0) {
 		LOG_INFO << "robot<" << m_robotId << "> <" << localAddr.toIpPort() << "> to gateserver <" << peerAddr.toIpPort() << "> closed! current robot cnt = " << m_robotMgr->m_robotMap.size() - 1;
 	}
 

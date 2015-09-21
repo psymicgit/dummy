@@ -3,18 +3,17 @@
 	"server-id": "zone-type-idx",
 
 	"wan": {
-		"threads": 2,
+		"threads": 1,
 		"listen": {"ip": "127.0.0.1", "port": 20001}
 	},
 
 	"lan": {
 		"threads": 1,
 		"listen": [
-			{"ip": "127.0.0.1", "port": 20001}
+			{"ip": "127.0.0.1", "port": 20002}
 		],
 
 		"connect": [
-			{"ip": "127.0.0.1", "port": 10001},
 			{"ip": "127.0.0.1", "port": 0}
 		]
 	}
