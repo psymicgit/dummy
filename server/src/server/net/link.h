@@ -53,6 +53,9 @@ public:
 	virtual void close();
 	virtual void erase();
 
+private:
+	void closing();
+
 public:
 	// 设置本连接参数，并注册到网络
 	void open();

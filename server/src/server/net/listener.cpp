@@ -99,7 +99,7 @@ void Listener::handleRead()
 		// 如何查看accept queue溢出
 		// netstat -s | grep LISTEN 对比前后是否有增长
 		if ((newfd = ::accept(m_listenFd, (struct sockaddr *)&addr, &addrlen)) == -1) {
-			int err = errno;
+			int err = socktool::geterrno();
 			// LOG_ERROR<< "err = " << err;
 			if (err == EAGAIN || err == EWOULDBLOCK) {
 				// 在non-blocking模式下，如果accept返回值为-1，且errno == EAGAIN或errno == EWOULDBLOCK表示没有新连接请求
@@ -108,7 +108,7 @@ void Listener::handleRead()
 				LOG_ERROR << "errno == " << err;
 				continue;
 			} else {
-				LOG_SYSTEM_ERR << m_pNetReactor->name() << " accept failed, restart listenning now";
+				LOG_SOCKET_ERR(m_listenFd, err) << m_pNetReactor->name() << " accept failed, restart listenning now";
 				//! if too many open files occur, need to restart epoll event
 				m_net->reopen(this);
 				break;

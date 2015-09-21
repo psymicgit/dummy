@@ -38,13 +38,19 @@ void Link::open()
 
 void Link::close()
 {
+	// 投递到网络线程执行close命令
+	m_net->getTaskQueue()->put(boost::bind(&Link::closing, this));
+}
+
+void Link::closing()
+{
 	// 检测是否重复close
 	if (m_closed) {
 		LOG_ERROR << m_pNetReactor->name() << " m_closed = " << m_closed << "m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd;
 		return;
 	}
 
-	// LOG_INFO << m_pNetReactor->name() << " Link::close, socket = " << m_sockfd;
+	LOG_INFO << m_pNetReactor->name() << " Link::close";
 
 	// 如果未发生错误，则先将未发送的数据发送完毕
 	if (!m_error && !m_isPeerClosed) {
@@ -53,6 +59,7 @@ void Link::close()
 		// 若数据未发送完毕，则暂缓关闭，只停止接收数据，等待之前的发送操作执行完毕后再关闭
 		if (!m_sendBuf.empty()) {
 			if (m_isWaitingClose) {
+				LOG_ERROR << m_pNetReactor->name() << " m_isWaitingClose = true";
 				return;
 			}
 
@@ -65,6 +72,7 @@ void Link::close()
 				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << m_sendBuf.readableBytes() << ", socket = " << m_sockfd;
 			}
 
+			LOG_ERROR << m_pNetReactor->name() << " is waiting write";
 			return;
 		}
 	}
@@ -80,7 +88,7 @@ void Link::close()
 
 	shutdown(m_sockfd, SHUT_RDWR);
 
-// 首先屏蔽本连接上的所有网络输出
+	// 首先屏蔽本连接上的所有网络输出
 	socktool::closeSocket(m_sockfd);
 
 #ifdef WIN
@@ -88,7 +96,7 @@ void Link::close()
 	m_net->disableAll(this);
 #endif
 
-// 等业务层处理好关闭操作
+	// 等业务层处理好关闭操作
 	m_pNetReactor->getTaskQueue().put(boost::bind(&Link::onLogicClose, this));
 }
 
@@ -156,13 +164,16 @@ void Link::onSend()
 			m_isWaitingWrite = true;
 		}
 
+		// 注册写事件，以待当本连接可写时再尝试发送
+#ifdef WIN
+		m_net->enableWrite(this);
+#else
 		if (!m_isRegisterWrite) {
-			// 注册写事件，以待当本连接可写时再尝试发送
 			m_net->enableWrite(this);
 			m_isRegisterWrite = true;
 			// LOG_INFO << m_pNetReactor->name() << " register write, m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes();
 		}
-
+#endif
 		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
 	} else {
 		// 本次数据已发送成功

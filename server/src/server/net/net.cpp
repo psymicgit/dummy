@@ -393,21 +393,21 @@ int Select::eventLoop()
 
 				if(FD_ISSET(fd, &rset)) {
 					pfd->handleRead();
-					if(--readyfds == 0) break;
+					// if(--readyfds == 0) break;
 				}
 				if(FD_ISSET(fd, &wset)) {
 					pfd->handleWrite();
-					if(--readyfds == 0) break;
+					// if(--readyfds == 0) break;
 				}
 				if(FD_ISSET(fd, &eset)) {
 					pfd->handleError();
-					if(--readyfds == 0) break;
+					// if(--readyfds == 0) break;
 				}
 			}
 
-			if(readyfds != 0) {
-				LOG_DEBUG << "Are there any fd left?";
-			}
+// 			if(readyfds != 0) {
+// 				LOG_DEBUG << "Are there any fd left?";
+// 			}
 		}
 		// ³¬Ê±
 		else {
