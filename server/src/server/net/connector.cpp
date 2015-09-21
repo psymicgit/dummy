@@ -214,8 +214,10 @@ bool Connector::retry()
 	TimerQueue &timerQueue = m_net->getTimerQueue();
 	timerQueue.runAfter(boost::bind(&Connector::connect, this), m_retryDelayMs);
 
+	m_net->interruptLoop();
+
 	// 重连时间 = 重连时间 * 2
-	m_retryDelayMs = MIN(m_retryDelayMs * 2, MaxRetryDelayMs);
+	m_retryDelayMs = MIN(m_retryDelayMs + InitRetryDelayMs, MaxRetryDelayMs);
 	return true;
 }
 

@@ -38,10 +38,13 @@ Epoll::Epoll()
 		LOG_SYSTEM_ERR << "socketpair failed";
 	}
 
+	socktool::setNonBlocking(m_pipe[0]);
+	socktool::setNonBlocking(m_pipe[1]);
+
 	struct epoll_event ee = { 0, { 0 } };
-	ee.data.ptr  = this;
-	ee.events    = EPOLLIN | EPOLLPRI | EPOLLOUT | EPOLLHUP | EPOLLET;;
-	::epoll_ctl(m_efd, EPOLL_CTL_ADD, m_pipe[0], &ee);
+	ee.data.fd   = m_pipe[1];
+	ee.events    = EPOLLIN | EPOLLET;;
+	::epoll_ctl(m_efd, EPOLL_CTL_ADD, m_pipe[1], &ee);
 
 	// 如果客户端关闭套接字close，而服务器调用一次write, 服务器会接收一个RST segment（tcp传输层）
 	// 如果服务器端再次调用了write，这个时候就会产生SIGPIPE信号，默认终止进程。
@@ -83,7 +86,16 @@ int Epoll::eventLoop()
 		int nfds = ::epoll_wait(m_efd, ev_set, EPOLL_EVENTS_SIZE, waitTime);
 		for (int i = 0; i < nfds; ++i) {
 			epoll_event& cur_ev = ev_set[i];
-			if (cur_ev.data.ptr == this) {
+// 			if (cur_ev.data.fd == m_pipe[0] || cur_ev.data.ptr == this) {
+// 				continue;
+// 			}
+			if (cur_ev.data.fd == m_pipe[1]) {
+				// LOG_WARN << "read from socket pair, m_efd = " << m_efd << ", m_pipe[1] = " << m_pipe[1] << "cur_ev.data.fd" << cur_ev.data.fd;
+				int nread = 0;
+				while((nread = ::recv(m_pipe[1], g_recvBuf, MAX_PACKET_LEN, NULL)) > 0) {
+					// LOG_WARN << "nread = " << nread;
+				};
+
 				continue;
 			}
 
@@ -113,24 +125,23 @@ int Epoll::eventLoop()
 void Epoll::close()
 {
 	m_tasks.put(boost::bind(&Epoll::closing, this));
+	interruptLoop();
 }
 
 void Epoll::closing()
 {
 	LOG_WARN << "closing net...";
 	// LOG_WARN << "	<link count = " << m_curFdCount << ", timer size = " << m_timers.size() << ">";
-
 	m_running = false;
-	interruptLoop();
 }
 
 int Epoll::interruptLoop()
 {
-	struct epoll_event ee = { 0, { 0 } };
-	ee.data.ptr  = this;
-	ee.events    = EPOLLIN | EPOLLOUT | EPOLLPRI | EPOLLHUP | EPOLLET;;
+	char buf[2] = {1};
+	int ret = send(m_pipe[0], buf, 1, 0);
 
-	return ::epoll_ctl(m_efd, EPOLL_CTL_MOD, m_pipe[0], &ee);
+	// LOG_WARN << "ret = " << ret;
+	return ret;
 }
 
 void Epoll::addFd(IFd* pfd)
