@@ -69,7 +69,7 @@ void Robot::onConnected(Link *link, const NetAddress& localAddr, const NetAddres
 	m_link = link;
 
 	if (g_connectedRobotCnt % 100 == 0) {
-		LOG_INFO << name() << " <" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success, current robot cnt = " << g_connectedRobotCnt;
+		LOG_INFO << name() << " <" << localAddr.toIpPort() << "> connect to <" << peerAddr.toIpPort() << "> success, current robot cnt = " << m_robotMgr->m_robotMap.size();
 	}
 
 	// m_link->send("1\r\n");
@@ -84,7 +84,7 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	}
 	*/
 
-	if (m_robotMgr->m_robotMap.size() - 1 % 100 == 0) {
+	if (m_robotMgr->m_robotMap.size() - 1 % 100 >= 0) {
 		LOG_INFO << "robot<" << m_robotId << "> <" << localAddr.toIpPort() << "> to gateserver <" << peerAddr.toIpPort() << "> closed! current robot cnt = " << m_robotMgr->m_robotMap.size() - 1;
 	}
 
@@ -142,9 +142,6 @@ void Robot::handleMsg()
 		}
 
 		char *msg = (char*)buf.peek() + sizeof(NetMsgHead) + EncryptHeadLen;
-
-		Buffer copyBuf;
-		copyBuf.append(msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen);
 
 		// 直接本地进行处理
 		m_robotMgr->m_dispatcher.dispatch(*this, msgId, msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen, 0);

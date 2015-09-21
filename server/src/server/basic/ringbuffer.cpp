@@ -15,6 +15,7 @@
 
 void RingBufferBlock::bind(Link *link)
 {
+	/*
 	m_next = NULL;
 	m_skip = 0;
 	m_link = link;
@@ -22,11 +23,11 @@ void RingBufferBlock::bind(Link *link)
 	if(NULL == link->m_head) {
 		link->m_head = this;
 		link->m_tail = this;
-	}
-	else {
+	} else {
 		link->m_tail->m_next = this;
 		link->m_tail = this;
 	}
+	*/
 }
 
 RingBufferBlock* RingBuffer::getHead()
@@ -64,8 +65,7 @@ RingBufferBlock* RingBuffer::splitBlock(int sum, int size)
 				}
 			}
 		}
-	}
-	else {
+	} else {
 		// m_head = 0;
 	}
 
@@ -95,8 +95,7 @@ RingBufferBlock* RingBuffer::searchFreeBlock(int size)
 		}
 
 		block = getNextBlock(block);
-	}
-	while(block);
+	} while(block);
 
 	return NULL;
 }
@@ -129,6 +128,7 @@ void RingBuffer::freeBlock(RingBufferBlock *block)
 
 RingBufferBlock* RingBuffer::add(const char* data, int len, Link *link)
 {
+	/*
 	if (0 == len) {
 		return NULL;
 	}
@@ -149,8 +149,7 @@ RingBufferBlock* RingBuffer::add(const char* data, int len, Link *link)
 	if(NULL == link->m_head) {
 		link->m_head = block;
 		link->m_tail = block;
-	}
-	else {
+	} else {
 		link->m_tail->m_next = block;
 		link->m_tail = block;
 	}
@@ -161,6 +160,9 @@ RingBufferBlock* RingBuffer::add(const char* data, int len, Link *link)
 	// m_head = getBlockOffset(getNextBlock(block));
 
 	return block;
+	*/
+
+	return NULL;
 }
 
 void RingBuffer::skip(int len)
@@ -178,6 +180,7 @@ void RingBuffer::skip(int len)
 
 void RingBuffer::statistic()
 {
+	/*
 	int usingBlockCount = 0;
 	int firstUsingBlockIdx = 0;
 	int firstUsingBlockOffset = 0;
@@ -230,7 +233,7 @@ void RingBuffer::statistic()
 	LOG_ERROR << "first using block count index = " << firstUsingBlockIdx;
 	LOG_ERROR << "first using block count offset = " << firstUsingBlockOffset;
 
-	// exit(0);
+	*/
 }
 
 void RingBuffer::linkBlock(RingBufferBlock *head, RingBufferBlock *block)

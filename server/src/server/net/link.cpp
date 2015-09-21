@@ -38,6 +38,10 @@ void Link::open()
 
 void Link::close()
 {
+	if (m_closed) {
+		return;
+	}
+
 	// 投递到网络线程执行close命令
 	m_net->getTaskQueue()->put(boost::bind(&Link::closing, this));
 }
@@ -307,8 +311,6 @@ void Link::handleRead()
 			}
 		} else if (0 == nread) { // eof
 			// 接收到0字节的数据: 说明已检测到对端关闭，此时直接关闭本连接，不再处理未发送的数据
-			static int g_closecnt = 0;
-			g_closecnt++;
 			// LOG_WARN << m_pNetReactor->name() << " read 0, closed! buffer len = " << m_recvBuf.readableBytes() << ", g_closecnt = " << g_closecnt;
 			m_isPeerClosed = true;
 			this->close();

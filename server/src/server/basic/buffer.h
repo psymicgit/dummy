@@ -38,9 +38,6 @@ public:
 		  m_readPos(g_cheapPrepend),
 		  m_writePos(g_cheapPrepend)
 	{
-		assert(readableBytes() == 0);
-		assert(writableBytes() == initialSize);
-		assert(prependableBytes() == g_cheapPrepend);
 	}
 
 	explicit Buffer(const char *data, int size)
@@ -83,7 +80,6 @@ public:
 	// the evaluation of two functions are unspecified
 	void skip(size_t len)
 	{
-		assert(len <= readableBytes());
 		if (len < readableBytes()) {
 			m_readPos += len;
 		} else {
@@ -91,14 +87,14 @@ public:
 		}
 	}
 
-	void clear()
+	inline void clear()
 	{
 		m_readPos = g_cheapPrepend;
 		m_writePos = g_cheapPrepend;
 
-		if (m_buffer.capacity() > 2 * g_initSize) {
-			recycle();
-		}
+// 		if (m_buffer.capacity() > 2 * g_initSize) {
+// 			recycle();
+// 		}
 	}
 
 	// 重新回收内存
@@ -107,12 +103,11 @@ public:
 		m_buffer.swap(std::vector<char>());
 	}
 
-	void append(const char* data, size_t len)
+	inline void append(const char* data, size_t len)
 	{
 		if (writableBytes() < len) {
 			makeSpace(len);
 		}
-		assert(writableBytes() >= len);
 
 		memcpy(beginWrite(), data, len);
 		hasWritten(len);
@@ -120,38 +115,33 @@ public:
 
 	char* beginWrite() { return begin() + m_writePos; }
 
-	void hasWritten(size_t len)
+	inline void hasWritten(size_t len)
 	{
-		assert(len <= writableBytes());
 		m_writePos += len;
 	}
 
-	void unread(size_t len)
+	inline void unread(size_t len)
 	{
-		assert(len <= prependableBytes());
 		m_readPos -= len;
 	}
 
-	void unwrite(size_t len)
+	inline void unwrite(size_t len)
 	{
-		assert(len <= readableBytes());
 		m_writePos -= len;
 	}
 
 	void prepend(const void* /*restrict*/ data, size_t len)
 	{
-		assert(len <= prependableBytes());
 		m_readPos -= len;
-
 		memcpy(peek(), data, len);
 	}
 
-	size_t capacity() const
+	inline size_t capacity() const
 	{
 		return m_buffer.capacity();
 	}
 
-	char* begin() { return &m_buffer[0]; }
+	inline char* begin() { return &m_buffer[0]; }
 
 private:
 	// 分配空间使得空闲空间足够再容纳下len字节

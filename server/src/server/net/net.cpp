@@ -96,6 +96,7 @@ int Epoll::eventLoop()
 					// LOG_WARN << "nread = " << nread;
 				};
 
+				recycleFds();
 				continue;
 			}
 
@@ -161,6 +162,17 @@ void Epoll::addFd(IFd* pfd)
 void Epoll::delFd(IFd* pfd)
 {
 	m_tasks.put(boost::bind(&IFd::erase, pfd));
+// 	int size = 0;
+// 	{
+// 		lock_guard_t<> lock(m_mutex);
+// 		m_deletingFdList.push_back(pfd);
+//
+// 		size = m_deletingFdList.size();
+// 	}
+//
+// 	if (size == 1) {
+// 		interruptLoop();
+// 	}
 }
 
 void Epoll::reopen(IFd* pfd)
@@ -227,7 +239,10 @@ void Epoll::recycleFds()
 	{
 		lock_guard_t<> lock(m_mutex);
 		delFds.swap(m_deletingFdList);
+
 	}
+
+	// LOG_INFO << "delFds.size()" << delFds.size();
 
 	for(size_t i = 0; i < delFds.size(); ++i) {
 		IFd *pfd = delFds[i];

@@ -58,8 +58,9 @@ struct Task {
 	{}
 
 	Task()
+		: m_task(NULL)
 	{
-		m_task = new TaskFunction(&Task::dummy, NULL);
+		// m_task = new TaskFunction(&Task::dummy, NULL);
 	}
 
 	~Task()
@@ -76,7 +77,9 @@ struct Task {
 
 	void run()
 	{
-		m_task->run();
+		if (m_task) {
+			m_task->run();
+		}
 	}
 
 	ITask* m_task;

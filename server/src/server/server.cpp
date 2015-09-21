@@ -107,15 +107,6 @@ void Server::onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& 
 
 void Server::onRecv(Link *link, Buffer& buf)
 {
-	{
-		lock_guard_t<> lock(link->m_sendBufLock);
-		if (link->m_isWaitingRead) {
-			return;
-		}
-
-		link->m_isWaitingRead = true;
-	}
-
 	m_taskQueue.put(boost::bind(&Server::handleMsg, this, link));
 }
 

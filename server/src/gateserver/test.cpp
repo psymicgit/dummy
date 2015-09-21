@@ -25,6 +25,7 @@
 
 void ringbufferTest()
 {
+	/*
 	Tick tick("ringbuffer test");
 
 	char text[] = "hello word, ringbuffer test";
@@ -44,15 +45,7 @@ void ringbufferTest()
 	if (link.m_head == NULL) {
 		link.m_tail = NULL;
 	}
-
-	//ringbuffer.add(text, sizeof(text), &link);
-	//ringbuffer.add(text, sizeof(text), &link);
-
-
-// 	ringbuffer.allocFreeBlock(40);
-// 	ringbuffer.allocFreeBlock(40);
-// 	ringbuffer.allocFreeBlock(40);
-// 	ringbuffer.allocFreeBlock(40);
+	*/
 }
 
 class BindTest

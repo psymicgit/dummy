@@ -136,6 +136,9 @@ private:
 // 非阻塞任务队列
 class TaskQueue
 {
+private:
+	typedef std::vector<Task> TaskList;
+
 public:
 	void put(const Task& task)
 	{
@@ -143,31 +146,30 @@ public:
 		m_tasklist.push_back(task);
 	}
 
-	int take(Task& task)
-	{
-		lock_guard_t<> lock(m_mutex);
-		task = m_tasklist.front();
-		m_tasklist.pop_front();
-		return 0;
-	}
-
 	int run()
 	{
-		ITaskQueue::task_list_t tasks;
+		TaskList tasks;
 		int ret = takeAll(tasks);
 
-		for (ITaskQueue::task_list_t::iterator it = tasks.begin(); it != tasks.end(); ++it) {
-			Task &t = *it;
+		for (size_t i = 0; i < tasks.size(); i++) {
+			Task &t = tasks[i];
 			t.run();
 		}
 
 		return ret;
 	}
 
-	int takeAll(ITaskQueue::task_list_t& tasks)
+	int takeAll(TaskList& tasks)
 	{
-		lock_guard_t<> lock(m_mutex);
-		tasks.swap(m_tasklist);
+		{
+			lock_guard_t<> lock(m_mutex);
+			if (m_tasklist.empty()) {
+				return 0;
+			}
+
+			tasks.swap(m_tasklist);
+		}
+
 		return tasks.size();
 	}
 
@@ -178,8 +180,8 @@ public:
 	}
 
 private:
-	ITaskQueue::task_list_t m_tasklist;
-	mutex_t                         m_mutex;
+	TaskList m_tasklist;
+	mutex_t m_mutex;
 };
 
 // 任务队列池，含多个线程，每个线程将运行一个阻塞任务队列

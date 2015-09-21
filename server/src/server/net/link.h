@@ -33,12 +33,11 @@ public:
 		, m_error(false)
 		, m_sockfd(sockfd)
 		, m_net(pNet)
-		, m_head(NULL)
-		, m_tail(NULL)
 		, m_isWaitingWrite(false)
 		, m_isWaitingRead(false)
 		, m_isWaitingClose(false)
 		, m_isPeerClosed(false)
+		, m_isRegisterWrite(false)
 	{
 	}
 
@@ -105,9 +104,6 @@ public:
 	// 自动重连标志位：标示本连接断开后是否需要自动重连
 	bool m_isAutoReconnect;
 
-	RingBufferBlock *m_head;
-	RingBufferBlock *m_tail;
-
 public:
 	// 是否已关闭标志位：防止重复close
 	bool m_closed;
@@ -123,9 +119,6 @@ public:
 
 	// 网络中心
 	NetModel *m_net;
-
-	// 网络任务队列
-	ITaskQueue *m_taskQueue;
 
 	// 发送缓冲区
 	Buffer m_sendBuf;
