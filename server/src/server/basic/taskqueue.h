@@ -16,33 +16,23 @@
 // #define NDEBUG
 // #include "readerwriterqueue.h"
 
-class ITaskQueue
-{
-public:
-	typedef std::list<Task> task_list_t;
-public:
-	virtual ~ITaskQueue() {}
-	virtual void close() = 0;
-	virtual void produce(const Task& task_) = 0;
-	virtual void multi_produce(const task_list_t& task_) = 0;
-	virtual int  consume(Task& task_) = 0;
-	virtual int  consume_all(task_list_t&) = 0;
-	virtual int run() = 0;
-	virtual int batch_run() = 0;
-};
-
 // 阻塞任务队列
-class BlockingTaskQueue: public ITaskQueue
+class BlockingTaskQueue
 {
 public:
-	BlockingTaskQueue():
-		m_closed(false),
-		m_cond(m_mutex)
+public:
+	typedef std::vector<Task> TaskList;
+
+	BlockingTaskQueue()
+		: m_closed(false)
+		, m_cond(m_mutex)
 	{
 	}
+
 	~BlockingTaskQueue()
 	{
 	}
+
 	void close()
 	{
 		lock_guard_t<> lock(m_mutex);
@@ -50,56 +40,58 @@ public:
 		m_cond.broadcast();
 	}
 
-	void multi_produce(const task_list_t& task_)
+	void put(const TaskList& tasks)
 	{
 		lock_guard_t<> lock(m_mutex);
-		bool need_sig = m_tasklist.empty();
+		bool needNotify = m_tasklist.empty();
 
-		for(task_list_t::const_iterator it = task_.begin(); it != task_.end(); ++it) {
-			m_tasklist.push_back(*it);
+		for(size_t i = 0; i < tasks.size(); i++) {
+			m_tasklist.push_back(tasks[i]);
 		}
 
-		if (need_sig) {
+		if (needNotify) {
 			m_cond.notify();
 		}
 	}
-	void produce(const Task& task_)
+
+	void put(const Task& task_)
 	{
 		lock_guard_t<> lock(m_mutex);
-		bool need_sig = m_tasklist.empty();
+		bool needNotify = m_tasklist.empty();
 
 		m_tasklist.push_back(task_);
-		if (need_sig) {
+		if (needNotify) {
 			m_cond.notify();
 		}
 	}
 
-	int   consume(Task& task_)
-	{
-		lock_guard_t<> lock(m_mutex);
-		while (m_tasklist.empty()) {
-			if (m_closed) {
-				return -1;
-			}
-			m_cond.wait();
-		}
+// 	int consume(Task& task_)
+// 	{
+// 		lock_guard_t<> lock(m_mutex);
+// 		while (m_tasklist.empty()) {
+// 			if (m_closed) {
+// 				return -1;
+// 			}
+// 			m_cond.wait();
+// 		}
+//
+// 		task_ = m_tasklist.front();
+// 		m_tasklist.pop_front();
+//
+// 		return 0;
+// 	}
 
-		task_ = m_tasklist.front();
-		m_tasklist.pop_front();
-
-		return 0;
-	}
-
-	int run()
-	{
+// 	int run()
+// 	{
 // 		Task t;
 // 		while (0 == consume(t)) {
 // 			t.run();
 // 		}
-		return 0;
-	}
+//
+// 		return 0;
+// 	}
 
-	int consume_all(task_list_t& tasks_)
+	int take(TaskList& tasks)
 	{
 		lock_guard_t<> lock(m_mutex);
 
@@ -107,33 +99,35 @@ public:
 			if (m_closed) {
 				return -1;
 			}
+
 			m_cond.wait();
 		}
 
-		tasks_ = m_tasklist;
-		m_tasklist.clear();
-
-		return 0;
+		tasks.swap(m_tasklist);
+		return tasks.size();
 	}
 
-	int batch_run()
+	int run()
 	{
-// 		task_list_t tasks;
-// 		int ret = consume_all(tasks);
-// 		while (0 == ret) {
-// 			for (task_list_t::iterator it = tasks.begin(); it != tasks.end(); ++it) {
-// 				(*it).run();
-// 			}
-// 			tasks.clear();
-// 			ret = consume_all(tasks);
-// 		}
+		TaskList tasks;
+		int ret = take(tasks);
+
+		while (ret > 0) {
+			for (TaskList::iterator it = tasks.begin(); it != tasks.end(); ++it) {
+				(*it).run();
+			}
+
+			tasks.clear();
+			ret = take(tasks);
+		}
+
 		return 0;
 	}
 private:
-	volatile bool                   m_closed;
-	task_list_t                     m_tasklist;
-	mutex_t                         m_mutex;
-	condition_var_t                 m_cond;
+	volatile bool   m_closed;
+	TaskList		m_tasklist;
+	mutex_t         m_mutex;
+	condition_var_t m_cond;
 };
 
 // 非阻塞任务队列
@@ -257,26 +251,23 @@ private:
 // 任务队列池，含多个线程，每个线程将运行一个阻塞任务队列
 class TaskQueuePool
 {
-	typedef ITaskQueue::task_list_t task_list_t;
-	typedef std::vector<BlockingTaskQueue*>    task_queue_vt_t;
-	static void task_func(void* pd_)
-	{
-		TaskQueuePool* t = (TaskQueuePool*)pd_;
-		t->run();
-	}
+	typedef BlockingTaskQueue::TaskList TaskList;
+	typedef std::vector<BlockingTaskQueue*> TaskQueueVec;
+
 public:
-	static Task gen_task(TaskQueuePool* p)
-	{
-		return boost::bind(&task_func, p);
-	}
-public:
-	TaskQueuePool(int n) :
+	TaskQueuePool() :
 		m_index(0)
 	{
+	}
+
+	bool init(int n)
+	{
 		for (int i = 0; i < n; ++i) {
-			BlockingTaskQueue* p = new BlockingTaskQueue();
-			m_tqs.push_back(p);
+			BlockingTaskQueue* q = new BlockingTaskQueue();
+			m_queues.push_back(q);
 		}
+
+		return true;
 	}
 
 	void run()
@@ -284,46 +275,48 @@ public:
 		BlockingTaskQueue* p = NULL;
 		{
 			lock_guard_t<> lock(m_mutex);
-			if (m_index >= (int)m_tqs.size()) {
+			if (m_index >= (int)m_queues.size()) {
 				throw std::runtime_error("too more thread running!!");
 			}
-			p = m_tqs[m_index++];
+			p = m_queues[m_index++];
 		}
 
-		p->batch_run();
+		p->run();
 	}
 
 	~TaskQueuePool()
 	{
-		task_queue_vt_t::iterator it = m_tqs.begin();
-		for (; it != m_tqs.end(); ++it) {
+		TaskQueueVec::iterator it = m_queues.begin();
+		for (; it != m_queues.end(); ++it) {
 			delete (*it);
 		}
-		m_tqs.clear();
+
+		m_queues.clear();
 	}
 
 	void close()
 	{
-		task_queue_vt_t::iterator it = m_tqs.begin();
-		for (; it != m_tqs.end(); ++it) {
+		TaskQueueVec::iterator it = m_queues.begin();
+		for (; it != m_queues.end(); ++it) {
 			(*it)->close();
 		}
 	}
 
-	size_t size() const { return m_tqs.size(); }
+	size_t size() const { return m_queues.size(); }
 
-	ITaskQueue* alloc(long id_)
+	BlockingTaskQueue* alloc(long id)
 	{
-		return m_tqs[id_ %  m_tqs.size()];
+		return m_queues[id % m_queues.size()];
 	}
-	ITaskQueue* rand_alloc()
+
+	BlockingTaskQueue* randAlloc()
 	{
 		static unsigned long id_ = 0;
-		return m_tqs[++id_ %  m_tqs.size()];
+		return m_queues[++id_ %  m_queues.size()];
 	}
 private:
 	mutex_t               m_mutex;
-	task_queue_vt_t       m_tqs;
+	TaskQueueVec       m_queues;
 	int					  m_index;
 };
 

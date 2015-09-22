@@ -18,6 +18,11 @@ void NetFactory::runNet(void *e)
 	net->eventLoop();
 }
 
+void NetFactory::runNetIO(void *e)
+{
+	TaskQueuePool *pool = (TaskQueuePool*)e;
+	pool->run();
+}
 
 NetFactory::NetFactory()
 	: m_started(false)
@@ -33,7 +38,7 @@ bool NetFactory::init(int threadCnt, int initLinkCnt)
 
 	// m_net.init(initLinkCnt, 1000);
 
-	for (int i = 0; i < threadCnt; i++) {
+	for (int i = 0; i < 1; i++) {
 		NetModel *net = new NetModel;
 		if (NULL == net) {
 			LOG_SYSTEM_ERR << "net resource allocate failed not enough memory, aborted!";
@@ -44,6 +49,7 @@ bool NetFactory::init(int threadCnt, int initLinkCnt)
 		m_nets.push_back(net);
 	}
 
+	m_queuePool.init(threadCnt);
 	return true;
 }
 
@@ -65,6 +71,8 @@ void NetFactory::start()
 		NetModel *net = m_nets[i];
 		m_netThread.createThread(boost::bind(&runNet, net), 1);
 	}
+
+	m_netThread.createThread(boost::bind(&runNetIO, &m_queuePool), m_queuePool.size());
 }
 
 void NetFactory::stop()

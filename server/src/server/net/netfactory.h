@@ -33,8 +33,11 @@ class NetFactory
 	typedef std::vector<Connector*> ConnectorVec;
 
 private:
-	// 网络线程启动后将开始执行本方法
+	// 网络监听线程启动后将开始执行本方法
 	static void runNet(void *e);
+
+	// 网络io线程启动后将开始执行本方法
+	static void runNetIO(void *e);
 
 public:
 	NetFactory();
@@ -60,6 +63,8 @@ public:
 public:
 	// 网络模型: linux下epoll / windows下select
 	std::vector<NetModel*> m_nets;
+
+	TaskQueuePool m_queuePool;
 
 	int m_curNetIdx;
 

@@ -93,7 +93,7 @@ private:
 			double count = 1.0f / speed;
 			LOG_INFO << "speedtest count = " << g_speedTestCount << ", avg cost=" << speed << ", size = " << p->ByteSize() << ", exe count per second = " << count;
 
-			if (g_speedTestCount % (10000 * 10000) == 0) {
+			if (g_speedTestCount == (5000 * 10000)) {
 				Server::instance->stop();
 			}
 		}
