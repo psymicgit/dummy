@@ -10,53 +10,48 @@
 
 namespace atomictool
 {
-	int inc(volatile int *mem)
+	int cas(int *x, int y, int z)
 	{
 #if defined(WIN)
-		return InterlockedIncrement((volatile LONG *)mem);
+		return InterlockedCompareExchange((volatile LONG*)x, y, z);
 #else
-		return add(mem, 1);
+		return __sync_val_compare_and_swap(x, y, z);
 #endif
 	}
 
-	int dec(volatile int *mem)
+	int inc(volatile int *x)
 	{
 #if defined(WIN)
-		return InterlockedDecrement((volatile LONG *)mem);
+		return InterlockedIncrement((volatile LONG *)x);
 #else
-		unsigned char prev;
-		asm volatile ("lock; decl %0; setnz %1"
-		              : "=m" (*mem), "=qm" (prev)
-		              : "m" (*mem)
-		              : "memory");
-
-		return prev;
+		return __sync_add_and_fetch(x, 1);
 #endif
 	}
 
-	int add(volatile int *mem, int val)
+	int dec(volatile int *x)
 	{
 #if defined(WIN)
-		return InterlockedExchangeAdd((volatile LONG *)mem, val);
+		return InterlockedDecrement((volatile LONG *)x);
 #else
-		asm volatile ("lock; xaddl %0,%1"
-		              : "=r" (val), "=m" (*mem)
-		              : "0" (val), "m" (*mem)
-		              : "memory", "cc");
-		return val;
+		return __sync_sub_and_fetch(x, 1);
 #endif
 	}
 
-	int sub(volatile int *mem, int val)
+	int add(volatile int *x, int y)
 	{
 #if defined(WIN)
-		return InterlockedExchangeAdd((volatile LONG *)mem, -val);
+		return InterlockedExchangeAdd((volatile LONG *)x, y);
 #else
-		asm volatile ("lock; subl %1, %0"
-		              : /* no output */
-		              : "m" (*(mem)), "r" (val)
-		              : "memory", "cc");
-		return *mem;
+		return __sync_add_and_fetch(x, y);
+#endif
+	}
+
+	int sub(volatile int *x, int y)
+	{
+#if defined(WIN)
+		return InterlockedExchangeAdd((volatile LONG *)x, -y);
+#else
+		return __sync_sub_and_fetch(x, y);
 #endif
 	}
 }

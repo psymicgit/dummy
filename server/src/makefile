@@ -1,4 +1,4 @@
-ALL_DIR=server gameserver gateserver robot
+ALL_DIR=server gateserver robot
 
 all:
 	@for i in $(ALL_DIR) ; \

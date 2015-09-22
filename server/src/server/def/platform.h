@@ -65,6 +65,8 @@
 	#include <sys/locking.h>
 #else
 	#include <pthread.h>
+
+	#define nullptr NULL
 #endif
 
 // 套接字、网络
@@ -91,6 +93,7 @@
 	#define stat _stati64
 	#define mode_t int
 	#define sleep Sleep
+	#define bzero(buf, len) memset(buf, 0, len)
 #else
 	#define sprintf_s snprintf
 	#define vsprintf_s vsnprintf
@@ -109,10 +112,6 @@
 	#else
 		#define thread_local __declspec(thread)
 	#endif
-#endif
-
-#ifdef WIN
-	#define bzero(buf, len) memset(buf, 0, len)
 #endif
 
 // 公用头文件
