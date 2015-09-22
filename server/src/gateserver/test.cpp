@@ -132,6 +132,7 @@ void test()
 		for(int i = 0; i < times; i++) {
 			Task t = boost::bind(&BindTest::addnum, &bt, &str);
 			t.run();
+			t.release();
 		}
 
 		double speed = tick.endTick() / times;

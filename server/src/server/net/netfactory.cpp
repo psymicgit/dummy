@@ -63,7 +63,7 @@ void NetFactory::start()
 
 	for (size_t i = 0; i < m_nets.size(); i++) {
 		NetModel *net = m_nets[i];
-		m_netThread.createThread(Task(&runNet, net), 1);
+		m_netThread.createThread(boost::bind(&runNet, net), 1);
 	}
 }
 

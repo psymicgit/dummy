@@ -17,11 +17,12 @@
 {
 	Task* t = (Task*)p;
 	t->run();
+	t->release();
 	delete t;
 	return 0;
 }
 
-int Thread::createThread(Task task, int num)
+int Thread::createThread(const Task &task, int num)
 {
 	for (int i = 0; i < num; ++i) {
 		Task* t = new Task(task);

@@ -365,13 +365,14 @@ void Link::handleWrite()
 
 void Link::handleError()
 {
+	if (m_isPeerClosed || m_error || m_isWaitingClose || m_closed) {
+		return;
+	}
+
 	int err = socktool::getSocketError(m_sockfd);
 	LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " socket<" << m_sockfd << "> error, m_error = " << m_error << ", m_isWaitingClose=" << m_isWaitingClose
 	                              << ", m_closed = " << m_closed;
 
-	if (m_error || m_isWaitingClose || m_closed) {
-		return;
-	}
 
 	m_error = true;
 	this->close();

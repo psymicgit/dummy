@@ -39,7 +39,7 @@ public:
 
 public:
 	// 创建num个线程，每个线程一启动将执行传入的任务
-	int createThread(Task task, int num);
+	int createThread(const Task &task, int num);
 
 	// 等待直至所有线程退出
 	int join();

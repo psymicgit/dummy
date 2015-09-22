@@ -89,11 +89,11 @@ public:
 
 	int run()
 	{
-		Task t;
-		while (0 == consume(t)) {
-			t.run();
-		}
-		return 0;
+// 		Task t;
+// 		while (0 == consume(t)) {
+// 			t.run();
+// 		}
+// 		return 0;
 	}
 
 	int consume_all(task_list_t& tasks_)
@@ -115,15 +115,15 @@ public:
 
 	int batch_run()
 	{
-		task_list_t tasks;
-		int ret = consume_all(tasks);
-		while (0 == ret) {
-			for (task_list_t::iterator it = tasks.begin(); it != tasks.end(); ++it) {
-				(*it).run();
-			}
-			tasks.clear();
-			ret = consume_all(tasks);
-		}
+// 		task_list_t tasks;
+// 		int ret = consume_all(tasks);
+// 		while (0 == ret) {
+// 			for (task_list_t::iterator it = tasks.begin(); it != tasks.end(); ++it) {
+// 				(*it).run();
+// 			}
+// 			tasks.clear();
+// 			ret = consume_all(tasks);
+// 		}
 		return 0;
 	}
 private:
@@ -140,10 +140,12 @@ private:
 	typedef std::vector<Task> TaskList;
 
 public:
-	void put(const Task& task)
+	void put(Task task)
 	{
-		lock_guard_t<> lock(m_mutex);
-		m_tasklist.push_back(task);
+		{
+			lock_guard_t<> lock(m_mutex);
+			m_tasklist.push_back(task);
+		}
 	}
 
 	int run()
@@ -154,6 +156,7 @@ public:
 		for (size_t i = 0; i < tasks.size(); i++) {
 			Task &t = tasks[i];
 			t.run();
+			t.release();
 		}
 
 		return ret;
@@ -197,7 +200,7 @@ class TaskQueuePool
 public:
 	static Task gen_task(TaskQueuePool* p)
 	{
-		return Task(&task_func, p);
+		return boost::bind(&task_func, p);
 	}
 public:
 	TaskQueuePool(int n) :

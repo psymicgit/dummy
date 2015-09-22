@@ -19,21 +19,21 @@ int TimerQueue::run()
 
 	// 依次取出离已到期的定时器并执行
 	while(!m_timers.empty()) {
-		Timer &task = *m_timers.top();
-		if(task.m_at > now) {
-			return (int)(task.m_at - now);
+		Timer &timer = *m_timers.top();
+		if(timer.m_at > now) {
+			return (int)(timer.m_at - now);
 		}
 
 		m_timers.pop();
 
-		task.run();
-		task.gotoDead();
+		timer.run();
+		timer.gotoDead();
 
-		if(task.m_life != 0) {
-			task.m_at = now + task.m_interval;
-			m_timers.push(&task);
+		if(timer.isAlive()) {
+			timer.m_at = now + timer.m_interval;
+			m_timers.push(&timer);
 		} else {
-			delete &task;
+			delete &timer;
 		}
 	}
 

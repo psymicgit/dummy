@@ -19,67 +19,42 @@ public:
 	virtual ITask* clone() = 0;
 };
 
-class TaskFunction: public ITask
-{
-public:
-	TaskFunction(taskFunc func, void* arg):
-		m_func(func),
-		m_arg(arg)
-	{}
-
-	virtual void run()
-	{
-		m_func(m_arg);
-	}
-
-	virtual ITask* clone()
-	{
-		return new TaskFunction(m_func, m_arg);
-	}
-
-protected:
-	taskFunc m_func;
-	void*       m_arg;
-};
-
 struct Task {
 	static void dummy(void*) {}
-
-	Task(taskFunc func, void* arg):
-		m_task(new TaskFunction(func, arg))
-	{}
 
 	Task(ITask* task):
 		m_task(task)
 	{}
 
-	Task(const Task& src):
-		m_task(src.m_task->clone())
-	{}
+// 	Task(const Task& src):
+// 		m_task(src.m_task)
+// 	{}
 
 	Task()
 		: m_task(NULL)
 	{
-		// m_task = new TaskFunction(&Task::dummy, NULL);
 	}
 
-	~Task()
+	void release()
 	{
 		delete m_task;
+		m_task = NULL;
 	}
 
-	Task& operator=(const Task& src)
-	{
-		delete m_task;
-		m_task = src.m_task->clone();
-		return *this;
-	}
+// 	Task& operator=(const Task& src)
+// 	{
+// 		delete m_task;
+// 		m_task = src.m_task->clone();
+// 		return *this;
+// 	}
 
 	void run()
 	{
-		if (m_task) {
-			m_task->run();
+		if (NULL == m_task) {
+			return;
 		}
+
+		m_task->run();
 	}
 
 	ITask* m_task;
@@ -545,10 +520,10 @@ using namespace bindtool;
 namespace boost
 {
 // 非类成员函数
-	static Task bind(void (*func)(void*), void* p_)
-	{
-		return Task(func, p_);
-	}
+// 	static Task bind(void (*func)(void*), void* p_)
+// 	{
+// 		return Task(func, p_);
+// 	}
 
 	template<typename RET>
 	static Task bind(RET (*func)(void))

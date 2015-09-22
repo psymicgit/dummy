@@ -44,7 +44,7 @@ public:
 
 public:
 	// 递减本定时器的剩余生命次数
-	void gotoDead()
+	inline void gotoDead()
 	{
 		// 如果本定时器已被定义为无限存活，则跳过
 		if(m_life == FOREVER_ALIVE) {
@@ -57,6 +57,8 @@ public:
 			m_life = 0;
 		}
 	}
+
+	inline bool isAlive() { return 0 != m_life; }
 
 	bool operator<(const Timer& rhs) const
 	{
@@ -90,6 +92,11 @@ public:
 	TaskTimer(const Task &task)
 		: m_task(task)
 	{
+	}
+
+	~TaskTimer()
+	{
+		m_task.release();
 	}
 
 	virtual void run()
