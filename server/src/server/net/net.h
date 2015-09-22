@@ -50,8 +50,6 @@ public:
 typedef ObjectPool<Link> LinkPool;
 typedef ObjectPool<Buffer> BufferPool;
 
-#define MAX_PACKET_LEN (1 * 1024 * 1024) // 2MB
-
 #ifndef WIN
 
 // linuxÏÂepoll

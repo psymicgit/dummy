@@ -160,12 +160,15 @@ bool Connector::onConnected()
 
 	link->open();
 
+	TaskQueue::TaskList taskList;
+
 	// 将连接成功的消息投到业务层
-	m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onConnected, m_pNetReactor, link, link->getLocalAddr(), m_peerAddr));
+	taskList.push_back(boost::bind(&INetReactor::onConnected, m_pNetReactor, link, link->getLocalAddr(), m_peerAddr));
 
 	// 等业务层处理完新连接后，才允许该连接开始读
-	m_pNetReactor->getTaskQueue().put(boost::bind(&NetModel::enableRead, link->m_net, link));
+	taskList.push_back(boost::bind(&NetModel::enableRead, link->m_net, link));
 
+	m_pNetReactor->getTaskQueue().put(taskList);
 	return true;
 }
 

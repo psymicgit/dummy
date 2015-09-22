@@ -127,11 +127,15 @@ void Listener::handleRead()
 
 		link->open();
 
+		TaskQueue::TaskList taskList;
+
 		// 将接收到新连接的消息投到业务层
-		m_pNetReactor->getTaskQueue().put(boost::bind(&INetReactor::onAccepted, m_pNetReactor, link, m_listenAddr, peerAddr));
+		taskList.push_back(boost::bind(&INetReactor::onAccepted, m_pNetReactor, link, m_listenAddr, peerAddr));
 
 		// 等业务层处理完新连接后，才允许该连接开始读
-		m_pNetReactor->getTaskQueue().put(boost::bind(&NetModel::enableRead, link->m_net, link));
+		taskList.push_back(boost::bind(&NetModel::enableRead, link->m_net, link));
+
+		m_pNetReactor->getTaskQueue().put(taskList);
 	} while (true);
 }
 

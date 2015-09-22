@@ -136,16 +136,23 @@ private:
 // 非阻塞任务队列
 class TaskQueue
 {
-private:
+public:
 	typedef std::vector<Task> TaskList;
 
 public:
+	void put(TaskList& tasks)
+	{
+		lock_guard_t<> lock(m_mutex);
+
+		for (size_t i = 0; i < tasks.size(); ++i) {
+			m_tasklist.push_back(tasks[i]);
+		}
+	}
+
 	void put(Task task)
 	{
-		{
-			lock_guard_t<> lock(m_mutex);
-			m_tasklist.push_back(task);
-		}
+		lock_guard_t<> lock(m_mutex);
+		m_tasklist.push_back(task);
 	}
 
 	int run()

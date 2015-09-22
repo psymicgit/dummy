@@ -299,6 +299,8 @@ void Link::handleRead()
 		return;
 	}
 
+	int totalRecvLen = 0;
+
 	// 循环接收数据直到无法再接收
 	int nread = 0;
 	do {
@@ -309,6 +311,8 @@ void Link::handleRead()
 				lock_guard_t<> lock(m_recvBufLock);
 				m_recvBuf.append(m_net->g_recvBuf, nread);
 			}
+
+			totalRecvLen += nread;
 		} else if (0 == nread) { // eof
 			// 接收到0字节的数据: 说明已检测到对端关闭，此时直接关闭本连接，不再处理未发送的数据
 			// LOG_WARN << m_pNetReactor->name() << " read 0, closed! buffer len = " << m_recvBuf.readableBytes() << ", g_closecnt = " << g_closecnt;
@@ -332,6 +336,10 @@ void Link::handleRead()
 			}
 		}
 	} while(true);
+
+	if(0 == totalRecvLen) {
+		return;
+	}
 
 	// 检测业务层是否已存在处理本连接接收数据的任务，若有则无需再次通知业务层，由之前的数据处理任务一并处理本次接收到的所有数据
 	{
@@ -372,7 +380,6 @@ void Link::handleError()
 	int err = socktool::getSocketError(m_sockfd);
 	LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " socket<" << m_sockfd << "> error, m_error = " << m_error << ", m_isWaitingClose=" << m_isWaitingClose
 	                              << ", m_closed = " << m_closed;
-
 
 	m_error = true;
 	this->close();
