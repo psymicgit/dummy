@@ -153,6 +153,12 @@
     <ClInclude Include="basic\ringbuffer.h">
       <Filter>basic</Filter>
     </ClInclude>
+    <ClInclude Include="basic\atomicops.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\readerwriterqueue.h">
+      <Filter>basic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">

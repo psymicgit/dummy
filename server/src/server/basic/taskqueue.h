@@ -13,6 +13,9 @@
 #include "lock.h"
 #include "bind.h"
 
+// #define NDEBUG
+// #include "readerwriterqueue.h"
+
 class ITaskQueue
 {
 public:
@@ -134,7 +137,7 @@ private:
 };
 
 // 非阻塞任务队列
-class TaskQueue
+class TaskQueue //MutexTaskQueue
 {
 public:
 	typedef std::vector<Task> TaskList;
@@ -194,6 +197,63 @@ private:
 	mutex_t m_mutex;
 };
 
+/*
+// 读写队列
+class LockFreeQueue
+{
+public:
+	typedef std::vector<Task> TaskList;
+
+public:
+	void put(TaskList& tasks)
+	{
+		for (size_t i = 0; i < tasks.size(); ++i) {
+			m_tasklist.enqueue(tasks[i]);
+		}
+	}
+
+	void put(Task task)
+	{
+		m_tasklist.enqueue(task);
+	}
+
+	int run()
+	{
+		TaskList tasks;
+		int ret = takeAll(tasks);
+
+		for (size_t i = 0; i < tasks.size(); i++) {
+			Task &t = tasks[i];
+			t.run();
+			t.release();
+		}
+
+		return ret;
+	}
+
+	int takeAll(TaskList& tasks)
+	{
+		Task task;
+		while(m_tasklist.try_dequeue(task)) {
+			tasks.push_back(task);
+		}
+
+		if(m_tasklist.size_approx() != 0) {
+			LOG_ERROR << "m_tasklist.size_approx() = " << m_tasklist.size_approx();
+		}
+
+		return tasks.size();
+	}
+
+	int size()
+	{
+		return m_tasklist.size_approx();
+	}
+
+private:
+	moodycamel::ReaderWriterQueue<Task> m_tasklist;
+};
+*/
 // 任务队列池，含多个线程，每个线程将运行一个阻塞任务队列
 class TaskQueuePool
 {
