@@ -97,6 +97,14 @@ void NetFactory::stop()
 	// 等待直到网络线程退出
 	m_netThread.join();
 
+	// 释放网络占用资源
+	for (size_t i = 0; i < m_nets.size(); i++) {
+		NetModel *net = m_nets[i];
+		delete net;
+	}
+
+	m_nets.clear();
+
 	// 	delete m_taskQueuePool;
 	// 	m_taskQueuePool = NULL;
 

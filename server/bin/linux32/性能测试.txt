@@ -1,0 +1,21 @@
+1. 检查内存泄露
+	valgrind --tool=memcheck --leak-check=full --show-reachable=yes --track-origins=yes --track-fds=yes ./gateserver
+
+2. 检查函数调用 & 检查cpu耗用
+	a. 
+		valgrind --tool=callgrind ./gateserver
+		
+		然后生成callgrind.out.***日志文件
+
+		callgrind_annotate callgrind.out.***
+
+	b.
+		统计每个函数占用
+		perf record -e cpu-clock -g ./gateserver
+		perf record -e task-clock -g ./gateserver
+		perf report
+
+		统计cpu信息
+		perf stat ./gateserver
+
+2. 

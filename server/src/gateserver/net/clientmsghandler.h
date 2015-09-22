@@ -92,7 +92,13 @@ private:
 			double speed = tick.endTick() / g_speedTestCount;
 			double count = 1.0f / speed;
 			LOG_INFO << "speedtest count = " << g_speedTestCount << ", avg cost=" << speed << ", size = " << p->ByteSize() << ", exe count per second = " << count;
+
+			if (g_speedTestCount % (100 * 10000) == 0) {
+				Server::instance->stop();
+			}
 		}
+
+
 
 // 		if (client->m_speedTestCount % 1000 == 0) {
 // 			client->send(eSpeedTest, *p);

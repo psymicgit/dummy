@@ -93,7 +93,7 @@ public:
 // 		while (0 == consume(t)) {
 // 			t.run();
 // 		}
-// 		return 0;
+		return 0;
 	}
 
 	int consume_all(task_list_t& tasks_)

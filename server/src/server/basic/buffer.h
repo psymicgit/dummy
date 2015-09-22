@@ -92,9 +92,9 @@ public:
 		m_readPos = g_cheapPrepend;
 		m_writePos = g_cheapPrepend;
 
-// 		if (m_buffer.capacity() > 2 * g_initSize) {
-// 			recycle();
-// 		}
+		if (m_buffer.capacity() > 2 * g_initSize) {
+			recycle();
+		}
 	}
 
 	// 重新回收内存
