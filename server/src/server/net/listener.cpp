@@ -27,7 +27,6 @@ bool Listener::open(const string & ip, int port)
 {
 	LOG_DEBUG << m_pNetReactor->name() << " start listening at <" << ip << ": " << port << ">";
 
-	NetAddress listenAddr(ip, port);
 	m_listenAddr = NetAddress(ip, port);
 
 	m_listenFd = socktool::createSocket();
@@ -77,7 +76,7 @@ void Listener::erase()
 
 void Listener::handleRead()
 {
-	sockaddr_storage addr;
+	sockaddr addr;
 	socklen_t addrlen = sizeof(addr);
 
 	// 循环接收新连接直到连接队列为空
@@ -115,7 +114,8 @@ void Listener::handleRead()
 			}
 		}
 
-		NetAddress peerAddr(*((struct sockaddr_in*)&addr));
+		const struct sockaddr_in *addr_in = (sockaddr_in*)&addr;
+		NetAddress peerAddr(*addr_in);
 
 		Link* link = createLink(newfd, peerAddr);
 		if (NULL == link) {

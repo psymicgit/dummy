@@ -49,7 +49,7 @@ bool NetFactory::init(int threadCnt, int initLinkCnt)
 		m_nets.push_back(net);
 	}
 
-	m_queuePool.init(threadCnt);
+	// m_queuePool.init(threadCnt);
 	return true;
 }
 
@@ -72,7 +72,7 @@ void NetFactory::start()
 		m_netThread.createThread(boost::bind(&runNet, net), 1);
 	}
 
-	m_netThread.createThread(boost::bind(&runNetIO, &m_queuePool), m_queuePool.size());
+	// m_netThread.createThread(boost::bind(&runNetIO, &m_queuePool), m_queuePool.size());
 }
 
 void NetFactory::stop()
