@@ -174,13 +174,17 @@ Connector* NetFactory::connect(const string& ip, int port, INetReactor &netReact
 
 NetModel* NetFactory::nextNet()
 {
-	NetModel *net = m_nets[m_curNetIdx];
-	m_curNetIdx = (m_curNetIdx + 1) % m_nets.size();
+	int n = m_nets.size();
+	if (1 == n) {
+		return m_nets[0];
+	}
 
-	// 尽量不返回第0个网络线程
-	if (0 == m_curNetIdx && m_nets.size() > 1) {
+	m_curNetIdx++;
+
+	// 返回第1个网络线程，避免返回第0个网络线程
+	if (m_curNetIdx >= n) {
 		m_curNetIdx = 1;
 	}
 
-	return net;
+	return m_nets[m_curNetIdx];
 }

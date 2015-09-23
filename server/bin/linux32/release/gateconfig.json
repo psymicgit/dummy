@@ -3,7 +3,7 @@
 	"server-id": "zone-type-idx",
 
 	"wan": {
-		"threads": 3,
+		"threads": 2,
 		"listen": {"ip": "127.0.0.1", "port": 20001}
 	},
 
