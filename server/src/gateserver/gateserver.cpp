@@ -35,7 +35,8 @@ bool GateServer::init(const char* jsonConfig)
 	m_lan.init(m_config.m_lanThreadNum);
 	m_wan.init(m_config.m_wanThreadNum);
 
-	// test();
+	test();
+
 	if(!m_wan.listen(m_config.m_wanListen.ip, m_config.m_wanListen.port, m_clientMgr)) {
 		LOG_ERROR << "listen at <" << m_config.m_wanListen.ip << ":" << m_config.m_wanListen.port <<  "> failed, aborted!";
 		return false;

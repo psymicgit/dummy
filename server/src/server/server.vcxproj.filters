@@ -156,6 +156,24 @@
     <ClInclude Include="basic\readerwriterqueue.h">
       <Filter>basic</Filter>
     </ClInclude>
+    <ClInclude Include="basic\evbuffer.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\evbuffer-internal.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\event_struct.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\event-config.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\evthread.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\evthread-internal.h">
+      <Filter>basic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -290,6 +308,12 @@
     </ClCompile>
     <ClCompile Include="http\httpcmd.cpp">
       <Filter>http</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\evbuffer.cpp">
+      <Filter>basic</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\evthread.cpp">
+      <Filter>basic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
