@@ -1560,7 +1560,7 @@ end:
    the end of the buffer doesn't work.
  */
 static void
-test_evbuffer_freeze(void *ptr)
+test_evbuffer_freeze(const char *ptr)
 {
 	struct evbuffer *buf = NULL, *tmp_buf=NULL;
 	const char string[] = /* Year's End, Richard Wilbur */
