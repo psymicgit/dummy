@@ -18,6 +18,8 @@ class NetAddress;
 class INetReactor;
 struct RingBufferBlock;
 
+struct evbuffer;
+
 namespace google {namespace protobuf {class Message;}}
 
 // 网络连接：Link = tcp连接，相当于connection
@@ -38,10 +40,11 @@ public:
 		, m_isWaitingClose(false)
 		, m_isPeerClosed(false)
 		, m_isRegisterWrite(false)
+		, m_nil(0)
 	{
 	}
 
-	~Link() {}
+	~Link();
 
 public:
 	virtual socket_t socket() const {return m_sockfd;}
@@ -86,7 +89,7 @@ private:
 
 private:
 	// 网络层：尝试一次性发送数据，返回尚未发送的数据长度
-	int trySend(Buffer&);
+	int trySend(evbuffer*);
 
 	// 业务层：处理本连接的关闭
 	void onLogicClose();
@@ -121,10 +124,10 @@ public:
 	NetModel *m_net;
 
 	// 发送缓冲区
-	Buffer m_sendBuf;
+	evbuffer* m_sendBuf;
 
 	// 接收缓冲区
-	Buffer m_recvBuf;
+	evbuffer* m_recvBuf;
 
 	// 发送缓冲区锁
 	mutex_t m_sendBufLock;
@@ -143,6 +146,11 @@ public:
 
 	// 是否已注册了写事件（写事件注册一次就行）
 	bool m_isRegisterWrite;
+
+	evbuffer *m_sendSwapBuf;
+	evbuffer *m_recvSwapBuf;
+
+	Buffer m_nil;
 };
 
 #endif //_link_h_

@@ -48,7 +48,7 @@ void registerSignal()
 
 bool RobotMgr::init(const char* jsonConfig)
 {
-	registerSignal();
+	// registerSignal();
 
 	global::init();
 

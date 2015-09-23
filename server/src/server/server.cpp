@@ -16,6 +16,7 @@
 #include <signal.h>
 
 #include <net.pb.h>
+#include <basic/evbuffer.h>
 
 Server* Server::instance = NULL;
 
@@ -67,7 +68,7 @@ bool Server::init()
 	global::init();
 
 	// 注册系统信号：防止一般的kill操作导致服务器不正常关闭
-	registerSignal();
+	// registerSignal();
 
 	//m_bufferPool.init(1000, 500);
 
@@ -112,14 +113,23 @@ void Server::onRecv(Link *link, Buffer& buf)
 
 void Server::handleMsg(Link *link)
 {
-	Buffer buf;
+	int size = 0;
 
 	// 1. 将接收缓冲区的数据全部取出
 	{
 		lock_guard_t<> lock(link->m_recvBufLock);
-		link->m_isWaitingRead = false;
-		buf.swap(link->m_recvBuf);
+		size = evbuffer_get_length(link->m_recvBuf);
 	}
+
+	Buffer buf(size);
+
+	{
+		lock_guard_t<> lock(link->m_recvBufLock);
+		evbuffer_remove(link->m_recvBuf, buf.peek(), size);
+		link->m_isWaitingRead = false;
+	}
+
+	buf.hasWritten(size);
 
 	// 2. 循环处理消息数据
 	while(true) {
@@ -146,11 +156,12 @@ void Server::handleMsg(Link *link)
 	if (!buf.empty()) {
 		{
 			lock_guard_t<> lock(link->m_recvBufLock);
-			if (!link->m_recvBuf.empty()) {
-				buf.append(link->m_recvBuf.peek(), link->m_recvBuf.readableBytes());
-				link->m_recvBuf.swap(buf);
+			int size = evbuffer_get_length(link->m_recvBuf);
+
+			if (size > 0) {
+				evbuffer_prepend(link->m_recvBuf, buf.peek(), buf.readableBytes());
 			} else {
-				link->m_recvBuf.swap(buf);
+				evbuffer_add(link->m_recvBuf, buf.peek(), buf.readableBytes());
 			}
 		}
 	}

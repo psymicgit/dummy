@@ -23,6 +23,8 @@
 
 #include <protocol.pb.h>
 #include <client.pb.h>
+#include <basic/evbuffer.h>
+
 
 Robot::Robot()
 	: m_link(NULL)
@@ -100,13 +102,24 @@ void Robot::onRecv(Link *link, Buffer &buf)
 void Robot::handleMsg()
 {
 	Link *link = m_link;
-	Buffer buf;
+
+	int size = 0;
+
+	// 1. 将接收缓冲区的数据全部取出
+	{
+		lock_guard_t<> lock(link->m_recvBufLock);
+		size = evbuffer_get_length(link->m_recvBuf);
+	}
+
+	Buffer buf(size);
 
 	{
 		lock_guard_t<> lock(link->m_recvBufLock);
+		evbuffer_remove(link->m_recvBuf, buf.peek(), size);
 		link->m_isWaitingRead = false;
-		buf.swap(link->m_recvBuf);
 	}
+
+	buf.hasWritten(size);
 
 	while(true) {
 		// 检测半包
@@ -148,14 +161,16 @@ void Robot::handleMsg()
 		buf.skip(msgLen);
 	}
 
+	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
 	if (!buf.empty()) {
 		{
 			lock_guard_t<> lock(link->m_recvBufLock);
-			if (!link->m_recvBuf.empty()) {
-				buf.append(link->m_recvBuf.peek(), link->m_recvBuf.readableBytes());
-				link->m_recvBuf.swap(buf);
+			int size = evbuffer_get_length(link->m_recvBuf);
+
+			if (size > 0) {
+				evbuffer_prepend(link->m_recvBuf, buf.peek(), buf.readableBytes());
 			} else {
-				link->m_recvBuf.swap(buf);
+				evbuffer_add(link->m_recvBuf, buf.peek(), buf.readableBytes());
 			}
 		}
 	}

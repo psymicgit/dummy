@@ -19,6 +19,8 @@
 #include <tool/encrypttool.h>
 #include <tool/randtool.h>
 
+#include <basic/evbuffer.h>
+
 Client::Client()
 	: m_link(NULL)
 	, m_clientId(0)
@@ -71,26 +73,29 @@ void Client::onRecv(Link *link, Buffer &buf)
 void Client::handleMsg()
 {
 	Link *link = m_link;
-	Buffer buf;
 
 	// 1. 将接收缓冲区的数据全部取出
+	evbuffer *dst = link->m_recvSwapBuf;
+
 	{
 		lock_guard_t<> lock(link->m_recvBufLock);
+		int size = evbuffer_get_length(link->m_recvBuf);
+		evbuffer_remove_buffer(link->m_recvBuf, dst, size);
 		link->m_isWaitingRead = false;
-		buf.swap(link->m_recvBuf);
 	}
 
 	// 2. 循环处理消息数据
 	while(true) {
 		// 检测包头长度
-		size_t bytes = buf.readableBytes();
+		size_t bytes = evbuffer_get_length(dst);
 		if (bytes < sizeof(NetMsgHead)) {
 			break;
 		}
 
-		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
-		uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
-		uint32 dataLen = endiantool::networkToHost32(msgHead->msgLen);
+		NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
+
+		uint16 msgId = endiantool::networkToHost16(head->msgId);
+		uint32 dataLen = endiantool::networkToHost32(head->msgLen);
 
 		// 检测半包
 		if (dataLen > bytes) {
@@ -99,18 +104,20 @@ void Client::handleMsg()
 			break;
 		}
 
+		unsigned char *peek = evbuffer_pullup(dst, dataLen);
+
 		//先解密
-		uint8* encryptBuf =  (uint8*)(buf.peek() + sizeof(NetMsgHead));
+		uint8 *encryptBuf =  (uint8*)(peek + sizeof(NetMsgHead));
 		int encryptBufLen = dataLen - sizeof(NetMsgHead);
 
 		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
 			LOG_ERROR << "gatesvr [" << link->getPeerAddr().toIpPort() << "] <-> " << name() << " [" << link->getLocalAddr().toIpPort()
 			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
-			buf.skip(dataLen);
+			evbuffer_drain(dst, dataLen);
 			continue;
 		}
 
-		char *msg = (char*)buf.peek() + sizeof(NetMsgHead) + EncryptHeadLen;
+		char *msg = (char*)peek + sizeof(NetMsgHead) + EncryptHeadLen;
 		uint32 msgLen = dataLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen;
 
 		// 判断是否需要转发，
@@ -122,21 +129,24 @@ void Client::handleMsg()
 			m_clientMgr->m_dispatcher.dispatch(*this, msgId, msg, msgLen, 0);
 		}
 
-		buf.skip(dataLen);
+		evbuffer_drain(dst, dataLen);
 	};
 
-	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
-	if (!buf.empty()) {
+// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
+	int leftSize = evbuffer_get_length(dst);
+	if (leftSize > 0) {
 		{
 			lock_guard_t<> lock(link->m_recvBufLock);
-			if (!link->m_recvBuf.empty()) {
-				buf.append(link->m_recvBuf.peek(), link->m_recvBuf.readableBytes());
-				link->m_recvBuf.swap(buf);
+			int size = evbuffer_get_length(link->m_recvBuf);
+
+			if (size > 0) {
+				evbuffer_prepend_buffer(link->m_recvBuf, dst);
 			} else {
-				link->m_recvBuf.swap(buf);
+				evbuffer_add_buffer(link->m_recvBuf, dst);
 			}
 		}
 	}
+
 }
 
 bool Client::needRoute(int msgId)

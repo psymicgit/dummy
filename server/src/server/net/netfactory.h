@@ -43,7 +43,7 @@ public:
 	NetFactory();
 
 	// 初始化网络：定义开启线程数、连接池空间
-	bool init(int threadCnt, int initLinkCnt = 200);
+	bool init(int threadCnt, int initLinkCnt = 100);
 
 	// 开始执行网络操作
 	void start();
