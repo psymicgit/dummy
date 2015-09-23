@@ -1,12 +1,12 @@
 {
 	"name": "robot",
 	"robots-per-second": 1000,
-	"robots-interval": 3000,
+	"robots-interval": 5000,
 	"robots-speedtest-packet-size": 100,
 	"robots-speedtest-packet-num": 10000,
 
 	"wan": {
-		"threads": 1,
+		"threads": 4,
 		"connect": {"ip": "127.0.0.1", "port": 20001}
 	}
 }

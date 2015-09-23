@@ -131,8 +131,8 @@ Listener* NetFactory::listen(const string& ip, int port, INetReactor &netReactor
 		return NULL;
 	}
 
-	// 创建一个网络监听器，该网络监听器将被注册到网络中
-	Listener* listener = new Listener(nextNet(), &netReactor, this);
+	// 创建一个网络监听器，该网络监听器将被注册到第1个网络中
+	Listener* listener = new Listener(m_nets[0], &netReactor, this);
 	if (NULL == listener) {
 		LOG_SYSTEM_ERR << "listen at <" << ip << ": " << port << "> failed, not enough memory";
 		return NULL;
@@ -153,8 +153,8 @@ Connector* NetFactory::connect(const string& ip, int port, INetReactor &netReact
 {
 	NetAddress peerAddr(ip, port);
 
-	// 创建一个网络连接器，该网络监听器将被注册到网络中
-	Connector* connector = new Connector(peerAddr, &netReactor, nextNet(), remoteHostName, this);
+	// 创建一个网络连接器，该网络连接器将被注册到第1个网络中
+	Connector* connector = new Connector(peerAddr, &netReactor, m_nets[0], remoteHostName, this);
 	if (NULL == connector) {
 		LOG_SYSTEM_ERR << "connect to <" << ip << ": " << port << "> failed, not enough memory";
 		return NULL;
@@ -176,6 +176,11 @@ NetModel* NetFactory::nextNet()
 {
 	NetModel *net = m_nets[m_curNetIdx];
 	m_curNetIdx = (m_curNetIdx + 1) % m_nets.size();
+
+	// 尽量不返回第0个网络线程
+	if (0 == m_curNetIdx && m_nets.size() > 1) {
+		m_curNetIdx = 1;
+	}
 
 	return net;
 }
