@@ -43,7 +43,7 @@ bool GateServer::init(const char* jsonConfig)
 
 	std::vector<IpPort> &lanListens = m_config.m_lanListens;
 	for(size_t i = 0; i < lanListens.size(); i++) {
-		if (!m_wan.listen(lanListens[i].ip, lanListens[i].port, *this)) {
+		if (!m_lan.listen(lanListens[i].ip, lanListens[i].port, *this)) {
 			LOG_ERROR << "listen at <" << lanListens[i].ip << ":" << lanListens[i].port <<  "> failed, aborted!";
 			return false;
 		}

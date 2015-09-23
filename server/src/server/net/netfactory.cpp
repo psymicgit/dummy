@@ -38,7 +38,7 @@ bool NetFactory::init(int threadCnt, int initLinkCnt)
 
 	// m_net.init(initLinkCnt, 1000);
 
-	for (int i = 0; i < 1; i++) {
+	for (int i = 0; i < threadCnt; i++) {
 		NetModel *net = new NetModel;
 		if (NULL == net) {
 			LOG_SYSTEM_ERR << "net resource allocate failed not enough memory, aborted!";
