@@ -1800,6 +1800,43 @@ void evbufTest()
 	LOG_WARN << "avg cost = " << speed << ", per second = " << per;
 }
 
+void evbufSpeedTest()
+{
+	int times = 100000;
+
+	{
+		Tick tick("evbufSpeedTest");
+
+		struct evbuffer *buf = evbuffer_new();
+		const char *abc = "abcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyz";
+
+		for (int i = 0; i < times; i++) {
+			evbuffer_add(buf, abc, strlen(abc));
+		}
+
+		evbuffer_free(buf);
+		double speed = tick.endTick() / times;
+		double per = 1.0f / speed;
+		LOG_WARN << "avg cost = " << speed << ", per second = " << per;
+	}
+
+	{
+		Tick tick("bufferSpeedTest");
+
+		Buffer buf;
+		const char *abc = "abcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyz";
+
+		for (int i = 0; i < times; i++) {
+			buf.append(abc, strlen(abc));
+		}
+
+		double speed = tick.endTick() / times;
+		double per = 1.0f / speed;
+		LOG_WARN << "avg cost = " << speed << ", per second = " << per;
+	}
+}
+
+
 class BindTest
 {
 public:
@@ -2019,5 +2056,7 @@ void test()
 		LOG_WARN << "avg cost = " << speed << ", per second = " << per;
 	}
 
-	evbufTest();
+	// evbufTest();
+
+	evbufSpeedTest();
 }
