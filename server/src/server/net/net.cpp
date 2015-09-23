@@ -92,7 +92,7 @@ int Epoll::eventLoop()
 			if (cur_ev.data.fd == m_pipe[1]) {
 				// LOG_WARN << "read from socket pair, m_efd = " << m_efd << ", m_pipe[1] = " << m_pipe[1] << "cur_ev.data.fd" << cur_ev.data.fd;
 				int nread = 0;
-				while((nread = ::recv(m_pipe[1], g_recvBuf, MAX_PACKET_LEN, NULL)) > 0) {
+				while((nread = ::recv(m_pipe[1], g_recvBuf, MAX_PACKET_LEN, 0)) > 0) {
 					// LOG_WARN << "nread = " << nread;
 				};
 

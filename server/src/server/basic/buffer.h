@@ -100,7 +100,8 @@ public:
 	// 重新回收内存
 	void recycle()
 	{
-		m_buffer.swap(std::vector<char>());
+		std::vector<char> nil;
+		m_buffer.swap(nil);
 	}
 
 	inline void append(const char* data, size_t len)

@@ -23,6 +23,8 @@ class Link;
 class IFd
 {
 public:
+	virtual ~IFd() {}
+
 	// ∑µªÿsocket÷µ
 	virtual socket_t socket() const = 0;
 

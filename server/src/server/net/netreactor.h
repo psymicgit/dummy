@@ -18,6 +18,8 @@ class TaskQueue;
 class INetReactor
 {
 public:
+	virtual ~INetReactor() {}
+
 	// 获取本网络逻辑实例的名称
 	virtual std::string name() = 0;
 

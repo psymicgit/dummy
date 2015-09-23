@@ -20,6 +20,8 @@ template <typename LinkType>
 class Callback
 {
 public:
+	virtual ~Callback() {}
+
 	virtual void onMessage(LinkType&, const char* data, int len, Timestamp) const = 0;
 };
 

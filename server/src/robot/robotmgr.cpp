@@ -166,15 +166,6 @@ void RobotMgr::run()
 	sleep(10);
 }
 
-void RobotMgr::handleMsg(Robot *robot, int msgId, Buffer &buf, Timestamp receiveTime)
-{
-	if (!m_run) {
-		return;
-	}
-
-	m_dispatcher.dispatch(*robot, msgId, buf.peek(), buf.readableBytes(), receiveTime);
-}
-
 void RobotMgr::onRobotDisconnect(Robot *robot)
 {
 	m_robotMap.erase(robot->m_robotId);

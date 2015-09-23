@@ -322,7 +322,7 @@ void Link::handleRead()
 	int nread = 0;
 	do {
 		//nread = evbuffer_read(buf, m_sockfd, -1);
-		nread = ::recv(m_sockfd, m_net->g_recvBuf, MAX_PACKET_LEN, NULL);
+		nread = ::recv(m_sockfd, m_net->g_recvBuf, MAX_PACKET_LEN, 0);
 		if (nread > 0) {
 			// 成功接收到数据：将本次接收到的数据拷贝到接收缓冲区末尾
 			{

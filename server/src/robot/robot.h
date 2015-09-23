@@ -25,7 +25,7 @@ class Robot : public INetReactor
 public:
 	Robot();
 
-	~Robot();
+	virtual ~Robot() {}
 
 	virtual std::string name();
 

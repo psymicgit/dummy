@@ -25,6 +25,8 @@ public:
 	{
 	}
 
+	virtual ~ServerLink() {}
+
 public:
 	virtual std::string name();
 

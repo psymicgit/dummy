@@ -24,19 +24,19 @@ endif
 # -Wall = 开启所有警告（小部分警告不会开启）
 # -Wno-unused = 屏蔽未初始化警告
 # -w = 关闭警告
-CPPFLAGS = -W -Wall -Wno-unused -Wno-reorder -m${long_bit} $(MACD) -pipe -std=c++0x -MMD -march=native 
+CPPFLAGS = -W -Wall -Wno-unused -Wno-reorder -m${long_bit} $(MACD) -pipe -std=c++11 -MMD -march=native -Wno-unused-parameter -Wno-sign-compare
 
 # ar = archive 是生成静态链接库的工具
 A_LINK      = ar rv
 
 ifeq (${compile_type}, release)
-	GCC	  = g++ -O2 ${CPPFLAGS} -DNDEBUG -fPIC -c
-	SO_LINK   = g++ -O2 ${CPPFLAGS} -DNDEBUG -fPIC -shared -o
-	EXEC_LINK = g++ -O2 ${CPPFLAGS} -DNDEBUG -o
+	GCC	  = ccache g++ ${CPPFLAGS} -O2 -DNDEBUG -fPIC -c
+	SO_LINK   = ccache g++ ${CPPFLAGS} -O2 -DNDEBUG -fPIC -shared -o
+	EXEC_LINK = ccache g++ ${CPPFLAGS} -O2 -DNDEBUG -o
 else
-	GCC   	  = g++ ${CPPFLAGS} -g -fPIC -c
-	SO_LINK   = g++ ${CPPFLAGS} -g -fPIC -shared -o
-	EXEC_LINK = g++ ${CPPFLAGS} -g -o
+	GCC   	  = ccache g++ ${CPPFLAGS} -g -fPIC -c
+	SO_LINK   = ccache g++ ${CPPFLAGS} -g -fPIC -shared -o
+	EXEC_LINK = ccache g++ ${CPPFLAGS} -g -o
 endif
 
 all : $(TARGET) 
