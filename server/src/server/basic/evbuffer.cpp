@@ -341,83 +341,6 @@ evbuffer_enable_locking(struct evbuffer *buf, void *lock)
 }
 
 void
-evbuffer_set_parent_(struct evbuffer *buf, struct bufferevent *bev)
-{
-	EVBUFFER_LOCK(buf);
-	buf->parent = bev;
-	EVBUFFER_UNLOCK(buf);
-}
-
-static void
-evbuffer_run_callbacks(struct evbuffer *buffer, int running_deferred)
-{
-	struct evbuffer_cb_entry *cbent, *next;
-	struct evbuffer_cb_info info;
-	size_t new_size;
-	uint32_t mask, masked_val;
-	int clear = 1;
-
-	if (running_deferred) {
-		mask = EVBUFFER_CB_NODEFER|EVBUFFER_CB_ENABLED;
-		masked_val = EVBUFFER_CB_ENABLED;
-	} else if (buffer->deferred_cbs) {
-		mask = EVBUFFER_CB_NODEFER|EVBUFFER_CB_ENABLED;
-		masked_val = EVBUFFER_CB_NODEFER|EVBUFFER_CB_ENABLED;
-		/* Don't zero-out n_add/n_del, since the deferred callbacks
-		   will want to see them. */
-		clear = 0;
-	} else {
-		mask = EVBUFFER_CB_ENABLED;
-		masked_val = EVBUFFER_CB_ENABLED;
-	}
-
-	ASSERT_EVBUFFER_LOCKED(buffer);
-
-	if (LIST_EMPTY(&buffer->callbacks)) {
-		buffer->n_add_for_cb = buffer->n_del_for_cb = 0;
-		return;
-	}
-	if (buffer->n_add_for_cb == 0 && buffer->n_del_for_cb == 0)
-		return;
-
-	new_size = buffer->total_len;
-	info.orig_size = new_size + buffer->n_del_for_cb - buffer->n_add_for_cb;
-	info.n_added = buffer->n_add_for_cb;
-	info.n_deleted = buffer->n_del_for_cb;
-	if (clear) {
-		buffer->n_add_for_cb = 0;
-		buffer->n_del_for_cb = 0;
-	}
-	for (cbent = LIST_FIRST(&buffer->callbacks);
-	        cbent != LIST_END(&buffer->callbacks);
-	        cbent = next) {
-		/* Get the 'next' pointer now in case this callback decides
-		 * to remove itself or something. */
-		next = LIST_NEXT(cbent, next);
-
-		if ((cbent->flags & mask) != masked_val)
-			continue;
-
-		if ((cbent->flags & EVBUFFER_CB_OBSOLETE))
-			cbent->cb.cb_obsolete(buffer,
-			                      info.orig_size, new_size, cbent->cbarg);
-		else
-			cbent->cb.cb_func(buffer, &info, cbent->cbarg);
-	}
-}
-
-static void
-evbuffer_remove_all_callbacks(struct evbuffer *buffer)
-{
-	struct evbuffer_cb_entry *cbent;
-
-	while ((cbent = LIST_FIRST(&buffer->callbacks))) {
-		LIST_REMOVE(cbent, next);
-		free(cbent);
-	}
-}
-
-void
 evbuffer_decref_and_unlock_(struct evbuffer *buffer)
 {
 	struct evbuffer_chain *chain, *next;
@@ -434,8 +357,6 @@ evbuffer_decref_and_unlock_(struct evbuffer *buffer)
 		next = chain->next;
 		evbuffer_chain_free(chain);
 	}
-	evbuffer_remove_all_callbacks(buffer);
-
 	EVBUFFER_UNLOCK(buffer);
 	if (buffer->own_lock)
 		EVTHREAD_FREE_LOCK(buffer->lock, EVTHREAD_LOCKTYPE_RECURSIVE);
@@ -1667,6 +1588,13 @@ done:
 	return result;
 }
 
+void evbuffer_swap(struct evbuffer *x, struct evbuffer *y)
+{
+	struct evbuffer mid = *x;
+	*x = *y;
+	*y = mid;
+}
+
 int
 evbuffer_prepend(struct evbuffer *buf, const void *data, size_t datlen)
 {
@@ -2813,66 +2741,6 @@ get_page_size(void)
 }
 #endif
 
-void
-evbuffer_setcb(struct evbuffer *buffer, evbuffer_cb cb, void *cbarg)
-{
-	EVBUFFER_LOCK(buffer);
-
-	if (!LIST_EMPTY(&buffer->callbacks))
-		evbuffer_remove_all_callbacks(buffer);
-
-	if (cb) {
-		struct evbuffer_cb_entry *ent =
-		    evbuffer_add_cb(buffer, NULL, cbarg);
-		ent->cb.cb_obsolete = cb;
-		ent->flags |= EVBUFFER_CB_OBSOLETE;
-	}
-	EVBUFFER_UNLOCK(buffer);
-}
-
-struct evbuffer_cb_entry *
-evbuffer_add_cb(struct evbuffer *buffer, evbuffer_cb_func cb, void *cbarg)
-{
-	struct evbuffer_cb_entry *e;
-	if (! (e = (evbuffer_cb_entry *)calloc(1, sizeof(struct evbuffer_cb_entry))))
-		return NULL;
-	EVBUFFER_LOCK(buffer);
-	e->cb.cb_func = cb;
-	e->cbarg = cbarg;
-	e->flags = EVBUFFER_CB_ENABLED;
-	LIST_INSERT_HEAD(&buffer->callbacks, e, next);
-	EVBUFFER_UNLOCK(buffer);
-	return e;
-}
-
-int
-evbuffer_remove_cb_entry(struct evbuffer *buffer,
-                         struct evbuffer_cb_entry *ent)
-{
-	EVBUFFER_LOCK(buffer);
-	LIST_REMOVE(ent, next);
-	EVBUFFER_UNLOCK(buffer);
-	free(ent);
-	return 0;
-}
-
-int
-evbuffer_remove_cb(struct evbuffer *buffer, evbuffer_cb_func cb, void *cbarg)
-{
-	struct evbuffer_cb_entry *cbent;
-	int result = -1;
-	EVBUFFER_LOCK(buffer);
-	LIST_FOREACH(cbent, &buffer->callbacks, next) {
-		if (cb == cbent->cb.cb_func && cbarg == cbent->cbarg) {
-			result = evbuffer_remove_cb_entry(buffer, cbent);
-			goto done;
-		}
-	}
-done:
-	EVBUFFER_UNLOCK(buffer);
-	return result;
-}
-
 int
 evbuffer_cb_set_flags(struct evbuffer *buffer,
                       struct evbuffer_cb_entry *cb, uint32_t flags)
@@ -2946,22 +2814,3 @@ evbuffer_cb_unsuspend(struct evbuffer *buffer, struct evbuffer_cb_entry *cb)
 	}
 }
 #endif
-
-int
-evbuffer_get_callbacks_(struct evbuffer *buffer, struct event_callback **cbs,
-                        int max_cbs)
-{
-	int r = 0;
-	EVBUFFER_LOCK(buffer);
-	if (buffer->deferred_cbs) {
-		if (max_cbs < 1) {
-			r = -1;
-			goto done;
-		}
-		cbs[0] = &buffer->deferred;
-		r = 1;
-	}
-done:
-	EVBUFFER_UNLOCK(buffer);
-	return r;
-}

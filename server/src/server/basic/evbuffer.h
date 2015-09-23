@@ -303,6 +303,7 @@ int evbuffer_commit_space(struct evbuffer *buf,
 
 int evbuffer_add(struct evbuffer *buf, const void *data, size_t datlen);
 
+void evbuffer_swap(struct evbuffer *x, struct evbuffer *y);
 
 /**
   Read data from an evbuffer and drain the bytes read.
@@ -860,19 +861,6 @@ typedef void (*evbuffer_cb_func)(struct evbuffer *buffer, const struct evbuffer_
 typedef void (*evbuffer_cb)(struct evbuffer *buffer, size_t old_len, size_t new_len, void *arg);
 
 struct evbuffer_cb_entry;
-/** Add a new callback to an evbuffer.
-
-  Subsequent calls to evbuffer_add_cb() add new callbacks.  To remove this
-  callback, call evbuffer_remove_cb or evbuffer_remove_cb_entry.
-
-  @param buffer the evbuffer to be monitored
-  @param cb the callback function to invoke when the evbuffer is modified,
-	or NULL to remove all callbacks.
-  @param cbarg an argument to be provided to the callback function
-  @return a handle to the callback on success, or NULL on failure.
- */
-
-struct evbuffer_cb_entry *evbuffer_add_cb(struct evbuffer *buffer, evbuffer_cb_func cb, void *cbarg);
 
 /** Remove a callback from an evbuffer, given a handle returned from
     evbuffer_add_cb.
@@ -1039,6 +1027,5 @@ int evbuffer_defer_callbacks(struct evbuffer *buffer, struct event_base *base);
 size_t evbuffer_add_iovec(struct evbuffer * buffer, struct evbuffer_iovec * vec, int n_vec);
 
 unsigned char *evbuffer_find(struct evbuffer *buffer, const unsigned char *what, size_t len);
-
 
 #endif /* EVENT2_BUFFER_H_INCLUDED_ */

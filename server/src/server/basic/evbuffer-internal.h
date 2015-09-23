@@ -122,25 +122,14 @@ struct evbuffer {
 	/** Zero or more EVBUFFER_FLAG_* bits */
 	uint32_t flags;
 
-	/** Used to implement deferred callbacks. */
-	struct event_base *cb_queue;
-
 	/** A reference count on this evbuffer.	 When the reference count
 	 * reaches 0, the buffer is destroyed.	Manipulated with
 	 * evbuffer_incref and evbuffer_decref_and_unlock and
 	 * evbuffer_free. */
 	int refcnt;
 
-	/** A struct event_callback handle to make all of this buffer's callbacks
-	 * invoked from the event loop. */
-	struct event_callback deferred;
-
 	/** A doubly-linked-list of callback functions */
 	LIST_HEAD(evbuffer_cb_queue, evbuffer_cb_entry) callbacks;
-
-	/** The parent bufferevent object this evbuffer belongs to.
-	 * NULL if the evbuffer stands alone. */
-	struct bufferevent *parent;
 };
 
 #if EVENT__SIZEOF_OFF_T < EVENT__SIZEOF_SIZE_T
@@ -322,14 +311,8 @@ int evbuffer_read_setup_vecs_(struct evbuffer *buf, ssize_t howmuch,
 /* XXXX the cast above is safe for now, but not if we allow mmaps on win64.
  * See note in buffer_iocp's launch_write function */
 
-/** Set the parent bufferevent object for buf to bev */
-void evbuffer_set_parent_(struct evbuffer *buf, struct bufferevent *bev);
-
 static void evbuffer_invoke_callbacks_(struct evbuffer *buf) {}
 
 
-int evbuffer_get_callbacks_(struct evbuffer *buffer,
-                            struct event_callback **cbs,
-                            int max_cbs);
 
 #endif /* EVBUFFER_INTERNAL_H_INCLUDED_ */
