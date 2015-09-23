@@ -16,6 +16,7 @@
 #include <client.pb.h>
 
 #include <basic/lock.h>
+#include <basic/taskqueue.h>
 
 // #include <basic/ringbuffer.h>
 //#include <net/link.h>
