@@ -126,14 +126,45 @@ public:
 private:
 	T* allocate()
 	{
-		T *obj = static_cast<T*>(::operator new (sizeof(T)));
-		return obj;
+		lock_guard_t<MutexType> lock(m_mutex);
+		if (m_objects.empty()) {
+			this->grow(m_growSize);
+			m_growSize <<= 1;
+		}
+
+		T * first = m_objects.back();
+		m_objects.pop_back();
+		return first;
 	}
 
 	// 回收一个对象
 	void deallocate(T* obj)
 	{
-		::operator delete (obj);
+		lock_guard_t<MutexType> lock(m_mutex);
+
+		// 		for (size_t i = 0; i < m_objects.size(); i++) {
+		// 			if (m_objects[i] == obj) {
+		// 				return;
+		// 			}
+		// 		}
+		//
+		// 		for(typename ObjectQueue::iterator itr = m_objects.begin(); itr != m_objects.end(); ++itr) {
+		// 			if (*itr == obj) {
+		// 				return;
+		// 			}
+		// 		}
+
+
+		//对于在内存池中的对象数据，当超过一定空闲个数时释放，防止内存出现暴涨
+		if (m_objects.size() > (uint32)(m_initSize + m_growSize)) {
+			// 			T * first = m_objects.front();
+			::operator delete (obj);
+			//
+			// 			m_objects[0] = obj;
+			// 			m_totalSize--;
+		} else {
+			m_objects.push_back(obj);
+		}
 	}
 
 	// 一次性扩张出count个对象
