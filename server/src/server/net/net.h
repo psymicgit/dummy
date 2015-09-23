@@ -49,8 +49,7 @@ public:
 #endif
 };
 
-typedef ObjectPool<Link> LinkPool;
-typedef ObjectPool<Buffer> BufferPool;
+typedef ObjectPool<Link, mutex_t> LinkPool;
 
 #ifndef WIN
 
