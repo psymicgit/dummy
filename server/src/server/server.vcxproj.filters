@@ -150,12 +150,6 @@
     <ClInclude Include="http\httpcmd.h">
       <Filter>http</Filter>
     </ClInclude>
-    <ClInclude Include="basic\atomicops.h">
-      <Filter>basic</Filter>
-    </ClInclude>
-    <ClInclude Include="basic\readerwriterqueue.h">
-      <Filter>basic</Filter>
-    </ClInclude>
     <ClInclude Include="basic\evbuffer.h">
       <Filter>basic</Filter>
     </ClInclude>

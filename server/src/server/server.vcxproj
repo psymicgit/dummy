@@ -107,7 +107,6 @@
   <ItemGroup>
     <ClInclude Include="..\protocol\net.pb.h" />
     <ClInclude Include="..\protocol\protocol.pb.h" />
-    <ClInclude Include="basic\atomicops.h" />
     <ClInclude Include="basic\base64.h" />
     <ClInclude Include="basic\bind.h" />
     <ClInclude Include="basic\buffer.h" />
@@ -119,7 +118,6 @@
     <ClInclude Include="basic\evthread.h" />
     <ClInclude Include="basic\lock.h" />
     <ClInclude Include="basic\objectpool.h" />
-    <ClInclude Include="basic\readerwriterqueue.h" />
     <ClInclude Include="basic\rsa.h" />
     <ClInclude Include="basic\singleton.h" />
     <ClInclude Include="basic\taskqueue.h" />
