@@ -17,11 +17,11 @@
 
 #include <basic/lock.h>
 
-#include <basic/ringbuffer.h>
-#include <net/link.h>
-#include <net/listener.h>
+// #include <basic/ringbuffer.h>
+//#include <net/link.h>
+//#include <net/listener.h>
 
-#include <server.h>
+// #include <server.h>
 
 void ringbufferTest()
 {

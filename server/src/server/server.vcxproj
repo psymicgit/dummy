@@ -114,7 +114,6 @@
     <ClInclude Include="basic\lock.h" />
     <ClInclude Include="basic\objectpool.h" />
     <ClInclude Include="basic\readerwriterqueue.h" />
-    <ClInclude Include="basic\ringbuffer.h" />
     <ClInclude Include="basic\rsa.h" />
     <ClInclude Include="basic\singleton.h" />
     <ClInclude Include="basic\taskqueue.h" />
@@ -166,7 +165,6 @@
     <ClCompile Include="basic\base64.cpp" />
     <ClCompile Include="basic\buffer.cpp" />
     <ClCompile Include="basic\lock.cpp" />
-    <ClCompile Include="basic\ringbuffer.cpp" />
     <ClCompile Include="basic\rsa.cpp" />
     <ClCompile Include="basic\thread.cpp" />
     <ClCompile Include="basic\timerqueue.cpp" />
