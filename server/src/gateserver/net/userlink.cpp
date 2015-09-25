@@ -15,7 +15,7 @@ void UserLink::OnDisconnect(Link*, const NetAddress& localAddr, const NetAddress
 
 }
 
-void UserLink::OnRecv(Link *link, Buffer &buf)
+void UserLink::OnRecv(Link *link)
 {
 
 }

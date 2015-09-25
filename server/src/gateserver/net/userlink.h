@@ -15,13 +15,12 @@
 
 class Link;
 class NetAddress;
-class Buffer;
 
 class UserLink : public INetReactor
 {
 	virtual void OnDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void OnRecv(Link*, Buffer&);
+	virtual void OnRecv(Link*);
 
 	virtual TaskQueue& GetTaskQueue();
 };

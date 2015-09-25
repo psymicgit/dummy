@@ -13,9 +13,6 @@
 #include <net/serverlink.h>
 
 class Link;
-class NetAddress;
-class Buffer;
-struct RingBufferBlock;
 
 class GameSvrLink : public ServerLink
 {

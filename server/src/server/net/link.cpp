@@ -369,8 +369,6 @@ void Link::handleRead()
 		m_isWaitingRead = true;
 	}
 
-	Buffer m_nil;
-
 	// 由业务层进行数据接收处理
 	m_pNetReactor->onRecv(this);
 }
