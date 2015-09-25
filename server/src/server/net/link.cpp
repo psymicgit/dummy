@@ -218,7 +218,7 @@ void Link::sendBuffer()
 		}
 
 		if (evbuffer_get_length(&m_sendBuf) == 0) {
-			// LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
+			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
 			return;
 		}
 

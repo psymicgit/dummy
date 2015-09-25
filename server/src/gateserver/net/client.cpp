@@ -137,7 +137,6 @@ void Client::handleMsg()
 	if (leftSize > 0) {
 		lock_guard_t<> lock(link->m_recvBufLock);
 		int size = evbuffer_get_length(&link->m_recvBuf);
-
 		if (size > 0) {
 			evbuffer_prepend_buffer(&link->m_recvBuf, dst);
 		} else {
