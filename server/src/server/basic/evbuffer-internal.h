@@ -66,6 +66,19 @@ struct evbuffer_cb_entry {
 struct bufferevent;
 struct evbuffer_chain;
 struct evbuffer {
+	evbuffer()
+	{
+		bzero(this, sizeof(evbuffer));
+
+		refcnt = 1;
+		last_with_datap = &first;
+	}
+
+	~evbuffer()
+	{
+		evbuffer_free(*this);
+	}
+
 	/** The first chain in this buffer's linked list of chains. */
 	struct evbuffer_chain *first;
 	/** The last chain in this buffer's linked list of chains. */
@@ -127,9 +140,6 @@ struct evbuffer {
 	 * evbuffer_incref and evbuffer_decref_and_unlock and
 	 * evbuffer_free. */
 	int refcnt;
-
-	/** A doubly-linked-list of callback functions */
-	LIST_HEAD(evbuffer_cb_queue, evbuffer_cb_entry) callbacks;
 };
 
 #if EVENT__SIZEOF_OFF_T < EVENT__SIZEOF_SIZE_T

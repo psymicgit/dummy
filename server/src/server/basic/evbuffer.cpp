@@ -113,8 +113,7 @@ evbuffer_chain_new(size_t size)
 	return (chain);
 }
 
-static inline void
-evbuffer_chain_free(struct evbuffer_chain *chain)
+static inline void evbuffer_chain_free(struct evbuffer_chain *chain)
 {
 	assert(chain->refcnt > 0);
 	if (--chain->refcnt > 0) {
@@ -276,7 +275,6 @@ evbuffer_new(void)
 	if (buffer == NULL)
 		return (NULL);
 
-	LIST_INIT(&buffer->callbacks);
 	buffer->refcnt = 1;
 	buffer->last_with_datap = &buffer->first;
 
@@ -287,7 +285,6 @@ void evbuffer_init(evbuffer &buf)
 {
 	bzero((char*)&buf, sizeof(evbuffer));
 
-	LIST_INIT(&buf.callbacks);
 	buf.refcnt = 1;
 	buf.last_with_datap = &buf.first;
 }
@@ -1604,13 +1601,6 @@ out:
 done:
 	EVBUFFER_UNLOCK(buf);
 	return result;
-}
-
-void evbuffer_swap(struct evbuffer *x, struct evbuffer *y)
-{
-	struct evbuffer mid = *x;
-	*x = *y;
-	*y = mid;
 }
 
 int

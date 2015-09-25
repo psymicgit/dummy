@@ -42,10 +42,12 @@ public:
 
 	void put(const TaskList& tasks)
 	{
+		size_t size = tasks.size();
+
 		lock_guard_t<> lock(m_mutex);
 		bool needNotify = m_tasklist.empty();
 
-		for(size_t i = 0; i < tasks.size(); i++) {
+		for(size_t i = 0; i < size; i++) {
 			m_tasklist.push_back(tasks[i]);
 		}
 
@@ -137,27 +139,32 @@ public:
 	typedef std::vector<Task> TaskList;
 
 public:
-	void put(TaskList& tasks)
+	inline void put(TaskList& tasks)
 	{
+		size_t size = tasks.size();
+
 		lock_guard_t<> lock(m_mutex);
 
-		for (size_t i = 0; i < tasks.size(); ++i) {
+		for (size_t i = 0; i < size; ++i) {
 			m_tasklist.push_back(tasks[i]);
 		}
 	}
 
-	void put(Task task)
+	inline void put(Task task)
 	{
 		lock_guard_t<> lock(m_mutex);
 		m_tasklist.push_back(task);
 	}
 
-	int run()
+	inline int run()
 	{
 		TaskList tasks;
 		int ret = takeAll(tasks);
+		if (0 == ret) {
+			return 0;
+		}
 
-		for (size_t i = 0; i < tasks.size(); i++) {
+		for (int i = 0; i < ret; i++) {
 			Task &t = tasks[i];
 			t.run();
 			t.release();
@@ -166,7 +173,7 @@ public:
 		return ret;
 	}
 
-	int takeAll(TaskList& tasks)
+	inline int takeAll(TaskList& tasks)
 	{
 		{
 			lock_guard_t<> lock(m_mutex);
@@ -180,7 +187,7 @@ public:
 		return tasks.size();
 	}
 
-	int size()
+	inline int size()
 	{
 		lock_guard_t<> lock(m_mutex);
 		return m_tasklist.size();

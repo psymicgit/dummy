@@ -306,8 +306,6 @@ int evbuffer_commit_space(struct evbuffer *buf,
 
 int evbuffer_add(struct evbuffer *buf, const void *data, size_t datlen);
 
-void evbuffer_swap(struct evbuffer *x, struct evbuffer *y);
-
 /**
   Read data from an evbuffer and drain the bytes read.
 

@@ -36,15 +36,10 @@ void Link::open()
 	}
 
 	m_net->addFd(this);
-
-	evbuffer_init(m_sendBuf);
-	evbuffer_init(m_recvBuf);
 }
 
 Link::~Link()
 {
-	evbuffer_free(m_sendBuf);
-	evbuffer_free(m_recvBuf);
 }
 
 void Link::close()
@@ -148,8 +143,6 @@ void Link::onSend()
 
 	// 1. 将发送缓冲区的数据全部取出
 	evbuffer sendSwapBuf;
-	evbuffer_init(sendSwapBuf);
-
 	evbuffer *dst = &sendSwapBuf;
 
 	{
@@ -210,8 +203,6 @@ void Link::onSend()
 			close();
 		}
 	}
-
-	evbuffer_free(sendSwapBuf);
 }
 
 void Link::sendBuffer()

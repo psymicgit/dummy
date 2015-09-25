@@ -101,8 +101,6 @@ void Robot::handleMsg()
 
 	// 1. 将接收缓冲区的数据全部取出
 	evbuffer recvSwapBuf;
-	evbuffer_init(recvSwapBuf);
-
 	evbuffer *dst = &recvSwapBuf;
 
 	{
@@ -166,8 +164,6 @@ void Robot::handleMsg()
 			evbuffer_add_buffer(&link->m_recvBuf, dst);
 		}
 	}
-
-	evbuffer_free(recvSwapBuf);
 }
 
 TaskQueue& Robot::getTaskQueue()

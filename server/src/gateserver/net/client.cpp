@@ -76,8 +76,6 @@ void Client::handleMsg()
 
 	// 1. 将接收缓冲区的数据全部取出
 	evbuffer recvSwapBuf;
-	evbuffer_init(recvSwapBuf);
-
 	evbuffer *dst = &recvSwapBuf;
 
 	{
@@ -137,19 +135,15 @@ void Client::handleMsg()
 // 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
 	int leftSize = evbuffer_get_length(dst);
 	if (leftSize > 0) {
-		{
-			lock_guard_t<> lock(link->m_recvBufLock);
-			int size = evbuffer_get_length(&link->m_recvBuf);
+		lock_guard_t<> lock(link->m_recvBufLock);
+		int size = evbuffer_get_length(&link->m_recvBuf);
 
-			if (size > 0) {
-				evbuffer_prepend_buffer(&link->m_recvBuf, dst);
-			} else {
-				evbuffer_add_buffer(&link->m_recvBuf, dst);
-			}
+		if (size > 0) {
+			evbuffer_prepend_buffer(&link->m_recvBuf, dst);
+		} else {
+			evbuffer_add_buffer(&link->m_recvBuf, dst);
 		}
 	}
-
-	evbuffer_free(recvSwapBuf);
 }
 
 bool Client::needRoute(int msgId)

@@ -1797,7 +1797,7 @@ void evbufTest()
 
 	double speed = tick.endTick() / getTimes;
 	double per = 1.0f / speed;
-	LOG_WARN << "avg cost = " << speed << ", per second = " << per;
+	LOG_INFO << "avg cost = " << speed << ", per second = " << per;
 }
 
 void evbufSpeedTest()
@@ -1817,7 +1817,7 @@ void evbufSpeedTest()
 		evbuffer_free(buf);
 		double speed = tick.endTick() / times;
 		double per = 1.0f / speed;
-		LOG_WARN << "avg cost = " << speed << ", per second = " << per;
+		LOG_INFO << "avg cost = " << speed << ", per second = " << per;
 	}
 
 	{
@@ -1832,7 +1832,7 @@ void evbufSpeedTest()
 
 		double speed = tick.endTick() / times;
 		double per = 1.0f / speed;
-		LOG_WARN << "avg cost = " << speed << ", per second = " << per;
+		LOG_INFO << "avg cost = " << speed << ", per second = " << per;
 	}
 }
 
@@ -1891,7 +1891,7 @@ void test()
 
 		double speed = tick.endTick() / times;
 		double count = 1.0f / speed;
-		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
+		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	{
@@ -1904,7 +1904,7 @@ void test()
 
 		double speed = tick.endTick() / times;
 		double count = 1.0f / speed;
-		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
+		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	Buffer buf;
@@ -1926,7 +1926,7 @@ void test()
 
 		double speed = tick.endTick() / times;
 		double count = 1.0f / speed;
-		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
+		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	// 	{
@@ -1939,7 +1939,7 @@ void test()
 	//
 	// 		double speed = tick.endTick() / times;
 	// 		double count = 1.0f / speed;
-	// 		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
+	// 		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	// 	}
 
 	times = 10000;
@@ -1958,7 +1958,7 @@ void test()
 
 		double speed = tick.endTick() / times;
 		double count = 1.0f / speed;
-		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
+		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	{
@@ -1972,7 +1972,7 @@ void test()
 
 		double speed = tick.endTick() / times;
 		double count = 1.0f / speed;
-		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
+		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	{
@@ -1986,7 +1986,7 @@ void test()
 
 		double speed = tick.endTick() / times;
 		double count = 1.0f / speed;
-		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
+		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	int variableTestNum = 10000;
@@ -2012,7 +2012,7 @@ void test()
 
 		double speed = tick.endTick() / variableTestNum;
 		double count = 1.0f / speed;
-		LOG_WARN << "avg cost = " << speed << ", per second = " << count;
+		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	{
@@ -2037,7 +2037,7 @@ void test()
 
 		double speed = tick.endTick() / variableTestNum;
 		double count = 1.0f / speed;
-		LOG_WARN << "avg cost = " << speed << ", per second = " << count;
+		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	{
@@ -2053,10 +2053,115 @@ void test()
 
 		double speed = tick.endTick() / getTimes;
 		double per = 1.0f / speed;
-		LOG_WARN << "avg cost = " << speed << ", per second = " << per;
+		LOG_INFO << "avg cost = " << speed << ", per second = " << per;
 	}
 
 	// evbufTest();
+	// evbufSpeedTest();
 
-	evbufSpeedTest();
+	std::vector<int> nums(10000);
+
+	for(int i = 0; i < 10000; i++) {
+		nums[i] = i;
+	}
+
+	{
+		int loopCnt = 1000;
+
+		{
+			Tick tick("cache vector.size() test");
+
+			int sum = 0;
+
+			for(int loop = 0; loop < loopCnt; loop++) {
+				int size = nums.size();
+
+				for(int i = 0; i < size; i++) {
+					if (i % 2) {
+						sum = i;
+					}
+				}
+			}
+
+			double speed = tick.endTick() / loopCnt;
+			double per = 1.0f / speed;
+			LOG_INFO << "avg cost = " << speed << ", per second = " << per << ", sum = " << sum;
+		}
+
+		{
+			Tick tick("local variable test");
+
+			int sum = 0;
+
+			int loop = 0;
+			int i = 0;
+
+			for(; loop < loopCnt; loop++) {
+				int size = nums.size();
+
+				for(i = 0; i < size; i++) {
+					if (i % 2) {
+						sum = i;
+					}
+				}
+			}
+
+			double speed = tick.endTick() / loopCnt;
+			double per = 1.0f / speed;
+			LOG_INFO << "avg cost = " << speed << ", per second = " << per << ", sum = " << sum;
+		}
+
+		{
+			Tick tick("vector.size() test");
+
+			int sum = 0;
+
+			for(int loop = 0; loop < loopCnt; loop++) {
+				for(int i = 0; i < nums.size(); i++) {
+					if (i % 2) {
+						sum = i;
+					}
+				}
+			}
+
+			double speed = tick.endTick() / loopCnt;
+			double per = 1.0f / speed;
+			LOG_INFO << "avg cost = " << speed << ", per second = " << per << ", sum = " << sum;
+		}
+	}
+
+	{
+		int inittestTime = 10000000;
+		{
+			Tick tick("int i = 0; init integer test");
+
+			int sum = 0;
+			for(int i = 0; i < inittestTime; ++i) {
+				int x = i;
+				if (x % 2) {
+					sum = x;
+				}
+			}
+
+			double speed = tick.endTick() / inittestTime;
+			double per = 1.0f / speed;
+			LOG_INFO << "avg cost = " << speed << ", per second = " << per << ", sum = " << sum;
+		}
+
+		{
+			Tick tick("int i(0); init integer test");
+
+			int sum = 0;
+			for(int i = 0; i < inittestTime; ++i) {
+				int x(i);
+				if (x % 2) {
+					sum = x;
+				}
+			}
+
+			double speed = tick.endTick() / inittestTime;
+			double per = 1.0f / speed;
+			LOG_INFO << "avg cost = " << speed << ", per second = " << per << ", sum = " << sum;
+		}
+	}
 }
