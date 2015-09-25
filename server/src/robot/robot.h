@@ -34,7 +34,7 @@ public:
 
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void onRecv(Link*, Buffer&);
+	virtual void onRecv(Link*);
 
 	void handleMsg();
 

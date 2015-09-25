@@ -65,7 +65,7 @@ void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddr
 	m_clientMgr->delClient(this);
 }
 
-void Client::onRecv(Link *link, Buffer &buf)
+void Client::onRecv(Link *link)
 {
 	m_taskQueue->put(boost::bind(&Client::handleMsg, this));
 }
@@ -75,12 +75,15 @@ void Client::handleMsg()
 	Link *link = m_link;
 
 	// 1. 将接收缓冲区的数据全部取出
-	evbuffer *dst = link->m_recvSwapBuf;
+	evbuffer recvSwapBuf;
+	evbuffer_init(recvSwapBuf);
+
+	evbuffer *dst = &recvSwapBuf;
 
 	{
 		lock_guard_t<> lock(link->m_recvBufLock);
-		int size = evbuffer_get_length(link->m_recvBuf);
-		evbuffer_remove_buffer(link->m_recvBuf, dst, size);
+		int size = evbuffer_get_length(&link->m_recvBuf);
+		evbuffer_remove_buffer(&link->m_recvBuf, dst, size);
 		link->m_isWaitingRead = false;
 	}
 
@@ -95,30 +98,29 @@ void Client::handleMsg()
 		NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
 
 		uint16 msgId = endiantool::networkToHost16(head->msgId);
-		uint32 dataLen = endiantool::networkToHost32(head->msgLen);
+		uint32 msgLen = endiantool::networkToHost32(head->msgLen);
 
 		// 检测半包
-		if (dataLen > bytes) {
+		if (msgLen > bytes) {
 			// 			LOG_WARN << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
 			// 			          << "] msgLen(" << msgLen << ") > bytes(" << bytes << ")";
 			break;
 		}
 
-		unsigned char *peek = evbuffer_pullup(dst, dataLen);
+		unsigned char *peek = evbuffer_pullup(dst, msgLen);
 
 		//先解密
 		uint8 *encryptBuf =  (uint8*)(peek + sizeof(NetMsgHead));
-		int encryptBufLen = dataLen - sizeof(NetMsgHead);
+		int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
 		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
 			LOG_ERROR << "gatesvr [" << link->getPeerAddr().toIpPort() << "] <-> " << name() << " [" << link->getLocalAddr().toIpPort()
 			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
-			evbuffer_drain(dst, dataLen);
+			evbuffer_drain(dst, msgLen);
 			continue;
 		}
 
 		char *msg = (char*)peek + sizeof(NetMsgHead) + EncryptHeadLen;
-		uint32 msgLen = dataLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen;
 
 		// 判断是否需要转发，
 		if (needRoute(msgId)) {
@@ -126,10 +128,10 @@ void Client::handleMsg()
 			//GateServer::Instance().sendToGameServer(client->m_clientId, msgId, msg, msgLen);
 		} else {
 			// 直接本地进行处理
-			m_clientMgr->m_dispatcher.dispatch(*this, msgId, msg, msgLen, 0);
+			m_clientMgr->m_dispatcher.dispatch(*this, msgId, msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen, 0);
 		}
 
-		evbuffer_drain(dst, dataLen);
+		evbuffer_drain(dst, msgLen);
 	};
 
 // 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
@@ -137,16 +139,17 @@ void Client::handleMsg()
 	if (leftSize > 0) {
 		{
 			lock_guard_t<> lock(link->m_recvBufLock);
-			int size = evbuffer_get_length(link->m_recvBuf);
+			int size = evbuffer_get_length(&link->m_recvBuf);
 
 			if (size > 0) {
-				evbuffer_prepend_buffer(link->m_recvBuf, dst);
+				evbuffer_prepend_buffer(&link->m_recvBuf, dst);
 			} else {
-				evbuffer_add_buffer(link->m_recvBuf, dst);
+				evbuffer_add_buffer(&link->m_recvBuf, dst);
 			}
 		}
 	}
 
+	evbuffer_free(recvSwapBuf);
 }
 
 bool Client::needRoute(int msgId)

@@ -88,7 +88,7 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 	m_robotMgr->onRobotDisconnect(this);
 }
 
-void Robot::onRecv(Link *link, Buffer &buf)
+void Robot::onRecv(Link *link)
 {
 	// 直接本地进行处理
 	m_robotMgr->m_taskQueue.put(boost::bind(&Robot::handleMsg, this));
@@ -96,79 +96,78 @@ void Robot::onRecv(Link *link, Buffer &buf)
 
 void Robot::handleMsg()
 {
+
 	Link *link = m_link;
 
-	int size = 0;
-
 	// 1. 将接收缓冲区的数据全部取出
-	{
-		lock_guard_t<> lock(link->m_recvBufLock);
-		size = evbuffer_get_length(link->m_recvBuf);
-	}
+	evbuffer recvSwapBuf;
+	evbuffer_init(recvSwapBuf);
 
-	Buffer buf(size);
+	evbuffer *dst = &recvSwapBuf;
 
 	{
 		lock_guard_t<> lock(link->m_recvBufLock);
-		evbuffer_remove(link->m_recvBuf, buf.peek(), size);
+		int size = evbuffer_get_length(&link->m_recvBuf);
+		evbuffer_remove_buffer(&link->m_recvBuf, dst, size);
 		link->m_isWaitingRead = false;
 	}
 
-	buf.hasWritten(size);
-
 	while(true) {
-		// 检测半包
-		size_t bytes = buf.readableBytes();
+		// 检测包头长度
+		size_t bytes = evbuffer_get_length(dst);
 		if (bytes < sizeof(NetMsgHead)) {
 			break;
 		}
 
-		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
-		uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
-		uint32 msgLen = endiantool::networkToHost32(msgHead->msgLen);
+		NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
+		uint16 msgId = endiantool::networkToHost16(head->msgId);
+		uint32 msgLen = endiantool::networkToHost32(head->msgLen);
 
 		if (msgLen > bytes) {
 			break;
 		}
 
+		char *peek = (char*)evbuffer_pullup(dst, msgLen);
+
 		// 未加密
 		if (!m_isEncrypt) {
-			m_robotMgr->m_dispatcher.dispatch(*this, msgId, buf.peek() + sizeof(NetMsgHead), msgLen - sizeof(NetMsgHead), 0);
-			buf.skip(msgLen);
+			m_robotMgr->m_dispatcher.dispatch(*this, msgId, peek + sizeof(NetMsgHead), msgLen - sizeof(NetMsgHead), 0);
+			evbuffer_drain(dst, msgLen);
 			continue;
 		}
 
 		//先解密
-		uint8* encryptBuf =  (uint8*)(buf.peek() + sizeof(NetMsgHead));
+		uint8* encryptBuf =  (uint8*)(peek + sizeof(NetMsgHead));
 		int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
 		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
 			LOG_ERROR << "robot [" << link->getLocalAddr().toIpPort() << "] <-> gatesvr [" << link->getPeerAddr().toIpPort()
 			          << "] receive invalid msg[len=" << encryptBufLen << "]";
-			buf.skip(msgLen);
+			evbuffer_drain(dst, msgLen);
 			continue;
 		}
 
-		char *msg = (char*)buf.peek() + sizeof(NetMsgHead) + EncryptHeadLen;
+		char *msg = (char*)peek + sizeof(NetMsgHead) + EncryptHeadLen;
 
 		// 直接本地进行处理
 		m_robotMgr->m_dispatcher.dispatch(*this, msgId, msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen, 0);
-		buf.skip(msgLen);
+		evbuffer_drain(dst, msgLen);
 	}
 
 	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
-	if (!buf.empty()) {
-		{
-			lock_guard_t<> lock(link->m_recvBufLock);
-			int size = evbuffer_get_length(link->m_recvBuf);
+	int leftSize = evbuffer_get_length(dst);
+	if (leftSize > 0) {
+		lock_guard_t<> lock(link->m_recvBufLock);
+		int size = evbuffer_get_length(&link->m_recvBuf);
 
-			if (size > 0) {
-				evbuffer_prepend(link->m_recvBuf, buf.peek(), buf.readableBytes());
-			} else {
-				evbuffer_add(link->m_recvBuf, buf.peek(), buf.readableBytes());
-			}
+		if (size > 0) {
+			evbuffer_prepend_buffer(&link->m_recvBuf, dst);
+		} else {
+			evbuffer_add_buffer(&link->m_recvBuf, dst);
 		}
 	}
+
+	evbuffer_free(recvSwapBuf);
 }
 
 TaskQueue& Robot::getTaskQueue()

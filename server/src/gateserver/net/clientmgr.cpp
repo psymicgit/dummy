@@ -74,9 +74,9 @@ void ClientMgr::onDisconnect(Link *link, const NetAddress& localAddr, const NetA
 
 }
 
-void ClientMgr::onRecv(Link *link, Buffer &buf)
+void ClientMgr::onRecv(Link *link)
 {
-	Server::instance->onRecv(link, buf);
+	Server::instance->onRecv(link);
 }
 
 uint32 ClientMgr::allocClientId()

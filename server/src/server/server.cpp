@@ -106,7 +106,7 @@ void Server::onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& 
 	LOG_INFO << "<" << localAddr.toIpPort() << "> peer connection <" << peerAddr.toIpPort() << "> broken";
 }
 
-void Server::onRecv(Link *link, Buffer& buf)
+void Server::onRecv(Link *link)
 {
 	m_taskQueue.put(boost::bind(&Server::handleMsg, this, link));
 }
@@ -118,14 +118,14 @@ void Server::handleMsg(Link *link)
 	// 1. 将接收缓冲区的数据全部取出
 	{
 		lock_guard_t<> lock(link->m_recvBufLock);
-		size = evbuffer_get_length(link->m_recvBuf);
+		size = evbuffer_get_length(&link->m_recvBuf);
 	}
 
 	Buffer buf(size);
 
 	{
 		lock_guard_t<> lock(link->m_recvBufLock);
-		evbuffer_remove(link->m_recvBuf, buf.peek(), size);
+		evbuffer_remove(&link->m_recvBuf, buf.peek(), size);
 		link->m_isWaitingRead = false;
 	}
 
@@ -156,12 +156,12 @@ void Server::handleMsg(Link *link)
 	if (!buf.empty()) {
 		{
 			lock_guard_t<> lock(link->m_recvBufLock);
-			int size = evbuffer_get_length(link->m_recvBuf);
+			int size = evbuffer_get_length(&link->m_recvBuf);
 
 			if (size > 0) {
-				evbuffer_prepend(link->m_recvBuf, buf.peek(), buf.readableBytes());
+				evbuffer_prepend(&link->m_recvBuf, buf.peek(), buf.readableBytes());
 			} else {
-				evbuffer_add(link->m_recvBuf, buf.peek(), buf.readableBytes());
+				evbuffer_add(&link->m_recvBuf, buf.peek(), buf.readableBytes());
 			}
 		}
 	}

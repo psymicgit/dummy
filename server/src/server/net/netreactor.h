@@ -11,7 +11,6 @@
 
 class Link;
 class NetAddress;
-class Buffer;
 class TaskQueue;
 
 // 网络逻辑实例，用于捕获网络上发生的事件
@@ -33,7 +32,7 @@ public:
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr) = 0;
 
 	// 接收到新的数据
-	virtual void onRecv(Link*, Buffer&) = 0;
+	virtual void onRecv(Link*) = 0;
 
 	// 获取本实例所处的业务层的任务队列
 	virtual TaskQueue& getTaskQueue() = 0;

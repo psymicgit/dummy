@@ -61,7 +61,7 @@ public:
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
 	// 接收到其他服务器发送来的数据
-	virtual void onRecv(Link*, Buffer&);
+	virtual void onRecv(Link*);
 
 	// 获取服务器主循环上的任务队列
 	virtual TaskQueue& getTaskQueue() { return m_taskQueue; }

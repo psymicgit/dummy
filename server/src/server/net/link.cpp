@@ -36,18 +36,15 @@ void Link::open()
 	}
 
 	m_net->addFd(this);
-	m_recvBuf = evbuffer_new();
-	m_sendBuf = evbuffer_new();
-	m_sendSwapBuf = evbuffer_new();
-	m_recvSwapBuf = evbuffer_new();
+
+	evbuffer_init(m_sendBuf);
+	evbuffer_init(m_recvBuf);
 }
 
 Link::~Link()
 {
 	evbuffer_free(m_sendBuf);
 	evbuffer_free(m_recvBuf);
-	evbuffer_free(m_sendSwapBuf);
-	evbuffer_free(m_recvSwapBuf);
 }
 
 void Link::close()
@@ -64,7 +61,7 @@ void Link::closing()
 {
 	// 检测是否重复close
 	if (m_closed) {
-		LOG_ERROR << m_pNetReactor->name() << " double closed, canceled, m_sendBuf left size = " << evbuffer_get_length(m_sendBuf);
+		LOG_ERROR << m_pNetReactor->name() << " double closed, canceled, m_sendBuf left size = " << evbuffer_get_length(&m_sendBuf);
 		return;
 	}
 
@@ -73,7 +70,7 @@ void Link::closing()
 		lock_guard_t<> lock(m_sendBufLock);
 
 		// 若数据未发送完毕，则暂缓关闭，只停止接收数据，等待之前的发送操作执行完毕后再关闭
-		if (evbuffer_get_length(m_sendBuf) >  0) {
+		if (evbuffer_get_length(&m_sendBuf) >  0) {
 			if (m_isWaitingClose) {
 				// LOG_ERROR << m_pNetReactor->name() << " is waiting close";
 				return;
@@ -85,7 +82,7 @@ void Link::closing()
 			m_net->disableRead(this);
 
 			if (!m_isWaitingWrite) {
-				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << evbuffer_get_length(m_sendBuf) << ", socket = " << m_sockfd;
+				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << evbuffer_get_length(&m_sendBuf) << ", socket = " << m_sockfd;
 			}
 
 			// LOG_ERROR << m_pNetReactor->name() << " is waiting write";
@@ -97,8 +94,8 @@ void Link::closing()
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		if (evbuffer_get_length(m_sendBuf) > 0) {
-			LOG_ERROR << m_pNetReactor->name() << " close, left size = " << evbuffer_get_length(m_sendBuf) << ", socket = " << m_sockfd;
+		if (evbuffer_get_length(&m_sendBuf) > 0) {
+			LOG_ERROR << m_pNetReactor->name() << " close, left size = " << evbuffer_get_length(&m_sendBuf) << ", socket = " << m_sockfd;
 		}
 	}
 
@@ -150,12 +147,15 @@ void Link::onSend()
 // 	}
 
 	// 1. 将发送缓冲区的数据全部取出
-	evbuffer *dst = m_sendSwapBuf;
+	evbuffer sendSwapBuf;
+	evbuffer_init(sendSwapBuf);
+
+	evbuffer *dst = &sendSwapBuf;
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		int size = evbuffer_get_length(m_sendBuf);
-		evbuffer_remove_buffer(m_sendBuf, dst, size);
+		int size = evbuffer_get_length(&m_sendBuf);
+		evbuffer_remove_buffer(&m_sendBuf, dst, size);
 		m_isWaitingWrite = false;
 	}
 
@@ -172,12 +172,12 @@ void Link::onSend()
 		// LOG_ERROR << m_pNetReactor->name() << " register write, socket = " << m_sockfd;
 		{
 			lock_guard_t<> lock(m_sendBufLock);
-			int size = evbuffer_get_length(m_sendBuf);
+			int size = evbuffer_get_length(&m_sendBuf);
 
 			if (size > 0) {
-				evbuffer_prepend_buffer(m_sendBuf, dst);
+				evbuffer_prepend_buffer(&m_sendBuf, dst);
 			} else {
-				evbuffer_add_buffer(m_sendBuf, dst);
+				evbuffer_add_buffer(&m_sendBuf, dst);
 			}
 
 			m_isWaitingWrite = true;
@@ -199,7 +199,7 @@ void Link::onSend()
 		bool isWaitingClose = false;
 		{
 			lock_guard_t<> lock(m_sendBufLock);
-			isWaitingClose = (m_isWaitingClose && (0 == evbuffer_get_length(m_sendBuf)));
+			isWaitingClose = (m_isWaitingClose && (0 == evbuffer_get_length(&m_sendBuf)));
 
 // 			if(isWaitingClose) {
 // 				LOG_ERROR << m_pNetReactor->name() << " isWaitingClose = true, m_sendBuf.size() = " << m_sendBuf.readableBytes() << " && m_isWaitingWrite = " << m_isWaitingWrite;
@@ -210,6 +210,8 @@ void Link::onSend()
 			close();
 		}
 	}
+
+	evbuffer_free(sendSwapBuf);
 }
 
 void Link::sendBuffer()
@@ -224,7 +226,7 @@ void Link::sendBuffer()
 			return;
 		}
 
-		if (evbuffer_get_length(m_sendBuf) == 0) {
+		if (evbuffer_get_length(&m_sendBuf) == 0) {
 			// LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
 			return;
 		}
@@ -244,7 +246,7 @@ void Link::send(const char *data, int len)
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		evbuffer_add(m_sendBuf, data, len);
+		evbuffer_add(&m_sendBuf, data, len);
 
 		if (m_isWaitingWrite) {
 			return;
@@ -274,8 +276,8 @@ void Link::send(int msgId, Message & msg)
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		evbuffer_add(m_sendBuf, (const char*)&msgHead, sizeof(msgHead));
-		evbuffer_add(m_sendBuf, m_net->g_sendBuf, size);
+		evbuffer_add(&m_sendBuf, (const char*)&msgHead, sizeof(msgHead));
+		evbuffer_add(&m_sendBuf, m_net->g_sendBuf, size);
 
 		if (m_isWaitingWrite) {
 			return;
@@ -296,8 +298,8 @@ void Link::send(int msgId, const char *data, int len)
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		evbuffer_add(m_sendBuf, m_net->g_sendBuf, sizeof(msgHead));
-		evbuffer_add(m_sendBuf, data, len);
+		evbuffer_add(&m_sendBuf, m_net->g_sendBuf, sizeof(msgHead));
+		evbuffer_add(&m_sendBuf, data, len);
 
 		if (m_isWaitingWrite) {
 			return;
@@ -316,8 +318,6 @@ void Link::handleRead()
 
 	int totalRecvLen = 0;
 
-	evbuffer *buf = evbuffer_new();
-
 	// 循环接收数据直到无法再接收
 	int nread = 0;
 	do {
@@ -327,7 +327,7 @@ void Link::handleRead()
 			// 成功接收到数据：将本次接收到的数据拷贝到接收缓冲区末尾
 			{
 				lock_guard_t<> lock(m_recvBufLock);
-				evbuffer_add(m_recvBuf, m_net->g_recvBuf, nread);
+				evbuffer_add(&m_recvBuf, m_net->g_recvBuf, nread);
 			}
 
 			totalRecvLen += nread;
@@ -369,8 +369,10 @@ void Link::handleRead()
 		m_isWaitingRead = true;
 	}
 
+	Buffer m_nil;
+
 	// 由业务层进行数据接收处理
-	m_pNetReactor->onRecv(this, m_nil);
+	m_pNetReactor->onRecv(this);
 }
 
 void Link::handleWrite()

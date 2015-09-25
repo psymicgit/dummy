@@ -12,6 +12,7 @@
 #include "net.h"
 #include "netaddress.h"
 #include "basic/buffer.h"
+#include "basic/evbuffer-internal.h"
 #include "protocol/protocol.h"
 
 class NetAddress;
@@ -40,7 +41,6 @@ public:
 		, m_isWaitingClose(false)
 		, m_isPeerClosed(false)
 		, m_isRegisterWrite(false)
-		, m_nil(0)
 	{
 	}
 
@@ -124,10 +124,10 @@ public:
 	NetModel *m_net;
 
 	// 发送缓冲区
-	evbuffer* m_sendBuf;
+	evbuffer m_sendBuf;
 
 	// 接收缓冲区
-	evbuffer* m_recvBuf;
+	evbuffer m_recvBuf;
 
 	// 发送缓冲区锁
 	mutex_t m_sendBufLock;
@@ -146,11 +146,6 @@ public:
 
 	// 是否已注册了写事件（写事件注册一次就行）
 	bool m_isRegisterWrite;
-
-	evbuffer *m_sendSwapBuf;
-	evbuffer *m_recvSwapBuf;
-
-	Buffer m_nil;
 };
 
 #endif //_link_h_

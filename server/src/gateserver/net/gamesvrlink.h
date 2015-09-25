@@ -19,7 +19,7 @@ struct RingBufferBlock;
 
 class GameSvrLink : public ServerLink
 {
-	virtual void onRecv(Link*, Buffer &buf, RingBufferBlock&);
+	virtual void onRecv(Link*);
 };
 
 #endif //_gamesvrlink_h_

@@ -118,6 +118,8 @@ struct evbuffer_iovec {
  */
 
 struct evbuffer *evbuffer_new(void);
+void evbuffer_init(evbuffer&);
+
 /**
   Deallocate storage for an evbuffer.
 
@@ -125,6 +127,7 @@ struct evbuffer *evbuffer_new(void);
  */
 
 void evbuffer_free(struct evbuffer *buf);
+void evbuffer_free(struct evbuffer &buf);
 
 /**
    Enable locking on an evbuffer so that it can safely be used by multiple

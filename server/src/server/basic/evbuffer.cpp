@@ -283,6 +283,24 @@ evbuffer_new(void)
 	return (buffer);
 }
 
+void evbuffer_init(evbuffer &buf)
+{
+	bzero((char*)&buf, sizeof(evbuffer));
+
+	LIST_INIT(&buf.callbacks);
+	buf.refcnt = 1;
+	buf.last_with_datap = &buf.first;
+}
+
+void evbuffer_free(evbuffer &buf)
+{
+	struct evbuffer_chain *chain, *next;
+	for (chain = buf.first; chain != NULL; chain = next) {
+		next = chain->next;
+		evbuffer_chain_free(chain);
+	}
+}
+
 int
 evbuffer_set_flags(struct evbuffer *buf, uint64_t flags)
 {

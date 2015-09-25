@@ -30,9 +30,9 @@ void ServerLink::onDisconnect(Link *link, const NetAddress& localAddr, const Net
 	}
 }
 
-void ServerLink::onRecv(Link *link, Buffer &buf)
+void ServerLink::onRecv(Link *link)
 {
-	Server::instance->onRecv(link, buf);
+	Server::instance->onRecv(link);
 }
 
 void ServerLink::send(uint32 routeId, uint16 msgId, const char *data, int len)

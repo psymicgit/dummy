@@ -33,7 +33,7 @@ public:
 	// 对端服务器断开连接
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void onRecv(Link*, Buffer&);
+	virtual void onRecv(Link*);
 
 	virtual TaskQueue& getTaskQueue() { return *m_taskQueue; }
 
