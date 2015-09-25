@@ -300,6 +300,28 @@ void Link::send(int msgId, const char *data, int len)
 	this->sendBuffer();
 }
 
+void Link::beginRead(evbuffer *readto)
+{
+	lock_guard_t<> lock(m_recvBufLock);
+	int size = evbuffer_get_length(&m_recvBuf);
+	evbuffer_remove_buffer(&m_recvBuf, readto, size);
+	m_isWaitingRead = false;
+}
+
+void Link::endRead(evbuffer *remain)
+{
+	int left = evbuffer_get_length(remain);
+	if (left > 0) {
+		lock_guard_t<> lock(m_recvBufLock);
+		int size = evbuffer_get_length(&m_recvBuf);
+		if (size > 0) {
+			evbuffer_prepend_buffer(&m_recvBuf, remain);
+		} else {
+			evbuffer_add_buffer(&m_recvBuf, remain);
+		}
+	}
+}
+
 void Link::handleRead()
 {
 	if (!isopen()) {

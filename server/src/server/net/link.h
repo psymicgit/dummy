@@ -74,6 +74,12 @@ public:
 	// 发送经过加密或调整的消息包
 	void send(int msgId, const char *data, int len);
 
+	// 业务层开始读取数据：将接收缓冲区内的数据全部取出存到readto并置空
+	void beginRead(evbuffer *readto);
+
+	// 业务层读取数据完毕：将业务层未处理完的数据重新存入接收缓冲区的头部
+	void endRead(evbuffer *remain);
+
 	// 本连接是否打开
 	inline bool isopen() const { return !m_closed; }
 
