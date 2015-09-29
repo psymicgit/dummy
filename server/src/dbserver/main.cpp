@@ -1,17 +1,17 @@
 ///<------------------------------------------------------------------------------
-//< @file:   src\gameserver\main.cpp
+//< @file:   src\dbserver\main.cpp
 //< @author: 洪坤安
-//< @date:   2015年3月2日 21:14:4
+//< @date:   2015年9月29日 14:14:4
 //< @brief:
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
-#include "gameserver.h"
+#include "dbserver.h"
 
 int main(int argc, char **argv)
 {
-	GameServer &svr = GameServer::Instance();
-	if (!svr.init("../gameconfig.json")) {
+	DBServer &svr = DBServer::Instance();
+	if (!svr.init("../dbconfig.json")) {
 		svr.uninit();
 		return 0;
 	}

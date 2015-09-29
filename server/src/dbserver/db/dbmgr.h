@@ -1,7 +1,7 @@
 ///<------------------------------------------------------------------------------
-//< @file:   gameserver\db\dbmgr.h
+//< @file:   dbserver\db\dbmgr.h
 //< @author: 洪坤安
-//< @date:   2015年3月27日 17:21:26
+//< @date:   2015年9月29日 17:21:26
 //< @brief:
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
@@ -11,6 +11,7 @@
 
 class DBFactory;
 class DBSession;
+struct DBConfig;
 
 class DBMgr
 {
@@ -21,7 +22,7 @@ public:
 	{
 	}
 
-	bool init();
+	bool init(DBConfig&);
 
 	void run();
 

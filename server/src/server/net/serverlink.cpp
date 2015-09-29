@@ -19,14 +19,17 @@ std::string ServerLink::name()
 
 void ServerLink::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
+	ServerType peerSvrType = m_peerSvrType;
+
 	int svrId = Server::instance->getServerId(m_peerSvrType, m_peerSvrId);
 	Server::instance->unregisterServer(svrId);
 
 	Server::instance->onDisconnect(link, localAddr, peerAddr);
 	Server::instance->onDisconnectServer(*link, m_peerSvrType, m_peerSvrId);
 
+	// 从这里开始this已经被删除了
 	if (link->m_isAutoReconnect) {
-		Server::instance->m_lan.connect(peerAddr.toIp(), peerAddr.toPort(), *Server::instance, svrtool::getSvrName(m_peerSvrType).c_str());
+		Server::instance->m_lan.connect(peerAddr.toIp(), peerAddr.toPort(), *Server::instance, svrtool::getSvrName(peerSvrType).c_str());
 	}
 }
 

@@ -18,6 +18,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "robot", "robot\robot.vcxpro
 		{EB348CE6-1B88-46B8-B07B-6B38EAD9CE83} = {EB348CE6-1B88-46B8-B07B-6B38EAD9CE83}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dbserver", "dbserver\dbserver.vcxproj", "{9FF35FD7-D02C-4F8F-AD4D-BBC1948B4154}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -40,6 +42,10 @@ Global
 		{DFEE9973-826F-421E-9C8C-3F4108A245CF}.Debug|Win32.Build.0 = Debug|Win32
 		{DFEE9973-826F-421E-9C8C-3F4108A245CF}.Release|Win32.ActiveCfg = Release|Win32
 		{DFEE9973-826F-421E-9C8C-3F4108A245CF}.Release|Win32.Build.0 = Release|Win32
+		{9FF35FD7-D02C-4F8F-AD4D-BBC1948B4154}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9FF35FD7-D02C-4F8F-AD4D-BBC1948B4154}.Debug|Win32.Build.0 = Debug|Win32
+		{9FF35FD7-D02C-4F8F-AD4D-BBC1948B4154}.Release|Win32.ActiveCfg = Release|Win32
+		{9FF35FD7-D02C-4F8F-AD4D-BBC1948B4154}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

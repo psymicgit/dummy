@@ -86,7 +86,7 @@ ServerLink* GateServer::onAcceptServer(Link &tcpLink, ServerType peerSvrType, in
 	// сно╥╥Ч
 	case eGameServer:
 		svrLink = m_gamesvrLink = new GameSvrLink;
-		LOG_INFO << "gateserver <-> gatmserver <svrId = " << peerSvrId << "> connection established";
+		LOG_INFO << "gateserver <-> gameserver <svrId = " << peerSvrId << "> connection established";
 		break;
 
 	default:

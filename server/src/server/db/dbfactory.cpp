@@ -74,11 +74,11 @@ std::string DBFactory::name()
 	return m_dbaccount.echo();
 }
 
-bool DBFactory::init(DBAccount &dbaccount, int minPoolSize, int maxPoolSize)
+bool DBFactory::init(const DBAccount &dbaccount)
 {
 	m_dbaccount = dbaccount;
-	m_minPoolSize = minPoolSize;
-	m_maxPoolSize = maxPoolSize;
+	m_minPoolSize = m_dbaccount.m_poolSize;
+	m_maxPoolSize = m_dbaccount.m_poolSize;
 
 	m_running = true;
 

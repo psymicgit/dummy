@@ -16,6 +16,8 @@
 #include <db/dbconnection.h>
 #include <tool/ticktool.h>
 
+#include "config/dbconfig.h"
+
 class OpHistoryDBCmd : public DBCommand
 {
 	virtual void execute(DBConnection &conn)
@@ -153,19 +155,10 @@ void DBMgr::test()
 	}
 }
 
-bool DBMgr::init()
+bool DBMgr::init(DBConfig &config)
 {
-	DBAccount gamedbAccnt;
-	gamedbAccnt.m_dbIp = "192.168.2.102";
-	gamedbAccnt.m_dbName = "gamedb";
-	gamedbAccnt.m_dbPort = 3306;
-	gamedbAccnt.m_loginName = "root";
-	gamedbAccnt.m_loginPwd = "123456";
-	gamedbAccnt.m_charactset = "utf8";
-	gamedbAccnt.m_unixSocket = "";
-
-	DBAccount logdbAccnt = gamedbAccnt;
-	logdbAccnt.m_dbName = "logdb";
+	DBAccount &gamedbAccnt = config.m_gamedbAccnt;
+	DBAccount &logdbAccnt = config.m_logdbAccnt;
 
 	m_gamedb = new DBFactory;
 	m_logdb = new DBFactory;

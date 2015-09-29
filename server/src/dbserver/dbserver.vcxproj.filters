@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="dbserver.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="db\dbmgr.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="config\dbconfig.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dbserver.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="db\dbmgr.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="config\dbconfig.h">
+      <Filter>config</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="db">
+      <UniqueIdentifier>{97626722-93f4-4d86-a3f0-73d3287a78e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{c6937573-8f08-4770-b21c-e36be3dde93e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

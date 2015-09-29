@@ -32,7 +32,7 @@ public:
 public:
 	std::string name();
 
-	bool init(DBAccount &dbaccount, int minPoolSize, int maxPoolSize);
+	bool init(const DBAccount &dbaccount);
 
 	// 将二进制字符串转化为数据库可识别的以0结尾的字符串
 	bool escape(const char *pSrc, int nSrcSize, char *pDest, int nDstSize);

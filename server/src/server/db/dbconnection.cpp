@@ -86,7 +86,7 @@ void DBConnection::release()
 		mysql_stmt_close(stmt);
 	}
 
-	LOG_INFO << "close dbconnection[svrip=" << m_account.m_dbIp << "\tdbname=" << m_account.m_dbName << "\tunixsocket=" << m_account.m_unixSocket << "] successfully!";
+	LOG_INFO << "close dbconnection " << m_account.echo() << " successfully!";
 }
 
 bool DBConnection::reconnect()
@@ -164,8 +164,7 @@ DB::DBExecuteCode DBConnection::execute(const char *sql, uint32 sqlLength, uint6
 		const char* errmsg = mysql_error(m_mysql);
 		if(errmsg != NULL) {
 			LOG_ERROR << "execute exception, sql = " << sql << ", errno = " << errnum << ", errmsg = " << errmsg;
-		}
-		else {
+		} else {
 			LOG_ERROR << "execute exception, sql = " << sql << ", errno = " << errnum;
 		}
 		//==================打印日志完毕==================
@@ -179,8 +178,7 @@ DB::DBExecuteCode DBConnection::execute(const char *sql, uint32 sqlLength, uint6
 				LOG_ERROR << "svr lost, execute exception again, sql = " << sql << ", errno = " << errnum;
 				return DB::EXECUTE_ERR_CONN;
 			}
-		}
-		else if(1062 == errnum) {
+		} else if(1062 == errnum) {
 			//主键冲突
 			return DB::EXECUTE_ERR_DUPLICATE;
 		}
@@ -202,8 +200,7 @@ DB::DBExecuteCode DBConnection::execute(const char *sql, uint32 sqlLength, uint6
 		MYSQL_RES * res = mysql_store_result(m_mysql);
 		if(NULL != res)
 			mysql_free_result(res);
-	}
-	while (!mysql_next_result(m_mysql));
+	} while (!mysql_next_result(m_mysql));
 
 	return DB::EXECUTE_OK;
 }
@@ -221,8 +218,7 @@ DB::DBQueryCode DBConnection::query(const char *sql, DBRecordSet **pRes)
 		const char* errmsg = mysql_error(m_mysql);
 		if(errmsg != NULL) {
 			LOG_ERROR << "query exception, sql" << sql << ", errno = " << errnum << ", errmsg = " << errmsg;
-		}
-		else {
+		} else {
 			LOG_ERROR << "query exception, sql" << sql << ", errno = " << errnum;
 		}
 		//==================打印日志完毕==================
@@ -236,8 +232,7 @@ DB::DBQueryCode DBConnection::query(const char *sql, DBRecordSet **pRes)
 				LOG_ERROR << "svr lost, query exception again, sql" << sql << ", errno = " << errnum;
 				return DB::QUERY_ERR_CONN;
 			}
-		}
-		else {
+		} else {
 			return DB::QUERY_ERR_UNKNOWN;
 		}
 
@@ -252,12 +247,10 @@ DB::DBQueryCode DBConnection::query(const char *sql, DBRecordSet **pRes)
 	if(NULL == res) {
 		if(0 == mysql_field_count(m_mysql)) {    //执行的是insert或update语句
 			code = DB::QUERY_OK_NO_RECORDSET;
-		}
-		else {
+		} else {
 			code = DB::QUERY_ERR_UNKNOWN;
 		}
-	}
-	else {
+	} else {
 		if(mysql_num_rows(res) > 0) {
 			DBRecordSet *rs = new DBRecordSet();
 			rs->m_res = res;
@@ -270,8 +263,7 @@ DB::DBQueryCode DBConnection::query(const char *sql, DBRecordSet **pRes)
 			*pRes = rs;
 
 			code = DB::QUERY_OK_HAVE_RECORDSET; //有结果返回
-		}
-		else {
+		} else {
 			code = DB::QUERY_OK_NO_RECORDSET;
 		}
 	}
@@ -347,8 +339,7 @@ bool DBConnection::isCompatiableCharset(Charsets &charsets)
 	Charsets::iterator itr = charsets.find(std::string("character_set_client"));
 	if(itr != charsets.end()) {
 		clientCharset = itr->second;
-	}
-	else {
+	} else {
 		LOG_ERROR << "Not found character_set_client variable! Check charset compatibility failed!";
 		return false;
 	}

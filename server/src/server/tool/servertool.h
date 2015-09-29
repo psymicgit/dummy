@@ -16,6 +16,7 @@ enum ServerType {
 	eNullServer		= 0,
 	eGameServer		= 1, // 游戏服
 	eGateServer		= 2, // 网关
+	eDBServer		= 3, // 数据库服务器
 	eServerTypeMax
 };
 

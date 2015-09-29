@@ -52,13 +52,14 @@ struct DBAccount {
 	std::string m_unixSocket; // mysql的unix socket
 
 	uint16 m_dbPort;		  // 数据库监听端口
+	uint16 m_poolSize;		  // 数据库连接池容量
 
 	DBAccount()
 		: m_dbPort(0)
 	{
 	}
 
-	std::string echo()
+	std::string echo() const
 	{
 		std::string ret;
 		if (m_unixSocket.empty()) {

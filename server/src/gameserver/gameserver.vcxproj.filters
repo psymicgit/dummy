@@ -27,6 +27,9 @@
     <ClInclude Include="net\http\gamehttpmgr.h">
       <Filter>net\http</Filter>
     </ClInclude>
+    <ClInclude Include="config\gameconfig.h">
+      <Filter>config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameserver.cpp" />
@@ -53,6 +56,9 @@
     <ClCompile Include="net\http\gamehttpmgr.cpp">
       <Filter>net\http</Filter>
     </ClCompile>
+    <ClCompile Include="config\gameconfig.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocol">
@@ -69,6 +75,9 @@
     </Filter>
     <Filter Include="net\http">
       <UniqueIdentifier>{469fff4e-e51f-4a36-8dd4-dbcce49d3cac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{3bb39cb2-8bb6-4acf-840b-38173acc976e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -13,6 +13,7 @@
 #include "db/dbmgr.h"
 #include "logic/clientmgr.h"
 #include "net/http/gamehttpmgr.h"
+#include "config/gameconfig.h"
 
 class GateLink;
 
@@ -21,7 +22,7 @@ class GameServer : public Singleton<GameServer>, public Server
 public:
 	GameServer();
 
-	bool init();
+	bool init(const char* jsonConfig);
 
 	void start();
 
@@ -39,6 +40,9 @@ private:
 
 	ClientMgr m_clientMgr;
 	GameHttpMgr m_httpMgr;
+
+	// ÓÎÏ··şÎñÆ÷ÅäÖÃ
+	GameConfig m_config;
 };
 
 #endif //_gameserver_h_

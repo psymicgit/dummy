@@ -19,7 +19,7 @@ GameServer::GameServer()
 	m_svrType = eGameServer;
 }
 
-bool GameServer::init()
+bool GameServer::init(const char* jsonConfig)
 {
 	if (!Server::init()) {
 		return false;
@@ -27,18 +27,25 @@ bool GameServer::init()
 
 	logging::init("gameserver", "log_gamesvr_");
 
-	m_lan.init(1);
-	m_lan.listen("127.0.0.1", 10000, *this);
-
-	for(int i = 0; i < 2; i++) {
-		// m_wan.connect("115.239.211.112", 20001, *this);
-		m_lan.connect("127.0.0.1", 10001, *this, "gateserver");
-	}
-
-	if (!m_dbmgr.init()) {
-		LOG_ERROR << "dbmgr init failed, aborted";
+	if (!m_config.load(jsonConfig)) {
+		LOG_INFO << name() << " load config failed! aborted!";
 		return false;
 	}
+
+	m_lan.init(m_config.m_lanThreadNum);
+
+	std::vector<IpPort> &lanConnects = m_config.m_lanConnects;
+	for(size_t i = 0; i < lanConnects.size(); i++) {
+		if (!m_lan.connect(lanConnects[i].ip, lanConnects[i].port, *this, lanConnects[i].peerName.c_str())) {
+			LOG_ERROR << name() << " connect to " << lanConnects[i].peerName << "<" << lanConnects[i].ip << ":" << lanConnects[i].port <<  "> failed, aborted!";
+			return false;
+		}
+	}
+
+// 	if (!m_dbmgr.init()) {
+// 		LOG_ERROR << "dbmgr init failed, aborted";
+// 		return false;
+// 	}
 
 	if (!m_httpMgr.init()) {
 		LOG_ERROR << "gamehttpmgr init failed, aborted";
@@ -69,7 +76,7 @@ void GameServer::run()
 {
 	Server::run();
 
-	m_dbmgr.run();
+	// m_dbmgr.run();
 	m_httpMgr.run();
 	sleep(10);
 }
