@@ -96,7 +96,7 @@ int Epoll::eventLoop()
 					// LOG_WARN << "nread = " << nread;
 				};
 
-				recycleFds();
+				// recycleFds();
 				continue;
 			}
 
