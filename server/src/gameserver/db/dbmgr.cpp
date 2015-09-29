@@ -167,17 +167,26 @@ bool DBMgr::init()
 	DBAccount logdbAccnt = gamedbAccnt;
 	logdbAccnt.m_dbName = "logdb";
 
-	m_dbfactory = new DBFactory;
+	m_gamedb = new DBFactory;
+	m_logdb = new DBFactory;
 
-	m_gamedb = m_dbfactory->createDBSession(gamedbAccnt, 20, 20);
 	if (NULL == m_gamedb) {
-		LOG_ERROR << "create gamedb seesion failed";
+		LOG_ERROR << "new gamedb failed";
 		return false;
 	}
 
-	m_logdb = m_dbfactory->createDBSession(logdbAccnt, 20, 20);
-	if (NULL == m_gamedb) {
-		LOG_ERROR << "create logdb seesion failed";
+	if (NULL == m_logdb) {
+		LOG_ERROR << "new gamedb failed";
+		return false;
+	}
+
+	if (!m_gamedb->init(gamedbAccnt, 20, 20)) {
+		LOG_ERROR << "initialize gamedb failed";
+		return false;
+	}
+
+	if (!m_logdb->init(logdbAccnt, 20, 20)) {
+		LOG_ERROR << "initialize gamedb failed";
 		return false;
 	}
 

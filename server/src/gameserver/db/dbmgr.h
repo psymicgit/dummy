@@ -31,8 +31,8 @@ public:
 private:
 	DBFactory *m_dbfactory;
 
-	DBSession *m_gamedb;
-	DBSession *m_logdb;
+	DBFactory *m_gamedb;
+	DBFactory *m_logdb;
 };
 
 #endif //_dbmgr_h_

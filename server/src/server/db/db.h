@@ -57,6 +57,18 @@ struct DBAccount {
 		: m_dbPort(0)
 	{
 	}
+
+	std::string echo()
+	{
+		std::string ret;
+		if (m_unixSocket.empty()) {
+			ret = "" + m_dbName + "[" + m_dbIp + ":" + echotool::getmsg("%u", m_dbPort) + "]";
+		} else {
+			ret = "" + m_dbName + "[" + m_unixSocket + "]";
+		}
+
+		return ret;
+	}
 };
 
 #endif //_db_h_
