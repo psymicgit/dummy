@@ -90,8 +90,8 @@ void Client::handleMsg()
 
 		NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
 
-		uint16 msgId = endiantool::networkToHost16(head->msgId);
-		uint32 msgLen = endiantool::networkToHost32(head->msgLen);
+		uint16 msgId = endiantool::networkToHost(head->msgId);
+		uint32 msgLen = endiantool::networkToHost(head->msgLen);
 
 		// ¼ì²â°ë°ü
 		if (msgLen > bytes) {

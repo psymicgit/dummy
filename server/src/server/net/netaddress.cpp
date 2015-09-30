@@ -54,7 +54,7 @@ string NetAddress::toIp() const
 
 uint16 NetAddress::toPort() const
 {
-	return endiantool::networkToHost16(m_addr.sin_port);
+	return endiantool::networkToHost(m_addr.sin_port);
 }
 
 bool NetAddress::resolve(string hostname, NetAddress* out)

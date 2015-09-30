@@ -99,7 +99,7 @@ namespace endiantool
 	}
 
 	// 将64位的整数从网络字节顺序转换成主机字节顺序
-	uint64_t networkToHost64(uint64_t net64)
+	uint64_t networkToHost(uint64_t net64)
 	{
 #ifdef WIN
 		return ntoh64(net64);
@@ -109,7 +109,7 @@ namespace endiantool
 	}
 
 	// 将32位的整数从网络字节顺序转换成主机字节顺序
-	uint32 networkToHost32(uint32 net32)
+	uint32 networkToHost(uint32 net32)
 	{
 #ifdef WIN
 		return ntohl(net32);
@@ -119,7 +119,7 @@ namespace endiantool
 	}
 
 	// 将16位的整数从网络字节顺序转换成主机字节顺序
-	uint16 networkToHost16(uint16 net16)
+	uint16 networkToHost(uint16 net16)
 	{
 #ifdef WIN
 		return ntohs(net16);

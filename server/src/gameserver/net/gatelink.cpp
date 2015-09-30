@@ -26,9 +26,9 @@ void GateLink::OnRecv(Link *link, Buffer &buf)
 		}
 
 		LanMsgHead *msgHead = (LanMsgHead*)buf.peek();
-		uint32 clientId = endiantool::networkToHost16(msgHead->clientId);
-		uint16 msgId = endiantool::networkToHost16(msgHead->msgId);
-		uint32 dataLen = endiantool::networkToHost32(msgHead->msgLen);
+		uint32 clientId = endiantool::networkToHost(msgHead->clientId);
+		uint16 msgId = endiantool::networkToHost(msgHead->msgId);
+		uint32 dataLen = endiantool::networkToHost(msgHead->msgLen);
 
 		// ¼ì²â°ë°ü
 		if (dataLen > bytes) {

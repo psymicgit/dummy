@@ -141,8 +141,8 @@ void Server::handleMsg(Link *link)
 
 		// ¼ì²â°ë°ü
 		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
-		msgHead->msgId = endiantool::networkToHost16(msgHead->msgId);
-		msgHead->msgLen = endiantool::networkToHost32(msgHead->msgLen);
+		msgHead->msgId = endiantool::networkToHost(msgHead->msgId);
+		msgHead->msgLen = endiantool::networkToHost(msgHead->msgLen);
 
 		if (msgHead->msgLen > bytes) {
 			break;
