@@ -14,7 +14,8 @@
 
 std::string ServerLink::name()
 {
-	return std::string(svrtool::getSvrName(m_peerSvrType)) + "Link";
+	std::string ret = "[" + svrtool::getSvrName(m_peerSvrType) + "<->" + svrtool::getSvrName(m_peerSvrType) + "Link]";
+	return ret;
 }
 
 void ServerLink::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)

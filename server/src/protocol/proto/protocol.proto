@@ -22,3 +22,11 @@ enum ClientGateMsgId
 	eClientGateMsgIdMax = 2000;
 }
 
+enum GameToDBMsgId
+{
+	eGameToDBMsgIdMin = 2000;
+	ePostSql = 2001; // Í¶µÝsqlÓï¾äµ½db·þ
+
+	eGameToDBMsgIdMax = 3000;
+}
+

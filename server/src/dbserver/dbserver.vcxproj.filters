@@ -10,6 +10,9 @@
     <ClCompile Include="config\dbconfig.cpp">
       <Filter>config</Filter>
     </ClCompile>
+    <ClCompile Include="..\protocol\game_db.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dbserver.h" />
@@ -20,6 +23,15 @@
     <ClInclude Include="config\dbconfig.h">
       <Filter>config</Filter>
     </ClInclude>
+    <ClInclude Include="net\game_dbmsghandler.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\game_db.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\protocol.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="db">
@@ -27,6 +39,12 @@
     </Filter>
     <Filter Include="config">
       <UniqueIdentifier>{c6937573-8f08-4770-b21c-e36be3dde93e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net">
+      <UniqueIdentifier>{96d38f47-1c14-42b2-abd9-68e947d444fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{6f87b3ed-8dea-4194-b74a-0bd2bc6db48b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

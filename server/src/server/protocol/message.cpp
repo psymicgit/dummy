@@ -26,8 +26,8 @@ namespace msgtool
 	{
 		uint32 packetLen = msgLen + sizeof(NetMsgHead);
 
-		msgHead->msgId	= endiantool::hostToNetwork16(msgId);
-		msgHead->msgLen	= endiantool::hostToNetwork32(packetLen);
+		msgHead->msgId	= endiantool::hostToNetwork(msgId);
+		msgHead->msgLen	= endiantool::hostToNetwork(packetLen);
 
 		return packetLen;
 	}
@@ -36,9 +36,9 @@ namespace msgtool
 	{
 		uint32 packetLen = msgLen + sizeof(LanMsgHead);
 
-		msgHead->clientId = endiantool::hostToNetwork16(clientId);
-		msgHead->msgId	  = endiantool::hostToNetwork16(msgId);
-		msgHead->msgLen	  = endiantool::hostToNetwork32(packetLen);
+		msgHead->clientId = endiantool::hostToNetwork(clientId);
+		msgHead->msgId	  = endiantool::hostToNetwork(msgId);
+		msgHead->msgLen	  = endiantool::hostToNetwork(packetLen);
 
 		return packetLen;
 	}

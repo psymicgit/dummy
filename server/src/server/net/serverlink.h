@@ -19,6 +19,7 @@ class ServerLink : public INetReactor
 public:
 	ServerLink()
 		: m_link(NULL)
+		, m_localSvrType(eNullServer)
 		, m_peerSvrType(eNullServer)
 		, m_peerSvrId(0)
 		, m_taskQueue(NULL)
@@ -46,6 +47,9 @@ public:
 
 public:
 	Link *m_link;
+
+	// 本地服务器的类别
+	ServerType m_localSvrType;
 
 	// 对端服务器的类别
 	ServerType m_peerSvrType;

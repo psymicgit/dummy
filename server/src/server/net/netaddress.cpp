@@ -19,8 +19,8 @@ NetAddress::NetAddress(uint16 port)
 {
 	bzero(&m_addr, sizeof m_addr);
 	m_addr.sin_family = AF_INET;
-	m_addr.sin_addr.s_addr = endiantool::hostToNetwork32(INADDR_ANY);
-	m_addr.sin_port = endiantool::hostToNetwork16(port);
+	m_addr.sin_addr.s_addr = endiantool::hostToNetwork((uint32)0);
+	m_addr.sin_port = endiantool::hostToNetwork(port);
 }
 
 NetAddress::NetAddress(const std::string &ip, uint16 port)
@@ -28,7 +28,7 @@ NetAddress::NetAddress(const std::string &ip, uint16 port)
 	bzero(&m_addr, sizeof m_addr);
 
 	m_addr.sin_family = AF_INET;
-	m_addr.sin_port = endiantool::hostToNetwork16(port);
+	m_addr.sin_port = endiantool::hostToNetwork(port);
 
 	if (::inet_pton(AF_INET, ip.c_str(), &m_addr.sin_addr) <= 0) {
 		LOG_ERROR << "NetAddress parse <ip:port> = <" << ip << ":" << port << "> failed";
@@ -68,12 +68,10 @@ bool NetAddress::resolve(string hostname, NetAddress* out)
 			if (err == WSAHOST_NOT_FOUND) {
 				LOG_ERROR << "Host not found\n";
 				return false;
-			}
-			else if (err == WSANO_DATA) {
+			} else if (err == WSANO_DATA) {
 				LOG_ERROR << "No data record found\n";
 				return false;
-			}
-			else {
+			} else {
 				LOG_ERROR << "Function failed with error: " << err;
 				return false;
 			}
@@ -98,8 +96,7 @@ bool NetAddress::resolve(string hostname, NetAddress* out)
 		assert(he->h_addrtype == AF_INET && he->h_length == sizeof(uint32));
 		out->m_addr.sin_addr = *reinterpret_cast<struct in_addr*>(he->h_addr);
 		return true;
-	}
-	else {
+	} else {
 		if (ret) {
 			LOG_SYSTEM_ERR << "InetAddress::resolve";
 		}

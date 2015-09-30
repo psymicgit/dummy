@@ -1,0 +1,21 @@
+// sql语句类别
+enum SqlType {
+	NormalSql = 0; // 正常sql
+	PlayerSql = 1; // 玩家sql
+	GuidSql = 2;   // 门派sql
+}
+
+// 单次sql语句
+message SqlMsg
+{
+	required SqlType sqltype = 1 [default = NormalSql]; // sql语句类别
+	required fixed64 sqlid = 2; // sql语句对应的玩家id/门派id....等等
+	required string sql = 3; // sql文本列表
+}
+
+// 游戏服发送给db服的sql语句
+message PostSql
+{
+	required fixed32 time = 1; // 该sql语句创建的时间
+	repeated SqlMsg sqls = 2; // sql列表
+}

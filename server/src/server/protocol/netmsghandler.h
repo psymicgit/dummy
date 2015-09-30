@@ -64,6 +64,7 @@ private:
 				res.set_ret(CONNECT_FAIL_UNKNOWN_SERVER_TYPE);
 			} else {
 				svrLink->m_link = link;
+				svrLink->m_localSvrType = Server::instance->m_svrType;
 				svrLink->m_peerSvrType = peerSvrType;
 				svrLink->m_peerSvrId = peerSvrId;
 				svrLink->m_taskQueue = &Server::instance->getTaskQueue();

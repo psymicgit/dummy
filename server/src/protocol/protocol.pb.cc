@@ -20,6 +20,7 @@ namespace {
 
 const ::google::protobuf::EnumDescriptor* NetMsgId_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ClientGateMsgId_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* GameToDBMsgId_descriptor_ = NULL;
 
 }  // namespace
 
@@ -32,6 +33,7 @@ void protobuf_AssignDesc_protocol_2eproto() {
   GOOGLE_CHECK(file != NULL);
   NetMsgId_descriptor_ = file->enum_type(0);
   ClientGateMsgId_descriptor_ = file->enum_type(1);
+  GameToDBMsgId_descriptor_ = file->enum_type(2);
 }
 
 namespace {
@@ -65,7 +67,9 @@ void protobuf_AddDesc_protocol_2eproto() {
     "yNtf\020\353\007\022\r\n\010eAuthReq\020\354\007\022\r\n\010eAuthAck\020\355\007\022\n\n"
     "\005ePing\020\356\007\022\n\n\005ePong\020\357\007\022\017\n\neSpeedTest\020\360\007\022\021"
     "\n\014eLatencyTest\020\361\007\022\030\n\023eClientGateMsgIdMax"
-    "\020\320\017", 283);
+    "\020\320\017*N\n\rGameToDBMsgId\022\026\n\021eGameToDBMsgIdMi"
+    "n\020\320\017\022\r\n\010ePostSql\020\321\017\022\026\n\021eGameToDBMsgIdMax"
+    "\020\270\027", 363);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protocol.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_protocol_2eproto);
@@ -108,6 +112,21 @@ bool ClientGateMsgId_IsValid(int value) {
     case 1008:
     case 1009:
     case 2000:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* GameToDBMsgId_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return GameToDBMsgId_descriptor_;
+}
+bool GameToDBMsgId_IsValid(int value) {
+  switch(value) {
+    case 2000:
+    case 2001:
+    case 3000:
       return true;
     default:
       return false;

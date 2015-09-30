@@ -78,6 +78,26 @@ inline bool ClientGateMsgId_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ClientGateMsgId>(
     ClientGateMsgId_descriptor(), name, value);
 }
+enum GameToDBMsgId {
+  eGameToDBMsgIdMin = 2000,
+  ePostSql = 2001,
+  eGameToDBMsgIdMax = 3000
+};
+bool GameToDBMsgId_IsValid(int value);
+const GameToDBMsgId GameToDBMsgId_MIN = eGameToDBMsgIdMin;
+const GameToDBMsgId GameToDBMsgId_MAX = eGameToDBMsgIdMax;
+const int GameToDBMsgId_ARRAYSIZE = GameToDBMsgId_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* GameToDBMsgId_descriptor();
+inline const ::std::string& GameToDBMsgId_Name(GameToDBMsgId value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    GameToDBMsgId_descriptor(), value);
+}
+inline bool GameToDBMsgId_Parse(
+    const ::std::string& name, GameToDBMsgId* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<GameToDBMsgId>(
+    GameToDBMsgId_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -100,6 +120,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NetMsgId>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::ClientGateMsgId>() {
   return ::ClientGateMsgId_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::GameToDBMsgId>() {
+  return ::GameToDBMsgId_descriptor();
 }
 
 }  // namespace google

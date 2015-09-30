@@ -33,6 +33,8 @@ public:
 private:
 	DBFactory *m_gamedb;
 	DBFactory *m_logdb;
+
+	std::vector<std::string> m_sqls;
 };
 
 #endif //_dbmgr_h_

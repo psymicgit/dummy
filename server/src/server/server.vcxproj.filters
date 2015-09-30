@@ -168,6 +168,9 @@
     <ClInclude Include="basic\evthread-internal.h">
       <Filter>basic</Filter>
     </ClInclude>
+    <ClInclude Include="tool\strtool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -308,6 +311,9 @@
     </ClCompile>
     <ClCompile Include="basic\evthread.cpp">
       <Filter>basic</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\strtool.cpp">
+      <Filter>tool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
