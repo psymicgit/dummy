@@ -129,9 +129,6 @@
     <ClInclude Include="basic\objectpool.h">
       <Filter>basic</Filter>
     </ClInclude>
-    <ClInclude Include="def\define.h">
-      <Filter>def</Filter>
-    </ClInclude>
     <ClInclude Include="tool\echotool.h">
       <Filter>tool</Filter>
     </ClInclude>
@@ -170,6 +167,9 @@
     </ClInclude>
     <ClInclude Include="tool\strtool.h">
       <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="def\global.h">
+      <Filter>def</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -288,9 +288,6 @@
     <ClCompile Include="tool\ticktool.cpp">
       <Filter>tool</Filter>
     </ClCompile>
-    <ClCompile Include="def\define.cpp">
-      <Filter>def</Filter>
-    </ClCompile>
     <ClCompile Include="tool\echotool.cpp">
       <Filter>tool</Filter>
     </ClCompile>
@@ -314,6 +311,9 @@
     </ClCompile>
     <ClCompile Include="tool\strtool.cpp">
       <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="def\global.cpp">
+      <Filter>def</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

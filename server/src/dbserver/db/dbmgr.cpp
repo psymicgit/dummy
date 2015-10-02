@@ -113,7 +113,7 @@ void DBMgr::test()
 		Tick tick("ÓÎÏ·¿â²åÈë²âÊÔ");
 
 		m_gamedb->execute("truncate players");
-		conn->beginTransaction();
+		conn->startTransaction();
 
 		for (size_t i = 1; i <= times; i++) {
 			PlayerDBCmd *cmd = new PlayerDBCmd;

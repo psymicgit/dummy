@@ -109,7 +109,7 @@ bool DBConnection::escape(const char *pSrc, int nSrcSize, char *pDest, int nDstS
 	return mysql_real_escape_string(m_mysql, pDest, pSrc, nSrcSize) > 0;
 }
 
-void DBConnection::beginTransaction()
+void DBConnection::startTransaction()
 {
 	if(NULL == m_mysql) {
 		return;

@@ -9,28 +9,48 @@
 #ifndef _singleton_h_
 #define _singleton_h_
 
+#include "lock.h"
+
 // 单例类
 // 比如：若希望某个类A拥有单例方法，则可定义class A : public Singleton<A>，便可调用A::instance()
 template <typename T>
 class Singleton
 {
-	struct object_creator {
-		object_creator() { Singleton<T>::Instance(); }
+private:
+	struct born {
+		born() { Singleton<T>::Instance(); }
 	};
 
-	static object_creator create_object;
+public:
+	static T& Instance()
+	{
+		if (NULL == instance) {
+			lock_guard_t<> lock(s_lock);
+			if (NULL == instance) {
+				T *t = new T;
+				instance = t;
+			}
+		}
+
+		return *instance;
+	}
+
+private:
+	static born s_born;
+	static mutex_t s_lock;
 
 public:
-	typedef T object_type;
-	static object_type& Instance()
-	{
-		static object_type obj;
-		return obj;
-	}
+	static T *instance;
 };
 
 template <typename T>
-typename Singleton<T>::object_creator Singleton<T>::create_object;
+typename Singleton<T>::born Singleton<T>::s_born;
+
+template <typename T>
+T* Singleton<T>::instance = NULL;
+
+template <typename T>
+mutex_t Singleton<T>::s_lock;
 
 #endif //_singleton_h_
 

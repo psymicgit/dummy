@@ -9,6 +9,8 @@
 #ifndef _dbmgr_h_
 #define _dbmgr_h_
 
+#include "tool/timetool.h"
+
 class DBFactory;
 class DBSession;
 
@@ -18,6 +20,7 @@ public:
 	DBMgr()
 		: m_gamedb(NULL)
 		, m_logdb(NULL)
+		, m_old(0)
 	{
 	}
 
@@ -32,6 +35,9 @@ public:
 private:
 	DBFactory *m_gamedb;
 	DBFactory *m_logdb;
+
+private:
+	Timestamp m_old;
 };
 
 #endif //_dbmgr_h_

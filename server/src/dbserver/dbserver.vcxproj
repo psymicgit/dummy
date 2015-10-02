@@ -100,6 +100,7 @@
     <ClInclude Include="config\dbconfig.h" />
     <ClInclude Include="dbserver.h" />
     <ClInclude Include="db\dbmgr.h" />
+    <ClInclude Include="db\sqldbcmd.h" />
     <ClInclude Include="net\game_dbmsghandler.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

@@ -11,15 +11,20 @@ struct IpPort {
 	std::string peerName;
 };
 
-struct GameConfig {
+class GameConfig : public Singleton<GameConfig>
+{
+public:
 	GameConfig()
 		: m_lanThreadNum(0)
+		, m_saveToDBInterval(0)
 	{}
 
 	bool load(const char* configFile);
 
 	std::vector<IpPort> m_lanConnects;
 	int m_lanThreadNum;
+
+	int m_saveToDBInterval;
 };
 
 #endif

@@ -112,6 +112,9 @@ private:
 class TimerQueue
 {
 public:
+	static Timestamp now;
+
+public:
 	// 返回当前与最近的一个定时器的时间差（毫秒），没有定时器则返回-1
 	int run();
 

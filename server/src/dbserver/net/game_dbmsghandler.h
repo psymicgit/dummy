@@ -10,12 +10,18 @@
 #define _clientmsgmgr_h_
 
 #include <protocol.pb.h>
+#include <game_db.pb.h>
 #include <client.pb.h>
 
 #include "net/msghandler.h"
 #include "tool/servertool.h"
 #include "protocol/message.h"
 #include <tool/ticktool.h>
+
+#include <db/dbfactory.h>
+
+#include "db/dbmgr.h"
+#include "db/sqldbcmd.h"
 
 // 处理游戏服发给db服的消息
 class Game_DBMsgHandler : public MsgHandler<Link>
@@ -29,14 +35,33 @@ public:
 
 	void init()
 	{
-		registerMsg(ePostSql, OnPostSqlReq);
+		registerMsg(ePostSql, onPostSqlReq);
 	}
 
 private:
-	static void OnPostSqlReq(Link* link, AuthReq *req, Timestamp receiveTime)
+	static void onPostSqlReq(Link* link, PostSql *req, Timestamp receiveTime)
 	{
-	}
+		int n = req->sqls_size();
 
+		DBFactory *db = NULL;
+		switch (req->dbtype()) {
+		case GameDB:
+			db = DBMgr::instance->m_gamedb;
+			break;
+		case LogDB:
+			db = DBMgr::instance->m_logdb;
+			break;
+		}
+
+		for(int i = 0; i < n; ++i) {
+			const SqlMsg &sqlmsg = req->sqls(i);
+
+			SqlDBCmd *sqlcmd = new SqlDBCmd;
+			sqlcmd->m_sql = sqlmsg.sql();
+
+			db->addDBCommand(sqlcmd);
+		}
+	}
 };
 
 

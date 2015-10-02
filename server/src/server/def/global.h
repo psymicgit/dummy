@@ -1,13 +1,13 @@
 ///<------------------------------------------------------------------------------
-//< @file:   server\def\define.h
+//< @file:   server\def\global.h
 //< @author: 洪坤安
 //< @date:   2015年4月7日 20:32:19
 //< @brief:
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
-#ifndef _define_h_
-#define _define_h_
+#ifndef _global_h_
+#define _global_h_
 
 #include "basic/objectpool.h"
 #include "basic/buffer.h"

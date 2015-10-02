@@ -129,7 +129,7 @@
     <ClInclude Include="db\dbfactory.h" />
     <ClInclude Include="db\dbrecordset.h" />
     <ClInclude Include="db\dbsession.h" />
-    <ClInclude Include="def\define.h" />
+    <ClInclude Include="def\global.h" />
     <ClInclude Include="def\platform.h" />
     <ClInclude Include="def\type.h" />
     <ClInclude Include="http\httpcmd.h" />
@@ -179,7 +179,7 @@
     <ClCompile Include="db\dbfactory.cpp" />
     <ClCompile Include="db\dbrecordset.cpp" />
     <ClCompile Include="db\dbsession.cpp" />
-    <ClCompile Include="def\define.cpp" />
+    <ClCompile Include="def\global.cpp" />
     <ClCompile Include="http\httpcmd.cpp" />
     <ClCompile Include="http\httpmgr.cpp" />
     <ClCompile Include="log\log.cpp" />

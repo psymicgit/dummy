@@ -8,6 +8,8 @@
 
 #include "timerqueue.h"
 
+Timestamp TimerQueue::now = 0;
+
 int TimerQueue::run()
 {
 	if(m_timers.empty()) {
@@ -15,7 +17,7 @@ int TimerQueue::run()
 	}
 
 	// 获取当前时间
-	Timestamp now = timetool::getTimeOfDay();
+	now = timetool::getTimeOfDay();
 
 	// 依次取出离已到期的定时器并执行
 	while(!m_timers.empty()) {

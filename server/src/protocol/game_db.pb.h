@@ -55,6 +55,25 @@ inline bool SqlType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<SqlType>(
     SqlType_descriptor(), name, value);
 }
+enum SqlDBType {
+  GameDB = 0,
+  LogDB = 1
+};
+bool SqlDBType_IsValid(int value);
+const SqlDBType SqlDBType_MIN = GameDB;
+const SqlDBType SqlDBType_MAX = LogDB;
+const int SqlDBType_ARRAYSIZE = SqlDBType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* SqlDBType_descriptor();
+inline const ::std::string& SqlDBType_Name(SqlDBType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    SqlDBType_descriptor(), value);
+}
+inline bool SqlDBType_Parse(
+    const ::std::string& name, SqlDBType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<SqlDBType>(
+    SqlDBType_descriptor(), name, value);
+}
 // ===================================================================
 
 class SqlMsg : public ::google::protobuf::Message {
@@ -225,10 +244,17 @@ class PostSql : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 time() const;
   inline void set_time(::google::protobuf::uint32 value);
 
-  // repeated .SqlMsg sqls = 2;
+  // required .SqlDBType dbtype = 2;
+  inline bool has_dbtype() const;
+  inline void clear_dbtype();
+  static const int kDbtypeFieldNumber = 2;
+  inline ::SqlDBType dbtype() const;
+  inline void set_dbtype(::SqlDBType value);
+
+  // repeated .SqlMsg sqls = 3;
   inline int sqls_size() const;
   inline void clear_sqls();
-  static const int kSqlsFieldNumber = 2;
+  static const int kSqlsFieldNumber = 3;
   inline const ::SqlMsg& sqls(int index) const;
   inline ::SqlMsg* mutable_sqls(int index);
   inline ::SqlMsg* add_sqls();
@@ -241,14 +267,17 @@ class PostSql : public ::google::protobuf::Message {
  private:
   inline void set_has_time();
   inline void clear_has_time();
+  inline void set_has_dbtype();
+  inline void clear_has_dbtype();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::SqlMsg > sqls_;
   ::google::protobuf::uint32 time_;
+  int dbtype_;
+  ::google::protobuf::RepeatedPtrField< ::SqlMsg > sqls_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_game_5fdb_2eproto();
   friend void protobuf_AssignDesc_game_5fdb_2eproto();
@@ -405,7 +434,30 @@ inline void PostSql::set_time(::google::protobuf::uint32 value) {
   time_ = value;
 }
 
-// repeated .SqlMsg sqls = 2;
+// required .SqlDBType dbtype = 2;
+inline bool PostSql::has_dbtype() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void PostSql::set_has_dbtype() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void PostSql::clear_has_dbtype() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void PostSql::clear_dbtype() {
+  dbtype_ = 0;
+  clear_has_dbtype();
+}
+inline ::SqlDBType PostSql::dbtype() const {
+  return static_cast< ::SqlDBType >(dbtype_);
+}
+inline void PostSql::set_dbtype(::SqlDBType value) {
+  assert(::SqlDBType_IsValid(value));
+  set_has_dbtype();
+  dbtype_ = value;
+}
+
+// repeated .SqlMsg sqls = 3;
 inline int PostSql::sqls_size() const {
   return sqls_.size();
 }
@@ -440,6 +492,10 @@ namespace protobuf {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::SqlType>() {
   return ::SqlType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::SqlDBType>() {
+  return ::SqlDBType_descriptor();
 }
 
 }  // namespace google

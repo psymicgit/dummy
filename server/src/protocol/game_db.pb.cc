@@ -25,6 +25,7 @@ const ::google::protobuf::Descriptor* PostSql_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   PostSql_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* SqlType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* SqlDBType_descriptor_ = NULL;
 
 }  // namespace
 
@@ -53,8 +54,9 @@ void protobuf_AssignDesc_game_5fdb_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(SqlMsg));
   PostSql_descriptor_ = file->message_type(1);
-  static const int PostSql_offsets_[2] = {
+  static const int PostSql_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PostSql, time_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PostSql, dbtype_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PostSql, sqls_),
   };
   PostSql_reflection_ =
@@ -69,6 +71,7 @@ void protobuf_AssignDesc_game_5fdb_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PostSql));
   SqlType_descriptor_ = file->enum_type(0);
+  SqlDBType_descriptor_ = file->enum_type(1);
 }
 
 namespace {
@@ -105,9 +108,11 @@ void protobuf_AddDesc_game_5fdb_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\rgame_db.proto\"J\n\006SqlMsg\022$\n\007sqltype\030\001 \002"
     "(\0162\010.SqlType:\tNormalSql\022\r\n\005sqlid\030\002 \002(\006\022\013"
-    "\n\003sql\030\003 \002(\t\".\n\007PostSql\022\014\n\004time\030\001 \002(\007\022\025\n\004"
-    "sqls\030\002 \003(\0132\007.SqlMsg*4\n\007SqlType\022\r\n\tNormal"
-    "Sql\020\000\022\r\n\tPlayerSql\020\001\022\013\n\007GuidSql\020\002", 193);
+    "\n\003sql\030\003 \002(\t\"J\n\007PostSql\022\014\n\004time\030\001 \002(\007\022\032\n\006"
+    "dbtype\030\002 \002(\0162\n.SqlDBType\022\025\n\004sqls\030\003 \003(\0132\007"
+    ".SqlMsg*4\n\007SqlType\022\r\n\tNormalSql\020\000\022\r\n\tPla"
+    "yerSql\020\001\022\013\n\007GuidSql\020\002*\"\n\tSqlDBType\022\n\n\006Ga"
+    "meDB\020\000\022\t\n\005LogDB\020\001", 257);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game_db.proto", &protobuf_RegisterTypes);
   SqlMsg::default_instance_ = new SqlMsg();
@@ -132,6 +137,20 @@ bool SqlType_IsValid(int value) {
     case 0:
     case 1:
     case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* SqlDBType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SqlDBType_descriptor_;
+}
+bool SqlDBType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
       return true;
     default:
       return false;
@@ -453,6 +472,7 @@ void SqlMsg::Swap(SqlMsg* other) {
 
 #ifndef _MSC_VER
 const int PostSql::kTimeFieldNumber;
+const int PostSql::kDbtypeFieldNumber;
 const int PostSql::kSqlsFieldNumber;
 #endif  // !_MSC_VER
 
@@ -473,6 +493,7 @@ PostSql::PostSql(const PostSql& from)
 void PostSql::SharedCtor() {
   _cached_size_ = 0;
   time_ = 0u;
+  dbtype_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -509,6 +530,7 @@ PostSql* PostSql::New() const {
 void PostSql::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     time_ = 0u;
+    dbtype_ = 0;
   }
   sqls_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -532,12 +554,33 @@ bool PostSql::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_sqls;
+        if (input->ExpectTag(16)) goto parse_dbtype;
         break;
       }
 
-      // repeated .SqlMsg sqls = 2;
+      // required .SqlDBType dbtype = 2;
       case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_dbtype:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::SqlDBType_IsValid(value)) {
+            set_dbtype(static_cast< ::SqlDBType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(2, value);
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_sqls;
+        break;
+      }
+
+      // repeated .SqlMsg sqls = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_sqls:
@@ -546,7 +589,7 @@ bool PostSql::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_sqls;
+        if (input->ExpectTag(26)) goto parse_sqls;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -574,10 +617,16 @@ void PostSql::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFixed32(1, this->time(), output);
   }
 
-  // repeated .SqlMsg sqls = 2;
+  // required .SqlDBType dbtype = 2;
+  if (has_dbtype()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->dbtype(), output);
+  }
+
+  // repeated .SqlMsg sqls = 3;
   for (int i = 0; i < this->sqls_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->sqls(i), output);
+      3, this->sqls(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -593,11 +642,17 @@ void PostSql::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteFixed32ToArray(1, this->time(), target);
   }
 
-  // repeated .SqlMsg sqls = 2;
+  // required .SqlDBType dbtype = 2;
+  if (has_dbtype()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->dbtype(), target);
+  }
+
+  // repeated .SqlMsg sqls = 3;
   for (int i = 0; i < this->sqls_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        2, this->sqls(i), target);
+        3, this->sqls(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -616,8 +671,14 @@ int PostSql::ByteSize() const {
       total_size += 1 + 4;
     }
 
+    // required .SqlDBType dbtype = 2;
+    if (has_dbtype()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->dbtype());
+    }
+
   }
-  // repeated .SqlMsg sqls = 2;
+  // repeated .SqlMsg sqls = 3;
   total_size += 1 * this->sqls_size();
   for (int i = 0; i < this->sqls_size(); i++) {
     total_size +=
@@ -655,6 +716,9 @@ void PostSql::MergeFrom(const PostSql& from) {
     if (from.has_time()) {
       set_time(from.time());
     }
+    if (from.has_dbtype()) {
+      set_dbtype(from.dbtype());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -672,7 +736,7 @@ void PostSql::CopyFrom(const PostSql& from) {
 }
 
 bool PostSql::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   for (int i = 0; i < sqls_size(); i++) {
     if (!this->sqls(i).IsInitialized()) return false;
@@ -683,6 +747,7 @@ bool PostSql::IsInitialized() const {
 void PostSql::Swap(PostSql* other) {
   if (other != this) {
     std::swap(time_, other->time_);
+    std::swap(dbtype_, other->dbtype_);
     sqls_.Swap(&other->sqls_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);

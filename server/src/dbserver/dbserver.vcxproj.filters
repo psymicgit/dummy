@@ -32,6 +32,9 @@
     <ClInclude Include="..\protocol\protocol.pb.h">
       <Filter>protocol</Filter>
     </ClInclude>
+    <ClInclude Include="db\sqldbcmd.h">
+      <Filter>db</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="db">

@@ -39,7 +39,7 @@ public:
 
 	DB::DBQueryCode query(const char *sql, DBRecordSet **pRes);
 
-	void beginTransaction();
+	void startTransaction();
 
 	void commit();
 

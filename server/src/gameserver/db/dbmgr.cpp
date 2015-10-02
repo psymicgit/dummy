@@ -16,6 +16,9 @@
 #include <db/dbconnection.h>
 #include <tool/ticktool.h>
 
+#include <basic/timerqueue.h>
+#include "config/gameconfig.h"
+
 class OpHistoryDBCmd : public DBCommand
 {
 	virtual void execute(DBConnection &conn)
@@ -111,7 +114,7 @@ void DBMgr::test()
 		Tick tick("游戏库插入测试");
 
 		m_gamedb->execute("truncate players");
-		conn->beginTransaction();
+		conn->startTransaction();
 
 		for (size_t i = 1; i <= times; i++) {
 			PlayerDBCmd *cmd = new PlayerDBCmd;
@@ -196,12 +199,15 @@ bool DBMgr::init()
 
 void DBMgr::run()
 {
-	m_gamedb->run(100);
-	m_logdb->run(100);
+	// 定时每隔10秒批量将玩家变更操作投递到dbserver
+	if (TimerQueue::now - m_old < GameConfig::instance->m_saveToDBInterval) {
+		return;
+	}
+
+	m_old = TimerQueue::now;
+
 }
 
 void DBMgr::stop()
 {
-	m_gamedb->stop();
-	m_logdb->stop();
 }

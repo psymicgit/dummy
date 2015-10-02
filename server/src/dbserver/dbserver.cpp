@@ -2,11 +2,13 @@
 
 #include "db/db.h"
 #include "db/dbfactory.h"
+#include "db/dbmgr.h"
 
 #include <net/serverlink.h>
 
 DBServer::DBServer()
 	: Server()
+	, m_dbmgr(DBMgr::instance)
 {
 	m_svrType = eDBServer;
 }
@@ -36,7 +38,7 @@ bool DBServer::init(const char* jsonConfig)
 		}
 	}
 
-	if (!m_dbmgr.init(m_config)) {
+	if (!m_dbmgr->init(m_config)) {
 		LOG_ERROR << "dbmgr init failed, aborted";
 		return false;
 	}
@@ -53,7 +55,7 @@ void DBServer::stoppping()
 {
 	LOG_WARN << "stopping game server ...";
 	Server::stopping();
-	m_dbmgr.stop();
+	m_dbmgr->stop();
 
 	// 将关闭网络时产生的网络任务执行完
 	run();
@@ -65,7 +67,7 @@ void DBServer::run()
 {
 	Server::run();
 
-	m_dbmgr.run();
+	m_dbmgr->run();
 	sleep(10);
 }
 

@@ -3,10 +3,10 @@
 
 
 #include "server.h"
-#include "db/dbmgr.h"
 #include "config/dbconfig.h"
 
 class GateLink;
+class DBMgr;
 
 class DBServer : public Singleton<DBServer>, public Server
 {
@@ -29,7 +29,7 @@ private:
 	// 外网中心：管理与外网的连接，如：与玩家的连接
 	NetFactory m_lan;
 
-	DBMgr m_dbmgr;
+	DBMgr *m_dbmgr;
 
 	DBConfig m_config;
 

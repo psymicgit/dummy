@@ -262,6 +262,6 @@ using namespace std;
 namespace google {namespace protobuf { class Message; }}
 typedef google::protobuf::Message Message;
 
-#include <def/define.h>
+#include <def/global.h>
 
 #endif //_platform_h_

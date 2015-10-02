@@ -5,6 +5,12 @@ enum SqlType {
 	GuidSql = 2;   // 门派sql
 }
 
+// sql目的库
+enum SqlDBType {
+	GameDB = 0; // 游戏库
+	LogDB = 1;  // 日志库
+}
+
 // 单次sql语句
 message SqlMsg
 {
@@ -17,5 +23,6 @@ message SqlMsg
 message PostSql
 {
 	required fixed32 time = 1; // 该sql语句创建的时间
-	repeated SqlMsg sqls = 2; // sql列表
+	required SqlDBType dbtype = 2; // sql将在哪个数据库上执行
+	repeated SqlMsg sqls = 3; // sql列表
 }

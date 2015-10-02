@@ -9,11 +9,13 @@
 #ifndef _dbmgr_h_
 #define _dbmgr_h_
 
+#include <basic/singleton.h>
+
 class DBFactory;
 class DBSession;
 struct DBConfig;
 
-class DBMgr
+class DBMgr : public Singleton<DBMgr>
 {
 public:
 	DBMgr()
@@ -30,11 +32,11 @@ public:
 
 	void test();
 
-private:
+public:
+	std::vector<std::string> m_sqls;
+
 	DBFactory *m_gamedb;
 	DBFactory *m_logdb;
-
-	std::vector<std::string> m_sqls;
 };
 
 #endif //_dbmgr_h_

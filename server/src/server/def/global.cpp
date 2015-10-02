@@ -6,7 +6,7 @@
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
-#include "define.h"
+#include "global.h"
 
 #include <google/protobuf/message.h>
 
@@ -17,11 +17,11 @@ namespace global
 {
 	// 网络
 	// 预先申请的消息包内存：用于构造接收到的消息包
-	char* g_recvPacketBuf = new char[MAX_PACKET_LEN];
+	char* g_recvPacketBuf = NULL; //new char[MAX_PACKET_LEN];
 	uint32 g_recvPacketBufSize = MAX_PACKET_LEN;
 
 	// 预先申请的消息包内存: 用于构造返回的消息包
-	char* g_packetBuf = new char[MAX_PACKET_LEN];
+	char* g_packetBuf = NULL; //new char[MAX_PACKET_LEN];
 	uint32 g_packetBufSize = MAX_PACKET_LEN;
 	Message *g_lastMessage = NULL;
 
