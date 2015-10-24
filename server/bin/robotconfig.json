@@ -6,7 +6,7 @@
 	"robots-speedtest-packet-num": 10000,
 
 	"wan": {
-		"threads": 2,
+		"threads": 1,
 		"connect": {"ip": "127.0.0.1", "port": 20001}
 	}
 }

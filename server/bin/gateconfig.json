@@ -1,9 +1,13 @@
 {
 	"name": "gateserver",
 	"server-id": "zone-type-idx",
+	"enable-encrypt": "true",
+	"encrypt-key": "*#H#*(@HSDMJHD#JS",
+	"max-players": 8000,
+	"sleep-ms-each-loop": 10,
 
 	"wan": {
-		"threads": 1,
+		"threads": 2,
 		"listen": {"ip": "127.0.0.1", "port": 20001}
 	},
 
@@ -14,7 +18,7 @@
 		],
 
 		"connect": [
-			{"ip": "127.0.0.1", "port": 0}
+			{"ip": "127.0.0.1", "port": 0, "name": "null"}
 		]
 	}
 }

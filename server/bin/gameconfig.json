@@ -1,0 +1,12 @@
+{
+	"name": "gameserver",
+	"server-id": "zone-type-idx",
+
+	"lan": {
+		"threads": 1,
+		"connect": [
+			{"ip": "127.0.0.1", "port": 20002, "name":"gateserver"},
+			{"ip": "127.0.0.1", "port": 20003, "name":"dbserver"}
+		]
+	}
+}
