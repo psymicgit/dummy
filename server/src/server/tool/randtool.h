@@ -19,13 +19,13 @@ namespace randtool
 	// 返回随机数
 	uint32 random();
 
-	// 获取随机数，范围是[0, unRange - 1]
+	// 获取随机数，范围是[0, range - 1]
 	uint32 random(uint32 range);
 
-	// 获取随机数，范围是[unMinRange, unMaxRange - 1]
+	// 获取随机数，范围是[minnum, maxnum]
 	uint32 random(uint32 minnum, uint32 maxnum);
 
-	// 必须命中算法，返回命中的概率序号(hitVec中的顺序),没有概率返回0序号
+	// 根据概率表进行随机，返回命中的概率序号(hitVec中的顺序),没有概率返回0序号
 	uint32 rollHit(HitVec &hitVec);
 
 	// 获取一串随机数，基于加密的伪随机数生成器（Cryptographically Secure Pseudo-Random Number Generator – CSPRNG）
