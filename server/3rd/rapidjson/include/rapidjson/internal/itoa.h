@@ -107,6 +107,8 @@ inline char* u32toa(uint32_t value, char* buffer) {
         *buffer++ = cDigitsLut[d4];
         *buffer++ = cDigitsLut[d4 + 1];
     }
+
+	*buffer = '\0';
     return buffer;
 }
 
