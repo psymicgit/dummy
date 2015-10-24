@@ -8,6 +8,7 @@
 class GateLink;
 class DBMgr;
 
+// 数据库服务器
 class DBServer : public Singleton<DBServer>, public Server
 {
 public:
@@ -26,7 +27,7 @@ public:
 	virtual void onDisconnectServer(Link&, ServerType, int serverId);
 
 private:
-	// 内网中心：负责与内网中服务器的通信
+	// 内网中心：负责与内网中其他服务器进行通信
 	NetFactory m_lan;
 
 	DBMgr *m_dbmgr;

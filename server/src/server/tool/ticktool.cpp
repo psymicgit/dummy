@@ -44,7 +44,7 @@ namespace ticktool
 #else
 	uint64 tick()
 	{
-		return (uint64)timetool::now();
+		return (uint64)timetool::getTimeOfDay();
 	}
 
 	// ·µ»ØÏà²îÃë

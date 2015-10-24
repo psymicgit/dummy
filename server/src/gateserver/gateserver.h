@@ -2,7 +2,7 @@
 //< @file:   src\gateserver\gateserver.h
 //< @author: 洪坤安
 //< @date:   2015年3月9日 16:11:49
-//< @brief:
+//< @brief:	 网关服务器
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 

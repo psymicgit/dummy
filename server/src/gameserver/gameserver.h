@@ -2,7 +2,7 @@
 //< @file:   src\gameserver\gameserver.h
 //< @author: 洪坤安
 //< @date:   2015年3月2日 21:11:31
-//< @brief:
+//< @brief:	 游戏服务器
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -17,6 +17,7 @@
 
 class GateLink;
 
+// 游戏服务器: 负责运行游戏逻辑
 class GameServer : public Singleton<GameServer>, public Server
 {
 public:
