@@ -8,7 +8,7 @@
 
 DBServer::DBServer()
 	: Server()
-	, m_dbmgr(DBMgr::instance)
+	, m_dbmgr(&DBMgr::Instance())
 {
 	m_svrType = eDBServer;
 }

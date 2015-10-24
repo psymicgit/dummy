@@ -2,7 +2,7 @@
 //< @file:   server\basic\timerqueue.h
 //< @author: 洪坤安
 //< @date:   2015年1月25日 19:3:59
-//< @brief:	 定时器
+//< @brief:	 定时器队列
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 

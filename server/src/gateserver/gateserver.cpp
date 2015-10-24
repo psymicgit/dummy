@@ -27,21 +27,33 @@ bool GateServer::init(const char* jsonConfig)
 
 	logging::init("gateserver", "log_gatesvr_");
 
+	// 读取配置
 	if (!m_config.load(jsonConfig)) {
-		LOG_INFO << name() << " load config failed! aborted!";
+		LOG_ERROR << name() << " load config failed! aborted!";
 		return false;
 	}
 
-	m_lan.init(m_config.m_lanThreadNum);
-	m_wan.init(m_config.m_wanThreadNum);
+	// 初始化内网中心
+	if (!m_lan.init(m_config.m_lanThreadNum)) {
+		LOG_INFO << name() << " init lan failed! aborted!";
+		return false;
+	}
+
+	// 初始化外网中心
+	if (!m_wan.init(m_config.m_wanThreadNum)) {
+		LOG_INFO << name() << " init wan failed! aborted!";
+		return false;
+	}
 
 	test();
 
+	// 开始监听来自外网的连接
 	if(!m_wan.listen(m_config.m_wanListen.ip, m_config.m_wanListen.port, m_clientMgr)) {
 		LOG_ERROR << "listen at <" << m_config.m_wanListen.ip << ":" << m_config.m_wanListen.port <<  "> failed, aborted!";
 		return false;
 	}
 
+	// 开始监听来自内网服务器的连接
 	std::vector<IpPort> &lanListens = m_config.m_lanListens;
 	for(size_t i = 0; i < lanListens.size(); i++) {
 		if (!m_lan.listen(lanListens[i].ip, lanListens[i].port, *this)) {
@@ -75,7 +87,7 @@ void GateServer::stopping()
 void GateServer::run()
 {
 	Server::run();
-	sleep(10);
+	sleep(m_config.m_sleepMsEachLoop);
 }
 
 ServerLink* GateServer::onAcceptServer(Link &tcpLink, ServerType peerSvrType, int peerSvrId)

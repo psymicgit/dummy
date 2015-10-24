@@ -27,13 +27,19 @@ bool GameServer::init(const char* jsonConfig)
 
 	logging::init("gameserver", "log_gamesvr_");
 
+	// 读取游戏服配置
 	if (!m_config.load(jsonConfig)) {
 		LOG_INFO << name() << " load config failed! aborted!";
 		return false;
 	}
 
-	m_lan.init(m_config.m_lanThreadNum);
+	// 初始化内网中心
+	if (!m_lan.init(m_config.m_lanThreadNum)) {
+		LOG_INFO << name() << " init wan failed! aborted!";
+		return false;
+	}
 
+	// 开始连接到其他服务器
 	std::vector<IpPort> &lanConnects = m_config.m_lanConnects;
 	for(size_t i = 0; i < lanConnects.size(); i++) {
 		if (!m_lan.connect(lanConnects[i].ip, lanConnects[i].port, *this, lanConnects[i].peerName.c_str())) {
@@ -47,6 +53,7 @@ bool GameServer::init(const char* jsonConfig)
 // 		return false;
 // 	}
 
+	// 初始化http管理器
 	if (!m_httpMgr.init()) {
 		LOG_ERROR << "gamehttpmgr init failed, aborted";
 		return false;
@@ -86,6 +93,7 @@ ServerLink* GameServer::onAcceptServer(Link &tcpLink, ServerType peerSvrType, in
 	ServerLink *svrLink = NULL;
 
 	switch(peerSvrType) {
+	// 网关服务器
 	case eGateServer:
 		svrLink = m_gateLink = new GateLink;
 		LOG_INFO << "gameserver -> gateserver <svrId = " << peerSvrId << "> connection established";
@@ -104,6 +112,7 @@ void GameServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int serve
 	ServerLink *link = NULL;
 
 	switch(svrType) {
+	// 网关服务器
 	case eGateServer:
 		link = m_gateLink;
 		m_gateLink = NULL;

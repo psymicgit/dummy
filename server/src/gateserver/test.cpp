@@ -11,6 +11,8 @@
 #include <tool/ticktool.h>
 #include <tool/sockettool.h>
 #include <tool/atomictool.h>
+#include <tool/strtool.h>
+#include <tool/randtool.h>
 
 #include <protocol/message.h>
 #include <client.pb.h>
@@ -20,6 +22,8 @@
 
 #include <basic/evbuffer.h>
 #include <basic/evbuffer-internal.h>
+
+#include <hash_map>
 
 #define TT_STMT_BEGIN do {
 #define TT_STMT_END } while (0)
@@ -1772,10 +1776,6 @@ end:
 
 void evbufTest()
 {
-	int getTimes = 1000;
-
-	Tick tick("socket get address test");
-
 	test_evbuffer();
 	test_evbuffer_remove_buffer_with_empty();
 	test_evbuffer_reserve2(NULL);
@@ -1794,207 +1794,298 @@ void evbufTest()
 	test_evbuffer_freeze("start");
 	test_evbuffer_add_iovec(NULL);
 	test_evbuffer_copyout(NULL);
-
-	double speed = tick.endTick() / getTimes;
-	double per = 1.0f / speed;
-	LOG_INFO << "avg cost = " << speed << ", per second = " << per;
 }
 
-void evbufSpeedTest()
+// 测试结果（优到劣）： evbuffer > Buffer = 8.26446e+06 : 5.02513e+06
+void testEvbufSpeed()
 {
-	int times = 100000;
+	int times = 1000000;
+
+	const char *abc = "abcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyz";
+	int len = strlen(abc);
 
 	{
-		Tick tick("evbufSpeedTest");
+		Tick tick("evbufSpeedTest", times);
 
-		struct evbuffer *buf = evbuffer_new();
-		const char *abc = "abcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyz";
+		struct evbuffer buf;
 
 		for (int i = 0; i < times; i++) {
-			evbuffer_add(buf, abc, strlen(abc));
+			evbuffer_add(&buf, abc, len);
 		}
-
-		evbuffer_free(buf);
-		double speed = tick.endTick() / times;
-		double per = 1.0f / speed;
-		LOG_INFO << "avg cost = " << speed << ", per second = " << per;
 	}
 
 	{
-		Tick tick("bufferSpeedTest");
+		Tick tick("bufferSpeedTest", times);
 
 		Buffer buf;
-		const char *abc = "abcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyz";
 
 		for (int i = 0; i < times; i++) {
-			buf.append(abc, strlen(abc));
+			buf.append(abc, len);
 		}
-
-		double speed = tick.endTick() / times;
-		double per = 1.0f / speed;
-		LOG_INFO << "avg cost = " << speed << ", per second = " << per;
 	}
 }
 
-
-class BindTest
+// 测试结果（优到劣）： evbuffer_add_buffer > evbuffer_prepend_buffer > evbuffer_remove_buffer = 3.44828e+07 : 3.22581e+07 : 1.78571e+07
+void testEvbufSwap()
 {
-public:
-	BindTest()
-		: m_num(0)
-	{
+	int times = 1000000;
+
+	const char *abc = "abcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyz";
+	int len = strlen(abc);
+
+	struct evbuffer x;
+	struct evbuffer y;
+
+	for (int i = 0; i < 100; i++) {
+		evbuffer_add(&x, abc, len);
 	}
 
-public:
-	void addnum(std::string *str)
 	{
-		m_num *= 2;
-		m_num += 1;
+		Tick tick("evbuffer add buffer test", times);
 
-		if (m_num > 10000000) {
-			m_num = 1;
+		for (int i = 0; i < times; i++) {
+			evbuffer_add_buffer(&y, &x);
+			evbuffer_add_buffer(&x, &y);
 		}
-
-		m_num++;
-		m_num += str->size();
 	}
 
-	int m_num;
-};
+	{
+		Tick tick("evbuffer prepend buffer test", times);
 
+		for (int i = 0; i < times; i++) {
+			evbuffer_prepend_buffer(&y, &x);
+			evbuffer_prepend_buffer(&x, &y);
+		}
+	}
 
-union epoll_data_fake {
-	void *ptr;
-	int fd;
-	uint32_t u32;
-	uint64_t u64;
-} ;
+	{
+		Tick tick("evbuffer remove buffer test", times);
 
-struct epoll_event_fake {
-	uint32_t events;  /* Epoll events */
-	epoll_data_fake data;    /* User data variable */
-};
+		for (int i = 0; i < times; i++) {
+			// int size = evbuffer_get_length(&x);
+			evbuffer_remove_buffer(&x, &y, 0);
+			evbuffer_remove_buffer(&y, &x, 0);
+		}
+	}
+}
 
-void test()
+// 测试结果（优到劣）： 直接加锁evbuffer_add > 先evbuffer_add再加锁evbuffer_add_buffer = 10 : 1
+void testEvbufferDtor()
+{
+	int times = 1000000;
+
+	const char *abc = "abcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyz";
+	int len = strlen(abc);
+
+	{
+		evbuffer x;
+		evbuffer y;
+		Tick tick("evbuffer dtor test", times);
+
+		for (int i = 0; i < times; i++) {
+			evbuffer_add(&y, abc, len);
+			evbuffer_add_buffer(&x, &y);
+		}
+	}
+
+	{
+		evbuffer x;
+		Tick tick("evbuffer not dtor test", times);
+
+		for (int i = 0; i < times; i++) {
+			evbuffer_add(&x, abc, len);
+		}
+	}
+}
+
+void testAtomic()
 {
 	int times = 100;
 	{
-		Tick tick("mutex performance test");
+		Tick tick("mutex performance test", times);
 
 		int num = 0;
 		mutex_t lock;
 		for(int i = 0; i < times; i++) {
-			lock.lock();
+			lock_guard_t<mutex_t> guard(lock);
+			//lock.lock();
 			num++;
-			lock.unlock();
+			//lock.unlock();
 		}
-
-		double speed = tick.endTick() / times;
-		double count = 1.0f / speed;
-		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	{
-		Tick tick("atomic test");
+		Tick tick("atomic test", times);
 
 		int num = 0;
 		for(int i = 0; i < times; i++) {
 			atomictool::inc(&num);
 		}
-
-		double speed = tick.endTick() / times;
-		double count = 1.0f / speed;
-		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
+}
 
-	Buffer buf;
-	char text[] = "hello word, test";
-	buf.append(text, strlen(text));
+void testTask()
+{
+	class BindTest
+	{
+	public:
+		BindTest()
+			: m_num(0)
+		{
+		}
 
-	std::string str = text;
+	public:
+		void addnum(std::string *str)
+		{
+			m_num *= 2;
+			m_num += 1;
 
-	times = 10000;
+			if (m_num > 10000000) {
+				m_num = 1;
+			}
+
+			m_num++;
+			m_num += str->size();
+		}
+
+		int m_num;
+	};
+
+	std::string str = "hello word, test";
+
+	int times = 10000;
 	{
 		BindTest bt;
-		Tick tick("task_t test");
+		Tick tick("task_t test", times);
 
 		for(int i = 0; i < times; i++) {
 			Task t = boost::bind(&BindTest::addnum, &bt, &str);
 			t.run();
 			t.release();
 		}
-
-		double speed = tick.endTick() / times;
-		double count = 1.0f / speed;
-		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
+}
 
-	// 	{
-	// 		Tick tick("bi::function test");
+void testSocketAddr()
+{
+	int times = 1000;
+
+	Tick tick("socket get address test", times);
+
+	// 		Listener *listener = Server::instance->m_lan.listen("127.0.0.1", 21005, *Server::instance);
 	//
-	// 		for(int i = 0; i < times; i++) {
-	// 			bi::function<void (std::string*)> func = bi::bind(&GateServer::addnum, this, _1);
-	// 			func(&str);
+	// 		for(int i = 0; i < getTimes; i++) {
+	// 			NetAddress peeraddr(socktool::getLocalAddr(listener->socket()));
 	// 		}
-	//
-	// 		double speed = tick.endTick() / times;
-	// 		double count = 1.0f / speed;
-	// 		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
-	// 	}
+}
 
-	times = 10000;
-	Buffer copyBuf;
+void testBufferPool()
+{
+	char text[] = "hello word, test";
+
+	int times = 10000;
 	{
 		ObjectPool<Buffer> m_bufferPool;
 		m_bufferPool.init(5000, 5000);
 
-		Tick tick("buffer pool test");
+		Tick tick("buffer pool test", times);
 
 		for(int i = 0; i < times; i++) {
 			Buffer *buf = m_bufferPool.alloc(1024);
 			buf->append(text, strlen(text));
 			m_bufferPool.free(buf);
 		}
-
-		double speed = tick.endTick() / times;
-		double count = 1.0f / speed;
-		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	{
-		Tick tick("stack alloc test");
+		Tick tick("stack alloc test", times);
 
 		for(int i = 0; i < times; i++) {
 			Buffer *buf = new Buffer(1024);
 			buf->append(text, strlen(text));
 			delete buf;
 		}
-
-		double speed = tick.endTick() / times;
-		double count = 1.0f / speed;
-		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	{
-		Tick tick("公共缓存");
+		Tick tick("global cache", times);
 
 		Buffer publicBuf(strlen(text) * times);
 
 		for(int i = 0; i < times; i++) {
 			publicBuf.append(text, strlen(text));
+			publicBuf.clear();
 		}
+	}
+}
 
-		double speed = tick.endTick() / times;
-		double count = 1.0f / speed;
-		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
+void testVecSize()
+{
+	int times = 100000;
+
+	std::vector<int> nums(times);
+
+	{
+		Tick tick("cache vector.size() test", times);
+
+		int size = nums.size();
+		for(int i = 0; i < size; i++) {
+			nums[i] = 2 * i;
+		}
 	}
 
-	int variableTestNum = 10000;
 	{
-		Tick tick("global packet test");
+		Tick tick("not cache vector.size() test", times);
 
-		for(int i = 0; i < variableTestNum; i++) {
-			LoginReq *req = msgtool::allocRecvPacket<LoginReq>();
+		for(int i = 0; i < nums.size(); i++) {
+			nums[i] = 3 * i;
+		}
+	}
+}
+
+void testInitNum()
+{
+	{
+		int times = 10000000;
+		{
+			Tick tick("int i = 0; init integer test", times);
+
+			int sum = 0;
+			for(int i = 0; i < times; ++i) {
+				int x = i;
+				if (x % 2 == 0) {
+					sum = x;
+				}
+			}
+
+			LOG_INFO << "sum = " << sum;
+		}
+
+		{
+			Tick tick("int i(0); init integer test", times);
+
+			int sum = 0;
+			for(int i = 0; i < times; ++i) {
+				int x(i);
+				if (x % 2 == 0) {
+					sum = x;
+				}
+			}
+
+			LOG_INFO << "sum = " << sum;
+		}
+	}
+
+}
+
+void testCachePacket()
+{
+	int times = 10000;
+	{
+		Tick tick("global packet test", times);
+
+		for(int i = 0; i < times; i++) {
+			LoginReq *req = new LoginReq;
 			req->set_clientversion(100);
 			req->set_deviceid("1273ab23c3390fe840a9e0");
 			req->set_notifyid("notifyid-00134678");
@@ -2007,18 +2098,14 @@ void test()
 			req->set_authtype(1);
 			req->set_authkey("2ab456b6b2b1b6b1bb2b");
 
-			msgtool::freePacket(req);
+			delete req;
 		}
-
-		double speed = tick.endTick() / variableTestNum;
-		double count = 1.0f / speed;
-		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
 	}
 
 	{
-		Tick tick("stack allocate packet test");
+		Tick tick("stack allocate packet test", times);
 
-		for(int i = 0; i < variableTestNum; i++) {
+		for(int i = 0; i < times; i++) {
 			LoginReq localreq;
 
 			LoginReq *req = &localreq;
@@ -2034,134 +2121,138 @@ void test()
 			req->set_authtype(1);
 			req->set_authkey("2ab456b6b2b1b6b1bb2b");
 		}
+	}
+}
 
-		double speed = tick.endTick() / variableTestNum;
-		double count = 1.0f / speed;
-		LOG_INFO << "avg cost = " << speed << ", per second = " << count;
+// map<string, int> 与 map<int, int> 性能测试
+void testMapInsertFind()
+{
+	int times = 1000;
+
+	{
+		// map<string, int>查找测试
+		std::map<string, int> strmap;
+
+		{
+			Tick tick("map<string, int> insert test", times);
+			for(int i = 0; i < times; ++i) {
+				int n = randtool::random();
+				strmap[strtool::itoa(n)] = n;
+			}
+		}
+
+		int findcnt = 0;
+
+		{
+			Tick tick("map<string, int> find test", times);
+			for(int i = 0; i < times; ++i) {
+				if (strmap.find(strtool::itoa(i)) != strmap.end()) {
+					findcnt++;
+				}
+			}
+		}
 	}
 
 	{
-		int getTimes = 1000;
+		// unordered_map<string, int>查找测试
+		tr1::unordered_map<string, int> strmap;
 
-		Tick tick("socket get address test");
+		{
+			Tick tick("unordered_map<string, int> insert test", times);
+			for(int i = 0; i < times; ++i) {
+				int n = randtool::random();
+				strmap[strtool::itoa(n)] = n;
+			}
+		}
 
-// 		Listener *listener = Server::instance->m_lan.listen("127.0.0.1", 21005, *Server::instance);
-//
-// 		for(int i = 0; i < getTimes; i++) {
-// 			NetAddress peeraddr(socktool::getLocalAddr(listener->socket()));
-// 		}
+		int findcnt = 0;
 
-		double speed = tick.endTick() / getTimes;
-		double per = 1.0f / speed;
-		LOG_INFO << "avg cost = " << speed << ", per second = " << per;
+		{
+			Tick tick("unordered_map<string, int> find test", times);
+			for(int i = 0; i < times; ++i) {
+				if (strmap.find(strtool::itoa(i)) != strmap.end()) {
+					findcnt++;
+				}
+			}
+		}
 	}
 
+	{
+		// map<int, int>查找测试
+		std::map<int, int> intmap;
+
+		{
+			Tick tick("map<int, int> insert test", times);
+			for(int i = 0; i < times; ++i) {
+				int n = randtool::random();
+				intmap[n] = n;
+			}
+		}
+
+		Tick tick("map<int, int> find test", times);
+
+		{
+			int findcnt = 0;
+			for(int i = 0; i < times; ++i) {
+				if (intmap.find(i) != intmap.end()) {
+					findcnt++;
+				}
+			}
+		}
+	}
+
+	{
+		// map<int, int>查找测试
+		tr1::unordered_map<int, int> intmap;
+
+		{
+			Tick tick("unordered_map<int, int> insert test", times);
+			for(int i = 0; i < times; ++i) {
+				int n = randtool::random();
+				intmap[n] = n;
+			}
+		}
+
+		{
+			Tick tick("unordered_map<int, int> find test", times);
+
+			int findcnt = 0;
+			for(int i = 0; i < times; ++i) {
+				if (intmap.find(i) != intmap.end()) {
+					findcnt++;
+				}
+			}
+		}
+	}
+}
+
+void testUnorderSetDtor()
+{
+	Tick tick("~unordered_set<string>");
+
+	tr1::unordered_set<string> strset;
+
+	int times = 100;
+	for(int i = 0; i < times; ++i) {
+		int n = randtool::random();
+		strset.insert(strtool::itoa(n));
+	}
+}
+
+void test()
+{
 	// evbufTest();
-	// evbufSpeedTest();
+	testEvbufSpeed();
+	testEvbufSwap();
+	testEvbufferDtor();
 
-	std::vector<int> nums(10000);
-
-	for(int i = 0; i < 10000; i++) {
-		nums[i] = i;
-	}
-
-	{
-		int loopCnt = 1000;
-
-		{
-			Tick tick("cache vector.size() test");
-
-			int sum = 0;
-
-			for(int loop = 0; loop < loopCnt; loop++) {
-				int size = nums.size();
-
-				for(int i = 0; i < size; i++) {
-					if (i % 2) {
-						sum = i;
-					}
-				}
-			}
-
-			double speed = tick.endTick() / loopCnt;
-			double per = 1.0f / speed;
-			LOG_INFO << "avg cost = " << speed << ", per second = " << per << ", sum = " << sum;
-		}
-
-		{
-			Tick tick("local variable test");
-
-			int sum = 0;
-
-			int loop = 0;
-			int i = 0;
-
-			for(; loop < loopCnt; loop++) {
-				int size = nums.size();
-
-				for(i = 0; i < size; i++) {
-					if (i % 2) {
-						sum = i;
-					}
-				}
-			}
-
-			double speed = tick.endTick() / loopCnt;
-			double per = 1.0f / speed;
-			LOG_INFO << "avg cost = " << speed << ", per second = " << per << ", sum = " << sum;
-		}
-
-		{
-			Tick tick("vector.size() test");
-
-			int sum = 0;
-
-			for(int loop = 0; loop < loopCnt; loop++) {
-				for(int i = 0; i < nums.size(); i++) {
-					if (i % 2) {
-						sum = i;
-					}
-				}
-			}
-
-			double speed = tick.endTick() / loopCnt;
-			double per = 1.0f / speed;
-			LOG_INFO << "avg cost = " << speed << ", per second = " << per << ", sum = " << sum;
-		}
-	}
-
-	{
-		int inittestTime = 10000000;
-		{
-			Tick tick("int i = 0; init integer test");
-
-			int sum = 0;
-			for(int i = 0; i < inittestTime; ++i) {
-				int x = i;
-				if (x % 2) {
-					sum = x;
-				}
-			}
-
-			double speed = tick.endTick() / inittestTime;
-			double per = 1.0f / speed;
-			LOG_INFO << "avg cost = " << speed << ", per second = " << per << ", sum = " << sum;
-		}
-
-		{
-			Tick tick("int i(0); init integer test");
-
-			int sum = 0;
-			for(int i = 0; i < inittestTime; ++i) {
-				int x(i);
-				if (x % 2) {
-					sum = x;
-				}
-			}
-
-			double speed = tick.endTick() / inittestTime;
-			double per = 1.0f / speed;
-			LOG_INFO << "avg cost = " << speed << ", per second = " << per << ", sum = " << sum;
-		}
-	}
+	testAtomic();
+	testTask();
+	testSocketAddr();
+	testBufferPool();
+	testVecSize();
+	testInitNum();
+	testCachePacket();
+	testMapInsertFind();
+	testUnorderSetDtor();
 }

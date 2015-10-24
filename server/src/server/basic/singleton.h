@@ -22,6 +22,7 @@ private:
 	};
 
 public:
+	// 该单例方法是线程安全的
 	static T& Instance()
 	{
 		if (NULL == instance) {

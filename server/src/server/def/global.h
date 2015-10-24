@@ -2,7 +2,7 @@
 //< @file:   server\def\global.h
 //< @author: 洪坤安
 //< @date:   2015年4月7日 20:32:19
-//< @brief:
+//< @brief:	 维护全局定义的变量或者全局申请的内存空间
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@
 #include "basic/objectpool.h"
 #include "basic/buffer.h"
 
-#define MAX_PACKET_LEN (256 * 1024) // 256KB
+#define MAX_PACKET_LEN (128 * 1024) // 128KB
 
 namespace global
 {

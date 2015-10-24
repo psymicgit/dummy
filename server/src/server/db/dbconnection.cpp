@@ -23,8 +23,9 @@ bool DBConnection::connect()
 	char autoReconnect = 1;
 	mysql_options(m_mysql, MYSQL_OPT_RECONNECT, &autoReconnect);
 
-	char timeout = 5;
-	mysql_options(m_mysql, MYSQL_OPT_CONNECT_TIMEOUT, &timeout);
+	// 下面这段将导致连接失败
+	// 	char timeout = 5;
+	// 	mysql_options(m_mysql, MYSQL_OPT_CONNECT_TIMEOUT, &timeout);
 
 	//如果客户设置了特殊的字符集，设置MYSQL的字符集属性
 	if(!m_account.m_charactset.empty()) {
@@ -34,9 +35,16 @@ bool DBConnection::connect()
 		}
 	}
 
-	MYSQL *mysql = mysql_real_connect(m_mysql, m_account.m_dbIp.c_str(), m_account.m_loginName.c_str(),
-	                                  m_account.m_loginPwd.c_str(), m_account.m_dbName.c_str(),
-	                                  m_account.m_dbPort, m_account.m_unixSocket.c_str(), CLIENT_MULTI_STATEMENTS);
+	MYSQL *mysql = mysql_real_connect(
+	                   m_mysql,
+	                   m_account.m_dbIp.c_str(),
+	                   m_account.m_loginName.c_str(),
+	                   m_account.m_loginPwd.c_str(),
+	                   m_account.m_dbName.c_str(),
+	                   m_account.m_dbPort,
+	                   m_account.m_unixSocket.c_str(),
+	                   CLIENT_MULTI_STATEMENTS
+	               );
 
 	if(NULL == mysql) {
 		const char *err = (char*)mysql_error(m_mysql);

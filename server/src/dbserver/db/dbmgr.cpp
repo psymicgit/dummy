@@ -18,40 +18,16 @@
 
 #include "config/dbconfig.h"
 
-class OpHistoryDBCmd : public DBCommand
-{
-	virtual void execute(DBConnection &conn)
-	{
-		sprintf_s(global::g_sql, sizeof(global::g_sql),
-		          "INSERT INTO `ophistory` VALUES ('2014-03-27 00:00:00', '%d', '7', '61015', '2', '40003', '21012', '61015', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '61015', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');", m_idx);
-		DB::DBExecuteCode code = conn.execute(global::g_sql);
-	}
-
-	virtual void onExecuted()
-	{
-		if (0 == m_idx % 1000) {
-			LOG_INFO << "executed " << m_idx;
-		}
-	}
-
-	virtual void release()
-	{
-		delete this;
-	}
-
-public:
-	int m_idx;
-};
-
 class PlayerDBCmd : public DBCommand
 {
 public:
 	virtual void execute(DBConnection &conn)
 	{
-		sprintf_s(global::g_sql, sizeof(global::g_sql),
+		char g_sql[2048];
+		sprintf_s(g_sql, sizeof(g_sql),
 		          "INSERT INTO `players` VALUES ('%d', '76C91654-E392-44C0-BA9F-EA24E2B84E12', '', 'qqqqqqq', 'dispname%d', '0', '0', '100', '39360', '48', '0', '1000', '1100', '0', '900', '0', '0', 0x01018200000080000002000000020000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, '44', '2200', '4', '2', '0', '0', '0000-00-00 00:00:00', '0', '', '0', '4975', '0', '0', '0', '0', '10', '1', '0', '0', '2013-12-06 09:42:48', '2013-12-06 09:43:06', '2013-12-06 09:42:48', '1970-01-01 08:00:00', '0', '2013-12-02 11:11:23', '2013-12-06 09:43:06');", m_idx, m_idx);
 
-		DB::DBExecuteCode code = conn.execute(global::g_sql);
+		DB::DBExecuteCode code = conn.execute(g_sql);
 	}
 
 	virtual void onExecuted()
@@ -72,7 +48,6 @@ public:
 
 void DBMgr::test()
 {
-
 	char sql[1024] = {0};
 
 	LOG_INFO << "start test";
@@ -110,10 +85,10 @@ void DBMgr::test()
 	size_t times = 10000;
 
 	{
-		Tick tick("游戏库插入测试");
+		Tick tick("game db insert test", times);
 
 		m_gamedb->execute("truncate players");
-		conn->startTransaction();
+		// conn->startTransaction();
 
 		for (size_t i = 1; i <= times; i++) {
 			PlayerDBCmd *cmd = new PlayerDBCmd;
@@ -125,33 +100,26 @@ void DBMgr::test()
 			m_gamedb->addDBCommand(cmd);
 		}
 
-		conn->commit();
-
-		double speed = tick.endTick() / times;
-		double count = 1.0f / speed;
-		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
+		// conn->commit();
 	}
 
 	{
-		Tick tick("游戏库select速度测试");
+		Tick tick("game db select test", times);
 
 		DBRecordSet *res = NULL;
 		for (size_t i = 1; i <= times; i++) {
+
 			sprintf_s(sql, sizeof(sql), "select * from players where PlayerID > %d limit 1", i);
 			DB::DBQueryCode code = conn->query(sql, &res);
 
 			if (code != DB::QUERY_OK_HAVE_RECORDSET) {
-				break;
+				continue;
 			}
 
 			if (0 == i % 1000) {
 				LOG_INFO << "executing " << i;
 			}
 		}
-
-		double speed = tick.endTick() / times;
-		double count = 1.0f / speed;
-		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
 	}
 }
 

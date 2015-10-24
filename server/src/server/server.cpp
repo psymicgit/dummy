@@ -113,58 +113,38 @@ void Server::onRecv(Link *link)
 
 void Server::handleMsg(Link *link)
 {
-	int size = 0;
-
 	// 1. 将接收缓冲区的数据全部取出
-	{
-		lock_guard_t<> lock(link->m_recvBufLock);
-		size = evbuffer_get_length(&link->m_recvBuf);
-	}
+	evbuffer recvSwapBuf;
+	evbuffer *buf = &recvSwapBuf;
 
-	Buffer buf(size);
-
-	{
-		lock_guard_t<> lock(link->m_recvBufLock);
-		evbuffer_remove(&link->m_recvBuf, buf.peek(), size);
-		link->m_isWaitingRead = false;
-	}
-
-	buf.hasWritten(size);
+	link->beginRead(buf);
 
 	// 2. 循环处理消息数据
 	while(true) {
 		// 检测包头长度
-		size_t bytes = buf.readableBytes();
+		size_t bytes = evbuffer_get_length(buf);
 		if (bytes < sizeof(NetMsgHead)) {
 			break;
 		}
 
-		// 检测半包
-		NetMsgHead *msgHead = (NetMsgHead*)buf.peek();
-		msgHead->msgId = endiantool::networkToHost(msgHead->msgId);
-		msgHead->msgLen = endiantool::networkToHost(msgHead->msgLen);
+		NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(buf, sizeof(NetMsgHead));
 
-		if (msgHead->msgLen > bytes) {
+		uint16 msgId = endiantool::networkToHost(head->msgId);
+		uint32 msgLen = endiantool::networkToHost(head->msgLen);
+
+		// 检测半包
+		if (msgLen > bytes) {
 			break;
 		}
 
-		m_dispatcher.dispatch(*link, msgHead->msgId, buf.peek() + sizeof(NetMsgHead), msgHead->msgLen - sizeof(NetMsgHead), 0);
-		buf.skip(msgHead->msgLen);
+		const char *peek = (const char*)evbuffer_pullup(buf, msgLen);
+
+		m_dispatcher.dispatch(*link, msgId, peek + sizeof(NetMsgHead), msgLen - sizeof(NetMsgHead), 0);
+		evbuffer_drain(buf, msgLen);
 	}
 
 	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
-	if (!buf.empty()) {
-		{
-			lock_guard_t<> lock(link->m_recvBufLock);
-			int size = evbuffer_get_length(&link->m_recvBuf);
-
-			if (size > 0) {
-				evbuffer_prepend(&link->m_recvBuf, buf.peek(), buf.readableBytes());
-			} else {
-				evbuffer_add(&link->m_recvBuf, buf.peek(), buf.readableBytes());
-			}
-		}
-	}
+	link->endRead(buf);
 
 	// LOG_INFO << "<Server> recv msg from <" << link->m_peerAddr.toIpPort() << "> :" << buffer->retrieveAllAsString();
 	// m_dispatcher.dispatch(*link, msgId, buf->peek(), buf->readableBytes(), 0);

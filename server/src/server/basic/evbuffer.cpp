@@ -289,15 +289,6 @@ void evbuffer_init(evbuffer &buf)
 	buf.last_with_datap = &buf.first;
 }
 
-void evbuffer_free(evbuffer &buf)
-{
-	struct evbuffer_chain *chain, *next;
-	for (chain = buf.first; chain != NULL; chain = next) {
-		next = chain->next;
-		evbuffer_chain_free(chain);
-	}
-}
-
 int
 evbuffer_set_flags(struct evbuffer *buf, uint64_t flags)
 {
@@ -383,6 +374,15 @@ evbuffer_free(struct evbuffer *buffer)
 {
 	EVBUFFER_LOCK(buffer);
 	evbuffer_decref_and_unlock_(buffer);
+}
+
+void evbuffer_free(evbuffer &buf)
+{
+	struct evbuffer_chain *chain, *next;
+	for (chain = buf.first; chain != NULL; chain = next) {
+		next = chain->next;
+		evbuffer_chain_free(chain);
+	}
 }
 
 void
@@ -1057,7 +1057,7 @@ evbuffer_remove_buffer(struct evbuffer *src, struct evbuffer *dst,
 
 	chain = previous = src->first;
 
-	if (datlen == 0 || dst == src) {
+	if (dst == src) {
 		result = 0;
 		goto done;
 	}
@@ -1068,7 +1068,7 @@ evbuffer_remove_buffer(struct evbuffer *src, struct evbuffer *dst,
 	}
 
 	/* short-cut if there is no more data buffered */
-	if (datlen >= src->total_len) {
+	if (0 == datlen || datlen >= src->total_len) {
 		datlen = src->total_len;
 		evbuffer_add_buffer(dst, src);
 		result = (int)datlen; /*XXXX should return ssize_t*/
@@ -1949,8 +1949,12 @@ evbuffer_expand(struct evbuffer *buf, size_t datlen)
  * Reads data from a file descriptor into a buffer.
  */
 
-#if defined(EVENT__HAVE_SYS_UIO_H) || defined(_WIN32)
+
+#if defined(_WIN32)
 	#define USE_IOVEC_IMPL
+#else
+	#define EVENT__HAVE_SYS_UIO_H
+	#define EVBUFFER_IOVEC_IS_NATIVE_
 #endif
 
 #ifdef USE_IOVEC_IMPL
@@ -2091,7 +2095,7 @@ evbuffer_read(struct evbuffer *buf, socket_t fd, int howmuch)
 	} else {
 		IOV_TYPE vecs[NUM_READ_IOVEC];
 #ifdef EVBUFFER_IOVEC_IS_NATIVE_
-		nvecs = evbuffer_read_setup_vecs_(buf, howmuch, vecs,
+		nvecs = evbuffer_read_setup_vecs_(buf, howmuch, (struct evbuffer_iovec*)vecs,
 		                                  NUM_READ_IOVEC, &chainp, 1);
 #else
 		/* We aren't using the native struct iovec.  Therefore,
@@ -2208,7 +2212,7 @@ evbuffer_write_iovec(struct evbuffer *buffer, socket_t fd,
 		if (chain->flags & EVBUFFER_SENDFILE)
 			break;
 #endif
-		iov[i].IOV_PTR_FIELD = (CHAR *) (chain->buffer + chain->misalign);
+		iov[i].IOV_PTR_FIELD = (char *) (chain->buffer + chain->misalign);
 		if ((size_t)howmuch >= chain->off) {
 			/* XXXcould be problematic when windows supports mmap*/
 			iov[i++].IOV_LEN_FIELD = (IOV_LEN_TYPE)chain->off;

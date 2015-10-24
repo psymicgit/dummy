@@ -15,17 +15,22 @@
 
 class GameSvrLink;
 
+// 网关服务器：负责充当玩家和游戏服的中转服务器，起路由功能，并负责对消息包进行加解密
 class GateServer : public Singleton<GateServer>, public Server
 {
 public:
 	GateServer();
 
+	// 根据配置初始化网关服务器
 	bool init(const char* jsonConfig);
 
+	// 启动网关服务器
 	void start();
 
+	// 回收服务器资源
 	virtual void stopping();
 
+	// 每次服务器循环所执行的任务
 	virtual void run();
 
 	// 接收到新的服务器连接
@@ -35,10 +40,11 @@ public:
 	virtual void onDisconnectServer(Link&, ServerType, int serverId);
 
 public:
+	// 将指定玩家的消息发给游戏服
 	void sendToGameServer(uint32 clientId, uint16 msgId, const char* data, uint32 len);
 
 private:
-	// 外网中心：管理与外网的连接，如：与玩家的连接
+	// 外网通信中心：负责与外网进行通信，如：管理玩家的连接
 	NetFactory m_wan;
 
 	// 与游戏服的连接

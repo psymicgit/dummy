@@ -2,7 +2,7 @@
 //< @file:   server\net\connector.h
 //< @author: 洪坤安
 //< @date:   2015年3月4日 12:25:54
-//< @brief:
+//< @brief:  网络连接器
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ class NetFactory;
 
 class INetReactor;
 
-// 网络连接器，主动向指定的<ip,端口>发起连接，如果连接不上将定时尝试重连直到成功
+// 网络连接器：用于主动向指定的<ip,端口>发起连接，如果连接不上将定时尝试重连直到成功
 class Connector : public IFd
 {
 	static const int MaxRetryDelayMs = 30 * 1000; // 尝试重连的最大间隔
@@ -32,6 +32,7 @@ class Connector : public IFd
 public:
 	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, const char* remoteHostName, NetFactory *pNetFactory);
 
+	// 初始化本连接器
 	bool open();
 
 	virtual socket_t socket() const {return m_sockfd;}
@@ -72,7 +73,7 @@ private:
 	NetAddress m_peerAddr;
 
 	// 与本连接器绑定的逻辑实例
-	INetReactor *m_pNetReactor;
+	INetReactor *m_logic;
 
 	// 网络中心
 	NetModel *m_net;

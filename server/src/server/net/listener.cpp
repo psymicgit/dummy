@@ -16,7 +16,7 @@
 
 Listener::Listener(NetModel *pNet, INetReactor *pNetReactor, NetFactory *pNetFactory)
 	: m_net(pNet)
-	, m_pNetReactor(pNetReactor)
+	, m_logic(pNetReactor)
 	, m_listenFd(0)
 	, m_netNetFactory(pNetFactory)
 {
@@ -25,7 +25,7 @@ Listener::Listener(NetModel *pNet, INetReactor *pNetReactor, NetFactory *pNetFac
 
 bool Listener::open(const string & ip, int port)
 {
-	LOG_DEBUG << m_pNetReactor->name() << " start listening at <" << ip << ": " << port << ">";
+	LOG_DEBUG << m_logic->name() << " start listening at <" << ip << ": " << port << ">";
 
 	m_listenAddr = NetAddress(ip, port);
 
@@ -44,6 +44,7 @@ bool Listener::open(const string & ip, int port)
 		return false;
 	}
 
+	// 绑定地址
 	if(!socktool::bindAddress(m_listenFd, m_listenAddr)) {
 		return false;
 	}
@@ -63,7 +64,7 @@ bool Listener::open(const string & ip, int port)
 
 void Listener::close()
 {
-	LOG_DEBUG << m_pNetReactor->name() << " stop listening at <" << m_listenAddr.toIpPort() << ">";
+	LOG_DEBUG << m_logic->name() << " stop listening at <" << m_listenAddr.toIpPort() << ">";
 
 	socktool::closeSocket(m_listenFd);
 	m_net->delFd(this);
@@ -107,7 +108,7 @@ void Listener::handleRead()
 				LOG_ERROR << "errno == " << err;
 				continue;
 			} else {
-				LOG_SOCKET_ERR(m_listenFd, err) << m_pNetReactor->name() << " accept failed, restart listenning now";
+				LOG_SOCKET_ERR(m_listenFd, err) << m_logic->name() << " accept failed, restart listenning now";
 				//! if too many open files occur, need to restart epoll event
 				m_net->reopen(this);
 				break;
@@ -117,36 +118,38 @@ void Listener::handleRead()
 		const struct sockaddr_in *addr_in = (sockaddr_in*)&addr;
 		NetAddress peerAddr(*addr_in);
 
+		// 创建新的连接对象
 		Link* link = createLink(newfd, peerAddr);
 		if (NULL == link) {
 			socktool::closeSocket(newfd);
 
-			LOG_ERROR << m_pNetReactor->name() << " listener create link failed, new socket = " << newfd;
+			LOG_ERROR << m_logic->name() << " listener create link failed, new socket = " << newfd;
 			break;
 		}
 
+		// 执行初始化并注册到网络
 		link->open();
 
-		TaskQueue::TaskList taskList;
+		TaskQueue::TaskList tasks;
 
 		// 将接收到新连接的消息投到业务层
-		taskList.push_back(boost::bind(&INetReactor::onAccepted, m_pNetReactor, link, m_listenAddr, peerAddr));
+		tasks.push_back(boost::bind(&INetReactor::onAccepted, m_logic, link, m_listenAddr, peerAddr));
 
 		// 等业务层处理完新连接后，才允许该连接开始读
-		taskList.push_back(boost::bind(&NetModel::enableRead, link->m_net, link));
+		tasks.push_back(boost::bind(&NetModel::enableRead, link->m_net, link));
 
-		m_pNetReactor->getTaskQueue().put(taskList);
+		m_logic->getTaskQueue().put(tasks);
 	} while (true);
 }
 
 void Listener::handleWrite()
 {
-	LOG_ERROR << m_pNetReactor->name();
+	LOG_ERROR << m_logic->name();
 }
 
 void Listener::handleError()
 {
-	LOG_ERROR << m_pNetReactor->name();
+	LOG_ERROR << m_logic->name();
 }
 
 Link* Listener::createLink(socket_t newfd, NetAddress &peerAddr)
@@ -154,5 +157,5 @@ Link* Listener::createLink(socket_t newfd, NetAddress &peerAddr)
 	NetModel *net = m_netNetFactory->nextNet();
 
 	LinkPool &linkPool = net->getLinkPool();
-	return linkPool.alloc(newfd, m_listenAddr, peerAddr, net, m_pNetReactor);
+	return linkPool.alloc(newfd, m_listenAddr, peerAddr, net, m_logic);
 }

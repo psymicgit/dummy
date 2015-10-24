@@ -2,7 +2,7 @@
 //< @file:   server\net\netaddress.h
 //< @author: 洪坤安
 //< @date:   2014年11月25日 15:14:15
-//< @brief:
+//< @brief:  网络ip地址封装类
 //< Copyright (c) 2014 Tokit. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -13,6 +13,7 @@
 
 using namespace std;
 
+// 网络ip地址封装类
 class NetAddress
 {
 public:
@@ -28,8 +29,13 @@ public:
 	{
 	}
 
+	// 获取对应的ip字符串
 	string toIp() const;
+
+	// 获取ip:port文本
 	string toIpPort() const;
+
+	// 获取端口号
 	uint16 toPort() const;
 
 	// 获取sockaddr_in结构体

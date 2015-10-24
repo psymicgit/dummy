@@ -62,6 +62,7 @@ namespace ticktool
 void Tick::startTick()
 {
 	m_tick = ticktool::tick();
+	++m_retickNum;
 }
 
 
@@ -69,4 +70,10 @@ void Tick::startTick()
 double Tick::endTick()
 {
 	return ticktool::tickDiff(m_tick);
+}
+
+double Tick::life()
+{
+	double lifetime = ticktool::tickDiff(m_born);
+	return lifetime;
 }

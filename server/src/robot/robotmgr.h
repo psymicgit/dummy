@@ -18,6 +18,7 @@
 #include "robot.h"
 #include "robotconfig.h"
 
+// 机器人管理器
 class RobotMgr : public Singleton<RobotMgr>
 {
 	typedef tr1::unordered_map<uint32, Robot*> RobotMap;

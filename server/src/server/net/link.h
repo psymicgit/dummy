@@ -30,7 +30,7 @@ public:
 	explicit Link(int sockfd, NetAddress &localAddr, NetAddress &peerAddr, NetModel *pNet, INetReactor *pNetReactor)
 		: m_localAddr(localAddr)
 		, m_peerAddr(peerAddr)
-		, m_pNetReactor(pNetReactor)
+		, m_logic(pNetReactor)
 		, m_isAutoReconnect(false)
 		, m_closed(false)
 		, m_error(false)
@@ -40,7 +40,6 @@ public:
 		, m_isWaitingRead(false)
 		, m_isWaitingClose(false)
 		, m_isPeerClosed(false)
-		, m_isRegisterWrite(false)
 	{
 	}
 
@@ -94,13 +93,13 @@ private:
 	void sendBuffer();
 
 private:
-	// 网络层：尝试一次性发送数据，返回尚未发送的数据长度
+	// 网络层执行,：尝试一次性发送数据，返回尚未发送的数据长度
 	int trySend(evbuffer*);
 
-	// 业务层：处理本连接的关闭
+	// 业务层执行：处理本连接的关闭
 	void onLogicClose();
 
-	// 网络层：开始发送数据
+	// 网络层执行：开始发送数据
 	void onSend();
 
 public:
@@ -108,7 +107,7 @@ public:
 	const NetAddress m_peerAddr;
 
 	// 本连接所对应的逻辑实例
-	INetReactor *m_pNetReactor;
+	INetReactor *m_logic;
 
 	// 自动重连标志位：标示本连接断开后是否需要自动重连
 	bool m_isAutoReconnect;
@@ -141,17 +140,14 @@ public:
 	// 接收缓冲区锁
 	mutex_t m_recvBufLock;
 
-	// 是否已在等待写
+	// 是否已在等待网络层发送数据
 	bool m_isWaitingWrite;
 
-	// 是否已在等待读
+	// 是否已在等待业务层读取数据
 	bool m_isWaitingRead;
 
 	// 对端是否已关闭
 	bool m_isPeerClosed;
-
-	// 是否已注册了写事件（写事件注册一次就行）
-	bool m_isRegisterWrite;
 };
 
 #endif //_link_h_

@@ -34,10 +34,10 @@ public:
 
 public:
 	// 接收到新的服务器连接
-	virtual ServerLink* onAcceptServer(Link&, ServerType, int svrId) = 0;
+	virtual ServerLink* onAcceptServer(Link&, ServerType peerSvrType/*对端服务器类别*/, int peerSvrId) = 0;
 
-	// 与服务器断开连接
-	virtual void onDisconnectServer(Link&, ServerType, int svrId) = 0;
+	// 与对端服务器断开连接
+	virtual void onDisconnectServer(Link&, ServerType peerSvrType/*对端服务器类别*/, int peerSvrId) = 0;
 
 public:
 	Server();
@@ -72,7 +72,7 @@ public:
 	// 启动服务器
 	void start();
 
-	// 关闭服务器：服务器将在处理完网络任务、数据库任务、逻辑业务之后才关闭
+	// 关闭服务器：调用此接口后，服务器将在处理完网络任务、数据库任务、逻辑业务之后才关闭
 	void stop();
 
 	// 回收服务器资源
@@ -103,7 +103,7 @@ public:
 	// 区Id
 	int m_zoneId;
 
-	// 内网通信中心
+	// 内网通信中心：负责与内网中服务器的通信
 	NetFactory m_lan;
 
 protected:

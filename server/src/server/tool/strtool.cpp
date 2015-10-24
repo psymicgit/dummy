@@ -2,7 +2,7 @@
 
 #include <rapidjson/internal/itoa.h>
 
-namespace socktool
+namespace strtool
 {
 	std::string itoa(int32 n)
 	{

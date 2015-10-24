@@ -18,16 +18,10 @@ class DBConnection;
 struct DBAccount;
 
 // db操作中心类，维护与一个数据库服务器的多个连接
-class DBFactory : public Singleton<DBFactory>
+class DBFactory  // : public Singleton<DBFactory>
 {
 public:
 	DBFactory();
-
-	DBSession* createDBSession(DBAccount&, int minPoolSize = 1, int maxPoolSize = 1);
-
-	void close();
-
-	void del(DBSession*);
 
 public:
 	std::string name();
@@ -98,10 +92,6 @@ private:
 	volatile int m_connCount;
 
 	Thread m_dbthread;
-
-private:
-	typedef std::vector<DBSession*> DBSessions;
-	DBSessions m_dbsessions;
 };
 
 #endif //_dbfactory_h_

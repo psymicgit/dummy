@@ -2,7 +2,7 @@
 //< @file:   server\basic\lock.h
 //< @author: 洪坤安
 //< @date:   2015年1月13日 18:31:38
-//< @brief:
+//< @brief:	 锁、条件变量
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ public:
 	pthread_mutex_t& get_mutex() {return m_mutex;}
 
 private:
-	pthread_mutex_t              m_mutex;
+	pthread_mutex_t m_mutex;
 #endif
 };
 
@@ -122,8 +122,7 @@ public:
 				sched_yield();
 #endif
 			}
-		}
-		while(!gotLock);
+		} while(!gotLock);
 #else
 #if defined(WIN)
 		EnterCriticalSection(&mHandle);
@@ -239,30 +238,18 @@ class lock_guard_t
 {
 public:
 	lock_guard_t(T& mutex_):
-		m_flag(false),
 		m_mutex(mutex_)
 	{
 		m_mutex.lock();
-		m_flag = true;
 	}
 
 	~lock_guard_t()
 	{
-		if (is_locked()) {
-			unlock();
-		}
-	}
-
-	void unlock()
-	{
-		m_flag = false;
 		m_mutex.unlock();
 	}
 
-	bool is_locked() const { return m_flag; }
 private:
-	bool m_flag;
-	T&      m_mutex;
+	T& m_mutex;
 };
 
 class condition_var_t
@@ -282,7 +269,7 @@ private:
 #ifdef WIN
 	CONDITION_VARIABLE m_condVariable;
 #else
-	pthread_cond_t                m_cond;
+	pthread_cond_t m_cond;
 #endif
 };
 

@@ -12,6 +12,7 @@ namespace inner
 		accnt.m_dbName = db["name"].GetString();
 		accnt.m_dbIp = db["ip"].GetString();
 		accnt.m_dbPort = db["port"].GetInt();
+		accnt.m_charactset = db["charactset"].GetString();
 		accnt.m_unixSocket = db["socket"].GetString();
 		accnt.m_loginName = db["usr"].GetString();
 		accnt.m_loginPwd = db["pwd"].GetString();

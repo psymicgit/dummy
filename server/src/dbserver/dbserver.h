@@ -26,7 +26,7 @@ public:
 	virtual void onDisconnectServer(Link&, ServerType, int serverId);
 
 private:
-	// 外网中心：管理与外网的连接，如：与玩家的连接
+	// 内网中心：负责与内网中服务器的通信
 	NetFactory m_lan;
 
 	DBMgr *m_dbmgr;

@@ -175,6 +175,10 @@ public:
 
 	inline int takeAll(TaskList& tasks)
 	{
+		if (m_tasklist.empty()) {
+			return 0;
+		}
+
 		{
 			lock_guard_t<> lock(m_mutex);
 			if (m_tasklist.empty()) {

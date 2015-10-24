@@ -2,7 +2,7 @@
 //< @file:   server\basic\objectpool.h
 //< @author: 洪坤安
 //< @date:   2015年4月3日 23:35:15
-//< @brief:
+//< @brief:  对象池
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 

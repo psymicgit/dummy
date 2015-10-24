@@ -55,6 +55,6 @@ namespace logging
 
 	void uninit()
 	{
-		google::ShutdownGoogleLogging();
+		// google::ShutdownGoogleLogging();
 	}
 }

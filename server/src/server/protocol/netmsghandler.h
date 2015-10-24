@@ -69,7 +69,7 @@ private:
 				svrLink->m_peerSvrId = peerSvrId;
 				svrLink->m_taskQueue = &Server::instance->getTaskQueue();
 
-				link->m_pNetReactor = svrLink;
+				link->m_logic = svrLink;
 
 				Server::instance->registerServer(svrId, svrLink);
 				svrLink->onEstablish();
@@ -119,7 +119,7 @@ private:
 			svrLink->m_peerSvrId = res->svrid();
 			svrLink->m_taskQueue = &Server::instance->getTaskQueue();
 
-			link->m_pNetReactor = svrLink;
+			link->m_logic = svrLink;
 
 			int svrId = Server::instance->getServerId((ServerType)res->svrtype(), res->svrid());
 			Server::instance->registerServer(svrId, svrLink);

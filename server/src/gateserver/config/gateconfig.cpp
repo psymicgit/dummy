@@ -45,6 +45,8 @@ bool GateConfig::load(const char* jsonConfig)
 		const Value& lanConnects = lan["listen"];
 
 		IpPort ipport;
+
+		// 读取listen配置
 		for (SizeType i = 0; i < lanListens.Size(); i++) {
 			const Value &listen = lanListens[i];
 
@@ -54,6 +56,7 @@ bool GateConfig::load(const char* jsonConfig)
 			m_lanListens.push_back(ipport);
 		}
 
+		// 读取connect配置
 		for (SizeType i = 0; i < lanConnects.Size(); i++) {
 			const Value &connect = lanConnects[i];
 
@@ -64,6 +67,12 @@ bool GateConfig::load(const char* jsonConfig)
 		}
 
 		m_lanThreadNum = lan["threads"].GetInt();
+	}
+
+	{
+		// 读取服务器配置参数
+		m_maxPlayers = doc["max-players"].GetInt();
+		m_sleepMsEachLoop = doc["sleep-ms-each-loop"].GetInt();
 	}
 
 	delete[] json;

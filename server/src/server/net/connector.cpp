@@ -20,7 +20,7 @@
 
 Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *net, const char* remoteHostName, NetFactory *pNetFactory)
 	: m_peerAddr(peerAddr)
-	, m_pNetReactor(netReactor)
+	, m_logic(netReactor)
 	, m_net(net)
 	, m_retryDelayMs(InitRetryDelayMs)
 	, m_state(StateDisconnected)
@@ -108,7 +108,7 @@ void Connector::connect()
 void Connector::handleRead()
 {
 	// 一般是不会接收到读事件的，所以这里打印error
-	LOG_ERROR << m_pNetReactor->name() << "recv read event, socket = " << m_sockfd;
+	LOG_ERROR << m_logic->name() << "recv read event, socket = " << m_sockfd;
 }
 
 void Connector::handleWrite()
@@ -117,7 +117,7 @@ void Connector::handleWrite()
 	m_errno = socktool::getSocketError(m_sockfd);
 	if (m_errno > 0) {
 		// 若检测到异常，则重连
-		LOG_SOCKET_ERR(m_sockfd, m_errno) << m_pNetReactor->name();
+		LOG_SOCKET_ERR(m_sockfd, m_errno) << m_logic->name();
 		retry();
 
 		return;
@@ -150,7 +150,7 @@ bool Connector::onConnected()
 	// 成功连接上对端
 	Link* link = createLink(m_sockfd, m_peerAddr);
 	if (NULL == link) {
-		LOG_ERROR << m_pNetReactor->name() << " connector create link failed, socket = " << m_sockfd;
+		LOG_ERROR << m_logic->name() << " connector create link failed, socket = " << m_sockfd;
 		this->close();
 		socktool::closeSocket(m_sockfd);
 		return false;
@@ -163,12 +163,12 @@ bool Connector::onConnected()
 	TaskQueue::TaskList taskList;
 
 	// 将连接成功的消息投到业务层
-	taskList.push_back(boost::bind(&INetReactor::onConnected, m_pNetReactor, link, link->getLocalAddr(), m_peerAddr));
+	taskList.push_back(boost::bind(&INetReactor::onConnected, m_logic, link, link->getLocalAddr(), m_peerAddr));
 
 	// 等业务层处理完新连接后，才允许该连接开始读
 	taskList.push_back(boost::bind(&NetModel::enableRead, link->m_net, link));
 
-	m_pNetReactor->getTaskQueue().put(taskList);
+	m_logic->getTaskQueue().put(taskList);
 	return true;
 }
 
@@ -201,7 +201,7 @@ bool Connector::retry()
 		}
 	}
 
-	LOG_SOCKET_ERR(m_sockfd, m_errno) << m_pNetReactor->name() << " connect to " << m_remoteHostName << "<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
+	LOG_SOCKET_ERR(m_sockfd, m_errno) << m_logic->name() << " connect to " << m_remoteHostName << "<" << m_peerAddr.toIpPort() << "> fail, retry after <" << m_retryDelayMs << "> ms";
 	m_errno = 0;
 
 	if (m_state == StateConnecting) {
@@ -231,7 +231,7 @@ Link* Connector::createLink(socket_t newfd, NetAddress &peerAddr)
 	LinkPool &linkPool = net->getLinkPool();
 	NetAddress localAddr(socktool::getLocalAddr(newfd));
 
-	Link *link = linkPool.alloc(newfd, localAddr, peerAddr, net, m_pNetReactor);
+	Link *link = linkPool.alloc(newfd, localAddr, peerAddr, net, m_logic);
 	if (NULL == link) {
 		return NULL;
 	}

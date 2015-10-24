@@ -111,7 +111,7 @@ void DBMgr::test()
 	size_t times = 10000;
 
 	{
-		Tick tick("游戏库插入测试");
+		Tick tick("game db insert test", times);
 
 		m_gamedb->execute("truncate players");
 		conn->startTransaction();
@@ -127,14 +127,10 @@ void DBMgr::test()
 		}
 
 		conn->commit();
-
-		double speed = tick.endTick() / times;
-		double count = 1.0f / speed;
-		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
 	}
 
 	{
-		Tick tick("游戏库select速度测试");
+		Tick tick("game db select test", times);
 
 		DBRecordSet *res = NULL;
 		for (size_t i = 1; i <= times; i++) {
@@ -149,10 +145,6 @@ void DBMgr::test()
 				LOG_INFO << "executing " << i;
 			}
 		}
-
-		double speed = tick.endTick() / times;
-		double count = 1.0f / speed;
-		LOG_WARN << "平均每条耗时 = " << speed << ", 每秒可执行" << count;
 	}
 }
 

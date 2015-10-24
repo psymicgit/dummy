@@ -1,7 +1,7 @@
 #ifndef _strtool_h_
 #define _strtool_h_
 
-namespace socktool
+namespace strtool
 {
 	std::string itoa(int32);
 	std::string itoa(int64);

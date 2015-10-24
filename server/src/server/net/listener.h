@@ -56,7 +56,7 @@ private:
 	NetModel *m_net;
 
 	// 与本监听器绑定的逻辑实例
-	INetReactor *m_pNetReactor;
+	INetReactor *m_logic;
 
 	// 正在监听的socket
 	socket_t m_listenFd;

@@ -52,7 +52,7 @@ void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAdd
 	client->m_clientMgr = this;
 	client->m_taskQueue = m_taskQueue;
 
-	link->m_pNetReactor = client;
+	link->m_logic = client;
 	client->onEstablish();
 
 	m_clientMap[newClientId] = client;

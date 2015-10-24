@@ -113,8 +113,8 @@ void Robot::handleMsg()
 		}
 
 		NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
-		uint16 msgId = endiantool::networkToHost16(head->msgId);
-		uint32 msgLen = endiantool::networkToHost32(head->msgLen);
+		uint16 msgId = endiantool::networkToHost(head->msgId);
+		uint32 msgLen = endiantool::networkToHost(head->msgLen);
 
 		if (msgLen > bytes) {
 			break;
@@ -247,6 +247,8 @@ void Robot::speedTest()
 	if (g_speedTestCnt % 100 == 0) {
 		LOG_INFO << name() << " start speed test, g_speedTestCnt = " << g_speedTestCnt << ", speed packet size = " << p.ByteSize();
 	}
+
+	// Tick tick("speed test", m_robotMgr->m_config.m_speedTestPacketNum);
 
 	for (int i = 0; i < m_robotMgr->m_config.m_speedTestPacketNum; i++) {
 		send(eSpeedTest, p);

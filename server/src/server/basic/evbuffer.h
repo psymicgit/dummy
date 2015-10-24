@@ -354,7 +354,7 @@ ssize_t evbuffer_copyout_from(struct evbuffer *buf, const struct evbuffer_ptr *p
   the bytes from the source buffer.  This function avoids copy
   operations to the extent possible.
 
-  If more bytes are requested than are available in src, the src
+  If more bytes are requested than are available in src or datlen = 0, the src
   buffer is drained completely.
 
   @param src the evbuffer to be read from

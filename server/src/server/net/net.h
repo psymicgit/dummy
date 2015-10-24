@@ -19,7 +19,7 @@
 class Listener;
 class Link;
 
-// 文件描述符接口(file descriptor)，套接字和监听器将从此类派生
+// 文件描述符接口(file descriptor)，套接字Link、监听器Listener和连接器Connector将从此类派生
 class IFd
 {
 public:
@@ -120,7 +120,11 @@ protected:
 public:
 	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
 	char g_encryptBuf[MAX_PACKET_LEN];
+
+	// 预先申请的接收缓冲区
 	char g_recvBuf[MAX_PACKET_LEN];
+
+	// 预先申请的发送缓冲区
 	char g_sendBuf[MAX_PACKET_LEN];
 };
 
@@ -207,7 +211,11 @@ private:
 public:
 	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
 	char g_encryptBuf[MAX_PACKET_LEN];
+
+	// 预先申请的接收缓冲区
 	char g_recvBuf[MAX_PACKET_LEN];
+
+	// 预先申请的发送缓冲区
 	char g_sendBuf[MAX_PACKET_LEN];
 };
 

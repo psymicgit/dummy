@@ -2,7 +2,7 @@
 //< @file:   server\def\platform.h
 //< @author: 洪坤安
 //< @date:   2014年11月25日 15:35:3
-//< @brief:
+//< @brief:  平台相关的定义
 //< Copyright (c) 2014 Tokit. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -95,6 +95,7 @@
 	#include <netinet/in.h>
 	#include <sys/socket.h>
 	#include <sys/epoll.h>
+	#include <sys/uio.h>
 	#include <arpa/inet.h>
 #endif
 

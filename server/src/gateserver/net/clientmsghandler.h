@@ -16,6 +16,7 @@
 #include "tool/servertool.h"
 #include "protocol/message.h"
 #include <tool/ticktool.h>
+#include <tool/strtool.h>
 
 // 处理客户端发给网关的各类消息
 class ClientMsgHandler : public MsgHandler<Client>
@@ -61,7 +62,7 @@ private:
 	static void OnPingTest(Client* client, PingPong *p, Timestamp receiveTime)
 	{
 		static int g_pingCount = 0;
-		static Tick tick("pingpong test");
+		static Tick tick("pingpong test", 100);
 
 		++g_pingCount;
 		++client->m_pingCount;
@@ -71,9 +72,8 @@ private:
 			LOG_INFO << "pingpong count = " << g_pingCount << ", PingPong size = " << p->ByteSize();
 
 			if (g_pingCount % 100 == 0) {
-				double speed = tick.endTick() / g_pingCount;
-				double count = 1.0f / speed;
-				LOG_WARN << "pingpong count = " << g_pingCount << ", avg cost time = " << speed << ", exe count per second = " << count;
+				tick.print(100, echotool::getmsg(" size = %d", p->ByteSize()));
+				tick.startTick();
 			}
 		}
 
@@ -89,16 +89,17 @@ private:
 		++client->m_speedTestCount;
 
 		if (g_speedTestCount % 100000 == 0) {
-			double speed = tick.endTick() / g_speedTestCount;
-			double count = 1.0f / speed;
-			LOG_INFO << "speedtest count = " << g_speedTestCount << ", avg cost=" << speed << ", size = " << p->ByteSize() << ", exe count per second = " << count;
+			tick.print(100000, echotool::getmsg(" size = %d", p->ByteSize()));
+			tick.startTick();
+
+// 			double speed = tick.endTick() / g_speedTestCount;
+// 			double count = 1.0f / speed;
+// 			LOG_INFO << "speedtest count = " << g_speedTestCount << ", avg cost=" << speed << ", size = " << p->ByteSize() << ", exe count per second = " << count;
 
 			if (g_speedTestCount == (5000 * 10000)) {
 				Server::instance->stop();
 			}
 		}
-
-
 
 // 		if (client->m_speedTestCount % 1000 == 0) {
 // 			client->send(eSpeedTest, *p);
@@ -119,9 +120,8 @@ private:
 			LOG_INFO << "latencytest count = " << g_latencyTestCount << ", latencytest size = " << p->ByteSize();
 
 			if (g_latencyTestCount % 100000 == 0) {
-				double speed = tick.endTick() / g_latencyTestCount;
-				double count = 1.0f / speed;
-				LOG_WARN << "latencytest count = " << g_latencyTestCount << ", avg cost time = " << speed << ", exe count per second = " << count;
+				tick.print(100000, echotool::getmsg(" size = %d", p->ByteSize()));
+				tick.startTick();
 
 				if (g_latencyTestCount % 1000000 == 0) {
 					// client->send(eLatencyTest, *p);

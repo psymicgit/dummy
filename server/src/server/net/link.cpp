@@ -32,7 +32,7 @@ void Link::open()
 	// socktool::setRecvBufSize(m_sockfd, 256 * 1024);
 
 	if (!socktool::setTcpNoDelay(m_sockfd)) {
-		LOG_ERROR << m_pNetReactor->name() << " " << getLocalAddr().toIpPort() << "<-->" << getPeerAddr().toIpPort() << " setTcpNoDelay failed!";
+		LOG_ERROR << m_logic->name() << " " << getLocalAddr().toIpPort() << "<-->" << getPeerAddr().toIpPort() << " setTcpNoDelay failed!";
 	}
 
 	m_net->addFd(this);
@@ -56,7 +56,7 @@ void Link::closing()
 {
 	// 检测是否重复close
 	if (m_closed) {
-		LOG_ERROR << m_pNetReactor->name() << " double closed, canceled, m_sendBuf left size = " << evbuffer_get_length(&m_sendBuf);
+		LOG_ERROR << m_logic->name() << " double closed, canceled, m_sendBuf left size = " << evbuffer_get_length(&m_sendBuf);
 		return;
 	}
 
@@ -74,10 +74,11 @@ void Link::closing()
 			m_isWaitingClose = true;
 			// shutdown(m_sockfd, SHUT_RD);
 
+			// 禁止读取数据
 			m_net->disableRead(this);
 
 			if (!m_isWaitingWrite) {
-				LOG_ERROR << m_pNetReactor->name() << " m_sendBuf != empty(), left size = " << evbuffer_get_length(&m_sendBuf) << ", socket = " << m_sockfd;
+				LOG_ERROR << m_logic->name() << " m_sendBuf != empty(), left size = " << evbuffer_get_length(&m_sendBuf) << ", socket = " << m_sockfd;
 			}
 
 			// LOG_ERROR << m_pNetReactor->name() << " is waiting write";
@@ -90,7 +91,7 @@ void Link::closing()
 	{
 		lock_guard_t<> lock(m_sendBufLock);
 		if (evbuffer_get_length(&m_sendBuf) > 0) {
-			LOG_ERROR << m_pNetReactor->name() << " close, left size = " << evbuffer_get_length(&m_sendBuf) << ", socket = " << m_sockfd;
+			LOG_ERROR << m_logic->name() << " close, left size = " << evbuffer_get_length(&m_sendBuf) << ", socket = " << m_sockfd;
 		}
 	}
 
@@ -107,7 +108,7 @@ void Link::closing()
 #endif
 
 	// 等业务层处理好关闭操作
-	m_pNetReactor->getTaskQueue().put(boost::bind(&Link::onLogicClose, this));
+	m_logic->getTaskQueue().put(boost::bind(&Link::onLogicClose, this));
 }
 
 void Link::erase()
@@ -118,7 +119,7 @@ void Link::erase()
 
 void Link::onLogicClose()
 {
-	m_pNetReactor->onDisconnect(this, m_localAddr, m_peerAddr);
+	m_logic->onDisconnect(this, m_localAddr, m_peerAddr);
 	m_net->delFd(this);
 }
 
@@ -143,17 +144,16 @@ void Link::onSend()
 
 	// 1. 将发送缓冲区的数据全部取出
 	evbuffer sendSwapBuf;
-	evbuffer *dst = &sendSwapBuf;
+	evbuffer *buf = &sendSwapBuf;
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		int size = evbuffer_get_length(&m_sendBuf);
-		evbuffer_remove_buffer(&m_sendBuf, dst, size);
+		evbuffer_add_buffer(buf, &m_sendBuf);
 		m_isWaitingWrite = false;
 	}
 
 	// 2. 尝试发送数据，若数据未能全部发送，则注册写事件
-	int left = trySend(dst);
+	int left = trySend(buf);
 	if (left < 0) {
 		// 发送异常: 则关闭连接
 		// LOG_ERROR << m_pNetReactor->name() << " = socket<" << m_sockfd << "> trySend fail, ret = " << left;
@@ -168,25 +168,19 @@ void Link::onSend()
 			int size = evbuffer_get_length(&m_sendBuf);
 
 			if (size > 0) {
-				evbuffer_prepend_buffer(&m_sendBuf, dst);
+				evbuffer_prepend_buffer(&m_sendBuf, buf);
 			} else {
-				evbuffer_add_buffer(&m_sendBuf, dst);
+				evbuffer_add_buffer(&m_sendBuf, buf);
 			}
 
 			m_isWaitingWrite = true;
 		}
 
 		// 注册写事件，以待当本连接可写时再尝试发送
-#ifdef WIN
 		m_net->enableWrite(this);
-#else
-		if (!m_isRegisterWrite) {
-			m_net->enableWrite(this);
-			m_isRegisterWrite = true;
-			// LOG_INFO << m_pNetReactor->name() << " register write, m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes();
-		}
+#ifdef WIN
+		// LOG_INFO << m_pNetReactor->name() << " register write, m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes();
 #endif
-		// LOG_WARN << "m_net->enableWrite <" << m_sockfd << ">";
 	} else {
 		// 本次数据已发送成功: 检查本连接是否已<待关闭>，是的话，若本次数据已全部发送成功且在此期间没有新的数据等待发送，则执行close操作
 		bool isWaitingClose = false;
@@ -211,19 +205,20 @@ void Link::sendBuffer()
 		return;
 	}
 
-	{
-		lock_guard_t<> lock(m_sendBufLock);
-		if (m_isWaitingWrite) {
-			return;
-		}
-
-		if (evbuffer_get_length(&m_sendBuf) == 0) {
-			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
-			return;
-		}
-
-		m_isWaitingWrite = true;
-	}
+// 	{
+// 		lock_guard_t<> lock(m_sendBufLock);
+// 		if (m_isWaitingWrite) {
+// 			LOG_ERROR << "m_isWaitingWrite = true";
+// 			return;
+// 		}
+//
+// 		if (evbuffer_get_length(&m_sendBuf) == 0) {
+// 			LOG_ERROR << m_logic->name() << " m_sendBuf.empty(), socket = " << m_sockfd;
+// 			return;
+// 		}
+//
+// 		m_isWaitingWrite = true;
+// 	}
 
 	// m_net->interruptLoop();
 	m_net->getTaskQueue()->put(boost::bind(&Link::onSend, this));
@@ -242,6 +237,8 @@ void Link::send(const char *data, int len)
 		if (m_isWaitingWrite) {
 			return;
 		}
+
+		m_isWaitingWrite = true;
 	}
 
 	this->sendBuffer();
@@ -273,6 +270,7 @@ void Link::send(int msgId, Message & msg)
 		if (m_isWaitingWrite) {
 			return;
 		}
+		m_isWaitingWrite = true;
 	}
 
 	this->sendBuffer();
@@ -295,6 +293,7 @@ void Link::send(int msgId, const char *data, int len)
 		if (m_isWaitingWrite) {
 			return;
 		}
+		m_isWaitingWrite = true;
 	}
 
 	this->sendBuffer();
@@ -302,14 +301,15 @@ void Link::send(int msgId, const char *data, int len)
 
 void Link::beginRead(evbuffer *readto)
 {
+	// m_recvBuf数据取出到readto
 	lock_guard_t<> lock(m_recvBufLock);
-	int size = evbuffer_get_length(&m_recvBuf);
-	evbuffer_remove_buffer(&m_recvBuf, readto, size);
+	evbuffer_add_buffer(readto, &m_recvBuf);
 	m_isWaitingRead = false;
 }
 
 void Link::endRead(evbuffer *remain)
 {
+	// remain数据移动到m_recvBuf前面
 	int left = evbuffer_get_length(remain);
 	if (left > 0) {
 		lock_guard_t<> lock(m_recvBufLock);
@@ -325,10 +325,11 @@ void Link::endRead(evbuffer *remain)
 void Link::handleRead()
 {
 	if (!isopen()) {
-		LOG_ERROR << m_pNetReactor->name() << " != open";
+		LOG_ERROR << m_logic->name() << " != open";
 		return;
 	}
 
+	// 记录本次接收数据的总长度
 	int totalRecvLen = 0;
 
 	// 循环接收数据直到无法再接收
@@ -383,7 +384,7 @@ void Link::handleRead()
 	}
 
 	// 由业务层进行数据接收处理
-	m_pNetReactor->onRecv(this);
+	m_logic->onRecv(this);
 }
 
 void Link::handleWrite()
@@ -409,7 +410,7 @@ void Link::handleError()
 	}
 
 	int err = socktool::getSocketError(m_sockfd);
-	LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " socket<" << m_sockfd << "> error, m_error = " << m_error << ", m_isWaitingClose=" << m_isWaitingClose
+	LOG_SOCKET_ERR(m_sockfd, err) << m_logic->name() << " socket<" << m_sockfd << "> error, m_error = " << m_error << ", m_isWaitingClose=" << m_isWaitingClose
 	                              << ", m_closed = " << m_closed;
 
 	m_error = true;
