@@ -71,7 +71,7 @@ namespace timetool
 		return global::g_formatBuf;
 	}
 
-	const char* FormatNow()
+	const char* getNowText()
 	{
 		FILETIME local;
 		SYSTEMTIME systime;
@@ -79,7 +79,7 @@ namespace timetool
 		FileTimeToLocalFileTime(&local, &local); // 转换为本地时间
 		FileTimeToSystemTime(&local, &systime);
 
-		sprintf_s(global::g_formatBuf, sizeof global::g_formatBuf, "%02d/%02d/%02d-%02d:%02d:%02d:%-6d",
+		sprintf_s(global::g_formatBuf, sizeof global::g_formatBuf, "%04d/%02d/%02d-%02d:%02d:%02d:%-6d",
 		          systime.wYear, systime.wMonth, systime.wDay,
 		          systime.wHour, systime.wMinute, systime.wSecond, systime.wMilliseconds
 		         );
@@ -96,15 +96,15 @@ namespace timetool
 		return seconds * 1000 + tv.tv_usec / 1000;
 	}
 
-	const char* FormatNow()
+	const char* getNowText()
 	{
 		time_t now;
 		time(&now);// time函数读取现在的时间(国际标准时间非北京时间)，然后传值给now
 
 		tm *localnow = localtime(&now); // 转为本时区时间
 
-		sprintf_s(global::g_formatBuf, sizeof global::g_formatBuf, "%02d/%02d/%02d-%02d:%02d:%02d",
-		          localnow->tm_year, localnow->tm_mon, localnow->tm_mday,
+		sprintf_s(global::g_formatBuf, sizeof global::g_formatBuf, "%04d/%02d/%02d-%02d:%02d:%02d",
+		          1900 + localnow->tm_year, 1 + localnow->tm_mon, localnow->tm_mday,
 		          localnow->tm_hour, localnow->tm_min, localnow->tm_sec
 		         );
 

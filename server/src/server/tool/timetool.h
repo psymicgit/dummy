@@ -25,7 +25,7 @@ namespace timetool
 
 	const char* FormatTime(const Timestamp& time);
 
-	const char* FormatNow();
+	const char* getNowText();
 }
 
 #endif //_timetool_h_

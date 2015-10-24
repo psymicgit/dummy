@@ -18,7 +18,7 @@
 #include <memory.h>
 
 static const unsigned char base64_table[65] =
-	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 /***
  * base64_encode - Base64 encode
@@ -33,7 +33,7 @@ static const unsigned char base64_table[65] =
  * not included in out_len.
  */
 unsigned char * base64_encode(const unsigned char *src, size_t len,
-			      size_t *out_len)
+                              size_t *out_len)
 {
 	unsigned char *out, *pos;
 	const unsigned char *end, *in;
@@ -73,7 +73,7 @@ unsigned char * base64_encode(const unsigned char *src, size_t len,
 			*pos++ = '=';
 		} else {
 			*pos++ = base64_table[((in[0] & 0x03) << 4) |
-					      (in[1] >> 4)];
+			                      (in[1] >> 4)];
 			*pos++ = base64_table[(in[1] & 0x0f) << 2];
 		}
 		*pos++ = '=';
@@ -101,7 +101,7 @@ unsigned char * base64_encode(const unsigned char *src, size_t len,
  * Caller is responsible for freeing the returned buffer.
  */
 unsigned char * base64_decode(const unsigned char *src, size_t len,
-			      size_t *out_len)
+                              size_t *out_len)
 {
 	unsigned char dtable[256], *out, *pos, in[4], block[4], tmp;
 	size_t i, count, olen;
