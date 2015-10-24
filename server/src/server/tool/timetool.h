@@ -18,14 +18,14 @@ typedef int32 TimeInMs; // in ms毫秒单位
 namespace timetool
 {
 	// 获取当前时间，单位: 毫秒
-	Timestamp getTimeOfDay();
+	Timestamp now();
 
 	// 获取本地时区时间，单位: 毫秒
-	Timestamp getLocalTime();
+	Timestamp localnow();
 
-	const char* FormatTime(const Timestamp& time);
+	const char* timeToText(const Timestamp& time);
 
-	const char* getNowText();
+	const char* nowText();
 }
 
 #endif //_timetool_h_

@@ -17,7 +17,7 @@ int TimerQueue::run()
 	}
 
 	// 获取当前时间
-	now = timetool::getTimeOfDay();
+	now = timetool::now();
 
 	// 依次取出离已到期的定时器并执行
 	while(!m_timers.empty()) {
@@ -62,7 +62,7 @@ void TimerQueue::runEvery(const Task &task, TimeInMs interval)
 
 void TimerQueue::runAfter(Timer *pTask, TimeInMs delay)
 {
-	Timestamp now = timetool::getTimeOfDay();
+	Timestamp now = timetool::now();
 	pTask->m_life = 1;
 	runAt(pTask, now + delay);
 }

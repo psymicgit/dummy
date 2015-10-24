@@ -88,7 +88,7 @@ void HttpMgr::run()
 	HttpCmdList::iterator itr = m_httpCmdList.begin();
 	HttpCmdList::iterator end = m_httpCmdList.end();
 
-	Timestamp now = timetool::getTimeOfDay();
+	Timestamp now = timetool::now();
 	for(; itr != end;) {
 		HttpCmd *cmd = *itr;
 
@@ -100,8 +100,7 @@ void HttpMgr::run()
 
 			//释放
 			curl_multi_remove_handle(m_currentCurl, cmd->m_curl);
-		}
-		else {
+		} else {
 			itr++;
 		}
 	}
@@ -130,7 +129,7 @@ size_t HttpMgr::onRecvHtml(void *buffer, size_t size, size_t count, void *pointe
 bool HttpMgr::addCmd(HttpCmd *cmd)
 {
 	cmd->bind();
-	cmd->m_lastAddTime = timetool::getTimeOfDay();
+	cmd->m_lastAddTime = timetool::now();
 
 	// 设置接收到html后的回调函数
 	curl_easy_setopt(cmd->m_curl, CURLOPT_WRITEFUNCTION, onRecvHtml);

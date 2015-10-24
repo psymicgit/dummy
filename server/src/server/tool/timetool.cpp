@@ -35,7 +35,7 @@ namespace timetool
 		return filetime;
 	}
 
-	Timestamp getTimeOfDay()
+	Timestamp now()
 	{
 		FILETIME now;
 		GetSystemTimeAsFileTime (&now); // 获得系统UTC格式时间
@@ -44,7 +44,7 @@ namespace timetool
 		return nowIn100ns / 10000; //转化为ms单位
 	}
 
-	Timestamp getLocalTime()
+	Timestamp localnow()
 	{
 		FILETIME local;
 		GetSystemTimeAsFileTime (&local); // 获得系统UTC格式时间
@@ -54,7 +54,7 @@ namespace timetool
 		return localIn100ns / 10000;
 	}
 
-	const char* FormatTime(const Timestamp& time)
+	const char* timeToText(const Timestamp& time)
 	{
 		Timestamp utc = time * 10000;
 
@@ -71,7 +71,7 @@ namespace timetool
 		return global::g_formatBuf;
 	}
 
-	const char* getNowText()
+	const char* nowText()
 	{
 		FILETIME local;
 		SYSTEMTIME systime;
@@ -88,7 +88,7 @@ namespace timetool
 	}
 
 #else
-	Timestamp getTimeOfDay()
+	Timestamp now()
 	{
 		struct timeval tv;
 		gettimeofday(&tv, NULL);
@@ -96,7 +96,7 @@ namespace timetool
 		return seconds * 1000 + tv.tv_usec / 1000;
 	}
 
-	const char* getNowText()
+	const char* nowText()
 	{
 		time_t now;
 		time(&now);// time函数读取现在的时间(国际标准时间非北京时间)，然后传值给now
