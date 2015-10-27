@@ -13,18 +13,23 @@ exit
 
   
     echo 启动%svrdir%下的gameserver服务器
-    rem cd gameserver
-    rem start "%svrdir%\gameserver.exe" "%svrdir%\gameserver.exe"
-    rem cd ..
+    cd gameserver
+    start "%svrdir%\gameserver.exe" "%svrdir%\gameserver.exe"
+    cd ..
 
     echo 启动%svrdir%下的gateserver服务器
     cd gateserver
     start "%svrdir%\gateserver.exe" "%svrdir%\gateserver.exe"
     cd ..
 
+    echo 启动%svrdir%下的dbserver服务器
+    cd dbserver
+    start "%svrdir%\dbserver.exe" "%svrdir%\dbserver.exe"
+    cd ..
+
     echo 启动%svrdir%下的robot机器人
     cd robot
-    start "%svrdir%\robot.exe" "%svrdir%\robot.exe"
+    rem start "%svrdir%\robot.exe" "%svrdir%\robot.exe"
     cd ..
 
     echo.
