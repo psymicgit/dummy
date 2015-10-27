@@ -54,6 +54,8 @@ private:
 
 	bool isCompatiableCharset(Charsets&);
 
+	void printCharsets(Charsets&);
+
 	bool checkConnection();
 
 public:

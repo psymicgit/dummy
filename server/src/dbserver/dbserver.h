@@ -27,9 +27,6 @@ public:
 	virtual void onDisconnectServer(Link&, ServerType, int serverId);
 
 private:
-	// 内网中心：负责与内网中其他服务器进行通信
-	NetFactory m_lan;
-
 	DBMgr *m_dbmgr;
 
 	DBConfig m_config;

@@ -90,7 +90,7 @@ ServerLink* DBServer::onAcceptServer(Link &tcpLink, ServerType peerSvrType, int 
 	return svrLink;
 }
 
-void DBServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int serverId)
+void DBServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int peerSvrId)
 {
 	ServerLink *link = NULL;
 
@@ -99,11 +99,11 @@ void DBServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int serverI
 	case eGameServer:
 		link = m_gameLink;
 		m_gameLink = NULL;
-		LOG_INFO << "dbserver <-> gameserver <svrId = " << serverId << "> connection broken";
+		LOG_INFO << "dbserver <-> gameserver <svrId = " << peerSvrId << "> connection broken";
 		break;
 
 	default:
-		LOG_ERROR << "dbserver <-> unknown server <svrType=" << svrType << ",svrId=" << serverId << "> connection broken";
+		LOG_ERROR << "dbserver <-> unknown server <svrType=" << svrType << ",svrId=" << peerSvrId << "> connection broken";
 		break;
 	}
 

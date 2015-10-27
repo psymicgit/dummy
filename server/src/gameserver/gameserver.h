@@ -10,10 +10,12 @@
 #define _gameserver_h_
 
 #include "server.h"
-#include "db/dbmgr.h"
+
 #include "logic/clientmgr.h"
 #include "net/http/gamehttpmgr.h"
 #include "config/gameconfig.h"
+
+#include "db/dbagent.h"
 
 class GateLink;
 
@@ -35,15 +37,21 @@ public:
 
 	virtual void onDisconnectServer(Link&, ServerType, int serverId);
 
+	// 发送消息到db服务器
+	bool sendToDBServer(uint16 msgId, Message&);
+
 private:
 	GateLink *m_gateLink;
-	DBMgr m_dbmgr;
+	ServerLink *m_dbLink;
 
 	ClientMgr m_clientMgr;
 	GameHttpMgr m_httpMgr;
 
 	// 游戏服务器配置
 	GameConfig m_config;
+
+	DbAgent m_gamedb;
+	DbAgent m_logdb;
 };
 
 #endif //_gameserver_h_

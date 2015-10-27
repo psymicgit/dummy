@@ -29,17 +29,17 @@ bool GameConfig::load(const char* jsonConfig)
 
 	{
 		// ∂¡»°Õ‚Õ¯Õ¯¬Á≈‰÷√
-		const Value& lan = doc["lan"];
-		const Value& lanConnects = lan["connect"];
+		const Value& lan			= doc["lan"];
+		const Value& lanConnects	= lan["connect"];
 
 		IpPort ipport;
 
 		for (SizeType i = 0; i < lanConnects.Size(); i++) {
 			const Value &connect = lanConnects[i];
 
-			ipport.ip = connect["ip"].GetString();
-			ipport.port = connect["port"].GetInt();
-			ipport.peerName = connect["name"].GetString();
+			ipport.ip		= connect["ip"].GetString();
+			ipport.port		= connect["port"].GetInt();
+			ipport.peerName	= connect["name"].GetString();
 
 			m_lanConnects.push_back(ipport);
 		}

@@ -80,6 +80,23 @@ bool DBConnection::connect()
 	return true;
 }
 
+void DBConnection::printCharsets(Charsets &charsets)
+{
+	std::string log = "db charset Info : \n "
+	                  "{\n"
+	                  "[varname] : [charset]\n";
+
+	Charsets::iterator itr = charsets.begin();
+	Charsets::iterator end = charsets.end();
+
+	while(itr != end) {
+		log += "" + itr->first + " : " + itr->second + "\n";
+		++itr;
+	}
+
+	LOG_INFO << log << "}";
+}
+
 void DBConnection::release()
 {
 	if(m_mysql) {
@@ -317,20 +334,6 @@ bool DBConnection::getCharsets(Charsets &charset)
 
 		charset.insert(std::make_pair(std::string(variableName), std::string(charsetName)));
 	}
-
-	std::string log = "db charset Info : \n "
-	                  "{\n"
-	                  "[varname] : [charset]\n";
-
-	Charsets::iterator itr = charset.begin();
-	Charsets::iterator end = charset.end();
-
-	while(itr != end) {
-		log += "" + itr->first + " : " + itr->second + "\n";
-		++itr;
-	}
-
-	LOG_INFO << log << "}";
 
 	pRes->Release();
 	return true;

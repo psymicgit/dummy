@@ -21,13 +21,15 @@ public:
 	*/
 	virtual int getGroupId() {return 0;};
 
-	// 在数据库线程执行
+	virtual void getSql(std::string &sql) {}
+
+// 在数据库线程执行
 	virtual void execute(DBConnection &poDBConnection) = 0;
 
-	// 在业务逻辑线程执行
+// 在业务逻辑线程执行
 	virtual void onExecuted() = 0;
 
-	// 执行完业务逻辑后，执行此release操作，对用户而言，此函数中的执行是同步的
+// 执行完业务逻辑后，执行此release操作，对用户而言，此函数中的执行是同步的
 	virtual void release() = 0;
 };
 

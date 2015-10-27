@@ -87,9 +87,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\protocol\client.pb.h" />
+    <ClInclude Include="..\protocol\game_db.pb.h" />
     <ClInclude Include="..\protocol\net.pb.h" />
+    <ClInclude Include="..\protocol\protocol.pb.h" />
     <ClInclude Include="config\gameconfig.h" />
-    <ClInclude Include="db\dbmgr.h" />
+    <ClInclude Include="db\dbagent.h" />
     <ClInclude Include="gameserver.h" />
     <ClInclude Include="logic\client.h" />
     <ClInclude Include="logic\clientmgr.h" />
@@ -100,9 +102,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\protocol\client.pb.cc" />
+    <ClCompile Include="..\protocol\game_db.pb.cc" />
     <ClCompile Include="..\protocol\net.pb.cc" />
     <ClCompile Include="config\gameconfig.cpp" />
-    <ClCompile Include="db\dbmgr.cpp" />
+    <ClCompile Include="db\dbagent.cpp" />
     <ClCompile Include="gameserver.cpp" />
     <ClCompile Include="logic\client.cpp" />
     <ClCompile Include="logic\clientmgr.cpp" />

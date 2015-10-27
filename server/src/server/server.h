@@ -103,7 +103,7 @@ public:
 	// 区Id
 	int m_zoneId;
 
-	// 内网通信中心：负责与内网中服务器的通信
+	// 内网中心：负责与内网中其他服务器进行通信
 	NetFactory m_lan;
 
 protected:

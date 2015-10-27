@@ -15,6 +15,9 @@
 GameServer::GameServer()
 	: Server()
 	, m_gateLink(NULL)
+	, m_dbLink(NULL)
+	, m_gamedb(GameDB)
+	, m_logdb(LogDB)
 {
 	m_svrType = eGameServer;
 }
@@ -48,11 +51,6 @@ bool GameServer::init(const char* jsonConfig)
 		}
 	}
 
-// 	if (!m_dbmgr.init()) {
-// 		LOG_ERROR << "dbmgr init failed, aborted";
-// 		return false;
-// 	}
-
 	// 初始化http管理器
 	if (!m_httpMgr.init()) {
 		LOG_ERROR << "gamehttpmgr init failed, aborted";
@@ -65,13 +63,15 @@ bool GameServer::init(const char* jsonConfig)
 void GameServer::start()
 {
 	Server::start();
+
+	m_gamedb.start();
+	m_logdb.start();
 }
 
 void GameServer::stoppping()
 {
 	LOG_WARN << "stopping game server ...";
 	Server::stopping();
-	m_dbmgr.stop();
 
 	// 将关闭网络时产生的网络任务执行完
 	run();
@@ -99,6 +99,12 @@ ServerLink* GameServer::onAcceptServer(Link &tcpLink, ServerType peerSvrType, in
 		LOG_INFO << "gameserver -> gateserver <svrId = " << peerSvrId << "> connection established";
 		break;
 
+	// db服务器
+	case eDBServer:
+		svrLink = m_dbLink = new ServerLink;
+		LOG_INFO << "gameserver -> dbserver <svrId = " << peerSvrId << "> connection established";
+		break;
+
 	default:
 		LOG_ERROR << "gameserver -> unknown server <svrType=" << peerSvrType << ",svrId=" << peerSvrId << "> connection established";
 		break;
@@ -107,7 +113,7 @@ ServerLink* GameServer::onAcceptServer(Link &tcpLink, ServerType peerSvrType, in
 	return svrLink;
 }
 
-void GameServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int serverId)
+void GameServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int peerSvrId)
 {
 	ServerLink *link = NULL;
 
@@ -117,13 +123,31 @@ void GameServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int serve
 		link = m_gateLink;
 		m_gateLink = NULL;
 
-		LOG_INFO << "gameserver -> gateserver<svrId = " << serverId << "> connection broken";
+		LOG_INFO << "gameserver -> gateserver<svrId = " << peerSvrId << "> connection broken";
+		break;
+
+	// db服务器
+	case eDBServer:
+		link = m_dbLink;
+		m_dbLink = NULL;
+
+		LOG_INFO << "gameserver -> dbserver <svrId = " << peerSvrId << "> connection broken";
 		break;
 
 	default:
-		LOG_ERROR << "gameserver -> unknown server <svrType=" << svrType << ",svrId=" << serverId << "> connection broken";
+		LOG_ERROR << "gameserver -> unknown server <svrType=" << svrType << ",svrId=" << peerSvrId << "> connection broken";
 		break;
 	}
 
 	delete link;
+}
+
+bool GameServer::sendToDBServer(uint16 msgId, Message &msg)
+{
+	if (NULL == m_dbLink) {
+		return false;
+	}
+
+	m_dbLink->m_link->send(msgId, msg);
+	return true;
 }

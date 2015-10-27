@@ -82,7 +82,7 @@ void DBMgr::test()
 
 	DBConnection *conn = m_gamedb->getConnection(0);
 
-	size_t times = 10000;
+	size_t times = 100;
 
 	{
 		Tick tick("game db insert test", times);
