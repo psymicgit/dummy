@@ -19,7 +19,7 @@
 class Listener;
 class Link;
 
-// 文件描述符接口(file descriptor)，套接字Link、监听器Listener和连接器Connector将从此类派生
+// 文件描述符接口(file descriptor)，连接Link、监听器Listener和连接器Connector将从此类派生
 class IFd
 {
 public:
@@ -99,13 +99,13 @@ protected:
 	// epoll句柄
 	int m_efd;
 
-	// 用于唤醒epoll的socketpair，实际上是半双工通信，但这里我们只用来单工通信，所以命名为pipe
-	int m_pipe[2];
+	// 用于唤醒epoll的socketpair，实际上是半双工通信，但这里我们只用来单工通信
+	int m_wakeup[2];
 
 	// 待销毁的socket列表
 	FdList m_deletingFdList;
 
-	// 删除socket列表
+	// 删除socket列表的锁
 	mutex_t m_mutex;
 
 	// 任务队列

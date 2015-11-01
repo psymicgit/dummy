@@ -22,7 +22,7 @@ Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *ne
 	: m_peerAddr(peerAddr)
 	, m_logic(netReactor)
 	, m_net(net)
-	, m_retryDelayMs(InitRetryDelayMs)
+	, m_retryDelayMs(init_retry_delay_ms)
 	, m_state(StateDisconnected)
 	, m_errno(0)
 	, m_remoteHostName(remoteHostName)
@@ -220,7 +220,7 @@ bool Connector::retry()
 	m_net->interruptLoop();
 
 	// 重连时间 = 重连时间 * 2
-	m_retryDelayMs = MIN(m_retryDelayMs + InitRetryDelayMs, MaxRetryDelayMs);
+	m_retryDelayMs = MIN(m_retryDelayMs + init_retry_delay_ms, max_retry_delay_ms);
 	return true;
 }
 

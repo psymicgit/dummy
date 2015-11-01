@@ -106,7 +106,7 @@ void Client::handleMsg()
 		uint8 *encryptBuf =  (uint8*)(peek + sizeof(NetMsgHead));
 		int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
-		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
+		if(!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
 			LOG_ERROR << "gatesvr [" << link->getPeerAddr().toIpPort() << "] <-> " << name() << " [" << link->getLocalAddr().toIpPort()
 			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
 			evbuffer_drain(dst, msgLen);
@@ -163,7 +163,7 @@ bool Client::send(int msgId, Message &msg)
 	uint8* decryptBuf = (uint8*)(m_link->m_net->g_encryptBuf + headSize);
 	int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
 
-	encrypttool::encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));
+	encrypttool::xor_encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));
 
 	NetMsgHead* pHeader = (NetMsgHead*)m_link->m_net->g_encryptBuf;
 

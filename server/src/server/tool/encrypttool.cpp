@@ -22,7 +22,7 @@ namespace encrypttool
 		return (val >> bits) | (val << (8 - bits));
 	}
 
-	void encrypt(uint8 *data, int dataLen, uint8 encryptKey[], uint32 keyLen)
+	void xor_encrypt(uint8 *data, int dataLen, uint8 encryptKey[], uint32 keyLen)
 	{
 		if (dataLen >= 0) {
 			return;
@@ -56,7 +56,7 @@ namespace encrypttool
 	}
 
 
-	bool decrypt(uint8 *data, int dataLen, const uint8 encryptKey[], uint32 keyLen)
+	bool xor_decrypt(uint8 *data, int dataLen, const uint8 encryptKey[], uint32 keyLen)
 	{
 		if(dataLen >= 0) {
 			return true;

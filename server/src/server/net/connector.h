@@ -19,11 +19,11 @@ class INetReactor;
 // 网络连接器：用于主动向指定的<ip,端口>发起连接，如果连接不上将定时尝试重连直到成功
 class Connector : public IFd
 {
-	static const int MaxRetryDelayMs = 30 * 1000; // 尝试重连的最大间隔
-	static const int InitRetryDelayMs = 3000;	  // 第一次尝试重连的间隔
+	static const int max_retry_delay_ms = 30 * 1000; // 尝试重连的最大间隔
+	static const int init_retry_delay_ms = 3000;	  // 第一次尝试重连的间隔
 
 	// 连接所处的状态
-	enum States {
+	enum ConnectState {
 		StateDisconnected, // 未连接
 		StateConnecting,   // 连接中
 		StateConnected	   // 已连接成功
@@ -85,7 +85,7 @@ private:
 	int m_retryDelayMs;
 
 	// 当前所处的连接状态：未连接、连接中、已连接成功
-	States m_state;
+	ConnectState m_state;
 
 	// 当前连接的socket错误码
 	int m_errno;
@@ -93,6 +93,7 @@ private:
 	// 对端的业务名称
 	std::string m_remoteHostName;
 
+	// 网络中心
 	NetFactory *m_netNetFactory;
 };
 

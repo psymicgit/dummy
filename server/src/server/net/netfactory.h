@@ -57,6 +57,7 @@ public:
 	// 主动连接指定的ip和端口，由传入的INetReactor执行连接接收成功后的操作
 	Connector* connect(const string& ip, int port, INetReactor&, const char* remoteHostName);
 
+private:
 	// 从第2个网络线程起依次获取下一个网络线程（仅有1个网络线程时则只返回1个）
 	NetModel *nextNet();
 

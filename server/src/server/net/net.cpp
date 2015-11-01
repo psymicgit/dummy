@@ -29,22 +29,22 @@ Epoll::Epoll()
 	// 创建一个epoll的句柄
 	m_efd = ::epoll_create(1);
 
-	m_pipe[0] = -1;
-	m_pipe[1] = -1;
+	m_wakeup[0] = -1;
+	m_wakeup[1] = -1;
 
-	int err = ::socketpair(AF_LOCAL, SOCK_STREAM, 0, m_pipe);
+	int err = ::socketpair(AF_LOCAL, SOCK_STREAM, 0, m_wakeup);
 	assert(0 == err);
 	if (err) {
 		LOG_SYSTEM_ERR << "socketpair failed";
 	}
 
-	socktool::setNonBlocking(m_pipe[0]);
-	socktool::setNonBlocking(m_pipe[1]);
+	socktool::setNonBlocking(m_wakeup[0]);
+	socktool::setNonBlocking(m_wakeup[1]);
 
 	struct epoll_event ee = { 0, { 0 } };
-	ee.data.fd   = m_pipe[1];
+	ee.data.fd   = m_wakeup[1];
 	ee.events    = EPOLLIN | EPOLLET;;
-	::epoll_ctl(m_efd, EPOLL_CTL_ADD, m_pipe[1], &ee);
+	::epoll_ctl(m_efd, EPOLL_CTL_ADD, m_wakeup[1], &ee);
 
 	// 如果客户端关闭套接字close，而服务器调用一次write, 服务器会接收一个RST segment（tcp传输层）
 	// 如果服务器端再次调用了write，这个时候就会产生SIGPIPE信号，默认终止进程。
@@ -62,8 +62,8 @@ Epoll::~Epoll()
 {
 	m_linkPool.clear();
 
-	::close(m_pipe[0]);
-	::close(m_pipe[1]);
+	::close(m_wakeup[0]);
+	::close(m_wakeup[1]);
 	::close(m_efd);
 	m_efd = -1;
 }
@@ -91,10 +91,10 @@ int Epoll::eventLoop()
 // 			if (cur_ev.data.fd == m_pipe[0] || cur_ev.data.ptr == this) {
 // 				continue;
 // 			}
-			if (cur_ev.data.fd == m_pipe[1]) {
+			if (cur_ev.data.fd == m_wakeup[1]) {
 				// LOG_WARN << "read from socket pair, m_efd = " << m_efd << ", m_pipe[1] = " << m_pipe[1] << "cur_ev.data.fd" << cur_ev.data.fd;
 				int nread = 0;
-				while((nread = ::recv(m_pipe[1], g_recvBuf, MAX_PACKET_LEN, 0)) > 0) {
+				while((nread = ::recv(m_wakeup[1], g_recvBuf, MAX_PACKET_LEN, 0)) > 0) {
 					// LOG_WARN << "nread = " << nread;
 				};
 
@@ -141,7 +141,7 @@ void Epoll::closing()
 int Epoll::interruptLoop()
 {
 	char buf[2] = {1};
-	int ret = send(m_pipe[0], buf, 1, 0);
+	int ret = send(m_wakeup[0], buf, 1, 0);
 
 	// LOG_WARN << "ret = " << ret;
 	return ret;
