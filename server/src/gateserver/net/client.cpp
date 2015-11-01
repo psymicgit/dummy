@@ -8,18 +8,21 @@
 
 #include "client.h"
 
+
 #include <client.pb.h>
 #include <protocol.pb.h>
 #include <protocol/message.h>
 
-#include "clientmgr.h"
-#include "gateserver.h"
 #include <net/netaddress.h>
-#include <server.h>
+#include <net/netmodel.h>
 #include <tool/encrypttool.h>
 #include <tool/randtool.h>
-
 #include <basic/evbuffer.h>
+#include <server.h>
+
+#include "clientmgr.h"
+#include "gateserver.h"
+
 
 Client::Client()
 	: m_link(NULL)

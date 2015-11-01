@@ -13,6 +13,8 @@
 #include "tool/randtool.h"
 #include "protocol/message.h"
 
+#include "net/netdefine.h"
+
 namespace global
 {
 	// ÍøÂç

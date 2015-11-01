@@ -1,224 +1,77 @@
 ///<------------------------------------------------------------------------------
 //< @file:   server\net\net.h
-//< @author: 洪坤安
-//< @date:   2014年11月26日 10:42:10
-//< @brief:
-//< Copyright (c) 2014 Tokit. All rights reserved.
+//< @author: hongkunan
+//< @date:   2015年1月13日 14:10:49
+//< @brief:	 网络中心，提供listen、connect等网络操作接口
+//< Copyright (c) 2015 heihuo. All rights reserved.
 ///<------------------------------------------------------------------------------
 
 #ifndef _net_h_
 #define _net_h_
 
-#include "basic/timerqueue.h"
-#include "basic/lock.h"
-#include "basic/taskqueue.h"
-#include "basic/objectpool.h"
-#include "basic/buffer.h"
-// #include "basic/ringbuffer.h"
+#include "basic/thread.h"
 
+class NetModel;
+class TaskQueuePool;
+class Thread;
 class Listener;
 class Link;
+class Connector;
+class INetReactor;
 
-// 文件描述符接口(file descriptor)，连接Link、监听器Listener和连接器Connector将从此类派生
-class IFd
+// 网络通信中心，提供listen、connect等网络操作接口
+class Net
 {
-public:
-	virtual ~IFd() {}
+	friend class Listener;
+	friend class Connector;
 
-	// 返回socket值
-	virtual socket_t socket() const = 0;
+	typedef std::vector<Listener*> ListenerVec;
+	typedef std::vector<Connector*> ConnectorVec;
 
-	// 处理可读信号
-	virtual void handleRead()  = 0;
-
-	// 处理可写信号
-	virtual void handleWrite() = 0;
-
-	// 处理异常信号
-	virtual void handleError() = 0;
-
-	// 关闭
-	virtual void close() = 0;
-
-	// 删除本fd
-	virtual void erase() = 0;
-
-#ifndef WIN
-public:
-	uint32 m_events;
-#endif
-};
-
-typedef ObjectPool<Link, mutex_t> LinkPool;
-
-#ifndef WIN
-
-// linux下epoll
-class Epoll
-{
 private:
-	typedef std::vector<IFd*> FdList;
+	// 网络监听线程启动后将开始执行本方法
+	static void runNet(void *e);
 
 public:
-	Epoll();
-	~Epoll();
+	Net();
 
-	bool init(int initLinkCount, int linkGrowCount);
+	// 初始化网络：定义开启线程数、连接池空间
+	bool init(int threadCnt, int initLinkCnt = 100);
 
-	int eventLoop();
-	void close();
+	// 开始执行网络操作
+	void start();
 
-	void reopen(IFd*);
-
-	void addFd(IFd*);
-	void delFd(IFd*);
-
-	void enableRead(IFd*);
-	void disableRead(IFd*);
-
-	void enableWrite(IFd*);
-	void disableWrite(IFd*);
-
-	void enableAll(IFd*);
-	void disableAll(IFd*);
-
-	inline TaskQueue* getTaskQueue() { return &m_tasks;}
-	inline TimerQueue& getTimerQueue() { return m_timers; }
-	inline LinkPool& getLinkPool() { return m_linkPool; }
-	int interruptLoop();
-
-protected:
-	void recycleFds();
-	void mod(IFd*, uint32 events);
+	// 停止执行网络操作（将阻塞直到所有网络线程关闭）
 	void stop();
-	void closing();
 
-	// <网络是否正在运行>标志位
-	bool m_running;
+	// 监听指定的ip和端口，由传入的INetReactor处理新连接
+	Listener* listen(const string& ip, int port, INetReactor&);
 
-	// epoll句柄
-	int m_efd;
+	// 主动连接指定的ip和端口，由传入的INetReactor执行连接接收成功后的操作
+	Connector* connect(const string& ip, int port, INetReactor&, const char* remoteHostName);
 
-	// 用于唤醒epoll的socketpair，实际上是半双工通信，但这里我们只用来单工通信
-	int m_wakeup[2];
-
-	// 待销毁的socket列表
-	FdList m_deletingFdList;
-
-	// 删除socket列表的锁
-	mutex_t m_mutex;
-
-	// 任务队列
-	TaskQueue m_tasks;
-
-	// 定时器列表
-	TimerQueue m_timers;
-
-	// 连接池，保存预先分配好的连接
-	LinkPool m_linkPool;
+private:
+	// 从第2个网络线程起依次获取下一个网络线程（仅有1个网络线程时则只返回1个）
+	NetModel *nextNetModel();
 
 public:
-	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
-	char g_encryptBuf[MAX_PACKET_LEN];
+	// 网络模型: linux下epoll / windows下select
+	std::vector<NetModel*> m_nets;
 
-	// 预先申请的接收缓冲区
-	char g_recvBuf[MAX_PACKET_LEN];
+	// 下一次分配的网络线程索引
+	int m_allocNetIdx;
 
-	// 预先申请的发送缓冲区
-	char g_sendBuf[MAX_PACKET_LEN];
+	// 网络线程
+	Thread m_netThread;
+
+	// 是否已启动标志
+	bool m_started;
+
+	// 网络监听器列表
+	ListenerVec m_listeners;
+
+	// 网络连接器列表
+	ConnectorVec m_connectors;
 };
-
-#else
-
-// windows下select
-class Select
-{
-private:
-	// 定义对单个文件描述符的操作类别
-	enum FDOperator {
-		FD_ADD,			  // 添加fd
-		FD_DEL,			  // 删除fd
-		FD_ENABLE_READ,   // 可读
-		FD_DISABLE_READ,  // 不可读
-		FD_ENABLE_WRITE,  // 可写
-		FD_DISABLE_WRITE, // 不可写
-		FD_ENABLE_ALL,	  // 监听所有事件
-		FD_DISABLE_ALL	  // 取消监听所有事件
-	};
-
-	// fd列表
-	typedef std::vector<IFd*> LinkerList;
-
-
-public:
-	Select();
-
-	bool init(int initLinkCount, int linkGrowCount);
-
-	int eventLoop();
-	void reopen(IFd*) {}
-	void close();
-
-	void addFd(IFd*);
-	void delFd(IFd*);
-
-	void enableRead(IFd*);
-	void disableRead(IFd*);
-
-	void enableWrite(IFd*);
-	void disableWrite(IFd*);
-
-	void enableAll(IFd*);
-	void disableAll(IFd*);
-
-	inline TaskQueue* getTaskQueue() { return &m_tasks;}
-	inline TimerQueue& getTimerQueue() { return m_timers; }
-	inline LinkPool& getLinkPool() { return m_linkPool; }
-	int interruptLoop() { return 0; }
-
-private:
-	void updateFd(IFd*, FDOperator);
-	void closing();
-
-private:
-	// 当前维持的连接
-	LinkerList m_links;
-
-	// 连接池，保存预先分配好的连接
-	LinkPool m_linkPool;
-
-	// 任务队列
-	TaskQueue m_tasks;
-
-	// 定时器队列
-	TimerQueue m_timers;
-
-	// 当前最大fd
-	int m_maxfd;
-
-	// 读文件描述符集
-	fd_set m_rset;
-
-	// 写文件描述符集
-	fd_set m_wset;
-
-	// exception文件描述符集
-	fd_set m_eset;
-
-	// <网络是否正在运行>标志位
-	bool m_running;
-
-public:
-	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
-	char g_encryptBuf[MAX_PACKET_LEN];
-
-	// 预先申请的接收缓冲区
-	char g_recvBuf[MAX_PACKET_LEN];
-
-	// 预先申请的发送缓冲区
-	char g_sendBuf[MAX_PACKET_LEN];
-};
-
-#endif
 
 #endif //_net_h_

@@ -9,7 +9,7 @@
 #ifndef _gamesvrlink_h_
 #define _gamesvrlink_h_
 
-#include <net/netreactor.h>
+#include <net/netdefine.h>
 #include <net/serverlink.h>
 
 class Link;

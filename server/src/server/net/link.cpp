@@ -10,17 +10,16 @@
 
 #include <google/protobuf/message.h>
 
+#include "netmodel.h"
 #include "netaddress.h"
-#include "netreactor.h"
 #include "listener.h"
-#include "session.h"
 
-#include "log/log.h"
-#include "tool/sockettool.h"
 #include "protocol/message.h"
 
+#include "tool/sockettool.h"
 #include "tool/atomictool.h"
 
+#include "log/log.h"
 #include "basic/evbuffer.h"
 
 void Link::open()

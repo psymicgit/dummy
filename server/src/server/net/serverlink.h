@@ -9,9 +9,10 @@
 #ifndef _serverlink_h_
 #define _serverlink_h_
 
-#include "net/netreactor.h"
 #include "protocol/protocol.h"
 #include "tool/servertool.h"
+
+#include "net/netdefine.h"
 
 // 服务器与服务器间的连接
 class ServerLink : public INetReactor

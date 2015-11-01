@@ -9,7 +9,7 @@
 #ifndef _client_h_
 #define _client_h_
 
-#include <net/netreactor.h>
+#include <net/netdefine.h>
 #include <client.pb.h>
 
 class Link;

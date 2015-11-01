@@ -26,14 +26,8 @@
     <ClInclude Include="net\listener.h">
       <Filter>net</Filter>
     </ClInclude>
-    <ClInclude Include="net\net.h">
-      <Filter>net</Filter>
-    </ClInclude>
     <ClInclude Include="basic\taskqueue.h">
       <Filter>basic</Filter>
-    </ClInclude>
-    <ClInclude Include="net\netfactory.h">
-      <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="basic\singleton.h">
       <Filter>basic</Filter>
@@ -52,9 +46,6 @@
     </ClInclude>
     <ClInclude Include="basic\timerqueue.h">
       <Filter>basic</Filter>
-    </ClInclude>
-    <ClInclude Include="net\netreactor.h">
-      <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="basic\buffer.h">
       <Filter>basic</Filter>
@@ -171,6 +162,15 @@
     <ClInclude Include="def\global.h">
       <Filter>def</Filter>
     </ClInclude>
+    <ClInclude Include="net\netmodel.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\net.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\netdefine.h">
+      <Filter>net</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -216,12 +216,6 @@
       <Filter>log</Filter>
     </ClCompile>
     <ClCompile Include="net\listener.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="net\net.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="net\netfactory.cpp">
       <Filter>net</Filter>
     </ClCompile>
     <ClCompile Include="basic\thread.cpp">
@@ -314,6 +308,12 @@
     </ClCompile>
     <ClCompile Include="def\global.cpp">
       <Filter>def</Filter>
+    </ClCompile>
+    <ClCompile Include="net\netmodel.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\net.cpp">
+      <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

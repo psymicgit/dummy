@@ -141,10 +141,10 @@
     <ClInclude Include="net\listener.h" />
     <ClInclude Include="net\msgdispatcher.h" />
     <ClInclude Include="net\msghandler.h" />
-    <ClInclude Include="net\net.h" />
+    <ClInclude Include="net\netdefine.h" />
+    <ClInclude Include="net\netmodel.h" />
     <ClInclude Include="net\netaddress.h" />
-    <ClInclude Include="net\netfactory.h" />
-    <ClInclude Include="net\netreactor.h" />
+    <ClInclude Include="net\net.h" />
     <ClInclude Include="net\serverlink.h" />
     <ClInclude Include="protocol\message.h" />
     <ClInclude Include="protocol\netmsghandler.h" />
@@ -187,8 +187,8 @@
     <ClCompile Include="net\link.cpp" />
     <ClCompile Include="net\listener.cpp" />
     <ClCompile Include="net\net.cpp" />
+    <ClCompile Include="net\netmodel.cpp" />
     <ClCompile Include="net\netaddress.cpp" />
-    <ClCompile Include="net\netfactory.cpp" />
     <ClCompile Include="net\serverlink.cpp" />
     <ClCompile Include="protocol\message.cpp" />
     <ClCompile Include="server.cpp" />

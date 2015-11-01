@@ -9,7 +9,7 @@
 #ifndef _link_h_
 #define _link_h_
 
-#include "net.h"
+#include "netdefine.h"
 #include "netaddress.h"
 #include "basic/buffer.h"
 #include "basic/evbuffer-internal.h"

@@ -11,6 +11,7 @@
 
 #include "protocol/message.h"
 #include "tool/servertool.h"
+#include "net/netmodel.h"
 
 std::string ServerLink::name()
 {

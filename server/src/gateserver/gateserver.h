@@ -45,7 +45,7 @@ public:
 
 private:
 	// 外网通信中心：负责与外网进行通信，如：管理玩家的连接
-	NetFactory m_wan;
+	Net m_wan;
 
 	// 与游戏服的连接
 	GameSvrLink *m_gamesvrLink;

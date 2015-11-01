@@ -10,11 +10,10 @@
 #define _connector_h_
 
 #include "netaddress.h"
-#include "net/net.h"
+#include "netdefine.h"
 
-class NetFactory;
-
-class INetReactor;
+class Net;
+class NetModel;
 
 // 网络连接器：用于主动向指定的<ip,端口>发起连接，如果连接不上将定时尝试重连直到成功
 class Connector : public IFd
@@ -30,7 +29,7 @@ class Connector : public IFd
 	};
 
 public:
-	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, const char* remoteHostName, NetFactory *pNetFactory);
+	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, const char* remoteHostName, Net*);
 
 	// 初始化本连接器
 	bool open();
@@ -76,7 +75,7 @@ private:
 	INetReactor *m_logic;
 
 	// 网络中心
-	NetModel *m_net;
+	NetModel *m_netModel;
 
 	// 本连接器的套接字
 	socket_t m_sockfd;
@@ -94,7 +93,7 @@ private:
 	std::string m_remoteHostName;
 
 	// 网络中心
-	NetFactory *m_netNetFactory;
+	Net *m_net;
 };
 
 #endif //_connector_h_

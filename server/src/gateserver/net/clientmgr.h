@@ -9,7 +9,7 @@
 #ifndef _clientmgr_h_
 #define _clientmgr_h_
 
-#include <net/netreactor.h>
+#include <net/netdefine.h>
 #include <net/msgdispatcher.h>
 #include <net/client.h>
 #include <basic/objectpool.h>

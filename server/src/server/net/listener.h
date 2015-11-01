@@ -9,19 +9,19 @@
 #ifndef _listener_h_
 #define _listener_h_
 
-#include "net.h"
+#include "netdefine.h"
 #include "netaddress.h"
 
 class INetReactor;
 class Link;
 class NetAddress;
-class NetFactory;
+class Net;
 
 // 网络监听器，监听指定端口上接收到的新连接
 class Listener : public IFd
 {
 public:
-	Listener(NetModel*, INetReactor*, NetFactory*);
+	Listener(NetModel*, INetReactor*, Net*);
 
 	// 开始监听
 	virtual bool open(const string& ip, int port);
@@ -53,7 +53,7 @@ public:
 
 private:
 	// 网络中心
-	NetModel *m_net;
+	NetModel *m_netModel;
 
 	// 与本监听器绑定的逻辑实例
 	INetReactor *m_logic;
@@ -61,7 +61,7 @@ private:
 	// 正在监听的socket
 	socket_t m_listenFd;
 
-	NetFactory *m_netNetFactory;
+	Net *m_net;
 };
 
 #endif //_listener_h_

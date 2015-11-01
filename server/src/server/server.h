@@ -11,8 +11,7 @@
 
 #include "protocol/protocol.h"
 
-#include "net/netreactor.h"
-#include "net/netfactory.h"
+#include "net/net.h"
 #include "net/msgdispatcher.h"
 
 #include "basic/taskqueue.h"
@@ -104,7 +103,7 @@ public:
 	int m_zoneId;
 
 	// 内网中心：负责与内网中其他服务器进行通信
-	NetFactory m_lan;
+	Net m_lan;
 
 protected:
 	// 是否已退出标志位

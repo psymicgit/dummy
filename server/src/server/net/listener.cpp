@@ -11,14 +11,14 @@
 #include "tool/sockettool.h"
 #include "net/netaddress.h"
 #include "net/link.h"
-#include "net/netreactor.h"
-#include "net/netfactory.h"
+#include "net/net.h"
+#include "net/netmodel.h"
 
-Listener::Listener(NetModel *pNet, INetReactor *pNetReactor, NetFactory *pNetFactory)
-	: m_net(pNet)
+Listener::Listener(NetModel *netModel, INetReactor *pNetReactor, Net *net)
+	: m_netModel(netModel)
 	, m_logic(pNetReactor)
 	, m_listenFd(0)
-	, m_netNetFactory(pNetFactory)
+	, m_net(net)
 {
 
 }
@@ -55,10 +55,10 @@ bool Listener::open(const string & ip, int port)
 	}
 
 	// 将本监听器注册到网络
-	m_net->addFd(this);
+	m_netModel->addFd(this);
 
 	// 注册可读事件：对于非阻塞listen，当接收到新连接时，描述符变成可读
-	m_net->enableRead(this);
+	m_netModel->enableRead(this);
 	return true;
 }
 
@@ -67,7 +67,7 @@ void Listener::close()
 	LOG_DEBUG << m_logic->name() << " stop listening at <" << m_listenAddr.toIpPort() << ">";
 
 	socktool::closeSocket(m_listenFd);
-	m_net->delFd(this);
+	m_netModel->delFd(this);
 }
 
 void Listener::erase()
@@ -110,7 +110,7 @@ void Listener::handleRead()
 			} else {
 				LOG_SOCKET_ERR(m_listenFd, err) << m_logic->name() << " accept failed, restart listenning now";
 				//! if too many open files occur, need to restart epoll event
-				m_net->reopen(this);
+				m_netModel->reopen(this);
 				break;
 			}
 		}
@@ -154,8 +154,8 @@ void Listener::handleError()
 
 Link* Listener::createLink(socket_t newfd, NetAddress &peerAddr)
 {
-	NetModel *net = m_netNetFactory->nextNet();
+	NetModel *netModel = m_net->nextNetModel();
 
-	LinkPool &linkPool = net->getLinkPool();
-	return linkPool.alloc(newfd, m_listenAddr, peerAddr, net, m_logic);
+	LinkPool &linkPool = netModel->getLinkPool();
+	return linkPool.alloc(newfd, m_listenAddr, peerAddr, netModel, m_logic);
 }

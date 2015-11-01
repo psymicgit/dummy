@@ -9,8 +9,7 @@
 #ifndef _userlink_h_
 #define _userlink_h_
 
-
-#include <net/netreactor.h>
+#include <net/netdefine.h>
 #include <net/serverlink.h>
 
 class Link;

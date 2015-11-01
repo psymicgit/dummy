@@ -12,21 +12,21 @@
 
 #include "tool/sockettool.h"
 #include "net/netaddress.h"
-#include "net/netreactor.h"
-#include "net/netfactory.h"
+#include "net/net.h"
 #include "net/link.h"
+#include "net/netmodel.h"
 #include "basic/timerqueue.h"
 #include "basic/taskqueue.h"
 
-Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *net, const char* remoteHostName, NetFactory *pNetFactory)
+Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *netModel, const char* remoteHostName, Net *net)
 	: m_peerAddr(peerAddr)
 	, m_logic(netReactor)
-	, m_net(net)
+	, m_netModel(netModel)
 	, m_retryDelayMs(init_retry_delay_ms)
 	, m_state(StateDisconnected)
 	, m_errno(0)
 	, m_remoteHostName(remoteHostName)
-	, m_netNetFactory(pNetFactory)
+	, m_net(net)
 {
 	m_sockfd = socktool::createSocket();
 	socktool::setNonBlocking(m_sockfd);
@@ -136,8 +136,8 @@ void Connector::handleError()
 void Connector::close()
 {
 	//LOG_INFO << "Connector::close, socket = " << m_sockfd;
-	m_net->disableAll(this);
-	m_net->delFd(this);
+	m_netModel->disableAll(this);
+	m_netModel->delFd(this);
 }
 
 void Connector::erase()
@@ -176,15 +176,15 @@ bool Connector::connecting()
 {
 	if (m_state == StateDisconnected) {
 		// 将本连接器注册到网络
-		m_net->addFd(this);
+		m_netModel->addFd(this);
 
 		// 注册写事件
-		m_net->enableWrite(this);
+		m_netModel->enableWrite(this);
 
 		m_state = StateConnecting;
 	} else if(m_state == StateConnecting) {
 		// 重新注册写事件（但不需要将本连接器重新注册到网络）
-		m_net->enableWrite(this);
+		m_netModel->enableWrite(this);
 	}
 
 	return true;
@@ -206,7 +206,7 @@ bool Connector::retry()
 
 	if (m_state == StateConnecting) {
 		// 屏蔽所有事件，防止无限触发exception
-		m_net->disableAll(this);
+		m_netModel->disableAll(this);
 
 #ifndef WIN
 		m_state = StateDisconnected;
@@ -214,10 +214,10 @@ bool Connector::retry()
 	}
 
 	// 设置定时任务：隔一段时间后重新连接
-	TimerQueue &timerQueue = m_net->getTimerQueue();
+	TimerQueue &timerQueue = m_netModel->getTimerQueue();
 	timerQueue.runAfter(boost::bind(&Connector::connect, this), m_retryDelayMs);
 
-	m_net->interruptLoop();
+	m_netModel->interruptLoop();
 
 	// 重连时间 = 重连时间 * 2
 	m_retryDelayMs = MIN(m_retryDelayMs + init_retry_delay_ms, max_retry_delay_ms);
@@ -226,12 +226,12 @@ bool Connector::retry()
 
 Link* Connector::createLink(socket_t newfd, NetAddress &peerAddr)
 {
-	NetModel *net = m_netNetFactory->nextNet();
+	NetModel *netModel = m_net->nextNetModel();
 
-	LinkPool &linkPool = net->getLinkPool();
+	LinkPool &linkPool = netModel->getLinkPool();
 	NetAddress localAddr(socktool::getLocalAddr(newfd));
 
-	Link *link = linkPool.alloc(newfd, localAddr, peerAddr, net, m_logic);
+	Link *link = linkPool.alloc(newfd, localAddr, peerAddr, netModel, m_logic);
 	if (NULL == link) {
 		return NULL;
 	}
