@@ -18,9 +18,9 @@
 #include "basic/timerqueue.h"
 #include "basic/taskqueue.h"
 
-Connector::Connector(NetAddress &peerAddr, INetReactor *netReactor, NetModel *netModel, const char* remoteHostName, Net *net)
+Connector::Connector(NetAddress &peerAddr, INetLogic *logic, NetModel *netModel, const char* remoteHostName, Net *net)
 	: m_peerAddr(peerAddr)
-	, m_logic(netReactor)
+	, m_logic(logic)
 	, m_netModel(netModel)
 	, m_retryDelayMs(init_retry_delay_ms)
 	, m_state(StateDisconnected)
@@ -129,7 +129,7 @@ void Connector::handleWrite()
 
 void Connector::handleError()
 {
-	// LOG_SYSTEM_ERR << m_pNetReactor->name() << " socket<" << m_sockfd << ">";
+	// LOG_SYSTEM_ERR << m_logic->name() << " socket<" << m_sockfd << ">";
 	retry();
 }
 
@@ -148,7 +148,7 @@ void Connector::erase()
 bool Connector::onConnected()
 {
 	// 成功连接上对端
-	Link* link = createLink(m_sockfd, m_peerAddr);
+	Link* link = allocLink(m_sockfd, m_peerAddr);
 	if (NULL == link) {
 		LOG_ERROR << m_logic->name() << " connector create link failed, socket = " << m_sockfd;
 		this->close();
@@ -163,7 +163,7 @@ bool Connector::onConnected()
 	TaskQueue::TaskList taskList;
 
 	// 将连接成功的消息投到业务层
-	taskList.push_back(boost::bind(&INetReactor::onConnected, m_logic, link, link->getLocalAddr(), m_peerAddr));
+	taskList.push_back(boost::bind(&INetLogic::onConnected, m_logic, link, link->getLocalAddr(), m_peerAddr));
 
 	// 等业务层处理完新连接后，才允许该连接开始读
 	taskList.push_back(boost::bind(&NetModel::enableRead, link->m_net, link));
@@ -224,7 +224,7 @@ bool Connector::retry()
 	return true;
 }
 
-Link* Connector::createLink(socket_t newfd, NetAddress &peerAddr)
+Link* Connector::allocLink(socket_t newfd, NetAddress &peerAddr)
 {
 	NetModel *netModel = m_net->nextNetModel();
 

@@ -15,7 +15,7 @@
 class Link;
 class NetAddress;
 
-class UserLink : public INetReactor
+class UserLink : public INetLogic
 {
 	virtual void OnDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 

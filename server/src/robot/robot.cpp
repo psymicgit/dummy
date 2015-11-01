@@ -10,21 +10,21 @@
 
 #include <net/netaddress.h>
 #include <net/link.h>
+#include <net/netmodel.h>
+
+#include <protocol.pb.h>
 #include <client.pb.h>
 #include <protocol/message.h>
-#include <tool/encrypttool.h>
 #include <protocol.pb.h>
-#include "robotmgr.h"
-
 #include "http/handshakehttpcmd.h"
 #include <tool/randtool.h>
 #include <tool/echotool.h>
 #include <tool/ticktool.h>
+#include <tool/encrypttool.h>
 
-#include <protocol.pb.h>
-#include <client.pb.h>
 #include <basic/evbuffer.h>
 
+#include "robotmgr.h"
 
 Robot::Robot()
 	: m_link(NULL)
@@ -133,7 +133,7 @@ void Robot::handleMsg()
 		uint8* encryptBuf =  (uint8*)(peek + sizeof(NetMsgHead));
 		int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
-		if(!encrypttool::decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
+		if(!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
 			LOG_ERROR << "robot [" << link->getLocalAddr().toIpPort() << "] <-> gatesvr [" << link->getPeerAddr().toIpPort()
 			          << "] receive invalid msg[len=" << encryptBufLen << "]";
 			evbuffer_drain(dst, msgLen);
@@ -183,7 +183,7 @@ bool Robot::send(int msgId, Message &msg)
 	uint8* decryptBuf = (uint8*)(m_link->m_net->g_encryptBuf + headSize);
 	int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
 
-	encrypttool::encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));
+	encrypttool::xor_encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));
 
 	NetMsgHead* pHeader = (NetMsgHead*)m_link->m_net->g_encryptBuf;
 

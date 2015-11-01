@@ -17,10 +17,10 @@ class TaskQueue;
 static const int MAX_PACKET_LEN = 128 * 1024;
 
 // 网络逻辑实例，用于捕获网络上发生的事件
-class INetReactor
+class INetLogic
 {
 public:
-	virtual ~INetReactor() {}
+	virtual ~INetLogic() {}
 
 	// 获取本网络逻辑实例的名称
 	virtual std::string name() = 0;

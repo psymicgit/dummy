@@ -54,6 +54,7 @@ public:
 	static bool resolve(string hostname, NetAddress* result);
 
 public:
+	// 存储的实际地址数据
 	struct sockaddr_in m_addr;
 };
 

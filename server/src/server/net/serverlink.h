@@ -15,7 +15,7 @@
 #include "net/netdefine.h"
 
 // 服务器与服务器间的连接
-class ServerLink : public INetReactor
+class ServerLink : public INetLogic
 {
 public:
 	ServerLink()

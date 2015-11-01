@@ -28,10 +28,7 @@ bool Net::init(int threadCnt, int initLinkCnt)
 {
 	assert(threadCnt > 0);
 
-	// m_taskQueuePool = new task_queue_pool_t(m_threadCnt);
-
-	// m_net.init(initLinkCnt, 1000);
-
+	// 初始化每个网络线程需要的网络资源
 	for (int i = 0; i < threadCnt; i++) {
 		NetModel *net = new NetModel;
 		if (NULL == net) {
@@ -43,7 +40,6 @@ bool Net::init(int threadCnt, int initLinkCnt)
 		m_nets.push_back(net);
 	}
 
-	// m_queuePool.init(threadCnt);
 	return true;
 }
 
@@ -55,12 +51,7 @@ void Net::start()
 
 	m_started = true;
 
-#ifndef WIN
-	// m_thread.create_thread(task_queue_pool_t::gen_task(m_taskQueuePool), m_threadCnt);
-#endif
-
-	// m_thread.createThread(Task(&runNet, this), 1);
-
+	// 启动各个网络线程
 	for (size_t i = 0; i < m_nets.size(); i++) {
 		NetModel *net = m_nets[i];
 		m_netThread.createThread(boost::bind(&runNet, net), 1);
@@ -107,9 +98,6 @@ void Net::stop()
 
 	m_nets.clear();
 
-	// 	delete m_taskQueuePool;
-	// 	m_taskQueuePool = NULL;
-
 	m_started = false;
 
 	m_listeners.clear();
@@ -118,7 +106,7 @@ void Net::stop()
 	LOG_WARN << "stop net successful";
 }
 
-Listener* Net::listen(const string& ip, int port, INetReactor &netReactor)
+Listener* Net::listen(const string& ip, int port, INetLogic &logic)
 {
 	if (0 == port) {
 		LOG_SYSTEM_ERR << "listen at <" << ip << ": " << port << "> failed, port = 0!";
@@ -126,7 +114,7 @@ Listener* Net::listen(const string& ip, int port, INetReactor &netReactor)
 	}
 
 	// 创建一个网络监听器，该网络监听器将被注册到第1个网络中
-	Listener* listener = new Listener(m_nets[0], &netReactor, this);
+	Listener* listener = new Listener(m_nets[0], &logic, this);
 	if (NULL == listener) {
 		LOG_SYSTEM_ERR << "listen at <" << ip << ": " << port << "> failed, not enough memory";
 		return NULL;
@@ -143,12 +131,12 @@ Listener* Net::listen(const string& ip, int port, INetReactor &netReactor)
 	return listener;
 }
 
-Connector* Net::connect(const string& ip, int port, INetReactor &netReactor, const char* remoteHostName)
+Connector* Net::connect(const string& ip, int port, INetLogic &logic, const char* remoteHostName)
 {
 	NetAddress peerAddr(ip, port);
 
 	// 创建一个网络连接器，该网络连接器将被注册到第1个网络中
-	Connector* connector = new Connector(peerAddr, &netReactor, m_nets[0], remoteHostName, this);
+	Connector* connector = new Connector(peerAddr, &logic, m_nets[0], remoteHostName, this);
 	if (NULL == connector) {
 		LOG_SYSTEM_ERR << "connect to <" << ip << ": " << port << "> failed, not enough memory";
 		return NULL;

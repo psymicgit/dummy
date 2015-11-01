@@ -22,7 +22,7 @@ class ConnectReq;
 class ServerLink;
 
 // 服务器基类
-class Server : public INetReactor
+class Server : public INetLogic
 {
 public:
 	// 服务器实例，相对于调用Instance()方法来说效率高一点

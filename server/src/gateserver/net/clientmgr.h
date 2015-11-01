@@ -17,7 +17,7 @@
 class Client;
 
 // 客户端管理中心，管理当前在线的客户端连接实例
-class ClientMgr : public INetReactor
+class ClientMgr : public INetLogic
 {
 private:
 	typedef std::tr1::unordered_map<uint32, Client*> ClientMap;

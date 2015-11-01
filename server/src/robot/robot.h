@@ -9,8 +9,8 @@
 #ifndef _robot_h_
 #define _robot_h_
 
-#include <net/netreactor.h>
 #include <client.pb.h>
+#include <net/netdefine.h>
 
 class TaskQueue;
 class RobotMgr;
@@ -20,7 +20,7 @@ enum RobotState {
 };
 
 // »úÆ÷ÈË
-class Robot : public INetReactor
+class Robot : public INetLogic
 {
 public:
 	Robot();

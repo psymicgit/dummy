@@ -12,7 +12,7 @@
 #include "netdefine.h"
 #include "netaddress.h"
 
-class INetReactor;
+class INetLogic;
 class Link;
 class NetAddress;
 class Net;
@@ -21,7 +21,7 @@ class Net;
 class Listener : public IFd
 {
 public:
-	Listener(NetModel*, INetReactor*, Net*);
+	Listener(NetModel*, INetLogic*, Net*);
 
 	// 开始监听
 	virtual bool open(const string& ip, int port);
@@ -38,14 +38,15 @@ public:
 	// 处理可读事件：对于非阻塞listen，当接收到新连接时，描述符变成可读
 	virtual void handleRead();
 
-	// 处理可写事件
+	// 处理可写事件（正常是接收不到的）
 	virtual void handleWrite();
 
-	// 处理异常事件
+	// 处理异常事件（正常是接收不到的）
 	virtual void handleError();
 
 private:
-	Link* createLink(socket_t newfd, NetAddress &peerAddr);
+	// 申请一个新的连接实例
+	Link* allocLink(socket_t newfd, NetAddress &peerAddr);
 
 public:
 	// 当前正在监听的地址
@@ -56,7 +57,7 @@ private:
 	NetModel *m_netModel;
 
 	// 与本监听器绑定的逻辑实例
-	INetReactor *m_logic;
+	INetLogic *m_logic;
 
 	// 正在监听的socket
 	socket_t m_listenFd;

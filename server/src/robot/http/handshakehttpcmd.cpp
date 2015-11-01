@@ -16,7 +16,7 @@ bool HandShakeHttpCmd::init()
 	m_url = "http://127.0.0.1/phpinfo.php";
 
 	m_fields =
-	    "time=" + std::string(echotool::getmsg("%u", timetool::FormatNow())) +
+	    "time=" + std::string(echotool::getmsg("%u", timetool::now())) +
 	    "&deviceid=" + m_robot->m_deviceid +
 	    "&ip=" + m_robot->m_ip;
 

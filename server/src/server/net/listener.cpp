@@ -14,9 +14,9 @@
 #include "net/net.h"
 #include "net/netmodel.h"
 
-Listener::Listener(NetModel *netModel, INetReactor *pNetReactor, Net *net)
+Listener::Listener(NetModel *netModel, INetLogic *logic, Net *net)
 	: m_netModel(netModel)
-	, m_logic(pNetReactor)
+	, m_logic(logic)
 	, m_listenFd(0)
 	, m_net(net)
 {
@@ -119,7 +119,7 @@ void Listener::handleRead()
 		NetAddress peerAddr(*addr_in);
 
 		// 创建新的连接对象
-		Link* link = createLink(newfd, peerAddr);
+		Link* link = allocLink(newfd, peerAddr);
 		if (NULL == link) {
 			socktool::closeSocket(newfd);
 
@@ -133,7 +133,7 @@ void Listener::handleRead()
 		TaskQueue::TaskList tasks;
 
 		// 将接收到新连接的消息投到业务层
-		tasks.push_back(boost::bind(&INetReactor::onAccepted, m_logic, link, m_listenAddr, peerAddr));
+		tasks.push_back(boost::bind(&INetLogic::onAccepted, m_logic, link, m_listenAddr, peerAddr));
 
 		// 等业务层处理完新连接后，才允许该连接开始读
 		tasks.push_back(boost::bind(&NetModel::enableRead, link->m_net, link));
@@ -152,7 +152,7 @@ void Listener::handleError()
 	LOG_ERROR << m_logic->name();
 }
 
-Link* Listener::createLink(socket_t newfd, NetAddress &peerAddr)
+Link* Listener::allocLink(socket_t newfd, NetAddress &peerAddr)
 {
 	NetModel *netModel = m_net->nextNetModel();
 

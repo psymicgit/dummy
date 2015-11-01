@@ -66,7 +66,7 @@ void Link::closing()
 		// 若数据未发送完毕，则暂缓关闭，只停止接收数据，等待之前的发送操作执行完毕后再关闭
 		if (evbuffer_get_length(&m_sendBuf) >  0) {
 			if (m_isWaitingClose) {
-				// LOG_ERROR << m_pNetReactor->name() << " is waiting close";
+				// LOG_ERROR << m_logic->name() << " is waiting close";
 				return;
 			}
 
@@ -80,12 +80,12 @@ void Link::closing()
 				LOG_ERROR << m_logic->name() << " m_sendBuf != empty(), left size = " << evbuffer_get_length(&m_sendBuf) << ", socket = " << m_sockfd;
 			}
 
-			// LOG_ERROR << m_pNetReactor->name() << " is waiting write";
+			// LOG_ERROR << m_logic->name() << " is waiting write";
 			return;
 		}
 	}
 
-	// LOG_INFO << m_pNetReactor->name() << " Link::closing";
+	// LOG_INFO << m_logic->name() << " Link::closing";
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
@@ -136,7 +136,7 @@ void Link::onSend()
 // 	{
 // 		lock_guard_t<> lock(m_sendBufLock);
 // 		if(m_sendBuf.empty()) {
-// 			LOG_ERROR << m_pNetReactor->name() << " m_sendBuf.empty(), m_isWaitingWrite = " << m_isWaitingWrite;
+// 			LOG_ERROR << m_logic->name() << " m_sendBuf.empty(), m_isWaitingWrite = " << m_isWaitingWrite;
 // 			return;
 // 		}
 // 	}
@@ -155,13 +155,13 @@ void Link::onSend()
 	int left = trySend(buf);
 	if (left < 0) {
 		// 发送异常: 则关闭连接
-		// LOG_ERROR << m_pNetReactor->name() << " = socket<" << m_sockfd << "> trySend fail, ret = " << left;
+		// LOG_ERROR << m_logic->name() << " = socket<" << m_sockfd << "> trySend fail, ret = " << left;
 		m_error = true;
 		this ->close();
 		return;
 	} else if (left > 0) {
 		// 数据未能全部发送: 则将残余数据重新拷贝到发送缓冲区的头部以保持正确的发送顺序
-		// LOG_ERROR << m_pNetReactor->name() << " register write, socket = " << m_sockfd;
+		// LOG_ERROR << m_logic->name() << " register write, socket = " << m_sockfd;
 		{
 			lock_guard_t<> lock(m_sendBufLock);
 			int size = evbuffer_get_length(&m_sendBuf);
@@ -178,7 +178,7 @@ void Link::onSend()
 		// 注册写事件，以待当本连接可写时再尝试发送
 		m_net->enableWrite(this);
 #ifdef WIN
-		// LOG_INFO << m_pNetReactor->name() << " register write, m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes();
+		// LOG_INFO << m_logic->name() << " register write, m_sendBuf.readableBytes() = " << m_sendBuf.readableBytes();
 #endif
 	} else {
 		// 本次数据已发送成功: 检查本连接是否已<待关闭>，是的话，若本次数据已全部发送成功且在此期间没有新的数据等待发送，则执行close操作
@@ -188,7 +188,7 @@ void Link::onSend()
 			isWaitingClose = (m_isWaitingClose && (0 == evbuffer_get_length(&m_sendBuf)));
 
 // 			if(isWaitingClose) {
-// 				LOG_ERROR << m_pNetReactor->name() << " isWaitingClose = true, m_sendBuf.size() = " << m_sendBuf.readableBytes() << " && m_isWaitingWrite = " << m_isWaitingWrite;
+// 				LOG_ERROR << m_logic->name() << " isWaitingClose = true, m_sendBuf.size() = " << m_sendBuf.readableBytes() << " && m_isWaitingWrite = " << m_isWaitingWrite;
 // 			}
 		}
 
@@ -346,7 +346,7 @@ void Link::handleRead()
 			totalRecvLen += nread;
 		} else if (0 == nread) { // eof
 			// 接收到0字节的数据: 说明已检测到对端关闭，此时直接关闭本连接，不再处理未发送的数据
-			// LOG_WARN << m_pNetReactor->name() << " read 0, closed! buffer len = " << m_recvBuf.readableBytes() << ", g_closecnt = " << g_closecnt;
+			// LOG_WARN << m_logic->name() << " read 0, closed! buffer len = " << m_recvBuf.readableBytes() << ", g_closecnt = " << g_closecnt;
 			m_isPeerClosed = true;
 			this->close();
 			break;
@@ -360,7 +360,7 @@ void Link::handleRead()
 				// LOG_WARN << "read task socket<" << m_sockfd << "> EWOULDBLOCK || EAGAIN, err = " << err;
 				break;
 			} else {
-				// LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << " recv fail, err = " << err << ", history recv buf size = " << m_recvBuf.readableBytes();
+				// LOG_SOCKET_ERR(m_sockfd, err) << m_logic->name() << " recv fail, err = " << err << ", history recv buf size = " << m_recvBuf.readableBytes();
 				m_error = true;
 				this->close();
 				break;
@@ -388,7 +388,7 @@ void Link::handleRead()
 
 void Link::handleWrite()
 {
-	// LOG_INFO << m_pNetReactor->name() << " socket <" << m_sockfd << "> is writable";
+	// LOG_INFO << m_logic->name() << " socket <" << m_sockfd << "> is writable";
 	if (!isopen()) {
 		return;
 	}
@@ -442,7 +442,7 @@ int Link::trySend(evbuffer *buffer)
 				return nleft;
 
 			default:
-				// LOG_SOCKET_ERR(m_sockfd, err) << m_pNetReactor->name() << "  send fail, err = " << err << ",nleft = " << nleft << ", nwritten = " << nwritten;
+				// LOG_SOCKET_ERR(m_sockfd, err) << m_logic->name() << "  send fail, err = " << err << ",nleft = " << nleft << ", nwritten = " << nwritten;
 				return -1;
 			}
 		}

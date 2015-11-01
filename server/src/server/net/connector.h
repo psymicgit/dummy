@@ -29,7 +29,7 @@ class Connector : public IFd
 	};
 
 public:
-	Connector(NetAddress &peerAddr, INetReactor*, NetModel*, const char* remoteHostName, Net*);
+	Connector(NetAddress &peerAddr, INetLogic*, NetModel*, const char* remoteHostName, Net*);
 
 	// 初始化本连接器
 	bool open();
@@ -64,15 +64,15 @@ public:
 	bool retry();
 
 private:
-	// 申请一个link
-	Link* createLink(socket_t newfd, NetAddress &peerAddr);
+	// 申请一个新的连接实例
+	Link* allocLink(socket_t newfd, NetAddress &peerAddr);
 
 private:
 	// 对端的网络地址
 	NetAddress m_peerAddr;
 
 	// 与本连接器绑定的逻辑实例
-	INetReactor *m_logic;
+	INetLogic *m_logic;
 
 	// 网络中心
 	NetModel *m_netModel;

@@ -9,10 +9,12 @@
 #ifndef _robotmgr_h_
 #define _robotmgr_h_
 
-#include <net/netreactor.h>
-#include <basic/taskqueue.h>
+#include <net/netdefine.h>
 #include <net/msgdispatcher.h>
-#include <net/netfactory.h>
+#include <net/net.h>
+
+#include <basic/taskqueue.h>
+#include <basic/timerqueue.h>
 
 #include "http/robothttpmgr.h"
 #include "robot.h"
@@ -77,7 +79,7 @@ public:
 	MsgDispatcher<Robot> m_dispatcher;
 
 	// 网络操作中心
-	NetFactory m_wan;
+	Net m_wan;
 
 	// http操作中心
 	RobotHttpMgr m_httpMgr;

@@ -2,7 +2,7 @@
 //< @file:   server\net\net.h
 //< @author: hongkunan
 //< @date:   2015年1月13日 14:10:49
-//< @brief:	 网络中心，提供listen、connect等网络操作接口
+//< @brief:	 网络中心，提供连接指定<ip:端口>、监听指定<端口>等网络操作接口
 //< Copyright (c) 2015 heihuo. All rights reserved.
 ///<------------------------------------------------------------------------------
 
@@ -17,9 +17,9 @@ class Thread;
 class Listener;
 class Link;
 class Connector;
-class INetReactor;
+class INetLogic;
 
-// 网络通信中心，提供listen、connect等网络操作接口
+// 网络通信中心，提供连接指定<ip:端口>、监听指定<端口>等网络操作接口
 class Net
 {
 	friend class Listener;
@@ -29,7 +29,7 @@ class Net
 	typedef std::vector<Connector*> ConnectorVec;
 
 private:
-	// 网络监听线程启动后将开始执行本方法
+	// 每个网络线程启动后将开始执行本方法
 	static void runNet(void *e);
 
 public:
@@ -44,11 +44,11 @@ public:
 	// 停止执行网络操作（将阻塞直到所有网络线程关闭）
 	void stop();
 
-	// 监听指定的ip和端口，由传入的INetReactor处理新连接
-	Listener* listen(const string& ip, int port, INetReactor&);
+	// 监听指定的ip和端口，由传入的INetLogic处理新连接
+	Listener* listen(const string& ip, int port, INetLogic&);
 
-	// 主动连接指定的ip和端口，由传入的INetReactor执行连接接收成功后的操作
-	Connector* connect(const string& ip, int port, INetReactor&, const char* remoteHostName);
+	// 主动连接指定的ip和端口，由传入的INetLogic执行连接接收成功后的操作
+	Connector* connect(const string& ip, int port, INetLogic&, const char* remoteHostName);
 
 private:
 	// 从第2个网络线程起依次获取下一个网络线程（仅有1个网络线程时则只返回1个）

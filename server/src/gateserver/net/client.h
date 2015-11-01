@@ -16,7 +16,7 @@ class Link;
 class ClientMgr;
 
 // 客户端连接
-class Client : public INetReactor
+class Client : public INetLogic
 {
 public:
 	Client();

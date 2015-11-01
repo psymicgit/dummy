@@ -16,7 +16,7 @@
 #include "protocol/protocol.h"
 
 class NetAddress;
-class INetReactor;
+class INetLogic;
 struct RingBufferBlock;
 
 struct evbuffer;
@@ -27,10 +27,10 @@ namespace google {namespace protobuf {class Message;}}
 class Link : public IFd
 {
 public:
-	explicit Link(int sockfd, NetAddress &localAddr, NetAddress &peerAddr, NetModel *pNet, INetReactor *pNetReactor)
+	explicit Link(int sockfd, NetAddress &localAddr, NetAddress &peerAddr, NetModel *pNet, INetLogic *logic)
 		: m_localAddr(localAddr)
 		, m_peerAddr(peerAddr)
-		, m_logic(pNetReactor)
+		, m_logic(logic)
 		, m_isAutoReconnect(false)
 		, m_closed(false)
 		, m_error(false)
@@ -107,7 +107,7 @@ public:
 	const NetAddress m_peerAddr;
 
 	// 本连接所对应的逻辑实例
-	INetReactor *m_logic;
+	INetLogic *m_logic;
 
 	// 自动重连标志位：标示本连接断开后是否需要自动重连
 	bool m_isAutoReconnect;
