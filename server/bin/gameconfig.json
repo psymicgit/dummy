@@ -1,6 +1,7 @@
 {
-	"name": "gameserver",
-	"server-id": "zone-type-idx",
+	"name"					: "gameserver",
+	"server-id"				: "zone-type-idx",
+	"sleep-ms-each-loop"	: 10,
 
 	"lan": {
 		"threads": 1,

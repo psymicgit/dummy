@@ -1,6 +1,6 @@
 {
-	"name": "dbserver",
-	"server-id": "zone-type-idx",
+	"name"		: "dbserver",
+	"server-id"	: "zone-type-idx",
 
 	"lan": {
 		"threads": 1,
@@ -10,24 +10,24 @@
 	},
 
 	"gamedb": {
-		"name":"gamedb",
-		"ip": "127.0.0.1",
-		"port": 3306,
-		"socket":"",		
-		"usr":"root",
-		"pwd":"1",
-		"charactset":"utf8",
-		"conn-pool-size":10
-	},
-
-	"logdb": {
-		"name":"logdb",
-		"ip": "127.0.0.1",
-		"port": 3306,
-		"socket":"",		
-		"usr":"root",
-		"pwd":"1",
-		"charactset":"utf8",
-		"conn-pool-size":10
+		"name"				: "gamedb",
+		"ip"				:  "127.0.0.1",
+		"port"				:  3306,
+		"socket"			: "",		
+		"usr"				: "root",
+		"pwd"				: "1",
+		"charactset"		: "utf8",
+		"conn-pool-size"	: 10
+	}, 
+ 
+	"logdb": { 
+		"name"				: "logdb",
+		"ip"				:  "127.0.0.1",
+		"port"				:  3306,
+		"socket"			: "",		
+		"usr"				: "root",
+		"pwd"				: "1",
+		"charactset"		: "utf8",
+		"conn-pool-size"	: 10
 	}
 }

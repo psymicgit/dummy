@@ -1,10 +1,10 @@
 {
-	"name": "gateserver",
-	"server-id": "zone-type-idx",
-	"enable-encrypt": "true",
-	"encrypt-key": "*#H#*(@HSDMJHD#JS",
-	"max-players": 8000,
-	"sleep-ms-each-loop": 10,
+	"name"				: "gateserver",
+	"server-id"			: "zone-type-idx",
+	"enable-encrypt"	: "true",
+	"encrypt-key"		: "*#H#*(@HSDMJHD#JS",
+	"max-players"		: 8000,
+	"sleep"				: 10,
 
 	"wan": {
 		"threads": 2,
