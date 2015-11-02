@@ -20,16 +20,17 @@ public:
 	void run();
 
 public:
-	SqlDBType m_dbtype;
+	SqlDBType		m_dbtype;
 
-	DBCommandList m_cmds;
+	DBCommandList	m_cmds;
 
-	mutex_t m_lock;
+	mutex_t			m_lock;
+
 	condition_var_t m_cond;
 
-	bool m_running;
+	bool			m_running;
 
-	Thread m_dbthread;
+	Thread			m_dbthread;
 };
 
 #endif

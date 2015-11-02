@@ -106,48 +106,35 @@ public:
 	const NetAddress m_localAddr;
 	const NetAddress m_peerAddr;
 
-	// 本连接所对应的逻辑实例
-	INetLogic *m_logic;
+	INetLogic*	m_logic;			// 本连接所对应的逻辑实例
 
-	// 自动重连标志位：标示本连接断开后是否需要自动重连
-	bool m_isAutoReconnect;
+	bool		m_isAutoReconnect;	// 自动重连标志位：标示本连接断开后是否需要自动重连
 
 public:
-	// 是否已关闭标志位：防止重复close
-	bool m_closed;
 
-	// 错误标志位：标示本连接是否曾发生过导致需要关闭连接的错误
-	bool m_error;
+	bool		m_closed;			// 是否已关闭标志位：防止重复close
 
-	// 是否正在等待关闭中
-	bool m_isWaitingClose;
+	bool		m_error;			// 错误标志位：标示本连接是否曾发生过导致需要关闭连接的错误
 
-	// 套接字
-	socket_t m_sockfd;
+	bool		m_isWaitingClose;	// 是否正在等待关闭中
 
-	// 网络中心
-	NetModel *m_net;
+	socket_t	m_sockfd;			// 套接字
 
-	// 发送缓冲区
-	evbuffer m_sendBuf;
+	NetModel*	m_net;				// 网络中心
 
-	// 接收缓冲区
-	evbuffer m_recvBuf;
+	evbuffer	m_sendBuf;			// 发送缓冲区
 
-	// 发送缓冲区锁
-	mutex_t m_sendBufLock;
+	evbuffer	m_recvBuf;			// 接收缓冲区
 
-	// 接收缓冲区锁
-	mutex_t m_recvBufLock;
+	mutex_t		m_sendBufLock;		// 发送缓冲区锁
 
-	// 是否已在等待网络层发送数据
-	bool m_isWaitingWrite;
+	mutex_t		m_recvBufLock;		// 接收缓冲区锁
 
-	// 是否已在等待业务层读取数据
-	bool m_isWaitingRead;
+	bool		m_isWaitingWrite;	// 是否已在等待网络层发送数据
 
-	// 对端是否已关闭
-	bool m_isPeerClosed;
+	bool		m_isWaitingRead;	// 是否已在等待业务层读取数据
+
+	bool		m_isPeerClosed;		// 对端是否已关闭
 };
 
 #endif //_link_h_

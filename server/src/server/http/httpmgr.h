@@ -15,8 +15,8 @@ class HttpCmd;
 
 // 发送到用户中心的http请求类型
 enum HttpCmdType {
-	EHCT_APP_PAY = 1,
-	EHCT_LEVEL = 2,
+	EHCT_APP_PAY	= 1,
+	EHCT_LEVEL		= 2,
 };
 
 class HttpMgr

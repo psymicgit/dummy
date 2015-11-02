@@ -37,15 +37,15 @@ void registerSignal()
 {
 #ifdef WIN
 	signal(SIGTERM, &handleSignal);
-	signal(SIGINT, &handleSignal);
+	signal(SIGINT,	&handleSignal);
 #else
 	struct sigaction act;
 	act.sa_handler = handleSignal;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = 0;
 
-	sigaction(SIGINT, &act, 0);
-	sigaction(SIGTERM, &act, 0);
+	sigaction(SIGINT,	&act, 0);
+	sigaction(SIGTERM,	&act, 0);
 #endif
 }
 
@@ -129,8 +129,8 @@ void Server::handleMsg(Link *link)
 
 		NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(buf, sizeof(NetMsgHead));
 
-		uint16 msgId = endiantool::networkToHost(head->msgId);
-		uint32 msgLen = endiantool::networkToHost(head->msgLen);
+		uint16 msgId	= endiantool::networkToHost(head->msgId);
+		uint32 msgLen	= endiantool::networkToHost(head->msgLen);
 
 		// ¼ì²â°ë°ü
 		if (msgLen > bytes) {

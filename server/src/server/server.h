@@ -96,27 +96,15 @@ public:
 	void unregisterServer(int svrId);
 
 public:
-	// 本服务器类别
-	ServerType m_svrType;
-
-	// 区Id
-	int m_zoneId;
-
-	// 内网中心：负责与内网中其他服务器进行通信
-	Net m_lan;
+	ServerType				m_svrType;		// 本服务器类别
+	int						m_zoneId;		// 区Id
+	Net						m_lan;			// 内网中心：负责与内网中其他服务器进行通信
 
 protected:
-	// 是否已退出标志位
-	bool m_isquit;
-
-	// 待执行的任务队列
-	TaskQueue m_taskQueue;
-
-	// 消息包派发器
-	MsgDispatcher<Link> m_dispatcher;
-
-	// 本服务器持有的与其他服务器的连接
-	ServerLinkMap m_svrLinkMap;
+	bool					m_isquit;		// 是否已退出标志位
+	TaskQueue				m_taskQueue;	// 待执行的任务队列
+	MsgDispatcher<Link>		m_dispatcher;	// 消息包派发器
+	ServerLinkMap			m_svrLinkMap;	// 本服务器持有的与其他服务器的连接
 };
 
 #endif //_server_h_

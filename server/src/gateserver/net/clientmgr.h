@@ -47,18 +47,15 @@ private:
 	uint32 allocClientId();
 
 public:
-	TaskQueue *m_taskQueue;
+	TaskQueue*				m_taskQueue;
 
-	uint32 m_allocClientId;
+	uint32					m_allocClientId;
 
-	// 当前在线的客户端列表
-	ClientMap m_clientMap;
+	ClientMap				m_clientMap;		// 当前在线的客户端列表
 
-	// 客户端消息派发器，派发客户端发来的消息
-	MsgDispatcher<Client> m_dispatcher;
+	MsgDispatcher<Client>	m_dispatcher;		// 客户端消息派发器，派发客户端发来的消息
 
-	// 客户端池
-	ObjectPool<Client> m_clientPool;
+	ObjectPool<Client>		m_clientPool;		// 客户端池
 };
 
 #endif //_clientmgr_h_

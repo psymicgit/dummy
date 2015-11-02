@@ -18,8 +18,8 @@ class NetModel;
 // 网络连接器：用于主动向指定的<ip,端口>发起连接，如果连接不上将定时尝试重连直到成功
 class Connector : public IFd
 {
-	static const int max_retry_delay_ms = 30 * 1000; // 尝试重连的最大间隔
-	static const int init_retry_delay_ms = 3000;	  // 第一次尝试重连的间隔
+	static const int max_retry_delay_ms		= 30 * 1000; // 尝试重连的最大间隔
+	static const int init_retry_delay_ms	= 3000;	  // 第一次尝试重连的间隔
 
 	// 连接所处的状态
 	enum ConnectState {
@@ -68,32 +68,15 @@ private:
 	Link* allocLink(socket_t newfd, NetAddress &peerAddr);
 
 private:
-	// 对端的网络地址
-	NetAddress m_peerAddr;
-
-	// 与本连接器绑定的逻辑实例
-	INetLogic *m_logic;
-
-	// 网络中心
-	NetModel *m_netModel;
-
-	// 本连接器的套接字
-	socket_t m_sockfd;
-
-	// 尝试重连的间隔
-	int m_retryDelayMs;
-
-	// 当前所处的连接状态：未连接、连接中、已连接成功
-	ConnectState m_state;
-
-	// 当前连接的socket错误码
-	int m_errno;
-
-	// 对端的业务名称
-	std::string m_remoteHostName;
-
-	// 网络中心
-	Net *m_net;
+	NetAddress		m_peerAddr;			// 对端的网络地址
+	INetLogic*		m_logic;			// 与本连接器绑定的逻辑实例
+	NetModel*		m_netModel;			// 网络中心
+	socket_t		m_sockfd;			// 本连接器的套接字
+	int				m_retryDelayMs;		// 尝试重连的间隔
+	ConnectState	m_state;			// 当前所处的连接状态：未连接、连接中、已连接成功
+	int				m_errno;			// 当前连接的socket错误码
+	std::string		m_remoteHostName;	// 对端的业务名称
+	Net*			m_net;				// 网络中心
 };
 
 #endif //_connector_h_

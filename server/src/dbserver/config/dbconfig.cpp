@@ -25,7 +25,7 @@ namespace inner
 
 bool DBConfig::load(const char* jsonConfig)
 {
-	char *json = filetool::get_whole_file_buf(jsonConfig);
+	char *json = filetool::open(jsonConfig);
 	if (NULL == json) {
 		return false;
 	}

@@ -44,17 +44,17 @@ public:
 	void syncExecute();
 
 protected:
-	CURL *m_curl; // URL的信息
+	CURL*		m_curl;				// URL的信息
 
-	Timestamp m_lastAddTime; // 上次添加URL请求时间
+	Timestamp	m_lastAddTime;		// 上次添加URL请求时间
 
-	char m_errorBuf[256]; //错误信息
+	char		m_errorBuf[256];	//错误信息
 
 	string		m_url;
 	string		m_fields;
-	string		m_html; // 返回的html页面结果
+	string		m_html;				// 返回的html页面结果
 
-	bool m_ok; // 是否成功执行本命令
+	bool		m_ok;				// 是否成功执行本命令
 };
 
 #endif //_httpcmd_h_

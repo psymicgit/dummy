@@ -62,9 +62,9 @@ template <typename LinkType>
 class MsgDispatcher
 {
 private:
-	typedef tr1::unordered_map<int, Callback<LinkType>*> CallbackMap;
+	typedef tr1::unordered_map<int, Callback<LinkType>*>	CallbackMap;
 	typedef tr1::unordered_map<int, IMsgHandler<LinkType>*> MsgHandlerMap;
-	typedef std::vector<IMsgHandler<LinkType>*> MsgHandlerVec;
+	typedef std::vector<IMsgHandler<LinkType>*>				MsgHandlerVec;
 
 public:
 	template <typename MessageType>
@@ -101,6 +101,7 @@ public:
 		for (size_t i = 0; i < m_msgHandlerVec.size(); i++) {
 			IMsgHandler<LinkType> *msgHandler = m_msgHandlerVec[i];
 			msgHandler->clear();
+
 			delete msgHandler;
 		}
 
@@ -109,8 +110,8 @@ public:
 
 private:
 	// 消息回调map
-	CallbackMap m_callbackMap;
-	MsgHandlerVec m_msgHandlerVec;;
+	CallbackMap		m_callbackMap;
+	MsgHandlerVec	m_msgHandlerVec;;
 };
 
 #endif //_msgdispatcher_h_

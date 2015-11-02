@@ -18,10 +18,10 @@ enum ECHO_COLOR {
 
 void ColoredPrintf(ECHO_COLOR color, const char* fmt, ...);
 
-#define ECHO_ERR(fmt, ...) ColoredPrintf(COLOR_RED, fmt"\n", __VA_ARGS__)
-#define ECHO_OK(fmt, ...) ColoredPrintf(COLOR_GREEN, fmt"\n", __VA_ARGS__)
-#define ECHO_WARN(fmt, ...) ColoredPrintf(COLOR_YELLOW, fmt"\n", __VA_ARGS__)
-#define ECHO_INFO(fmt, ...) fprintf(stdout, fmt"\n", __VA_ARGS__);
+#define ECHO_ERR(fmt, ...)		ColoredPrintf(COLOR_RED, fmt"\n", __VA_ARGS__)
+#define ECHO_OK(fmt, ...)		ColoredPrintf(COLOR_GREEN, fmt"\n", __VA_ARGS__)
+#define ECHO_WARN(fmt, ...)		ColoredPrintf(COLOR_YELLOW, fmt"\n", __VA_ARGS__)
+#define ECHO_INFO(fmt, ...)		fprintf(stdout, fmt"\n", __VA_ARGS__);
 
 
 namespace echotool

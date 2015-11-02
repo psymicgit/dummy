@@ -28,7 +28,7 @@ namespace filetool
 
 	// 以二进制方式读取整个文件，根据文件大小分配缓冲区，将文件内容存入缓冲区中并返回
 	// 该缓冲区通过new分配，所以要手动delete[]
-	char* get_whole_file_buf(const std::string &path);
+	char* open(const char *path);
 
 	// 以字符方式读取整个文件，返回文本内容字符串（文件大时不适合用此方法,因为返回的string将被深拷贝）
 	bool get_whole_file_str(const std::string &path, std::string &text);

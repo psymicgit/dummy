@@ -30,13 +30,13 @@ public:
 
 	void init()
 	{
-		registerMsg(eLoginReq, OnLoginReq);
-		registerMsg(eAuthReq, OnAuthReq);
+		registerMsg(eLoginReq,		OnLoginReq);
+		registerMsg(eAuthReq,		OnAuthReq);
 
 		// ≤‚ ‘
-		registerMsg(ePing, OnPingTest);
-		registerMsg(eSpeedTest, OnSpeedTest);
-		registerMsg(eLatencyTest, OnLatencyTest);
+		registerMsg(ePing,			OnPingTest);
+		registerMsg(eSpeedTest,		OnSpeedTest);
+		registerMsg(eLatencyTest,	OnLatencyTest);
 	}
 
 private:

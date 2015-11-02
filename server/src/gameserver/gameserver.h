@@ -41,17 +41,19 @@ public:
 	bool sendToDBServer(uint16 msgId, Message&);
 
 private:
-	GateLink *m_gateLink;
-	ServerLink *m_dbLink;
+	GateLink*		m_gateLink;
 
-	ClientMgr m_clientMgr;
-	GameHttpMgr m_httpMgr;
+	ServerLink*		m_dbLink;
 
-	// 游戏服务器配置
-	GameConfig m_config;
+	ClientMgr		m_clientMgr;
 
-	DbAgent m_gamedb;
-	DbAgent m_logdb;
+	GameHttpMgr		m_httpMgr;
+
+	GameConfig		m_config;		// 游戏服务器配置
+
+	DbAgent			m_gamedb;
+
+	DbAgent			m_logdb;
 };
 
 #endif //_gameserver_h_

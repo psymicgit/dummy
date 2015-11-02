@@ -25,11 +25,11 @@ public:
 	std::string name();
 
 	// @override
-	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
+	virtual void		onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
-	virtual void onRecv(Link*);
+	virtual void		onRecv(Link*);
 
-	virtual TaskQueue& getTaskQueue() { return *m_taskQueue; }
+	virtual TaskQueue&	getTaskQueue() { return *m_taskQueue; }
 
 public:
 	// 执行本客户端连接成功建立时所需要执行的初始化操作
@@ -47,23 +47,23 @@ public:
 	bool needRoute(int msgId);
 
 public:
-	// 与客户端的tcp原始连接
-	Link *m_link;
-	uint32 m_clientId;
 
-	TaskQueue *m_taskQueue;
-	ClientMgr *m_clientMgr;
+	Link*		m_link;							// 与客户端的tcp原始连接
 
-	// 加密密钥
-	uint8 m_encryptKey[EncryptKeyLen];
+	uint32		m_clientId;
 
-	// 认证密钥
-	uint8 m_authKey[AuthKeyLen];
+	TaskQueue*	m_taskQueue;
+
+	ClientMgr*	m_clientMgr;
+
+	uint8		m_encryptKey[EncryptKeyLen];	// 加密密钥
+
+	uint8		m_authKey[AuthKeyLen];			// 认证密钥
 
 public:
-	int m_pingCount;
-	int m_speedTestCount;
-	int m_latencyTestCount;
+	int			m_pingCount;
+	int			m_speedTestCount;
+	int			m_latencyTestCount;
 };
 
 #endif //_client_h_

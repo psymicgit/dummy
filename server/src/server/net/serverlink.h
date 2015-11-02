@@ -47,18 +47,15 @@ public:
 	virtual void onTerminate() {}
 
 public:
-	Link *m_link;
+	Link*		m_link;
 
-	// 本地服务器的类别
-	ServerType m_localSvrType;
+	ServerType	m_localSvrType;	// 本地服务器的类别
 
-	// 对端服务器的类别
-	ServerType m_peerSvrType;
+	ServerType	m_peerSvrType;	// 对端服务器的类别
 
-	// 对端服务器的id
-	int m_peerSvrId;
+	int			m_peerSvrId;	// 对端服务器的id
 
-	TaskQueue *m_taskQueue;
+	TaskQueue*	m_taskQueue;
 };
 
 #endif //_serverlink_h_

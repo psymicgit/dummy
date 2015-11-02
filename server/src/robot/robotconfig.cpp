@@ -7,7 +7,7 @@ using namespace rapidjson;
 
 bool RobotConfig::load(const char* jsonConfig)
 {
-	char *json = filetool::get_whole_file_buf(jsonConfig);
+	char *json = filetool::open(jsonConfig);
 	if (NULL == json) {
 		return false;
 	}
@@ -29,21 +29,21 @@ bool RobotConfig::load(const char* jsonConfig)
 
 	{
 		// 读取机器人数量等配置
-		m_robotsPerSecond = doc["robots-per-second"].GetInt();
-		m_robotsInterval = doc["robots-interval"].GetInt();
-		m_speedTestPacketSize = doc["robots-speedtest-packet-size"].GetInt();
-		m_speedTestPacketNum = doc["robots-speedtest-packet-num"].GetInt();
+		m_robotsPerSecond		= doc["robots-per-second"].GetInt();
+		m_robotsInterval		= doc["robots-interval"].GetInt();
+		m_speedTestPacketSize	= doc["robots-speedtest-packet-size"].GetInt();
+		m_speedTestPacketNum	= doc["robots-speedtest-packet-num"].GetInt();
 	}
 
 	{
 		// 读取网关服务器地址和网络配置
-		const Value& wan = doc["wan"];
-		const Value& gateserver = wan["connect"];
+		const Value& wan			= doc["wan"];
+		const Value& gateserver	= wan["connect"];
 
-		m_gateserver.ip = gateserver["ip"].GetString();
-		m_gateserver.port = gateserver["port"].GetInt();
+		m_gateserver.ip		= gateserver["ip"].GetString();
+		m_gateserver.port	= gateserver["port"].GetInt();
 
-		m_wanThreadNum = wan["threads"].GetInt();
+		m_wanThreadNum		= wan["threads"].GetInt();
 	}
 
 	delete[] json;

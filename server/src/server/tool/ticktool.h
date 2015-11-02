@@ -38,7 +38,10 @@ public:
 	~Tick()
 	{
 		if (1 == m_retickNum) {
-			print(m_jobCnt);
+			int jobcnt = m_jobCnt;
+			m_jobCnt = 0;
+
+			print(jobcnt);
 		} else {
 			printHistoryMax();
 		}
@@ -86,24 +89,18 @@ public:
 	}
 
 public:
-	// 本计时器的作业注释
-	std::string m_jobText;
+	std::string m_jobText;		// 本计时器的作业注释
 
 private:
-	// 本计时器的出生时间
-	uint64 m_born;
+	uint64		m_born;			// 本计时器的出生时间
 
-	// 计时起点，计时起点可以手动重设
-	uint64 m_tick;
+	uint64		m_tick;			// 计时起点，计时起点可以手动重设
 
-	// 历史曾经达到过的最高每秒执行次数
-	double m_historyMax;
+	double		m_historyMax;	// 历史曾经达到过的最高每秒执行次数
 
-	// 历史执行过的作业数
-	int m_jobCnt;
+	int			m_jobCnt;		// 历史执行过的作业数
 
-	// 重新计时次数
-	int m_retickNum;
+	int			m_retickNum;	// 重新计时次数
 };
 
 

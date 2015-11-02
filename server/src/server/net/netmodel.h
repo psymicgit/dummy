@@ -64,39 +64,28 @@ protected:
 	void stop();
 	void closing();
 
-	// <网络是否正在运行>标志位
-	bool m_running;
+	bool		m_running;			// <网络是否正在运行>标志位
 
-	// epoll句柄
-	int m_efd;
+	int			m_efd;				// epoll句柄
 
-	// 用于唤醒epoll的socketpair，实际上是半双工通信，但这里我们只用来单工通信
-	int m_wakeup[2];
+	int			m_wakeup[2];		// 用于唤醒epoll的socketpair，实际上是半双工通信，但这里我们只用来单工通信
 
-	// 待销毁的socket列表
-	FdList m_deletingFdList;
+	FdList		m_deletingFdList;	// 待销毁的socket列表
 
-	// 删除socket列表的锁
-	mutex_t m_mutex;
+	mutex_t		m_mutex;			// 删除socket列表的锁
 
-	// 任务队列
-	TaskQueue m_tasks;
+	TaskQueue	m_tasks;			// 任务队列
 
-	// 定时器列表
-	TimerQueue m_timers;
+	TimerQueue	m_timers;			// 定时器列表
 
-	// 连接池，保存预先分配好的连接
-	LinkPool m_linkPool;
+	LinkPool	m_linkPool;			// 连接池，保存预先分配好的连接
 
 public:
-	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
-	char g_encryptBuf[MAX_PACKET_LEN];
+	char g_encryptBuf[MAX_PACKET_LEN];	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
 
-	// 预先申请的接收缓冲区
-	char g_recvBuf[MAX_PACKET_LEN];
+	char g_recvBuf[MAX_PACKET_LEN];		// 预先申请的接收缓冲区
 
-	// 预先申请的发送缓冲区
-	char g_sendBuf[MAX_PACKET_LEN];
+	char g_sendBuf[MAX_PACKET_LEN];		// 预先申请的发送缓冲区
 };
 
 #else
@@ -152,42 +141,32 @@ private:
 	void closing();
 
 private:
-	// 当前维持的连接
-	LinkerList m_links;
 
-	// 连接池，保存预先分配好的连接
-	LinkPool m_linkPool;
+	LinkerList	m_links;	// 当前维持的连接
 
-	// 任务队列
-	TaskQueue m_tasks;
+	LinkPool	m_linkPool;	// 连接池，保存预先分配好的连接
 
-	// 定时器队列
-	TimerQueue m_timers;
+	TaskQueue	m_tasks;	// 任务队列
 
-	// 当前最大fd
-	int m_maxfd;
+	TimerQueue	m_timers;	// 定时器队列
 
-	// 读文件描述符集
-	fd_set m_rset;
+	int			m_maxfd;	// 当前最大fd
 
-	// 写文件描述符集
-	fd_set m_wset;
+	fd_set		m_rset;		// 读文件描述符集
 
-	// exception文件描述符集
-	fd_set m_eset;
+	fd_set		m_wset;		// 写文件描述符集
 
-	// <网络是否正在运行>标志位
-	bool m_running;
+	fd_set		m_eset;		// exception文件描述符集
+
+	bool		m_running;	// <网络是否正在运行>标志位
 
 public:
-	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
-	char g_encryptBuf[MAX_PACKET_LEN];
 
-	// 预先申请的接收缓冲区
-	char g_recvBuf[MAX_PACKET_LEN];
+	char g_encryptBuf[MAX_PACKET_LEN];	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
 
-	// 预先申请的发送缓冲区
-	char g_sendBuf[MAX_PACKET_LEN];
+	char g_recvBuf[MAX_PACKET_LEN];		// 预先申请的接收缓冲区
+
+	char g_sendBuf[MAX_PACKET_LEN];		// 预先申请的发送缓冲区
 };
 
 #endif

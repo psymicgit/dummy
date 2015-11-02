@@ -10,8 +10,8 @@
 
 #ifdef WIN
 
-#define is_bigendian() ((*(char*) &endian) == 0)
-#define is_littlendbian() ((*(char*) &endian) == 1)
+#define is_bigendian()		((*(char*) &endian) == 0)
+#define is_littlendbian()	((*(char*) &endian) == 1)
 
 #include <winsock2.h>
 
@@ -30,14 +30,14 @@ namespace endiantool
 		uint64_t ret = 0;
 		uint32 high, low;
 
-		low = host & 0xFFFFFFFF;
-		high = (host >> 32) & 0xFFFFFFFF;
-		low = htonl(low);
-		high = htonl(high);
+		low		= host & 0xFFFFFFFF;
+		high	= (host >> 32) & 0xFFFFFFFF;
+		low		= htonl(low);
+		high	= htonl(high);
 
-		ret = low;
-		ret <<= 32;
-		ret |=   high;
+		ret		= low;
+		ret	  <<= 32;
+		ret	   |=   high;
 		return ret;
 	}
 
@@ -51,14 +51,14 @@ namespace endiantool
 		uint64_t ret = 0;
 		uint32 high, low;
 
-		low = net & 0xFFFFFFFF;
-		high = (net >> 32) & 0xFFFFFFFF;
-		low = ntohl(low);
-		high = ntohl(high);
+		low		= net & 0xFFFFFFFF;
+		high	= (net >> 32) & 0xFFFFFFFF;
+		low		= ntohl(low);
+		high	= ntohl(high);
 
-		ret = low;
-		ret <<= 32;
-		ret |= high;
+		ret		= low;
+		ret	  <<= 32;
+		ret	   |= high;
 
 		return ret;
 	}

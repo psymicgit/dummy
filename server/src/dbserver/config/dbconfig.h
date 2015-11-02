@@ -17,7 +17,7 @@ struct IpPort {
 	{}
 
 	std::string ip;
-	int port;
+	int			port;
 };
 
 struct DBConfig {
@@ -28,10 +28,10 @@ struct DBConfig {
 	bool load(const char* configFile);
 
 	std::vector<IpPort> m_lanListens;
-	int m_lanThreadNum;
+	int					m_lanThreadNum;
 
-	DBAccount m_gamedbAccnt;
-	DBAccount m_logdbAccnt;
+	DBAccount			m_gamedbAccnt;
+	DBAccount			m_logdbAccnt;
 };
 
 #endif // _dbconfig_h_

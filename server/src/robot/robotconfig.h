@@ -7,7 +7,7 @@ struct IpPort {
 	{}
 
 	std::string ip;
-	int port;
+	int			port;
 };
 
 struct RobotConfig {
@@ -21,14 +21,12 @@ struct RobotConfig {
 
 	bool load(const char* configFile);
 
-	int m_wanThreadNum;
-	int m_robotsPerSecond;
-	int m_robotsInterval;
-	int m_speedTestPacketSize;
-	int m_speedTestPacketNum;
-
-	// 网关服务器地址
-	IpPort m_gateserver;
+	int		m_wanThreadNum;
+	int		m_robotsPerSecond;
+	int		m_robotsInterval;
+	int		m_speedTestPacketSize;
+	int		m_speedTestPacketNum;
+	IpPort	m_gateserver;			// 网关服务器地址
 };
 
 #endif

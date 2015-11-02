@@ -27,9 +27,9 @@ public:
 	virtual void onDisconnectServer(Link&, ServerType, int serverId);
 
 private:
-	DBMgr *m_dbmgr;
+	DBMgr*		m_dbmgr;
 
-	DBConfig m_config;
+	DBConfig	m_config;
 
 private:
 	// 与游戏服的连接

@@ -33,10 +33,10 @@ public:
 	void test();
 
 public:
-	std::vector<std::string> m_sqls;
+	std::vector<std::string>	m_sqls;
 
-	DBFactory *m_gamedb;
-	DBFactory *m_logdb;
+	DBFactory*					m_gamedb;
+	DBFactory*					m_logdb;
 };
 
 #endif //_dbmgr_h_

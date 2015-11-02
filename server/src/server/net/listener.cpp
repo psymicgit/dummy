@@ -27,9 +27,9 @@ bool Listener::open(const string & ip, int port)
 {
 	LOG_DEBUG << m_logic->name() << " start listening at <" << ip << ": " << port << ">";
 
-	m_listenAddr = NetAddress(ip, port);
+	m_listenAddr	= NetAddress(ip, port);
+	m_listenFd		= socktool::createSocket();
 
-	m_listenFd = socktool::createSocket();
 	if (m_listenFd <= 0) {
 		return false;
 	}

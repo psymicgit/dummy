@@ -30,14 +30,14 @@ public:
 
 	void init()
 	{
-		registerMsg(eLoginAck, OnLoginAck);
-		registerMsg(eEncryptKeyNtf, OnEncryptKeyNtf);
-		registerMsg(eAuthAck, OnAuthAck);
+		registerMsg(eLoginAck,			OnLoginAck);
+		registerMsg(eEncryptKeyNtf,		OnEncryptKeyNtf);
+		registerMsg(eAuthAck,			OnAuthAck);
 
 		// ≤‚ ‘
-		registerMsg(ePong, OnPongTest);
-		registerMsg(eSpeedTest, OnSpeedTestDone);
-		registerMsg(eLatencyTest, OnLatencyTestDone);
+		registerMsg(ePong,				OnPongTest);
+		registerMsg(eSpeedTest,			OnSpeedTestDone);
+		registerMsg(eLatencyTest,		OnLatencyTestDone);
 	}
 
 private:

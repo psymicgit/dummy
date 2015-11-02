@@ -37,8 +37,9 @@ public:
 private:
 	static void OnConnectServerReq(Link* link, ConnectReq *req, Timestamp receiveTime)
 	{
-		ServerType peerSvrType = (ServerType)req->svrtype();
-		int peerSvrId = req->svrid();
+		ServerType peerSvrType		= (ServerType)req->svrtype();
+		int peerSvrId				= req->svrid();
+
 		int svrId = Server::instance->getServerId(peerSvrType, peerSvrId);
 		const std::string &authKey = req->authkey();
 
@@ -63,11 +64,11 @@ private:
 			if (NULL == svrLink) {
 				res.set_ret(CONNECT_FAIL_UNKNOWN_SERVER_TYPE);
 			} else {
-				svrLink->m_link = link;
-				svrLink->m_localSvrType = Server::instance->m_svrType;
-				svrLink->m_peerSvrType = peerSvrType;
-				svrLink->m_peerSvrId = peerSvrId;
-				svrLink->m_taskQueue = &Server::instance->getTaskQueue();
+				svrLink->m_link			= link;
+				svrLink->m_localSvrType	= Server::instance->m_svrType;
+				svrLink->m_peerSvrType		= peerSvrType;
+				svrLink->m_peerSvrId		= peerSvrId;
+				svrLink->m_taskQueue		= &Server::instance->getTaskQueue();
 
 				link->m_logic = svrLink;
 
@@ -86,26 +87,27 @@ private:
 	{
 		ConnectResult ret = res->ret();
 		if (ret != CONNECT_OK) {
-			std::string failMsg = "";
+			const char* reason = "";
 			switch(ret) {
 			case CONNECT_FAIL_UNKNOWN_SERVER_TYPE:
-				failMsg = "unknown server type";
+				reason = "unknown server type";
 				break;
 
 			case CONNECT_FAIL_FOUND_SAME_SERVER:
-				failMsg = "found same server connection";
+				reason = "found same server connection";
 				break;
 
 			case CONNECT_FAIL_AUTH_KEY_INVALID:
-				failMsg = "auth key invalid";
+				reason = "auth key invalid";
 				break;
 
 			default:
-				failMsg = "unknow reason";
+				reason = "unknow reason";
 				break;
 			}
 
-			LOG_ERROR << "connect failed: peer server<" << svrtool::getSvrName((ServerType)res->svrtype()) << ", zoneId=" << res->svrid() << "> reject connection : " << failMsg << "! \n" << msgtool::getMsgDebugString(*res);
+			LOG_ERROR << "connect failed: peer server<" << svrtool::getSvrName((ServerType)res->svrtype())
+			          << ", zoneId=" << res->svrid() << "> reject connection : " << reason << "! \n" << msgtool::getMsgDebugString(*res);
 
 			link->close();
 			return;
@@ -114,12 +116,12 @@ private:
 		// LOG_DEBUG << "OnAcceptConnect : \n" << msgtool::getMsgString(*req);
 		ServerLink *svrLink = Server::instance->onAcceptServer(*link, (ServerType)res->svrtype(), res->svrid());
 		if (svrLink) {
-			svrLink->m_link = link;
+			svrLink->m_link		= link;
 			svrLink->m_peerSvrType = (ServerType)res->svrtype();
-			svrLink->m_peerSvrId = res->svrid();
-			svrLink->m_taskQueue = &Server::instance->getTaskQueue();
+			svrLink->m_peerSvrId	= res->svrid();
+			svrLink->m_taskQueue	= &Server::instance->getTaskQueue();
 
-			link->m_logic = svrLink;
+			link->m_logic			= svrLink;
 
 			int svrId = Server::instance->getServerId((ServerType)res->svrtype(), res->svrid());
 			Server::instance->registerServer(svrId, svrLink);

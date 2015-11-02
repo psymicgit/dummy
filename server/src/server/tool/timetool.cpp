@@ -18,7 +18,7 @@ namespace timetool
 	Timestamp FileTimeToInt64(const FILETIME& time)
 	{
 		ULARGE_INTEGER tt;
-		tt.LowPart = time.dwLowDateTime;
+		tt.LowPart	= time.dwLowDateTime;
 		tt.HighPart = time.dwHighDateTime;
 		return(tt.QuadPart);
 	}
@@ -29,8 +29,8 @@ namespace timetool
 		tt.QuadPart = stamp;
 
 		FILETIME filetime;
-		filetime.dwLowDateTime = tt.LowPart;
-		filetime.dwHighDateTime = tt.HighPart;
+		filetime.dwLowDateTime		= tt.LowPart;
+		filetime.dwHighDateTime	= tt.HighPart;
 
 		return filetime;
 	}
@@ -47,7 +47,7 @@ namespace timetool
 	Timestamp localnow()
 	{
 		FILETIME local;
-		GetSystemTimeAsFileTime (&local); // 获得系统UTC格式时间
+		GetSystemTimeAsFileTime(&local); // 获得系统UTC格式时间
 		FileTimeToLocalFileTime(&local, &local); // 转换为本地时间
 
 		int64 localIn100ns = FileTimeToInt64(local);// 单位100ns
@@ -56,9 +56,9 @@ namespace timetool
 
 	const char* timeToText(const Timestamp& time)
 	{
-		Timestamp utc = time * 10000;
+		Timestamp utc		= time * 10000;
 
-		FILETIME filetime = Int64ToFileTime(utc);
+		FILETIME filetime	= Int64ToFileTime(utc);
 
 		SYSTEMTIME systime;
 		FileTimeToSystemTime(&filetime, &systime);

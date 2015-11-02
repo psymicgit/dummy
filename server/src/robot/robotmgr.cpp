@@ -32,7 +32,7 @@ void registerSignal()
 {
 #ifdef WIN
 	signal(SIGTERM, &handleSignal);
-	signal(SIGINT, &handleSignal);
+	signal(SIGINT,	&handleSignal);
 #else
 	struct sigaction act;
 	act.sa_handler = handleSignal;
@@ -100,8 +100,8 @@ Robot* RobotMgr::createRobot()
 {
 	Robot *robot = new Robot;
 
-	robot->m_robotMgr = this;
-	robot->m_robotId = allocRobotId();
+	robot->m_robotMgr	= this;
+	robot->m_robotId	= allocRobotId();
 
 	m_robotMap[robot->m_robotId]  = robot;
 	return robot;

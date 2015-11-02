@@ -1872,7 +1872,7 @@ void testEvbufSwap()
 // 测试结果（优到劣）： 直接加锁evbuffer_add > 先evbuffer_add再加锁evbuffer_add_buffer = 10 : 1
 void testEvbufferDtor()
 {
-	int times = 1000000;
+	int times = 100000;
 
 	const char *abc = "abcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyzabcdefghijklmnopqrstvuwxyz";
 	int len = strlen(abc);
@@ -2239,6 +2239,29 @@ void testUnorderSetDtor()
 	}
 }
 
+void testFastString()
+{
+	int times = 100000;
+	char *text = "1111111111111111111123222222222222222";
+	{
+		Tick tick("std::string test", times);
+
+		for(int i = 0; i < times; ++i) {
+			std::string str(text);
+		}
+	}
+
+	{
+		Tick tick("fast string test", times);
+
+		for(int i = 0; i < times; ++i) {
+			int len = strlen(text);
+			char *str = new char[len + 1];
+			memcpy(str, text, len + 1);
+		}
+	}
+}
+
 void test()
 {
 	// evbufTest();
@@ -2255,4 +2278,5 @@ void test()
 	testCachePacket();
 	testMapInsertFind();
 	testUnorderSetDtor();
+	testFastString();
 }

@@ -30,7 +30,7 @@ namespace filetool
 		return access(path.c_str(), 0) != -1;
 	}
 
-	char* get_whole_file_buf(const std::string &path)
+	char* open(const char *path)
 	{
 		if(false == exist(path)) {
 			LOG_SYSTEM_ERR << "open <" << path << "> file failed: not found";
@@ -41,13 +41,13 @@ namespace filetool
 		FILE *file = NULL;
 
 #ifdef WIN
-		int err = fopen_s(&file, path.c_str(), "rb" );
+		int err = fopen_s(&file, path, "rb" );
 		if (NULL == file || err > 0) {
 			LOG_SYSTEM_ERR << "打开<" << path << ">文件失败，错误号:" << err;
 			return NULL;
 		}
 #else
-		file = fopen(path.c_str(), "rb" );
+		file = fopen(path, "rb" );
 		if (NULL == file) {
 			LOG_SYSTEM_ERR << "打开<" << path << ">文件失败";
 			return NULL;

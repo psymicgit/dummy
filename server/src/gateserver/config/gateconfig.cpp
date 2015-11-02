@@ -7,12 +7,12 @@ using namespace rapidjson;
 
 bool GateConfig::load(const char* jsonConfig)
 {
-	char *json = filetool::get_whole_file_buf(jsonConfig);
+	char *json = filetool::open(jsonConfig);
 	if (NULL == json) {
 		return false;
 	}
 
-	Document doc;
+	rapidjson::Document doc;
 
 	if (doc.ParseInsitu(json).HasParseError()) {
 		LOG_ERROR << "parse config<" << jsonConfig << "> failed, error code = " << doc.GetParseError() << ", error offset = " << doc.GetErrorOffset()
@@ -28,21 +28,20 @@ bool GateConfig::load(const char* jsonConfig)
 	}
 
 	{
-		// ¶ÁÈ¡ÄÚÍøÍøÂçÅäÖÃ
-		const Value& wan = doc["wan"];
-		const Value& wanListen = wan["listen"];
+		// ¶ÁÈ¡ÍâÍøÍøÂçÅäÖÃ
+		const rapidjson::Value& wan		= doc["wan"];
+		const rapidjson::Value& wanListen = wan["listen"];
 
-		m_wanListen.ip = wanListen["ip"].GetString();
-		m_wanListen.port = wanListen["port"].GetInt();
-
-		m_wanThreadNum = wan["threads"].GetInt();
+		m_wanListen.ip		= wanListen["ip"].GetString();
+		m_wanListen.port	= wanListen["port"].GetInt();
+		m_wanThreadNum		= wan["threads"].GetInt();
 	}
 
 	{
-		// ¶ÁÈ¡ÍâÍøÍøÂçÅäÖÃ
-		const Value& lan = doc["lan"];
-		const Value& lanListens = lan["listen"];
-		const Value& lanConnects = lan["listen"];
+		// ¶ÁÈ¡ÄÚÍøÍøÂçÅäÖÃ
+		const rapidjson::Value& lan				= doc["lan"];
+		const rapidjson::Value& lanListens		= lan["listen"];
+		const rapidjson::Value& lanConnects	= lan["listen"];
 
 		IpPort ipport;
 
@@ -50,8 +49,8 @@ bool GateConfig::load(const char* jsonConfig)
 		for (SizeType i = 0; i < lanListens.Size(); i++) {
 			const Value &listen = lanListens[i];
 
-			ipport.ip = listen["ip"].GetString();
-			ipport.port = listen["port"].GetInt();
+			ipport.ip		= listen["ip"].GetString();
+			ipport.port		= listen["port"].GetInt();
 
 			m_lanListens.push_back(ipport);
 		}
@@ -60,8 +59,8 @@ bool GateConfig::load(const char* jsonConfig)
 		for (SizeType i = 0; i < lanConnects.Size(); i++) {
 			const Value &connect = lanConnects[i];
 
-			ipport.ip = connect["ip"].GetString();
-			ipport.port = connect["port"].GetInt();
+			ipport.ip		= connect["ip"].GetString();
+			ipport.port		= connect["port"].GetInt();
 
 			m_lanConnects.push_back(ipport);
 		}
@@ -71,8 +70,8 @@ bool GateConfig::load(const char* jsonConfig)
 
 	{
 		// ¶ÁÈ¡·þÎñÆ÷ÅäÖÃ²ÎÊý
-		m_maxPlayers = doc["max-players"].GetInt();
-		m_sleepMsEachLoop = doc["sleep-ms-each-loop"].GetInt();
+		m_maxPlayers	= doc["max-players"].GetInt();
+		m_sleep			= doc["sleep"].GetInt();
 	}
 
 	delete[] json;

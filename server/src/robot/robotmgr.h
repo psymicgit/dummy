@@ -60,32 +60,16 @@ private:
 	uint32 allocRobotId() { return ++m_allocRobotId; }
 
 public:
-	// 任务队列
-	TaskQueue m_taskQueue;
 
-	// 定时器队列
-	TimerQueue m_timers;
-
-	// <是否运行中>标志位
-	bool m_run;
-
-	// 空闲的机器人id
-	uint32 m_allocRobotId;
-
-	// 机器人列表
-	RobotMap m_robotMap;
-
-	// 消息派发器
-	MsgDispatcher<Robot> m_dispatcher;
-
-	// 网络操作中心
-	Net m_wan;
-
-	// http操作中心
-	RobotHttpMgr m_httpMgr;
-
-	// 机器人配置
-	RobotConfig m_config;
+	TaskQueue				m_taskQueue;	// 任务队列
+	TimerQueue				m_timers;		// 定时器队列
+	bool					m_run;			// <是否运行中>标志位
+	uint32					m_allocRobotId;	// 空闲的机器人id
+	RobotMap				m_robotMap;		// 机器人列表
+	MsgDispatcher<Robot>	m_dispatcher;	// 消息派发器
+	Net						m_wan;			// 外网中心
+	RobotHttpMgr			m_httpMgr;		// http操作中心
+	RobotConfig				m_config;		// 机器人配置
 };
 
 #endif //_robotmgr_h_

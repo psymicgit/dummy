@@ -78,6 +78,7 @@ namespace socktool
 	void setKeepAlive(socket_t sockfd, bool on, int keepIdleTime)
 	{
 		socklen_t keepAlive = on ? 1 : 0;
+
 		int ret = ::setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, (const char*)&keepAlive, sizeof(keepAlive));
 		if (ret == -1) {
 			LOG_SYSTEM_ERR << "set socket " << sockfd << " SO_KEEPALIVE failed";
@@ -93,7 +94,7 @@ namespace socktool
 	void setSendBufSize(socket_t sock, int size)
 	{
 		socklen_t sendBuf  = 0;
-		socklen_t optlen = static_cast<socklen_t>(sizeof sendBuf);
+		socklen_t optlen	= static_cast<socklen_t>(sizeof sendBuf);
 
 		if (::getsockopt(sock, SOL_SOCKET, SO_SNDBUF, (char*)&sendBuf, &optlen) < 0) {
 			LOG_SYSTEM_ERR << "socket " << sock << " SO_SNDBUF = [" << size << "]";
@@ -112,7 +113,7 @@ namespace socktool
 	void setRecvBufSize(socket_t sock, int size)
 	{
 		socklen_t recvBuf  = 0;
-		socklen_t optlen = static_cast<socklen_t>(sizeof recvBuf);
+		socklen_t optlen	= static_cast<socklen_t>(sizeof recvBuf);
 
 		if (::getsockopt(sock, SOL_SOCKET, SO_RCVBUF, (char*)&recvBuf, &optlen) < 0) {
 			LOG_SYSTEM_ERR << "socket " << sock << " SO_RCVBUF = [" << size << "]";
@@ -131,8 +132,8 @@ namespace socktool
 	{
 		linger ling;
 
-		ling.l_onoff = 1; // (在closesocket()调用, 在还有数据没发送完毕的时候容许逗留)
-		ling.l_linger = waitTime; // 延迟关闭socket的时间
+		ling.l_onoff	= 1; // (在closesocket()调用, 在还有数据没发送完毕的时候容许逗留)
+		ling.l_linger	= waitTime; // 延迟关闭socket的时间
 		setsockopt(sock, SOL_SOCKET, SO_LINGER, (const char*)&ling, sizeof(linger));
 	}
 
@@ -156,8 +157,8 @@ namespace socktool
 
 	int getSocketError(socket_t sockfd)
 	{
-		socklen_t err  = 0;
-		socklen_t optlen = static_cast<socklen_t>(sizeof err);
+		socklen_t err		= 0;
+		socklen_t optlen	= static_cast<socklen_t>(sizeof err);
 
 		if (::getsockopt(sockfd, SOL_SOCKET, SO_ERROR, (char*)&err, &optlen) < 0) {
 			return err;

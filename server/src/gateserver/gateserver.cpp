@@ -87,7 +87,7 @@ void GateServer::stopping()
 void GateServer::run()
 {
 	Server::run();
-	sleep(m_config.m_sleepMsEachLoop);
+	sleep(m_config.m_sleep);
 }
 
 ServerLink* GateServer::onAcceptServer(Link &tcpLink, ServerType peerSvrType, int peerSvrId)

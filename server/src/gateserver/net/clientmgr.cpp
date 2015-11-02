@@ -46,11 +46,11 @@ void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAdd
 
 	uint32 newClientId = allocClientId();
 
-	Client *client = m_clientPool.alloc();
-	client->m_link = link;
-	client->m_clientId = newClientId;
-	client->m_clientMgr = this;
-	client->m_taskQueue = m_taskQueue;
+	Client *client			= m_clientPool.alloc();
+	client->m_link			= link;
+	client->m_clientId		= newClientId;
+	client->m_clientMgr		= this;
+	client->m_taskQueue		= m_taskQueue;
 
 	link->m_logic = client;
 	client->onEstablish();

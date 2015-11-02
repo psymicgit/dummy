@@ -18,11 +18,11 @@ bool AuthHttpCmd::init()
 	std::string encryptPwd = "encrypted_" + m_robot->m_password + "_encrypted";
 
 	m_fields =
-	    "cliver=" + std::string(echotool::getmsg("%u", m_robot->m_cliversion)) +
+	    "cliver="	 + std::string(echotool::getmsg("%u", m_robot->m_cliversion)) +
 	    "&deviceid=" + m_robot->m_deviceid +
 	    "&username=" + m_robot->m_username +
 	    "&password=" + m_robot->m_password +
-	    "&ip=" + m_robot->m_ip;
+	    "&ip="		 + m_robot->m_ip;
 
 	m_url = signUrl(HTTP_URL_SIGN);
 	return true;

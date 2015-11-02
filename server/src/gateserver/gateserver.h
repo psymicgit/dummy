@@ -44,17 +44,10 @@ public:
 	void sendToGameServer(uint32 clientId, uint16 msgId, const char* data, uint32 len);
 
 private:
-	// 外网通信中心：负责与外网进行通信，如：管理玩家的连接
-	Net m_wan;
-
-	// 与游戏服的连接
-	GameSvrLink *m_gamesvrLink;
-
-	// 客户端管理中心
-	ClientMgr m_clientMgr;
-
-	// 网关配置
-	GateConfig m_config;
+	Net				m_wan;			// 外网通信中心：负责与外网进行通信，如：管理玩家的连接
+	GameSvrLink*	m_gamesvrLink;	// 与游戏服的连接
+	ClientMgr		m_clientMgr;	// 客户端管理中心
+	GateConfig		m_config;		// 网关配置
 };
 
 #endif //_gateserver_h_

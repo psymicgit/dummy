@@ -34,8 +34,8 @@ namespace ticktool
 	// 返回两次时钟周期的秒差
 	double tickDiff(uint64 old_tick)
 	{
-		uint64 tick_now = tick();
-		uint64 diff = tick_now - old_tick;
+		uint64 tick_now	= tick();
+		uint64 diff			= tick_now - old_tick;
 
 		double s = (double)diff / GetTickFrequency();
 		return s;
@@ -50,8 +50,8 @@ namespace ticktool
 	// 返回相差秒
 	double tickDiff(uint64 old_tick)
 	{
-		uint64 tick_now = tick();
-		uint64 msDiff = tick_now - old_tick;
+		uint64 tick_now	= tick();
+		uint64 msDiff		= tick_now - old_tick;
 
 		double s = (double)msDiff / 1000;
 		return s;

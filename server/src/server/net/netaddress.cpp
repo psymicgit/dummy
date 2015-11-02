@@ -17,17 +17,17 @@
 NetAddress::NetAddress(uint16 port)
 {
 	bzero(&m_addr, sizeof m_addr);
-	m_addr.sin_family = AF_INET;
-	m_addr.sin_addr.s_addr = endiantool::hostToNetwork((uint32)0);
-	m_addr.sin_port = endiantool::hostToNetwork(port);
+	m_addr.sin_family		= AF_INET;
+	m_addr.sin_addr.s_addr	= endiantool::hostToNetwork((uint32)0);
+	m_addr.sin_port			= endiantool::hostToNetwork(port);
 }
 
 NetAddress::NetAddress(const std::string &ip, uint16 port)
 {
 	bzero(&m_addr, sizeof m_addr);
 
-	m_addr.sin_family = AF_INET;
-	m_addr.sin_port = endiantool::hostToNetwork(port);
+	m_addr.sin_family	= AF_INET;
+	m_addr.sin_port		= endiantool::hostToNetwork(port);
 
 	if (::inet_pton(AF_INET, ip.c_str(), &m_addr.sin_addr) <= 0) {
 		LOG_ERROR << "NetAddress parse <ip:port> = <" << ip << ":" << port << "> failed";
@@ -83,14 +83,15 @@ bool NetAddress::resolve(string hostname, NetAddress* out)
 
 #else
 	assert(out != NULL);
-	struct hostent hent;
-	struct hostent* he = NULL;
-	int herrno = 0;
+	struct hostent	hent;
+	struct hostent* he		= NULL;
+	int				herrno	= 0;
+
 	bzero(&hent, sizeof(hent));
 
-	char t_resolveBuffer[1024];
+	char resolveBuffer[1024];
 
-	int ret = gethostbyname_r(hostname.c_str(), &hent, t_resolveBuffer, sizeof t_resolveBuffer, &he, &herrno);
+	int ret = gethostbyname_r(hostname.c_str(), &hent, resolveBuffer, sizeof resolveBuffer, &he, &herrno);
 	if (ret == 0 && he != NULL) {
 		assert(he->h_addrtype == AF_INET && he->h_length == sizeof(uint32));
 		out->m_addr.sin_addr = *reinterpret_cast<struct in_addr*>(he->h_addr);
@@ -99,6 +100,7 @@ bool NetAddress::resolve(string hostname, NetAddress* out)
 		if (ret) {
 			LOG_SYSTEM_ERR << "InetAddress::resolve";
 		}
+
 		return false;
 	}
 #endif

@@ -91,10 +91,10 @@ void Client::handleMsg()
 			break;
 		}
 
-		NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
+		NetMsgHead *head	= (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
 
-		uint16 msgId = endiantool::networkToHost(head->msgId);
-		uint32 msgLen = endiantool::networkToHost(head->msgLen);
+		uint16 msgId		= endiantool::networkToHost(head->msgId);
+		uint32 msgLen		= endiantool::networkToHost(head->msgLen);
 
 		// 检测半包
 		if (msgLen > bytes) {
@@ -106,7 +106,7 @@ void Client::handleMsg()
 		unsigned char *peek = evbuffer_pullup(dst, msgLen);
 
 		//先解密
-		uint8 *encryptBuf =  (uint8*)(peek + sizeof(NetMsgHead));
+		uint8 *encryptBuf	=  (uint8*)(peek + sizeof(NetMsgHead));
 		int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
 		if(!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
@@ -150,8 +150,8 @@ bool Client::send(int msgId, Message &msg)
 		return false;
 	}
 
-	uint32 headSize = sizeof(NetMsgHead);
-	int size = msg.ByteSize();
+	uint32 headSize	= sizeof(NetMsgHead);
+	int size			= msg.ByteSize();
 
 	// 将消息包序列化为二进制数据
 	bool ok = msg.SerializeToArray(m_link->m_net->g_encryptBuf + headSize + EncryptHeadLen, size);
@@ -163,16 +163,15 @@ bool Client::send(int msgId, Message &msg)
 	}
 
 	// 添加加解密头尾
-	uint8* decryptBuf = (uint8*)(m_link->m_net->g_encryptBuf + headSize);
+	uint8* decryptBuf	= (uint8*)(m_link->m_net->g_encryptBuf + headSize);
 	int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
 
 	encrypttool::xor_encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));
 
-	NetMsgHead* pHeader = (NetMsgHead*)m_link->m_net->g_encryptBuf;
+	NetMsgHead* pHeader	= (NetMsgHead*)m_link->m_net->g_encryptBuf;
+	int packetLen			= msgtool::buildNetHeader(pHeader, msgId, decryptBufLen);
 
-	int packetLen = msgtool::buildNetHeader(pHeader, msgId, decryptBufLen);
 	m_link->send(m_link->m_net->g_encryptBuf, packetLen);
-
 	return true;
 }
 

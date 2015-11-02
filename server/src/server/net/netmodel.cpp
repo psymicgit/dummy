@@ -41,9 +41,9 @@ Epoll::Epoll()
 	socktool::setNonBlocking(m_wakeup[0]);
 	socktool::setNonBlocking(m_wakeup[1]);
 
-	struct epoll_event ee = { 0, { 0 } };
-	ee.data.fd   = m_wakeup[1];
-	ee.events    = EPOLLIN | EPOLLET;;
+	struct epoll_event ee	= { 0, { 0 } };
+	ee.data.fd				= m_wakeup[1];
+	ee.events				= EPOLLIN | EPOLLET;;
 	::epoll_ctl(m_efd, EPOLL_CTL_ADD, m_wakeup[1], &ee);
 
 	// 如果客户端关闭套接字close，而服务器调用一次write, 服务器会接收一个RST segment（tcp传输层）
@@ -151,9 +151,9 @@ void Epoll::addFd(IFd* pfd)
 {
 	// LOG_INFO << "add fd " << pfd->socket();
 
-	struct epoll_event ee = { 0, { 0 } };
-	ee.data.ptr  = pfd;
-	ee.events    = EPOLLERR | EPOLLPRI | EPOLLHUP | EPOLLET;;
+	struct epoll_event ee	= { 0, { 0 } };
+	ee.data.ptr				= pfd;
+	ee.events				= EPOLLERR | EPOLLPRI | EPOLLHUP | EPOLLET;;
 
 	pfd->m_events = ee.events;
 	::epoll_ctl(m_efd, EPOLL_CTL_ADD, pfd->socket(), &ee);
@@ -227,9 +227,9 @@ void Epoll::mod(IFd *pfd, uint32 events)
 
 	pfd->m_events = events;
 
-	struct epoll_event ee = { 0, { 0 } };
-	ee.data.ptr  = pfd;
-	ee.events    = events;
+	struct epoll_event ee	= { 0, { 0 } };
+	ee.data.ptr				= pfd;
+	ee.events				= events;
 
 	::epoll_ctl(m_efd, EPOLL_CTL_MOD, pfd->socket(), &ee);
 }
@@ -241,7 +241,6 @@ void Epoll::recycleFds()
 	{
 		lock_guard_t<> lock(m_mutex);
 		delFds.swap(m_deletingFdList);
-
 	}
 
 	// LOG_INFO << "delFds.size()" << delFds.size();
@@ -472,6 +471,7 @@ void Select::closing()
 	m_running = false;
 	m_links.clear();
 	m_linkPool.clear();
+
 	LOG_WARN << "close net successful";
 }
 

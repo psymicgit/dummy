@@ -199,7 +199,7 @@ public:
 
 private:
 	TaskList m_tasklist;
-	mutex_t m_mutex;
+	mutex_t	 m_mutex;
 };
 
 /*

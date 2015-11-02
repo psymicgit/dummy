@@ -25,7 +25,7 @@ class Net
 	friend class Listener;
 	friend class Connector;
 
-	typedef std::vector<Listener*> ListenerVec;
+	typedef std::vector<Listener*>	ListenerVec;
 	typedef std::vector<Connector*> ConnectorVec;
 
 private:
@@ -55,23 +55,18 @@ private:
 	NetModel *nextNetModel();
 
 public:
-	// 网络模型: linux下epoll / windows下select
-	std::vector<NetModel*> m_nets;
 
-	// 下一次分配的网络线程索引
-	int m_allocNetIdx;
+	std::vector<NetModel*>	m_nets;			// 网络模型: linux下epoll / windows下select
 
-	// 网络线程
-	Thread m_netThread;
+	int						m_allocNetIdx;	// 下一次分配的网络线程索引
 
-	// 是否已启动标志
-	bool m_started;
+	Thread					m_netThread;	// 网络线程
 
-	// 网络监听器列表
-	ListenerVec m_listeners;
+	bool					m_started;		// 是否已启动标志
 
-	// 网络连接器列表
-	ConnectorVec m_connectors;
+	ListenerVec				m_listeners;	// 网络监听器列表
+
+	ConnectorVec			m_connectors;	// 网络连接器列表
 };
 
 #endif //_net_h_

@@ -25,10 +25,10 @@ void GateLink::OnRecv(Link *link, Buffer &buf)
 			return;
 		}
 
-		LanMsgHead *msgHead = (LanMsgHead*)buf.peek();
-		uint32 clientId = endiantool::networkToHost(msgHead->clientId);
-		uint16 msgId = endiantool::networkToHost(msgHead->msgId);
-		uint32 dataLen = endiantool::networkToHost(msgHead->msgLen);
+		LanMsgHead *msgHead	= (LanMsgHead*)buf.peek();
+		uint32 clientId		= endiantool::networkToHost(msgHead->clientId);
+		uint16 msgId			= endiantool::networkToHost(msgHead->msgId);
+		uint32 dataLen			= endiantool::networkToHost(msgHead->msgLen);
 
 		// ¼ì²â°ë°ü
 		if (dataLen > bytes) {
@@ -37,8 +37,8 @@ void GateLink::OnRecv(Link *link, Buffer &buf)
 			return;
 		}
 
-		char *msg = (char*)buf.peek() + sizeof(LanMsgHead);
-		uint32 msgLen = dataLen - sizeof(LanMsgHead);
+		char *msg		= (char*)buf.peek() + sizeof(LanMsgHead);
+		uint32 msgLen	= dataLen - sizeof(LanMsgHead);
 
 		Client *client = ClientMgr::Instance().FindClient(clientId);
 		if (NULL == client) {

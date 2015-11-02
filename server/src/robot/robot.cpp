@@ -54,7 +54,7 @@ void Robot::randomRobot()
 	m_deviceid = std::string("deviceid_") + (const char*)randNum;
 	m_username = std::string("username_") + (const char*)randNum;
 	m_password = std::string("password_") + (const char*)randNum;
-	m_ip = std::string("127.0.0.") + echotool::getmsg("%u", randtool::random(1, 254));
+	m_ip	   = std::string("127.0.0.") + echotool::getmsg("%u", randtool::random(1, 254));
 }
 
 
@@ -112,9 +112,9 @@ void Robot::handleMsg()
 			break;
 		}
 
-		NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
-		uint16 msgId = endiantool::networkToHost(head->msgId);
-		uint32 msgLen = endiantool::networkToHost(head->msgLen);
+		NetMsgHead *head	= (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
+		uint16 msgId		= endiantool::networkToHost(head->msgId);
+		uint32 msgLen		= endiantool::networkToHost(head->msgLen);
 
 		if (msgLen > bytes) {
 			break;
@@ -130,7 +130,7 @@ void Robot::handleMsg()
 		}
 
 		//先解密
-		uint8* encryptBuf =  (uint8*)(peek + sizeof(NetMsgHead));
+		uint8* encryptBuf	=  (uint8*)(peek + sizeof(NetMsgHead));
 		int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
 		if(!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
@@ -169,7 +169,7 @@ bool Robot::send(int msgId, Message &msg)
 	}
 
 	uint32 headSize = sizeof(NetMsgHead);
-	int size = msg.ByteSize();
+	int size		 = msg.ByteSize();
 
 	bool ok = msg.SerializeToArray(m_link->m_net->g_encryptBuf + headSize + EncryptHeadLen, size);
 	if (!ok) {
@@ -180,7 +180,7 @@ bool Robot::send(int msgId, Message &msg)
 	}
 
 	// 添加加解密头尾
-	uint8* decryptBuf = (uint8*)(m_link->m_net->g_encryptBuf + headSize);
+	uint8* decryptBuf	= (uint8*)(m_link->m_net->g_encryptBuf + headSize);
 	int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
 
 	encrypttool::xor_encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));

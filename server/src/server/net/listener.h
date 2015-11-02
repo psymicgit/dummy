@@ -49,20 +49,13 @@ private:
 	Link* allocLink(socket_t newfd, NetAddress &peerAddr);
 
 public:
-	// 当前正在监听的地址
-	NetAddress m_listenAddr;
+	NetAddress	m_listenAddr;	// 当前正在监听的地址
 
 private:
-	// 网络中心
-	NetModel *m_netModel;
-
-	// 与本监听器绑定的逻辑实例
-	INetLogic *m_logic;
-
-	// 正在监听的socket
-	socket_t m_listenFd;
-
-	Net *m_net;
+	NetModel*	m_netModel;		// 网络中心
+	INetLogic*	m_logic;		// 与本监听器绑定的逻辑实例
+	socket_t	m_listenFd;		// 正在监听的socket
+	Net*		m_net;
 };
 
 #endif //_listener_h_

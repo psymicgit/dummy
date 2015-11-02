@@ -60,11 +60,9 @@ public:
 		m_callbackMap.clear();
 	}
 
-	// 消息回调map
-	CallbackMap m_callbackMap;
+	CallbackMap					m_callbackMap;		// 消息回调map
 
-	// 消息派发器
-	MsgDispatcher<LinkType> *m_msgDispacher;
+	MsgDispatcher<LinkType>*	m_msgDispacher;	// 消息派发器
 };
 
 #endif //_msghandler_h_
