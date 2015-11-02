@@ -1,3 +1,11 @@
+///<------------------------------------------------------------------------------
+//< @file:   gateconfig.h
+//< @author: 洪坤安
+//< @date:   2015年11月2日
+//< @brief:
+//< Copyright (c) 2015 服务器. All rights reserved.
+///<------------------------------------------------------------------------------
+
 #ifndef _gateconfig_h_
 #define _gateconfig_h_
 
@@ -37,4 +45,4 @@ struct GateConfig {
 	uint16 m_sleepMsEachLoop; // 服务器每次主循环间的sleep时间，单位毫秒（用于防止跑满cpu）
 };
 
-#endif
+#endif // _gateconfig_h_

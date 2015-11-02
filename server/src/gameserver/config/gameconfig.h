@@ -1,3 +1,11 @@
+///<------------------------------------------------------------------------------
+//< @file:   gameconfig.h
+//< @author: 洪坤安
+//< @date:   2015年11月2日
+//< @brief:
+//< Copyright (c) 2015 服务器. All rights reserved.
+///<------------------------------------------------------------------------------
+
 #ifndef _gameconfig_h_
 #define _gameconfig_h_
 
@@ -27,4 +35,4 @@ public:
 	int m_saveToDBInterval;
 };
 
-#endif
+#endif // _gameconfig_h_

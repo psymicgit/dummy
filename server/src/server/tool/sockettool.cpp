@@ -10,8 +10,6 @@
 
 #include <errno.h>
 
-#include "log/log.h"
-
 #include "net/netaddress.h"
 
 #ifndef WIN

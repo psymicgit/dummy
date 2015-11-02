@@ -9,7 +9,6 @@
 #include "netaddress.h"
 
 #include "tool/endiantool.h"
-#include "log/log.h"
 
 #ifndef WIN
 	#include <netdb.h>

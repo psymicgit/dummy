@@ -13,8 +13,6 @@
 #include "robot.h"
 #include "robotmsghandler.h"
 
-#include <log/log.h>
-
 void registerSignal();
 
 void handleSignal(int sig)

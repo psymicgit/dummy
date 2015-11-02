@@ -117,6 +117,7 @@
     <ClInclude Include="basic\evthread-internal.h" />
     <ClInclude Include="basic\evthread.h" />
     <ClInclude Include="basic\lock.h" />
+    <ClInclude Include="basic\log.h" />
     <ClInclude Include="basic\objectpool.h" />
     <ClInclude Include="basic\rsa.h" />
     <ClInclude Include="basic\singleton.h" />
@@ -134,7 +135,6 @@
     <ClInclude Include="def\type.h" />
     <ClInclude Include="http\httpcmd.h" />
     <ClInclude Include="http\httpmgr.h" />
-    <ClInclude Include="log\log.h" />
     <ClInclude Include="net\connector.h" />
     <ClInclude Include="net\imsghandler.h" />
     <ClInclude Include="net\link.h" />
@@ -172,6 +172,7 @@
     <ClCompile Include="basic\evbuffer.cpp" />
     <ClCompile Include="basic\evthread.cpp" />
     <ClCompile Include="basic\lock.cpp" />
+    <ClCompile Include="basic\log.cpp" />
     <ClCompile Include="basic\rsa.cpp" />
     <ClCompile Include="basic\thread.cpp" />
     <ClCompile Include="basic\timerqueue.cpp" />
@@ -182,7 +183,6 @@
     <ClCompile Include="def\global.cpp" />
     <ClCompile Include="http\httpcmd.cpp" />
     <ClCompile Include="http\httpmgr.cpp" />
-    <ClCompile Include="log\log.cpp" />
     <ClCompile Include="net\connector.cpp" />
     <ClCompile Include="net\link.cpp" />
     <ClCompile Include="net\listener.cpp" />

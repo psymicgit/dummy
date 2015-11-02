@@ -19,7 +19,6 @@
 #include "tool/sockettool.h"
 #include "tool/atomictool.h"
 
-#include "log/log.h"
 #include "basic/evbuffer.h"
 
 void Link::open()

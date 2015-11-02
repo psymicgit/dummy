@@ -20,9 +20,6 @@
     <ClInclude Include="tool\sockettool.h">
       <Filter>tool</Filter>
     </ClInclude>
-    <ClInclude Include="log\log.h">
-      <Filter>log</Filter>
-    </ClInclude>
     <ClInclude Include="net\listener.h">
       <Filter>net</Filter>
     </ClInclude>
@@ -171,6 +168,9 @@
     <ClInclude Include="net\netdefine.h">
       <Filter>net</Filter>
     </ClInclude>
+    <ClInclude Include="basic\log.h">
+      <Filter>basic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -181,9 +181,6 @@
     </Filter>
     <Filter Include="def">
       <UniqueIdentifier>{ad1a6770-b64a-4193-8d18-546344da1f6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="log">
-      <UniqueIdentifier>{21a45f05-786a-4f43-9101-07852fd6bd8c}</UniqueIdentifier>
     </Filter>
     <Filter Include="basic">
       <UniqueIdentifier>{9191102b-5521-42b6-92e3-0ef5d6090a03}</UniqueIdentifier>
@@ -211,9 +208,6 @@
     </ClCompile>
     <ClCompile Include="tool\sockettool.cpp">
       <Filter>tool</Filter>
-    </ClCompile>
-    <ClCompile Include="log\log.cpp">
-      <Filter>log</Filter>
     </ClCompile>
     <ClCompile Include="net\listener.cpp">
       <Filter>net</Filter>
@@ -314,6 +308,9 @@
     </ClCompile>
     <ClCompile Include="net\net.cpp">
       <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\log.cpp">
+      <Filter>basic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

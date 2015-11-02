@@ -9,8 +9,6 @@
 #ifndef _ticktool_h_
 #define _ticktool_h_
 
-#include "log/log.h"
-
 namespace ticktool
 {
 	// 返回时钟周期

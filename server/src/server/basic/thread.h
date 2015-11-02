@@ -17,7 +17,7 @@ class Thread
 #ifdef WIN
 	typedef vector<HANDLE> ThreadIdList;
 #else
-	typedef vector<pthread_t> ThreadIdList;
+	typedef vector<pthread_t> ThreadIdL ist;
 #endif
 
 public:
@@ -27,7 +27,7 @@ public:
 	static void* run(void* p);
 #endif
 
-
+	// 当前线程让出cpu资源
 	inline void yield()
 	{
 #if defined(WIN)

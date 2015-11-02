@@ -1,3 +1,11 @@
+///<------------------------------------------------------------------------------
+//< @file:   dbconfig.h
+//< @author: 洪坤安
+//< @date:   2015年11月2日
+//< @brief:
+//< Copyright (c) 2015 服务器. All rights reserved.
+///<------------------------------------------------------------------------------
+
 #ifndef _dbconfig_h_
 #define _dbconfig_h_
 
@@ -26,4 +34,4 @@ struct DBConfig {
 	DBAccount m_logdbAccnt;
 };
 
-#endif
+#endif // _dbconfig_h_
