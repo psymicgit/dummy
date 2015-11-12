@@ -25,17 +25,17 @@ class GameServer : public Singleton<GameServer>, public Server
 public:
 	GameServer();
 
-	bool init(const char* jsonConfig);
-
-	void start();
-
 	virtual void stoppping();
-
-	void run();
 
 	virtual ServerLink* onAcceptServer(Link&, ServerType, int serverId);
 
 	virtual void onDisconnectServer(Link&, ServerType, int serverId);
+
+	bool init(const char* jsonConfig);
+
+	void start();
+
+	void run();
 
 	// 发送消息到db服务器
 	bool sendToDBServer(uint16 msgId, Message&);
@@ -51,9 +51,9 @@ private:
 
 	GameConfig		m_config;		// 游戏服务器配置
 
-	DbAgent			m_gamedb;
+	DbAgent			m_gamedb;       // 游戏库代理
 
-	DbAgent			m_logdb;
+	DbAgent			m_logdb;        // 日志库代理
 };
 
 #endif //_gameserver_h_

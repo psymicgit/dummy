@@ -21,12 +21,6 @@ class GateServer : public Singleton<GateServer>, public Server
 public:
 	GateServer();
 
-	// 根据配置初始化网关服务器
-	bool init(const char* jsonConfig);
-
-	// 启动网关服务器
-	void start();
-
 	// 回收服务器资源
 	virtual void stopping();
 
@@ -38,6 +32,12 @@ public:
 
 	// 与服务器断开连接
 	virtual void onDisconnectServer(Link&, ServerType, int serverId);
+
+	// 根据配置初始化网关服务器
+	bool init(const char* jsonConfig);
+
+	// 启动网关服务器
+	void start();
 
 public:
 	// 将指定玩家的消息发给游戏服

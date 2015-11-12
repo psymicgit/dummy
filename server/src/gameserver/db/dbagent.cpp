@@ -1,9 +1,14 @@
-#include "dbagent.h"
+///<------------------------------------------------------------------------------
+//< @file:   dbagent.cpp
+//< @author: 洪坤安
+//< @date:   2015年11月12日
+//< @brief:
+//< Copyright (c) 2015 服务器. All rights reserved.
+///<------------------------------------------------------------------------------
 
 #include "gameserver.h"
 
 #include <protocol.pb.h>
-
 #include <db/dbcommand.h>
 
 DbAgent::DbAgent(SqlDBType dbtype)
