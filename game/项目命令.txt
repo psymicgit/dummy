@@ -1,0 +1,5 @@
+新建game项目名
+	cocos new game -p com.do.game -l cpp -d .
+
+运行项目
+	cocos run -p win32
