@@ -83,7 +83,7 @@ static const char *getArg(int *i, int argc, char* argv[])
            ++*i >= argc || '-' == argv[*i][0] ? "" : argv[*i];
 }
 
-int maina (int argc, char* argv[])
+int main (int argc, char* argv[])
 {
     int argCount = 0;        // record the number of files on the command line
     int fileFlag = 0;        // -f<file> sets this to 1
