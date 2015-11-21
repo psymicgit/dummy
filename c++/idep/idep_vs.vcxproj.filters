@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="idep_aliasdep.h" />
+    <ClInclude Include="idep_aliastable.h" />
+    <ClInclude Include="idep_aliasutil.h" />
+    <ClInclude Include="idep_binrel.h" />
+    <ClInclude Include="idep_compiledep.h" />
+    <ClInclude Include="idep_filedepiter.h" />
+    <ClInclude Include="idep_linkdep.h" />
+    <ClInclude Include="idep_namearray.h" />
+    <ClInclude Include="idep_nameindexmap.h" />
+    <ClInclude Include="idep_string.h" />
+    <ClInclude Include="idep_tokeniter.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="adep.cpp" />
+    <ClCompile Include="cdep.cpp" />
+    <ClCompile Include="idep_adep.cpp" />
+    <ClCompile Include="idep_altab.cpp" />
+    <ClCompile Include="idep_alutil.cpp" />
+    <ClCompile Include="idep_binrel.cpp" />
+    <ClCompile Include="idep_cdep.cpp" />
+    <ClCompile Include="idep_fdepitr.cpp" />
+    <ClCompile Include="idep_ldep.cpp" />
+    <ClCompile Include="idep_namea.cpp" />
+    <ClCompile Include="idep_nimap.cpp" />
+    <ClCompile Include="idep_string.cpp" />
+    <ClCompile Include="idep_tokitr.cpp" />
+    <ClCompile Include="ldep.cpp" />
+  </ItemGroup>
+</Project>
