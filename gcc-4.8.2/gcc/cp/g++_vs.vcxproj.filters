@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="parser.cpp" />
+    <ClCompile Include="call.cpp" />
+    <ClCompile Include="class.cpp" />
+    <ClCompile Include="cp-gimplify.cpp" />
+    <ClCompile Include="cp-lang.cpp" />
+    <ClCompile Include="cp-objcp-common.cpp" />
+    <ClCompile Include="cvt.cpp" />
+    <ClCompile Include="cxx-pretty-print.cpp" />
+    <ClCompile Include="decl.cpp" />
+    <ClCompile Include="decl2.cpp" />
+    <ClCompile Include="typeck2.cpp" />
+    <ClCompile Include="name-lookup.cpp" />
+    <ClCompile Include="method.cpp" />
+    <ClCompile Include="mangle.cpp" />
+    <ClCompile Include="optimize.cpp" />
+    <ClCompile Include="pt.cpp" />
+    <ClCompile Include="ptree.cpp" />
+    <ClCompile Include="repo.cpp" />
+    <ClCompile Include="rtti.cpp" />
+    <ClCompile Include="search.cpp" />
+    <ClCompile Include="semantics.cpp" />
+    <ClCompile Include="tree.cpp" />
+    <ClCompile Include="typeck.cpp" />
+    <ClCompile Include="lex.cpp" />
+    <ClCompile Include="init.cpp" />
+    <ClCompile Include="g++spec.cpp" />
+    <ClCompile Include="friend.cpp" />
+    <ClCompile Include="expr.cpp" />
+    <ClCompile Include="except.cpp" />
+    <ClCompile Include="error.cpp" />
+    <ClCompile Include="dump.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cfns.h" />
+    <ClInclude Include="cp-objcp-common.h" />
+    <ClInclude Include="cp-tree.h" />
+    <ClInclude Include="cxx-pretty-print.h" />
+    <ClInclude Include="decl.h" />
+    <ClInclude Include="lang-specs.h" />
+    <ClInclude Include="name-lookup.h" />
+    <ClInclude Include="parser.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cp-tree.def" />
+    <None Include="operators.def" />
+  </ItemGroup>
+</Project>
