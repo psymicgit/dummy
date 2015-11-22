@@ -11,40 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="call.c" />
-    <ClCompile Include="class.c" />
-    <ClCompile Include="cp-gimplify.c" />
-    <ClCompile Include="cp-lang.c" />
-    <ClCompile Include="cp-objcp-common.c" />
-    <ClCompile Include="cvt.c" />
-    <ClCompile Include="cxx-pretty-print.c" />
-    <ClCompile Include="decl.c" />
-    <ClCompile Include="decl2.c" />
-    <ClCompile Include="dump.c" />
-    <ClCompile Include="error.c" />
-    <ClCompile Include="except.c" />
-    <ClCompile Include="expr.c" />
-    <ClCompile Include="friend.c" />
-    <ClCompile Include="g++spec.c" />
-    <ClCompile Include="init.c" />
-    <ClCompile Include="lex.c" />
-    <ClCompile Include="mangle.c" />
-    <ClCompile Include="method.c" />
-    <ClCompile Include="name-lookup.c" />
-    <ClCompile Include="optimize.c" />
-    <ClCompile Include="parser.c" />
-    <ClCompile Include="parser.cpp" />
-    <ClCompile Include="pt.c" />
-    <ClCompile Include="ptree.c" />
-    <ClCompile Include="repo.c" />
-    <ClCompile Include="rtti.c" />
-    <ClCompile Include="search.c" />
-    <ClCompile Include="semantics.c" />
-    <ClCompile Include="tree.c" />
-    <ClCompile Include="typeck.c" />
-    <ClCompile Include="typeck2.c" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\auto-host.h" />
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\bconfig.h" />
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\bversion.h" />
@@ -196,13 +162,41 @@
     <ClInclude Include="parser.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cfns.gperf" />
-    <None Include="ChangeLog.ptr" />
-    <None Include="ChangeLog.tree-ssa" />
-    <None Include="config-lang.in" />
     <None Include="cp-tree.def" />
-    <None Include="Make-lang.in" />
     <None Include="operators.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="call.cpp" />
+    <ClCompile Include="class.cpp" />
+    <ClCompile Include="cp-gimplify.cpp" />
+    <ClCompile Include="cp-lang.cpp" />
+    <ClCompile Include="cp-objcp-common.cpp" />
+    <ClCompile Include="cvt.cpp" />
+    <ClCompile Include="cxx-pretty-print.cpp" />
+    <ClCompile Include="decl.cpp" />
+    <ClCompile Include="decl2.cpp" />
+    <ClCompile Include="dump.cpp" />
+    <ClCompile Include="error.cpp" />
+    <ClCompile Include="except.cpp" />
+    <ClCompile Include="expr.cpp" />
+    <ClCompile Include="friend.cpp" />
+    <ClCompile Include="g++spec.cpp" />
+    <ClCompile Include="init.cpp" />
+    <ClCompile Include="lex.cpp" />
+    <ClCompile Include="mangle.cpp" />
+    <ClCompile Include="method.cpp" />
+    <ClCompile Include="name-lookup.cpp" />
+    <ClCompile Include="optimize.cpp" />
+    <ClCompile Include="parser.cpp" />
+    <ClCompile Include="pt.cpp" />
+    <ClCompile Include="ptree.cpp" />
+    <ClCompile Include="repo.cpp" />
+    <ClCompile Include="rtti.cpp" />
+    <ClCompile Include="search.cpp" />
+    <ClCompile Include="semantics.cpp" />
+    <ClCompile Include="tree.cpp" />
+    <ClCompile Include="typeck.cpp" />
+    <ClCompile Include="typeck2.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9A2A28E8-942E-47B2-8600-37DA83F01CBD}</ProjectGuid>
