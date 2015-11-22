@@ -94,6 +94,9 @@
     <ClCompile Include="typeck2.c">
       <Filter>c++</Filter>
     </ClCompile>
+    <ClCompile Include="parser.cpp">
+      <Filter>c++</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cfns.h">
