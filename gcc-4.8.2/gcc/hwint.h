@@ -34,11 +34,9 @@
    but they're all cross-compile-only.)  Just in case, force a
    constraint violation if that assumption is incorrect.  */
 #if !defined HAVE_LONG_LONG
-# if GCC_VERSION >= 3000
 #  define HAVE_LONG_LONG 1
 #  define SIZEOF_LONG_LONG 8
 extern char sizeof_long_long_must_be_8[sizeof(long long) == 8 ? 1 : -1];
-# endif
 #endif
 
 #ifdef HAVE_LONG_LONG
@@ -56,11 +54,6 @@ extern char sizeof_long_long_must_be_8[sizeof(long long) == 8 ? 1 : -1];
    Thus, we use that unless we have to use 'long long' or '__int64'
    because we're targeting a 64-bit machine from a 32-bit host.  */
 
-#if HOST_BITS_PER_LONG >= 64 || !defined NEED_64BIT_HOST_WIDE_INT
-#   define HOST_BITS_PER_WIDE_INT HOST_BITS_PER_LONG
-#   define HOST_WIDE_INT long
-#   define HOST_WIDE_INT_C(X) X ## L
-#else
 # if HOST_BITS_PER_LONGLONG >= 64
 #   define HOST_BITS_PER_WIDE_INT HOST_BITS_PER_LONGLONG
 #   define HOST_WIDE_INT long long
@@ -74,7 +67,6 @@ extern char sizeof_long_long_must_be_8[sizeof(long long) == 8 ? 1 : -1];
     #error "Unable to find a suitable type for HOST_WIDE_INT"
 #  endif
 # endif
-#endif
 
 #define HOST_WIDE_INT_1 HOST_WIDE_INT_C(1)
 

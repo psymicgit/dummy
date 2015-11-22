@@ -37,6 +37,10 @@ along with GCC; see the file COPYING3.  If not see
 #include "pointer-set.h"
 #include "hash-table.h"
 
+#ifndef TARGET_VTABLE_USES_DESCRIPTORS
+#define TARGET_VTABLE_USES_DESCRIPTORS 0
+#endif
+
 /* The number of nested classes being processed.  If we are not in the
    scope of any class, this is zero.  */
 

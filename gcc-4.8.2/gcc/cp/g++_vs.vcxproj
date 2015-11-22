@@ -234,7 +234,7 @@
       <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>../;../../libcpp/include;../../include;../../gcc-build-4.8.2/gcc</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <DisableSpecificWarnings>4800</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4800;4244;4715;4065;4305;4819;4809;4018;4145;4146;4138</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

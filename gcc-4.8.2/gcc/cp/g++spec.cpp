@@ -23,6 +23,7 @@ along with GCC; see the file COPYING3.  If not see
 #include "tm.h"
 #include "gcc.h"
 #include "opts.h"
+#include "options.h"
 
 /* This bit is set if we saw a `-xfoo' language specification.  */
 #define LANGSPEC	(1<<1)
