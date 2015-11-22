@@ -120,6 +120,426 @@
     <ClInclude Include="parser.h">
       <Filter>c++</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\auto-host.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\bconfig.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\bversion.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\config.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\configargs.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\cs-bconfig.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\cs-config.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\cs-tconfig.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\cs-tm.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\cs-tm_p.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gcov-iov.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\genrtl.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-ada-decl.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-ada-misc.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-ada-trans.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-ada-utils.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-alias.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-asan.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-bitmap.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-caller-save.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-c-c-decl.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-c-c-parser.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-c-family-c-common.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-c-family-c-cppbuiltin.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-c-family-c-pragma.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cfgrtl.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cgraph.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cgraphclones.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cgraphunit.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-coverage.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-call.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-class.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-cp-lang.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-cp-objcp-common.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-decl.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-decl2.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-except.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-mangle.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-method.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-name-lookup.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-parser.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-pt.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-repo.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-rtti.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-semantics.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-tree.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cp-typeck2.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-cselib.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-dbxout.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-dojump.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-dwarf2asm.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-dwarf2cfi.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-dwarf2out.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-emit-rtl.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-except.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-explow.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-expr.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-fortran-f95-lang.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-fortran-trans-decl.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-fortran-trans-intrinsic.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-fortran-trans-io.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-fortran-trans-stmt.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-fortran-trans-types.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-function.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-gcse.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-gimple.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-gimplify.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-godump.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-go-go-lang.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-i386.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-java-builtins.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-java-class.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-java-constants.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-java-decl.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-java-expr.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-java-jcf-parse.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-java-lang.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-java-mangle.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-java-resource.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-lists.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-lto-lto.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-lto-lto-lang.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-objc-objc-act.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-objc-objc-gnu-runtime-abi-01.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-objc-objc-map.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-objc-objc-next-runtime-abi-01.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-objc-objc-next-runtime-abi-02.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-objc-objc-runtime-shared-support.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-omp-low.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-optabs.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-passes.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-sdbout.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-stor-layout.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-stringpool.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-symtab.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-targhooks.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-trans-mem.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-tree.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-tree-iterator.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-tree-mudflap.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-tree-nested.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-tree-parloops.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-tree-phinodes.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-tree-profile.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-tree-scalar-evolution.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-tree-ssa-address.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-tree-ssa-propagate.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-tree-vect-generic.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gt-varasm.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gtype-ada.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gtype-c.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gtype-cp.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gtype-desc.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gtype-fortran.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gtype-go.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gtype-java.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gtype-lto.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gtype-objc.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\gtype-objcp.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\insn-attr.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\insn-attr-common.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\insn-codes.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\insn-config.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\insn-constants.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\insn-flags.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\insn-modes.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\insn-opinit.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\mm_malloc.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\multilib.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\options.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\plugin-version.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\specs.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\target-hooks-def.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tconfig.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tm.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tm_p.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tm-constrs.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tmp-limits.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tm-preds.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tree-check.h">
+      <Filter>build</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cfns.gperf">
