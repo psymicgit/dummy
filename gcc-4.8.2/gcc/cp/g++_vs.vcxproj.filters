@@ -1,37 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="parser.cpp" />
-    <ClCompile Include="call.cpp" />
-    <ClCompile Include="class.cpp" />
-    <ClCompile Include="cp-gimplify.cpp" />
-    <ClCompile Include="cp-lang.cpp" />
-    <ClCompile Include="cp-objcp-common.cpp" />
-    <ClCompile Include="cvt.cpp" />
-    <ClCompile Include="cxx-pretty-print.cpp" />
-    <ClCompile Include="decl.cpp" />
-    <ClCompile Include="decl2.cpp" />
-    <ClCompile Include="typeck2.cpp" />
-    <ClCompile Include="name-lookup.cpp" />
-    <ClCompile Include="method.cpp" />
-    <ClCompile Include="mangle.cpp" />
-    <ClCompile Include="optimize.cpp" />
-    <ClCompile Include="pt.cpp" />
-    <ClCompile Include="ptree.cpp" />
-    <ClCompile Include="repo.cpp" />
-    <ClCompile Include="rtti.cpp" />
-    <ClCompile Include="search.cpp" />
-    <ClCompile Include="semantics.cpp" />
-    <ClCompile Include="tree.cpp" />
-    <ClCompile Include="typeck.cpp" />
-    <ClCompile Include="lex.cpp" />
-    <ClCompile Include="init.cpp" />
-    <ClCompile Include="g++spec.cpp" />
-    <ClCompile Include="friend.cpp" />
-    <ClCompile Include="expr.cpp" />
-    <ClCompile Include="except.cpp" />
-    <ClCompile Include="error.cpp" />
-    <ClCompile Include="dump.cpp" />
+    <ClCompile Include="call.c" />
+    <ClCompile Include="class.c" />
+    <ClCompile Include="cp-gimplify.c" />
+    <ClCompile Include="cp-lang.c" />
+    <ClCompile Include="cp-objcp-common.c" />
+    <ClCompile Include="cvt.c" />
+    <ClCompile Include="cxx-pretty-print.c" />
+    <ClCompile Include="decl.c" />
+    <ClCompile Include="decl2.c" />
+    <ClCompile Include="dump.c" />
+    <ClCompile Include="error.c" />
+    <ClCompile Include="except.c" />
+    <ClCompile Include="expr.c" />
+    <ClCompile Include="friend.c" />
+    <ClCompile Include="g++spec.c" />
+    <ClCompile Include="init.c" />
+    <ClCompile Include="lex.c" />
+    <ClCompile Include="mangle.c" />
+    <ClCompile Include="method.c" />
+    <ClCompile Include="name-lookup.c" />
+    <ClCompile Include="optimize.c" />
+    <ClCompile Include="parser.c" />
+    <ClCompile Include="pt.c" />
+    <ClCompile Include="ptree.c" />
+    <ClCompile Include="repo.c" />
+    <ClCompile Include="rtti.c" />
+    <ClCompile Include="search.c" />
+    <ClCompile Include="semantics.c" />
+    <ClCompile Include="tree.c" />
+    <ClCompile Include="typeck.c" />
+    <ClCompile Include="typeck2.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cfns.h" />
@@ -46,5 +46,10 @@
   <ItemGroup>
     <None Include="cp-tree.def" />
     <None Include="operators.def" />
+    <None Include="cfns.gperf" />
+    <None Include="config-lang.in" />
+    <None Include="Make-lang.in" />
+    <None Include="ChangeLog.ptr" />
+    <None Include="ChangeLog.tree-ssa" />
   </ItemGroup>
 </Project>
