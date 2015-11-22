@@ -4075,6 +4075,7 @@ ObjCXX_handle_option_auto (struct gcc_options *opts,
 #define OPTION_MASK_ISA_XSAVE (HOST_WIDE_INT_1 << 40)
 #define OPTION_MASK_ISA_XSAVEOPT (HOST_WIDE_INT_1 << 41)
  #if defined(HOST_BITS_PER_WIDE_INT) && 42 >= HOST_BITS_PER_WIDE_INT
+#error HOST_BITS_PER_WIDE_INT
 #error too many masks for ix86_isa_flags
 #endif
 

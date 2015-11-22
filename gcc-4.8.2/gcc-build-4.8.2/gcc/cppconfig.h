@@ -20,7 +20,7 @@
 
 /* Define to 1 if translation of program messages to the user's native
    language is requested. */
-#define ENABLE_NLS 1
+//#define ENABLE_NLS 1
 
 /* Define if you want to workaround valgrind (a memory checker) warnings about
    possible memory leaks because of libcpp use of interior pointers. */
