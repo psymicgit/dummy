@@ -1,7 +1,11 @@
 idep分析c++文件的依赖
 
 命令：
-	分析依赖的头文件：
+	分析include的头文件：
 		./cdep -I. -I/usr/local/include/c++/4.8.2/  /mnt/hgfs/proj/idep/cdep.cpp
+
+	分析依赖
+		./ldep -d/mnt/hgfs/proj/dummygit/c++/idep/cdep.cpp -s
+
 
 	
