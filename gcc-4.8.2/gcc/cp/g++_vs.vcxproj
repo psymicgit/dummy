@@ -96,7 +96,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>../;D:\proj\gcc-4.8.2\libcpp\include;D:\proj\gcc-4.8.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../;../../libcpp/include;../../include;../../gcc-build-4.8.2/gcc</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4800</DisableSpecificWarnings>
     </ClCompile>

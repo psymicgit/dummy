@@ -1,55 +1,155 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="call.c" />
-    <ClCompile Include="class.c" />
-    <ClCompile Include="cp-gimplify.c" />
-    <ClCompile Include="cp-lang.c" />
-    <ClCompile Include="cp-objcp-common.c" />
-    <ClCompile Include="cvt.c" />
-    <ClCompile Include="cxx-pretty-print.c" />
-    <ClCompile Include="decl.c" />
-    <ClCompile Include="decl2.c" />
-    <ClCompile Include="dump.c" />
-    <ClCompile Include="error.c" />
-    <ClCompile Include="except.c" />
-    <ClCompile Include="expr.c" />
-    <ClCompile Include="friend.c" />
-    <ClCompile Include="g++spec.c" />
-    <ClCompile Include="init.c" />
-    <ClCompile Include="lex.c" />
-    <ClCompile Include="mangle.c" />
-    <ClCompile Include="method.c" />
-    <ClCompile Include="name-lookup.c" />
-    <ClCompile Include="optimize.c" />
-    <ClCompile Include="parser.c" />
-    <ClCompile Include="pt.c" />
-    <ClCompile Include="ptree.c" />
-    <ClCompile Include="repo.c" />
-    <ClCompile Include="rtti.c" />
-    <ClCompile Include="search.c" />
-    <ClCompile Include="semantics.c" />
-    <ClCompile Include="tree.c" />
-    <ClCompile Include="typeck.c" />
-    <ClCompile Include="typeck2.c" />
+    <ClCompile Include="call.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="class.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="cp-gimplify.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="cp-lang.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="cp-objcp-common.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="cvt.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="cxx-pretty-print.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="decl.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="decl2.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="dump.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="error.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="except.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="expr.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="friend.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="g++spec.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="init.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="lex.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="mangle.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="method.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="name-lookup.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="optimize.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="parser.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="pt.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="ptree.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="repo.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="rtti.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="search.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="semantics.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="tree.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="typeck.c">
+      <Filter>c++</Filter>
+    </ClCompile>
+    <ClCompile Include="typeck2.c">
+      <Filter>c++</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cfns.h" />
-    <ClInclude Include="cp-objcp-common.h" />
-    <ClInclude Include="cp-tree.h" />
-    <ClInclude Include="cxx-pretty-print.h" />
-    <ClInclude Include="decl.h" />
-    <ClInclude Include="lang-specs.h" />
-    <ClInclude Include="name-lookup.h" />
-    <ClInclude Include="parser.h" />
+    <ClInclude Include="cfns.h">
+      <Filter>c++</Filter>
+    </ClInclude>
+    <ClInclude Include="cp-objcp-common.h">
+      <Filter>c++</Filter>
+    </ClInclude>
+    <ClInclude Include="cp-tree.h">
+      <Filter>c++</Filter>
+    </ClInclude>
+    <ClInclude Include="cxx-pretty-print.h">
+      <Filter>c++</Filter>
+    </ClInclude>
+    <ClInclude Include="decl.h">
+      <Filter>c++</Filter>
+    </ClInclude>
+    <ClInclude Include="lang-specs.h">
+      <Filter>c++</Filter>
+    </ClInclude>
+    <ClInclude Include="name-lookup.h">
+      <Filter>c++</Filter>
+    </ClInclude>
+    <ClInclude Include="parser.h">
+      <Filter>c++</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cp-tree.def" />
-    <None Include="operators.def" />
-    <None Include="cfns.gperf" />
-    <None Include="config-lang.in" />
-    <None Include="Make-lang.in" />
-    <None Include="ChangeLog.ptr" />
-    <None Include="ChangeLog.tree-ssa" />
+    <None Include="cfns.gperf">
+      <Filter>c++</Filter>
+    </None>
+    <None Include="ChangeLog.ptr">
+      <Filter>c++</Filter>
+    </None>
+    <None Include="ChangeLog.tree-ssa">
+      <Filter>c++</Filter>
+    </None>
+    <None Include="config-lang.in">
+      <Filter>c++</Filter>
+    </None>
+    <None Include="cp-tree.def">
+      <Filter>c++</Filter>
+    </None>
+    <None Include="Make-lang.in">
+      <Filter>c++</Filter>
+    </None>
+    <None Include="operators.def">
+      <Filter>c++</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="build">
+      <UniqueIdentifier>{d2ee8cc3-8621-48bd-a84e-41e18ec0cf29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="c++">
+      <UniqueIdentifier>{1e432196-14e5-4457-8172-c36649ac8d6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
