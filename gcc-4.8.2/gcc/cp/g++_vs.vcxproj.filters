@@ -543,6 +543,9 @@
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tree-check.h">
       <Filter>build</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\cppconfig.h">
+      <Filter>build</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cfns.gperf">

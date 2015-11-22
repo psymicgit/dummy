@@ -50,6 +50,7 @@
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\bversion.h" />
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\config.h" />
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\configargs.h" />
+    <ClInclude Include="..\..\gcc-build-4.8.2\gcc\cppconfig.h" />
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\cs-bconfig.h" />
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\cs-config.h" />
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\cs-tconfig.h" />
