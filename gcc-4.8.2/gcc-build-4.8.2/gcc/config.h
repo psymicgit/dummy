@@ -22,4 +22,6 @@
 	#endif
 
 #define snprintf sprintf_s
+#define HAVE_COMDAT_GROUP 1
+
 #endif /* GCC_CONFIG_H */
