@@ -15,7 +15,7 @@
 
 	#include <limits.h>
 
-#define GENERATOR_FILE 0
+//#define GENERATOR_FILE 0
 
 	#ifdef IN_GCC
 		#include "ansidecl.h"

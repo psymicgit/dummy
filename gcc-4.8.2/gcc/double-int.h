@@ -450,8 +450,8 @@ double_int::popcount () const
 #ifndef GENERATOR_FILE
 /* Conversion to and from GMP integer representations.  */
 
-void mpz_set_double_int (mpz_t, double_int, bool);
-double_int mpz_get_double_int (const_tree, mpz_t, bool);
+// void mpz_set_double_int (mpz_t, double_int, bool);
+// double_int mpz_get_double_int (const_tree, mpz_t, bool);
 #endif
 
 #endif /* DOUBLE_INT_H */

@@ -5903,7 +5903,7 @@ extern bool decl_address_invariant_p (const_tree);
 extern bool decl_address_ip_invariant_p (const_tree);
 extern bool int_fits_type_p (const_tree, const_tree);
 #ifndef GENERATOR_FILE
-extern void get_type_static_bounds (const_tree, mpz_t, mpz_t);
+//extern void get_type_static_bounds (const_tree, mpz_t, mpz_t);
 #endif
 extern bool variably_modified_type_p (tree, tree);
 extern int tree_log2 (const_tree);

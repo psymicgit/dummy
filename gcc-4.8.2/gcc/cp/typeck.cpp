@@ -27,9 +27,7 @@ along with GCC; see the file COPYING3.  If not see
 #define GCC_TM_H
 
 #include "config.h"
-#include "options.h"
 #include "system.h"
-#include "coretypes.h"
 #include "tm.h"
 #include "tree.h"
 #include "cp-tree.h"
@@ -40,12 +38,12 @@ along with GCC; see the file COPYING3.  If not see
 #include "convert.h"
 #include "c-family/c-common.h"
 #include "c-family/c-objc.h"
-extern struct gcc_options global_options;
 
 #include "params.h"
 
 #define GCC_INSN_FLAGS_H
 #include "defaults.h"
+extern struct gcc_options global_options;
 
 static tree pfn_from_ptrmemfunc (tree);
 static tree delta_from_ptrmemfunc (tree);
