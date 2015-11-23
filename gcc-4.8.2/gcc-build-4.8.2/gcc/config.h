@@ -20,4 +20,6 @@
 	#ifdef IN_GCC
 		#include "ansidecl.h"
 	#endif
+
+#define snprintf sprintf_s
 #endif /* GCC_CONFIG_H */
