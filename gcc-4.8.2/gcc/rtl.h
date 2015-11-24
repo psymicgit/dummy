@@ -39,6 +39,9 @@ along with GCC; see the file COPYING3.  If not see
 #define RTX_CODE	enum rtx_code
 enum rtx_code  {
 
+#undef CONST
+#undef AND
+
 #define DEF_RTL_EXPR(ENUM, NAME, FORMAT, CLASS)   ENUM ,
 #include "rtl.def"		/* rtl expressions are documented here */
 #undef DEF_RTL_EXPR
