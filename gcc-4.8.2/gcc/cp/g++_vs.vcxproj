@@ -166,6 +166,7 @@
     <None Include="operators.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\main.cpp" />
     <ClCompile Include="call.cpp" />
     <ClCompile Include="class.cpp" />
     <ClCompile Include="cp-gimplify.cpp" />

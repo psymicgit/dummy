@@ -456,6 +456,9 @@
     <Filter Include="c++">
       <UniqueIdentifier>{1e432196-14e5-4457-8172-c36649ac8d6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="gcc">
+      <UniqueIdentifier>{8e2c9b53-b506-4e73-ab31-5b2f4844f6b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="operators.def">
@@ -559,5 +562,6 @@
     <ClCompile Include="call.cpp">
       <Filter>c++</Filter>
     </ClCompile>
+    <ClCompile Include="..\main.cpp" />
   </ItemGroup>
 </Project>
