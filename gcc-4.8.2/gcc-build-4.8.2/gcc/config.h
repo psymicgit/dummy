@@ -24,4 +24,6 @@
 #define snprintf sprintf_s
 #define HAVE_COMDAT_GROUP 1
 
+#include "gtype-desc.h"
+
 #endif /* GCC_CONFIG_H */
