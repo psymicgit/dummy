@@ -62,9 +62,9 @@ struct GTY((user)) edge_def {
 
 
 /* Garbage collection and PCH support for edge_def.  */
-extern void gt_ggc_mx (edge_def *e);
-extern void gt_pch_nx (edge_def *e);
-extern void gt_pch_nx (edge_def *e, gt_pointer_operator, void *);
+extern void gt_ggc_mx_inner (edge_def *e);
+extern void gt_pch_nx_inner(edge_def *e);
+extern void gt_pch_nx_inner(edge_def *e, gt_pointer_operator, void *);
 
 /* Masks for edge.flags.  */
 #define DEF_EDGE_FLAG(NAME,IDX) EDGE_##NAME = 1 << IDX ,

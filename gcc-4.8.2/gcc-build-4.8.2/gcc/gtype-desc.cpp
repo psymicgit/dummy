@@ -59,8 +59,7 @@ along with GCC; see the file COPYING3.  If not see
 /* See definition in function.h.  */
 #undef cfun
 
-void
-gt_ggc_mx_vec_inline_summary_t_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_inline_summary_t_va_gc_ (void *x_p)
 {
   vec<inline_summary_t,va_gc> * const x = (vec<inline_summary_t,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -69,16 +68,14 @@ gt_ggc_mx_vec_inline_summary_t_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct inline_summary& x_r ATTRIBUTE_UNUSED)
+void gt_ggc_mx_inner (struct inline_summary& x_r ATTRIBUTE_UNUSED)
 {
   struct inline_summary * ATTRIBUTE_UNUSED x = &x_r;
   gt_ggc_m_20vec_condition_va_gc_ ((*x).conds);
   gt_ggc_m_26vec_size_time_entry_va_gc_ ((*x).entry);
 }
 
-void
-gt_ggc_mx_vec_size_time_entry_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_size_time_entry_va_gc_ (void *x_p)
 {
   vec<size_time_entry,va_gc> * const x = (vec<size_time_entry,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -87,14 +84,12 @@ gt_ggc_mx_vec_size_time_entry_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct size_time_entry& x_r ATTRIBUTE_UNUSED)
+void gt_ggc_mx_inner (struct size_time_entry& x_r ATTRIBUTE_UNUSED)
 {
   struct size_time_entry * ATTRIBUTE_UNUSED x = &x_r;
 }
 
-void
-gt_ggc_mx_vec_condition_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_condition_va_gc_ (void *x_p)
 {
   vec<condition,va_gc> * const x = (vec<condition,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -103,15 +98,13 @@ gt_ggc_mx_vec_condition_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct condition& x_r ATTRIBUTE_UNUSED)
+void gt_ggc_mx_inner (struct condition& x_r ATTRIBUTE_UNUSED)
 {
   struct condition * ATTRIBUTE_UNUSED x = &x_r;
   gt_ggc_m_9tree_node ((*x).val);
 }
 
-void
-gt_ggc_mx_lto_in_decl_state (void *x_p)
+void gt_ggc_mx_lto_in_decl_state (void *x_p)
 {
   struct lto_in_decl_state * const x = (struct lto_in_decl_state *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -136,8 +129,7 @@ gt_ggc_mx_lto_in_decl_state (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_ipa_edge_args_t_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_ipa_edge_args_t_va_gc_ (void *x_p)
 {
   vec<ipa_edge_args_t,va_gc> * const x = (vec<ipa_edge_args_t,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -146,15 +138,13 @@ gt_ggc_mx_vec_ipa_edge_args_t_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct ipa_edge_args& x_r ATTRIBUTE_UNUSED)
+void gt_ggc_mx_inner (struct ipa_edge_args& x_r ATTRIBUTE_UNUSED)
 {
   struct ipa_edge_args * ATTRIBUTE_UNUSED x = &x_r;
   gt_ggc_m_26vec_ipa_jump_func_t_va_gc_ ((*x).jump_functions);
 }
 
-void
-gt_ggc_mx_vec_ipa_agg_replacement_value_p_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_ipa_agg_replacement_value_p_va_gc_ (void *x_p)
 {
   vec<ipa_agg_replacement_value_p,va_gc> * const x = (vec<ipa_agg_replacement_value_p,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -163,15 +153,13 @@ gt_ggc_mx_vec_ipa_agg_replacement_value_p_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct ipa_agg_replacement_value *& x)
+void gt_ggc_mx_inner (struct ipa_agg_replacement_value *& x)
 {
   if (x)
     gt_ggc_mx_ipa_agg_replacement_value ((void *) x);
 }
 
-void
-gt_ggc_mx_vec_ipa_jump_func_t_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_ipa_jump_func_t_va_gc_ (void *x_p)
 {
   vec<ipa_jump_func_t,va_gc> * const x = (vec<ipa_jump_func_t,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -180,8 +168,7 @@ gt_ggc_mx_vec_ipa_jump_func_t_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct ipa_jump_func& x_r ATTRIBUTE_UNUSED)
+void gt_ggc_mx_inner (struct ipa_jump_func& x_r ATTRIBUTE_UNUSED)
 {
   struct ipa_jump_func * ATTRIBUTE_UNUSED x = &x_r;
   gt_ggc_m_28vec_ipa_agg_jf_item_t_va_gc_ ((*x).agg.items);
@@ -205,8 +192,7 @@ gt_ggc_mx (struct ipa_jump_func& x_r ATTRIBUTE_UNUSED)
     }
 }
 
-void
-gt_ggc_mx_vec_ipa_agg_jf_item_t_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_ipa_agg_jf_item_t_va_gc_ (void *x_p)
 {
   vec<ipa_agg_jf_item_t,va_gc> * const x = (vec<ipa_agg_jf_item_t,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -215,15 +201,13 @@ gt_ggc_mx_vec_ipa_agg_jf_item_t_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct ipa_agg_jf_item& x_r ATTRIBUTE_UNUSED)
+void gt_ggc_mx_inner (struct ipa_agg_jf_item& x_r ATTRIBUTE_UNUSED)
 {
   struct ipa_agg_jf_item * ATTRIBUTE_UNUSED x = &x_r;
   gt_ggc_m_9tree_node ((*x).value);
 }
 
-void
-gt_ggc_mx_ssa_operand_memory_d (void *x_p)
+void gt_ggc_mx_ssa_operand_memory_d (void *x_p)
 {
   struct ssa_operand_memory_d * x = (struct ssa_operand_memory_d *)x_p;
   struct ssa_operand_memory_d * xlimit = x;
@@ -236,8 +220,7 @@ gt_ggc_mx_ssa_operand_memory_d (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_gimple_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_gimple_va_gc_ (void *x_p)
 {
   vec<gimple,va_gc> * const x = (vec<gimple,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -246,15 +229,13 @@ gt_ggc_mx_vec_gimple_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (union gimple_statement_d *& x)
+void gt_ggc_mx_inner (union gimple_statement_d *& x)
 {
   if (x)
     gt_ggc_mx_gimple_statement_d ((void *) x);
 }
 
-void
-gt_ggc_mx_tm_restart_node (void *x_p)
+void gt_ggc_mx_tm_restart_node (void *x_p)
 {
   struct tm_restart_node * const x = (struct tm_restart_node *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -264,8 +245,7 @@ gt_ggc_mx_tm_restart_node (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_throw_stmt_node (void *x_p)
+void gt_ggc_mx_throw_stmt_node (void *x_p)
 {
   struct throw_stmt_node * const x = (struct throw_stmt_node *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -274,8 +254,7 @@ gt_ggc_mx_throw_stmt_node (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_eh_landing_pad_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_eh_landing_pad_va_gc_ (void *x_p)
 {
   vec<eh_landing_pad,va_gc> * const x = (vec<eh_landing_pad,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -284,15 +263,13 @@ gt_ggc_mx_vec_eh_landing_pad_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct eh_landing_pad_d *& x)
+void gt_ggc_mx_inner (struct eh_landing_pad_d *& x)
 {
   if (x)
     gt_ggc_mx_eh_landing_pad_d ((void *) x);
 }
 
-void
-gt_ggc_mx_vec_eh_region_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_eh_region_va_gc_ (void *x_p)
 {
   vec<eh_region,va_gc> * const x = (vec<eh_region,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -301,15 +278,13 @@ gt_ggc_mx_vec_eh_region_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct eh_region_d *& x)
+void gt_ggc_mx_inner (struct eh_region_d *& x)
 {
   if (x)
     gt_ggc_mx_eh_region_d ((void *) x);
 }
 
-void
-gt_ggc_mx_eh_catch_d (void *x_p)
+void gt_ggc_mx_eh_catch_d (void *x_p)
 {
   struct eh_catch_d * const x = (struct eh_catch_d *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -322,8 +297,7 @@ gt_ggc_mx_eh_catch_d (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_eh_landing_pad_d (void *x_p)
+void gt_ggc_mx_eh_landing_pad_d (void *x_p)
 {
   struct eh_landing_pad_d * const x = (struct eh_landing_pad_d *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -335,8 +309,7 @@ gt_ggc_mx_eh_landing_pad_d (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_eh_region_d (void *x_p)
+void gt_ggc_mx_eh_region_d (void *x_p)
 {
   struct eh_region_d * const x = (struct eh_region_d *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -366,8 +339,7 @@ gt_ggc_mx_eh_region_d (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_dw_cfi_ref_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_dw_cfi_ref_va_gc_ (void *x_p)
 {
   vec<dw_cfi_ref,va_gc> * const x = (vec<dw_cfi_ref,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -376,15 +348,13 @@ gt_ggc_mx_vec_dw_cfi_ref_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct dw_cfi_struct *& x)
+void gt_ggc_mx_inner (struct dw_cfi_struct *& x)
 {
   if (x)
     gt_ggc_mx_dw_cfi_struct ((void *) x);
 }
 
-void
-gt_ggc_mx_dw_loc_descr_struct (void *x_p)
+void gt_ggc_mx_dw_loc_descr_struct (void *x_p)
 {
   struct dw_loc_descr_struct * const x = (struct dw_loc_descr_struct *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -491,8 +461,7 @@ gt_ggc_mx_dw_loc_descr_struct (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_dw_cfi_struct (void *x_p)
+void gt_ggc_mx_dw_cfi_struct (void *x_p)
 {
   struct dw_cfi_struct * const x = (struct dw_cfi_struct *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -530,8 +499,7 @@ gt_ggc_mx_dw_cfi_struct (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_ipa_agg_replacement_value (void *x_p)
+void gt_ggc_mx_ipa_agg_replacement_value (void *x_p)
 {
   struct ipa_agg_replacement_value * const x = (struct ipa_agg_replacement_value *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -541,8 +509,7 @@ gt_ggc_mx_ipa_agg_replacement_value (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_constant_descriptor_tree (void *x_p)
+void gt_ggc_mx_constant_descriptor_tree (void *x_p)
 {
   struct constant_descriptor_tree * const x = (struct constant_descriptor_tree *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -552,8 +519,7 @@ gt_ggc_mx_constant_descriptor_tree (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_asm_node (void *x_p)
+void gt_ggc_mx_asm_node (void *x_p)
 {
   struct asm_node * const x = (struct asm_node *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -563,8 +529,7 @@ gt_ggc_mx_asm_node (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_cgraph_indirect_call_info (void *x_p)
+void gt_ggc_mx_cgraph_indirect_call_info (void *x_p)
 {
   struct cgraph_indirect_call_info * const x = (struct cgraph_indirect_call_info *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -573,8 +538,7 @@ gt_ggc_mx_cgraph_indirect_call_info (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_cgraph_function_version_info (void *x_p)
+void gt_ggc_mx_cgraph_function_version_info (void *x_p)
 {
   struct cgraph_function_version_info * const x = (struct cgraph_function_version_info *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -586,8 +550,7 @@ gt_ggc_mx_cgraph_function_version_info (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_cgraph_edge (void *x_p)
+void gt_ggc_mx_cgraph_edge (void *x_p)
 {
   struct cgraph_edge * x = (struct cgraph_edge *)x_p;
   struct cgraph_edge * xlimit = x;
@@ -615,8 +578,7 @@ gt_ggc_mx_cgraph_edge (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_ipa_replace_map_p_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_ipa_replace_map_p_va_gc_ (void *x_p)
 {
   vec<ipa_replace_map_p,va_gc> * const x = (vec<ipa_replace_map_p,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -625,15 +587,13 @@ gt_ggc_mx_vec_ipa_replace_map_p_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct ipa_replace_map *& x)
+void gt_ggc_mx_inner (struct ipa_replace_map *& x)
 {
   if (x)
     gt_ggc_mx_ipa_replace_map ((void *) x);
 }
 
-void
-gt_ggc_mx_ipa_replace_map (void *x_p)
+void gt_ggc_mx_ipa_replace_map (void *x_p)
 {
   struct ipa_replace_map * const x = (struct ipa_replace_map *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -643,8 +603,7 @@ gt_ggc_mx_ipa_replace_map (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_lto_file_decl_data (void *x_p)
+void gt_ggc_mx_lto_file_decl_data (void *x_p)
 {
   struct lto_file_decl_data * const x = (struct lto_file_decl_data *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -656,8 +615,7 @@ gt_ggc_mx_lto_file_decl_data (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_ipa_ref_t_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_ipa_ref_t_va_gc_ (void *x_p)
 {
   vec<ipa_ref_t,va_gc> * const x = (vec<ipa_ref_t,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -666,8 +624,7 @@ gt_ggc_mx_vec_ipa_ref_t_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct ipa_ref& x_r ATTRIBUTE_UNUSED)
+void gt_ggc_mx_inner (struct ipa_ref& x_r ATTRIBUTE_UNUSED)
 {
   struct ipa_ref * ATTRIBUTE_UNUSED x = &x_r;
   gt_ggc_m_15symtab_node_def ((*x).referring);
@@ -675,8 +632,7 @@ gt_ggc_mx (struct ipa_ref& x_r ATTRIBUTE_UNUSED)
   gt_ggc_m_18gimple_statement_d ((*x).stmt);
 }
 
-void
-gt_ggc_mx_symtab_node_def (void *x_p)
+void gt_ggc_mx_symtab_node_def (void *x_p)
 {
   union symtab_node_def * x = (union symtab_node_def *)x_p;
   union symtab_node_def * xlimit = x;
@@ -761,8 +717,7 @@ gt_ggc_mx_symtab_node_def (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_cgraph_node (void *x_p)
+void gt_ggc_mx_cgraph_node (void *x_p)
 {
   struct cgraph_node * const x = (struct cgraph_node *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -807,8 +762,7 @@ gt_ggc_mx_cgraph_node (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_basic_block_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_basic_block_va_gc_ (void *x_p)
 {
   vec<basic_block,va_gc> * const x = (vec<basic_block,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -817,15 +771,13 @@ gt_ggc_mx_vec_basic_block_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct basic_block_def *& x)
+void gt_ggc_mx_inner (struct basic_block_def *& x)
 {
   if (x)
     gt_ggc_mx_basic_block_def ((void *) x);
 }
 
-void
-gt_ggc_mx_vec_edge_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_edge_va_gc_ (void *x_p)
 {
   vec<edge,va_gc> * const x = (vec<edge,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -834,15 +786,13 @@ gt_ggc_mx_vec_edge_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct edge_def *& x)
+void gt_ggc_mx_inner (struct edge_def *& x)
 {
   if (x)
     gt_ggc_mx_edge_def ((void *) x);
 }
 
-void
-gt_ggc_mx_rtl_bb_info (void *x_p)
+void gt_ggc_mx_rtl_bb_info (void *x_p)
 {
   struct rtl_bb_info * const x = (struct rtl_bb_info *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -853,8 +803,7 @@ gt_ggc_mx_rtl_bb_info (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_loop_p_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_loop_p_va_gc_ (void *x_p)
 {
   vec<loop_p,va_gc> * const x = (vec<loop_p,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -863,15 +812,13 @@ gt_ggc_mx_vec_loop_p_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct loop *& x)
+void gt_ggc_mx_inner (struct loop *& x)
 {
   if (x)
     gt_ggc_mx_loop ((void *) x);
 }
 
-void
-gt_ggc_mx_loop (void *x_p)
+void gt_ggc_mx_loop (void *x_p)
 {
   struct loop * x = (struct loop *)x_p;
   struct loop * xlimit = x;
@@ -891,8 +838,7 @@ gt_ggc_mx_loop (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_loop_exit (void *x_p)
+void gt_ggc_mx_loop_exit (void *x_p)
 {
   struct loop_exit * const x = (struct loop_exit *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -904,8 +850,7 @@ gt_ggc_mx_loop_exit (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_nb_iter_bound (void *x_p)
+void gt_ggc_mx_nb_iter_bound (void *x_p)
 {
   struct nb_iter_bound * x = (struct nb_iter_bound *)x_p;
   struct nb_iter_bound * xlimit = x;
@@ -919,8 +864,7 @@ gt_ggc_mx_nb_iter_bound (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_types_used_by_vars_entry (void *x_p)
+void gt_ggc_mx_types_used_by_vars_entry (void *x_p)
 {
   struct types_used_by_vars_entry * const x = (struct types_used_by_vars_entry *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -930,8 +874,7 @@ gt_ggc_mx_types_used_by_vars_entry (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_loops (void *x_p)
+void gt_ggc_mx_loops (void *x_p)
 {
   struct loops * const x = (struct loops *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -942,8 +885,7 @@ gt_ggc_mx_loops (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_control_flow_graph (void *x_p)
+void gt_ggc_mx_control_flow_graph (void *x_p)
 {
   struct control_flow_graph * const x = (struct control_flow_graph *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -955,8 +897,7 @@ gt_ggc_mx_control_flow_graph (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_eh_status (void *x_p)
+void gt_ggc_mx_eh_status (void *x_p)
 {
   struct eh_status * const x = (struct eh_status *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -980,8 +921,7 @@ gt_ggc_mx_eh_status (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_stack_usage (void *x_p)
+void gt_ggc_mx_stack_usage (void *x_p)
 {
   struct stack_usage * const x = (struct stack_usage *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -989,8 +929,7 @@ gt_ggc_mx_stack_usage (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_temp_slot_p_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_temp_slot_p_va_gc_ (void *x_p)
 {
   vec<temp_slot_p,va_gc> * const x = (vec<temp_slot_p,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -999,15 +938,13 @@ gt_ggc_mx_vec_temp_slot_p_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct temp_slot *& x)
+void gt_ggc_mx_inner (struct temp_slot *& x)
 {
   if (x)
     gt_ggc_mx_temp_slot ((void *) x);
 }
 
-void
-gt_ggc_mx_frame_space (void *x_p)
+void gt_ggc_mx_frame_space (void *x_p)
 {
   struct frame_space * const x = (struct frame_space *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1016,8 +953,7 @@ gt_ggc_mx_frame_space (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_dw_fde_struct (void *x_p)
+void gt_ggc_mx_dw_fde_struct (void *x_p)
 {
   struct dw_fde_struct * const x = (struct dw_fde_struct *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1034,8 +970,7 @@ gt_ggc_mx_dw_fde_struct (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_gimple_df (void *x_p)
+void gt_ggc_mx_gimple_df (void *x_p)
 {
   struct gimple_df * const x = (struct gimple_df *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1051,8 +986,7 @@ gt_ggc_mx_gimple_df (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_call_site_record_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_call_site_record_va_gc_ (void *x_p)
 {
   vec<call_site_record,va_gc> * const x = (vec<call_site_record,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1061,15 +995,13 @@ gt_ggc_mx_vec_call_site_record_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct call_site_record_d *& x)
+void gt_ggc_mx_inner (struct call_site_record_d *& x)
 {
   if (x)
     gt_ggc_mx_call_site_record_d ((void *) x);
 }
 
-void
-gt_ggc_mx_vec_uchar_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_uchar_va_gc_ (void *x_p)
 {
   vec<uchar,va_gc> * const x = (vec<uchar,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1078,8 +1010,7 @@ gt_ggc_mx_vec_uchar_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_sequence_stack (void *x_p)
+void gt_ggc_mx_sequence_stack (void *x_p)
 {
   struct sequence_stack * const x = (struct sequence_stack *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1090,8 +1021,7 @@ gt_ggc_mx_sequence_stack (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_libfunc_entry (void *x_p)
+void gt_ggc_mx_libfunc_entry (void *x_p)
 {
   struct libfunc_entry * const x = (struct libfunc_entry *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1100,8 +1030,7 @@ gt_ggc_mx_libfunc_entry (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_tree_vec_map (void *x_p)
+void gt_ggc_mx_tree_vec_map (void *x_p)
 {
   struct tree_vec_map * const x = (struct tree_vec_map *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1111,8 +1040,7 @@ gt_ggc_mx_tree_vec_map (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_tree_priority_map (void *x_p)
+void gt_ggc_mx_tree_priority_map (void *x_p)
 {
   struct tree_priority_map * const x = (struct tree_priority_map *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1121,8 +1049,7 @@ gt_ggc_mx_tree_priority_map (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_tree_int_map (void *x_p)
+void gt_ggc_mx_tree_int_map (void *x_p)
 {
   struct tree_int_map * const x = (struct tree_int_map *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1131,8 +1058,7 @@ gt_ggc_mx_tree_int_map (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_tree_decl_map (void *x_p)
+void gt_ggc_mx_tree_decl_map (void *x_p)
 {
   struct tree_decl_map * const x = (struct tree_decl_map *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1142,8 +1068,7 @@ gt_ggc_mx_tree_decl_map (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_tree_map (void *x_p)
+void gt_ggc_mx_tree_map (void *x_p)
 {
   struct tree_map * const x = (struct tree_map *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1153,8 +1078,7 @@ gt_ggc_mx_tree_map (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_tree_statement_list_node (void *x_p)
+void gt_ggc_mx_tree_statement_list_node (void *x_p)
 {
   struct tree_statement_list_node * x = (struct tree_statement_list_node *)x_p;
   struct tree_statement_list_node * xlimit = x;
@@ -1177,8 +1101,7 @@ gt_ggc_mx_tree_statement_list_node (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_tree_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_tree_va_gc_ (void *x_p)
 {
   vec<tree,va_gc> * const x = (vec<tree,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1187,15 +1110,13 @@ gt_ggc_mx_vec_tree_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (union tree_node *& x)
+void gt_ggc_mx_inner (union tree_node *& x)
 {
   if (x)
     gt_ggc_mx_lang_tree_node ((void *) x);
 }
 
-void
-gt_ggc_mx_ptr_info_def (void *x_p)
+void gt_ggc_mx_ptr_info_def (void *x_p)
 {
   struct ptr_info_def * const x = (struct ptr_info_def *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1204,8 +1125,7 @@ gt_ggc_mx_ptr_info_def (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_constructor_elt_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_constructor_elt_va_gc_ (void *x_p)
 {
   vec<constructor_elt,va_gc> * const x = (vec<constructor_elt,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1214,16 +1134,14 @@ gt_ggc_mx_vec_constructor_elt_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct constructor_elt_d& x_r ATTRIBUTE_UNUSED)
+void gt_ggc_mx_inner (struct constructor_elt_d& x_r ATTRIBUTE_UNUSED)
 {
   struct constructor_elt_d * ATTRIBUTE_UNUSED x = &x_r;
   gt_ggc_m_9tree_node ((*x).index);
   gt_ggc_m_9tree_node ((*x).value);
 }
 
-void
-gt_ggc_mx_vec_alias_pair_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_alias_pair_va_gc_ (void *x_p)
 {
   vec<alias_pair,va_gc> * const x = (vec<alias_pair,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1232,16 +1150,14 @@ gt_ggc_mx_vec_alias_pair_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct alias_pair& x_r ATTRIBUTE_UNUSED)
+void gt_ggc_mx_inner (struct alias_pair& x_r ATTRIBUTE_UNUSED)
 {
   struct alias_pair * ATTRIBUTE_UNUSED x = &x_r;
   gt_ggc_m_9tree_node ((*x).decl);
   gt_ggc_m_9tree_node ((*x).target);
 }
 
-void
-gt_ggc_mx_function (void *x_p)
+void gt_ggc_mx_function (void *x_p)
 {
   struct function * const x = (struct function *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1263,8 +1179,7 @@ gt_ggc_mx_function (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_fixed_value (void *x_p)
+void gt_ggc_mx_fixed_value (void *x_p)
 {
   struct fixed_value * const x = (struct fixed_value *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1272,8 +1187,7 @@ gt_ggc_mx_fixed_value (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_real_value (void *x_p)
+void gt_ggc_mx_real_value (void *x_p)
 {
   struct real_value * const x = (struct real_value *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1281,8 +1195,7 @@ gt_ggc_mx_real_value (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_vec_rtx_va_gc_ (void *x_p)
+void gt_ggc_mx_vec_rtx_va_gc_ (void *x_p)
 {
   vec<rtx,va_gc> * const x = (vec<rtx,va_gc> *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1291,15 +1204,13 @@ gt_ggc_mx_vec_rtx_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_ggc_mx (struct rtx_def *& x)
+void gt_ggc_mx_inner (struct rtx_def *& x)
 {
   if (x)
     gt_ggc_mx_rtx_def ((void *) x);
 }
 
-void
-gt_ggc_mx_object_block (void *x_p)
+void gt_ggc_mx_object_block (void *x_p)
 {
   struct object_block * const x = (struct object_block *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1310,8 +1221,7 @@ gt_ggc_mx_object_block (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_reg_attrs (void *x_p)
+void gt_ggc_mx_reg_attrs (void *x_p)
 {
   struct reg_attrs * const x = (struct reg_attrs *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1320,8 +1230,7 @@ gt_ggc_mx_reg_attrs (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_mem_attrs (void *x_p)
+void gt_ggc_mx_mem_attrs (void *x_p)
 {
   struct mem_attrs * const x = (struct mem_attrs *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1330,8 +1239,7 @@ gt_ggc_mx_mem_attrs (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_bitmap_obstack (void *x_p)
+void gt_ggc_mx_bitmap_obstack (void *x_p)
 {
   struct bitmap_obstack * const x = (struct bitmap_obstack *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1341,8 +1249,7 @@ gt_ggc_mx_bitmap_obstack (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_bitmap_element_def (void *x_p)
+void gt_ggc_mx_bitmap_element_def (void *x_p)
 {
   struct bitmap_element_def * x = (struct bitmap_element_def *)x_p;
   struct bitmap_element_def * xlimit = x;
@@ -1364,8 +1271,7 @@ gt_ggc_mx_bitmap_element_def (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_machine_function (void *x_p)
+void gt_ggc_mx_machine_function (void *x_p)
 {
   struct machine_function * const x = (struct machine_function *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1377,8 +1283,7 @@ gt_ggc_mx_machine_function (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_basic_block_def (void *x_p)
+void gt_ggc_mx_basic_block_def (void *x_p)
 {
   struct basic_block_def * x = (struct basic_block_def *)x_p;
   struct basic_block_def * xlimit = x;
@@ -1416,8 +1321,7 @@ gt_ggc_mx_basic_block_def (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_edge_def (void *x_p)
+void gt_ggc_mx_edge_def (void *x_p)
 {
   struct edge_def * const x = (struct edge_def *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1425,8 +1329,7 @@ gt_ggc_mx_edge_def (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_section (void *x_p)
+void gt_ggc_mx_section (void *x_p)
 {
   union section * const x = (union section *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1448,8 +1351,7 @@ gt_ggc_mx_section (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_gimple_statement_d (void *x_p)
+void gt_ggc_mx_gimple_statement_d (void *x_p)
 {
   union gimple_statement_d * x = (union gimple_statement_d *)x_p;
   union gimple_statement_d * xlimit = x;
@@ -1684,8 +1586,7 @@ gt_ggc_mx_gimple_statement_d (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_rtvec_def (void *x_p)
+void gt_ggc_mx_rtvec_def (void *x_p)
 {
   struct rtvec_def * const x = (struct rtvec_def *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -1702,8 +1603,7 @@ gt_ggc_mx_rtvec_def (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_rtx_def (void *x_p)
+void gt_ggc_mx_rtx_def (void *x_p)
 {
   struct rtx_def * x = (struct rtx_def *)x_p;
   struct rtx_def * xlimit = x;
@@ -2318,8 +2218,7 @@ gt_ggc_mx_rtx_def (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_bitmap_head_def (void *x_p)
+void gt_ggc_mx_bitmap_head_def (void *x_p)
 {
   struct bitmap_head_def * const x = (struct bitmap_head_def *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2329,8 +2228,7 @@ gt_ggc_mx_bitmap_head_def (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_answer (void *x_p)
+void gt_ggc_mx_answer (void *x_p)
 {
   struct answer * const x = (struct answer *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2371,8 +2269,7 @@ gt_ggc_mx_answer (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_cpp_macro (void *x_p)
+void gt_ggc_mx_cpp_macro (void *x_p)
 {
   struct cpp_macro * const x = (struct cpp_macro *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2434,8 +2331,7 @@ gt_ggc_mx_cpp_macro (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_cpp_token (void *x_p)
+void gt_ggc_mx_cpp_token (void *x_p)
 {
   struct cpp_token * const x = (struct cpp_token *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2467,8 +2363,7 @@ gt_ggc_mx_cpp_token (void *x_p)
     }
 }
 
-void
-gt_ggc_mx_line_maps (void *x_p)
+void gt_ggc_mx_line_maps (void *x_p)
 {
   struct line_maps * const x = (struct line_maps *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2539,8 +2434,7 @@ gt_ggc_mx_line_maps (void *x_p)
     }
 }
 
-void
-gt_ggc_m_II17splay_tree_node_s (void *x_p)
+void gt_ggc_m_II17splay_tree_node_s (void *x_p)
 {
   struct splay_tree_node_s * const x = (struct splay_tree_node_s *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2550,8 +2444,7 @@ gt_ggc_m_II17splay_tree_node_s (void *x_p)
     }
 }
 
-void
-gt_ggc_m_SP9tree_node17splay_tree_node_s (void *x_p)
+void gt_ggc_m_SP9tree_node17splay_tree_node_s (void *x_p)
 {
   struct splay_tree_node_s * const x = (struct splay_tree_node_s *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2563,8 +2456,7 @@ gt_ggc_m_SP9tree_node17splay_tree_node_s (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P9tree_nodeP9tree_node17splay_tree_node_s (void *x_p)
+void gt_ggc_m_P9tree_nodeP9tree_node17splay_tree_node_s (void *x_p)
 {
   struct splay_tree_node_s * const x = (struct splay_tree_node_s *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2576,8 +2468,7 @@ gt_ggc_m_P9tree_nodeP9tree_node17splay_tree_node_s (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P17lto_in_decl_state4htab (void *x_p)
+void gt_ggc_m_P17lto_in_decl_state4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2595,8 +2486,7 @@ gt_ggc_m_P17lto_in_decl_state4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P9tree_nodeP9tree_node12splay_tree_s (void *x_p)
+void gt_ggc_m_P9tree_nodeP9tree_node12splay_tree_s (void *x_p)
 {
   struct splay_tree_s * const x = (struct splay_tree_s *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2605,8 +2495,7 @@ gt_ggc_m_P9tree_nodeP9tree_node12splay_tree_s (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P15tm_restart_node4htab (void *x_p)
+void gt_ggc_m_P15tm_restart_node4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2624,8 +2513,7 @@ gt_ggc_m_P15tm_restart_node4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P12tree_int_map4htab (void *x_p)
+void gt_ggc_m_P12tree_int_map4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2643,8 +2531,7 @@ gt_ggc_m_P12tree_int_map4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P8tree_map4htab (void *x_p)
+void gt_ggc_m_P8tree_map4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2662,8 +2549,7 @@ gt_ggc_m_P8tree_map4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P24constant_descriptor_tree4htab (void *x_p)
+void gt_ggc_m_P24constant_descriptor_tree4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2681,8 +2567,7 @@ gt_ggc_m_P24constant_descriptor_tree4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P12object_block4htab (void *x_p)
+void gt_ggc_m_P12object_block4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2700,8 +2585,7 @@ gt_ggc_m_P12object_block4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P7section4htab (void *x_p)
+void gt_ggc_m_P7section4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2719,8 +2603,7 @@ gt_ggc_m_P7section4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P17tree_priority_map4htab (void *x_p)
+void gt_ggc_m_P17tree_priority_map4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2738,8 +2621,7 @@ gt_ggc_m_P17tree_priority_map4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P12tree_vec_map4htab (void *x_p)
+void gt_ggc_m_P12tree_vec_map4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2757,8 +2639,7 @@ gt_ggc_m_P12tree_vec_map4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P13tree_decl_map4htab (void *x_p)
+void gt_ggc_m_P13tree_decl_map4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2776,8 +2657,7 @@ gt_ggc_m_P13tree_decl_map4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P15throw_stmt_node4htab (void *x_p)
+void gt_ggc_m_P15throw_stmt_node4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2795,8 +2675,7 @@ gt_ggc_m_P15throw_stmt_node4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P9reg_attrs4htab (void *x_p)
+void gt_ggc_m_P9reg_attrs4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2814,8 +2693,7 @@ gt_ggc_m_P9reg_attrs4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P9mem_attrs4htab (void *x_p)
+void gt_ggc_m_P9mem_attrs4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2833,8 +2711,7 @@ gt_ggc_m_P9mem_attrs4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P7rtx_def4htab (void *x_p)
+void gt_ggc_m_P7rtx_def4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2852,8 +2729,7 @@ gt_ggc_m_P7rtx_def4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_SP9tree_node12splay_tree_s (void *x_p)
+void gt_ggc_m_SP9tree_node12splay_tree_s (void *x_p)
 {
   struct splay_tree_s * const x = (struct splay_tree_s *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2862,8 +2738,7 @@ gt_ggc_m_SP9tree_node12splay_tree_s (void *x_p)
     }
 }
 
-void
-gt_ggc_m_II12splay_tree_s (void *x_p)
+void gt_ggc_m_II12splay_tree_s (void *x_p)
 {
   struct splay_tree_s * const x = (struct splay_tree_s *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2872,8 +2747,7 @@ gt_ggc_m_II12splay_tree_s (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P15symtab_node_def4htab (void *x_p)
+void gt_ggc_m_P15symtab_node_def4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2891,8 +2765,7 @@ gt_ggc_m_P15symtab_node_def4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P11cgraph_edge4htab (void *x_p)
+void gt_ggc_m_P11cgraph_edge4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2910,8 +2783,7 @@ gt_ggc_m_P11cgraph_edge4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P9loop_exit4htab (void *x_p)
+void gt_ggc_m_P9loop_exit4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2929,8 +2801,7 @@ gt_ggc_m_P9loop_exit4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P24types_used_by_vars_entry4htab (void *x_p)
+void gt_ggc_m_P24types_used_by_vars_entry4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2948,8 +2819,7 @@ gt_ggc_m_P24types_used_by_vars_entry4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P9tree_node4htab (void *x_p)
+void gt_ggc_m_P9tree_node4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2967,8 +2837,7 @@ gt_ggc_m_P9tree_node4htab (void *x_p)
     }
 }
 
-void
-gt_ggc_m_P13libfunc_entry4htab (void *x_p)
+void gt_ggc_m_P13libfunc_entry4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (ggc_test_and_set_mark (x))
@@ -2986,8 +2855,7 @@ gt_ggc_m_P13libfunc_entry4htab (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_inline_summary_t_va_gc_ (void *x_p)
+void gt_pch_nx_vec_inline_summary_t_va_gc_ (void *x_p)
 {
   vec<inline_summary_t,va_gc> * const x = (vec<inline_summary_t,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_27vec_inline_summary_t_va_gc_))
@@ -2996,16 +2864,14 @@ gt_pch_nx_vec_inline_summary_t_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct inline_summary& x_r ATTRIBUTE_UNUSED)
+void gt_pch_nx_inner (struct inline_summary& x_r ATTRIBUTE_UNUSED)
 {
   struct inline_summary * ATTRIBUTE_UNUSED x = &x_r;
   gt_pch_n_20vec_condition_va_gc_ ((*x).conds);
   gt_pch_n_26vec_size_time_entry_va_gc_ ((*x).entry);
 }
 
-void
-gt_pch_nx_vec_size_time_entry_va_gc_ (void *x_p)
+void gt_pch_nx_vec_size_time_entry_va_gc_ (void *x_p)
 {
   vec<size_time_entry,va_gc> * const x = (vec<size_time_entry,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_26vec_size_time_entry_va_gc_))
@@ -3014,14 +2880,12 @@ gt_pch_nx_vec_size_time_entry_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct size_time_entry& x_r ATTRIBUTE_UNUSED)
+void gt_pch_nx_inner (struct size_time_entry& x_r ATTRIBUTE_UNUSED)
 {
   struct size_time_entry * ATTRIBUTE_UNUSED x = &x_r;
 }
 
-void
-gt_pch_nx_vec_condition_va_gc_ (void *x_p)
+void gt_pch_nx_vec_condition_va_gc_ (void *x_p)
 {
   vec<condition,va_gc> * const x = (vec<condition,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_20vec_condition_va_gc_))
@@ -3030,15 +2894,13 @@ gt_pch_nx_vec_condition_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct condition& x_r ATTRIBUTE_UNUSED)
+void gt_pch_nx_inner (struct condition& x_r ATTRIBUTE_UNUSED)
 {
   struct condition * ATTRIBUTE_UNUSED x = &x_r;
   gt_pch_n_9tree_node ((*x).val);
 }
 
-void
-gt_pch_nx_lto_in_decl_state (void *x_p)
+void gt_pch_nx_lto_in_decl_state (void *x_p)
 {
   struct lto_in_decl_state * const x = (struct lto_in_decl_state *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_17lto_in_decl_state))
@@ -3063,8 +2925,7 @@ gt_pch_nx_lto_in_decl_state (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_ipa_edge_args_t_va_gc_ (void *x_p)
+void gt_pch_nx_vec_ipa_edge_args_t_va_gc_ (void *x_p)
 {
   vec<ipa_edge_args_t,va_gc> * const x = (vec<ipa_edge_args_t,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_26vec_ipa_edge_args_t_va_gc_))
@@ -3073,15 +2934,13 @@ gt_pch_nx_vec_ipa_edge_args_t_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct ipa_edge_args& x_r ATTRIBUTE_UNUSED)
+void gt_pch_nx_inner (struct ipa_edge_args& x_r ATTRIBUTE_UNUSED)
 {
   struct ipa_edge_args * ATTRIBUTE_UNUSED x = &x_r;
   gt_pch_n_26vec_ipa_jump_func_t_va_gc_ ((*x).jump_functions);
 }
 
-void
-gt_pch_nx_vec_ipa_agg_replacement_value_p_va_gc_ (void *x_p)
+void gt_pch_nx_vec_ipa_agg_replacement_value_p_va_gc_ (void *x_p)
 {
   vec<ipa_agg_replacement_value_p,va_gc> * const x = (vec<ipa_agg_replacement_value_p,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_38vec_ipa_agg_replacement_value_p_va_gc_))
@@ -3090,15 +2949,13 @@ gt_pch_nx_vec_ipa_agg_replacement_value_p_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct ipa_agg_replacement_value *& x)
+void gt_pch_nx_inner (struct ipa_agg_replacement_value *& x)
 {
   if (x)
     gt_pch_nx_ipa_agg_replacement_value ((void *) x);
 }
 
-void
-gt_pch_nx_vec_ipa_jump_func_t_va_gc_ (void *x_p)
+void gt_pch_nx_vec_ipa_jump_func_t_va_gc_ (void *x_p)
 {
   vec<ipa_jump_func_t,va_gc> * const x = (vec<ipa_jump_func_t,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_26vec_ipa_jump_func_t_va_gc_))
@@ -3107,8 +2964,7 @@ gt_pch_nx_vec_ipa_jump_func_t_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct ipa_jump_func& x_r ATTRIBUTE_UNUSED)
+void gt_pch_nx_inner (struct ipa_jump_func& x_r ATTRIBUTE_UNUSED)
 {
   struct ipa_jump_func * ATTRIBUTE_UNUSED x = &x_r;
   gt_pch_n_28vec_ipa_agg_jf_item_t_va_gc_ ((*x).agg.items);
@@ -3132,8 +2988,7 @@ gt_pch_nx (struct ipa_jump_func& x_r ATTRIBUTE_UNUSED)
     }
 }
 
-void
-gt_pch_nx_vec_ipa_agg_jf_item_t_va_gc_ (void *x_p)
+void gt_pch_nx_vec_ipa_agg_jf_item_t_va_gc_ (void *x_p)
 {
   vec<ipa_agg_jf_item_t,va_gc> * const x = (vec<ipa_agg_jf_item_t,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_28vec_ipa_agg_jf_item_t_va_gc_))
@@ -3142,15 +2997,13 @@ gt_pch_nx_vec_ipa_agg_jf_item_t_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct ipa_agg_jf_item& x_r ATTRIBUTE_UNUSED)
+void gt_pch_nx_inner (struct ipa_agg_jf_item& x_r ATTRIBUTE_UNUSED)
 {
   struct ipa_agg_jf_item * ATTRIBUTE_UNUSED x = &x_r;
   gt_pch_n_9tree_node ((*x).value);
 }
 
-void
-gt_pch_nx_ssa_operand_memory_d (void *x_p)
+void gt_pch_nx_ssa_operand_memory_d (void *x_p)
 {
   struct ssa_operand_memory_d * x = (struct ssa_operand_memory_d *)x_p;
   struct ssa_operand_memory_d * xlimit = x;
@@ -3163,8 +3016,7 @@ gt_pch_nx_ssa_operand_memory_d (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_gimple_va_gc_ (void *x_p)
+void gt_pch_nx_vec_gimple_va_gc_ (void *x_p)
 {
   vec<gimple,va_gc> * const x = (vec<gimple,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_17vec_gimple_va_gc_))
@@ -3173,15 +3025,13 @@ gt_pch_nx_vec_gimple_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (union gimple_statement_d *& x)
+void gt_pch_nx_inner (union gimple_statement_d *& x)
 {
   if (x)
     gt_pch_nx_gimple_statement_d ((void *) x);
 }
 
-void
-gt_pch_nx_tm_restart_node (void *x_p)
+void gt_pch_nx_tm_restart_node (void *x_p)
 {
   struct tm_restart_node * const x = (struct tm_restart_node *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_15tm_restart_node))
@@ -3191,8 +3041,7 @@ gt_pch_nx_tm_restart_node (void *x_p)
     }
 }
 
-void
-gt_pch_nx_throw_stmt_node (void *x_p)
+void gt_pch_nx_throw_stmt_node (void *x_p)
 {
   struct throw_stmt_node * const x = (struct throw_stmt_node *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_15throw_stmt_node))
@@ -3201,8 +3050,7 @@ gt_pch_nx_throw_stmt_node (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_eh_landing_pad_va_gc_ (void *x_p)
+void gt_pch_nx_vec_eh_landing_pad_va_gc_ (void *x_p)
 {
   vec<eh_landing_pad,va_gc> * const x = (vec<eh_landing_pad,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_25vec_eh_landing_pad_va_gc_))
@@ -3211,15 +3059,13 @@ gt_pch_nx_vec_eh_landing_pad_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct eh_landing_pad_d *& x)
+void gt_pch_nx_inner (struct eh_landing_pad_d *& x)
 {
   if (x)
     gt_pch_nx_eh_landing_pad_d ((void *) x);
 }
 
-void
-gt_pch_nx_vec_eh_region_va_gc_ (void *x_p)
+void gt_pch_nx_vec_eh_region_va_gc_ (void *x_p)
 {
   vec<eh_region,va_gc> * const x = (vec<eh_region,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_20vec_eh_region_va_gc_))
@@ -3228,15 +3074,13 @@ gt_pch_nx_vec_eh_region_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct eh_region_d *& x)
+void gt_pch_nx_inner (struct eh_region_d *& x)
 {
   if (x)
     gt_pch_nx_eh_region_d ((void *) x);
 }
 
-void
-gt_pch_nx_eh_catch_d (void *x_p)
+void gt_pch_nx_eh_catch_d (void *x_p)
 {
   struct eh_catch_d * const x = (struct eh_catch_d *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_10eh_catch_d))
@@ -3249,8 +3093,7 @@ gt_pch_nx_eh_catch_d (void *x_p)
     }
 }
 
-void
-gt_pch_nx_eh_landing_pad_d (void *x_p)
+void gt_pch_nx_eh_landing_pad_d (void *x_p)
 {
   struct eh_landing_pad_d * const x = (struct eh_landing_pad_d *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_16eh_landing_pad_d))
@@ -3262,8 +3105,7 @@ gt_pch_nx_eh_landing_pad_d (void *x_p)
     }
 }
 
-void
-gt_pch_nx_eh_region_d (void *x_p)
+void gt_pch_nx_eh_region_d (void *x_p)
 {
   struct eh_region_d * const x = (struct eh_region_d *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_11eh_region_d))
@@ -3293,8 +3135,7 @@ gt_pch_nx_eh_region_d (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_dw_cfi_ref_va_gc_ (void *x_p)
+void gt_pch_nx_vec_dw_cfi_ref_va_gc_ (void *x_p)
 {
   vec<dw_cfi_ref,va_gc> * const x = (vec<dw_cfi_ref,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_21vec_dw_cfi_ref_va_gc_))
@@ -3303,15 +3144,13 @@ gt_pch_nx_vec_dw_cfi_ref_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct dw_cfi_struct *& x)
+void gt_pch_nx_inner (struct dw_cfi_struct *& x)
 {
   if (x)
     gt_pch_nx_dw_cfi_struct ((void *) x);
 }
 
-void
-gt_pch_nx_dw_loc_descr_struct (void *x_p)
+void gt_pch_nx_dw_loc_descr_struct (void *x_p)
 {
   struct dw_loc_descr_struct * const x = (struct dw_loc_descr_struct *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_19dw_loc_descr_struct))
@@ -3418,8 +3257,7 @@ gt_pch_nx_dw_loc_descr_struct (void *x_p)
     }
 }
 
-void
-gt_pch_nx_dw_cfi_struct (void *x_p)
+void gt_pch_nx_dw_cfi_struct (void *x_p)
 {
   struct dw_cfi_struct * const x = (struct dw_cfi_struct *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_13dw_cfi_struct))
@@ -3457,8 +3295,7 @@ gt_pch_nx_dw_cfi_struct (void *x_p)
     }
 }
 
-void
-gt_pch_nx_ipa_agg_replacement_value (void *x_p)
+void gt_pch_nx_ipa_agg_replacement_value (void *x_p)
 {
   struct ipa_agg_replacement_value * const x = (struct ipa_agg_replacement_value *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_25ipa_agg_replacement_value))
@@ -3468,8 +3305,7 @@ gt_pch_nx_ipa_agg_replacement_value (void *x_p)
     }
 }
 
-void
-gt_pch_nx_constant_descriptor_tree (void *x_p)
+void gt_pch_nx_constant_descriptor_tree (void *x_p)
 {
   struct constant_descriptor_tree * const x = (struct constant_descriptor_tree *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_24constant_descriptor_tree))
@@ -3479,8 +3315,7 @@ gt_pch_nx_constant_descriptor_tree (void *x_p)
     }
 }
 
-void
-gt_pch_nx_asm_node (void *x_p)
+void gt_pch_nx_asm_node (void *x_p)
 {
   struct asm_node * const x = (struct asm_node *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_8asm_node))
@@ -3490,8 +3325,7 @@ gt_pch_nx_asm_node (void *x_p)
     }
 }
 
-void
-gt_pch_nx_cgraph_indirect_call_info (void *x_p)
+void gt_pch_nx_cgraph_indirect_call_info (void *x_p)
 {
   struct cgraph_indirect_call_info * const x = (struct cgraph_indirect_call_info *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_25cgraph_indirect_call_info))
@@ -3500,8 +3334,7 @@ gt_pch_nx_cgraph_indirect_call_info (void *x_p)
     }
 }
 
-void
-gt_pch_nx_cgraph_function_version_info (void *x_p)
+void gt_pch_nx_cgraph_function_version_info (void *x_p)
 {
   struct cgraph_function_version_info * const x = (struct cgraph_function_version_info *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_28cgraph_function_version_info))
@@ -3513,8 +3346,7 @@ gt_pch_nx_cgraph_function_version_info (void *x_p)
     }
 }
 
-void
-gt_pch_nx_cgraph_edge (void *x_p)
+void gt_pch_nx_cgraph_edge (void *x_p)
 {
   struct cgraph_edge * x = (struct cgraph_edge *)x_p;
   struct cgraph_edge * xlimit = x;
@@ -3542,8 +3374,7 @@ gt_pch_nx_cgraph_edge (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_ipa_replace_map_p_va_gc_ (void *x_p)
+void gt_pch_nx_vec_ipa_replace_map_p_va_gc_ (void *x_p)
 {
   vec<ipa_replace_map_p,va_gc> * const x = (vec<ipa_replace_map_p,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_28vec_ipa_replace_map_p_va_gc_))
@@ -3552,15 +3383,13 @@ gt_pch_nx_vec_ipa_replace_map_p_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct ipa_replace_map *& x)
+void gt_pch_nx_inner (struct ipa_replace_map *& x)
 {
   if (x)
     gt_pch_nx_ipa_replace_map ((void *) x);
 }
 
-void
-gt_pch_nx_ipa_replace_map (void *x_p)
+void gt_pch_nx_ipa_replace_map (void *x_p)
 {
   struct ipa_replace_map * const x = (struct ipa_replace_map *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_15ipa_replace_map))
@@ -3570,8 +3399,7 @@ gt_pch_nx_ipa_replace_map (void *x_p)
     }
 }
 
-void
-gt_pch_nx_lto_file_decl_data (void *x_p)
+void gt_pch_nx_lto_file_decl_data (void *x_p)
 {
   struct lto_file_decl_data * const x = (struct lto_file_decl_data *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_18lto_file_decl_data))
@@ -3583,8 +3411,7 @@ gt_pch_nx_lto_file_decl_data (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_ipa_ref_t_va_gc_ (void *x_p)
+void gt_pch_nx_vec_ipa_ref_t_va_gc_ (void *x_p)
 {
   vec<ipa_ref_t,va_gc> * const x = (vec<ipa_ref_t,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_20vec_ipa_ref_t_va_gc_))
@@ -3593,8 +3420,7 @@ gt_pch_nx_vec_ipa_ref_t_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct ipa_ref& x_r ATTRIBUTE_UNUSED)
+void gt_pch_nx_inner (struct ipa_ref& x_r ATTRIBUTE_UNUSED)
 {
   struct ipa_ref * ATTRIBUTE_UNUSED x = &x_r;
   gt_pch_n_15symtab_node_def ((*x).referring);
@@ -3602,8 +3428,7 @@ gt_pch_nx (struct ipa_ref& x_r ATTRIBUTE_UNUSED)
   gt_pch_n_18gimple_statement_d ((*x).stmt);
 }
 
-void
-gt_pch_nx_symtab_node_def (void *x_p)
+void gt_pch_nx_symtab_node_def (void *x_p)
 {
   union symtab_node_def * x = (union symtab_node_def *)x_p;
   union symtab_node_def * xlimit = x;
@@ -3688,8 +3513,7 @@ gt_pch_nx_symtab_node_def (void *x_p)
     }
 }
 
-void
-gt_pch_nx_cgraph_node (void *x_p)
+void gt_pch_nx_cgraph_node (void *x_p)
 {
   struct cgraph_node * const x = (struct cgraph_node *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_11cgraph_node))
@@ -3734,8 +3558,7 @@ gt_pch_nx_cgraph_node (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_basic_block_va_gc_ (void *x_p)
+void gt_pch_nx_vec_basic_block_va_gc_ (void *x_p)
 {
   vec<basic_block,va_gc> * const x = (vec<basic_block,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_22vec_basic_block_va_gc_))
@@ -3744,15 +3567,13 @@ gt_pch_nx_vec_basic_block_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct basic_block_def *& x)
+void gt_pch_nx_inner (struct basic_block_def *& x)
 {
   if (x)
     gt_pch_nx_basic_block_def ((void *) x);
 }
 
-void
-gt_pch_nx_vec_edge_va_gc_ (void *x_p)
+void gt_pch_nx_vec_edge_va_gc_ (void *x_p)
 {
   vec<edge,va_gc> * const x = (vec<edge,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_15vec_edge_va_gc_))
@@ -3761,15 +3582,13 @@ gt_pch_nx_vec_edge_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct edge_def *& x)
+void gt_pch_nx_inner (struct edge_def *& x)
 {
   if (x)
     gt_pch_nx_edge_def ((void *) x);
 }
 
-void
-gt_pch_nx_rtl_bb_info (void *x_p)
+void gt_pch_nx_rtl_bb_info (void *x_p)
 {
   struct rtl_bb_info * const x = (struct rtl_bb_info *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_11rtl_bb_info))
@@ -3780,8 +3599,7 @@ gt_pch_nx_rtl_bb_info (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_loop_p_va_gc_ (void *x_p)
+void gt_pch_nx_vec_loop_p_va_gc_ (void *x_p)
 {
   vec<loop_p,va_gc> * const x = (vec<loop_p,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_17vec_loop_p_va_gc_))
@@ -3790,15 +3608,13 @@ gt_pch_nx_vec_loop_p_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct loop *& x)
+void gt_pch_nx_inner (struct loop *& x)
 {
   if (x)
     gt_pch_nx_loop ((void *) x);
 }
 
-void
-gt_pch_nx_loop (void *x_p)
+void gt_pch_nx_loop (void *x_p)
 {
   struct loop * x = (struct loop *)x_p;
   struct loop * xlimit = x;
@@ -3818,8 +3634,7 @@ gt_pch_nx_loop (void *x_p)
     }
 }
 
-void
-gt_pch_nx_loop_exit (void *x_p)
+void gt_pch_nx_loop_exit (void *x_p)
 {
   struct loop_exit * const x = (struct loop_exit *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_9loop_exit))
@@ -3831,8 +3646,7 @@ gt_pch_nx_loop_exit (void *x_p)
     }
 }
 
-void
-gt_pch_nx_nb_iter_bound (void *x_p)
+void gt_pch_nx_nb_iter_bound (void *x_p)
 {
   struct nb_iter_bound * x = (struct nb_iter_bound *)x_p;
   struct nb_iter_bound * xlimit = x;
@@ -3846,8 +3660,7 @@ gt_pch_nx_nb_iter_bound (void *x_p)
     }
 }
 
-void
-gt_pch_nx_types_used_by_vars_entry (void *x_p)
+void gt_pch_nx_types_used_by_vars_entry (void *x_p)
 {
   struct types_used_by_vars_entry * const x = (struct types_used_by_vars_entry *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_24types_used_by_vars_entry))
@@ -3857,8 +3670,7 @@ gt_pch_nx_types_used_by_vars_entry (void *x_p)
     }
 }
 
-void
-gt_pch_nx_loops (void *x_p)
+void gt_pch_nx_loops (void *x_p)
 {
   struct loops * const x = (struct loops *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_5loops))
@@ -3869,8 +3681,7 @@ gt_pch_nx_loops (void *x_p)
     }
 }
 
-void
-gt_pch_nx_control_flow_graph (void *x_p)
+void gt_pch_nx_control_flow_graph (void *x_p)
 {
   struct control_flow_graph * const x = (struct control_flow_graph *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_18control_flow_graph))
@@ -3882,8 +3693,7 @@ gt_pch_nx_control_flow_graph (void *x_p)
     }
 }
 
-void
-gt_pch_nx_eh_status (void *x_p)
+void gt_pch_nx_eh_status (void *x_p)
 {
   struct eh_status * const x = (struct eh_status *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_9eh_status))
@@ -3907,8 +3717,7 @@ gt_pch_nx_eh_status (void *x_p)
     }
 }
 
-void
-gt_pch_nx_stack_usage (void *x_p)
+void gt_pch_nx_stack_usage (void *x_p)
 {
   struct stack_usage * const x = (struct stack_usage *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_11stack_usage))
@@ -3916,8 +3725,7 @@ gt_pch_nx_stack_usage (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_temp_slot_p_va_gc_ (void *x_p)
+void gt_pch_nx_vec_temp_slot_p_va_gc_ (void *x_p)
 {
   vec<temp_slot_p,va_gc> * const x = (vec<temp_slot_p,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_22vec_temp_slot_p_va_gc_))
@@ -3926,15 +3734,13 @@ gt_pch_nx_vec_temp_slot_p_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct temp_slot *& x)
+void gt_pch_nx_inner (struct temp_slot *& x)
 {
   if (x)
     gt_pch_nx_temp_slot ((void *) x);
 }
 
-void
-gt_pch_nx_frame_space (void *x_p)
+void gt_pch_nx_frame_space (void *x_p)
 {
   struct frame_space * const x = (struct frame_space *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_11frame_space))
@@ -3943,8 +3749,7 @@ gt_pch_nx_frame_space (void *x_p)
     }
 }
 
-void
-gt_pch_nx_dw_fde_struct (void *x_p)
+void gt_pch_nx_dw_fde_struct (void *x_p)
 {
   struct dw_fde_struct * const x = (struct dw_fde_struct *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_13dw_fde_struct))
@@ -3961,8 +3766,7 @@ gt_pch_nx_dw_fde_struct (void *x_p)
     }
 }
 
-void
-gt_pch_nx_gimple_df (void *x_p)
+void gt_pch_nx_gimple_df (void *x_p)
 {
   struct gimple_df * const x = (struct gimple_df *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_9gimple_df))
@@ -3978,8 +3782,7 @@ gt_pch_nx_gimple_df (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_call_site_record_va_gc_ (void *x_p)
+void gt_pch_nx_vec_call_site_record_va_gc_ (void *x_p)
 {
   vec<call_site_record,va_gc> * const x = (vec<call_site_record,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_27vec_call_site_record_va_gc_))
@@ -3988,15 +3791,13 @@ gt_pch_nx_vec_call_site_record_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct call_site_record_d *& x)
+void gt_pch_nx_inner (struct call_site_record_d *& x)
 {
   if (x)
     gt_pch_nx_call_site_record_d ((void *) x);
 }
 
-void
-gt_pch_nx_vec_uchar_va_gc_ (void *x_p)
+void gt_pch_nx_vec_uchar_va_gc_ (void *x_p)
 {
   vec<uchar,va_gc> * const x = (vec<uchar,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_16vec_uchar_va_gc_))
@@ -4005,8 +3806,7 @@ gt_pch_nx_vec_uchar_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx_sequence_stack (void *x_p)
+void gt_pch_nx_sequence_stack (void *x_p)
 {
   struct sequence_stack * const x = (struct sequence_stack *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_14sequence_stack))
@@ -4017,8 +3817,7 @@ gt_pch_nx_sequence_stack (void *x_p)
     }
 }
 
-void
-gt_pch_nx_libfunc_entry (void *x_p)
+void gt_pch_nx_libfunc_entry (void *x_p)
 {
   struct libfunc_entry * const x = (struct libfunc_entry *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_13libfunc_entry))
@@ -4027,8 +3826,7 @@ gt_pch_nx_libfunc_entry (void *x_p)
     }
 }
 
-void
-gt_pch_nx_tree_vec_map (void *x_p)
+void gt_pch_nx_tree_vec_map (void *x_p)
 {
   struct tree_vec_map * const x = (struct tree_vec_map *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_12tree_vec_map))
@@ -4038,8 +3836,7 @@ gt_pch_nx_tree_vec_map (void *x_p)
     }
 }
 
-void
-gt_pch_nx_tree_priority_map (void *x_p)
+void gt_pch_nx_tree_priority_map (void *x_p)
 {
   struct tree_priority_map * const x = (struct tree_priority_map *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_17tree_priority_map))
@@ -4048,8 +3845,7 @@ gt_pch_nx_tree_priority_map (void *x_p)
     }
 }
 
-void
-gt_pch_nx_tree_int_map (void *x_p)
+void gt_pch_nx_tree_int_map (void *x_p)
 {
   struct tree_int_map * const x = (struct tree_int_map *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_12tree_int_map))
@@ -4058,8 +3854,7 @@ gt_pch_nx_tree_int_map (void *x_p)
     }
 }
 
-void
-gt_pch_nx_tree_decl_map (void *x_p)
+void gt_pch_nx_tree_decl_map (void *x_p)
 {
   struct tree_decl_map * const x = (struct tree_decl_map *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_13tree_decl_map))
@@ -4069,8 +3864,7 @@ gt_pch_nx_tree_decl_map (void *x_p)
     }
 }
 
-void
-gt_pch_nx_tree_map (void *x_p)
+void gt_pch_nx_tree_map (void *x_p)
 {
   struct tree_map * const x = (struct tree_map *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_8tree_map))
@@ -4080,8 +3874,7 @@ gt_pch_nx_tree_map (void *x_p)
     }
 }
 
-void
-gt_pch_nx_tree_statement_list_node (void *x_p)
+void gt_pch_nx_tree_statement_list_node (void *x_p)
 {
   struct tree_statement_list_node * x = (struct tree_statement_list_node *)x_p;
   struct tree_statement_list_node * xlimit = x;
@@ -4104,8 +3897,7 @@ gt_pch_nx_tree_statement_list_node (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_tree_va_gc_ (void *x_p)
+void gt_pch_nx_vec_tree_va_gc_ (void *x_p)
 {
   vec<tree,va_gc> * const x = (vec<tree,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_15vec_tree_va_gc_))
@@ -4114,15 +3906,13 @@ gt_pch_nx_vec_tree_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (union tree_node *& x)
+void gt_pch_nx_inner (union tree_node *& x)
 {
   if (x)
     gt_pch_nx_lang_tree_node ((void *) x);
 }
 
-void
-gt_pch_nx_ptr_info_def (void *x_p)
+void gt_pch_nx_ptr_info_def (void *x_p)
 {
   struct ptr_info_def * const x = (struct ptr_info_def *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_12ptr_info_def))
@@ -4131,8 +3921,7 @@ gt_pch_nx_ptr_info_def (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_constructor_elt_va_gc_ (void *x_p)
+void gt_pch_nx_vec_constructor_elt_va_gc_ (void *x_p)
 {
   vec<constructor_elt,va_gc> * const x = (vec<constructor_elt,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_26vec_constructor_elt_va_gc_))
@@ -4141,16 +3930,14 @@ gt_pch_nx_vec_constructor_elt_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct constructor_elt_d& x_r ATTRIBUTE_UNUSED)
+void gt_pch_nx_inner (struct constructor_elt_d& x_r ATTRIBUTE_UNUSED)
 {
   struct constructor_elt_d * ATTRIBUTE_UNUSED x = &x_r;
   gt_pch_n_9tree_node ((*x).index);
   gt_pch_n_9tree_node ((*x).value);
 }
 
-void
-gt_pch_nx_vec_alias_pair_va_gc_ (void *x_p)
+void gt_pch_nx_vec_alias_pair_va_gc_ (void *x_p)
 {
   vec<alias_pair,va_gc> * const x = (vec<alias_pair,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_21vec_alias_pair_va_gc_))
@@ -4159,16 +3946,14 @@ gt_pch_nx_vec_alias_pair_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct alias_pair& x_r ATTRIBUTE_UNUSED)
+void gt_pch_nx_inner (struct alias_pair& x_r ATTRIBUTE_UNUSED)
 {
   struct alias_pair * ATTRIBUTE_UNUSED x = &x_r;
   gt_pch_n_9tree_node ((*x).decl);
   gt_pch_n_9tree_node ((*x).target);
 }
 
-void
-gt_pch_nx_function (void *x_p)
+void gt_pch_nx_function (void *x_p)
 {
   struct function * const x = (struct function *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_8function))
@@ -4190,8 +3975,7 @@ gt_pch_nx_function (void *x_p)
     }
 }
 
-void
-gt_pch_nx_fixed_value (void *x_p)
+void gt_pch_nx_fixed_value (void *x_p)
 {
   struct fixed_value * const x = (struct fixed_value *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_11fixed_value))
@@ -4199,8 +3983,7 @@ gt_pch_nx_fixed_value (void *x_p)
     }
 }
 
-void
-gt_pch_nx_real_value (void *x_p)
+void gt_pch_nx_real_value (void *x_p)
 {
   struct real_value * const x = (struct real_value *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_10real_value))
@@ -4208,8 +3991,7 @@ gt_pch_nx_real_value (void *x_p)
     }
 }
 
-void
-gt_pch_nx_vec_rtx_va_gc_ (void *x_p)
+void gt_pch_nx_vec_rtx_va_gc_ (void *x_p)
 {
   vec<rtx,va_gc> * const x = (vec<rtx,va_gc> *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_14vec_rtx_va_gc_))
@@ -4218,15 +4000,13 @@ gt_pch_nx_vec_rtx_va_gc_ (void *x_p)
     }
 }
 
-void
-gt_pch_nx (struct rtx_def *& x)
+void gt_pch_nx_inner (struct rtx_def *& x)
 {
   if (x)
     gt_pch_nx_rtx_def ((void *) x);
 }
 
-void
-gt_pch_nx_object_block (void *x_p)
+void gt_pch_nx_object_block (void *x_p)
 {
   struct object_block * const x = (struct object_block *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_12object_block))
@@ -4237,8 +4017,7 @@ gt_pch_nx_object_block (void *x_p)
     }
 }
 
-void
-gt_pch_nx_reg_attrs (void *x_p)
+void gt_pch_nx_reg_attrs (void *x_p)
 {
   struct reg_attrs * const x = (struct reg_attrs *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_9reg_attrs))
@@ -4247,8 +4026,7 @@ gt_pch_nx_reg_attrs (void *x_p)
     }
 }
 
-void
-gt_pch_nx_mem_attrs (void *x_p)
+void gt_pch_nx_mem_attrs (void *x_p)
 {
   struct mem_attrs * const x = (struct mem_attrs *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_9mem_attrs))
@@ -4257,8 +4035,7 @@ gt_pch_nx_mem_attrs (void *x_p)
     }
 }
 
-void
-gt_pch_nx_bitmap_obstack (void *x_p)
+void gt_pch_nx_bitmap_obstack (void *x_p)
 {
   struct bitmap_obstack * const x = (struct bitmap_obstack *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_14bitmap_obstack))
@@ -4268,8 +4045,7 @@ gt_pch_nx_bitmap_obstack (void *x_p)
     }
 }
 
-void
-gt_pch_nx_bitmap_element_def (void *x_p)
+void gt_pch_nx_bitmap_element_def (void *x_p)
 {
   struct bitmap_element_def * x = (struct bitmap_element_def *)x_p;
   struct bitmap_element_def * xlimit = x;
@@ -4291,8 +4067,7 @@ gt_pch_nx_bitmap_element_def (void *x_p)
     }
 }
 
-void
-gt_pch_nx_machine_function (void *x_p)
+void gt_pch_nx_machine_function (void *x_p)
 {
   struct machine_function * const x = (struct machine_function *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_16machine_function))
@@ -4304,8 +4079,7 @@ gt_pch_nx_machine_function (void *x_p)
     }
 }
 
-void
-gt_pch_nx_basic_block_def (void *x_p)
+void gt_pch_nx_basic_block_def (void *x_p)
 {
   struct basic_block_def * x = (struct basic_block_def *)x_p;
   struct basic_block_def * xlimit = x;
@@ -4343,8 +4117,7 @@ gt_pch_nx_basic_block_def (void *x_p)
     }
 }
 
-void
-gt_pch_nx_edge_def (void *x_p)
+void gt_pch_nx_edge_def (void *x_p)
 {
   struct edge_def * const x = (struct edge_def *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_8edge_def))
@@ -4352,8 +4125,7 @@ gt_pch_nx_edge_def (void *x_p)
     }
 }
 
-void
-gt_pch_nx_section (void *x_p)
+void gt_pch_nx_section (void *x_p)
 {
   union section * const x = (union section *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_7section))
@@ -4375,8 +4147,7 @@ gt_pch_nx_section (void *x_p)
     }
 }
 
-void
-gt_pch_nx_gimple_statement_d (void *x_p)
+void gt_pch_nx_gimple_statement_d (void *x_p)
 {
   union gimple_statement_d * x = (union gimple_statement_d *)x_p;
   union gimple_statement_d * xlimit = x;
@@ -4611,8 +4382,7 @@ gt_pch_nx_gimple_statement_d (void *x_p)
     }
 }
 
-void
-gt_pch_nx_rtvec_def (void *x_p)
+void gt_pch_nx_rtvec_def (void *x_p)
 {
   struct rtvec_def * const x = (struct rtvec_def *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_9rtvec_def))
@@ -4629,8 +4399,7 @@ gt_pch_nx_rtvec_def (void *x_p)
     }
 }
 
-void
-gt_pch_nx_rtx_def (void *x_p)
+void gt_pch_nx_rtx_def (void *x_p)
 {
   struct rtx_def * x = (struct rtx_def *)x_p;
   struct rtx_def * xlimit = x;
@@ -5245,8 +5014,7 @@ gt_pch_nx_rtx_def (void *x_p)
     }
 }
 
-void
-gt_pch_nx_bitmap_head_def (void *x_p)
+void gt_pch_nx_bitmap_head_def (void *x_p)
 {
   struct bitmap_head_def * const x = (struct bitmap_head_def *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_15bitmap_head_def))
@@ -5256,8 +5024,7 @@ gt_pch_nx_bitmap_head_def (void *x_p)
     }
 }
 
-void
-gt_pch_nx_answer (void *x_p)
+void gt_pch_nx_answer (void *x_p)
 {
   struct answer * const x = (struct answer *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_6answer))
@@ -5298,8 +5065,7 @@ gt_pch_nx_answer (void *x_p)
     }
 }
 
-void
-gt_pch_nx_cpp_macro (void *x_p)
+void gt_pch_nx_cpp_macro (void *x_p)
 {
   struct cpp_macro * const x = (struct cpp_macro *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_9cpp_macro))
@@ -5361,8 +5127,7 @@ gt_pch_nx_cpp_macro (void *x_p)
     }
 }
 
-void
-gt_pch_nx_cpp_token (void *x_p)
+void gt_pch_nx_cpp_token (void *x_p)
 {
   struct cpp_token * const x = (struct cpp_token *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_9cpp_token))
@@ -5394,8 +5159,7 @@ gt_pch_nx_cpp_token (void *x_p)
     }
 }
 
-void
-gt_pch_nx_line_maps (void *x_p)
+void gt_pch_nx_line_maps (void *x_p)
 {
   struct line_maps * const x = (struct line_maps *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_9line_maps))
@@ -5466,8 +5230,7 @@ gt_pch_nx_line_maps (void *x_p)
     }
 }
 
-void
-gt_pch_n_II17splay_tree_node_s (void *x_p)
+void gt_pch_n_II17splay_tree_node_s (void *x_p)
 {
   struct splay_tree_node_s * const x = (struct splay_tree_node_s *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_II17splay_tree_node_s))
@@ -5477,8 +5240,7 @@ gt_pch_n_II17splay_tree_node_s (void *x_p)
     }
 }
 
-void
-gt_pch_n_SP9tree_node17splay_tree_node_s (void *x_p)
+void gt_pch_n_SP9tree_node17splay_tree_node_s (void *x_p)
 {
   struct splay_tree_node_s * const x = (struct splay_tree_node_s *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_SP9tree_node17splay_tree_node_s))
@@ -5490,8 +5252,7 @@ gt_pch_n_SP9tree_node17splay_tree_node_s (void *x_p)
     }
 }
 
-void
-gt_pch_n_P9tree_nodeP9tree_node17splay_tree_node_s (void *x_p)
+void gt_pch_n_P9tree_nodeP9tree_node17splay_tree_node_s (void *x_p)
 {
   struct splay_tree_node_s * const x = (struct splay_tree_node_s *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P9tree_nodeP9tree_node17splay_tree_node_s))
@@ -5503,8 +5264,7 @@ gt_pch_n_P9tree_nodeP9tree_node17splay_tree_node_s (void *x_p)
     }
 }
 
-void
-gt_pch_n_P17lto_in_decl_state4htab (void *x_p)
+void gt_pch_n_P17lto_in_decl_state4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P17lto_in_decl_state4htab))
@@ -5522,8 +5282,7 @@ gt_pch_n_P17lto_in_decl_state4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P9tree_nodeP9tree_node12splay_tree_s (void *x_p)
+void gt_pch_n_P9tree_nodeP9tree_node12splay_tree_s (void *x_p)
 {
   struct splay_tree_s * const x = (struct splay_tree_s *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P9tree_nodeP9tree_node12splay_tree_s))
@@ -5532,8 +5291,7 @@ gt_pch_n_P9tree_nodeP9tree_node12splay_tree_s (void *x_p)
     }
 }
 
-void
-gt_pch_n_P15tm_restart_node4htab (void *x_p)
+void gt_pch_n_P15tm_restart_node4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P15tm_restart_node4htab))
@@ -5551,8 +5309,7 @@ gt_pch_n_P15tm_restart_node4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P12tree_int_map4htab (void *x_p)
+void gt_pch_n_P12tree_int_map4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P12tree_int_map4htab))
@@ -5570,8 +5327,7 @@ gt_pch_n_P12tree_int_map4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P8tree_map4htab (void *x_p)
+void gt_pch_n_P8tree_map4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P8tree_map4htab))
@@ -5589,8 +5345,7 @@ gt_pch_n_P8tree_map4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P24constant_descriptor_tree4htab (void *x_p)
+void gt_pch_n_P24constant_descriptor_tree4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P24constant_descriptor_tree4htab))
@@ -5608,8 +5363,7 @@ gt_pch_n_P24constant_descriptor_tree4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P12object_block4htab (void *x_p)
+void gt_pch_n_P12object_block4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P12object_block4htab))
@@ -5627,8 +5381,7 @@ gt_pch_n_P12object_block4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P7section4htab (void *x_p)
+void gt_pch_n_P7section4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P7section4htab))
@@ -5646,8 +5399,7 @@ gt_pch_n_P7section4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P17tree_priority_map4htab (void *x_p)
+void gt_pch_n_P17tree_priority_map4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P17tree_priority_map4htab))
@@ -5665,8 +5417,7 @@ gt_pch_n_P17tree_priority_map4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P12tree_vec_map4htab (void *x_p)
+void gt_pch_n_P12tree_vec_map4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P12tree_vec_map4htab))
@@ -5684,8 +5435,7 @@ gt_pch_n_P12tree_vec_map4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P13tree_decl_map4htab (void *x_p)
+void gt_pch_n_P13tree_decl_map4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P13tree_decl_map4htab))
@@ -5703,8 +5453,7 @@ gt_pch_n_P13tree_decl_map4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P15throw_stmt_node4htab (void *x_p)
+void gt_pch_n_P15throw_stmt_node4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P15throw_stmt_node4htab))
@@ -5722,8 +5471,7 @@ gt_pch_n_P15throw_stmt_node4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P9reg_attrs4htab (void *x_p)
+void gt_pch_n_P9reg_attrs4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P9reg_attrs4htab))
@@ -5741,8 +5489,7 @@ gt_pch_n_P9reg_attrs4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P9mem_attrs4htab (void *x_p)
+void gt_pch_n_P9mem_attrs4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P9mem_attrs4htab))
@@ -5760,8 +5507,7 @@ gt_pch_n_P9mem_attrs4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P7rtx_def4htab (void *x_p)
+void gt_pch_n_P7rtx_def4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P7rtx_def4htab))
@@ -5779,8 +5525,7 @@ gt_pch_n_P7rtx_def4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_SP9tree_node12splay_tree_s (void *x_p)
+void gt_pch_n_SP9tree_node12splay_tree_s (void *x_p)
 {
   struct splay_tree_s * const x = (struct splay_tree_s *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_SP9tree_node12splay_tree_s))
@@ -5789,8 +5534,7 @@ gt_pch_n_SP9tree_node12splay_tree_s (void *x_p)
     }
 }
 
-void
-gt_pch_n_II12splay_tree_s (void *x_p)
+void gt_pch_n_II12splay_tree_s (void *x_p)
 {
   struct splay_tree_s * const x = (struct splay_tree_s *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_II12splay_tree_s))
@@ -5799,8 +5543,7 @@ gt_pch_n_II12splay_tree_s (void *x_p)
     }
 }
 
-void
-gt_pch_n_P15symtab_node_def4htab (void *x_p)
+void gt_pch_n_P15symtab_node_def4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P15symtab_node_def4htab))
@@ -5818,8 +5561,7 @@ gt_pch_n_P15symtab_node_def4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P11cgraph_edge4htab (void *x_p)
+void gt_pch_n_P11cgraph_edge4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P11cgraph_edge4htab))
@@ -5837,8 +5579,7 @@ gt_pch_n_P11cgraph_edge4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P9loop_exit4htab (void *x_p)
+void gt_pch_n_P9loop_exit4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P9loop_exit4htab))
@@ -5856,8 +5597,7 @@ gt_pch_n_P9loop_exit4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P24types_used_by_vars_entry4htab (void *x_p)
+void gt_pch_n_P24types_used_by_vars_entry4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P24types_used_by_vars_entry4htab))
@@ -5875,8 +5615,7 @@ gt_pch_n_P24types_used_by_vars_entry4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P9tree_node4htab (void *x_p)
+void gt_pch_n_P9tree_node4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P9tree_node4htab))
@@ -5894,8 +5633,7 @@ gt_pch_n_P9tree_node4htab (void *x_p)
     }
 }
 
-void
-gt_pch_n_P13libfunc_entry4htab (void *x_p)
+void gt_pch_n_P13libfunc_entry4htab (void *x_p)
 {
   struct htab * const x = (struct htab *)x_p;
   if (gt_pch_note_object (x, x, gt_pch_p_P13libfunc_entry4htab))
@@ -5913,8 +5651,7 @@ gt_pch_n_P13libfunc_entry4htab (void *x_p)
     }
 }
 
-void
-gt_pch_p_27vec_inline_summary_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_27vec_inline_summary_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -5924,8 +5661,7 @@ gt_pch_p_27vec_inline_summary_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_nx (struct inline_summary* x ATTRIBUTE_UNUSED,
+void gt_pch_nx_inner (struct inline_summary* x ATTRIBUTE_UNUSED,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
 {
@@ -5933,8 +5669,7 @@ gt_pch_nx (struct inline_summary* x ATTRIBUTE_UNUSED,
     op (&((*x).entry), cookie);
 }
 
-void
-gt_pch_p_26vec_size_time_entry_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_26vec_size_time_entry_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -5944,15 +5679,13 @@ gt_pch_p_26vec_size_time_entry_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_nx (struct size_time_entry* x ATTRIBUTE_UNUSED,
+void gt_pch_nx_inner (struct size_time_entry* x ATTRIBUTE_UNUSED,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
 {
 }
 
-void
-gt_pch_p_20vec_condition_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_20vec_condition_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -5962,16 +5695,14 @@ gt_pch_p_20vec_condition_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_nx (struct condition* x ATTRIBUTE_UNUSED,
+void gt_pch_nx_inner (struct condition* x ATTRIBUTE_UNUSED,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
 {
     op (&((*x).val), cookie);
 }
 
-void
-gt_pch_p_17lto_in_decl_state (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_17lto_in_decl_state (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -5999,8 +5730,7 @@ gt_pch_p_17lto_in_decl_state (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).fn_decl), cookie);
 }
 
-void
-gt_pch_p_26vec_ipa_edge_args_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_26vec_ipa_edge_args_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6010,16 +5740,14 @@ gt_pch_p_26vec_ipa_edge_args_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_nx (struct ipa_edge_args* x ATTRIBUTE_UNUSED,
+void gt_pch_nx_inner (struct ipa_edge_args* x ATTRIBUTE_UNUSED,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
 {
     op (&((*x).jump_functions), cookie);
 }
 
-void
-gt_pch_p_38vec_ipa_agg_replacement_value_p_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_38vec_ipa_agg_replacement_value_p_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6029,8 +5757,7 @@ gt_pch_p_38vec_ipa_agg_replacement_value_p_va_gc_ (ATTRIBUTE_UNUSED void *this_o
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_26vec_ipa_jump_func_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_26vec_ipa_jump_func_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6040,8 +5767,7 @@ gt_pch_p_26vec_ipa_jump_func_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_nx (struct ipa_jump_func* x ATTRIBUTE_UNUSED,
+void gt_pch_nx_inner (struct ipa_jump_func* x ATTRIBUTE_UNUSED,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
 {
@@ -6066,8 +5792,7 @@ gt_pch_nx (struct ipa_jump_func* x ATTRIBUTE_UNUSED,
     }
 }
 
-void
-gt_pch_p_28vec_ipa_agg_jf_item_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_28vec_ipa_agg_jf_item_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6077,16 +5802,14 @@ gt_pch_p_28vec_ipa_agg_jf_item_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_nx (struct ipa_agg_jf_item* x ATTRIBUTE_UNUSED,
+void gt_pch_nx_inner (struct ipa_agg_jf_item* x ATTRIBUTE_UNUSED,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
 {
     op (&((*x).value), cookie);
 }
 
-void
-gt_pch_p_20ssa_operand_memory_d (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_20ssa_operand_memory_d (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6096,8 +5819,7 @@ gt_pch_p_20ssa_operand_memory_d (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).next), cookie);
 }
 
-void
-gt_pch_p_17vec_gimple_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_17vec_gimple_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6107,8 +5829,7 @@ gt_pch_p_17vec_gimple_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_15tm_restart_node (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_15tm_restart_node (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6120,8 +5841,7 @@ gt_pch_p_15tm_restart_node (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).label_or_list), cookie);
 }
 
-void
-gt_pch_p_15throw_stmt_node (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_15throw_stmt_node (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6131,8 +5851,7 @@ gt_pch_p_15throw_stmt_node (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).stmt), cookie);
 }
 
-void
-gt_pch_p_25vec_eh_landing_pad_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_25vec_eh_landing_pad_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6142,8 +5861,7 @@ gt_pch_p_25vec_eh_landing_pad_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_20vec_eh_region_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_20vec_eh_region_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6153,8 +5871,7 @@ gt_pch_p_20vec_eh_region_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_10eh_catch_d (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_10eh_catch_d (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6172,8 +5889,7 @@ gt_pch_p_10eh_catch_d (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).label), cookie);
 }
 
-void
-gt_pch_p_16eh_landing_pad_d (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_16eh_landing_pad_d (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6189,8 +5905,7 @@ gt_pch_p_16eh_landing_pad_d (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).landing_pad), cookie);
 }
 
-void
-gt_pch_p_11eh_region_d (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_11eh_region_d (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6231,8 +5946,7 @@ gt_pch_p_11eh_region_d (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).filter_reg), cookie);
 }
 
-void
-gt_pch_p_21vec_dw_cfi_ref_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_21vec_dw_cfi_ref_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6242,8 +5956,7 @@ gt_pch_p_21vec_dw_cfi_ref_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_19dw_loc_descr_struct (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_19dw_loc_descr_struct (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6375,8 +6088,7 @@ gt_pch_p_19dw_loc_descr_struct (ATTRIBUTE_UNUSED void *this_obj,
     }
 }
 
-void
-gt_pch_p_13dw_cfi_struct (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_13dw_cfi_struct (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6418,8 +6130,7 @@ gt_pch_p_13dw_cfi_struct (ATTRIBUTE_UNUSED void *this_obj,
     }
 }
 
-void
-gt_pch_p_25ipa_agg_replacement_value (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_25ipa_agg_replacement_value (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6431,8 +6142,7 @@ gt_pch_p_25ipa_agg_replacement_value (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).value), cookie);
 }
 
-void
-gt_pch_p_24constant_descriptor_tree (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_24constant_descriptor_tree (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6444,8 +6154,7 @@ gt_pch_p_24constant_descriptor_tree (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).value), cookie);
 }
 
-void
-gt_pch_p_8asm_node (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_8asm_node (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6457,8 +6166,7 @@ gt_pch_p_8asm_node (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).asm_str), cookie);
 }
 
-void
-gt_pch_p_25cgraph_indirect_call_info (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_25cgraph_indirect_call_info (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6468,8 +6176,7 @@ gt_pch_p_25cgraph_indirect_call_info (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).otr_type), cookie);
 }
 
-void
-gt_pch_p_28cgraph_function_version_info (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_28cgraph_function_version_info (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6485,8 +6192,7 @@ gt_pch_p_28cgraph_function_version_info (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).dispatcher_resolver), cookie);
 }
 
-void
-gt_pch_p_11cgraph_edge (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_11cgraph_edge (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6510,8 +6216,7 @@ gt_pch_p_11cgraph_edge (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).indirect_info), cookie);
 }
 
-void
-gt_pch_p_28vec_ipa_replace_map_p_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_28vec_ipa_replace_map_p_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6521,8 +6226,7 @@ gt_pch_p_28vec_ipa_replace_map_p_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_15ipa_replace_map (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_15ipa_replace_map (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6534,8 +6238,7 @@ gt_pch_p_15ipa_replace_map (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).new_tree), cookie);
 }
 
-void
-gt_pch_p_18lto_file_decl_data (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_18lto_file_decl_data (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6551,8 +6254,7 @@ gt_pch_p_18lto_file_decl_data (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).next), cookie);
 }
 
-void
-gt_pch_p_20vec_ipa_ref_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_20vec_ipa_ref_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6562,8 +6264,7 @@ gt_pch_p_20vec_ipa_ref_t_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_nx (struct ipa_ref* x ATTRIBUTE_UNUSED,
+void gt_pch_nx_inner (struct ipa_ref* x ATTRIBUTE_UNUSED,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
 {
@@ -6572,8 +6273,7 @@ gt_pch_nx (struct ipa_ref* x ATTRIBUTE_UNUSED,
     op (&((*x).stmt), cookie);
 }
 
-void
-gt_pch_p_15symtab_node_def (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_15symtab_node_def (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6691,8 +6391,7 @@ gt_pch_p_15symtab_node_def (ATTRIBUTE_UNUSED void *this_obj,
     }
 }
 
-void
-gt_pch_p_11cgraph_node (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_11cgraph_node (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6765,8 +6464,7 @@ gt_pch_p_11cgraph_node (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).thunk.alias), cookie);
 }
 
-void
-gt_pch_p_22vec_basic_block_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_22vec_basic_block_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6776,8 +6474,7 @@ gt_pch_p_22vec_basic_block_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_15vec_edge_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_15vec_edge_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6787,8 +6484,7 @@ gt_pch_p_15vec_edge_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_11rtl_bb_info (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_11rtl_bb_info (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6802,8 +6498,7 @@ gt_pch_p_11rtl_bb_info (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).footer_), cookie);
 }
 
-void
-gt_pch_p_17vec_loop_p_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_17vec_loop_p_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6813,8 +6508,7 @@ gt_pch_p_17vec_loop_p_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_4loop (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_4loop (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6838,8 +6532,7 @@ gt_pch_p_4loop (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).exits), cookie);
 }
 
-void
-gt_pch_p_9loop_exit (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_9loop_exit (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6855,8 +6548,7 @@ gt_pch_p_9loop_exit (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).next_e), cookie);
 }
 
-void
-gt_pch_p_13nb_iter_bound (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_13nb_iter_bound (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6868,8 +6560,7 @@ gt_pch_p_13nb_iter_bound (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).next), cookie);
 }
 
-void
-gt_pch_p_24types_used_by_vars_entry (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_24types_used_by_vars_entry (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6881,8 +6572,7 @@ gt_pch_p_24types_used_by_vars_entry (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).var_decl), cookie);
 }
 
-void
-gt_pch_p_5loops (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_5loops (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6896,8 +6586,7 @@ gt_pch_p_5loops (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).tree_root), cookie);
 }
 
-void
-gt_pch_p_18control_flow_graph (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_18control_flow_graph (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6913,8 +6602,7 @@ gt_pch_p_18control_flow_graph (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).x_label_to_block_map), cookie);
 }
 
-void
-gt_pch_p_9eh_status (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_9eh_status (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6945,8 +6633,7 @@ gt_pch_p_9eh_status (ATTRIBUTE_UNUSED void *this_obj,
     }
 }
 
-void
-gt_pch_p_11stack_usage (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_11stack_usage (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6954,8 +6641,7 @@ gt_pch_p_11stack_usage (ATTRIBUTE_UNUSED void *this_obj,
   struct stack_usage * x ATTRIBUTE_UNUSED = (struct stack_usage *)x_p;
 }
 
-void
-gt_pch_p_22vec_temp_slot_p_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_22vec_temp_slot_p_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6965,8 +6651,7 @@ gt_pch_p_22vec_temp_slot_p_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_11frame_space (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_11frame_space (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -6976,8 +6661,7 @@ gt_pch_p_11frame_space (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).next), cookie);
 }
 
-void
-gt_pch_p_13dw_fde_struct (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_13dw_fde_struct (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7003,8 +6687,7 @@ gt_pch_p_13dw_fde_struct (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).dw_fde_cfi), cookie);
 }
 
-void
-gt_pch_p_9gimple_df (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_9gimple_df (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7028,8 +6711,7 @@ gt_pch_p_9gimple_df (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).tm_restart), cookie);
 }
 
-void
-gt_pch_p_27vec_call_site_record_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_27vec_call_site_record_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7039,8 +6721,7 @@ gt_pch_p_27vec_call_site_record_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_16vec_uchar_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_16vec_uchar_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7050,8 +6731,7 @@ gt_pch_p_16vec_uchar_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_14sequence_stack (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_14sequence_stack (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7065,8 +6745,7 @@ gt_pch_p_14sequence_stack (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).next), cookie);
 }
 
-void
-gt_pch_p_13libfunc_entry (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_13libfunc_entry (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7076,8 +6755,7 @@ gt_pch_p_13libfunc_entry (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).libfunc), cookie);
 }
 
-void
-gt_pch_p_12tree_vec_map (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_12tree_vec_map (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7089,8 +6767,7 @@ gt_pch_p_12tree_vec_map (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).to), cookie);
 }
 
-void
-gt_pch_p_17tree_priority_map (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_17tree_priority_map (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7100,8 +6777,7 @@ gt_pch_p_17tree_priority_map (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).base.from), cookie);
 }
 
-void
-gt_pch_p_12tree_int_map (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_12tree_int_map (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7111,8 +6787,7 @@ gt_pch_p_12tree_int_map (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).base.from), cookie);
 }
 
-void
-gt_pch_p_13tree_decl_map (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_13tree_decl_map (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7124,8 +6799,7 @@ gt_pch_p_13tree_decl_map (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).to), cookie);
 }
 
-void
-gt_pch_p_8tree_map (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_8tree_map (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7137,8 +6811,7 @@ gt_pch_p_8tree_map (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).to), cookie);
 }
 
-void
-gt_pch_p_24tree_statement_list_node (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_24tree_statement_list_node (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7152,8 +6825,7 @@ gt_pch_p_24tree_statement_list_node (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).stmt), cookie);
 }
 
-void
-gt_pch_p_15vec_tree_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_15vec_tree_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7163,8 +6835,7 @@ gt_pch_p_15vec_tree_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_12ptr_info_def (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_12ptr_info_def (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7174,8 +6845,7 @@ gt_pch_p_12ptr_info_def (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).pt.vars), cookie);
 }
 
-void
-gt_pch_p_26vec_constructor_elt_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_26vec_constructor_elt_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7185,8 +6855,7 @@ gt_pch_p_26vec_constructor_elt_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_nx (struct constructor_elt_d* x ATTRIBUTE_UNUSED,
+void gt_pch_nx_inner (struct constructor_elt_d* x ATTRIBUTE_UNUSED,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
 {
@@ -7194,8 +6863,7 @@ gt_pch_nx (struct constructor_elt_d* x ATTRIBUTE_UNUSED,
     op (&((*x).value), cookie);
 }
 
-void
-gt_pch_p_21vec_alias_pair_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_21vec_alias_pair_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7205,8 +6873,7 @@ gt_pch_p_21vec_alias_pair_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_nx (struct alias_pair* x ATTRIBUTE_UNUSED,
+void gt_pch_nx_inner (struct alias_pair* x ATTRIBUTE_UNUSED,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
 {
@@ -7214,8 +6881,7 @@ gt_pch_nx (struct alias_pair* x ATTRIBUTE_UNUSED,
     op (&((*x).target), cookie);
 }
 
-void
-gt_pch_p_8function (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_8function (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7251,8 +6917,7 @@ gt_pch_p_8function (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).fde), cookie);
 }
 
-void
-gt_pch_p_11fixed_value (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_11fixed_value (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7260,8 +6925,7 @@ gt_pch_p_11fixed_value (ATTRIBUTE_UNUSED void *this_obj,
   struct fixed_value * x ATTRIBUTE_UNUSED = (struct fixed_value *)x_p;
 }
 
-void
-gt_pch_p_10real_value (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_10real_value (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7269,8 +6933,7 @@ gt_pch_p_10real_value (ATTRIBUTE_UNUSED void *this_obj,
   struct real_value * x ATTRIBUTE_UNUSED = (struct real_value *)x_p;
 }
 
-void
-gt_pch_p_14vec_rtx_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_14vec_rtx_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7280,8 +6943,7 @@ gt_pch_p_14vec_rtx_va_gc_ (ATTRIBUTE_UNUSED void *this_obj,
     gt_pch_nx (&((*x)), op, cookie);
 }
 
-void
-gt_pch_p_12object_block (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_12object_block (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7295,8 +6957,7 @@ gt_pch_p_12object_block (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).anchors), cookie);
 }
 
-void
-gt_pch_p_9reg_attrs (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_9reg_attrs (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7306,8 +6967,7 @@ gt_pch_p_9reg_attrs (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).decl), cookie);
 }
 
-void
-gt_pch_p_9mem_attrs (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_9mem_attrs (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7317,8 +6977,7 @@ gt_pch_p_9mem_attrs (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).expr), cookie);
 }
 
-void
-gt_pch_p_14bitmap_obstack (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_14bitmap_obstack (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7330,8 +6989,7 @@ gt_pch_p_14bitmap_obstack (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).heads), cookie);
 }
 
-void
-gt_pch_p_18bitmap_element_def (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_18bitmap_element_def (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7343,8 +7001,7 @@ gt_pch_p_18bitmap_element_def (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).prev), cookie);
 }
 
-void
-gt_pch_p_16machine_function (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_16machine_function (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7360,8 +7017,7 @@ gt_pch_p_16machine_function (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).fs.cfa_reg), cookie);
 }
 
-void
-gt_pch_p_15basic_block_def (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_15basic_block_def (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7396,8 +7052,7 @@ gt_pch_p_15basic_block_def (ATTRIBUTE_UNUSED void *this_obj,
     }
 }
 
-void
-gt_pch_p_8edge_def (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_8edge_def (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7405,8 +7060,7 @@ gt_pch_p_8edge_def (ATTRIBUTE_UNUSED void *this_obj,
   struct edge_def * x ATTRIBUTE_UNUSED = (struct edge_def *)x_p;
 }
 
-void
-gt_pch_p_7section (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_7section (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7431,8 +7085,7 @@ gt_pch_p_7section (ATTRIBUTE_UNUSED void *this_obj,
     }
 }
 
-void
-gt_pch_p_18gimple_statement_d (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_18gimple_statement_d (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7772,8 +7425,7 @@ gt_pch_p_18gimple_statement_d (ATTRIBUTE_UNUSED void *this_obj,
     }
 }
 
-void
-gt_pch_p_9rtvec_def (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_9rtvec_def (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -7791,8 +7443,7 @@ gt_pch_p_9rtvec_def (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_7rtx_def (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_7rtx_def (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -8644,8 +8295,7 @@ gt_pch_p_7rtx_def (ATTRIBUTE_UNUSED void *this_obj,
     }
 }
 
-void
-gt_pch_p_15bitmap_head_def (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_15bitmap_head_def (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -8657,8 +8307,7 @@ gt_pch_p_15bitmap_head_def (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).obstack), cookie);
 }
 
-void
-gt_pch_p_6answer (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_6answer (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -8704,8 +8353,7 @@ gt_pch_p_6answer (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_9cpp_macro (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_9cpp_macro (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -8776,8 +8424,7 @@ gt_pch_p_9cpp_macro (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_9cpp_token (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_9cpp_token (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -8813,8 +8460,7 @@ gt_pch_p_9cpp_token (ATTRIBUTE_UNUSED void *this_obj,
     }
 }
 
-void
-gt_pch_p_9line_maps (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_9line_maps (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -8896,8 +8542,7 @@ gt_pch_p_9line_maps (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_II17splay_tree_node_s (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_II17splay_tree_node_s (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -8909,25 +8554,7 @@ gt_pch_p_II17splay_tree_node_s (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).right), cookie);
 }
 
-void
-gt_pch_p_SP9tree_node17splay_tree_node_s (ATTRIBUTE_UNUSED void *this_obj,
-	void *x_p,
-	ATTRIBUTE_UNUSED gt_pointer_operator op,
-	ATTRIBUTE_UNUSED void *cookie)
-{
-  struct splay_tree_node_s * x ATTRIBUTE_UNUSED = (struct splay_tree_node_s *)x_p;
-  if ((void *)(x) == this_obj)
-    op (&((*x).key), cookie);
-  if ((void *)(x) == this_obj)
-    op (&((*x).value), cookie);
-  if ((void *)(x) == this_obj)
-    op (&((*x).left), cookie);
-  if ((void *)(x) == this_obj)
-    op (&((*x).right), cookie);
-}
-
-void
-gt_pch_p_P9tree_nodeP9tree_node17splay_tree_node_s (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_SP9tree_node17splay_tree_node_s (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -8943,8 +8570,23 @@ gt_pch_p_P9tree_nodeP9tree_node17splay_tree_node_s (ATTRIBUTE_UNUSED void *this_
     op (&((*x).right), cookie);
 }
 
-void
-gt_pch_p_P17lto_in_decl_state4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P9tree_nodeP9tree_node17splay_tree_node_s (ATTRIBUTE_UNUSED void *this_obj,
+	void *x_p,
+	ATTRIBUTE_UNUSED gt_pointer_operator op,
+	ATTRIBUTE_UNUSED void *cookie)
+{
+  struct splay_tree_node_s * x ATTRIBUTE_UNUSED = (struct splay_tree_node_s *)x_p;
+  if ((void *)(x) == this_obj)
+    op (&((*x).key), cookie);
+  if ((void *)(x) == this_obj)
+    op (&((*x).value), cookie);
+  if ((void *)(x) == this_obj)
+    op (&((*x).left), cookie);
+  if ((void *)(x) == this_obj)
+    op (&((*x).right), cookie);
+}
+
+void gt_pch_p_P17lto_in_decl_state4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -8964,8 +8606,7 @@ gt_pch_p_P17lto_in_decl_state4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P9tree_nodeP9tree_node12splay_tree_s (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P9tree_nodeP9tree_node12splay_tree_s (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -8975,8 +8616,7 @@ gt_pch_p_P9tree_nodeP9tree_node12splay_tree_s (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).root), cookie);
 }
 
-void
-gt_pch_p_P15tm_restart_node4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P15tm_restart_node4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -8996,8 +8636,7 @@ gt_pch_p_P15tm_restart_node4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P12tree_int_map4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P12tree_int_map4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9017,8 +8656,7 @@ gt_pch_p_P12tree_int_map4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P8tree_map4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P8tree_map4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9038,8 +8676,7 @@ gt_pch_p_P8tree_map4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P24constant_descriptor_tree4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P24constant_descriptor_tree4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9059,8 +8696,7 @@ gt_pch_p_P24constant_descriptor_tree4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P12object_block4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P12object_block4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9080,8 +8716,7 @@ gt_pch_p_P12object_block4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P7section4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P7section4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9101,8 +8736,7 @@ gt_pch_p_P7section4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P17tree_priority_map4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P17tree_priority_map4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9122,8 +8756,7 @@ gt_pch_p_P17tree_priority_map4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P12tree_vec_map4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P12tree_vec_map4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9143,8 +8776,7 @@ gt_pch_p_P12tree_vec_map4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P13tree_decl_map4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P13tree_decl_map4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9164,8 +8796,7 @@ gt_pch_p_P13tree_decl_map4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P15throw_stmt_node4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P15throw_stmt_node4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9185,8 +8816,7 @@ gt_pch_p_P15throw_stmt_node4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P9reg_attrs4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P9reg_attrs4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9206,8 +8836,7 @@ gt_pch_p_P9reg_attrs4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P9mem_attrs4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P9mem_attrs4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9227,8 +8856,7 @@ gt_pch_p_P9mem_attrs4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P7rtx_def4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P7rtx_def4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9248,8 +8876,7 @@ gt_pch_p_P7rtx_def4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_SP9tree_node12splay_tree_s (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_SP9tree_node12splay_tree_s (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9259,8 +8886,7 @@ gt_pch_p_SP9tree_node12splay_tree_s (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).root), cookie);
 }
 
-void
-gt_pch_p_II12splay_tree_s (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_II12splay_tree_s (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9270,8 +8896,7 @@ gt_pch_p_II12splay_tree_s (ATTRIBUTE_UNUSED void *this_obj,
     op (&((*x).root), cookie);
 }
 
-void
-gt_pch_p_P15symtab_node_def4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P15symtab_node_def4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9291,8 +8916,7 @@ gt_pch_p_P15symtab_node_def4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P11cgraph_edge4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P11cgraph_edge4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9312,8 +8936,7 @@ gt_pch_p_P11cgraph_edge4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P9loop_exit4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P9loop_exit4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9333,8 +8956,7 @@ gt_pch_p_P9loop_exit4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P24types_used_by_vars_entry4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P24types_used_by_vars_entry4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9354,8 +8976,7 @@ gt_pch_p_P24types_used_by_vars_entry4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P9tree_node4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P9tree_node4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9375,8 +8996,7 @@ gt_pch_p_P9tree_node4htab (ATTRIBUTE_UNUSED void *this_obj,
   }
 }
 
-void
-gt_pch_p_P13libfunc_entry4htab (ATTRIBUTE_UNUSED void *this_obj,
+void gt_pch_p_P13libfunc_entry4htab (ATTRIBUTE_UNUSED void *this_obj,
 	void *x_p,
 	ATTRIBUTE_UNUSED gt_pointer_operator op,
 	ATTRIBUTE_UNUSED void *cookie)
@@ -9634,8 +9254,7 @@ void * ggc_alloc_splay_tree_libfunc_entry_htab (int sz, void * nl)
 /* GC roots.  */
 
 static void gt_ggc_ma_regno_reg_rtx (void *);
-static void
-gt_ggc_ma_regno_reg_rtx (ATTRIBUTE_UNUSED void *x_p)
+static void gt_ggc_ma_regno_reg_rtx (ATTRIBUTE_UNUSED void *x_p)
 {
   if (regno_reg_rtx != NULL) {
     size_t i0;
@@ -9665,8 +9284,7 @@ static void gt_pch_pa_regno_reg_rtx (ATTRIBUTE_UNUSED void *this_obj,
 }
 
 static void gt_pch_na_regno_reg_rtx (void *);
-static void
-gt_pch_na_regno_reg_rtx (ATTRIBUTE_UNUSED void *x_p)
+static void gt_pch_na_regno_reg_rtx (ATTRIBUTE_UNUSED void *x_p)
 {
   if (regno_reg_rtx != NULL) {
     size_t i0;
