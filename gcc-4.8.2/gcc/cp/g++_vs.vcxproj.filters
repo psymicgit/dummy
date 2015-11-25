@@ -337,6 +337,9 @@
     <ClInclude Include="..\tree.h">
       <Filter>gcc</Filter>
     </ClInclude>
+    <ClInclude Include="..\c-family\c-common.h">
+      <Filter>c-family</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="build">
@@ -347,6 +350,9 @@
     </Filter>
     <Filter Include="gcc">
       <UniqueIdentifier>{8e2c9b53-b506-4e73-ab31-5b2f4844f6b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="c-family">
+      <UniqueIdentifier>{d7c6c86f-78e5-4754-8f2f-55d43794ec03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -466,6 +472,9 @@
     </ClCompile>
     <ClCompile Include="..\fold-const.cpp">
       <Filter>gcc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\c-family\c-common.cpp">
+      <Filter>c-family</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
