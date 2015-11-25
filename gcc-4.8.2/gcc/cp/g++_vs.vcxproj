@@ -113,6 +113,7 @@
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tm_p.h" />
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tree-check.h" />
     <ClInclude Include="..\c-family\c-objc.h" />
+    <ClInclude Include="..\tree.h" />
     <ClInclude Include="..\vec.h" />
     <ClInclude Include="cfns.h" />
     <ClInclude Include="cp-objcp-common.h" />
@@ -131,6 +132,7 @@
     <ClCompile Include="..\..\gcc-build-4.8.2\gcc\gtype-desc.cpp" />
     <ClCompile Include="..\c-family\stub-objc.cpp" />
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\tree.cpp" />
     <ClCompile Include="..\vec.cpp" />
     <ClCompile Include="call.cpp" />
     <ClCompile Include="class.cpp" />
