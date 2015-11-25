@@ -112,6 +112,7 @@
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tmp-limits.h" />
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tm_p.h" />
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tree-check.h" />
+    <ClInclude Include="..\c-family\c-objc.h" />
     <ClInclude Include="..\vec.h" />
     <ClInclude Include="cfns.h" />
     <ClInclude Include="cp-objcp-common.h" />
@@ -128,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\gcc-build-4.8.2\gcc\gtype-desc.cpp" />
+    <ClCompile Include="..\c-family\stub-objc.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\vec.cpp" />
     <ClCompile Include="call.cpp" />

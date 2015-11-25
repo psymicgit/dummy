@@ -331,6 +331,9 @@
     <ClInclude Include="..\vec.h">
       <Filter>gcc</Filter>
     </ClInclude>
+    <ClInclude Include="..\c-family\c-objc.h">
+      <Filter>gcc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="build">
@@ -450,6 +453,9 @@
       <Filter>build</Filter>
     </ClCompile>
     <ClCompile Include="..\vec.cpp">
+      <Filter>gcc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\c-family\stub-objc.cpp">
       <Filter>gcc</Filter>
     </ClCompile>
   </ItemGroup>
