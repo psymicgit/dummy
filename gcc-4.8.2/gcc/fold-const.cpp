@@ -46,7 +46,8 @@ along with GCC; see the file COPYING3.  If not see
 #include "tm.h"
 #include "flags.h"
 #include "tree.h"
-#include "realmpfr.h"
+#include "real.h"
+//#include "realmpfr.h"
 #include "rtl.h"
 #include "expr.h"
 #include "tm_p.h"
@@ -1250,10 +1251,8 @@ const_binop (enum tree_code code, tree arg1, tree arg2)
 	  break;
 
 	case MULT_EXPR:
-	  if (COMPLEX_FLOAT_TYPE_P (type))
-	    return do_mpc_arg2 (arg1, arg2, type,
-				/* do_nonfinite= */ folding_initializer,
-				mpc_mul);
+		if (COMPLEX_FLOAT_TYPE_P(type))
+			return NULL_TREE; //  do_mpc_arg2(arg1, arg2, type, /* do_nonfinite= */ folding_initializer, mpc_mul);
 
 	  real = const_binop (MINUS_EXPR,
 			      const_binop (MULT_EXPR, r1, r2),
@@ -1264,10 +1263,8 @@ const_binop (enum tree_code code, tree arg1, tree arg2)
 	  break;
 
 	case RDIV_EXPR:
-	  if (COMPLEX_FLOAT_TYPE_P (type))
-	    return do_mpc_arg2 (arg1, arg2, type,
-                                /* do_nonfinite= */ folding_initializer,
-				mpc_div);
+		if (COMPLEX_FLOAT_TYPE_P(type))
+			return NULL_TREE; // do_mpc_arg2(arg1, arg2, type, /* do_nonfinite= */ folding_initializer, mpc_div);
 	  /* Fallthru ... */
 	case TRUNC_DIV_EXPR:
 	case CEIL_DIV_EXPR:
