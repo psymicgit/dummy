@@ -476,5 +476,8 @@
     <ClCompile Include="..\c-family\c-common.cpp">
       <Filter>c-family</Filter>
     </ClCompile>
+    <ClCompile Include="..\c-family\c-semantics.cpp">
+      <Filter>c-family</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

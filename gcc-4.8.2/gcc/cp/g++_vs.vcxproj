@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\gcc-build-4.8.2\gcc\gtype-desc.cpp" />
     <ClCompile Include="..\c-family\c-common.cpp" />
+    <ClCompile Include="..\c-family\c-semantics.cpp" />
     <ClCompile Include="..\c-family\stub-objc.cpp" />
     <ClCompile Include="..\fold-const.cpp" />
     <ClCompile Include="..\main.cpp" />
