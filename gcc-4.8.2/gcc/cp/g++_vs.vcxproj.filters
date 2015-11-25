@@ -370,9 +370,6 @@
     <ClCompile Include="typeck.cpp">
       <Filter>c++</Filter>
     </ClCompile>
-    <ClCompile Include="tree.cpp">
-      <Filter>c++</Filter>
-    </ClCompile>
     <ClCompile Include="semantics.cpp">
       <Filter>c++</Filter>
     </ClCompile>
@@ -478,6 +475,9 @@
     </ClCompile>
     <ClCompile Include="..\c-family\c-semantics.cpp">
       <Filter>c-family</Filter>
+    </ClCompile>
+    <ClCompile Include="cp-tree.cpp">
+      <Filter>c++</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

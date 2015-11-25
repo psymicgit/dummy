@@ -143,6 +143,7 @@
     <ClCompile Include="cp-gimplify.cpp" />
     <ClCompile Include="cp-lang.cpp" />
     <ClCompile Include="cp-objcp-common.cpp" />
+    <ClCompile Include="cp-tree.cpp" />
     <ClCompile Include="cvt.cpp" />
     <ClCompile Include="cxx-pretty-print.cpp" />
     <ClCompile Include="decl.cpp" />
@@ -166,7 +167,6 @@
     <ClCompile Include="rtti.cpp" />
     <ClCompile Include="search.cpp" />
     <ClCompile Include="semantics.cpp" />
-    <ClCompile Include="tree.cpp" />
     <ClCompile Include="typeck.cpp" />
     <ClCompile Include="typeck2.cpp" />
   </ItemGroup>
