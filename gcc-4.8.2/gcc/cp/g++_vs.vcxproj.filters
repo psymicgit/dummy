@@ -464,5 +464,8 @@
     <ClCompile Include="..\tree.cpp">
       <Filter>gcc</Filter>
     </ClCompile>
+    <ClCompile Include="..\fold-const.cpp">
+      <Filter>gcc</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
