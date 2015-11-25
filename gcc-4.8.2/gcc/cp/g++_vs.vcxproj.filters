@@ -479,5 +479,8 @@
     <ClCompile Include="cp-tree.cpp">
       <Filter>c++</Filter>
     </ClCompile>
+    <ClCompile Include="..\varasm.cpp">
+      <Filter>gcc</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

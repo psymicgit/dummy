@@ -137,6 +137,7 @@
     <ClCompile Include="..\fold-const.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\tree.cpp" />
+    <ClCompile Include="..\varasm.cpp" />
     <ClCompile Include="..\vec.cpp" />
     <ClCompile Include="call.cpp" />
     <ClCompile Include="class.cpp" />
