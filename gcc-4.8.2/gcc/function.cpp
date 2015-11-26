@@ -32,6 +32,7 @@ along with GCC; see the file COPYING3.  If not see
    not get a hard register.  */
 
 #include "config.h"
+#include "insn-flags.h"
 #include "system.h"
 #include "coretypes.h"
 #include "tm.h"
@@ -61,6 +62,8 @@ along with GCC; see the file COPYING3.  If not see
 #include "df.h"
 #include "params.h"
 #include "bb-reorder.h"
+
+#include "config/i386/i386-protos.h"
 
 /* So we can assign to cfun in this file.  */
 #undef cfun
@@ -6037,9 +6040,9 @@ thread_prologue_and_epilogue_insns (void)
       if (frame_pointer_needed)
 	add_to_hard_reg_set (&set_up_by_prologue.set, Pmode,
 			     HARD_FRAME_POINTER_REGNUM);
-      if (pic_offset_table_rtx)
-	add_to_hard_reg_set (&set_up_by_prologue.set, Pmode,
-			     PIC_OFFSET_TABLE_REGNUM);
+	  if (pic_offset_table_rtx)
+		  add_to_hard_reg_set(&set_up_by_prologue.set, Pmode,
+		  29);// PIC_OFFSET_TABLE_REGNUM);
       if (crtl->drap_reg)
 	add_to_hard_reg_set (&set_up_by_prologue.set,
 			     GET_MODE (crtl->drap_reg),

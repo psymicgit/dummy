@@ -4,6 +4,8 @@
 #ifndef GCC_TM_CONSTRS_H
 #define GCC_TM_CONSTRS_H
 
+#include "tm-preds.h"
+
 static inline bool
 satisfies_constraint_z (rtx op)
 {

@@ -340,6 +340,12 @@
     <ClInclude Include="..\c-family\c-common.h">
       <Filter>c-family</Filter>
     </ClInclude>
+    <ClInclude Include="..\function.h">
+      <Filter>gcc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\config\i386\i386-protos.h">
+      <Filter>config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="build">
@@ -353,6 +359,9 @@
     </Filter>
     <Filter Include="c-family">
       <UniqueIdentifier>{d7c6c86f-78e5-4754-8f2f-55d43794ec03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{642be872-2b34-4650-a630-d18297250928}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -481,6 +490,12 @@
     </ClCompile>
     <ClCompile Include="..\varasm.cpp">
       <Filter>gcc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\function.cpp">
+      <Filter>gcc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\config\i386\i386.cpp">
+      <Filter>config</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

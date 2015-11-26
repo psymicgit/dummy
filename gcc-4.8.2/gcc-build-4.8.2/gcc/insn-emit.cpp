@@ -25,6 +25,8 @@ from the machine description file `md'.  */
 #include "basic-block.h"
 #include "target.h"
 
+#include "config/i386//i386-protos.h"
+
 #define FAIL return (end_sequence (), _val)
 #define DONE return (_val = get_insns (), end_sequence (), _val)
 

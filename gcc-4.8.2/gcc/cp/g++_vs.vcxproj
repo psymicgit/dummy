@@ -114,6 +114,8 @@
     <ClInclude Include="..\..\gcc-build-4.8.2\gcc\tree-check.h" />
     <ClInclude Include="..\c-family\c-common.h" />
     <ClInclude Include="..\c-family\c-objc.h" />
+    <ClInclude Include="..\config\i386\i386-protos.h" />
+    <ClInclude Include="..\function.h" />
     <ClInclude Include="..\tree.h" />
     <ClInclude Include="..\vec.h" />
     <ClInclude Include="cfns.h" />
@@ -134,7 +136,9 @@
     <ClCompile Include="..\c-family\c-common.cpp" />
     <ClCompile Include="..\c-family\c-semantics.cpp" />
     <ClCompile Include="..\c-family\stub-objc.cpp" />
+    <ClCompile Include="..\config\i386\i386.cpp" />
     <ClCompile Include="..\fold-const.cpp" />
+    <ClCompile Include="..\function.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\tree.cpp" />
     <ClCompile Include="..\varasm.cpp" />

@@ -22,6 +22,7 @@ along with GCC; see the file COPYING3.  If not see
 #include "coretypes.h"
 #include "tm.h"
 #include "rtl.h"
+#include "i386-protos.h"
 #include "tree.h"
 #include "tm_p.h"
 #include "regs.h"
@@ -31,6 +32,7 @@ along with GCC; see the file COPYING3.  If not see
 #include "output.h"
 #include "insn-codes.h"
 #include "insn-attr.h"
+#include "insn-flags.h"
 #include "flags.h"
 #include "except.h"
 #include "function.h"
@@ -62,6 +64,15 @@ along with GCC; see the file COPYING3.  If not see
 #include "dumpfile.h"
 #include "tree-pass.h"
 #include "tree-flow.h"
+#include "insn-constants.h"
+
+//#include "bsd.h"
+//#include "i386-interix.h"
+#include "defaults.h"
+//#include "unix.h"
+
+#include "target-hooks-def.h"
+
 
 static rtx legitimize_dllimport_symbol (rtx, bool);
 
@@ -82,6 +93,28 @@ static rtx legitimize_dllimport_symbol (rtx, bool);
 #define COSTS_N_BYTES(N) ((N) * 2)
 
 #define DUMMY_STRINGOP_ALGS {libcall, {{-1, libcall, false}}}
+
+
+struct test {
+	const int add;		/* cost of an add instruction */
+	const int lea;		/* cost of a lea instruction */
+	const int shift_var;		/* variable shift costs */
+	const int shift_const;	/* constant shift costs */
+	const int mult_init[5];	
+};
+
+const
+struct test test1 = {
+	COSTS_N_BYTES(2),			/* cost of an add instruction */
+	COSTS_N_BYTES(3),			/* cost of a lea instruction */
+	COSTS_N_BYTES(2),			/* variable shift costs */
+	COSTS_N_BYTES(3),			/* constant shift costs */
+	{ COSTS_N_BYTES(3),			/* cost of starting multiply for QI */
+	COSTS_N_BYTES(3),			/*				 HI */
+	COSTS_N_BYTES(3),			/*				 SI */
+	COSTS_N_BYTES(3),			/*				 DI */
+	COSTS_N_BYTES(5) }
+};
 
 const
 struct processor_costs ix86_size_cost = {/* costs for tuning for size */
@@ -1095,6 +1128,8 @@ struct processor_costs bdver3_cost = {
   2,					/* cond_taken_branch_cost.  */
   1,					/* cond_not_taken_branch_cost.  */
 };
+
+#define COSTS_N_INSNS(N) ((N) * 4)
 
 struct processor_costs btver1_cost = {
   COSTS_N_INSNS (1),			/* cost of an add instruction */
@@ -3723,7 +3758,7 @@ ix86_option_override_internal (bool main_args_p)
   /* Figure out what ASM_GENERATE_INTERNAL_LABEL builds as a prefix.  */
   {
     char *p;
-    ASM_GENERATE_INTERNAL_LABEL (internal_label_prefix, "LX", 0);
+    //ASM_GENERATE_INTERNAL_LABEL (internal_label_prefix, "LX", 0);
     p = strchr (internal_label_prefix, 'X');
     internal_label_prefix_len = p - internal_label_prefix;
     *p = '\0';
@@ -4810,15 +4845,15 @@ x86_output_aligned_bss (FILE *file, tree decl ATTRIBUTE_UNUSED,
     switch_to_section (get_named_section (decl, ".lbss", 0));
   else
     switch_to_section (bss_section);
-  ASM_OUTPUT_ALIGN (file, floor_log2 (align / BITS_PER_UNIT));
-#ifdef ASM_DECLARE_OBJECT_NAME
-  last_assemble_variable_decl = decl;
-  ASM_DECLARE_OBJECT_NAME (file, name, decl);
-#else
-  /* Standard thing is just output label for the object.  */
-  ASM_OUTPUT_LABEL (file, name);
-#endif /* ASM_DECLARE_OBJECT_NAME */
-  ASM_OUTPUT_SKIP (file, size ? size : 1);
+//   ASM_OUTPUT_ALIGN (file, floor_log2 (align / BITS_PER_UNIT));
+// #ifdef ASM_DECLARE_OBJECT_NAME
+//   last_assemble_variable_decl = decl;
+//   ASM_DECLARE_OBJECT_NAME (file, name, decl);
+// #else
+//   /* Standard thing is just output label for the object.  */
+//   ASM_OUTPUT_LABEL (file, name);
+// #endif /* ASM_DECLARE_OBJECT_NAME */
+//   ASM_OUTPUT_SKIP (file, size ? size : 1);
 }
 
 /* Decide whether we must probe the stack before any space allocation
@@ -5602,6 +5637,12 @@ ix86_cfun_abi (void)
 }
 
 /* Write the extra assembler code needed to declare a function properly.  */
+
+#define ASM_LONG "\t.long\t"
+#define ASM_BYTE "\t.byte\t"
+#define ASM_SHORT "\t.word\t"
+#define ASM_LONG "\t.long\t"
+#define ASM_QUAD "\t.quad\t"  /* Should not be used for 32bit compilation.  */
 
 void
 ix86_asm_output_function_label (FILE *asm_out_file, const char *fname,
@@ -8606,6 +8647,10 @@ static int pic_labels_used;
 /* Fills in the label name that should be used for a pc thunk for
    the given register.  */
 
+#undef ASM_GENERATE_INTERNAL_LABEL
+#define ASM_GENERATE_INTERNAL_LABEL(LABEL,PREFIX,NUM)	\
+	sprintf((LABEL), "*$%s%ld", (PREFIX), (long)(NUM))
+
 static void
 get_pc_thunk_name (char name[32], unsigned int regno)
 {
@@ -8617,6 +8662,15 @@ get_pc_thunk_name (char name[32], unsigned int regno)
     ASM_GENERATE_INTERNAL_LABEL (name, "LPR", regno);
 }
 
+#undef ASM_DECLARE_FUNCTION_NAME
+#define ASM_DECLARE_FUNCTION_NAME(FILE, NAME, DECL)			\
+do									\
+{									\
+if (write_symbols != SDB_DEBUG)					\
+	i386_pe_declare_function_type(FILE, NAME, TREE_PUBLIC(DECL));	\
+	ASM_OUTPUT_LABEL(FILE, NAME);       				\
+}									\
+while (0)
 
 /* This function generates code for -fpic that loads %ebx with
    the return address of the caller and then returns.  */
@@ -9771,6 +9825,9 @@ release_scratch_register_on_entry (struct scratch_reg *sr)
     }
 }
 
+#ifndef STACK_CHECK_PROBE_INTERVAL_EXP
+#define STACK_CHECK_PROBE_INTERVAL_EXP 12
+#endif
 #define PROBE_INTERVAL (1 << STACK_CHECK_PROBE_INTERVAL_EXP)
 
 /* Emit code to adjust the stack pointer by SIZE bytes while probing it.  */
@@ -10106,6 +10163,9 @@ ix86_finalize_stack_realign_flags (void)
       return;
     }
 
+#ifndef STACK_CHECK_MOVING_SP
+#define STACK_CHECK_MOVING_SP 0
+#endif
   /* If the only reason for frame_pointer_needed is that we conservatively
      assumed stack realignment might be needed, but in the end nothing that
      needed the stack alignment had been spilled, clear frame_pointer_needed
@@ -10476,6 +10536,13 @@ ix86_expand_prologue (void)
       else
 	{
 	  HOST_WIDE_INT size = allocate;
+
+#ifndef STACK_CHECK_PROTECT
+#define STACK_CHECK_PROTECT						\
+	(targetm_common.except_unwind_info(&global_options) == UI_SJLJ	\
+	? 75 * UNITS_PER_WORD							\
+	: 12 * 1024)
+#endif
 
 	  if (TARGET_64BIT && size >= (HOST_WIDE_INT) 0x80000000)
 	    size = 0x80000000 - STACK_CHECK_PROTECT - 1;
@@ -14324,6 +14391,8 @@ ix86_print_operand (FILE *file, rtx x, int code)
 	case 'p':
 	  break;
 
+#define SHIFT_DOUBLE_OMITS_COUNT 1
+
 	case 's':
 	  if (CONST_INT_P (x) || ! SHIFT_DOUBLE_OMITS_COUNT)
 	    {
@@ -14497,18 +14566,18 @@ ix86_print_operand (FILE *file, rtx x, int code)
 	case 'K':
 	  gcc_assert (CONST_INT_P (x));
 
-	  if (INTVAL (x) & IX86_HLE_ACQUIRE)
-#ifdef HAVE_AS_IX86_HLE
-	    fputs ("xacquire ", file);
-#else
-	    fputs ("\n" ASM_BYTE "0xf2\n\t", file);
-#endif
-	  else if (INTVAL (x) & IX86_HLE_RELEASE)
-#ifdef HAVE_AS_IX86_HLE
-	    fputs ("xrelease ", file);
-#else
-	    fputs ("\n" ASM_BYTE "0xf3\n\t", file);
-#endif
+// 	  if (INTVAL (x) & IX86_HLE_ACQUIRE)
+// #ifdef HAVE_AS_IX86_HLE
+// 	    fputs ("xacquire ", file);
+// #else
+// 	    fputs ("\n" ASM_BYTE "0xf2\n\t", file);
+// #endif
+// 	  else if (INTVAL (x) & IX86_HLE_RELEASE)
+// #ifdef HAVE_AS_IX86_HLE
+// 	    fputs ("xrelease ", file);
+// #else
+// 	    fputs ("\n" ASM_BYTE "0xf3\n\t", file);
+// #endif
 	  /* We do not want to print value of the operand.  */
 	  return;
 
@@ -15884,17 +15953,19 @@ output_fp_compare (rtx insn, rtx *operands, bool eflags_p, bool unordered_p)
     }
 }
 
+#define LPREFIX ".L"
+
 void
 ix86_output_addr_vec_elt (FILE *file, int value)
 {
   const char *directive = ASM_LONG;
 
-#ifdef ASM_QUAD
-  if (TARGET_LP64)
-    directive = ASM_QUAD;
-#else
-  gcc_assert (!TARGET_64BIT);
-#endif
+// #ifdef ASM_QUAD
+//   if (TARGET_LP64)
+//     directive = ASM_QUAD;
+// #else
+//   gcc_assert (!TARGET_64BIT);
+// #endif
 
   fprintf (file, "%s%s%d\n", directive, LPREFIX, value);
 }
@@ -15902,31 +15973,31 @@ ix86_output_addr_vec_elt (FILE *file, int value)
 void
 ix86_output_addr_diff_elt (FILE *file, int value, int rel)
 {
-  const char *directive = ASM_LONG;
-
-#ifdef ASM_QUAD
-  if (TARGET_64BIT && CASE_VECTOR_MODE == DImode)
-    directive = ASM_QUAD;
-#else
-  gcc_assert (!TARGET_64BIT);
-#endif
-  /* We can't use @GOTOFF for text labels on VxWorks; see gotoff_operand.  */
-  if (TARGET_64BIT || TARGET_VXWORKS_RTP)
-    fprintf (file, "%s%s%d-%s%d\n",
-	     directive, LPREFIX, value, LPREFIX, rel);
-  else if (HAVE_AS_GOTOFF_IN_DATA)
-    fprintf (file, ASM_LONG "%s%d@GOTOFF\n", LPREFIX, value);
-#if TARGET_MACHO
-  else if (TARGET_MACHO)
-    {
-      fprintf (file, ASM_LONG "%s%d-", LPREFIX, value);
-      machopic_output_function_base_name (file);
-      putc ('\n', file);
-    }
-#endif
-  else
-    asm_fprintf (file, ASM_LONG "%U%s+[.-%s%d]\n",
-		 GOT_SYMBOL_NAME, LPREFIX, value);
+//   const char *directive = ASM_LONG;
+// 
+// #ifdef ASM_QUAD
+//   if (TARGET_64BIT && CASE_VECTOR_MODE == DImode)
+//     directive = ASM_QUAD;
+// #else
+//   gcc_assert (!TARGET_64BIT);
+// #endif
+//   /* We can't use @GOTOFF for text labels on VxWorks; see gotoff_operand.  */
+//   if (TARGET_64BIT || TARGET_VXWORKS_RTP)
+//     fprintf (file, "%s%s%d-%s%d\n",
+// 	     directive, LPREFIX, value, LPREFIX, rel);
+//   else if (HAVE_AS_GOTOFF_IN_DATA)
+//     fprintf (file, ASM_LONG "%s%d@GOTOFF\n", LPREFIX, value);
+// #if TARGET_MACHO
+//   else if (TARGET_MACHO)
+//     {
+//       fprintf (file, ASM_LONG "%s%d-", LPREFIX, value);
+//       machopic_output_function_base_name (file);
+//       putc ('\n', file);
+//     }
+// #endif
+//   else
+//     asm_fprintf (file, ASM_LONG "%U%s+[.-%s%d]\n",
+// 		 GOT_SYMBOL_NAME, LPREFIX, value);
 }
 
 /* Generate either "mov $0, reg" or "xor reg, reg", as appropriate
@@ -42645,6 +42716,9 @@ ix86_memmodel_check (unsigned HOST_WIDE_INT val)
 
 #undef TARGET_SPILL_CLASS
 #define TARGET_SPILL_CLASS ix86_spill_class
+
+extern void default_stabs_asm_out_destructor(rtx, int);
+extern void default_stabs_asm_out_constructor(rtx, int);
 
 struct gcc_target targetm = TARGET_INITIALIZER;
 

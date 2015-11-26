@@ -108,10 +108,10 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
    be used otherwise.  */
 struct stringop_algs
 {
-  const enum stringop_alg unknown_size;
-  const struct stringop_strategy {
-    const int max;
-    const enum stringop_alg alg;
+  enum stringop_alg unknown_size;
+  struct stringop_strategy {
+    int max;
+    enum stringop_alg alg;
     int noalign;
   } size [MAX_STRINGOP_ALGS];
 };
