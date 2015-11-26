@@ -1439,9 +1439,9 @@ make_decl_rtl (tree decl)
       else if (!in_hard_reg_set_p (operand_reg_set, mode, reg_number))
 	error ("the register specified for %q+D is not general enough"
 	       " to be used as a register variable", decl);
-      else if (!HARD_REGNO_MODE_OK (reg_number, mode))
-	error ("register specified for %q+D isn%'t suitable for data type",
-               decl);
+//       else if (!HARD_REGNO_MODE_OK (reg_number, mode))
+// 	error ("register specified for %q+D isn%'t suitable for data type",
+//                decl);
       /* Now handle properly declared static register variables.  */
       else
 	{
@@ -1748,167 +1748,167 @@ decide_function_section (tree decl)
    with defining the name of the function.  DECL describes the function.
    NAME is the function's name.  For the constant pool, we use the current
    constant pool data.  */
-
-void
-assemble_start_function (tree decl, const char *fnname)
-{
-  int align;
-  char tmp_label[100];
-  bool hot_label_written = false;
-
-  if (flag_reorder_blocks_and_partition)
-    {
-      ASM_GENERATE_INTERNAL_LABEL (tmp_label, "LHOTB", const_labelno);
-      crtl->subsections.hot_section_label = ggc_strdup (tmp_label);
-      ASM_GENERATE_INTERNAL_LABEL (tmp_label, "LCOLDB", const_labelno);
-      crtl->subsections.cold_section_label = ggc_strdup (tmp_label);
-      ASM_GENERATE_INTERNAL_LABEL (tmp_label, "LHOTE", const_labelno);
-      crtl->subsections.hot_section_end_label = ggc_strdup (tmp_label);
-      ASM_GENERATE_INTERNAL_LABEL (tmp_label, "LCOLDE", const_labelno);
-      crtl->subsections.cold_section_end_label = ggc_strdup (tmp_label);
-      const_labelno++;
-    }
-  else
-    {
-      crtl->subsections.hot_section_label = NULL;
-      crtl->subsections.cold_section_label = NULL;
-      crtl->subsections.hot_section_end_label = NULL;
-      crtl->subsections.cold_section_end_label = NULL;
-    }
-
-  /* The following code does not need preprocessing in the assembler.  */
-
-  app_disable ();
-
-  if (CONSTANT_POOL_BEFORE_FUNCTION)
-    output_constant_pool (fnname, decl);
-
-  /* Make sure the not and cold text (code) sections are properly
-     aligned.  This is necessary here in the case where the function
-     has both hot and cold sections, because we don't want to re-set
-     the alignment when the section switch happens mid-function.  */
-
-  if (flag_reorder_blocks_and_partition)
-    {
-      first_function_block_is_cold = false;
-
-      switch_to_section (unlikely_text_section ());
-      assemble_align (DECL_ALIGN (decl));
-      ASM_OUTPUT_LABEL (asm_out_file, crtl->subsections.cold_section_label);
-
-      /* When the function starts with a cold section, we need to explicitly
-	 align the hot section and write out the hot section label.
-	 But if the current function is a thunk, we do not have a CFG.  */
-      if (!cfun->is_thunk
-	  && BB_PARTITION (ENTRY_BLOCK_PTR->next_bb) == BB_COLD_PARTITION)
-	{
-	  switch_to_section (text_section);
-	  assemble_align (DECL_ALIGN (decl));
-	  ASM_OUTPUT_LABEL (asm_out_file, crtl->subsections.hot_section_label);
-	  hot_label_written = true;
-	  first_function_block_is_cold = true;
-	}
-      in_cold_section_p = first_function_block_is_cold;
-    }
-
-
-  /* Switch to the correct text section for the start of the function.  */
-
-  switch_to_section (function_section (decl));
-  if (flag_reorder_blocks_and_partition
-      && !hot_label_written)
-    ASM_OUTPUT_LABEL (asm_out_file, crtl->subsections.hot_section_label);
-
-  /* Tell assembler to move to target machine's alignment for functions.  */
-  align = floor_log2 (DECL_ALIGN (decl) / BITS_PER_UNIT);
-  if (align > 0)
-    {
-      ASM_OUTPUT_ALIGN (asm_out_file, align);
-    }
-
-  /* Handle a user-specified function alignment.
-     Note that we still need to align to DECL_ALIGN, as above,
-     because ASM_OUTPUT_MAX_SKIP_ALIGN might not do any alignment at all.  */
-  if (! DECL_USER_ALIGN (decl)
-      && align_functions_log > align
-      && optimize_function_for_speed_p (cfun))
-    {
-#ifdef ASM_OUTPUT_MAX_SKIP_ALIGN
-      ASM_OUTPUT_MAX_SKIP_ALIGN (asm_out_file,
-				 align_functions_log, align_functions - 1);
-#else
-      ASM_OUTPUT_ALIGN (asm_out_file, align_functions_log);
-#endif
-    }
-
-#ifdef ASM_OUTPUT_FUNCTION_PREFIX
-  ASM_OUTPUT_FUNCTION_PREFIX (asm_out_file, fnname);
-#endif
-
-  if (!DECL_IGNORED_P (decl))
-    (*debug_hooks->begin_function) (decl);
-
-  /* Make function name accessible from other files, if appropriate.  */
-
-  if (TREE_PUBLIC (decl))
-    {
-      notice_global_symbol (decl);
-
-      globalize_decl (decl);
-
-      maybe_assemble_visibility (decl);
-    }
-
-  if (DECL_PRESERVE_P (decl))
-    targetm.asm_out.mark_decl_preserved (fnname);
-
-  /* Do any machine/system dependent processing of the function name.  */
-#ifdef ASM_DECLARE_FUNCTION_NAME
-  ASM_DECLARE_FUNCTION_NAME (asm_out_file, fnname, current_function_decl);
-#else
-  /* Standard thing is just output label for the function.  */
-  ASM_OUTPUT_FUNCTION_LABEL (asm_out_file, fnname, current_function_decl);
-#endif /* ASM_DECLARE_FUNCTION_NAME */
-
-  if (lookup_attribute ("no_split_stack", DECL_ATTRIBUTES (decl)))
-    saw_no_split_stack = true;
-}
+// 
+// void
+// assemble_start_function (tree decl, const char *fnname)
+// {
+//   int align;
+//   char tmp_label[100];
+//   bool hot_label_written = false;
+// 
+//   if (flag_reorder_blocks_and_partition)
+//     {
+//       ASM_GENERATE_INTERNAL_LABEL (tmp_label, "LHOTB", const_labelno);
+//       crtl->subsections.hot_section_label = ggc_strdup (tmp_label);
+//       ASM_GENERATE_INTERNAL_LABEL (tmp_label, "LCOLDB", const_labelno);
+//       crtl->subsections.cold_section_label = ggc_strdup (tmp_label);
+//       ASM_GENERATE_INTERNAL_LABEL (tmp_label, "LHOTE", const_labelno);
+//       crtl->subsections.hot_section_end_label = ggc_strdup (tmp_label);
+//       ASM_GENERATE_INTERNAL_LABEL (tmp_label, "LCOLDE", const_labelno);
+//       crtl->subsections.cold_section_end_label = ggc_strdup (tmp_label);
+//       const_labelno++;
+//     }
+//   else
+//     {
+//       crtl->subsections.hot_section_label = NULL;
+//       crtl->subsections.cold_section_label = NULL;
+//       crtl->subsections.hot_section_end_label = NULL;
+//       crtl->subsections.cold_section_end_label = NULL;
+//     }
+// 
+//   /* The following code does not need preprocessing in the assembler.  */
+// 
+//   app_disable ();
+// 
+//   if (CONSTANT_POOL_BEFORE_FUNCTION)
+//     output_constant_pool (fnname, decl);
+// 
+//   /* Make sure the not and cold text (code) sections are properly
+//      aligned.  This is necessary here in the case where the function
+//      has both hot and cold sections, because we don't want to re-set
+//      the alignment when the section switch happens mid-function.  */
+// 
+//   if (flag_reorder_blocks_and_partition)
+//     {
+//       first_function_block_is_cold = false;
+// 
+//       switch_to_section (unlikely_text_section ());
+//       assemble_align (DECL_ALIGN (decl));
+//       ASM_OUTPUT_LABEL (asm_out_file, crtl->subsections.cold_section_label);
+// 
+//       /* When the function starts with a cold section, we need to explicitly
+// 	 align the hot section and write out the hot section label.
+// 	 But if the current function is a thunk, we do not have a CFG.  */
+//       if (!cfun->is_thunk
+// 	  && BB_PARTITION (ENTRY_BLOCK_PTR->next_bb) == BB_COLD_PARTITION)
+// 	{
+// 	  switch_to_section (text_section);
+// 	  assemble_align (DECL_ALIGN (decl));
+// 	  ASM_OUTPUT_LABEL (asm_out_file, crtl->subsections.hot_section_label);
+// 	  hot_label_written = true;
+// 	  first_function_block_is_cold = true;
+// 	}
+//       in_cold_section_p = first_function_block_is_cold;
+//     }
+// 
+// 
+//   /* Switch to the correct text section for the start of the function.  */
+// 
+//   switch_to_section (function_section (decl));
+//   if (flag_reorder_blocks_and_partition
+//       && !hot_label_written)
+//     ASM_OUTPUT_LABEL (asm_out_file, crtl->subsections.hot_section_label);
+// 
+//   /* Tell assembler to move to target machine's alignment for functions.  */
+//   align = floor_log2 (DECL_ALIGN (decl) / BITS_PER_UNIT);
+//   if (align > 0)
+//     {
+//       ASM_OUTPUT_ALIGN (asm_out_file, align);
+//     }
+// 
+//   /* Handle a user-specified function alignment.
+//      Note that we still need to align to DECL_ALIGN, as above,
+//      because ASM_OUTPUT_MAX_SKIP_ALIGN might not do any alignment at all.  */
+//   if (! DECL_USER_ALIGN (decl)
+//       && align_functions_log > align
+//       && optimize_function_for_speed_p (cfun))
+//     {
+// #ifdef ASM_OUTPUT_MAX_SKIP_ALIGN
+//       ASM_OUTPUT_MAX_SKIP_ALIGN (asm_out_file,
+// 				 align_functions_log, align_functions - 1);
+// #else
+//       ASM_OUTPUT_ALIGN (asm_out_file, align_functions_log);
+// #endif
+//     }
+// 
+// #ifdef ASM_OUTPUT_FUNCTION_PREFIX
+//   ASM_OUTPUT_FUNCTION_PREFIX (asm_out_file, fnname);
+// #endif
+// 
+//   if (!DECL_IGNORED_P (decl))
+//     (*debug_hooks->begin_function) (decl);
+// 
+//   /* Make function name accessible from other files, if appropriate.  */
+// 
+//   if (TREE_PUBLIC (decl))
+//     {
+//       notice_global_symbol (decl);
+// 
+//       globalize_decl (decl);
+// 
+//       maybe_assemble_visibility (decl);
+//     }
+// 
+//   if (DECL_PRESERVE_P (decl))
+//     targetm.asm_out.mark_decl_preserved (fnname);
+// 
+//   /* Do any machine/system dependent processing of the function name.  */
+// #ifdef ASM_DECLARE_FUNCTION_NAME
+//   ASM_DECLARE_FUNCTION_NAME (asm_out_file, fnname, current_function_decl);
+// #else
+//   /* Standard thing is just output label for the function.  */
+//   ASM_OUTPUT_FUNCTION_LABEL (asm_out_file, fnname, current_function_decl);
+// #endif /* ASM_DECLARE_FUNCTION_NAME */
+// 
+//   if (lookup_attribute ("no_split_stack", DECL_ATTRIBUTES (decl)))
+//     saw_no_split_stack = true;
+// }
 
 /* Output assembler code associated with defining the size of the
    function.  DECL describes the function.  NAME is the function's name.  */
-
-void
-assemble_end_function (tree decl, const char *fnname ATTRIBUTE_UNUSED)
-{
-#ifdef ASM_DECLARE_FUNCTION_SIZE
-  /* We could have switched section in the middle of the function.  */
-  if (flag_reorder_blocks_and_partition)
-    switch_to_section (function_section (decl));
-  ASM_DECLARE_FUNCTION_SIZE (asm_out_file, fnname, decl);
-#endif
-  if (! CONSTANT_POOL_BEFORE_FUNCTION)
-    {
-      output_constant_pool (fnname, decl);
-      switch_to_section (function_section (decl)); /* need to switch back */
-    }
-  /* Output labels for end of hot/cold text sections (to be used by
-     debug info.)  */
-  if (flag_reorder_blocks_and_partition)
-    {
-      section *save_text_section;
-
-      save_text_section = in_section;
-      switch_to_section (unlikely_text_section ());
-      ASM_OUTPUT_LABEL (asm_out_file, crtl->subsections.cold_section_end_label);
-      if (first_function_block_is_cold)
-	switch_to_section (text_section);
-      else
-	switch_to_section (function_section (decl));
-      ASM_OUTPUT_LABEL (asm_out_file, crtl->subsections.hot_section_end_label);
-      switch_to_section (save_text_section);
-    }
-}
-
+// 
+// void
+// assemble_end_function (tree decl, const char *fnname ATTRIBUTE_UNUSED)
+// {
+// #ifdef ASM_DECLARE_FUNCTION_SIZE
+//   /* We could have switched section in the middle of the function.  */
+//   if (flag_reorder_blocks_and_partition)
+//     switch_to_section (function_section (decl));
+//   ASM_DECLARE_FUNCTION_SIZE (asm_out_file, fnname, decl);
+// #endif
+//   if (! CONSTANT_POOL_BEFORE_FUNCTION)
+//     {
+//       output_constant_pool (fnname, decl);
+//       switch_to_section (function_section (decl)); /* need to switch back */
+//     }
+//   /* Output labels for end of hot/cold text sections (to be used by
+//      debug info.)  */
+//   if (flag_reorder_blocks_and_partition)
+//     {
+//       section *save_text_section;
+// 
+//       save_text_section = in_section;
+//       switch_to_section (unlikely_text_section ());
+//       ASM_OUTPUT_LABEL (asm_out_file, crtl->subsections.cold_section_end_label);
+//       if (first_function_block_is_cold)
+// 	switch_to_section (text_section);
+//       else
+// 	switch_to_section (function_section (decl));
+//       ASM_OUTPUT_LABEL (asm_out_file, crtl->subsections.hot_section_end_label);
+//       switch_to_section (save_text_section);
+//     }
+// }
+// 
 /* Assemble code to leave SIZE bytes of zeros.  */
 
 void
@@ -1917,20 +1917,20 @@ assemble_zeros (unsigned HOST_WIDE_INT size)
   /* Do no output if -fsyntax-only.  */
   if (flag_syntax_only)
     return;
-
-#ifdef ASM_NO_SKIP_IN_TEXT
-  /* The `space' pseudo in the text section outputs nop insns rather than 0s,
-     so we must output 0s explicitly in the text section.  */
-  if (ASM_NO_SKIP_IN_TEXT && (in_section->common.flags & SECTION_CODE) != 0)
-    {
-      unsigned HOST_WIDE_INT i;
-      for (i = 0; i < size; i++)
-	assemble_integer (const0_rtx, 1, BITS_PER_UNIT, 1);
-    }
-  else
-#endif
-    if (size > 0)
-      ASM_OUTPUT_SKIP (asm_out_file, size);
+// 
+// #ifdef ASM_NO_SKIP_IN_TEXT
+//   /* The `space' pseudo in the text section outputs nop insns rather than 0s,
+//      so we must output 0s explicitly in the text section.  */
+//   if (ASM_NO_SKIP_IN_TEXT && (in_section->common.flags & SECTION_CODE) != 0)
+//     {
+//       unsigned HOST_WIDE_INT i;
+//       for (i = 0; i < size; i++)
+// 	assemble_integer (const0_rtx, 1, BITS_PER_UNIT, 1);
+//     }
+//   else
+// #endif
+//     if (size > 0)
+//       ASM_OUTPUT_SKIP (asm_out_file, size);
 }
 
 /* Assemble an alignment pseudo op for an ALIGN-bit boundary.  */
@@ -1940,7 +1940,7 @@ assemble_align (int align)
 {
   if (align > BITS_PER_UNIT)
     {
-      ASM_OUTPUT_ALIGN (asm_out_file, floor_log2 (align / BITS_PER_UNIT));
+      //ASM_OUTPUT_ALIGN (asm_out_file, floor_log2 (align / BITS_PER_UNIT));
     }
 }
 
@@ -1976,17 +1976,18 @@ emit_local (tree decl ATTRIBUTE_UNUSED,
 	    unsigned HOST_WIDE_INT size ATTRIBUTE_UNUSED,
 	    unsigned HOST_WIDE_INT rounded ATTRIBUTE_UNUSED)
 {
-#if defined ASM_OUTPUT_ALIGNED_DECL_LOCAL
-  ASM_OUTPUT_ALIGNED_DECL_LOCAL (asm_out_file, decl, name,
-				 size, DECL_ALIGN (decl));
-  return true;
-#elif defined ASM_OUTPUT_ALIGNED_LOCAL
-  ASM_OUTPUT_ALIGNED_LOCAL (asm_out_file, name, size, DECL_ALIGN (decl));
-  return true;
-#else
-  ASM_OUTPUT_LOCAL (asm_out_file, name, size, rounded);
-  return false;
-#endif
+// #if defined ASM_OUTPUT_ALIGNED_DECL_LOCAL
+//   ASM_OUTPUT_ALIGNED_DECL_LOCAL (asm_out_file, decl, name,
+// 				 size, DECL_ALIGN (decl));
+//   return true;
+// #elif defined ASM_OUTPUT_ALIGNED_LOCAL
+//   ASM_OUTPUT_ALIGNED_LOCAL (asm_out_file, name, size, DECL_ALIGN (decl));
+//   return true;
+// #else
+//   ASM_OUTPUT_LOCAL (asm_out_file, name, size, rounded);
+//   return false;
+// #endif
+	return true;
 }
 
 /* A noswitch_section_callback for bss_noswitch_section.  */
@@ -2013,17 +2014,18 @@ emit_common (tree decl ATTRIBUTE_UNUSED,
 	     unsigned HOST_WIDE_INT size ATTRIBUTE_UNUSED,
 	     unsigned HOST_WIDE_INT rounded ATTRIBUTE_UNUSED)
 {
-#if defined ASM_OUTPUT_ALIGNED_DECL_COMMON
-  ASM_OUTPUT_ALIGNED_DECL_COMMON (asm_out_file, decl, name,
-				  size, DECL_ALIGN (decl));
+// #if defined ASM_OUTPUT_ALIGNED_DECL_COMMON
+//   ASM_OUTPUT_ALIGNED_DECL_COMMON (asm_out_file, decl, name,
+// 				  size, DECL_ALIGN (decl));
+//   return true;
+// #elif defined ASM_OUTPUT_ALIGNED_COMMON
+//   ASM_OUTPUT_ALIGNED_COMMON (asm_out_file, name, size, DECL_ALIGN (decl));
+//   return true;
+// #else
+//   ASM_OUTPUT_COMMON (asm_out_file, name, size, rounded);
+//   return false;
+// #endif
   return true;
-#elif defined ASM_OUTPUT_ALIGNED_COMMON
-  ASM_OUTPUT_ALIGNED_COMMON (asm_out_file, name, size, DECL_ALIGN (decl));
-  return true;
-#else
-  ASM_OUTPUT_COMMON (asm_out_file, name, size, rounded);
-  return false;
-#endif
 }
 
 /* A noswitch_section_callback for tls_comm_section.  */
@@ -2256,7 +2258,7 @@ assemble_variable (tree decl, int top_level ATTRIBUTE_UNUSED,
     {
       switch_to_section (sect);
       if (DECL_ALIGN (decl) > BITS_PER_UNIT)
-	ASM_OUTPUT_ALIGN (asm_out_file, floor_log2 (DECL_ALIGN_UNIT (decl)));
+	//ASM_OUTPUT_ALIGN (asm_out_file, floor_log2 (DECL_ALIGN_UNIT (decl)));
       assemble_variable_contents (decl, name, dont_output_data);
       if (asan_protected)
 	{
@@ -2566,7 +2568,7 @@ assemble_static_space (unsigned HOST_WIDE_INT size)
   const char *namestring;
   rtx x;
 
-  ASM_GENERATE_INTERNAL_LABEL (name, "LF", const_labelno);
+  //ASM_GENERATE_INTERNAL_LABEL (name, "LF", const_labelno);
   ++const_labelno;
   namestring = ggc_strdup (name);
 
@@ -2574,11 +2576,11 @@ assemble_static_space (unsigned HOST_WIDE_INT size)
   SYMBOL_REF_FLAGS (x) = SYMBOL_FLAG_LOCAL;
 
 #ifdef ASM_OUTPUT_ALIGNED_DECL_LOCAL
-  ASM_OUTPUT_ALIGNED_DECL_LOCAL (asm_out_file, NULL_TREE, name, size,
+  // ASM_OUTPUT_ALIGNED_DECL_LOCAL (asm_out_file, NULL_TREE, name, size,
 				 BIGGEST_ALIGNMENT);
 #else
 #ifdef ASM_OUTPUT_ALIGNED_LOCAL
-  ASM_OUTPUT_ALIGNED_LOCAL (asm_out_file, name, size, BIGGEST_ALIGNMENT);
+  // ASM_OUTPUT_ALIGNED_LOCAL (asm_out_file, name, size, BIGGEST_ALIGNMENT);
 #else
   {
     /* Round size up to multiple of BIGGEST_ALIGNMENT bits
@@ -2588,7 +2590,7 @@ assemble_static_space (unsigned HOST_WIDE_INT size)
       = ((size + (BIGGEST_ALIGNMENT / BITS_PER_UNIT) - 1)
 	 / (BIGGEST_ALIGNMENT / BITS_PER_UNIT)
 	 * (BIGGEST_ALIGNMENT / BITS_PER_UNIT));
-    ASM_OUTPUT_LOCAL (asm_out_file, name, size, rounded);
+    //ASM_OUTPUT_LOCAL (asm_out_file, name, size, rounded);
   }
 #endif
 #endif
@@ -2624,14 +2626,14 @@ assemble_trampoline_template (void)
 
   /* Write the assembler code to define one.  */
   align = floor_log2 (TRAMPOLINE_ALIGNMENT / BITS_PER_UNIT);
-  if (align > 0)
-    ASM_OUTPUT_ALIGN (asm_out_file, align);
+//   if (align > 0)
+//     ASM_OUTPUT_ALIGN (asm_out_file, align);
 
   targetm.asm_out.internal_label (asm_out_file, "LTRAMP", 0);
   targetm.asm_out.trampoline_template (asm_out_file);
 
   /* Record the rtl to refer to it.  */
-  ASM_GENERATE_INTERNAL_LABEL (label, "LTRAMP", 0);
+  //ASM_GENERATE_INTERNAL_LABEL (label, "LTRAMP", 0);
   name = ggc_strdup (label);
   symbol = gen_rtx_SYMBOL_REF (Pmode, name);
   SYMBOL_REF_FLAGS (symbol) = SYMBOL_FLAG_LOCAL;
@@ -3316,7 +3318,7 @@ build_constant_desc (tree exp)
 
   /* Create a string containing the label name, in LABEL.  */
   labelno = const_labelno++;
-  ASM_GENERATE_INTERNAL_LABEL (label, "LC", labelno);
+  //ASM_GENERATE_INTERNAL_LABEL (label, "LC", labelno);
 
   /* Construct the VAR_DECL associated with the constant.  */
   decl = build_decl (UNKNOWN_LOCATION, VAR_DECL, get_identifier (label),
@@ -3499,8 +3501,8 @@ output_constant_def_contents (rtx symbol)
     {
       align = DECL_ALIGN (decl);
       switch_to_section (get_constant_section (exp, align));
-      if (align > BITS_PER_UNIT)
-	ASM_OUTPUT_ALIGN (asm_out_file, floor_log2 (align / BITS_PER_UNIT));
+//       if (align > BITS_PER_UNIT)
+// 	ASM_OUTPUT_ALIGN (asm_out_file, floor_log2 (align / BITS_PER_UNIT));
       assemble_constant_contents (exp, XSTR (symbol, 0), align);
       if (asan_protected)
 	{
@@ -3815,7 +3817,7 @@ force_const_mem (enum machine_mode mode, rtx x)
   pool->last = desc;
 
   /* Create a string containing the label name, in LABEL.  */
-  ASM_GENERATE_INTERNAL_LABEL (label, "LC", const_labelno);
+  //ASM_GENERATE_INTERNAL_LABEL (label, "LC", const_labelno);
   ++const_labelno;
 
   /* Construct the SYMBOL_REF.  Make sure to mark it as belonging to
@@ -7041,7 +7043,7 @@ void
 default_generate_internal_label (char *buf, const char *prefix,
 				 unsigned long labelno)
 {
-  ASM_GENERATE_INTERNAL_LABEL (buf, prefix, labelno);
+  //ASM_GENERATE_INTERNAL_LABEL (buf, prefix, labelno);
 }
 
 /* This is how to output an internal numbered label where PREFIX is
@@ -7052,7 +7054,7 @@ default_internal_label (FILE *stream, const char *prefix,
 			unsigned long labelno)
 {
   char *const buf = (char *) alloca (40 + strlen (prefix));
-  ASM_GENERATE_INTERNAL_LABEL (buf, prefix, labelno);
+  //ASM_GENERATE_INTERNAL_LABEL (buf, prefix, labelno);
   ASM_OUTPUT_INTERNAL_LABEL (stream, buf);
 }
 
@@ -7072,9 +7074,9 @@ default_asm_declare_constant_name (FILE *file, const char *name,
 void
 default_file_start (void)
 {
-  if (targetm.asm_file_start_app_off
-      && !(flag_verbose_asm || flag_debug_asm || flag_dump_rtl_in_asm))
-    fputs (ASM_APP_OFF, asm_out_file);
+//   if (targetm.asm_file_start_app_off
+//       && !(flag_verbose_asm || flag_debug_asm || flag_dump_rtl_in_asm))
+//     fputs (ASM_APP_OFF, asm_out_file);
 
   if (targetm.asm_file_start_file_directive)
     output_file_directive (asm_out_file, main_input_filename);
@@ -7295,7 +7297,7 @@ get_section_anchor (struct object_block *block, HOST_WIDE_INT offset,
     }
 
   /* Create a new anchor with a unique label.  */
-  ASM_GENERATE_INTERNAL_LABEL (label, "LANCHOR", anchor_labelno++);
+  //ASM_GENERATE_INTERNAL_LABEL (label, "LANCHOR", anchor_labelno++);
   anchor = create_block_symbol (ggc_strdup (label), block, offset);
   SYMBOL_REF_FLAGS (anchor) |= SYMBOL_FLAG_LOCAL | SYMBOL_FLAG_ANCHOR;
   SYMBOL_REF_FLAGS (anchor) |= model << SYMBOL_FLAG_TLS_SHIFT;
@@ -7414,7 +7416,7 @@ elf_record_gcc_switches (print_switch_type type, const char * name)
     {
     case SWITCH_TYPE_PASSED:
       ASM_OUTPUT_ASCII (asm_out_file, name, strlen (name));
-      ASM_OUTPUT_SKIP (asm_out_file, (unsigned HOST_WIDE_INT) 1);
+      //ASM_OUTPUT_SKIP (asm_out_file, (unsigned HOST_WIDE_INT) 1);
       break;
 
     case SWITCH_TYPE_DESCRIPTIVE:
