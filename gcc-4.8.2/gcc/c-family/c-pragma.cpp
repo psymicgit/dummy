@@ -38,6 +38,9 @@ along with GCC; see the file COPYING3.  If not see
 #include "plugin.h"
 #include "cgraph.h"
 
+#include "config/i386/i386-protos.h"
+
+
 #define GCC_BAD(gmsgid) \
   do { warning (OPT_Wpragmas, gmsgid); return; } while (0)
 #define GCC_BAD2(gmsgid, arg) \
