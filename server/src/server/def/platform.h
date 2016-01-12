@@ -248,7 +248,7 @@ using namespace std;
 #endif
 
 // 调试宏重定义
-#ifdef WIN
+#if defined(WIN) && !defined(__clang__)
 	#define _FUNC_ __FUNCTION__
 #else
 	#define _FUNC_ << __FUNCTION__ <<
