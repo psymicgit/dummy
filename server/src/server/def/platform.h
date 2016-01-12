@@ -119,7 +119,9 @@
 
 // 线程局部存储
 #if !defined(_TTHREAD_CPP11_) && !defined(thread_local)
-	#if defined(__GNUC__) || defined(__INTEL_COMPILER) || defined(__SUNPRO_CC) || defined(__IBMCPP__)
+	#if defined(__clang__)
+		// clang编译器已实现thread_local，若重新#define将导致编译错误
+	#elif defined(__GNUC__) || defined(__INTEL_COMPILER) || defined(__SUNPRO_CC) || defined(__IBMCPP__)
 		#define thread_local __thread
 	#else
 		#define thread_local __declspec(thread)
