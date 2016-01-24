@@ -166,22 +166,6 @@ namespace strtool
 		return trip_to(filename, '.');
 	}
 
-	// 获取当前时间字符串
-	void time_str()
-
-	{
-		time_t rawtime;
-		struct tm* timeinfo = NULL;
-
-		time(&rawtime);
-		if(localtime_s(timeinfo, &rawtime)) {
-			return;
-		}
-
-		static char buf[1024];
-		sprintf_s(buf, sizeof(buf), "%4d-%02d-%02d %02d:%02d:%02d", 1900 + timeinfo->tm_year, 1 + timeinfo->tm_mon, timeinfo->tm_mday, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
-	}
-
 	// 从左数起直到指定分隔符的字符串
 	// 例如：trip_at("123_456", '_') = 123
 	string trip_at(const string &str, char delimiter)
@@ -218,19 +202,6 @@ namespace strtool
 		return string(str.begin() + pos + 1, str.end());
 	}
 
-	// 将无符号64位整数转换为字符串
-	// 例如：tostr(100123) = "100123"
-	string tostr(uint64 n)
-	{
-		char buf[64] = {0};
-		errno_t err = _ui64toa_s (n, buf, sizeof(buf), 10);
-		if(err) {
-			return "";
-		}
-
-		return buf;
-	}
-
 	stringvec_t split(const string &src, char cut /* = ',' */)
 	{
 		stringvec_t vec;
@@ -256,72 +227,5 @@ namespace strtool
 		}
 
 		return vec;
-	}
-
-	BOOL StringToWString(const std::string &str,std::wstring &wstr)
-	{
-		int wlen = MultiByteToWideChar (CP_ACP, 0, str.c_str(), -1, NULL, 0);
-		int len  = (int)str.length();
-		wstr.resize(wlen + 1,L' ');
-
-		int result = MultiByteToWideChar(CP_ACP,0, str.c_str(),len, (LPWSTR)wstr.c_str(), wlen * sizeof(wchar_t));
-		if (result == 0) {
-			return FALSE;
-		}
-
-		return TRUE;
-	}
-
-	//wstring高字节不为0，返回FALSE
-	BOOL WStringToString(const std::wstring &wstr,std::string &str)
-	{
-		int len  = WideCharToMultiByte (CP_ACP, 0, wstr.c_str(), -1, NULL, 0, NULL, NULL);
-		int wlen = (int)str.length();
-		str.resize(len + 1, ' ');
-
-		int result = WideCharToMultiByte(CP_ACP,0, wstr.c_str(),len, (LPSTR)str.c_str(), len, NULL, NULL);
-		if (result == 0) {
-			return FALSE;
-		}
-
-		return TRUE;
-	}
-
-	//把字符串转换成宽字符串
-	std::wstring string2wstring(const std::string &str)
-	{
-		std::wstring wstr;
-
-		int wlen = MultiByteToWideChar (CP_ACP, 0, str.c_str(), -1, NULL, 0);
-		int len  = (int)str.length();
-		wstr.resize(wlen + 1,L' ');
-
-		int result = MultiByteToWideChar(CP_ACP,0, str.c_str(),len, (LPWSTR)wstr.c_str(), wlen * sizeof(wchar_t));
-		if (result == 0) {
-			return FALSE;
-		}
-
-		return wstr;
-	}
-
-	//把宽字符串转换成字符串，输出使用
-	std::string& wstring2string(const std::wstring &wstr)
-	{
-		static string str;
-		int iLen = WideCharToMultiByte( CP_ACP, NULL, wstr.c_str(), -1, NULL, 0, NULL, FALSE ); // 计算转换后字符串的长度。（包含字符串结束符）
-		str.resize(iLen - 1);
-		WideCharToMultiByte( CP_OEMCP, NULL, wstr.c_str(), -1, (LPSTR)str.c_str(), iLen, NULL, FALSE); // 正式转换。
-		return str;
-	}
-
-	//把宽字符串转换成字符串，输出使用
-	std::string& wstring2string(const wchar_t *wstr)
-	{
-		static string str;
-
-		int iLen = WideCharToMultiByte( CP_ACP, NULL, wstr, -1, NULL, 0, NULL, FALSE ); // 计算转换后字符串的长度。（包含字符串结束符）
-		str.resize(iLen - 1);
-		WideCharToMultiByte( CP_OEMCP, NULL, wstr, -1, (LPSTR)str.c_str(), iLen, NULL, FALSE); // 正式转换。
-		return str;
 	}
 }

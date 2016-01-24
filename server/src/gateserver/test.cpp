@@ -19,6 +19,7 @@
 
 #include <basic/lock.h>
 #include <basic/taskqueue.h>
+#include <basic/bind.h>
 
 #include <basic/evbuffer.h>
 #include <basic/evbuffer-internal.h>
@@ -1924,33 +1925,33 @@ void testAtomic()
 	}
 }
 
+class BindTest
+{
+public:
+	BindTest()
+		: m_num(0)
+	{
+	}
+
+public:
+	void addnum(std::string *str)
+	{
+		m_num *= 2;
+		m_num += 1;
+
+		if (m_num > 10000000) {
+			m_num = 1;
+		}
+
+		m_num++;
+		m_num += str->size();
+	}
+
+	int m_num;
+};
+
 void testTask()
 {
-	class BindTest
-	{
-	public:
-		BindTest()
-			: m_num(0)
-		{
-		}
-
-	public:
-		void addnum(std::string *str)
-		{
-			m_num *= 2;
-			m_num += 1;
-
-			if (m_num > 10000000) {
-				m_num = 1;
-			}
-
-			m_num++;
-			m_num += str->size();
-		}
-
-		int m_num;
-	};
-
 	std::string str = "hello word, test";
 
 	int times = 10000;
@@ -2242,7 +2243,7 @@ void testUnorderSetDtor()
 void testFastString()
 {
 	int times = 100000;
-	char *text = "1111111111111111111123222222222222222";
+	const char *text = "1111111111111111111123222222222222222";
 	{
 		Tick tick("std::string test", times);
 

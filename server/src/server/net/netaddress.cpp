@@ -12,6 +12,7 @@
 
 #ifndef WIN
 	#include <netdb.h>
+	#include <stdio.h>
 #endif
 
 NetAddress::NetAddress(uint16 port)

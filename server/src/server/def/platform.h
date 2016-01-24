@@ -10,6 +10,7 @@
 #define _platform_h_
 
 #include <assert.h>
+#include <stdio.h>
 
 /*
 #ifdef WIN

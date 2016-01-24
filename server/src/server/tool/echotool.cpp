@@ -13,6 +13,7 @@
 	#include <io.h>
 #else
 	#include <stdarg.h>
+	#include <stdio.h>
 #endif
 
 /* 下面颜色改变的代码摘自gtest，只稍微做了一些调整 */

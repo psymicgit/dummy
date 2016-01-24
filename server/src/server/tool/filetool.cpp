@@ -96,27 +96,6 @@ namespace filetool
 		text = buf.str();
 		return true;
 	}
-
-	bool overwrite_file(const std::string &path, const std::string &new_text)
-	{
-		string old_text;
-		get_whole_file_str(path, old_text);
-		if (old_text == new_text) {
-			return true;
-		}
-
-		ofstream o(path);
-		if (!o.good()) {
-			LOG_SYSTEM_ERR << "无法生成文件，路径错误:" << path;
-			return false;
-		}
-
-		o << new_text;
-		o.flush();
-		o.close();
-
-		return true;
-	}
 }
 
 namespace tool

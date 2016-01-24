@@ -32,7 +32,7 @@ namespace strtool
 	// 又如: replace("good", "o", "oo") = "将会导致死循环"
 	string& cycle_replace(string &str, const char *old, const char* to);
 
-	// 返回文件夹路径，返回结果末尾含/或\
+	// 返回文件夹路径，返回结果末尾含/或\字符
 	// 例如：get_dir(../../xxxx.txt) = ../../
 	string get_dir(const string &path);
 
@@ -43,9 +43,6 @@ namespace strtool
 	// 移掉文件名后缀
 	// 例如：strip_ext(xxxx.txt) = xxxx
 	string strip_ext(const string &filename);
-
-	// 获取当前时间字符串
-	void time_str();
 
 	// 从左数起直到第一个分隔符中间的字符串
 	// 例如：trip_at("123_456_789", '_') = 123
@@ -58,10 +55,6 @@ namespace strtool
 	// 从右数起直到指定分隔符的字符串
 	// 例如：r_trip_at("123_456_789", '_') = 789
 	string r_trip_at(const string &str, char delimiter);
-
-	// 将无符号64位整数转换为字符串
-	// 例如：tostr(100123) = "100123"
-	string tostr(uint64 n);
 
 	typedef std::vector<std::string> stringvec_t;
 
@@ -97,11 +90,6 @@ namespace strtool
 
 		return intset;
 	}
-
-	std::wstring string2wstring(const std::string &sToMatch);
-	std::string& wstring2string(const std::wstring &sToMatch);
-
-	std::string& wstring2string(const wchar_t*);
 };
 
 

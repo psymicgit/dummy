@@ -24,7 +24,7 @@ endif
 # -Wall = 开启所有警告（小部分警告不会开启）
 # -Wno-unused = 屏蔽未初始化警告
 # -w = 关闭警告
-CPPFLAGS = -W -Wall -Wno-unused -Wno-reorder -m${long_bit} $(MACD) -pipe -std=c++11 -MMD -march=native -Wno-unused-parameter -Wno-sign-compare
+CPPFLAGS = -W -Wall -Wno-unused -Wno-reorder -m${long_bit} $(MACD) -pipe -MMD -march=native -Wno-unused-parameter -Wno-sign-compare -Wno-deprecated
 
 # ar = archive 是生成静态链接库的工具
 A_LINK      = ar rv
