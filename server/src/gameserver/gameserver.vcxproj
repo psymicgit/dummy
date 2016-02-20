@@ -56,6 +56,8 @@
       <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;../../3rd/curl/include;../../3rd/rapidjson/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -75,6 +77,8 @@
       <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;../../3rd/curl/include;../../3rd/rapidjson/include;</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4099</DisableSpecificWarnings>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
