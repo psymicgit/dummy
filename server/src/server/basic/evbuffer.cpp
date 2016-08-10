@@ -30,7 +30,6 @@
 #include <string.h>
 #include <limits.h>
 
-#include "buffer.h"
 #include "evbuffer-internal.h"
 
 /* some systems do not have MAP_FAILED */
