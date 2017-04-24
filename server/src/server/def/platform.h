@@ -102,9 +102,6 @@
 
 // º¯Êýµ÷ÓÃ
 #ifdef WIN
-	#define fstat _fstati64
-	#define stat _stati64
-	#define mode_t int
 	#define sleep Sleep
 	#define bzero(buf, len) memset(buf, 0, len)
 #else
@@ -125,7 +122,7 @@
 	#elif defined(__GNUC__) || defined(__INTEL_COMPILER) || defined(__SUNPRO_CC) || defined(__IBMCPP__)
 		#define thread_local __thread
 	#else
-		#define thread_local __declspec(thread)
+		//#define thread_local __declspec(thread)
 	#endif
 #endif
 
