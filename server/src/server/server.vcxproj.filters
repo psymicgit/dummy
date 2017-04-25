@@ -171,6 +171,12 @@
     <ClInclude Include="basic\log.h">
       <Filter>basic</Filter>
     </ClInclude>
+    <ClInclude Include="tool\aho_corasick.hpp">
+      <Filter>tool</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\actool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -311,6 +317,9 @@
     </ClCompile>
     <ClCompile Include="basic\log.cpp">
       <Filter>basic</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\actool.cpp">
+      <Filter>tool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

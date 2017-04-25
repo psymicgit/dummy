@@ -35,6 +35,31 @@ namespace strtool
 
 namespace strtool
 {
+	// 随机生成一个定长字符串
+	string random_str(int n)
+	{
+		if (n <= 0)
+		{
+			return "";
+		}
+
+		static const char alphanum[] =
+			"0123456789"
+			"!@#$%^&*"
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+			"abcdefghijklmnopqrstuvwxyz";
+
+		int size = sizeof(alphanum);
+
+		string str;
+		str.resize(n);
+
+		for (int i = 0; i < n; ++i) {
+			str[i] = alphanum[rand() % (size - 1)];
+		}
+		return str;
+	}
+
 #define IS_SPACE(c) (c == ' ' || c == '\t')
 
 	// 移除掉字符串开头和末尾处的空格和\t符号
@@ -74,34 +99,48 @@ namespace strtool
 		return str.substr(pos);
 	}
 
-	// 替换字符串
-	// 例如：replace("this is an expmple", "is", "") = "th  an expmple"
-	string& replace(string &str, const char *old, const char* to)
+	template <typename S /* 字符串类型 */, typename C /* 字符类型 */>
+	S& replace(S &str, const C *old, int len_old, const C* to, int len_to)
 	{
-		string::size_type pos = 0;
-		int len_old = strlen(old);
-		int len_new = strlen(to);
+		S::size_type len_str = str.size();
 
-		while((pos = str.find(old, pos)) != string::npos) {
-			str.replace(pos, len_old, to);
-			pos += len_new;
+		S out;
+		out.reserve(2 * len_str);
+
+		S::size_type pre_pos = 0;
+		S::size_type find_pos = 0;
+
+		while ((find_pos = str.find(old, pre_pos)) != S::npos)
+		{
+			out += str.substr(pre_pos, find_pos - pre_pos);
+			out += to;
+
+			pre_pos = find_pos + len_old;
 		}
 
+		if (pre_pos < len_str)
+		{
+			out += str.substr(pre_pos);
+		}
+
+		str = out;
 		return str;
 	}
 
-	string& replace(string &str, const char *old, const string& to)
+	string& replace(string &str, const char *old, const char* to)
 	{
-		string::size_type pos = 0;
 		int len_old = strlen(old);
-		int len_new = to.size();
+		int len_to = strlen(to);
 
-		while((pos = str.find(old, pos)) != string::npos) {
-			str.replace(pos, len_old, to);
-			pos += len_new;
-		}
+		return replace(str, old, len_old, to, len_to);
+	}
 
-		return str;
+	wstring& wide_replace(wstring &str, const wchar_t *old, const wchar_t* to)
+	{
+		int len_old = wcslen(old);
+		int len_to = wcslen(to);
+
+		return replace(str, old, len_old, to, len_to);
 	}
 
 	// 循环替换，即每次字符串被替换后，再在替换过的字符串中进行替换

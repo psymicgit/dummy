@@ -16,6 +16,9 @@ using std::wstring;
 
 namespace strtool
 {
+	// 随机生成一个定长字符串
+	string random_str(int n);
+
 	// 移除掉字符串开头和末尾处的空格和\t符号
 	// 例如: trim("   start xxx end   ") = "start xxx end"
 	string trim(char* str);
@@ -23,9 +26,9 @@ namespace strtool
 
 	// 替换字符串，传入的字符串将被修改
 	// 例如：replace("this is an expmple", "is", "") = "th  an expmple"
-	// 又如: replace("dbdb", "db", "bd") = "bdbd"
+	// 又如: replace("acac", "ac", "ca") = "caca"
 	string& replace(string &str, const char *old, const char* to);
-	string& replace(string &str, const char *old, const string& to);
+	wstring& wide_replace(wstring &str, const wchar_t *old, const wchar_t* to);
 
 	// 循环替换，即每次字符串被替换后，再在替换过的字符串中进行替换
 	// 例如: replace("dbdb", "db", "bd") = "bbbd"

@@ -7,9 +7,12 @@
 ///<------------------------------------------------------------------------------
 
 #include "gameserver.h"
+#include <tool/actool.h>
 
 int main(int argc, char **argv)
 {
+	actool::test();
+
 	GameServer &svr = GameServer::Instance();
 	if (!svr.init("../gameconfig.json")) {
 		svr.uninit();
@@ -17,5 +20,6 @@ int main(int argc, char **argv)
 	}
 
 	svr.start();
+
 	return 0;
 }

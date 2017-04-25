@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -11,24 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0F32A337-691A-40D5-BE02-47CA30E415BF}</ProjectGuid>
+    <ProjectGuid>{DFEE9973-826F-421E-9C8C-3F4108A245CF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>gameserver</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <RootNamespace>robot</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -56,31 +53,32 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;../../3rd/curl/include;../../3rd/rapidjson/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/curl/include;../../3rd/rapidjson/include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
-      <DisableSpecificWarnings>4099</DisableSpecificWarnings>
-      <MinimalRebuild>false</MinimalRebuild>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>server.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;../../3rd/curl/include;../../3rd/rapidjson/include;</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/curl/include;../../3rd/rapidjson/include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
@@ -90,41 +88,35 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>../../lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>server.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\protocol\client.pb.h" />
-    <ClInclude Include="..\protocol\game_db.pb.h" />
-    <ClInclude Include="..\protocol\net.pb.h" />
-    <ClInclude Include="..\protocol\protocol.pb.h" />
-    <ClInclude Include="config\gameconfig.h" />
-    <ClInclude Include="db\dbagent.h" />
-    <ClInclude Include="gameserver.h" />
-    <ClInclude Include="logic\client.h" />
-    <ClInclude Include="logic\clientmgr.h" />
-    <ClInclude Include="net\clientmsghandler.h" />
-    <ClInclude Include="net\gatelink.h" />
-    <ClInclude Include="net\http\gamehttpmgr.h" />
-    <ClInclude Include="stdafx.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\protocol\client.pb.cc" />
-    <ClCompile Include="..\protocol\game_db.pb.cc" />
-    <ClCompile Include="..\protocol\net.pb.cc" />
-    <ClCompile Include="config\gameconfig.cpp" />
-    <ClCompile Include="db\dbagent.cpp" />
-    <ClCompile Include="gameserver.cpp" />
-    <ClCompile Include="logic\client.cpp" />
-    <ClCompile Include="logic\clientmgr.cpp" />
+    <ClCompile Include="..\protocol\protocol.pb.cc" />
+    <ClCompile Include="http\authhttpcmd.cpp" />
+    <ClCompile Include="http\handshakehttpcmd.cpp" />
+    <ClCompile Include="http\robothttpmgr.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="net\gatelink.cpp" />
-    <ClCompile Include="net\http\gamehttpmgr.cpp" />
+    <ClCompile Include="robot.cpp" />
+    <ClCompile Include="robotconfig.cpp" />
+    <ClCompile Include="robotmgr.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\protocol\client.pb.h" />
+    <ClInclude Include="..\protocol\protocol.pb.h" />
+    <ClInclude Include="http\authhttpcmd.h" />
+    <ClInclude Include="http\handshakehttpcmd.h" />
+    <ClInclude Include="http\robothttpmgr.h" />
+    <ClInclude Include="robot.h" />
+    <ClInclude Include="robotconfig.h" />
+    <ClInclude Include="robotmgr.h" />
+    <ClInclude Include="robotmsghandler.h" />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

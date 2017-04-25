@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -11,24 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0F32A337-691A-40D5-BE02-47CA30E415BF}</ProjectGuid>
+    <ProjectGuid>{C5FE3A93-E30B-4DC6-924E-BA9C8EC1FA50}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>gameserver</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <RootNamespace>gateserver</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -43,12 +40,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>../../bin/$(ProjectName)/</OutDir>
-    <IntDir>../../bin/$(ProjectName)/$(Configuration)\</IntDir>
+    <IntDir>../../bin/$(ProjectName)/$(Configuration)/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>../../bin/$(ProjectName)/</OutDir>
-    <IntDir>../../bin/$(ProjectName)/$(Configuration)\</IntDir>
+    <IntDir>../../bin/$(ProjectName)/$(Configuration)/</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -56,11 +53,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;../../3rd/curl/include;../../3rd/rapidjson/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/rapidjson/include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
-      <DisableSpecificWarnings>4099</DisableSpecificWarnings>
-      <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
@@ -78,8 +74,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;../../3rd/curl/include;../../3rd/rapidjson/include;</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4099</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/rapidjson/include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
@@ -95,36 +90,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\protocol\client.pb.h" />
-    <ClInclude Include="..\protocol\game_db.pb.h" />
-    <ClInclude Include="..\protocol\net.pb.h" />
-    <ClInclude Include="..\protocol\protocol.pb.h" />
-    <ClInclude Include="config\gameconfig.h" />
-    <ClInclude Include="db\dbagent.h" />
-    <ClInclude Include="gameserver.h" />
-    <ClInclude Include="logic\client.h" />
-    <ClInclude Include="logic\clientmgr.h" />
-    <ClInclude Include="net\clientmsghandler.h" />
-    <ClInclude Include="net\gatelink.h" />
-    <ClInclude Include="net\http\gamehttpmgr.h" />
-    <ClInclude Include="stdafx.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\protocol\client.pb.cc" />
-    <ClCompile Include="..\protocol\game_db.pb.cc" />
-    <ClCompile Include="..\protocol\net.pb.cc" />
-    <ClCompile Include="config\gameconfig.cpp" />
-    <ClCompile Include="db\dbagent.cpp" />
-    <ClCompile Include="gameserver.cpp" />
-    <ClCompile Include="logic\client.cpp" />
-    <ClCompile Include="logic\clientmgr.cpp" />
+    <ClCompile Include="config\gateconfig.cpp" />
+    <ClCompile Include="gateserver.cpp" />
+    <ClCompile Include="logic\user.cpp" />
+    <ClCompile Include="logic\usermgr.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="net\gatelink.cpp" />
-    <ClCompile Include="net\http\gamehttpmgr.cpp" />
+    <ClCompile Include="net\client.cpp" />
+    <ClCompile Include="net\clientmgr.cpp" />
+    <ClCompile Include="net\gamesvrlink.cpp" />
+    <ClCompile Include="net\userlink.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\protocol\client.pb.h" />
+    <ClInclude Include="config\gateconfig.h" />
+    <ClInclude Include="gateserver.h" />
+    <ClInclude Include="logic\user.h" />
+    <ClInclude Include="logic\usermgr.h" />
+    <ClInclude Include="net\client.h" />
+    <ClInclude Include="net\clientmgr.h" />
+    <ClInclude Include="net\clientmsghandler.h" />
+    <ClInclude Include="net\gamesvrlink.h" />
+    <ClInclude Include="net\userlink.h" />
+    <ClInclude Include="protocol\protocol.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
