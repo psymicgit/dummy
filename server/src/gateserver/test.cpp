@@ -2038,7 +2038,7 @@ void testVecSize()
 	{
 		Tick tick("not cache vector.size() test", times);
 
-		for(int i = 0; i < nums.size(); i++) {
+		for(int i = 0; i < (int)nums.size(); i++) {
 			nums[i] = 3 * i;
 		}
 	}

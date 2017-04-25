@@ -60,7 +60,38 @@ namespace strtool
 		return str;
 	}
 
-#define IS_SPACE(c) (c == ' ' || c == '\t')
+	// 是否为空白字符
+	inline bool is_blank(char c)
+	{
+		return (c == ' ' || c == '\t');
+	}
+
+	// 是否为斜杠符号：\或/
+	inline bool is_slash(char c)
+	{
+		return (c == '\\' || c == '/');
+	}
+
+	inline bool is_empty(const char *str)
+	{
+		return (str == nullptr) || (str[0] == 0x00);
+	}
+
+	inline bool is_same_ignore_case(char a, char b)
+	{
+		return ::tolower(a) == ::tolower(b);
+	}
+
+	inline bool is_same_ignore_case(const std::string &a, const char *b)
+	{
+		return 0 == strnicmp(a.c_str(), b, a.size());
+	}
+
+	inline bool is_same_ignore_case(const char *a, const char *b)
+	{
+		return 0 == strnicmp(a, b, strlen(a));
+	}
+
 
 	// 移除掉字符串开头和末尾处的空格和\t符号
 	// 例如: trim("   start xxx end   ") = "start xxx end"
@@ -70,13 +101,13 @@ namespace strtool
 			return "";
 		}
 
-		while(IS_SPACE(*str)) {str++;}
+		while(is_blank(*str)) {str++;}
 		char *start = str;
 
 		while(*str) {str++;}
 		char *end   = str;
 
-		while((end != start) && IS_SPACE(*end)) {--end;}
+		while((end != start) && is_blank(*end)) {--end;}
 		*(end) = '\0';
 
 		return start;
@@ -266,5 +297,44 @@ namespace strtool
 		}
 
 		return vec;
+	}
+
+	enum
+	{
+		MAX_ALPHABET = 256,	// 单字节字符个数
+	};
+
+	// sunday算法
+	int sunday(const char *src, const char *des)
+	{
+		int i, pos = 0;
+		int len_s, len_d;
+		int alphabet[MAX_ALPHABET] = { 0 };
+
+		if (src == NULL || des == NULL)
+			return -1;
+
+		len_s = strlen(src);
+		len_d = strlen(des);
+
+		for (i = 0; i < MAX_ALPHABET; i++)
+			alphabet[i] = len_d;
+
+		for (i = 0; i < len_d; i++)
+			alphabet[des[i]] = len_d - i - 1;
+
+		for (pos = 1; pos <= len_s - len_d; ) {
+			for (i = pos - 1; i - pos + 1 < len_d; i++) {
+				if (src[i] != des[i - pos + 1])
+					break;
+			}
+
+			if ((i - pos + 1) == len_d)
+				return pos;
+			else
+				pos += alphabet[src[pos + len_d - 1]] + 1;
+		}
+
+		return -1;
 	}
 }

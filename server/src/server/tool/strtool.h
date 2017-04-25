@@ -93,6 +93,9 @@ namespace strtool
 
 		return intset;
 	}
+
+	// sundayËã·¨
+	int sunday(const char *src, const char *des);
 };
 
 

@@ -11,8 +11,6 @@
 
 int main(int argc, char **argv)
 {
-	actool::test();
-
 	GameServer &svr = GameServer::Instance();
 	if (!svr.init("../gameconfig.json")) {
 		svr.uninit();

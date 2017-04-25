@@ -17,6 +17,7 @@ bool GameConfig::load(const char* jsonConfig)
 {
 	char *json = filetool::open(jsonConfig);
 	if (NULL == json) {
+		LOG_ERROR << "not found config file <" << jsonConfig << ">";
 		return false;
 	}
 
