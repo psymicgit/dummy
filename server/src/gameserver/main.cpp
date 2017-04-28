@@ -7,7 +7,7 @@
 ///<------------------------------------------------------------------------------
 
 #include "gameserver.h"
-#include <tool/actool.h>
+#include "scene/AoiModule.h"
 
 int main(int argc, char **argv)
 {
@@ -16,6 +16,9 @@ int main(int argc, char **argv)
 		svr.uninit();
 		return 0;
 	}
+
+	AoiModule aoiModule;
+	aoiModule.test();
 
 	svr.start();
 

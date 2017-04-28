@@ -36,6 +36,15 @@
     <ClInclude Include="..\protocol\protocol.pb.h">
       <Filter>protocol</Filter>
     </ClInclude>
+    <ClInclude Include="logic\ai\ai.h">
+      <Filter>logic\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\scene.h">
+      <Filter>logic\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\AoiModule.h">
+      <Filter>logic\scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameserver.cpp" />
@@ -68,6 +77,15 @@
     <ClCompile Include="..\protocol\game_db.pb.cc">
       <Filter>protocol</Filter>
     </ClCompile>
+    <ClCompile Include="logic\ai\ai.cpp">
+      <Filter>logic\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\scene.cpp">
+      <Filter>logic\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\AoiModule.cpp">
+      <Filter>logic\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocol">
@@ -87,6 +105,12 @@
     </Filter>
     <Filter Include="config">
       <UniqueIdentifier>{3bb39cb2-8bb6-4acf-840b-38173acc976e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\ai">
+      <UniqueIdentifier>{1325c83e-a2cb-40af-be2f-eb72c7951a9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logic\scene">
+      <UniqueIdentifier>{30972419-598c-45b0-8fbc-9e27d08ef061}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

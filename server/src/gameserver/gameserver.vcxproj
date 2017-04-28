@@ -78,7 +78,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;../../3rd/curl/include;../../3rd/rapidjson/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;../../3rd/curl/include;../../3rd/rapidjson/include;logic</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4099</DisableSpecificWarnings>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -102,8 +102,11 @@
     <ClInclude Include="config\gameconfig.h" />
     <ClInclude Include="db\dbagent.h" />
     <ClInclude Include="gameserver.h" />
+    <ClInclude Include="logic\ai\ai.h" />
     <ClInclude Include="logic\client.h" />
     <ClInclude Include="logic\clientmgr.h" />
+    <ClInclude Include="logic\scene\AoiModule.h" />
+    <ClInclude Include="logic\scene\scene.h" />
     <ClInclude Include="net\clientmsghandler.h" />
     <ClInclude Include="net\gatelink.h" />
     <ClInclude Include="net\http\gamehttpmgr.h" />
@@ -116,8 +119,11 @@
     <ClCompile Include="config\gameconfig.cpp" />
     <ClCompile Include="db\dbagent.cpp" />
     <ClCompile Include="gameserver.cpp" />
+    <ClCompile Include="logic\ai\ai.cpp" />
     <ClCompile Include="logic\client.cpp" />
     <ClCompile Include="logic\clientmgr.cpp" />
+    <ClCompile Include="logic\scene\AoiModule.cpp" />
+    <ClCompile Include="logic\scene\scene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="net\gatelink.cpp" />
     <ClCompile Include="net\http\gamehttpmgr.cpp" />
