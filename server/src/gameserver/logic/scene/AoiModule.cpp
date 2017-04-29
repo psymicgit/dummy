@@ -8,20 +8,21 @@
 #include "AoiModule.h"
 #include <tool/utiltool.h>
 #include <tool/randtool.h>
+#include <tool/timetool.h>
 
 AoiModule::AoiModule()
 {
 
 }
 
-bool AoiModule::Add(ObjectId objId, AoiObject *obj)
+bool AoiModule::Add(AoiObject *obj)
 {
-	if (utiltool::Has(m_objs, objId))
+	if (utiltool::Has(m_objs, obj->objId))
 	{
 		return false;
 	}
 
-	m_objs[objId] = obj;
+	m_objs[obj->objId] = obj;
 	int at = GetInsertPos(obj->x, obj->y);
 	m_vecX.insert(m_vecX.begin() + at, obj);
 
@@ -37,30 +38,44 @@ bool AoiModule::Leave(AoiObject* obj)
 	}
 
 	m_objs.erase(itr);
+
+	int pos = GetObjPos(obj);
+	if (pos >= 0)
+	{
+		m_vecX.erase(m_vecX.begin() + pos);
+	}
 }
 
 void AoiModule::Move(AoiObject* obj, float x, float y)
 {
-	int old_pos = GetObjPos(obj);
-	int new_pos = GetInsertPos(x, y);
-
-	obj->x = x;
-	obj->y = y;
-
-	if (old_pos == new_pos || old_pos < 0)
+	if (0)
 	{
-		return;
-	}
-
-	if (new_pos < old_pos)
-	{		
-		memmove(&m_vecX[new_pos + 1], &m_vecX[new_pos], (old_pos - new_pos) * sizeof(AoiObject*));
-		m_vecX[new_pos] = obj;
+		Leave(obj);
+		Add(obj);
 	}
 	else
 	{
-		memmove(&m_vecX[old_pos], &m_vecX[old_pos + 1], (new_pos - old_pos) * sizeof(AoiObject*));
-		m_vecX[new_pos - 1] = obj;
+		int old_pos = GetObjPos(obj);
+		int new_pos = GetInsertPos(x, y);
+
+		obj->x = x;
+		obj->y = y;
+
+		if (old_pos == new_pos || old_pos < 0)
+		{
+			return;
+		}
+
+		if (new_pos < old_pos)
+		{
+			memmove(&m_vecX[new_pos + 1], &m_vecX[new_pos], (old_pos - new_pos) * sizeof(AoiObject*));
+			m_vecX[new_pos] = obj;
+		}
+		else
+		{
+			memmove(&m_vecX[old_pos], &m_vecX[old_pos + 1], (new_pos - old_pos) * sizeof(AoiObject*));
+			m_vecX[new_pos - 1] = obj;
+		}
 	}
 }
 
@@ -156,33 +171,14 @@ bool AoiModule::PickNear(AoiObject* obj, float radius, std::vector<AoiObject*>& 
 
 bool AoiModule::Pick(float x, float y, float radius, std::vector<AoiObject*>& outs)
 {
-	int n = m_vecX.size();
-	int low = 1;
-	int high = n;
-
 	float bound_left = x - radius;
 	float bound_right = x + radius;
 
-	while (low <= high)
-	{
-		int mid = (low + high) / 2;
-		AoiObject* midObj = m_vecX[mid];
+	int leftPos = GetInsertPos(x, y);
 
-		if (midObj->x < bound_left)
-		{
-			low = mid + 1;
-		}
-		else if (midObj->x > bound_left)
-		{
-			high = mid - 1;
-		}
-		else
-		{
-			break;
-		}
-	}
+	int n = m_vecX.size();
 
-	for (int i = low; i <= high; ++i)
+	for (int i = leftPos; i < n; ++i)
 	{
 		AoiObject* obj = m_vecX[i];
 
@@ -190,12 +186,34 @@ bool AoiModule::Pick(float x, float y, float radius, std::vector<AoiObject*>& ou
 		{
 			outs.push_back(obj);
 		}
+		else
+		{
+			break;
+		}
 	}
+
+	for (int i = leftPos - 1; i > n; --i)
+	{
+		AoiObject* obj = m_vecX[i];
+
+		if (utiltool::Between(obj->x, bound_left, bound_right))
+		{
+			outs.push_back(obj);
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	return !outs.empty();
 }
 
 void AoiModule::test()
 {
 	const float range = 1000.0f;
+	int n = 10000;
+	int pickNum = 1000;
 
 	float init[] =
 	{
@@ -203,7 +221,11 @@ void AoiModule::test()
 		19, 40, 50, 61, 62
 	};
 
-	for (int i = 1; i <= 100000; ++i)
+	//*********** 添加 ***********//
+
+	Timestamp time1 = timetool::now();
+
+	for (int i = 1; i <= n; ++i)
 	{
 		AoiObject* obj = new AoiObject;
 		obj->objId = i;
@@ -211,16 +233,37 @@ void AoiModule::test()
 		obj->y = obj->x / 2;
 		//obj->x = init[i - 1];
 
-		Add(i, obj);
+		Add(obj);
 	}
 
-	Move(m_vecX[2], 19.0f, 0);
-	Move(m_vecX[4], 20, 0);
+	//*********** 移动 ***********//
+
+	Timestamp time2 = timetool::now();
+
+	int sum_add = (int)(time2 - time1);
+	float avg_add = (float)sum_add / n;
+	LOG_INFO << "sum_add = " << sum_add << ", avg_add = " << avg_add;
 
 	for (int i = 0, n = (int)m_vecX.size(); i < n; ++i)
 	{
 		AoiObject* obj = m_vecX[i];
 		Move(obj, randtool::rand_float(range), randtool::rand_float(range));
+	}
+
+	Timestamp end = timetool::now();
+
+	int sum_move = (int)(end - time2);
+	float avg_move = (float)sum_move / n;
+	LOG_INFO << "sum_move = " << sum_move << ", avg_move = " << avg_move;
+
+	//*********** 搜索附近对象 ***********//
+
+	std::vector<AoiObject*> picks;
+
+	for (int i = 0; i < pickNum; ++i)
+	{
+		Pick(randtool::rand_float(range), 0, 100, picks);
+		picks.clear();
 	}
 
 	if (!IsOk())

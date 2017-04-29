@@ -41,7 +41,7 @@ public:
 	AoiModule();
 
 public:
-	bool Add(ObjectId, AoiObject*);
+	bool Add(AoiObject*);
 
 	bool Leave(AoiObject*);
 
