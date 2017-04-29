@@ -173,6 +173,7 @@
     <ClInclude Include="tool\ticktool.h" />
     <ClInclude Include="tool\timertool.h" />
     <ClInclude Include="tool\timetool.h" />
+    <ClInclude Include="tool\utiltool.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\protocol\net.pb.cc" />
@@ -219,6 +220,7 @@
     <ClCompile Include="tool\ticktool.cpp" />
     <ClCompile Include="tool\timertool.cpp" />
     <ClCompile Include="tool\timetool.cpp" />
+    <ClCompile Include="tool\utiltool.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -21,37 +21,43 @@ namespace randtool
 		srand((unsigned)time(NULL));
 	}
 
-	uint32 random()
+	// 获取随机数，范围是[0, n - 1]
+	int rand_int(int n)
 	{
-		return rand();
+		return rand() % n;
 	}
 
-	uint32 random(uint32 range)
+	int rand_int_between(int a, int b)
 	{
-		return rand() % range;
-	}
-
-	uint32 random(uint32 minnum, uint32 maxnum)
-	{
-		if ( minnum >= maxnum ) {
-			return maxnum;
+		if ( a >= b ) {
+			return b;
 		}
 
-		return rand() % (maxnum - minnum) + minnum;
+		return rand() % (b - a) + a;
 	}
 
-	uint32 rollHit(HitVec &hitVec)
+	float rand_float(float n)
+	{
+		return ((float)rand() / RAND_MAX) * n;
+	}
+
+	float rand_float_between(float a, float b)
+	{
+		return a + rand_float(b - a);
+	}
+
+	int rollHit(HitVec &hitVec)
 	{
 		if (hitVec.empty()) {
 			return 0;
 		}
 
-		uint32 totalWeight = 0;
+		int totalWeight = 0;
 		for (size_t i = 0; i < hitVec.size(); i++) {
 			totalWeight += hitVec[i];
 		}
 
-		uint32 hit = random(totalWeight);
+		int hit = rand_int(totalWeight);
 
 		totalWeight = 0;
 
@@ -66,7 +72,7 @@ namespace randtool
 		return 0;
 	}
 
-	void secureRandom(uint8 nums[], uint32 cnt, int beg, int end)
+	void secureRandom(uint8 nums[], int cnt, int beg, int end)
 	{
 		int range = end - beg;
 
@@ -74,14 +80,14 @@ namespace randtool
 		HCRYPTPROV  hCryptProv = 0;
 		CryptGenRandom(hCryptProv, cnt, nums);
 
-		for (uint32 i = 0; i < cnt; i++) {
-			nums[i] = random();
+		for (int i = 0; i < cnt; i++) {
+			nums[i] = rand();
 
 			nums[i] = nums[i] % range + beg;
 		}
 #else
-		for (uint32 i = 0; i < cnt; i++) {
-			nums[i] = random() % range + beg;
+		for (int i = 0; i < cnt; i++) {
+			nums[i] = rand() % range + beg;
 		}
 #endif
 	}

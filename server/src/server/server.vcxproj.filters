@@ -177,6 +177,9 @@
     <ClInclude Include="tool\actool.h">
       <Filter>tool</Filter>
     </ClInclude>
+    <ClInclude Include="tool\utiltool.h">
+      <Filter>tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -319,6 +322,9 @@
       <Filter>basic</Filter>
     </ClCompile>
     <ClCompile Include="tool\actool.cpp">
+      <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\utiltool.cpp">
       <Filter>tool</Filter>
     </ClCompile>
   </ItemGroup>

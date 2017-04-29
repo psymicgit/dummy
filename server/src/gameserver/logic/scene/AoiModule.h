@@ -47,11 +47,19 @@ public:
 
 	void Move(AoiObject*, float x, float y);
 
+	int GetInsertPos(float x, float y);
+
+	int GetObjPos(AoiObject*);
+
+	void SetPos(int from, int to);
+
 	bool PickNear(AoiObject*, float radius, std::vector<AoiObject*>&);
 
 	bool Pick(float x, float y, float radius, std::vector<AoiObject*>&);
 
 	void test();
+
+	bool IsOk();
 
 private:
 	std::map<ObjectId, AoiObject*> m_objs;
