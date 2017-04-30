@@ -1,3 +1,11 @@
+enum GameToDBMsgId
+{
+	eGameToDBMsgIdMin = 2000;
+	ePostSql = 2001; // 投递sql语句到db服
+
+	eGameToDBMsgIdMax = 3000;
+}
+
 // sql语句类别
 enum SqlType {
 	NormalSql = 0; // 正常sql

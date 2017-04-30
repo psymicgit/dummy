@@ -15,6 +15,7 @@ struct AoiObject
 	float x;
 	float y;
 	float height;
+	float seeRadius;
 
 	// 默认排序：按x从小到大排序
 	bool operator<(const AoiObject& other)
@@ -41,6 +42,8 @@ public:
 	AoiModule();
 
 public:
+	void Update();
+
 	bool Add(AoiObject*);
 
 	bool Leave(AoiObject*);
@@ -56,6 +59,9 @@ public:
 	bool PickNear(AoiObject*, float radius, std::vector<AoiObject*>&);
 
 	bool Pick(float x, float y, float radius, std::vector<AoiObject*>&);
+
+	// 是否在可视范围内
+	bool IsInSeeRange(AoiObject*, float x);
 
 	void test();
 

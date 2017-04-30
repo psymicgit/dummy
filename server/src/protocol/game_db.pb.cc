@@ -24,6 +24,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* PostSql_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   PostSql_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* GameToDBMsgId_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* SqlType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* SqlDBType_descriptor_ = NULL;
 
@@ -70,8 +71,9 @@ void protobuf_AssignDesc_game_5fdb_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PostSql));
-  SqlType_descriptor_ = file->enum_type(0);
-  SqlDBType_descriptor_ = file->enum_type(1);
+  GameToDBMsgId_descriptor_ = file->enum_type(0);
+  SqlType_descriptor_ = file->enum_type(1);
+  SqlDBType_descriptor_ = file->enum_type(2);
 }
 
 namespace {
@@ -110,9 +112,11 @@ void protobuf_AddDesc_game_5fdb_2eproto() {
     "(\0162\010.SqlType:\tNormalSql\022\r\n\005sqlid\030\002 \002(\006\022\013"
     "\n\003sql\030\003 \002(\t\"J\n\007PostSql\022\014\n\004time\030\001 \002(\007\022\032\n\006"
     "dbtype\030\002 \002(\0162\n.SqlDBType\022\025\n\004sqls\030\003 \003(\0132\007"
-    ".SqlMsg*4\n\007SqlType\022\r\n\tNormalSql\020\000\022\r\n\tPla"
+    ".SqlMsg*N\n\rGameToDBMsgId\022\026\n\021eGameToDBMsg"
+    "IdMin\020\320\017\022\r\n\010ePostSql\020\321\017\022\026\n\021eGameToDBMsgI"
+    "dMax\020\270\027*4\n\007SqlType\022\r\n\tNormalSql\020\000\022\r\n\tPla"
     "yerSql\020\001\022\013\n\007GuidSql\020\002*\"\n\tSqlDBType\022\n\n\006Ga"
-    "meDB\020\000\022\t\n\005LogDB\020\001", 257);
+    "meDB\020\000\022\t\n\005LogDB\020\001", 337);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game_db.proto", &protobuf_RegisterTypes);
   SqlMsg::default_instance_ = new SqlMsg();
@@ -128,6 +132,21 @@ struct StaticDescriptorInitializer_game_5fdb_2eproto {
     protobuf_AddDesc_game_5fdb_2eproto();
   }
 } static_descriptor_initializer_game_5fdb_2eproto_;
+const ::google::protobuf::EnumDescriptor* GameToDBMsgId_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return GameToDBMsgId_descriptor_;
+}
+bool GameToDBMsgId_IsValid(int value) {
+  switch(value) {
+    case 2000:
+    case 2001:
+    case 3000:
+      return true;
+    default:
+      return false;
+  }
+}
+
 const ::google::protobuf::EnumDescriptor* SqlType_descriptor() {
   protobuf_AssignDescriptorsOnce();
   return SqlType_descriptor_;

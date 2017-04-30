@@ -18,9 +18,6 @@
 
 namespace {
 
-const ::google::protobuf::EnumDescriptor* NetMsgId_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* ClientGateMsgId_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* GameToDBMsgId_descriptor_ = NULL;
 
 }  // namespace
 
@@ -31,9 +28,6 @@ void protobuf_AssignDesc_protocol_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "protocol.proto");
   GOOGLE_CHECK(file != NULL);
-  NetMsgId_descriptor_ = file->enum_type(0);
-  ClientGateMsgId_descriptor_ = file->enum_type(1);
-  GameToDBMsgId_descriptor_ = file->enum_type(2);
 }
 
 namespace {
@@ -60,16 +54,7 @@ void protobuf_AddDesc_protocol_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\016protocol.proto*2\n\010NetMsgId\022\022\n\016eConnect"
-    "SvrReq\020\001\022\022\n\016eConnectSvrAck\020\002*\324\001\n\017ClientG"
-    "ateMsgId\022\030\n\023eClientGateMsgIdMin\020\350\007\022\016\n\teL"
-    "oginReq\020\351\007\022\016\n\teLoginAck\020\352\007\022\023\n\016eEncryptKe"
-    "yNtf\020\353\007\022\r\n\010eAuthReq\020\354\007\022\r\n\010eAuthAck\020\355\007\022\n\n"
-    "\005ePing\020\356\007\022\n\n\005ePong\020\357\007\022\017\n\neSpeedTest\020\360\007\022\021"
-    "\n\014eLatencyTest\020\361\007\022\030\n\023eClientGateMsgIdMax"
-    "\020\320\017*N\n\rGameToDBMsgId\022\026\n\021eGameToDBMsgIdMi"
-    "n\020\320\017\022\r\n\010ePostSql\020\321\017\022\026\n\021eGameToDBMsgIdMax"
-    "\020\270\027", 363);
+    "\n\016protocol.proto", 16);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protocol.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_protocol_2eproto);
@@ -81,58 +66,6 @@ struct StaticDescriptorInitializer_protocol_2eproto {
     protobuf_AddDesc_protocol_2eproto();
   }
 } static_descriptor_initializer_protocol_2eproto_;
-const ::google::protobuf::EnumDescriptor* NetMsgId_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return NetMsgId_descriptor_;
-}
-bool NetMsgId_IsValid(int value) {
-  switch(value) {
-    case 1:
-    case 2:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const ::google::protobuf::EnumDescriptor* ClientGateMsgId_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return ClientGateMsgId_descriptor_;
-}
-bool ClientGateMsgId_IsValid(int value) {
-  switch(value) {
-    case 1000:
-    case 1001:
-    case 1002:
-    case 1003:
-    case 1004:
-    case 1005:
-    case 1006:
-    case 1007:
-    case 1008:
-    case 1009:
-    case 2000:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const ::google::protobuf::EnumDescriptor* GameToDBMsgId_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return GameToDBMsgId_descriptor_;
-}
-bool GameToDBMsgId_IsValid(int value) {
-  switch(value) {
-    case 2000:
-    case 2001:
-    case 3000:
-      return true;
-    default:
-      return false;
-  }
-}
-
 
 // @@protoc_insertion_point(namespace_scope)
 

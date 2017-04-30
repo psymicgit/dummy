@@ -14,6 +14,5 @@ class GameLogic : public Singleton<GameLogic>
 public:
 	//template <typename MessageType>
 	//bool ListenMessage(int msgId, int subId, );
-
-	bool Send(ObjectId, int msgId, int subId, const Message& msg);
+	static bool Send(ObjectId, int msgId, int subId, const Message& msg);
 };

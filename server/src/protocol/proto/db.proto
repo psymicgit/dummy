@@ -1,8 +1,0 @@
-// 游戏服发送给db服的sql语句
-message Player
-{
-	required fixed64 playerid = 1;
-	required fixed32 lvl = 2;
-	required string nickname = 3; // 昵称
-	required fixed32 job = 4; // 职业
-}

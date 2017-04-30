@@ -1,3 +1,25 @@
+//************** 服务端 - 客户端消息号 **************//
+
+enum ClientMsgId
+{
+	eClientGateMsgIdMin = 1000;
+	eLoginReq = 1001;				// 登录到网关请求
+	eLoginAck = 1002;				// 登录到网关答复
+	eEncryptKeyNtf = 1003;			// 下发加密串
+	eAuthReq = 1004;
+	eAuthAck = 1005; 
+
+	// 测试
+	ePing = 1006;
+	ePong = 1007;
+	eSpeedTest = 1008;
+	eLatencyTest = 1009;
+
+	eClientGateMsgIdMax = 2000;
+}
+
+//************** 服务端 - 客户端消息内容 **************//
+
 // 加解密玥定义
 enum EncryptKeyDef {
 	EncryptKeyLen = 32; // 加密密钥长度

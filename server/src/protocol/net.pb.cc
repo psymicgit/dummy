@@ -24,6 +24,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ConnectResponse_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ConnectResponse_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* NetMsgId_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ConnectResult_descriptor_ = NULL;
 
 }  // namespace
@@ -69,7 +70,8 @@ void protobuf_AssignDesc_net_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ConnectResponse));
-  ConnectResult_descriptor_ = file->enum_type(0);
+  NetMsgId_descriptor_ = file->enum_type(0);
+  ConnectResult_descriptor_ = file->enum_type(1);
 }
 
 namespace {
@@ -107,11 +109,12 @@ void protobuf_AddDesc_net_2eproto() {
     "\n\tnet.proto\"=\n\nConnectReq\022\017\n\007svrType\030\001 \002"
     "(\005\022\017\n\007authKey\030\002 \002(\t\022\r\n\005svrId\030\003 \001(\005\"N\n\017Co"
     "nnectResponse\022\033\n\003ret\030\001 \002(\0162\016.ConnectResu"
-    "lt\022\017\n\007svrType\030\002 \002(\005\022\r\n\005svrId\030\003 \001(\005*\214\001\n\rC"
-    "onnectResult\022\016\n\nCONNECT_OK\020\000\022$\n CONNECT_"
-    "FAIL_UNKNOWN_SERVER_TYPE\020\001\022\"\n\036CONNECT_FA"
-    "IL_FOUND_SAME_SERVER\020\002\022!\n\035CONNECT_FAIL_A"
-    "UTH_KEY_INVALID\020\003", 297);
+    "lt\022\017\n\007svrType\030\002 \002(\005\022\r\n\005svrId\030\003 \001(\005*2\n\010Ne"
+    "tMsgId\022\022\n\016eConnectSvrReq\020\001\022\022\n\016eConnectSv"
+    "rAck\020\002*\214\001\n\rConnectResult\022\016\n\nCONNECT_OK\020\000"
+    "\022$\n CONNECT_FAIL_UNKNOWN_SERVER_TYPE\020\001\022\""
+    "\n\036CONNECT_FAIL_FOUND_SAME_SERVER\020\002\022!\n\035CO"
+    "NNECT_FAIL_AUTH_KEY_INVALID\020\003", 349);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "net.proto", &protobuf_RegisterTypes);
   ConnectReq::default_instance_ = new ConnectReq();
@@ -127,6 +130,20 @@ struct StaticDescriptorInitializer_net_2eproto {
     protobuf_AddDesc_net_2eproto();
   }
 } static_descriptor_initializer_net_2eproto_;
+const ::google::protobuf::EnumDescriptor* NetMsgId_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return NetMsgId_descriptor_;
+}
+bool NetMsgId_IsValid(int value) {
+  switch(value) {
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
 const ::google::protobuf::EnumDescriptor* ConnectResult_descriptor() {
   protobuf_AssignDescriptorsOnce();
   return ConnectResult_descriptor_;

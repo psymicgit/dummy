@@ -57,6 +57,34 @@ inline bool LoginReq_LoginType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<LoginReq_LoginType>(
     LoginReq_LoginType_descriptor(), name, value);
 }
+enum ClientMsgId {
+  eClientGateMsgIdMin = 1000,
+  eLoginReq = 1001,
+  eLoginAck = 1002,
+  eEncryptKeyNtf = 1003,
+  eAuthReq = 1004,
+  eAuthAck = 1005,
+  ePing = 1006,
+  ePong = 1007,
+  eSpeedTest = 1008,
+  eLatencyTest = 1009,
+  eClientGateMsgIdMax = 2000
+};
+bool ClientMsgId_IsValid(int value);
+const ClientMsgId ClientMsgId_MIN = eClientGateMsgIdMin;
+const ClientMsgId ClientMsgId_MAX = eClientGateMsgIdMax;
+const int ClientMsgId_ARRAYSIZE = ClientMsgId_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ClientMsgId_descriptor();
+inline const ::std::string& ClientMsgId_Name(ClientMsgId value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ClientMsgId_descriptor(), value);
+}
+inline bool ClientMsgId_Parse(
+    const ::std::string& name, ClientMsgId* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ClientMsgId>(
+    ClientMsgId_descriptor(), name, value);
+}
 enum EncryptKeyDef {
   EncryptKeyLen = 32,
   EncryptHeadLen = 2,
@@ -1709,6 +1737,10 @@ namespace protobuf {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::LoginReq_LoginType>() {
   return ::LoginReq_LoginType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::ClientMsgId>() {
+  return ::ClientMsgId_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::EncryptKeyDef>() {

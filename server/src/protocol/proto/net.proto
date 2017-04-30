@@ -1,10 +1,15 @@
+enum NetMsgId
+{
+	eConnectSvrReq = 1; // 连接对端内网服务器请求
+	eConnectSvrAck = 2; // 连接对端内网服务器答复
+}
+
 message ConnectReq
 {
 	required int32 svrType = 1;
 	required string authKey = 2; // 认证码
 	optional int32 svrId = 3;
 }
-
 
 enum ConnectResult {
     CONNECT_OK = 0;

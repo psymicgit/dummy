@@ -35,6 +35,25 @@ void protobuf_ShutdownFile_net_2eproto();
 class ConnectReq;
 class ConnectResponse;
 
+enum NetMsgId {
+  eConnectSvrReq = 1,
+  eConnectSvrAck = 2
+};
+bool NetMsgId_IsValid(int value);
+const NetMsgId NetMsgId_MIN = eConnectSvrReq;
+const NetMsgId NetMsgId_MAX = eConnectSvrAck;
+const int NetMsgId_ARRAYSIZE = NetMsgId_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* NetMsgId_descriptor();
+inline const ::std::string& NetMsgId_Name(NetMsgId value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    NetMsgId_descriptor(), value);
+}
+inline bool NetMsgId_Parse(
+    const ::std::string& name, NetMsgId* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<NetMsgId>(
+    NetMsgId_descriptor(), name, value);
+}
 enum ConnectResult {
   CONNECT_OK = 0,
   CONNECT_FAIL_UNKNOWN_SERVER_TYPE = 1,
@@ -464,6 +483,10 @@ inline void ConnectResponse::set_svrid(::google::protobuf::int32 value) {
 namespace google {
 namespace protobuf {
 
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NetMsgId>() {
+  return ::NetMsgId_descriptor();
+}
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::ConnectResult>() {
   return ::ConnectResult_descriptor();

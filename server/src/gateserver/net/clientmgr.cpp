@@ -43,7 +43,6 @@ void ClientMgr::close()
 
 void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
-
 	uint32 newClientId = allocClientId();
 
 	Client *client			= m_clientPool.alloc();

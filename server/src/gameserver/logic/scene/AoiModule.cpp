@@ -15,6 +15,11 @@ AoiModule::AoiModule()
 
 }
 
+void AoiModule::Update()
+{
+
+}
+
 bool AoiModule::Add(AoiObject *obj)
 {
 	if (utiltool::Has(m_objs, obj->objId))
@@ -25,6 +30,15 @@ bool AoiModule::Add(AoiObject *obj)
 	m_objs[obj->objId] = obj;
 	int at = GetInsertPos(obj->x, obj->y);
 	m_vecX.insert(m_vecX.begin() + at, obj);
+
+	for (int i = 0, n = m_vecX.size(); i < n; ++i)
+	{
+		AoiObject* other = m_vecX[i];
+		if (IsInSeeRange(other, obj->x))
+		{
+			
+		}
+	}
 
 	return true;
 }
@@ -207,6 +221,12 @@ bool AoiModule::Pick(float x, float y, float radius, std::vector<AoiObject*>& ou
 	}
 
 	return !outs.empty();
+}
+
+// 是否在可视范围内
+bool AoiModule::IsInSeeRange(AoiObject* obj, float x)
+{
+	return utiltool::Between(x, obj->x - obj->seeRadius, obj->x + obj->seeRadius);
 }
 
 void AoiModule::test()

@@ -180,6 +180,12 @@
     <ClInclude Include="tool\utiltool.h">
       <Filter>tool</Filter>
     </ClInclude>
+    <ClInclude Include="global\VarList.h">
+      <Filter>global</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol\MsgDefine.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -202,6 +208,9 @@
     </Filter>
     <Filter Include="http">
       <UniqueIdentifier>{5ab3f19e-c72d-4e06-85d7-f7bf46f7bbeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="global">
+      <UniqueIdentifier>{bb5808f1-7e29-4c0e-b5c5-b21025e24449}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +335,9 @@
     </ClCompile>
     <ClCompile Include="tool\utiltool.cpp">
       <Filter>tool</Filter>
+    </ClCompile>
+    <ClCompile Include="global\VarList.cpp">
+      <Filter>global</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
