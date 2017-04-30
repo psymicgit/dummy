@@ -2137,7 +2137,7 @@ void testMapInsertFind()
 		{
 			Tick tick("map<string, int> insert test", times);
 			for(int i = 0; i < times; ++i) {
-				int n = randtool::random();
+				int n = randtool::rand_int_all();
 				strmap[strtool::itoa(n)] = n;
 			}
 		}
@@ -2161,7 +2161,7 @@ void testMapInsertFind()
 		{
 			Tick tick("unordered_map<string, int> insert test", times);
 			for(int i = 0; i < times; ++i) {
-				int n = randtool::random();
+				int n = randtool::rand_int_all();
 				strmap[strtool::itoa(n)] = n;
 			}
 		}
@@ -2185,7 +2185,7 @@ void testMapInsertFind()
 		{
 			Tick tick("map<int, int> insert test", times);
 			for(int i = 0; i < times; ++i) {
-				int n = randtool::random();
+				int n = randtool::rand_int_all();
 				intmap[n] = n;
 			}
 		}
@@ -2209,7 +2209,7 @@ void testMapInsertFind()
 		{
 			Tick tick("unordered_map<int, int> insert test", times);
 			for(int i = 0; i < times; ++i) {
-				int n = randtool::random();
+				int n = randtool::rand_int_all();
 				intmap[n] = n;
 			}
 		}
@@ -2235,7 +2235,7 @@ void testUnorderSetDtor()
 
 	int times = 100;
 	for(int i = 0; i < times; ++i) {
-		int n = randtool::random();
+		int n = randtool::rand_int_all();
 		strset.insert(strtool::itoa(n));
 	}
 }

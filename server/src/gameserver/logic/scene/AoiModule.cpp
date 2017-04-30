@@ -212,7 +212,7 @@ bool AoiModule::Pick(float x, float y, float radius, std::vector<AoiObject*>& ou
 void AoiModule::test()
 {
 	const float range = 1000.0f;
-	int n = 10000;
+	int n = 4000;
 	int pickNum = 1000;
 
 	float init[] =

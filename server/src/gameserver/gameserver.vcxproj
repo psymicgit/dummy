@@ -14,7 +14,7 @@
     <ProjectGuid>{0F32A337-691A-40D5-BE02-47CA30E415BF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>gameserver</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -101,6 +101,7 @@
     <ClInclude Include="..\protocol\protocol.pb.h" />
     <ClInclude Include="config\gameconfig.h" />
     <ClInclude Include="db\dbagent.h" />
+    <ClInclude Include="GameLogic.h" />
     <ClInclude Include="gameserver.h" />
     <ClInclude Include="logic\ai\ai.h" />
     <ClInclude Include="logic\client.h" />
@@ -118,6 +119,7 @@
     <ClCompile Include="..\protocol\net.pb.cc" />
     <ClCompile Include="config\gameconfig.cpp" />
     <ClCompile Include="db\dbagent.cpp" />
+    <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="gameserver.cpp" />
     <ClCompile Include="logic\ai\ai.cpp" />
     <ClCompile Include="logic\client.cpp" />

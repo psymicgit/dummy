@@ -45,6 +45,7 @@
     <ClInclude Include="logic\scene\AoiModule.h">
       <Filter>logic\scene</Filter>
     </ClInclude>
+    <ClInclude Include="GameLogic.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameserver.cpp" />
@@ -86,6 +87,7 @@
     <ClCompile Include="logic\scene\AoiModule.cpp">
       <Filter>logic\scene</Filter>
     </ClCompile>
+    <ClCompile Include="GameLogic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocol">

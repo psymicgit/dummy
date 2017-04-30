@@ -16,6 +16,9 @@ namespace randtool
 	// 初始化随机数种子，仅需在启动时调用
 	void initSeed();
 
+	// 获取随机数
+	int rand_int_all();
+
 	// 获取随机数，范围是[0, n - 1]
 	int rand_int(int n);
 

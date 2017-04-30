@@ -48,13 +48,13 @@ void Robot::randomRobot()
 {
 	uint8 randNum[64] = {0};
 
-	m_cliversion = randtool::random(1, 1200);
+	m_cliversion = randtool::rand_int_between(1, 1200);
 
 	randtool::secureRandom(randNum, sizeof(randNum) - 1, 65, 97);
 	m_deviceid = std::string("deviceid_") + (const char*)randNum;
 	m_username = std::string("username_") + (const char*)randNum;
 	m_password = std::string("password_") + (const char*)randNum;
-	m_ip	   = std::string("127.0.0.") + echotool::getmsg("%u", randtool::random(1, 254));
+	m_ip	   = std::string("127.0.0.") + echotool::getmsg("%u", randtool::rand_int_between(1, 254));
 }
 
 

@@ -21,6 +21,11 @@ namespace randtool
 		srand((unsigned)time(NULL));
 	}
 
+	int rand_int_all()
+	{
+		return rand();
+	}
+
 	// 获取随机数，范围是[0, n - 1]
 	int rand_int(int n)
 	{
