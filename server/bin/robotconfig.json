@@ -1,9 +1,9 @@
 {
 	"name"							: "robot",
-	"robots-per-second"				: 1000,
+	"robots-per-second"				: 1,
 	"robots-interval"				: 3000,
-	"robots-speedtest-packet-size"	: 100,
-	"robots-speedtest-packet-num"	: 10000,
+	"robots-speedtest-packet-size"	: 1,
+	"robots-speedtest-packet-num"	: 1,
 
 	"wan": {
 		"threads": 1,
