@@ -34,10 +34,14 @@ bool Listener::open(const string & ip, int port)
 		return false;
 	}
 
+	/*
+
 	// 设置端口复用
 	if(!socktool::setReuseAddr(m_listenFd, true)) {
 		return false;
 	}
+
+	*/
 
 	// 设置为非阻塞
 	if(!socktool::setNonBlocking(m_listenFd)) {

@@ -44,7 +44,7 @@ private:
 	{
 		AuthAck ack;
 
-		if(req->authkey().compare(std::string((const char*)client->m_authKey))) {
+		if(req->authkey() == (const char*)client->m_authKey) {
 			ack.set_result(AUTH_OK);
 		} else {
 			ack.set_result(AUTH_FAIL);
