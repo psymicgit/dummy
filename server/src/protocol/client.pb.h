@@ -58,21 +58,16 @@ inline bool LoginReq_LoginType_Parse(
     LoginReq_LoginType_descriptor(), name, value);
 }
 enum ClientMsgId {
-  eClientGateMsgIdMin = 1000,
-  eLoginReq = 1001,
-  eLoginAck = 1002,
-  eEncryptKeyNtf = 1003,
-  eAuthReq = 1004,
-  eAuthAck = 1005,
-  ePing = 1006,
-  ePong = 1007,
-  eSpeedTest = 1008,
-  eLatencyTest = 1009,
-  eClientGateMsgIdMax = 2000
+  ClientMsg_LoginRequest = 1,
+  ClientMsg_AuthRequest = 2,
+  ClientMsg_PingRequest = 3,
+  ClientMsg_SpeedTestRequest = 4,
+  ClientMsg_LatencyTestRequest = 5,
+  ClientMsg_RouteToGate = 1000
 };
 bool ClientMsgId_IsValid(int value);
-const ClientMsgId ClientMsgId_MIN = eClientGateMsgIdMin;
-const ClientMsgId ClientMsgId_MAX = eClientGateMsgIdMax;
+const ClientMsgId ClientMsgId_MIN = ClientMsg_LoginRequest;
+const ClientMsgId ClientMsgId_MAX = ClientMsg_RouteToGate;
 const int ClientMsgId_ARRAYSIZE = ClientMsgId_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ClientMsgId_descriptor();
@@ -86,11 +81,16 @@ inline bool ClientMsgId_Parse(
     ClientMsgId_descriptor(), name, value);
 }
 enum ServerMsgId {
-  ServerMsgId_EncryptKeyNotify = 1
+  ServerMsg_LoginReply = 1,
+  ServerMsg_EncryptKeyNotify = 2,
+  ServerMsg_AutyReply = 3,
+  ServerMsg_PongReply = 4,
+  ServerMsg_SpeedTestReply = 5,
+  ServerMsg_LatencyTestReply = 6
 };
 bool ServerMsgId_IsValid(int value);
-const ServerMsgId ServerMsgId_MIN = ServerMsgId_EncryptKeyNotify;
-const ServerMsgId ServerMsgId_MAX = ServerMsgId_EncryptKeyNotify;
+const ServerMsgId ServerMsgId_MIN = ServerMsg_LoginReply;
+const ServerMsgId ServerMsgId_MAX = ServerMsg_LatencyTestReply;
 const int ServerMsgId_ARRAYSIZE = ServerMsgId_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ServerMsgId_descriptor();

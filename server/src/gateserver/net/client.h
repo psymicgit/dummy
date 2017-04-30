@@ -44,7 +44,8 @@ public:
 	// 出来本客户端连接已收到的数据
 	void handleMsg();
 
-	bool needRoute(int msgId);
+	// 是否需要转发到游戏服
+	bool NeedRouteToGame(int msgId);
 
 public:
 

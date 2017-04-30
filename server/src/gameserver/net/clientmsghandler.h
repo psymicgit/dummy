@@ -28,8 +28,8 @@ public:
 
 	void init()
 	{
-		registerMsg(eLoginReq,	OnLoginReq);
-		registerMsg(eAuthReq,	OnAuthReq);
+		registerMsg(ClientMsg_LoginRequest,	OnLoginReq);
+		registerMsg(ClientMsg_AuthRequest,	OnAuthReq);
 	}
 
 private:

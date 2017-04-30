@@ -1,29 +1,32 @@
-//************** 服务端 - 客户端消息号 **************//
+//---------------- 服务端 - 客户端消息号 ----------------//
 
 enum ClientMsgId
 {
-	eClientGateMsgIdMin = 1000;
-	eLoginReq = 1001;				// 登录到网关请求
-	eLoginAck = 1002;				// 登录到网关答复
-	eEncryptKeyNtf = 1003;			// 下发加密串
-	eAuthReq = 1004;
-	eAuthAck = 1005; 
+	//******** 网关直接处理 ********//
 
-	// 测试
-	ePing = 1006;
-	ePong = 1007;
-	eSpeedTest = 1008;
-	eLatencyTest = 1009;
-
-	eClientGateMsgIdMax = 2000;
+	ClientMsg_LoginRequest = 1;				// 登录请求
+	ClientMsg_AuthRequest = 2;				// 认证请求
+	ClientMsg_PingRequest = 3;				// 测试pingpong发包速度请求
+	ClientMsg_SpeedTestRequest = 4;			// 测试发包速度请求
+	ClientMsg_LatencyTestRequest = 5;		// 测试发包延迟请求
+	
+	ClientMsg_RouteToGate = 1000;			// 在网关直接处理
+	
+	//******** 网关收到后转发给游戏服处理 ********//
+	
 }
 
 enum ServerMsgId
 {
-	ServerMsgId_EncryptKeyNotify = 1;
+	ServerMsg_LoginReply = 1;
+	ServerMsg_EncryptKeyNotify = 2;
+	ServerMsg_AutyReply = 3;
+	ServerMsg_PongReply = 4;
+	ServerMsg_SpeedTestReply = 5;
+	ServerMsg_LatencyTestReply = 6;
 }
 
-//************** 服务端 - 客户端消息内容 **************//
+//---------------- 服务端 - 客户端消息内容 ----------------//
 
 // 加解密玥定义
 enum EncryptKeyDef {

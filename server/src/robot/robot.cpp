@@ -231,7 +231,7 @@ void Robot::pingpongTest()
 
 	LOG_INFO << "robot <" << m_robotId << "> start pingpong test, pingpong packet size = " << p.ByteSize();
 
-	send(ePing, p);
+	send(ClientMsg_PingRequest, p);
 }
 
 void Robot::speedTest()
@@ -251,7 +251,7 @@ void Robot::speedTest()
 	// Tick tick("speed test", m_robotMgr->m_config.m_speedTestPacketNum);
 
 	for (int i = 0; i < m_robotMgr->m_config.m_speedTestPacketNum; i++) {
-		send(eSpeedTest, p);
+		send(ClientMsg_SpeedTestRequest, p);
 	}
 
 	m_link->close();
@@ -278,7 +278,7 @@ void Robot::latencyTest()
 
 	for (int i = 0; i < 1000; i++) {
 		p.set_time(ticktool::tick());
-		send(eLatencyTest, p);
+		send(ClientMsg_LatencyTestRequest, p);
 	}
 
 	m_link->close();

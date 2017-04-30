@@ -200,17 +200,20 @@ void protobuf_AddDesc_client_2eproto() {
     "thReq\022\017\n\007authKey\030\001 \002(\t\":\n\007AuthAck\022\033\n\006res"
     "ult\030\001 \002(\0162\013.AuthResult\022\022\n\nencryptKey\030\002 \002"
     "(\t\"*\n\010PingPong\022\020\n\010pingpong\030\001 \002(\t\022\014\n\004time"
-    "\030\002 \002(\004*\320\001\n\013ClientMsgId\022\030\n\023eClientGateMsg"
-    "IdMin\020\350\007\022\016\n\teLoginReq\020\351\007\022\016\n\teLoginAck\020\352\007"
-    "\022\023\n\016eEncryptKeyNtf\020\353\007\022\r\n\010eAuthReq\020\354\007\022\r\n\010"
-    "eAuthAck\020\355\007\022\n\n\005ePing\020\356\007\022\n\n\005ePong\020\357\007\022\017\n\ne"
-    "SpeedTest\020\360\007\022\021\n\014eLatencyTest\020\361\007\022\030\n\023eClie"
-    "ntGateMsgIdMax\020\320\017*/\n\013ServerMsgId\022 \n\034Serv"
-    "erMsgId_EncryptKeyNotify\020\001*\177\n\rEncryptKey"
-    "Def\022\021\n\rEncryptKeyLen\020 \022\022\n\016EncryptHeadLen"
-    "\020\002\022\022\n\016EncryptTailLen\020\004\022\016\n\nAuthKeyLen\020\020\022\020"
-    "\n\014PublicKeyLen\020\010\022\021\n\rPrivateKeyLen\020\024*(\n\nA"
-    "uthResult\022\013\n\007AUTH_OK\020\000\022\r\n\tAUTH_FAIL\020\001", 917);
+    "\030\002 \002(\004*\275\001\n\013ClientMsgId\022\032\n\026ClientMsg_Logi"
+    "nRequest\020\001\022\031\n\025ClientMsg_AuthRequest\020\002\022\031\n"
+    "\025ClientMsg_PingRequest\020\003\022\036\n\032ClientMsg_Sp"
+    "eedTestRequest\020\004\022 \n\034ClientMsg_LatencyTes"
+    "tRequest\020\005\022\032\n\025ClientMsg_RouteToGate\020\350\007*\267"
+    "\001\n\013ServerMsgId\022\030\n\024ServerMsg_LoginReply\020\001"
+    "\022\036\n\032ServerMsg_EncryptKeyNotify\020\002\022\027\n\023Serv"
+    "erMsg_AutyReply\020\003\022\027\n\023ServerMsg_PongReply"
+    "\020\004\022\034\n\030ServerMsg_SpeedTestReply\020\005\022\036\n\032Serv"
+    "erMsg_LatencyTestReply\020\006*\177\n\rEncryptKeyDe"
+    "f\022\021\n\rEncryptKeyLen\020 \022\022\n\016EncryptHeadLen\020\002"
+    "\022\022\n\016EncryptTailLen\020\004\022\016\n\nAuthKeyLen\020\020\022\020\n\014"
+    "PublicKeyLen\020\010\022\021\n\rPrivateKeyLen\020\024*(\n\nAut"
+    "hResult\022\013\n\007AUTH_OK\020\000\022\r\n\tAUTH_FAIL\020\001", 1035);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "client.proto", &protobuf_RegisterTypes);
   LoginReq::default_instance_ = new LoginReq();
@@ -238,17 +241,12 @@ const ::google::protobuf::EnumDescriptor* ClientMsgId_descriptor() {
 }
 bool ClientMsgId_IsValid(int value) {
   switch(value) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
     case 1000:
-    case 1001:
-    case 1002:
-    case 1003:
-    case 1004:
-    case 1005:
-    case 1006:
-    case 1007:
-    case 1008:
-    case 1009:
-    case 2000:
       return true;
     default:
       return false;
@@ -262,6 +260,11 @@ const ::google::protobuf::EnumDescriptor* ServerMsgId_descriptor() {
 bool ServerMsgId_IsValid(int value) {
   switch(value) {
     case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
       return true;
     default:
       return false;

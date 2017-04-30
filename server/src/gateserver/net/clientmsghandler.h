@@ -30,13 +30,13 @@ public:
 
 	void init()
 	{
-		registerMsg(eLoginReq,		OnLoginReq);
-		registerMsg(eAuthReq,		OnAuthReq);
+		registerMsg(ClientMsg_LoginRequest,			OnLoginReq);
+		registerMsg(ClientMsg_AuthRequest,			OnAuthReq);
 
 		// ²âÊÔ
-		registerMsg(ePing,			OnPingTest);
-		registerMsg(eSpeedTest,		OnSpeedTest);
-		registerMsg(eLatencyTest,	OnLatencyTest);
+		registerMsg(ClientMsg_PingRequest,			OnPingTest);
+		registerMsg(ClientMsg_SpeedTestRequest,		OnSpeedTest);
+		registerMsg(ClientMsg_LatencyTestRequest,	OnLatencyTest);
 	}
 
 private:
@@ -51,7 +51,7 @@ private:
 		}
 
 		ack.set_encryptkey("123213");
-		client->send(eAuthAck, ack);
+		client->send(ServerMsg_AutyReply, ack);
 	}
 
 	static void OnLoginReq(Client* client, LoginReq *req, Timestamp receiveTime)
@@ -77,7 +77,7 @@ private:
 			}
 		}
 
-		client->send(ePong, *p);
+		client->send(ServerMsg_PongReply, *p);
 	}
 
 	static void OnSpeedTest(Client* client, PingPong *p, Timestamp receiveTime)

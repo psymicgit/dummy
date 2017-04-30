@@ -48,7 +48,7 @@ void Client::onEstablish()
 	ntf.set_privatekey((const char*)m_encryptKey, sizeof(m_encryptKey));
 	ntf.set_authkey((const char*)m_authKey, sizeof(m_authKey));
 
-	m_link->send(eEncryptKeyNtf, ntf);
+	m_link->send(ServerMsg_EncryptKeyNotify, ntf);
 //
 // 	Message *msg = ntf;
 // 	msgtool::freePacket(msg);
@@ -119,9 +119,9 @@ void Client::handleMsg()
 		char *msg = (char*)peek + sizeof(NetMsgHead) + EncryptHeadLen;
 
 		// 判断是否需要转发，
-		if (needRoute(msgId)) {
+		if (NeedRouteToGame(msgId)) {
 			// 转发给游戏服务器
-			//GateServer::Instance().sendToGameServer(client->m_clientId, msgId, msg, msgLen);
+			GateServer::Instance().sendToGameServer(m_clientId, msgId, msg, msgLen);
 		} else {
 			// 直接本地进行处理
 			m_clientMgr->m_dispatcher.dispatch(*this, msgId, msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen, 0);
@@ -134,14 +134,9 @@ void Client::handleMsg()
 	link->endRead(dst);
 }
 
-bool Client::needRoute(int msgId)
+bool Client::NeedRouteToGame(int msgId)
 {
-	// 判断是否需要转发
-	if (eClientGateMsgIdMin < msgId && msgId < eClientGateMsgIdMax) {
-		return false;
-	}
-
-	return true;
+	return msgId > ClientMsg_RouteToGate;
 }
 
 bool Client::send(int msgId, Message &msg)

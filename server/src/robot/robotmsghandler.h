@@ -30,14 +30,14 @@ public:
 
 	void init()
 	{
-		registerMsg(eLoginAck,			OnLoginAck);
-		registerMsg(eEncryptKeyNtf,		OnEncryptKeyNtf);
-		registerMsg(eAuthAck,			OnAuthAck);
+		registerMsg(ServerMsg_LoginReply,			OnLoginAck);
+		registerMsg(ServerMsg_EncryptKeyNotify,		OnEncryptKeyNtf);
+		registerMsg(ServerMsg_AutyReply,			OnAuthAck);
 
 		// ²âÊÔ
-		registerMsg(ePong,				OnPongTest);
-		registerMsg(eSpeedTest,			OnSpeedTestDone);
-		registerMsg(eLatencyTest,		OnLatencyTestDone);
+		registerMsg(ServerMsg_PongReply,			OnPongTest);
+		registerMsg(ServerMsg_SpeedTestReply,		OnSpeedTestDone);
+		registerMsg(ServerMsg_LatencyTestReply,		OnLatencyTestDone);
 	}
 
 private:
@@ -79,7 +79,7 @@ private:
 	// ÊÕµ½µÇÂ¼´ğ¸´£¨²âÊÔÓÃ£©
 	static void OnLoginAck(Robot* robot, LoginReq *req, Timestamp receiveTime)
 	{
-		robot->send(eLoginReq, *req);
+		robot->send(ClientMsg_LoginRequest, *req);
 	}
 
 	// ÊÕµ½µÇÂ¼´ğ¸´£¨²âÊÔÓÃ£©
@@ -93,7 +93,7 @@ private:
 		robot->m_pingpongCount++;
 
 		if (robot->m_pingpongCount % 10) {
-			robot->send(ePing, *p);
+			robot->send(ClientMsg_PingRequest, *p);
 		} else {
 			robot->speedTest();
 		}
