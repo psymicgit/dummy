@@ -85,6 +85,24 @@ inline bool ClientMsgId_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ClientMsgId>(
     ClientMsgId_descriptor(), name, value);
 }
+enum ServerMsgId {
+  ServerMsgId_EncryptKeyNotify = 1
+};
+bool ServerMsgId_IsValid(int value);
+const ServerMsgId ServerMsgId_MIN = ServerMsgId_EncryptKeyNotify;
+const ServerMsgId ServerMsgId_MAX = ServerMsgId_EncryptKeyNotify;
+const int ServerMsgId_ARRAYSIZE = ServerMsgId_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ServerMsgId_descriptor();
+inline const ::std::string& ServerMsgId_Name(ServerMsgId value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ServerMsgId_descriptor(), value);
+}
+inline bool ServerMsgId_Parse(
+    const ::std::string& name, ServerMsgId* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ServerMsgId>(
+    ServerMsgId_descriptor(), name, value);
+}
 enum EncryptKeyDef {
   EncryptKeyLen = 32,
   EncryptHeadLen = 2,
@@ -1741,6 +1759,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::LoginReq_LoginType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::ClientMsgId>() {
   return ::ClientMsgId_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::ServerMsgId>() {
+  return ::ServerMsgId_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::EncryptKeyDef>() {

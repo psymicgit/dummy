@@ -18,6 +18,11 @@ enum ClientMsgId
 	eClientGateMsgIdMax = 2000;
 }
 
+enum ServerMsgId
+{
+	ServerMsgId_EncryptKeyNotify = 1;
+}
+
 //************** 服务端 - 客户端消息内容 **************//
 
 // 加解密玥定义

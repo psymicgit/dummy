@@ -35,6 +35,7 @@ const ::google::protobuf::Descriptor* PingPong_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   PingPong_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* ClientMsgId_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* ServerMsgId_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EncryptKeyDef_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* AuthResult_descriptor_ = NULL;
 
@@ -138,8 +139,9 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PingPong));
   ClientMsgId_descriptor_ = file->enum_type(0);
-  EncryptKeyDef_descriptor_ = file->enum_type(1);
-  AuthResult_descriptor_ = file->enum_type(2);
+  ServerMsgId_descriptor_ = file->enum_type(1);
+  EncryptKeyDef_descriptor_ = file->enum_type(2);
+  AuthResult_descriptor_ = file->enum_type(3);
 }
 
 namespace {
@@ -203,11 +205,12 @@ void protobuf_AddDesc_client_2eproto() {
     "\022\023\n\016eEncryptKeyNtf\020\353\007\022\r\n\010eAuthReq\020\354\007\022\r\n\010"
     "eAuthAck\020\355\007\022\n\n\005ePing\020\356\007\022\n\n\005ePong\020\357\007\022\017\n\ne"
     "SpeedTest\020\360\007\022\021\n\014eLatencyTest\020\361\007\022\030\n\023eClie"
-    "ntGateMsgIdMax\020\320\017*\177\n\rEncryptKeyDef\022\021\n\rEn"
-    "cryptKeyLen\020 \022\022\n\016EncryptHeadLen\020\002\022\022\n\016Enc"
-    "ryptTailLen\020\004\022\016\n\nAuthKeyLen\020\020\022\020\n\014PublicK"
-    "eyLen\020\010\022\021\n\rPrivateKeyLen\020\024*(\n\nAuthResult"
-    "\022\013\n\007AUTH_OK\020\000\022\r\n\tAUTH_FAIL\020\001", 868);
+    "ntGateMsgIdMax\020\320\017*/\n\013ServerMsgId\022 \n\034Serv"
+    "erMsgId_EncryptKeyNotify\020\001*\177\n\rEncryptKey"
+    "Def\022\021\n\rEncryptKeyLen\020 \022\022\n\016EncryptHeadLen"
+    "\020\002\022\022\n\016EncryptTailLen\020\004\022\016\n\nAuthKeyLen\020\020\022\020"
+    "\n\014PublicKeyLen\020\010\022\021\n\rPrivateKeyLen\020\024*(\n\nA"
+    "uthResult\022\013\n\007AUTH_OK\020\000\022\r\n\tAUTH_FAIL\020\001", 917);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "client.proto", &protobuf_RegisterTypes);
   LoginReq::default_instance_ = new LoginReq();
@@ -246,6 +249,19 @@ bool ClientMsgId_IsValid(int value) {
     case 1008:
     case 1009:
     case 2000:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ServerMsgId_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ServerMsgId_descriptor_;
+}
+bool ServerMsgId_IsValid(int value) {
+  switch(value) {
+    case 1:
       return true;
     default:
       return false;
