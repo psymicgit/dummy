@@ -36,6 +36,9 @@ namespace randtool
 
 	// 获取一串随机数，基于加密的伪随机数生成器（Cryptographically Secure Pseudo-Random Number Generator – CSPRNG）
 	void secureRandom(uint8 nums[], int cnt, int beg, int end);
+
+	// 随机生成一个定长字符串
+	std::string rand_string(int n);
 }
 
 #endif //_randtool_h_

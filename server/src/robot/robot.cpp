@@ -31,11 +31,9 @@ Robot::Robot()
 	, m_robotMgr(NULL)
 	, m_isEncrypt(false)
 	, m_robotId(0)
-	, m_cliversion(110)
+	, m_clientVersion(110)
 	, m_pingpongCount(0)
 {
-	bzero(m_encryptKey, sizeof(m_encryptKey));
-
 	randomRobot();
 }
 
@@ -46,14 +44,13 @@ std::string Robot::name()
 
 void Robot::randomRobot()
 {
-	uint8 randNum[64] = {0};
+	m_clientVersion = randtool::rand_int_between(1, 1200);
 
-	m_cliversion = randtool::rand_int_between(1, 1200);
+	std::string randKey = randtool::rand_string(64);
 
-	randtool::secureRandom(randNum, sizeof(randNum) - 1, 65, 97);
-	m_deviceid = std::string("deviceid_") + (const char*)randNum;
-	m_username = std::string("username_") + (const char*)randNum;
-	m_password = std::string("password_") + (const char*)randNum;
+	m_deviceid = std::string("deviceid_") + randKey;
+	m_username = std::string("username_") + randKey;
+	m_password = std::string("password_") + randKey;
 	m_ip	   = std::string("127.0.0.") + echotool::getmsg("%u", randtool::rand_int_between(1, 254));
 }
 
@@ -133,7 +130,7 @@ void Robot::handleMsg()
 		uint8* encryptBuf	=  (uint8*)(peek + sizeof(NetMsgHead));
 		int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
-		if(!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
+		if(!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size())) {
 			LOG_ERROR << "robot [" << link->getLocalAddr().toIpPort() << "] <-> gatesvr [" << link->getPeerAddr().toIpPort()
 			          << "] receive invalid msg[len=" << encryptBufLen << "]";
 			evbuffer_drain(dst, msgLen);
@@ -183,7 +180,7 @@ bool Robot::send(int msgId, Message &msg)
 	uint8* decryptBuf	= (uint8*)(m_link->m_net->g_encryptBuf + headSize);
 	int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
 
-	encrypttool::xor_encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));
+	encrypttool::xor_encrypt(decryptBuf, decryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size());
 
 	NetMsgHead* pHeader = (NetMsgHead*)m_link->m_net->g_encryptBuf;
 

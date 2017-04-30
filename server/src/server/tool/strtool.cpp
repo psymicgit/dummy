@@ -35,31 +35,6 @@ namespace strtool
 
 namespace strtool
 {
-	// 随机生成一个定长字符串
-	string random_str(int n)
-	{
-		if (n <= 0)
-		{
-			return "";
-		}
-
-		static const char alphanum[] =
-			"0123456789"
-			"!@#$%^&*"
-			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-			"abcdefghijklmnopqrstuvwxyz";
-
-		int size = sizeof(alphanum);
-
-		string str;
-		str.resize(n);
-
-		for (int i = 0; i < n; ++i) {
-			str[i] = alphanum[rand() % (size - 1)];
-		}
-		return str;
-	}
-
 	// 是否为空白字符
 	inline bool is_blank(char c)
 	{

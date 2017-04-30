@@ -70,11 +70,11 @@ public:
 	Link*		m_link;
 	RobotMgr*	m_robotMgr;
 
-	uint8		m_encryptKey[EncryptKeyLen];
+	std::string	m_encryptKey;
 	bool		m_isEncrypt;
 	uint32		m_robotId;
 
-	int			m_cliversion;
+	int			m_clientVersion;
 	int			m_pingpongCount;
 
 	std::string m_publickey; // 认证中心发送过来的公钥

@@ -11,6 +11,7 @@
 #include <chrono>
 #include <iostream>
 #include "strtool.h"
+#include "randtool.h"
 
 namespace actool
 {
@@ -64,7 +65,7 @@ namespace actool
 		cout << "Generating input text ...";
 		set<string> input_strings;
 		while (input_strings.size() < 10) {
-			input_strings.insert(strtool::random_str(256));
+			input_strings.insert(randtool::rand_string(256));
 		}
 		vector<string> input_vector(input_strings.begin(), input_strings.end());
 		cout << " done" << endl;
@@ -72,7 +73,7 @@ namespace actool
 		cout << "Generating search patterns ...";
 		set<string> patterns;
 		while (patterns.size() < 1000000) {
-			patterns.insert(strtool::random_str(8));
+			patterns.insert(randtool::rand_string(8));
 		}
 		vector<string> pattern_vector(patterns.begin(), patterns.end());
 		cout << " done" << endl;

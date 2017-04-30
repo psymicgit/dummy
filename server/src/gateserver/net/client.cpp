@@ -33,25 +33,21 @@ Client::Client()
 	, m_speedTestCount(0)
 	, m_latencyTestCount(0)
 {
-	bzero(m_encryptKey, sizeof(m_encryptKey));
 }
 
 void Client::onEstablish()
 {
 	// 随机生成认证串
-	randtool::secureRandom(m_authKey, sizeof(m_authKey), '0', 'z');
-	randtool::secureRandom(m_encryptKey, sizeof(m_encryptKey), '0', 'z');
+	m_encryptKey = randtool::rand_string(EncryptKeyLen);
+	m_authKey = randtool::rand_string(AuthKeyLen);
 
 	//发送加解密密钥
 	EncryptKeyNtf ntf;
-	ntf.set_publickey((const char*)m_encryptKey, sizeof(m_encryptKey));
-	ntf.set_privatekey((const char*)m_encryptKey, sizeof(m_encryptKey));
-	ntf.set_authkey((const char*)m_authKey, sizeof(m_authKey));
+	ntf.set_publickey(m_encryptKey);
+	ntf.set_privatekey(m_encryptKey);
+	ntf.set_authkey(m_authKey);
 
 	m_link->send(ServerMsg_EncryptKeyNotify, ntf);
-//
-// 	Message *msg = ntf;
-// 	msgtool::freePacket(msg);
 }
 
 std::string Client::name()
@@ -109,7 +105,7 @@ void Client::handleMsg()
 		uint8 *encryptBuf	=  (uint8*)(peek + sizeof(NetMsgHead));
 		int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
-		if(!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, m_encryptKey, sizeof(m_encryptKey))) {
+		if(!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size())) {
 			LOG_ERROR << "gatesvr [" << link->getPeerAddr().toIpPort() << "] <-> " << name() << " [" << link->getLocalAddr().toIpPort()
 			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
 			evbuffer_drain(dst, msgLen);
@@ -161,7 +157,7 @@ bool Client::send(int msgId, Message &msg)
 	uint8* decryptBuf	= (uint8*)(m_link->m_net->g_encryptBuf + headSize);
 	int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
 
-	encrypttool::xor_encrypt(decryptBuf, decryptBufLen, m_encryptKey, sizeof(m_encryptKey));
+	encrypttool::xor_encrypt(decryptBuf, decryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size());
 
 	NetMsgHead* pHeader	= (NetMsgHead*)m_link->m_net->g_encryptBuf;
 	int packetLen			= msgtool::buildNetHeader(pHeader, msgId, decryptBufLen);

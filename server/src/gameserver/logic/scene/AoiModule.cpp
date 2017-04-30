@@ -58,6 +58,8 @@ bool AoiModule::Leave(AoiObject* obj)
 	{
 		m_vecX.erase(m_vecX.begin() + pos);
 	}
+
+	return true;
 }
 
 void AoiModule::Move(AoiObject* obj, float x, float y)

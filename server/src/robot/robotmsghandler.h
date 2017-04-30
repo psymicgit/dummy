@@ -53,7 +53,7 @@ private:
 
 		// LOG_INFO << "OnEncryptKeyNtf :" << msgtool::getMsgString(*ntf);
 
-		memcpy(robot->m_encryptKey, ntf->publickey().data(), sizeof(robot->m_encryptKey));
+		robot->m_encryptKey = ntf->publickey();
 		robot->m_isEncrypt = true;
 
 		LoginReq req;

@@ -49,17 +49,12 @@ public:
 
 public:
 
-	Link*		m_link;							// 与客户端的tcp原始连接
-
-	uint32		m_clientId;
-
-	TaskQueue*	m_taskQueue;
-
-	ClientMgr*	m_clientMgr;
-
-	uint8		m_encryptKey[EncryptKeyLen];	// 加密密钥
-
-	uint8		m_authKey[AuthKeyLen];			// 认证密钥
+	Link*			m_link;			// 与客户端的tcp原始连接
+	uint32			m_clientId;
+	TaskQueue*		m_taskQueue;
+	ClientMgr*		m_clientMgr;
+	std::string		m_encryptKey;	// 加密密钥
+	std::string		m_authKey;		// 认证密钥
 
 public:
 	int			m_pingCount;

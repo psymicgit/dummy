@@ -15,10 +15,7 @@ using std::string;
 using std::wstring;
 
 namespace strtool
-{
-	// 随机生成一个定长字符串
-	string random_str(int n);
-
+{	
 	// 移除掉字符串开头和末尾处的空格和\t符号
 	// 例如: trim("   start xxx end   ") = "start xxx end"
 	string trim(char* str);

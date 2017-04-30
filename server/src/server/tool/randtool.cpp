@@ -96,4 +96,30 @@ namespace randtool
 		}
 #endif
 	}
+
+	// 随机生成一个定长字符串
+	std::string rand_string(int n)
+	{
+		if (n <= 0)
+		{
+			return "";
+		}
+
+		static const char alphanum[] =
+			"0123456789"
+			"!@#$%^&*"
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+			"abcdefghijklmnopqrstuvwxyz";
+
+		int size = sizeof(alphanum);
+
+		string str;
+		str.resize(n);
+
+		for (int i = 0; i < n; ++i) {
+			str[i] = alphanum[rand() % (size - 1)];
+		}
+		return str;
+	}
+
 }

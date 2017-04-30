@@ -18,7 +18,7 @@ bool AuthHttpCmd::init()
 	std::string encryptPwd = "encrypted_" + m_robot->m_password + "_encrypted";
 
 	m_fields =
-	    "cliver="	 + std::string(echotool::getmsg("%u", m_robot->m_cliversion)) +
+	    "cliver="	 + std::string(echotool::getmsg("%u", m_robot->m_clientVersion)) +
 	    "&deviceid=" + m_robot->m_deviceid +
 	    "&username=" + m_robot->m_username +
 	    "&password=" + m_robot->m_password +
