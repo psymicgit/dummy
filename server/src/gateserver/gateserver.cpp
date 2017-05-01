@@ -132,5 +132,8 @@ void GateServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int serve
 
 void GateServer::sendToGameServer(uint32 clientId, uint16 msgId, const char* data, uint32 len)
 {
-	m_gamesvrLink->send(clientId, msgId, data, len);
+	if (m_gamesvrLink)
+	{
+		m_gamesvrLink->send(clientId, msgId, data, len);
+	}
 }

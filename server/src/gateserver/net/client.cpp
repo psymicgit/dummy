@@ -38,7 +38,7 @@ Client::Client()
 void Client::onEstablish()
 {
 	// 随机生成认证串
-	m_encryptKey = randtool::rand_string(EncryptKeyLen);
+	// m_encryptKey = randtool::rand_string(EncryptKeyLen);
 	m_authKey = randtool::rand_string(AuthKeyLen);
 
 	//发送加解密密钥
@@ -89,42 +89,56 @@ void Client::handleMsg()
 
 		NetMsgHead *head	= (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
 
-		uint16 msgId		= endiantool::networkToHost(head->msgId);
-		uint32 msgLen		= endiantool::networkToHost(head->msgLen);
+		uint16 msgId = endiantool::networkToHost(head->msgId);
+		uint32 rawMsgSize = endiantool::networkToHost(head->msgLen);
 
 		// 检测半包
-		if (msgLen > bytes) {
+		if (rawMsgSize > bytes) {
 			// 			LOG_WARN << "gatesvr [" << link->m_localAddr.toIpPort() << "] <-> client [" << link->m_peerAddr.toIpPort()
 			// 			          << "] msgLen(" << msgLen << ") > bytes(" << bytes << ")";
 			break;
 		}
 
-		unsigned char *peek = evbuffer_pullup(dst, msgLen);
+		unsigned char *peek = evbuffer_pullup(dst, rawMsgSize);
+		
+		char *msg = nullptr;
+		int msgSize = 0;
 
-		// 取到的是加密串
-		uint8 *encryptBuf	=  (uint8*)(peek + sizeof(NetMsgHead));
-		int encryptBufLen = msgLen - sizeof(NetMsgHead);
-
-		// 解密
-		if(!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size())) {
-			LOG_ERROR << "gatesvr [" << link->getPeerAddr().toIpPort() << "] <-> " << name() << " [" << link->getLocalAddr().toIpPort()
-			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
-			evbuffer_drain(dst, msgLen);
-			continue;
+		// 不加密
+		if (m_encryptKey.empty())
+		{
+			msg = (char*)peek + sizeof(NetMsgHead);
+			msgSize = rawMsgSize - sizeof(NetMsgHead);
 		}
+		// 加密
+		else
+		{
+			// 取到的是加密串
+			uint8 *encryptBuf = (uint8*)(peek + sizeof(NetMsgHead));
+			int encryptBufLen = rawMsgSize - sizeof(NetMsgHead);
 
-		char *msg = (char*)peek + sizeof(NetMsgHead) + EncryptHeadLen;
+			// 解密
+			if (!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size())) {
+				LOG_ERROR << "gatesvr [" << link->getPeerAddr().toIpPort() << "] <-> " << name() << " [" << link->getLocalAddr().toIpPort()
+					<< "] decrypt msg [len=" << encryptBufLen << "] failed";
+				evbuffer_drain(dst, rawMsgSize);
+				continue;
+			}
+
+			msg = (char*)peek + sizeof(NetMsgHead) + EncryptHeadLen;
+			msgSize = rawMsgSize - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen;
+		}
 
 		// 判断是否转发
 		if (NeedRouteToGame(msgId)) {
 			// 转发给游戏服
-			GateServer::Instance().sendToGameServer(m_clientId, msgId, msg, msgLen);
+			GateServer::Instance().sendToGameServer(m_clientId, msgId, msg, msgSize);
 		} else {
 			// 直接处理
-			m_clientMgr->m_dispatcher.dispatch(*this, msgId, msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen, 0);
+			m_clientMgr->m_dispatcher.dispatch(*this, msgId, msg, msgSize, 0);
 		}
 
-		evbuffer_drain(dst, msgLen);
+		evbuffer_drain(dst, rawMsgSize);
 	};
 
 	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
@@ -142,28 +156,37 @@ bool Client::send(int msgId, Message &msg)
 		return false;
 	}
 
-	uint32 headSize	= sizeof(NetMsgHead);
-	int size = msg.ByteSize();
-
-	// 将消息包序列化
-	bool ok = msg.SerializeToArray(m_link->m_net->g_encryptBuf + headSize + EncryptHeadLen, size);
-	if (!ok) {
-		LOG_ERROR << "client [" << m_link->getPeerAddr().toIpPort()
-		          << "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgDebugString(msg) << "]";
-
-		return false;
+	// 不加密
+	if (m_encryptKey.empty())
+	{
+		m_link->send(msgId, msg);
 	}
+	// 加密
+	else
+	{
+		int size = msg.ByteSize();
 
-	// 添加加密头、加密尾
-	uint8* decryptBuf = (uint8*)(m_link->m_net->g_encryptBuf + headSize);
-	int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
+		// 将消息包序列化
+		bool ok = msg.SerializeToArray(m_link->m_net->g_encryptBuf + sizeof(NetMsgHead) + EncryptHeadLen, size);
+		if (!ok) {
+			LOG_ERROR << "client [" << m_link->getPeerAddr().toIpPort()
+				<< "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgDebugString(msg) << "]";
 
-	encrypttool::xor_encrypt(decryptBuf, decryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size());
+			return false;
+		}
 
-	NetMsgHead* header	= (NetMsgHead*)m_link->m_net->g_encryptBuf;
-	int packetLen = msgtool::BuildNetHeader(header, msgId, decryptBufLen);
+		// 添加加密头、加密尾
+		uint8* decryptBuf = (uint8*)(m_link->m_net->g_encryptBuf + sizeof(NetMsgHead));
+		int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
 
-	m_link->send(m_link->m_net->g_encryptBuf, packetLen);
+		encrypttool::xor_encrypt(decryptBuf, decryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size());
+
+		NetMsgHead* header = (NetMsgHead*)m_link->m_net->g_encryptBuf;
+		int packetLen = msgtool::BuildNetHeader(header, msgId, decryptBufLen);
+
+		m_link->send(m_link->m_net->g_encryptBuf, packetLen);
+	}
+	
 	return true;
 }
 

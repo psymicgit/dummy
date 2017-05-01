@@ -46,7 +46,8 @@ void ServerLink::send(uint32 routeId, uint16 msgId, const char *data, int len)
 	LanMsgHead *msgHead = (LanMsgHead*)netBuf;
 
 	memcpy(netBuf + sizeof(LanMsgHead), data, len);
-	msgtool::buildLanMsgHeader(msgHead, routeId, msgId, len);
+	msgtool::BuildLanMsgHeader(msgHead, routeId, msgId, len);
 
-	m_link->send(netBuf, msgHead->msgLen);
+	int msgSize = sizeof(LanMsgHead) + len;
+	m_link->send(netBuf, msgSize);
 }

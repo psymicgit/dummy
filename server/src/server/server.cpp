@@ -108,10 +108,10 @@ void Server::onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& 
 
 void Server::onRecv(Link *link)
 {
-	m_taskQueue.put(boost::bind(&Server::handleMsg, this, link));
+	m_taskQueue.put(boost::bind(&Server::HandleNetMsg, this, link));
 }
 
-void Server::handleMsg(Link *link)
+void Server::HandleNetMsg(Link *link)
 {
 	// 1. 将接收缓冲区的数据全部取出
 	evbuffer recvSwapBuf;
@@ -172,6 +172,10 @@ void Server::registerServer(int svrId, ServerLink *svrLink)
 void Server::unregisterServer(int svrId)
 {
 	m_svrLinkMap.erase(svrId);
+}
+
+void Server::HandleServerMsg(Link* link)
+{
 }
 
 void Server::start()

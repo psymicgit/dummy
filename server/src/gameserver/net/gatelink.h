@@ -18,7 +18,7 @@ class Buffer;
 
 class GateLink : public ServerLink
 {
-	virtual void OnRecv(Link*, Buffer&);
+	virtual void onRecv(Link*) override;
 };
 
 #endif //_gatelink_h_

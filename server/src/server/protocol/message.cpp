@@ -32,7 +32,7 @@ namespace msgtool
 		return packetLen;
 	}
 
-	int buildLanMsgHeader(LanMsgHead *msgHead, uint32 clientId, uint16 msgId, uint32 msgLen)
+	int BuildLanMsgHeader(LanMsgHead *msgHead, uint32 clientId, uint16 msgId, uint32 msgLen)
 	{
 		uint32 packetLen = msgLen + sizeof(LanMsgHead);
 

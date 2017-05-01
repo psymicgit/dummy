@@ -66,7 +66,10 @@ public:
 	virtual TaskQueue& getTaskQueue() { return m_taskQueue; }
 
 	// 处理指定连接上已接收到的数据
-	virtual void handleMsg(Link*);
+	virtual void HandleNetMsg(Link*);
+
+	// 处理内网消息
+	void HandleServerMsg(Link*);
 
 	// 启动服务器
 	void start();

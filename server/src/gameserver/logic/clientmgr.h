@@ -23,7 +23,7 @@ public:
 
 	Client* FindClient(uint32 playerId);
 
-	void handleMsg(Client &client, uint16 msgId, Buffer&, Timestamp receiveTime);
+	void handleMsg(Link* link);
 
 private:
 	ClientMap m_clients;
