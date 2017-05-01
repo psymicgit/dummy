@@ -13,21 +13,22 @@
     <ClCompile Include="..\protocol\client.pb.cc">
       <Filter>protocol</Filter>
     </ClCompile>
-    <ClCompile Include="net\clientmgr.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="logic\user.cpp">
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="logic\usermgr.cpp">
       <Filter>logic</Filter>
     </ClCompile>
-    <ClCompile Include="net\client.cpp">
-      <Filter>net</Filter>
-    </ClCompile>
     <ClCompile Include="test.cpp" />
     <ClCompile Include="config\gateconfig.cpp">
       <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="GateLogic.cpp" />
+    <ClCompile Include="net\GateClient.cpp">
+      <Filter>net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\GateClientMgr.cpp">
+      <Filter>net</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -45,24 +46,22 @@
     <ClInclude Include="..\protocol\client.pb.h">
       <Filter>protocol</Filter>
     </ClInclude>
-    <ClInclude Include="net\clientmgr.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="net\client.h">
-      <Filter>net</Filter>
-    </ClInclude>
     <ClInclude Include="logic\usermgr.h">
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="logic\user.h">
       <Filter>logic</Filter>
     </ClInclude>
-    <ClInclude Include="net\clientmsghandler.h">
-      <Filter>net</Filter>
-    </ClInclude>
     <ClInclude Include="test.h" />
     <ClInclude Include="config\gateconfig.h">
       <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="GateLogic.h" />
+    <ClInclude Include="net\GateClient.h">
+      <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\GateClientMgr.h">
+      <Filter>net</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

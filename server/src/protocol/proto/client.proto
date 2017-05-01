@@ -107,7 +107,7 @@ message PingPong
 // 就绪消息
 message ReadyRequest
 {
-	required int is_ready = 1;
+	required int32 is_ready = 1;
 }
 
 // 移动请求

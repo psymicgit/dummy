@@ -11,13 +11,15 @@
 
 #include "server.h"
 
-#include "logic/clientmgr.h"
+#include "logic/GameClientMgr.h"
 #include "net/http/gamehttpmgr.h"
+#include "net/msgdispatcher.h"
 #include "config/gameconfig.h"
 
 #include "db/dbagent.h"
 
 class GateLink;
+class GameClient;
 
 // 游戏服务器: 负责运行游戏逻辑
 class GameServer : public Singleton<GameServer>, public Server
@@ -40,12 +42,15 @@ public:
 	// 发送消息到db服务器
 	bool sendToDBServer(uint16 msgId, Message&);
 
+public:
+	MsgDispatcher<GameClient> m_dispatcher;
+
 private:
 	GateLink*		m_gateLink;
 
 	ServerLink*		m_dbLink;
 
-	ClientMgr		m_clientMgr;
+	GameClientMgr		m_clientMgr;
 
 	GameHttpMgr		m_httpMgr;
 

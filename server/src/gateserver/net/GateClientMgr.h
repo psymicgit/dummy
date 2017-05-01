@@ -11,20 +11,22 @@
 
 #include <net/netdefine.h>
 #include <net/msgdispatcher.h>
-#include <net/client.h>
+#include <net/GateClient.h>
 #include <basic/objectpool.h>
 
-class Client;
+class GateClient;
 
 // 客户端管理中心，管理当前在线的客户端连接实例
-class ClientMgr : public INetLogic
+class GateClientMgr : public INetLogic
 {
 private:
-	typedef std::tr1::unordered_map<uint32, Client*> ClientMap;
+	typedef std::tr1::unordered_map<uint32, GateClient*> ClientMap;
 
 public:
-	ClientMgr();
-	~ClientMgr();
+	GateClientMgr();
+	~GateClientMgr();
+
+	bool Init();
 
 	void close();
 
@@ -39,7 +41,7 @@ public:
 
 	virtual TaskQueue& getTaskQueue() { return *m_taskQueue; }
 
-	void delClient(Client*);
+	void delClient(GateClient*);
 
 	int getClientCount() { return m_clientMap.size(); }
 
@@ -53,9 +55,9 @@ public:
 
 	ClientMap				m_clientMap;		// 当前在线的客户端列表
 
-	MsgDispatcher<Client>	m_dispatcher;		// 客户端消息派发器，派发客户端发来的消息
+	MsgDispatcher<GateClient>	m_dispatcher;		// 客户端消息派发器，派发客户端发来的消息
 
-	ObjectPool<Client>		m_clientPool;		// 客户端池
+	ObjectPool<GateClient>		m_clientPool;		// 客户端池
 };
 
 #endif //_clientmgr_h_

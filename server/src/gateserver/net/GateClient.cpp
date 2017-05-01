@@ -6,7 +6,7 @@
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
-#include "client.h"
+#include "GateClient.h"
 
 
 #include <client.pb.h>
@@ -20,11 +20,11 @@
 #include <basic/evbuffer.h>
 #include <server.h>
 
-#include "clientmgr.h"
+#include "GateClientMgr.h"
 #include "gateserver.h"
 
 
-Client::Client()
+GateClient::GateClient()
 	: m_link(NULL)
 	, m_clientId(0)
 	, m_taskQueue(NULL)
@@ -35,7 +35,7 @@ Client::Client()
 {
 }
 
-void Client::onEstablish()
+void GateClient::onEstablish()
 {
 	// 随机生成认证串
 	// m_encryptKey = randtool::rand_string(EncryptKeyLen);
@@ -50,12 +50,12 @@ void Client::onEstablish()
 	m_link->send(ServerMsg_EncryptKeyNotify, ntf);
 }
 
-std::string Client::name()
+std::string GateClient::name()
 {
 	return echotool::getmsg("client<%u>", m_clientId);
 }
 
-void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
+void GateClient::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	if ((m_clientMgr->getClientCount() - 1) % 100 == 0) {
 		LOG_INFO << name() << " [" << peerAddr.toIpPort() << "] <-> gatesvr [" << localAddr.toIpPort() << "] broken! current client cnt = " << m_clientMgr->getClientCount() - 1;
@@ -64,12 +64,12 @@ void Client::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddr
 	m_clientMgr->delClient(this);
 }
 
-void Client::onRecv(Link *link)
+void GateClient::onRecv(Link *link)
 {
-	m_taskQueue->put(boost::bind(&Client::handleMsg, this));
+	m_taskQueue->put(boost::bind(&GateClient::handleMsg, this));
 }
 
-void Client::handleMsg()
+void GateClient::handleMsg()
 {
 	Link *link = m_link;
 
@@ -145,12 +145,12 @@ void Client::handleMsg()
 	link->endRead(dst);
 }
 
-bool Client::NeedRouteToGame(int msgId)
+bool GateClient::NeedRouteToGame(int msgId)
 {
 	return msgId > ClientMsg_RouteToGate;
 }
 
-bool Client::send(int msgId, Message &msg)
+bool GateClient::send(int msgId, Message &msg)
 {
 	if (!m_link->isopen()) {
 		return false;
@@ -190,7 +190,7 @@ bool Client::send(int msgId, Message &msg)
 	return true;
 }
 
-void Client::close()
+void GateClient::close()
 {
 	m_link->close();
 }

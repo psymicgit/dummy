@@ -51,7 +51,7 @@ public:
 	void auth();
 
 	// 3. 登录到游戏服
-	void login();
+	void Login();
 
 public:
 	// 开始ping-pong测试

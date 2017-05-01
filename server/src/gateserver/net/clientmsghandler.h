@@ -11,36 +11,16 @@
 
 #include <protocol.pb.h>
 #include <client.pb.h>
-
-#include "net/msghandler.h"
-#include "tool/servertool.h"
-#include "protocol/message.h"
 #include <tool/ticktool.h>
 #include <tool/strtool.h>
+#include <tool/servertool.h>
+#include <protocol/message.h>
 
 // 处理客户端发给网关的各类消息
-class ClientMsgHandler : public MsgHandler<Client>
+class ClientMsgHandler
 {
 public:
-	ClientMsgHandler(MsgDispatcher<Client> *msgDispacher)
-		: MsgHandler<Client>(msgDispacher)
-	{
-		init();
-	}
-
-	void init()
-	{
-		registerMsg(ClientMsg_LoginRequest,			OnLoginReq);
-		registerMsg(ClientMsg_AuthRequest,			OnAuthReq);
-
-		// 测试
-		registerMsg(ClientMsg_PingRequest,			OnPingTest);
-		registerMsg(ClientMsg_SpeedTestRequest,		OnSpeedTest);
-		registerMsg(ClientMsg_LatencyTestRequest,	OnLatencyTest);
-	}
-
-private:
-	static void OnAuthReq(Client* client, AuthReq *req, Timestamp receiveTime)
+	static void OnAuthReq(GateClient* client, AuthReq *req, Timestamp receiveTime)
 	{
 		AuthAck ack;
 
@@ -54,12 +34,12 @@ private:
 		client->send(ServerMsg_AutyReply, ack);
 	}
 
-	static void OnLoginReq(Client* client, LoginReq *req, Timestamp receiveTime)
+	static void OnLoginReq(GateClient* client, LoginReq *req, Timestamp receiveTime)
 	{
 
 	}
 
-	static void OnPingTest(Client* client, PingPong *p, Timestamp receiveTime)
+	static void OnPingTest(GateClient* client, PingPong *p, Timestamp receiveTime)
 	{
 		static int g_pingCount = 0;
 		static Tick tick("pingpong test", 100);
@@ -80,7 +60,7 @@ private:
 		client->send(ServerMsg_PongReply, *p);
 	}
 
-	static void OnSpeedTest(Client* client, PingPong *p, Timestamp receiveTime)
+	static void OnSpeedTest(GateClient* client, PingPong *p, Timestamp receiveTime)
 	{
 		static int g_speedTestCount = 0;
 		static Tick tick("speed test");
@@ -107,7 +87,7 @@ private:
 // 		}
 	}
 
-	static void OnLatencyTest(Client* client, PingPong *p, Timestamp receiveTime)
+	static void OnLatencyTest(GateClient* client, PingPong *p, Timestamp receiveTime)
 	{
 		static int g_latencyTestCount = 0;
 		static Tick tick("latency test");

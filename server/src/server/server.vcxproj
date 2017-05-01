@@ -146,11 +146,9 @@
     <ClInclude Include="http\httpcmd.h" />
     <ClInclude Include="http\httpmgr.h" />
     <ClInclude Include="net\connector.h" />
-    <ClInclude Include="net\imsghandler.h" />
     <ClInclude Include="net\link.h" />
     <ClInclude Include="net\listener.h" />
     <ClInclude Include="net\msgdispatcher.h" />
-    <ClInclude Include="net\msghandler.h" />
     <ClInclude Include="net\netdefine.h" />
     <ClInclude Include="net\netmodel.h" />
     <ClInclude Include="net\netaddress.h" />

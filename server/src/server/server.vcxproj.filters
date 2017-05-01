@@ -81,12 +81,6 @@
     <ClInclude Include="tool\randtool.h">
       <Filter>tool</Filter>
     </ClInclude>
-    <ClInclude Include="net\imsghandler.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="net\msghandler.h">
-      <Filter>net</Filter>
-    </ClInclude>
     <ClInclude Include="protocol\netmsghandler.h">
       <Filter>protocol</Filter>
     </ClInclude>

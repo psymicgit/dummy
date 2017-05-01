@@ -13,7 +13,6 @@
 
 #include "net/link.h"
 #include "tool/timetool.h"
-#include "imsghandler.h"
 
 // 消息回调基类
 template <typename LinkType>
@@ -63,13 +62,13 @@ class MsgDispatcher
 {
 private:
 	typedef tr1::unordered_map<int, Callback<LinkType>*>	CallbackMap;
-	typedef tr1::unordered_map<int, IMsgHandler<LinkType>*> MsgHandlerMap;
-	typedef std::vector<IMsgHandler<LinkType>*>				MsgHandlerVec;
 
 public:
+	// 对某个消息id注册对应的回调函数
 	template <typename MessageType>
-	void registerMsg(int msgId, CallbackT<LinkType, MessageType> *pd)
+	void registerMsg(int msgId, void(*callback)(LinkType*, MessageType* message, Timestamp))
 	{
+		CallbackT<LinkType, MessageType> *pd = new CallbackT<LinkType, MessageType>(callback);
 		m_callbackMap[msgId] = pd;
 	}
 
@@ -89,29 +88,14 @@ public:
 		callback->onMessage(link, data, len, receiveTime);
 	}
 
-	void addMsgHandler(IMsgHandler<LinkType> *msgHandler)
-	{
-		m_msgHandlerVec.push_back(msgHandler);
-	}
-
 	void clear()
 	{
-		// LOG_INFO << "clear";
 
-		for (size_t i = 0; i < m_msgHandlerVec.size(); i++) {
-			IMsgHandler<LinkType> *msgHandler = m_msgHandlerVec[i];
-			msgHandler->clear();
-
-			delete msgHandler;
-		}
-
-		m_msgHandlerVec.clear();
 	}
 
 private:
 	// 消息回调map
 	CallbackMap		m_callbackMap;
-	MsgHandlerVec	m_msgHandlerVec;;
 };
 
 #endif //_msgdispatcher_h_

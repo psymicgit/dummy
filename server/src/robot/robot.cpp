@@ -222,9 +222,22 @@ void Robot::auth()
 
 }
 
-void Robot::login()
+void Robot::Login()
 {
+	LoginReq msg;
+	msg.set_clientversion(100);
+	msg.set_deviceid("1273ab23c3390fe840a9e0");
+	msg.set_notifyid("notifyid-00134678");
+	msg.set_username("psy_micgit");
+	msg.set_zoneid(1);
+	msg.set_userid(100000001);
+	msg.set_playerid(14560034);
+	msg.set_job("sword");
+	msg.set_logintype(LoginReq_LoginType_NewRole);
+	msg.set_authtype(1);
+	msg.set_authkey("2ab456b6b2b1b6b1bb2b");
 
+	send(ClientMsg_LoginRequest, msg);
 }
 
 void Robot::pingpongTest()

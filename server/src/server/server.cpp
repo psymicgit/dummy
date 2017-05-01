@@ -69,10 +69,11 @@ bool Server::init()
 
 	// 注册系统信号：防止一般的kill操作导致服务器不正常关闭
 	// registerSignal();
-
 	//m_bufferPool.init(1000, 500);
 
-	m_dispatcher.addMsgHandler(new NetMsgHandler(&m_dispatcher));
+	m_dispatcher.registerMsg(eConnectSvrReq, NetMsgHandler::OnConnectServerReq);	// 连接服务器请求
+	m_dispatcher.registerMsg(eConnectSvrAck, NetMsgHandler::OnConnectServerAck);	// 连接服务器答复
+
 	return true;
 }
 

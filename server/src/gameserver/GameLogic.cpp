@@ -7,7 +7,7 @@
 
 #include "GameLogic.h"
 
-bool GameLogic::Send(ObjectId, int msgId, int subId, const Message& msg)
+bool GameLogic::SendToClient(ObjectId, int msgId, int subId, const Message& msg)
 {
 	return true;
 }

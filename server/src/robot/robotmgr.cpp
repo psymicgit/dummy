@@ -78,7 +78,14 @@ bool RobotMgr::init(const char* jsonConfig)
 // 		// m_wan.connect("127.0.0.1", 80, *robot);
 // 	}
 
-	m_dispatcher.addMsgHandler(new RobotMsgHandler(&m_dispatcher));
+	m_dispatcher.registerMsg(ServerMsg_LoginReply, RobotMsgHandler::OnLoginAck);
+	m_dispatcher.registerMsg(ServerMsg_EncryptKeyNotify, RobotMsgHandler::OnEncryptKeyNtf);
+	m_dispatcher.registerMsg(ServerMsg_AutyReply, RobotMsgHandler::OnAuthAck);
+	
+	// ≤‚ ‘
+	m_dispatcher.registerMsg(ServerMsg_PongReply, RobotMsgHandler::OnPongTest);
+	m_dispatcher.registerMsg(ServerMsg_SpeedTestReply, RobotMsgHandler::OnSpeedTestDone);
+	m_dispatcher.registerMsg(ServerMsg_LatencyTestReply, RobotMsgHandler::OnLatencyTestDone);
 
 	m_run = true;
 

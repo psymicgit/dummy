@@ -34,6 +34,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* PingPong_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   PingPong_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ReadyRequest_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ReadyRequest_reflection_ = NULL;
 const ::google::protobuf::Descriptor* MoveRequest_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   MoveRequest_reflection_ = NULL;
@@ -144,7 +147,22 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PingPong));
-  MoveRequest_descriptor_ = file->message_type(5);
+  ReadyRequest_descriptor_ = file->message_type(5);
+  static const int ReadyRequest_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReadyRequest, is_ready_),
+  };
+  ReadyRequest_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ReadyRequest_descriptor_,
+      ReadyRequest::default_instance_,
+      ReadyRequest_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReadyRequest, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReadyRequest, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ReadyRequest));
+  MoveRequest_descriptor_ = file->message_type(6);
   static const int MoveRequest_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequest, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequest, y_),
@@ -160,7 +178,7 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MoveRequest));
-  MoveNotify_descriptor_ = file->message_type(6);
+  MoveNotify_descriptor_ = file->message_type(7);
   static const int MoveNotify_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotify, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotify, y_),
@@ -203,6 +221,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     PingPong_descriptor_, &PingPong::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReadyRequest_descriptor_, &ReadyRequest::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     MoveRequest_descriptor_, &MoveRequest::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     MoveNotify_descriptor_, &MoveNotify::default_instance());
@@ -221,6 +241,8 @@ void protobuf_ShutdownFile_client_2eproto() {
   delete AuthAck_reflection_;
   delete PingPong::default_instance_;
   delete PingPong_reflection_;
+  delete ReadyRequest::default_instance_;
+  delete ReadyRequest_reflection_;
   delete MoveRequest::default_instance_;
   delete MoveRequest_reflection_;
   delete MoveNotify::default_instance_;
@@ -246,24 +268,25 @@ void protobuf_AddDesc_client_2eproto() {
     "thReq\022\017\n\007authKey\030\001 \002(\t\":\n\007AuthAck\022\033\n\006res"
     "ult\030\001 \002(\0162\013.AuthResult\022\022\n\nencryptKey\030\002 \002"
     "(\t\"*\n\010PingPong\022\020\n\010pingpong\030\001 \002(\t\022\014\n\004time"
-    "\030\002 \002(\004\"#\n\013MoveRequest\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 "
-    "\002(\002\"\"\n\nMoveNotify\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002*"
-    "\366\001\n\013ClientMsgId\022\032\n\026ClientMsg_LoginReques"
-    "t\020\001\022\031\n\025ClientMsg_AuthRequest\020\002\022\031\n\025Client"
-    "Msg_PingRequest\020\003\022\036\n\032ClientMsg_SpeedTest"
-    "Request\020\004\022 \n\034ClientMsg_LatencyTestReques"
-    "t\020\005\022\032\n\025ClientMsg_RouteToGate\020\350\007\022\033\n\026Clien"
-    "tMsg_ReadyRequest\020\351\007\022\032\n\025ClientMsg_MoveRe"
-    "quest\020\352\007*\322\001\n\013ServerMsgId\022\030\n\024ServerMsg_Lo"
-    "ginReply\020\001\022\036\n\032ServerMsg_EncryptKeyNotify"
-    "\020\002\022\027\n\023ServerMsg_AutyReply\020\003\022\027\n\023ServerMsg"
-    "_PongReply\020\004\022\034\n\030ServerMsg_SpeedTestReply"
-    "\020\005\022\036\n\032ServerMsg_LatencyTestReply\020\006\022\031\n\024Cl"
-    "ientMsg_MoveNotify\020\351\007*\177\n\rEncryptKeyDef\022\021"
-    "\n\rEncryptKeyLen\020 \022\022\n\016EncryptHeadLen\020\002\022\022\n"
-    "\016EncryptTailLen\020\004\022\016\n\nAuthKeyLen\020\020\022\020\n\014Pub"
-    "licKeyLen\020\010\022\021\n\rPrivateKeyLen\020\024*(\n\nAuthRe"
-    "sult\022\013\n\007AUTH_OK\020\000\022\r\n\tAUTH_FAIL\020\001", 1192);
+    "\030\002 \002(\004\" \n\014ReadyRequest\022\020\n\010is_ready\030\001 \002(\005"
+    "\"#\n\013MoveRequest\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"\"\n"
+    "\nMoveNotify\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002*\366\001\n\013Cl"
+    "ientMsgId\022\032\n\026ClientMsg_LoginRequest\020\001\022\031\n"
+    "\025ClientMsg_AuthRequest\020\002\022\031\n\025ClientMsg_Pi"
+    "ngRequest\020\003\022\036\n\032ClientMsg_SpeedTestReques"
+    "t\020\004\022 \n\034ClientMsg_LatencyTestRequest\020\005\022\032\n"
+    "\025ClientMsg_RouteToGate\020\350\007\022\033\n\026ClientMsg_R"
+    "eadyRequest\020\351\007\022\032\n\025ClientMsg_MoveRequest\020"
+    "\352\007*\322\001\n\013ServerMsgId\022\030\n\024ServerMsg_LoginRep"
+    "ly\020\001\022\036\n\032ServerMsg_EncryptKeyNotify\020\002\022\027\n\023"
+    "ServerMsg_AutyReply\020\003\022\027\n\023ServerMsg_PongR"
+    "eply\020\004\022\034\n\030ServerMsg_SpeedTestReply\020\005\022\036\n\032"
+    "ServerMsg_LatencyTestReply\020\006\022\031\n\024ClientMs"
+    "g_MoveNotify\020\351\007*\177\n\rEncryptKeyDef\022\021\n\rEncr"
+    "yptKeyLen\020 \022\022\n\016EncryptHeadLen\020\002\022\022\n\016Encry"
+    "ptTailLen\020\004\022\016\n\nAuthKeyLen\020\020\022\020\n\014PublicKey"
+    "Len\020\010\022\021\n\rPrivateKeyLen\020\024*(\n\nAuthResult\022\013"
+    "\n\007AUTH_OK\020\000\022\r\n\tAUTH_FAIL\020\001", 1226);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "client.proto", &protobuf_RegisterTypes);
   LoginReq::default_instance_ = new LoginReq();
@@ -271,6 +294,7 @@ void protobuf_AddDesc_client_2eproto() {
   AuthReq::default_instance_ = new AuthReq();
   AuthAck::default_instance_ = new AuthAck();
   PingPong::default_instance_ = new PingPong();
+  ReadyRequest::default_instance_ = new ReadyRequest();
   MoveRequest::default_instance_ = new MoveRequest();
   MoveNotify::default_instance_ = new MoveNotify();
   LoginReq::default_instance_->InitAsDefaultInstance();
@@ -278,6 +302,7 @@ void protobuf_AddDesc_client_2eproto() {
   AuthReq::default_instance_->InitAsDefaultInstance();
   AuthAck::default_instance_->InitAsDefaultInstance();
   PingPong::default_instance_->InitAsDefaultInstance();
+  ReadyRequest::default_instance_->InitAsDefaultInstance();
   MoveRequest::default_instance_->InitAsDefaultInstance();
   MoveNotify::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_client_2eproto);
@@ -2188,6 +2213,215 @@ void PingPong::Swap(PingPong* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = PingPong_descriptor_;
   metadata.reflection = PingPong_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ReadyRequest::kIsReadyFieldNumber;
+#endif  // !_MSC_VER
+
+ReadyRequest::ReadyRequest()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ReadyRequest::InitAsDefaultInstance() {
+}
+
+ReadyRequest::ReadyRequest(const ReadyRequest& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ReadyRequest::SharedCtor() {
+  _cached_size_ = 0;
+  is_ready_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReadyRequest::~ReadyRequest() {
+  SharedDtor();
+}
+
+void ReadyRequest::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ReadyRequest::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReadyRequest::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReadyRequest_descriptor_;
+}
+
+const ReadyRequest& ReadyRequest::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_client_2eproto();
+  return *default_instance_;
+}
+
+ReadyRequest* ReadyRequest::default_instance_ = NULL;
+
+ReadyRequest* ReadyRequest::New() const {
+  return new ReadyRequest;
+}
+
+void ReadyRequest::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    is_ready_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReadyRequest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 is_ready = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &is_ready_)));
+          set_has_is_ready();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ReadyRequest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 is_ready = 1;
+  if (has_is_ready()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->is_ready(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ReadyRequest::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 is_ready = 1;
+  if (has_is_ready()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->is_ready(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ReadyRequest::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 is_ready = 1;
+    if (has_is_ready()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->is_ready());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReadyRequest::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReadyRequest* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReadyRequest*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReadyRequest::MergeFrom(const ReadyRequest& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_is_ready()) {
+      set_is_ready(from.is_ready());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReadyRequest::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReadyRequest::CopyFrom(const ReadyRequest& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReadyRequest::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void ReadyRequest::Swap(ReadyRequest* other) {
+  if (other != this) {
+    std::swap(is_ready_, other->is_ready_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReadyRequest::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReadyRequest_descriptor_;
+  metadata.reflection = ReadyRequest_reflection_;
   return metadata;
 }
 

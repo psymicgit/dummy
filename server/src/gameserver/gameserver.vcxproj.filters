@@ -9,15 +9,6 @@
     <ClInclude Include="net\gatelink.h">
       <Filter>net</Filter>
     </ClInclude>
-    <ClInclude Include="net\clientmsghandler.h">
-      <Filter>net</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\client.h">
-      <Filter>logic</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\clientmgr.h">
-      <Filter>logic</Filter>
-    </ClInclude>
     <ClInclude Include="..\protocol\client.pb.h">
       <Filter>protocol</Filter>
     </ClInclude>
@@ -46,6 +37,12 @@
       <Filter>logic\scene</Filter>
     </ClInclude>
     <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="logic\GameClient.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\GameClientMgr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameserver.cpp" />
@@ -56,12 +53,6 @@
     </ClCompile>
     <ClCompile Include="net\gatelink.cpp">
       <Filter>net</Filter>
-    </ClCompile>
-    <ClCompile Include="logic\client.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
-    <ClCompile Include="logic\clientmgr.cpp">
-      <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="..\protocol\client.pb.cc">
       <Filter>protocol</Filter>
@@ -88,6 +79,12 @@
       <Filter>logic\scene</Filter>
     </ClCompile>
     <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="logic\GameClient.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\GameClientMgr.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="protocol">

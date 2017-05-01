@@ -1,25 +1,20 @@
 //------------------------------------------------------------------------------
 // 作者: 洪坤安
-// 日期: 2017年4月29日
-// 说明: 提供游戏服通用的接口
+// 日期: 2017年5月1日
+// 说明: 
 // Copyright (c) game. All rights reserved.
 //------------------------------------------------------------------------------
 
 #pragma once
 
-#include "gameserver.h"
+#include "gateserver.h"
 
-typedef int64 ObjectId;
-
-class GameLogic : public Singleton<GameLogic>
+class GateLogic : public Singleton<GateLogic>
 {
 public:
 	template <typename T>
 	static void RegisterClientMsg(int msgId, T t)
 	{
-		GameServer::Instance().m_dispatcher.registerMsg(msgId, t);
+		GateServer::Instance().m_dispatcher.registerMsg(msgId, t);
 	}
-
-	// 发消息给客户端
-	static bool SendToClient(ObjectId, int msgId, int subId, const Message& msg);
 };

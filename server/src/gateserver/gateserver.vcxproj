@@ -97,12 +97,13 @@
   <ItemGroup>
     <ClCompile Include="..\protocol\client.pb.cc" />
     <ClCompile Include="config\gateconfig.cpp" />
+    <ClCompile Include="GateLogic.cpp" />
     <ClCompile Include="gateserver.cpp" />
     <ClCompile Include="logic\user.cpp" />
     <ClCompile Include="logic\usermgr.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="net\client.cpp" />
-    <ClCompile Include="net\clientmgr.cpp" />
+    <ClCompile Include="net\GateClient.cpp" />
+    <ClCompile Include="net\GateClientMgr.cpp" />
     <ClCompile Include="net\gamesvrlink.cpp" />
     <ClCompile Include="net\userlink.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -114,12 +115,12 @@
   <ItemGroup>
     <ClInclude Include="..\protocol\client.pb.h" />
     <ClInclude Include="config\gateconfig.h" />
+    <ClInclude Include="GateLogic.h" />
     <ClInclude Include="gateserver.h" />
     <ClInclude Include="logic\user.h" />
     <ClInclude Include="logic\usermgr.h" />
-    <ClInclude Include="net\client.h" />
-    <ClInclude Include="net\clientmgr.h" />
-    <ClInclude Include="net\clientmsghandler.h" />
+    <ClInclude Include="net\GateClient.h" />
+    <ClInclude Include="net\GateClientMgr.h" />
     <ClInclude Include="net\gamesvrlink.h" />
     <ClInclude Include="net\userlink.h" />
     <ClInclude Include="protocol\protocol.h" />

@@ -37,6 +37,7 @@ class EncryptKeyNtf;
 class AuthReq;
 class AuthAck;
 class PingPong;
+class ReadyRequest;
 class MoveRequest;
 class MoveNotify;
 
@@ -778,6 +779,88 @@ class PingPong : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static PingPong* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ReadyRequest : public ::google::protobuf::Message {
+ public:
+  ReadyRequest();
+  virtual ~ReadyRequest();
+
+  ReadyRequest(const ReadyRequest& from);
+
+  inline ReadyRequest& operator=(const ReadyRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReadyRequest& default_instance();
+
+  void Swap(ReadyRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  ReadyRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReadyRequest& from);
+  void MergeFrom(const ReadyRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 is_ready = 1;
+  inline bool has_is_ready() const;
+  inline void clear_is_ready();
+  static const int kIsReadyFieldNumber = 1;
+  inline ::google::protobuf::int32 is_ready() const;
+  inline void set_is_ready(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:ReadyRequest)
+ private:
+  inline void set_has_is_ready();
+  inline void clear_has_is_ready();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 is_ready_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_client_2eproto();
+  friend void protobuf_AssignDesc_client_2eproto();
+  friend void protobuf_ShutdownFile_client_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReadyRequest* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1932,6 +2015,32 @@ inline ::google::protobuf::uint64 PingPong::time() const {
 inline void PingPong::set_time(::google::protobuf::uint64 value) {
   set_has_time();
   time_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReadyRequest
+
+// required int32 is_ready = 1;
+inline bool ReadyRequest::has_is_ready() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReadyRequest::set_has_is_ready() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReadyRequest::clear_has_is_ready() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReadyRequest::clear_is_ready() {
+  is_ready_ = 0;
+  clear_has_is_ready();
+}
+inline ::google::protobuf::int32 ReadyRequest::is_ready() const {
+  return is_ready_;
+}
+inline void ReadyRequest::set_is_ready(::google::protobuf::int32 value) {
+  set_has_is_ready();
+  is_ready_ = value;
 }
 
 // -------------------------------------------------------------------

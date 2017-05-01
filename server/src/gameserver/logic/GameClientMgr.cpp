@@ -6,15 +6,18 @@
 //< Copyright (c) 2015 服务器. All rights reserved.
 ///<------------------------------------------------------------------------------
 
-#include "clientmgr.h"
-#include "net/clientmsghandler.h"
+#include "GameClientMgr.h"
+#include "GameLogic.h"
+#include <client.pb.h>
+#include <protocol/message.h>
 
-ClientMgr::ClientMgr()
+GameClientMgr::GameClientMgr()
 {
-	m_dispatcher.addMsgHandler(new ClientMsgHandler(&m_dispatcher));
+	GameLogic::RegisterClientMsg(ClientMsg_LoginRequest, OnLoginReq);
+	GameLogic::RegisterClientMsg(ClientMsg_AuthRequest, OnAuthReq);
 }
 
-Client* ClientMgr::FindClient(uint32 playerId)
+GameClient* GameClientMgr::FindClient(uint32 playerId)
 {
 	ClientMap::iterator itr = m_clients.find(playerId);
 	if (itr == m_clients.end()) {
@@ -24,7 +27,7 @@ Client* ClientMgr::FindClient(uint32 playerId)
 	return itr->second;
 }
 
-void ClientMgr::handleMsg(Link* link)
+void GameClientMgr::handleMsg(Link* link)
 {
 	// 1. 将接收缓冲区的数据全部取出
 	evbuffer recvSwapBuf;
@@ -50,7 +53,7 @@ void ClientMgr::handleMsg(Link* link)
 			break;
 		}
 
-		Client *client = ClientMgr::Instance().FindClient(clientId);
+		GameClient *client = GameClientMgr::Instance().FindClient(clientId);
 		if (NULL == client) {
 			return;
 		}
@@ -66,4 +69,12 @@ void ClientMgr::handleMsg(Link* link)
 
 	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
 	link->endRead(buf);
+}
+
+void GameClientMgr::OnAuthReq(GameClient* client, AuthReq *req, Timestamp receiveTime)
+{
+}
+
+void GameClientMgr::OnLoginReq(GameClient* client, LoginReq *req, Timestamp receiveTime)
+{
 }

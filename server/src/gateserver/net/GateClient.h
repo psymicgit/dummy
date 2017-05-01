@@ -13,13 +13,13 @@
 #include <client.pb.h>
 
 class Link;
-class ClientMgr;
+class GateClientMgr;
 
 // 客户端连接
-class Client : public INetLogic
+class GateClient : public INetLogic
 {
 public:
-	Client();
+	GateClient();
 
 public:
 	std::string name();
@@ -52,7 +52,7 @@ public:
 	Link*			m_link;			// 与客户端的tcp原始连接
 	uint32			m_clientId;
 	TaskQueue*		m_taskQueue;
-	ClientMgr*		m_clientMgr;
+	GateClientMgr*		m_clientMgr;
 	std::string		m_encryptKey;	// 加密密钥
 	std::string		m_authKey;		// 认证密钥
 

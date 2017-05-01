@@ -10,10 +10,10 @@
 #define _client_h_
 
 // 客户端，对应于网关的一个玩家连接
-class Client
+class GameClient
 {
 public:
-	Client();
+	GameClient();
 };
 
 #endif //_client_h_

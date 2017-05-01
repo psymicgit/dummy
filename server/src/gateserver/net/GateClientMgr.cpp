@@ -6,46 +6,59 @@
 //< Copyright (c) 2015 ·þÎñÆ÷. All rights reserved.
 ///<------------------------------------------------------------------------------
 
-#include "clientmgr.h"
+#include "GateClientMgr.h"
 
 #include <net/netaddress.h>
 #include <net/link.h>
 #include <server.h>
-
 #include <tool/sockettool.h>
 #include <tool/encrypttool.h>
 
-#include "client.h"
+#include "GateClient.h"
+#include "GateLogic.h"
 #include "clientmsghandler.h"
 
-ClientMgr::ClientMgr()
+GateClientMgr::GateClientMgr()
 	: m_taskQueue(NULL)
 	, m_allocClientId(0)
 {
-	m_dispatcher.addMsgHandler(new ClientMsgHandler(&m_dispatcher));
+	
 }
 
-ClientMgr::~ClientMgr()
+GateClientMgr::~GateClientMgr()
 {
 	m_clientPool.clear();
 	m_dispatcher.clear();
 }
 
-void ClientMgr::close()
+bool GateClientMgr::Init()
+{
+	GateLogic::RegisterClientMsg(ClientMsg_LoginRequest, ClientMsgHandler::OnLoginReq);
+	GateLogic::RegisterClientMsg(ClientMsg_AuthRequest, ClientMsgHandler::OnAuthReq);
+
+	// ²âÊÔ
+	GateLogic::RegisterClientMsg(ClientMsg_PingRequest, ClientMsgHandler::OnPingTest);
+	GateLogic::RegisterClientMsg(ClientMsg_SpeedTestRequest, ClientMsgHandler::OnSpeedTest);
+	GateLogic::RegisterClientMsg(ClientMsg_LatencyTestRequest, ClientMsgHandler::OnLatencyTest);
+
+	return true;
+}
+
+void GateClientMgr::close()
 {
 	for(ClientMap::iterator itr = m_clientMap.begin(); itr != m_clientMap.end(); ++itr) {
-		Client *client = itr->second;
+		GateClient *client = itr->second;
 		client->close();
 	}
 
 	// m_clientMap.clear();
 }
 
-void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
+void GateClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	uint32 newClientId = allocClientId();
 
-	Client *client			= m_clientPool.alloc();
+	GateClient *client			= m_clientPool.alloc();
 	client->m_link			= link;
 	client->m_clientId		= newClientId;
 	client->m_clientMgr		= this;
@@ -68,22 +81,22 @@ void ClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const NetAdd
 	}
 }
 
-void ClientMgr::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
+void GateClientMgr::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 
 }
 
-void ClientMgr::onRecv(Link *link)
+void GateClientMgr::onRecv(Link *link)
 {
 	Server::instance->onRecv(link);
 }
 
-uint32 ClientMgr::allocClientId()
+uint32 GateClientMgr::allocClientId()
 {
 	return ++m_allocClientId;
 }
 
-void ClientMgr::delClient(Client *client)
+void GateClientMgr::delClient(GateClient *client)
 {
 	// LOG_INFO << "client <" << client->m_link->m_peerAddr.toIpPort() << "> disconnet";
 

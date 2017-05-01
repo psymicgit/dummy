@@ -106,11 +106,10 @@
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="gameserver.h" />
     <ClInclude Include="logic\ai\ai.h" />
-    <ClInclude Include="logic\client.h" />
-    <ClInclude Include="logic\clientmgr.h" />
+    <ClInclude Include="logic\GameClient.h" />
+    <ClInclude Include="logic\GameClientMgr.h" />
     <ClInclude Include="logic\scene\AoiModule.h" />
     <ClInclude Include="logic\scene\scene.h" />
-    <ClInclude Include="net\clientmsghandler.h" />
     <ClInclude Include="net\gatelink.h" />
     <ClInclude Include="net\http\gamehttpmgr.h" />
     <ClInclude Include="stdafx.h" />
@@ -124,8 +123,8 @@
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="gameserver.cpp" />
     <ClCompile Include="logic\ai\ai.cpp" />
-    <ClCompile Include="logic\client.cpp" />
-    <ClCompile Include="logic\clientmgr.cpp" />
+    <ClCompile Include="logic\GameClient.cpp" />
+    <ClCompile Include="logic\GameClientMgr.cpp" />
     <ClCompile Include="logic\scene\AoiModule.cpp" />
     <ClCompile Include="logic\scene\scene.cpp" />
     <ClCompile Include="main.cpp" />

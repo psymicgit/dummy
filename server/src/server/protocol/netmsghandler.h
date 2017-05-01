@@ -11,30 +11,12 @@
 
 #include <net.pb.h>
 #include <protocol.pb.h>
-
-#include "net/msghandler.h"
 #include "net/serverlink.h"
 #include "tool/servertool.h"
 
-class NetMsgHandler : public MsgHandler<Link>
+class NetMsgHandler
 {
 public:
-	NetMsgHandler(MsgDispatcher<Link> *msgDispacher)
-		: MsgHandler<Link>(msgDispacher)
-	{
-		init();
-	}
-
-	void init()
-	{
-		// 连接服务器请求
-		registerMsg(eConnectSvrReq, OnConnectServerReq);
-
-		// 连接服务器答复
-		registerMsg(eConnectSvrAck, OnConnectServerAck);
-	}
-
-private:
 	static void OnConnectServerReq(Link* link, ConnectReq *req, Timestamp receiveTime)
 	{
 		ServerType peerSvrType		= (ServerType)req->svrtype();
