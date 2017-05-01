@@ -41,6 +41,11 @@ namespace randtool
 		return rand() % (b - a) + a;
 	}
 
+	float rand_float_all()
+	{
+		return ((float)rand() / RAND_MAX);
+	}
+
 	float rand_float(float n)
 	{
 		return ((float)rand() / RAND_MAX) * n;

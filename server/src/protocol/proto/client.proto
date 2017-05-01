@@ -2,7 +2,7 @@
 
 enum ClientMsgId
 {
-	//******** 网关直接处理 ********//
+	//******** 网关处理 ********//
 
 	ClientMsg_LoginRequest = 1;				// 登录请求
 	ClientMsg_AuthRequest = 2;				// 认证请求
@@ -12,18 +12,26 @@ enum ClientMsgId
 	
 	ClientMsg_RouteToGate = 1000;			// 在网关直接处理
 	
-	//******** 网关收到后转发给游戏服处理 ********//
+	//******** 游戏服处理 ********//
 	
+	ClientMsg_ReadyRequest = 1001;			// 就绪请求
+	ClientMsg_MoveRequest = 1002;			// 移动请求
 }
 
 enum ServerMsgId
 {
+	//******** 网关下发 ********//
+
 	ServerMsg_LoginReply = 1;
 	ServerMsg_EncryptKeyNotify = 2;
 	ServerMsg_AutyReply = 3;
 	ServerMsg_PongReply = 4;
 	ServerMsg_SpeedTestReply = 5;
 	ServerMsg_LatencyTestReply = 6;
+	
+	//******** 游戏服下发 ********//
+	
+	ClientMsg_MoveNotify = 1001;			// 下发移动消息
 }
 
 //---------------- 服务端 - 客户端消息内容 ----------------//
@@ -94,4 +102,24 @@ message PingPong
 {
 	required string pingpong = 1;
 	required uint64 time = 2;
+}
+
+// 就绪消息
+message ReadyRequest
+{
+	required int is_ready = 1;
+}
+
+// 移动请求
+message MoveRequest
+{
+	required float x = 1;
+	required float y = 2;
+}
+
+// 下发移动消息
+message MoveNotify
+{
+	required float x = 1;
+	required float y = 2;
 }

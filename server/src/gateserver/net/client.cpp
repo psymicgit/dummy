@@ -101,10 +101,11 @@ void Client::handleMsg()
 
 		unsigned char *peek = evbuffer_pullup(dst, msgLen);
 
-		//先解密
+		// 取到的是加密串
 		uint8 *encryptBuf	=  (uint8*)(peek + sizeof(NetMsgHead));
 		int encryptBufLen = msgLen - sizeof(NetMsgHead);
 
+		// 解密
 		if(!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size())) {
 			LOG_ERROR << "gatesvr [" << link->getPeerAddr().toIpPort() << "] <-> " << name() << " [" << link->getLocalAddr().toIpPort()
 			          << "] decrypt msg [len=" << encryptBufLen << "] failed";
@@ -114,19 +115,19 @@ void Client::handleMsg()
 
 		char *msg = (char*)peek + sizeof(NetMsgHead) + EncryptHeadLen;
 
-		// 判断是否需要转发，
+		// 判断是否转发
 		if (NeedRouteToGame(msgId)) {
-			// 转发给游戏服务器
+			// 转发给游戏服
 			GateServer::Instance().sendToGameServer(m_clientId, msgId, msg, msgLen);
 		} else {
-			// 直接本地进行处理
+			// 直接处理
 			m_clientMgr->m_dispatcher.dispatch(*this, msgId, msg, msgLen - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen, 0);
 		}
 
 		evbuffer_drain(dst, msgLen);
 	};
 
-// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
+	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
 	link->endRead(dst);
 }
 
@@ -142,9 +143,9 @@ bool Client::send(int msgId, Message &msg)
 	}
 
 	uint32 headSize	= sizeof(NetMsgHead);
-	int size			= msg.ByteSize();
+	int size = msg.ByteSize();
 
-	// 将消息包序列化为二进制数据
+	// 将消息包序列化
 	bool ok = msg.SerializeToArray(m_link->m_net->g_encryptBuf + headSize + EncryptHeadLen, size);
 	if (!ok) {
 		LOG_ERROR << "client [" << m_link->getPeerAddr().toIpPort()
@@ -153,14 +154,14 @@ bool Client::send(int msgId, Message &msg)
 		return false;
 	}
 
-	// 添加加解密头尾
-	uint8* decryptBuf	= (uint8*)(m_link->m_net->g_encryptBuf + headSize);
+	// 添加加密头、加密尾
+	uint8* decryptBuf = (uint8*)(m_link->m_net->g_encryptBuf + headSize);
 	int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
 
 	encrypttool::xor_encrypt(decryptBuf, decryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size());
 
-	NetMsgHead* pHeader	= (NetMsgHead*)m_link->m_net->g_encryptBuf;
-	int packetLen			= msgtool::buildNetHeader(pHeader, msgId, decryptBufLen);
+	NetMsgHead* header	= (NetMsgHead*)m_link->m_net->g_encryptBuf;
+	int packetLen = msgtool::BuildNetHeader(header, msgId, decryptBufLen);
 
 	m_link->send(m_link->m_net->g_encryptBuf, packetLen);
 	return true;

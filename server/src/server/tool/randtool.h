@@ -26,6 +26,9 @@ namespace randtool
 	int rand_int_between(int a, int b);
 
 	// 获取随机浮点数
+	float rand_float_all();
+
+	// 获取随机浮点数
 	float rand_float(float n);
 
 	// 获取随机浮点数

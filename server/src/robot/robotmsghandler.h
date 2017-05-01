@@ -73,6 +73,7 @@ private:
 			//robot->send(eLoginReq, *req);
 		}
 
+		robot->MoveTest();
 		robot->speedTest();
 	}
 

@@ -32,7 +32,7 @@ namespace msgtool
 	string getMsgDebugString(const Message &msg);
 
 	// 构建网络包头
-	int buildNetHeader(NetMsgHead *msgHead, uint16 msgId, uint32 msgLen);
+	int BuildNetHeader(NetMsgHead *msgHead, uint16 msgId, uint32 msgLen);
 
 	// 构建内网消息包头
 	int buildLanMsgHeader(LanMsgHead *msgHead, uint32 clientId, uint16 msgId, uint32 msgLen);

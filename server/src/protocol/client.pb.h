@@ -37,6 +37,8 @@ class EncryptKeyNtf;
 class AuthReq;
 class AuthAck;
 class PingPong;
+class MoveRequest;
+class MoveNotify;
 
 enum LoginReq_LoginType {
   LoginReq_LoginType_NewRole = 0,
@@ -63,11 +65,13 @@ enum ClientMsgId {
   ClientMsg_PingRequest = 3,
   ClientMsg_SpeedTestRequest = 4,
   ClientMsg_LatencyTestRequest = 5,
-  ClientMsg_RouteToGate = 1000
+  ClientMsg_RouteToGate = 1000,
+  ClientMsg_ReadyRequest = 1001,
+  ClientMsg_MoveRequest = 1002
 };
 bool ClientMsgId_IsValid(int value);
 const ClientMsgId ClientMsgId_MIN = ClientMsg_LoginRequest;
-const ClientMsgId ClientMsgId_MAX = ClientMsg_RouteToGate;
+const ClientMsgId ClientMsgId_MAX = ClientMsg_MoveRequest;
 const int ClientMsgId_ARRAYSIZE = ClientMsgId_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ClientMsgId_descriptor();
@@ -86,11 +90,12 @@ enum ServerMsgId {
   ServerMsg_AutyReply = 3,
   ServerMsg_PongReply = 4,
   ServerMsg_SpeedTestReply = 5,
-  ServerMsg_LatencyTestReply = 6
+  ServerMsg_LatencyTestReply = 6,
+  ClientMsg_MoveNotify = 1001
 };
 bool ServerMsgId_IsValid(int value);
 const ServerMsgId ServerMsgId_MIN = ServerMsg_LoginReply;
-const ServerMsgId ServerMsgId_MAX = ServerMsg_LatencyTestReply;
+const ServerMsgId ServerMsgId_MAX = ClientMsg_MoveNotify;
 const int ServerMsgId_ARRAYSIZE = ServerMsgId_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ServerMsgId_descriptor();
@@ -773,6 +778,190 @@ class PingPong : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static PingPong* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MoveRequest : public ::google::protobuf::Message {
+ public:
+  MoveRequest();
+  virtual ~MoveRequest();
+
+  MoveRequest(const MoveRequest& from);
+
+  inline MoveRequest& operator=(const MoveRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MoveRequest& default_instance();
+
+  void Swap(MoveRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  MoveRequest* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MoveRequest& from);
+  void MergeFrom(const MoveRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float x = 1;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 1;
+  inline float x() const;
+  inline void set_x(float value);
+
+  // required float y = 2;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 2;
+  inline float y() const;
+  inline void set_y(float value);
+
+  // @@protoc_insertion_point(class_scope:MoveRequest)
+ private:
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  float x_;
+  float y_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_client_2eproto();
+  friend void protobuf_AssignDesc_client_2eproto();
+  friend void protobuf_ShutdownFile_client_2eproto();
+
+  void InitAsDefaultInstance();
+  static MoveRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MoveNotify : public ::google::protobuf::Message {
+ public:
+  MoveNotify();
+  virtual ~MoveNotify();
+
+  MoveNotify(const MoveNotify& from);
+
+  inline MoveNotify& operator=(const MoveNotify& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MoveNotify& default_instance();
+
+  void Swap(MoveNotify* other);
+
+  // implements Message ----------------------------------------------
+
+  MoveNotify* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MoveNotify& from);
+  void MergeFrom(const MoveNotify& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float x = 1;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 1;
+  inline float x() const;
+  inline void set_x(float value);
+
+  // required float y = 2;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 2;
+  inline float y() const;
+  inline void set_y(float value);
+
+  // @@protoc_insertion_point(class_scope:MoveNotify)
+ private:
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  float x_;
+  float y_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_client_2eproto();
+  friend void protobuf_AssignDesc_client_2eproto();
+  friend void protobuf_ShutdownFile_client_2eproto();
+
+  void InitAsDefaultInstance();
+  static MoveNotify* default_instance_;
 };
 // ===================================================================
 
@@ -1743,6 +1932,102 @@ inline ::google::protobuf::uint64 PingPong::time() const {
 inline void PingPong::set_time(::google::protobuf::uint64 value) {
   set_has_time();
   time_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// MoveRequest
+
+// required float x = 1;
+inline bool MoveRequest::has_x() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MoveRequest::set_has_x() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MoveRequest::clear_has_x() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MoveRequest::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline float MoveRequest::x() const {
+  return x_;
+}
+inline void MoveRequest::set_x(float value) {
+  set_has_x();
+  x_ = value;
+}
+
+// required float y = 2;
+inline bool MoveRequest::has_y() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MoveRequest::set_has_y() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MoveRequest::clear_has_y() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MoveRequest::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline float MoveRequest::y() const {
+  return y_;
+}
+inline void MoveRequest::set_y(float value) {
+  set_has_y();
+  y_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// MoveNotify
+
+// required float x = 1;
+inline bool MoveNotify::has_x() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MoveNotify::set_has_x() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MoveNotify::clear_has_x() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MoveNotify::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline float MoveNotify::x() const {
+  return x_;
+}
+inline void MoveNotify::set_x(float value) {
+  set_has_x();
+  x_ = value;
+}
+
+// required float y = 2;
+inline bool MoveNotify::has_y() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MoveNotify::set_has_y() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MoveNotify::clear_has_y() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MoveNotify::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline float MoveNotify::y() const {
+  return y_;
+}
+inline void MoveNotify::set_y(float value) {
+  set_has_y();
+  y_ = value;
 }
 
 

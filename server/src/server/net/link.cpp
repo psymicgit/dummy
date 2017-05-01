@@ -256,7 +256,7 @@ void Link::send(int msgId, Message & msg)
 	int size = msg.ByteSize();
 
 	NetMsgHead msgHead = {0, 0};
-	msgtool::buildNetHeader(&msgHead, msgId, size);
+	msgtool::BuildNetHeader(&msgHead, msgId, size);
 
 	msg.SerializeToArray(m_net->g_sendBuf, size);
 
@@ -281,7 +281,7 @@ void Link::send(int msgId, const char *data, int len)
 	}
 
 	NetMsgHead *msgHead = (NetMsgHead*)m_net->g_sendBuf;
-	msgtool::buildNetHeader(msgHead, msgId, len);
+	msgtool::BuildNetHeader(msgHead, msgId, len);
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);

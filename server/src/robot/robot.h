@@ -63,6 +63,9 @@ public:
 	// 开始延迟测试
 	void latencyTest();
 
+	// 开始移动测试
+	void MoveTest();
+
 private:
 	void randomRobot();
 

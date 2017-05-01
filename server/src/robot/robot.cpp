@@ -184,7 +184,7 @@ bool Robot::send(int msgId, Message &msg)
 
 	NetMsgHead* pHeader = (NetMsgHead*)m_link->m_net->g_encryptBuf;
 
-	int packetLen = msgtool::buildNetHeader(pHeader, msgId, decryptBufLen);
+	int packetLen = msgtool::BuildNetHeader(pHeader, msgId, decryptBufLen);
 	if (packetLen <= 0) {
 		LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->getLocalAddr().toIpPort() << "] <-> gatesvr [" << m_link->getPeerAddr().toIpPort()
 		          << "] pakcetLen = " << packetLen;
@@ -279,4 +279,16 @@ void Robot::latencyTest()
 	}
 
 	m_link->close();
+}
+
+// ¿ªÊ¼ÒÆ¶¯²âÊÔ
+void Robot::MoveTest()
+{
+	float randX = randtool::rand_float_all();
+	float randY = randtool::rand_float_all();
+
+	MoveRequest msg;
+	msg.set_x(randX);
+	msg.set_y(randY);
+	send(ClientMsg_MoveRequest, msg);
 }
