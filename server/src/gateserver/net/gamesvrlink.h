@@ -13,10 +13,17 @@
 #include <net/serverlink.h>
 
 class Link;
+class RouteToClientMsg;
 
 class GameSvrLink : public ServerLink
 {
-	virtual void onRecv(Link*);
+public:
+	bool Init() override;
+
+	void onRecv(Link*) override;
+
+public:
+	static void OnRouteToClient(GameSvrLink* gameLink, RouteToClientMsg* routeToClientMsg, int64 receiveTime);
 };
 
 #endif //_gamesvrlink_h_

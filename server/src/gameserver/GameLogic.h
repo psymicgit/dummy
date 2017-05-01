@@ -17,7 +17,13 @@ public:
 	template <typename T>
 	static void RegisterClientMsg(int msgId, T t)
 	{
-		GameServer::Instance().m_dispatcher.registerMsg(msgId, t);
+		GameServer::Instance().m_clientDispatcher.registerMsg(msgId, t);
+	}
+
+	template <typename T>
+	static void RegisterGateMsg(int msgId, T t)
+	{
+		GameServer::Instance().m_gateDispatcher.registerMsg(msgId, t);
 	}
 
 	// 发消息给客户端

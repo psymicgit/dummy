@@ -6,18 +6,14 @@
 
 #include <net/serverlink.h>
 
-DBServer::DBServer()
-	: Server()
-	, m_dbmgr(&DBMgr::Instance())
-{
-	m_svrType = eDBServer;
-}
-
 bool DBServer::init(const char* jsonConfig)
 {
 	if (!Server::init()) {
 		return false;
 	}
+
+	m_svrType = eDBServer;
+	m_dbmgr = &DBMgr::Instance();
 
 	logging::init("dbserver", "log_dbsvr_");
 

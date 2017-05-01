@@ -11,19 +11,14 @@
 
 #include "test.h"
 
-GateServer::GateServer()
-	: Server()
-	, m_gamesvrLink(NULL)
-{
-	m_svrType = eGateServer;
-	m_clientMgr.m_taskQueue = &m_taskQueue;
-}
-
 bool GateServer::init(const char* jsonConfig)
-{
+{	
 	if (!Server::init()) {
 		return false;
 	}
+
+	m_gamesvrLink = nullptr;
+	m_svrType = eGateServer;
 
 	logging::init("gateserver", "log_gatesvr_");
 
@@ -46,9 +41,10 @@ bool GateServer::init(const char* jsonConfig)
 	}
 
 	test();
+	GateClientMgr::Instance().Init();
 
 	// 开始监听来自外网的连接
-	if(!m_wan.listen(m_config.m_wanListen.ip, m_config.m_wanListen.port, m_clientMgr)) {
+	if(!m_wan.listen(m_config.m_wanListen.ip, m_config.m_wanListen.port, GateClientMgr::Instance())) {
 		LOG_ERROR << "listen at <" << m_config.m_wanListen.ip << ":" << m_config.m_wanListen.port <<  "> failed, aborted!";
 		return false;
 	}
@@ -130,10 +126,10 @@ void GateServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int serve
 	delete link;
 }
 
-void GateServer::sendToGameServer(uint32 clientId, uint16 msgId, const char* data, uint32 len)
+void GateServer::SendToGameServer(int msgId, const Message& msg)
 {
 	if (m_gamesvrLink)
 	{
-		m_gamesvrLink->send(clientId, msgId, data, len);
+		m_gamesvrLink->SendMsg(msgId, msg);
 	}
 }

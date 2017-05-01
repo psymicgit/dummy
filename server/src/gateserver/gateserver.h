@@ -19,8 +19,6 @@ class GameSvrLink;
 class GateServer : public Singleton<GateServer>, public Server
 {
 public:
-	GateServer();
-
 	// 回收服务器资源
 	virtual void stopping();
 
@@ -41,15 +39,16 @@ public:
 
 public:
 	// 将指定玩家的消息发给游戏服
-	void sendToGameServer(uint32 clientId, uint16 msgId, const char* data, uint32 len);
+	void SendToGameServer(int msgId, const Message& msg);
 
 public:
-	MsgDispatcher<GateClient> m_dispatcher;
+	MsgDispatcher<GateClient> m_clientDispatcher;
+	MsgDispatcher<GameSvrLink> m_gameDispatcher;
 
 private:
 	Net				m_wan;			// 外网通信中心：负责与外网进行通信，如：管理玩家的连接
 	GameSvrLink*	m_gamesvrLink;	// 与游戏服的连接
-	GateClientMgr		m_clientMgr;	// 客户端管理中心
+	GateClientMgr	m_clientMgr;	// 客户端管理中心
 	GateConfig		m_config;		// 网关配置
 };
 

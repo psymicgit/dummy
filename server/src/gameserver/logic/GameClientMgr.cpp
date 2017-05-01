@@ -11,15 +11,19 @@
 #include <client.pb.h>
 #include <protocol/message.h>
 
-GameClientMgr::GameClientMgr()
+bool GameClientMgr::Init()
 {
-	GameLogic::RegisterClientMsg(ClientMsg_LoginRequest, OnLoginReq);
-	GameLogic::RegisterClientMsg(ClientMsg_AuthRequest, OnAuthReq);
+	GameLogic::RegisterClientMsg(ClientMsg_LoginRequest, OnLoginRequest);
+	GameLogic::RegisterClientMsg(ClientMsg_AuthRequest, OnAuthRequest);
+	GameLogic::RegisterClientMsg(ClientMsg_MoveRequest, OnMoveRequest);
+	GameLogic::RegisterClientMsg(ClientMsg_ReadyRequest, OnReadyRequest);
+
+	return true;
 }
 
-GameClient* GameClientMgr::FindClient(uint32 playerId)
+GameClient* GameClientMgr::FindClient(int clientId)
 {
-	ClientMap::iterator itr = m_clients.find(playerId);
+	ClientMap::iterator itr = m_clients.find(clientId);
 	if (itr == m_clients.end()) {
 		return NULL;
 	}
@@ -27,54 +31,36 @@ GameClient* GameClientMgr::FindClient(uint32 playerId)
 	return itr->second;
 }
 
-void GameClientMgr::handleMsg(Link* link)
+GameClient* GameClientMgr::AddClient(int clientId)
 {
-	// 1. 将接收缓冲区的数据全部取出
-	evbuffer recvSwapBuf;
-	evbuffer *buf = &recvSwapBuf;
-
-	link->beginRead(buf);
-
-	// 2. 循环处理消息数据
-	while (true) {
-		// 检测包头长度
-		int bytes = (int)evbuffer_get_length(buf);
-		if (bytes <= sizeof(NetMsgHead)) {
-			break;
-		}
-
-		LanMsgHead *head = (LanMsgHead*)evbuffer_pullup(buf, sizeof(LanMsgHead));
-		int clientId = endiantool::networkToHost(head->clientId);
-		int msgId = endiantool::networkToHost(head->msgId);
-		int rawMsgSize = endiantool::networkToHost(head->msgLen);
-
-		// 检测半包
-		if (rawMsgSize > bytes) {
-			break;
-		}
-
-		GameClient *client = GameClientMgr::Instance().FindClient(clientId);
-		if (NULL == client) {
-			return;
-		}
-
-		int msgSize = rawMsgSize - sizeof(LanMsgHead);
-
-		const char *peek = (const char*)evbuffer_pullup(buf, msgSize);
-		const char* msg = peek + sizeof(LanMsgHead);
-
-		m_dispatcher.dispatch(*client, msgId, msg, msgSize, 0);
-		evbuffer_drain(buf, rawMsgSize);
+	GameClient *oldClient = FindClient(clientId);
+	if (oldClient)
+	{
+		return oldClient;
 	}
 
-	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
-	link->endRead(buf);
+	GameClient *client = new GameClient;
+	client->Init();
+
+	client->m_clientId = clientId;
+	m_clients[clientId] = client;
+	return client;
 }
 
-void GameClientMgr::OnAuthReq(GameClient* client, AuthReq *req, Timestamp receiveTime)
+void GameClientMgr::OnAuthRequest(GameClient* client, AuthReq *req, Timestamp receiveTime)
 {
 }
 
-void GameClientMgr::OnLoginReq(GameClient* client, LoginReq *req, Timestamp receiveTime)
+void GameClientMgr::OnLoginRequest(GameClient* client, LoginReq *req, Timestamp receiveTime)
 {
+}
+
+void GameClientMgr::OnMoveRequest(GameClient* client, MoveRequest *req, Timestamp receiveTime)
+{
+
+}
+
+void GameClientMgr::OnReadyRequest(GameClient* client, ReadyRequest *req, Timestamp receiveTime)
+{
+
 }

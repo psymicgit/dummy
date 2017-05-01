@@ -25,8 +25,6 @@ class GameClient;
 class GameServer : public Singleton<GameServer>, public Server
 {
 public:
-	GameServer();
-
 	virtual void stoppping();
 
 	virtual ServerLink* onAcceptServer(Link&, ServerType, int serverId);
@@ -41,16 +39,17 @@ public:
 
 	// 发送消息到db服务器
 	bool sendToDBServer(uint16 msgId, Message&);
+	
+	bool SendToGate(int msgId, Message&);
 
 public:
-	MsgDispatcher<GameClient> m_dispatcher;
+	MsgDispatcher<GameClient> m_clientDispatcher;
+	MsgDispatcher<GateLink> m_gateDispatcher;
 
 private:
 	GateLink*		m_gateLink;
 
 	ServerLink*		m_dbLink;
-
-	GameClientMgr		m_clientMgr;
 
 	GameHttpMgr		m_httpMgr;
 

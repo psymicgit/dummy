@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\protocol\client.pb.cc" />
+    <ClCompile Include="..\protocol\game_to_gate.pb.cc" />
     <ClCompile Include="config\gateconfig.cpp" />
     <ClCompile Include="GateLogic.cpp" />
     <ClCompile Include="gateserver.cpp" />
@@ -114,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\protocol\client.pb.h" />
+    <ClInclude Include="..\protocol\game_to_gate.pb.h" />
     <ClInclude Include="config\gateconfig.h" />
     <ClInclude Include="GateLogic.h" />
     <ClInclude Include="gateserver.h" />

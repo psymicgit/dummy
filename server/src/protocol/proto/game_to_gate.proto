@@ -1,0 +1,34 @@
+import "client.proto";
+
+//---------------- 服务端 <-> 服务端消息号 ----------------//
+
+enum GateToGameMsgId
+{
+	GateToGame_RouteFromClient = 1;
+	GateToGame_RouteLoginRequest = 2;
+}
+
+enum GameToGateMsgId
+{
+	GameToGate_RouteToClient = 1;
+}
+
+message RouteFromClientMsg
+{
+	required int32 client_id = 1; // 客户端id
+	required int32 msg_id = 2; // 消息id
+	required string msg = 3;	// 封装起来的包
+}
+
+message RouteToClientMsg
+{
+	required int32 client_id = 1; // 客户端id
+	required int32 msg_id = 2; // 消息id
+	required string msg = 3;	// 封装起来的包
+}
+
+message RouteLoginRequest
+{
+	required int32 client_id = 1; // 客户端id
+	required LoginReq loginReq = 2;	// 客户端原始登录包
+}

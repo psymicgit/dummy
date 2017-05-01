@@ -19,9 +19,6 @@ class GateClientMgr;
 class GateClient : public INetLogic
 {
 public:
-	GateClient();
-
-public:
 	std::string name();
 
 	// @override
@@ -32,11 +29,16 @@ public:
 	virtual TaskQueue&	getTaskQueue() { return *m_taskQueue; }
 
 public:
+	bool Init();
+
 	// 执行本客户端连接成功建立时所需要执行的初始化操作
 	void onEstablish();
 
 	// 发送消息包
-	bool send(int msgId, Message&);
+	bool SendMsg(int msgId, Message&);
+
+	// 发送消息包
+	bool Send(int msgId, const char* msg, int msgSize);
 
 	// 关闭本客户端连接
 	void close();
@@ -50,9 +52,8 @@ public:
 public:
 
 	Link*			m_link;			// 与客户端的tcp原始连接
-	uint32			m_clientId;
+	int				m_clientId;
 	TaskQueue*		m_taskQueue;
-	GateClientMgr*		m_clientMgr;
 	std::string		m_encryptKey;	// 加密密钥
 	std::string		m_authKey;		// 认证密钥
 

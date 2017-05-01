@@ -11,11 +11,17 @@
 #include <protocol.pb.h>
 #include <db/dbcommand.h>
 
-DbAgent::DbAgent(SqlDBType dbtype)
+DbAgent::DbAgent()
 	: m_cond(m_lock)
-	, m_running(false)
-	, m_dbtype(dbtype)
 {
+}
+
+bool DbAgent::Init(SqlDBType dbtype)
+{
+	m_running = false;
+	m_dbtype = dbtype;
+
+	return true;
 }
 
 bool DbAgent::start()

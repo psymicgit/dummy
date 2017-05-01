@@ -8,8 +8,10 @@
 
 #include "gatelink.h"
 #include "gameserver.h"
+#include "GameLogic.h"
 #include "logic/GameClientMgr.h"
 
+#include <game_to_gate.pb.h>
 #include <net/netaddress.h>
 #include <net/link.h>
 #include <server.h>
@@ -17,49 +19,53 @@
 
 void GateLink::onRecv(Link *link)
 {
-	Server::instance->getTaskQueue().put(boost::bind(&GameClientMgr::handleMsg, &GameClientMgr::Instance(), link));
+	Server::instance->getTaskQueue().put(boost::bind(&GateLink::handleMsg, this, link));
+}
+
+bool GateLink::Init()
+{
+	GameLogic::RegisterGateMsg(GateToGame_RouteFromClient, GateLink::OnRouteFromClient);
+	GameLogic::RegisterGateMsg(GateToGame_RouteLoginRequest, GateLink::OnRouteLogin);
+
+	return true;
 }
 
 void GateLink::handleMsg(Link* link)
 {
-	// 1. 将接收缓冲区的数据全部取出
-	evbuffer recvSwapBuf;
-	evbuffer *buf = &recvSwapBuf;
+	msgtool::DispatchMsg(link, *this, GameServer::Instance().m_gateDispatcher);
+}
 
-	link->beginRead(buf);
+void GateLink::OnRouteFromClient(GateLink* gateLink, RouteFromClientMsg *routeFromClientMsg, int64 receiveTime)
+{
+	int clientId = routeFromClientMsg->client_id();
 
-	// 2. 循环处理消息数据
-	while (true) {
-		// 检测包头长度
-		int bytes = (int)evbuffer_get_length(buf);
-		if (bytes <= sizeof(NetMsgHead)) {
-			break;
-		}
-
-		LanMsgHead *head = (LanMsgHead*)evbuffer_pullup(buf, sizeof(LanMsgHead));
-		int clientId = endiantool::networkToHost(head->clientId);
-		int msgId = endiantool::networkToHost(head->msgId);
-		int rawMsgSize = endiantool::networkToHost(head->msgLen);
-
-		// 检测半包
-		if (rawMsgSize > bytes) {
-			break;
-		}
-
-		GameClient *client = GameClientMgr::Instance().FindClient(clientId);
-		if (NULL == client) {
-			return;
-		}
-
-		int msgSize = rawMsgSize - sizeof(LanMsgHead);
-
-		const char *peek = (const char*)evbuffer_pullup(buf, msgSize);
-		const char* msg = peek + sizeof(LanMsgHead);
-
-		GameServer::Instance().m_dispatcher.dispatch(*client, msgId, msg, msgSize, 0);
-		evbuffer_drain(buf, rawMsgSize);
+	GameClient* client = GameClientMgr::instance->FindClient(clientId);
+	if (nullptr == client)
+	{
+		return;
 	}
 
-	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
-	link->endRead(buf);
+	const std::string& routeMsg = routeFromClientMsg->msg();
+
+	int msgId = routeFromClientMsg->msg_id();
+	int msgSize = routeMsg.size();
+	GameServer::Instance().m_clientDispatcher.dispatch(*client, msgId, routeMsg.c_str(), msgSize, 0);
+}
+
+void GateLink::OnRouteLogin(GateLink* gateLink, RouteLoginRequest* msg, int64 receiveTime)
+{
+	int clientId = msg->client_id();
+	const LoginReq& loginReq = msg->loginreq();
+
+	GameClient* oldClient = GameClientMgr::instance->FindClient(clientId);
+	if (oldClient)
+	{
+		return;
+	}
+
+	GameClient* client = GameClientMgr::instance->AddClient(clientId);
+	if (nullptr == client)
+	{
+		return;
+	}
 }

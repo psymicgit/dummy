@@ -48,6 +48,9 @@ bool RobotMgr::init(const char* jsonConfig)
 {
 	// registerSignal();
 
+	m_allocRobotId = 0;
+	m_run = false;
+
 	global::init();
 
 	logging::init("robot", "log_robot_");

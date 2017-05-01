@@ -19,6 +19,11 @@ std::string ServerLink::name()
 	return ret;
 }
 
+bool ServerLink::Init()
+{
+	return true;
+}
+
 void ServerLink::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
 	ServerType peerSvrType = m_peerSvrType;
@@ -50,4 +55,9 @@ void ServerLink::send(uint32 routeId, uint16 msgId, const char *data, int len)
 
 	int msgSize = sizeof(LanMsgHead) + len;
 	m_link->send(netBuf, msgSize);
+}
+
+void ServerLink::SendMsg(int msgId, const Message& msg)
+{
+	m_link->send(msgId, msg);
 }

@@ -247,7 +247,7 @@ void Link::send(const char *text)
 	send(text, strlen(text));
 }
 
-void Link::send(int msgId, Message & msg)
+void Link::send(int msgId, const Message & msg)
 {
 	if (!isopen()) {
 		return;

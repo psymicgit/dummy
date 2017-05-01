@@ -18,7 +18,7 @@
 #include <net.pb.h>
 #include <basic/evbuffer.h>
 
-Server* Server::instance = NULL;
+Server* Server::instance = nullptr;
 
 void registerSignal();
 
@@ -49,15 +49,6 @@ void registerSignal()
 #endif
 }
 
-Server::Server()
-	: m_svrType(eNullServer)
-	, m_zoneId(0)
-	, m_isquit(false)
-{
-	assert(NULL == instance);
-	instance = this;
-}
-
 std::string Server::name()
 {
 	return svrtool::getSvrName(m_svrType);
@@ -65,6 +56,12 @@ std::string Server::name()
 
 bool Server::init()
 {
+	assert(nullptr == instance);
+	instance = this;
+	m_svrType = eNullServer;
+	m_zoneId = 0;
+	m_isquit = false;
+
 	global::init();
 
 	// 注册系统信号：防止一般的kill操作导致服务器不正常关闭
@@ -114,42 +111,7 @@ void Server::onRecv(Link *link)
 
 void Server::HandleNetMsg(Link *link)
 {
-	// 1. 将接收缓冲区的数据全部取出
-	evbuffer recvSwapBuf;
-	evbuffer *buf = &recvSwapBuf;
-
-	link->beginRead(buf);
-
-	// 2. 循环处理消息数据
-	while(true) {
-		// 检测包头长度
-		size_t bytes = evbuffer_get_length(buf);
-		if (bytes < sizeof(NetMsgHead)) {
-			break;
-		}
-
-		NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(buf, sizeof(NetMsgHead));
-
-		uint16 msgId	= endiantool::networkToHost(head->msgId);
-		uint32 msgLen	= endiantool::networkToHost(head->msgLen);
-
-		// 检测半包
-		if (msgLen > bytes) {
-			break;
-		}
-
-		const char *peek = (const char*)evbuffer_pullup(buf, msgLen);
-
-		m_dispatcher.dispatch(*link, msgId, peek + sizeof(NetMsgHead), msgLen - sizeof(NetMsgHead), 0);
-		evbuffer_drain(buf, msgLen);
-	}
-
-	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
-	link->endRead(buf);
-
-	// LOG_INFO << "<Server> recv msg from <" << link->m_peerAddr.toIpPort() << "> :" << buffer->retrieveAllAsString();
-	// m_dispatcher.dispatch(*link, msgId, buf->peek(), buf->readableBytes(), 0);
-	// m_bufferPool.free(buf);
+	msgtool::DispatchMsg(link, *link, m_dispatcher);
 }
 
 int Server::getServerId(ServerType svrType, int zoneId)
@@ -167,16 +129,13 @@ bool Server::isSvrLinkExist(ServerType svrType, int zoneId)
 
 void Server::registerServer(int svrId, ServerLink *svrLink)
 {
+	svrLink->Init();
 	m_svrLinkMap[svrId] = svrLink;
 }
 
 void Server::unregisterServer(int svrId)
 {
 	m_svrLinkMap.erase(svrId);
-}
-
-void Server::HandleServerMsg(Link* link)
-{
 }
 
 void Server::start()

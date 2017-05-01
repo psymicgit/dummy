@@ -10,6 +10,8 @@
 #define _message_h_
 
 #include <google/protobuf/message.h>
+#include "net/link.h"
+#include "net/msgdispatcher.h"
 
 // namespace google {namespace protobuf { class Message; }}
 
@@ -81,6 +83,44 @@ namespace msgtool
 		if (obj) {
 			obj->~T();
 		}
+	}
+
+	template <typename T>
+	void DispatchMsg(Link* link, T &t, MsgDispatcher<T>& dispatcher)
+	{
+		// 1. 将接收缓冲区的数据全部取出
+		evbuffer recvSwapBuf;
+		evbuffer *dst = &recvSwapBuf;
+
+		link->beginRead(dst);
+
+		while (true) {
+			// 检测包头长度
+			size_t bytes = evbuffer_get_length(dst);
+			if (bytes < sizeof(NetMsgHead)) {
+				break;
+			}
+
+			NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
+			uint16 msgId = endiantool::networkToHost(head->msgId);
+			uint32 rawMsgSize = endiantool::networkToHost(head->msgLen);
+
+			// 检测半包
+			if (rawMsgSize > bytes) {
+				break;
+			}
+
+			char *peek = (char*)evbuffer_pullup(dst, rawMsgSize);
+
+			char *msg = peek + sizeof(NetMsgHead);
+			int msgSize = rawMsgSize - sizeof(NetMsgHead);
+
+			dispatcher.dispatch(t, msgId, msg, msgSize, 0);
+			evbuffer_drain(dst, rawMsgSize);
+		}
+
+		// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
+		link->endRead(dst);
 	}
 }
 

@@ -13,7 +13,16 @@
 class GameClient
 {
 public:
-	GameClient();
+	bool Init();
+
+	// 发送消息包
+	bool SendMsg(int msgId, Message&);
+
+	// 发送消息包
+	bool Send(int msgId, const char* msg, int msgSize);
+
+public:
+	int m_clientId;
 };
 
 #endif //_client_h_

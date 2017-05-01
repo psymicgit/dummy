@@ -68,7 +68,7 @@ public:
 	void send(const char *text);
 
 	// 发送未加密的消息包
-	void send(int msgId, Message &msg);
+	void send(int msgId, const Message &msg);
 
 	// 发送经过加密或调整的消息包
 	void send(int msgId, const char *data, int len);

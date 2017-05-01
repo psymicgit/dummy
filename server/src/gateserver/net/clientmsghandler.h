@@ -11,6 +11,7 @@
 
 #include <protocol.pb.h>
 #include <client.pb.h>
+#include <game_to_gate.pb.h>
 #include <tool/ticktool.h>
 #include <tool/strtool.h>
 #include <tool/servertool.h>
@@ -31,12 +32,18 @@ public:
 		}
 
 		ack.set_encryptkey("123213");
-		client->send(ServerMsg_AutyReply, ack);
+		client->SendMsg(ServerMsg_AutyReply, ack);
 	}
 
 	static void OnLoginReq(GateClient* client, LoginReq *req, Timestamp receiveTime)
 	{
+		RouteLoginRequest routeLoginRequest;
+		routeLoginRequest.set_client_id(client->m_clientId);
+		routeLoginRequest.set_allocated_loginreq(req);
 
+		GateServer::Instance().SendToGameServer(GateToGame_RouteLoginRequest, routeLoginRequest);
+
+		routeLoginRequest.release_loginreq();
 	}
 
 	static void OnPingTest(GateClient* client, PingPong *p, Timestamp receiveTime)
@@ -57,7 +64,7 @@ public:
 			}
 		}
 
-		client->send(ServerMsg_PongReply, *p);
+		client->SendMsg(ServerMsg_PongReply, *p);
 	}
 
 	static void OnSpeedTest(GateClient* client, PingPong *p, Timestamp receiveTime)

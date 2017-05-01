@@ -16,13 +16,13 @@
 
 #include "GateClient.h"
 #include "GateLogic.h"
+#include "gateserver.h"
 #include "clientmsghandler.h"
 
 GateClientMgr::GateClientMgr()
 	: m_taskQueue(NULL)
 	, m_allocClientId(0)
 {
-	
 }
 
 GateClientMgr::~GateClientMgr()
@@ -33,6 +33,8 @@ GateClientMgr::~GateClientMgr()
 
 bool GateClientMgr::Init()
 {
+	m_taskQueue = &GateServer::Instance().getTaskQueue();
+
 	GateLogic::RegisterClientMsg(ClientMsg_LoginRequest, ClientMsgHandler::OnLoginReq);
 	GateLogic::RegisterClientMsg(ClientMsg_AuthRequest, ClientMsgHandler::OnAuthReq);
 
@@ -46,7 +48,7 @@ bool GateClientMgr::Init()
 
 void GateClientMgr::close()
 {
-	for(ClientMap::iterator itr = m_clientMap.begin(); itr != m_clientMap.end(); ++itr) {
+	for(ClientMap::iterator itr = m_clients.begin(); itr != m_clients.end(); ++itr) {
 		GateClient *client = itr->second;
 		client->close();
 	}
@@ -58,16 +60,17 @@ void GateClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const Ne
 {
 	uint32 newClientId = allocClientId();
 
-	GateClient *client			= m_clientPool.alloc();
-	client->m_link			= link;
+	GateClient *client = m_clientPool.alloc();
+	client->Init();
+
+	client->m_link = link;
 	client->m_clientId		= newClientId;
-	client->m_clientMgr		= this;
 	client->m_taskQueue		= m_taskQueue;
 
 	link->m_logic = client;
 	client->onEstablish();
 
-	m_clientMap[newClientId] = client;
+	m_clients[newClientId] = client;
 
 // 	static int clientNum = 0;
 // 	clientNum++;
@@ -76,8 +79,8 @@ void GateClientMgr::onAccepted(Link *link, const NetAddress& localAddr, const Ne
 // 		LOG_INFO << "clientNum = " << clientNum << ", m_clientMap.size() = " << m_clientMap.size();
 // 	}
 
-	if (m_clientMap.size() % 100 == 0) {
-		LOG_INFO << "<" << localAddr.toIpPort() << "> accept new client from <" << peerAddr.toIpPort() << ">, m_clientMap.size()=" << m_clientMap.size();
+	if (m_clients.size() % 100 == 0) {
+		LOG_INFO << "<" << localAddr.toIpPort() << "> accept new client from <" << peerAddr.toIpPort() << ">, m_clientMap.size()=" << m_clients.size();
 	}
 }
 
@@ -91,7 +94,17 @@ void GateClientMgr::onRecv(Link *link)
 	Server::instance->onRecv(link);
 }
 
-uint32 GateClientMgr::allocClientId()
+GateClient* GateClientMgr::FindClient(int clientId)
+{
+	ClientMap::iterator itr = m_clients.find(clientId);
+	if (itr == m_clients.end()) {
+		return NULL;
+	}
+
+	return itr->second;
+}
+
+int GateClientMgr::allocClientId()
 {
 	return ++m_allocClientId;
 }
@@ -100,6 +113,6 @@ void GateClientMgr::delClient(GateClient *client)
 {
 	// LOG_INFO << "client <" << client->m_link->m_peerAddr.toIpPort() << "> disconnet";
 
-	m_clientMap.erase(client->m_clientId);
+	m_clients.erase(client->m_clientId);
 	m_clientPool.free(client);
 }

@@ -43,6 +43,9 @@
     <ClInclude Include="logic\GameClientMgr.h">
       <Filter>logic</Filter>
     </ClInclude>
+    <ClInclude Include="..\protocol\game_to_gate.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameserver.cpp" />
@@ -84,6 +87,9 @@
     </ClCompile>
     <ClCompile Include="logic\GameClientMgr.cpp">
       <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\protocol\game_to_gate.pb.cc">
+      <Filter>protocol</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,27 +12,31 @@
 
 class AuthReq;
 class LoginReq;
+class MoveRequest;
+class ReadyRequest;
 
 // 客户端管理器，管理当前通过网关与本游戏服连接的所有玩家连接
 class GameClientMgr : public Singleton<GameClientMgr>
 {
 private:
-	typedef std::tr1::unordered_map<uint32, GameClient*> ClientMap;
+	typedef std::map<uint32, GameClient*> ClientMap;
 
 public:
-	GameClientMgr();
+	bool Init();
 
-	GameClient* FindClient(uint32 playerId);
+	GameClient* FindClient(int clientId);
 
-	void handleMsg(Link* link);
+	GameClient* AddClient(int clientId);
 
 private:
-	static void OnAuthReq(GameClient* client, AuthReq *req, Timestamp receiveTime);
+	static void OnAuthRequest(GameClient* client, AuthReq *req, Timestamp receiveTime);
 
-	static void OnLoginReq(GameClient* client, LoginReq *req, Timestamp receiveTime);
+	static void OnLoginRequest(GameClient* client, LoginReq *req, Timestamp receiveTime);
+	
+	static void OnMoveRequest(GameClient* client, MoveRequest *req, Timestamp receiveTime);
+	
+	static void OnReadyRequest(GameClient* client, ReadyRequest *req, Timestamp receiveTime);
 
 private:
 	ClientMap m_clients;
-
-	MsgDispatcher<GameClient> m_dispatcher;
 };

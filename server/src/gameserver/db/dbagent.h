@@ -20,7 +20,9 @@ class DbAgent
 	typedef std::vector<DBCommand*> DBCommandList;
 
 public:
-	DbAgent(SqlDBType dbtype);
+	DbAgent();
+
+	bool Init(SqlDBType dbtype);
 
 	bool start();
 

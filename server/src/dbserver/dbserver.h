@@ -12,8 +12,6 @@ class DBMgr;
 class DBServer : public Singleton<DBServer>, public Server
 {
 public:
-	DBServer();
-
 	bool init(const char* jsonConfig);
 
 	void start();

@@ -15,12 +15,20 @@
 class Link;
 class NetAddress;
 class Buffer;
+class RouteFromClientMsg;
+class RouteLoginRequest;
 
 class GateLink : public ServerLink
 {
+	bool Init() override;
+
 	virtual void onRecv(Link*) override;
 
 	void handleMsg(Link* link);
+
+public:
+	static void OnRouteFromClient(GateLink* gateLink, RouteFromClientMsg *msg, int64 receiveTime);
+	static void OnRouteLogin(GateLink* gateLink, RouteLoginRequest* msg, int64 receiveTime);
 };
 
 #endif //_gatelink_h_

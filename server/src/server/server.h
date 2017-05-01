@@ -39,8 +39,6 @@ public:
 	virtual void onDisconnectServer(Link&, ServerType peerSvrType/*对端服务器类别*/, int peerSvrId) = 0;
 
 public:
-	Server();
-
 	// 初始化服务器
 	bool init();
 
@@ -68,8 +66,7 @@ public:
 	// 处理指定连接上已接收到的数据
 	virtual void HandleNetMsg(Link*);
 
-	// 处理内网消息
-	void HandleServerMsg(Link*);
+	void DispatchMsg(Link*);
 
 	// 启动服务器
 	void start();

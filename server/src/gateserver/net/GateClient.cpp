@@ -10,9 +10,9 @@
 
 
 #include <client.pb.h>
+#include <game_to_gate.pb.h>
 #include <protocol.pb.h>
 #include <protocol/message.h>
-
 #include <net/netaddress.h>
 #include <net/netmodel.h>
 #include <tool/encrypttool.h>
@@ -23,16 +23,16 @@
 #include "GateClientMgr.h"
 #include "gateserver.h"
 
-
-GateClient::GateClient()
-	: m_link(NULL)
-	, m_clientId(0)
-	, m_taskQueue(NULL)
-	, m_clientMgr(NULL)
-	, m_pingCount(0)
-	, m_speedTestCount(0)
-	, m_latencyTestCount(0)
+bool GateClient::Init()
 {
+	m_link = nullptr;
+	m_clientId = 0;
+	m_taskQueue = nullptr;
+	m_pingCount = 0;
+	m_speedTestCount = 0;
+	m_latencyTestCount = 0;
+
+	return true;
 }
 
 void GateClient::onEstablish()
@@ -57,11 +57,12 @@ std::string GateClient::name()
 
 void GateClient::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddress& peerAddr)
 {
-	if ((m_clientMgr->getClientCount() - 1) % 100 == 0) {
-		LOG_INFO << name() << " [" << peerAddr.toIpPort() << "] <-> gatesvr [" << localAddr.toIpPort() << "] broken! current client cnt = " << m_clientMgr->getClientCount() - 1;
+	int clientCount = GateClientMgr::Instance().getClientCount();
+	if ((clientCount - 1) % 100 == 0) {
+		LOG_INFO << name() << " [" << peerAddr.toIpPort() << "] <-> gatesvr [" << localAddr.toIpPort() << "] broken! current client cnt = " << clientCount - 1;
 	}
 
-	m_clientMgr->delClient(this);
+	GateClientMgr::Instance().delClient(this);
 }
 
 void GateClient::onRecv(Link *link)
@@ -129,13 +130,19 @@ void GateClient::handleMsg()
 			msgSize = rawMsgSize - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen;
 		}
 
-		// 判断是否转发
+		// 转发给游戏服
 		if (NeedRouteToGame(msgId)) {
-			// 转发给游戏服
-			GateServer::Instance().sendToGameServer(m_clientId, msgId, msg, msgSize);
-		} else {
-			// 直接处理
-			m_clientMgr->m_dispatcher.dispatch(*this, msgId, msg, msgSize, 0);
+			RouteFromClientMsg routeMsg;
+			routeMsg.set_client_id(m_clientId);
+			routeMsg.set_msg_id(msgId);
+			routeMsg.set_msg(msg, msgSize);
+
+			GateServer::Instance().SendToGameServer(GateToGame_RouteFromClient, routeMsg);
+		} 
+		// 直接处理
+		else 
+		{
+			GateServer::Instance().m_clientDispatcher.dispatch(*this, msgId, msg, msgSize, 0);
 		}
 
 		evbuffer_drain(dst, rawMsgSize);
@@ -150,7 +157,7 @@ bool GateClient::NeedRouteToGame(int msgId)
 	return msgId > ClientMsg_RouteToGate;
 }
 
-bool GateClient::send(int msgId, Message &msg)
+bool GateClient::SendMsg(int msgId, Message &msg)
 {
 	if (!m_link->isopen()) {
 		return false;
@@ -187,6 +194,22 @@ bool GateClient::send(int msgId, Message &msg)
 		m_link->send(m_link->m_net->g_encryptBuf, packetLen);
 	}
 	
+	return true;
+}
+
+// 发送消息包
+bool GateClient::Send(int msgId, const char* msg, int msgSize)
+{
+	if (!m_link->isopen()) {
+		return false;
+	}
+
+	// 不加密
+	if (m_encryptKey.empty())
+	{
+		m_link->send(msgId, msg, msgSize);
+	}
+
 	return true;
 }
 

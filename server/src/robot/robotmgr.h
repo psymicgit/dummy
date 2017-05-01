@@ -23,15 +23,9 @@
 // 机器人管理器
 class RobotMgr : public Singleton<RobotMgr>
 {
-	typedef tr1::unordered_map<uint32, Robot*> RobotMap;
+	typedef std::map<uint32, Robot*> RobotMap;
 
 public:
-	RobotMgr()
-		: m_allocRobotId(0)
-		, m_run(false)
-	{
-	}
-
 	virtual std::string name() { return string("robotmgr"); }
 
 public:

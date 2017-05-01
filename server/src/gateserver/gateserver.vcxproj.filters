@@ -30,6 +30,9 @@
     <ClCompile Include="net\GateClientMgr.cpp">
       <Filter>net</Filter>
     </ClCompile>
+    <ClCompile Include="..\protocol\game_to_gate.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gateserver.h" />
@@ -62,6 +65,9 @@
     </ClInclude>
     <ClInclude Include="net\GateClientMgr.h">
       <Filter>net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\protocol\game_to_gate.pb.h">
+      <Filter>protocol</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

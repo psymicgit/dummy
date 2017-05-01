@@ -32,6 +32,8 @@ public:
 public:
 	virtual std::string name();
 
+	virtual bool Init();
+
 	// 对端服务器断开连接
 	virtual void onDisconnect(Link*, const NetAddress& localAddr, const NetAddress& peerAddr);
 
@@ -40,6 +42,8 @@ public:
 	virtual TaskQueue& getTaskQueue() { return *m_taskQueue; }
 
 	void send(uint32 routeId, uint16 msgId, const char *data, int len);
+
+	void SendMsg(int msgId, const Message& msg);
 
 public:
 	virtual void onEstablish() {}

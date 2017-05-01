@@ -12,21 +12,18 @@
 #include "db/db.h"
 #include "db/dbfactory.h"
 
-GameServer::GameServer()
-	: Server()
-	, m_gateLink(NULL)
-	, m_dbLink(NULL)
-	, m_gamedb(GameDB)
-	, m_logdb(LogDB)
-{
-	m_svrType = eGameServer;
-}
-
 bool GameServer::init(const char* jsonConfig)
 {
 	if (!Server::init()) {
 		return false;
 	}
+
+	m_svrType = eGameServer;
+
+	m_gateLink = nullptr;
+	m_dbLink = nullptr;
+	m_gamedb.Init(GameDB);
+	m_logdb.Init(LogDB);
 
 	logging::init("gameserver", "log_gamesvr_");
 
@@ -57,6 +54,7 @@ bool GameServer::init(const char* jsonConfig)
 		return false;
 	}
 
+	GameClientMgr::Instance().Init();
 	return true;
 }
 
@@ -144,10 +142,18 @@ void GameServer::onDisconnectServer(Link &tcpLink, ServerType svrType, int peerS
 
 bool GameServer::sendToDBServer(uint16 msgId, Message &msg)
 {
-	if (NULL == m_dbLink) {
-		return false;
+	if (m_dbLink) {
+		m_dbLink->m_link->send(msgId, msg);
 	}
 
-	m_dbLink->m_link->send(msgId, msg);
+	return true;
+}
+
+bool GameServer::SendToGate(int msgId, Message &msg)
+{
+	if (m_gateLink) {
+		m_gateLink->m_link->send(msgId, msg);
+	}
+
 	return true;
 }

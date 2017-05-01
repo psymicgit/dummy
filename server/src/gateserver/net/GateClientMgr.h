@@ -17,10 +17,10 @@
 class GateClient;
 
 // 客户端管理中心，管理当前在线的客户端连接实例
-class GateClientMgr : public INetLogic
+class GateClientMgr : public INetLogic, public Singleton<GateClientMgr>
 {
 private:
-	typedef std::tr1::unordered_map<uint32, GateClient*> ClientMap;
+	typedef std::map<int, GateClient*> ClientMap;
 
 public:
 	GateClientMgr();
@@ -43,21 +43,19 @@ public:
 
 	void delClient(GateClient*);
 
-	int getClientCount() { return m_clientMap.size(); }
+	int getClientCount() { return m_clients.size(); }
+
+	GateClient* FindClient(int clientId);
 
 private:
-	uint32 allocClientId();
+	int allocClientId();
 
 public:
-	TaskQueue*				m_taskQueue;
-
-	uint32					m_allocClientId;
-
-	ClientMap				m_clientMap;		// 当前在线的客户端列表
-
-	MsgDispatcher<GateClient>	m_dispatcher;		// 客户端消息派发器，派发客户端发来的消息
-
-	ObjectPool<GateClient>		m_clientPool;		// 客户端池
+	TaskQueue* m_taskQueue;
+	int m_allocClientId;
+	ClientMap m_clients;						// 当前在线的客户端列表
+	MsgDispatcher<GateClient> m_dispatcher;		// 客户端消息派发器，派发客户端发来的消息
+	ObjectPool<GateClient> m_clientPool;		// 客户端池
 };
 
 #endif //_clientmgr_h_
