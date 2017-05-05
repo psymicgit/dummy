@@ -29,7 +29,6 @@ namespace tutorial
       get { return _id; }
       set { _id = value; }
     }
-
     private string _email = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"email", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
@@ -57,7 +56,6 @@ namespace tutorial
       get { return _number; }
       set { _number = value; }
     }
-
     private tutorial.Person.PhoneType _type = tutorial.Person.PhoneType.HOME;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(tutorial.Person.PhoneType.HOME)]

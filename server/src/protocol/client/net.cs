@@ -29,7 +29,6 @@ namespace net
       get { return _authKey; }
       set { _authKey = value; }
     }
-
     private int _svrId = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"svrId", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
@@ -62,7 +61,6 @@ namespace net
       get { return _svrType; }
       set { _svrType = value; }
     }
-
     private int _svrId = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"svrId", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]

@@ -103,7 +103,7 @@ using <xsl:value-of select="$ns"/>;
 // Option: pre-observable (OnPropertyChanging) enabled
     </xsl:if><xsl:if test="$partialMethods">
 // Option: partial methods (On*Changing/On*Changed) enabled
-    </xsl:if><xsl:if test="$detectMissing">
+    </xsl:if><xsl:if test="$optionDetectMissing">
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     </xsl:if><xsl:if test="not($optionFullFramework)">
 // Option: light framework (CF/Silverlight) enabled
@@ -368,7 +368,6 @@ namespace <xsl:value-of select="translate($namespace,':-/\','__..')"/>
     <xsl:variable name="field"><xsl:apply-templates select="." mode="field"/></xsl:variable>
     <xsl:variable name="specified" select="$optionDetectMissing and ($primitiveType='struct' or $primitiveType='class')"/>
     <xsl:variable name="fieldType"><xsl:value-of select="$propType"/><xsl:if test="$specified and $primitiveType='struct'">?</xsl:if></xsl:variable>
-
     private <xsl:value-of select="concat($fieldType,' ',$field)"/><xsl:if test="not($specified)"> = <xsl:value-of select="$defaultValue"/></xsl:if>;
     [<xsl:apply-templates select="." mode="checkDeprecated"/>global::ProtoBuf.ProtoMember(<xsl:value-of select="number"/>, IsRequired = false, Name=@"<xsl:value-of select="name"/>", DataFormat = global::ProtoBuf.DataFormat.<xsl:value-of select="$format"/>)]<!--
     --><xsl:if test="not($specified)">
@@ -424,9 +423,9 @@ namespace <xsl:value-of select="translate($namespace,':-/\','__..')"/>
       <xsl:call-template name="stripKeyword">
         <xsl:with-param name="value" select="$name"/>
       </xsl:call-template></xsl:variable>
-    public <xsl:value-of select="concat($propType,' ',$name)"/>
+    public <xsl:value-of select="concat($fieldType,' ',$name)"/>
     {
-      get { return <xsl:value-of select="$field"/> <xsl:if test="$specified">?? <xsl:value-of select="$defaultValue"/></xsl:if>; }
+      get { return <xsl:value-of select="$field"/>; }
       set { <xsl:if test="$optionPartialMethods">On<xsl:value-of select="$nameNoKeyword"/>Changing(value); </xsl:if><xsl:if test="$optionPreObservable">OnPropertyChanging(@"<xsl:value-of select="$nameNoKeyword"/>"); </xsl:if><xsl:value-of select="$field"/> = value; <xsl:if test="$optionObservable">OnPropertyChanged(@"<xsl:value-of select="$nameNoKeyword"/>"); </xsl:if><xsl:if test="$optionPartialMethods">On<xsl:value-of select="$nameNoKeyword"/>Changed();</xsl:if>}
     }<xsl:if test="$optionPartialMethods">
     partial void On<xsl:value-of select="$nameNoKeyword"/>Changing(<xsl:value-of select="$propType"/> value);
@@ -435,8 +434,8 @@ namespace <xsl:value-of select="translate($namespace,':-/\','__..')"/>
     <xsl:if test="$optionFullFramework">[global::System.ComponentModel.Browsable(false)]</xsl:if>
     public bool <xsl:value-of select="$nameNoKeyword"/>Specified
     {
-      get { return <xsl:value-of select="$field"/> != null; }
-      set { if (value == (<xsl:value-of select="$field"/>== null)) <xsl:value-of select="$field"/> = value ? <xsl:value-of select="$name"/> : (<xsl:value-of select="$fieldType"/>)null; }
+      get { return this.<xsl:value-of select="$field"/> != null; }
+      set { if (value == (this.<xsl:value-of select="$field"/>== null)) this.<xsl:value-of select="$field"/> = value ? this.<xsl:value-of select="$name"/> : (<xsl:value-of select="$fieldType"/>)null; }
     }
     private bool ShouldSerialize<xsl:value-of select="$nameNoKeyword"/>() { return <xsl:value-of select="$nameNoKeyword"/>Specified; }
     private void Reset<xsl:value-of select="$nameNoKeyword"/>() { <xsl:value-of select="$nameNoKeyword"/>Specified = false; }

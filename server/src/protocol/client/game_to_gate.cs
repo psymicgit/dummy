@@ -6,3 +6,114 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+// Generated from: game_to_gate.proto
+// Note: requires additional types generated from: client.proto
+namespace game_to_gate
+{
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RouteFromClientMsg")]
+  public partial class RouteFromClientMsg : global::ProtoBuf.IExtensible
+  {
+    public RouteFromClientMsg() {}
+    
+    private int _client_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"client_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int client_id
+    {
+      get { return _client_id; }
+      set { _client_id = value; }
+    }
+    private int _msg_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"msg_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int msg_id
+    {
+      get { return _msg_id; }
+      set { _msg_id = value; }
+    }
+    private string _msg;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"msg", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string msg
+    {
+      get { return _msg; }
+      set { _msg = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RouteToClientMsg")]
+  public partial class RouteToClientMsg : global::ProtoBuf.IExtensible
+  {
+    public RouteToClientMsg() {}
+    
+    private int _client_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"client_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int client_id
+    {
+      get { return _client_id; }
+      set { _client_id = value; }
+    }
+    private int _msg_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"msg_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int msg_id
+    {
+      get { return _msg_id; }
+      set { _msg_id = value; }
+    }
+    private string _msg;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"msg", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string msg
+    {
+      get { return _msg; }
+      set { _msg = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RouteLoginRequest")]
+  public partial class RouteLoginRequest : global::ProtoBuf.IExtensible
+  {
+    public RouteLoginRequest() {}
+    
+    private int _client_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"client_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int client_id
+    {
+      get { return _client_id; }
+      set { _client_id = value; }
+    }
+    private LoginReq _loginReq;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"loginReq", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public LoginReq loginReq
+    {
+      get { return _loginReq; }
+      set { _loginReq = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"GateToGameMsgId")]
+    public enum GateToGameMsgId
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GateToGame_RouteFromClient", Value=1)]
+      GateToGame_RouteFromClient = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GateToGame_RouteLoginRequest", Value=2)]
+      GateToGame_RouteLoginRequest = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"GameToGateMsgId")]
+    public enum GameToGateMsgId
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GameToGate_RouteToClient", Value=1)]
+      GameToGate_RouteToClient = 1
+    }
+  
+}
