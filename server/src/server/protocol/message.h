@@ -17,15 +17,8 @@
 
 // 外网消息头
 struct NetMsgHead {
-	uint16 msgId;
-	uint32 msgLen;
-};
-
-// 内网消息头
-struct LanMsgHead {
-	uint32 clientId;
-	uint16 msgId;
-	uint32 msgLen;
+	int msgSize;
+	int16 msgId;
 };
 
 namespace msgtool
@@ -34,10 +27,7 @@ namespace msgtool
 	string getMsgDebugString(const Message &msg);
 
 	// 构建网络包头
-	int BuildNetHeader(NetMsgHead *msgHead, uint16 msgId, uint32 msgLen);
-
-	// 构建内网消息包头
-	int BuildLanMsgHeader(LanMsgHead *msgHead, uint32 clientId, uint16 msgId, uint32 msgLen);
+	int BuildNetHeader(NetMsgHead *msgHead, int msgId, int msgLen);
 
 	// 在预先分配好的接收消息包内存上申请一个Message
 	template<typename T>
@@ -102,8 +92,8 @@ namespace msgtool
 			}
 
 			NetMsgHead *head = (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
-			uint16 msgId = endiantool::networkToHost(head->msgId);
-			uint32 rawMsgSize = endiantool::networkToHost(head->msgLen);
+			uint16 msgId = endiantool::NetworkToHost16(head->msgId);
+			uint32 rawMsgSize = endiantool::NetworkToHost32(head->msgSize);
 
 			// 检测半包
 			if (rawMsgSize > bytes) {

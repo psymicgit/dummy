@@ -5,7 +5,7 @@
 
 namespace strtool
 {
-	std::string itoa(int32);
+	std::string itoa(int);
 	std::string itoa(int64);
 	std::string itoa(uint32);
 	std::string itoa(uint64);

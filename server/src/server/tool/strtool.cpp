@@ -4,7 +4,7 @@
 
 namespace strtool
 {
-	std::string itoa(int32 n)
+	std::string itoa(int n)
 	{
 		char buf[12];
 		rapidjson::internal::i32toa(n, buf);

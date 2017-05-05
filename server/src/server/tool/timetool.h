@@ -10,7 +10,7 @@
 #define _timetool_h_
 
 typedef int64 Timestamp; // utc格式时间，从1900起经过的时间，单位毫秒
-typedef int32 TimeInMs; // in ms毫秒单位
+typedef int TimeInMs; // in ms毫秒单位
 
 #define MsPerSecond 1000 // 毫秒
 #define UsPerSecond (1000 * 1000) // 微秒

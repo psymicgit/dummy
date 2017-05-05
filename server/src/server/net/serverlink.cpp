@@ -45,18 +45,6 @@ void ServerLink::onRecv(Link *link)
 	Server::instance->onRecv(link);
 }
 
-void ServerLink::send(uint32 routeId, uint16 msgId, const char *data, int len)
-{
-	char *netBuf = m_link->m_net->g_encryptBuf;
-	LanMsgHead *msgHead = (LanMsgHead*)netBuf;
-
-	memcpy(netBuf + sizeof(LanMsgHead), data, len);
-	msgtool::BuildLanMsgHeader(msgHead, routeId, msgId, len);
-
-	int msgSize = sizeof(LanMsgHead) + len;
-	m_link->send(netBuf, msgSize);
-}
-
 void ServerLink::SendMsg(int msgId, const Message& msg)
 {
 	m_link->send(msgId, msg);

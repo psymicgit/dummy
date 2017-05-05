@@ -19,8 +19,8 @@ NetAddress::NetAddress(uint16 port)
 {
 	bzero(&m_addr, sizeof m_addr);
 	m_addr.sin_family		= AF_INET;
-	m_addr.sin_addr.s_addr	= endiantool::hostToNetwork((uint32)0);
-	m_addr.sin_port			= endiantool::hostToNetwork(port);
+	m_addr.sin_addr.s_addr	= endiantool::HostToNetwork32(0);
+	m_addr.sin_port			= endiantool::HostToNetwork16(port);
 }
 
 NetAddress::NetAddress(const std::string &ip, uint16 port)
@@ -28,7 +28,7 @@ NetAddress::NetAddress(const std::string &ip, uint16 port)
 	bzero(&m_addr, sizeof m_addr);
 
 	m_addr.sin_family	= AF_INET;
-	m_addr.sin_port		= endiantool::hostToNetwork(port);
+	m_addr.sin_port		= endiantool::HostToNetwork16(port);
 
 	if (::inet_pton(AF_INET, ip.c_str(), &m_addr.sin_addr) <= 0) {
 		LOG_ERROR << "NetAddress parse <ip:port> = <" << ip << ":" << port << "> failed";
@@ -54,7 +54,7 @@ string NetAddress::toIp() const
 
 uint16 NetAddress::toPort() const
 {
-	return endiantool::networkToHost(m_addr.sin_port);
+	return endiantool::NetworkToHost16(m_addr.sin_port);
 }
 
 bool NetAddress::resolve(string hostname, NetAddress* out)

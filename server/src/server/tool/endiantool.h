@@ -11,23 +11,23 @@
 
 namespace endiantool
 {
-	// 将64位的整数从主机字节顺序转换成网络字节顺序
-	uint64_t hostToNetwork(uint64_t host64);
+	// 主机字节序转换成网络字节序：64位整数
+	uint64_t HostToNetwork64(uint64_t host64);
 
 	// 将32位的整数从主机字节顺序转换成网络字节顺序
-	uint32 hostToNetwork(uint32 host32);
+	uint32 HostToNetwork32(uint32 host32);
 
 	// 将16位的整数从主机字节顺序转换成网络字节顺序
-	uint16 hostToNetwork(uint16 host16);
+	uint16 HostToNetwork16(uint16 host16);
 
 	// 将64位的整数从网络字节顺序转换成主机字节顺序
-	uint64_t networkToHost(uint64_t net64);
+	uint64_t NetworkToHost64(uint64_t net64);
 
 	// 将32位的整数从网络字节顺序转换成主机字节顺序
-	uint32 networkToHost(uint32 net32);
+	uint32 NetworkToHost32(uint32 net32);
 
 	// 将16位的整数从网络字节顺序转换成主机字节顺序
-	uint16 networkToHost(uint16 net16);
+	uint16 NetworkToHost16(uint16 net16);
 }
 
 #endif //_endiantool_h_

@@ -109,8 +109,8 @@ void Robot::handleMsg()
 		}
 
 		NetMsgHead *head	= (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
-		uint16 msgId		= endiantool::networkToHost(head->msgId);
-		uint32 rawMsgSize		= endiantool::networkToHost(head->msgLen);
+		uint16 msgId		= endiantool::NetworkToHost16(head->msgId);
+		uint32 rawMsgSize		= endiantool::NetworkToHost32(head->msgSize);
 
 		if (rawMsgSize > bytes) {
 			break;

@@ -22,24 +22,13 @@ namespace msgtool
 	}
 
 	// 构建网络包头
-	int BuildNetHeader(NetMsgHead *msgHead, uint16 msgId, uint32 msgLen)
+	int BuildNetHeader(NetMsgHead *msgHead, int msgId, int msgSize)
 	{
-		uint32 packetLen = msgLen + sizeof(NetMsgHead);
+		int packetSize = msgSize + sizeof(NetMsgHead);
 
-		msgHead->msgId	= endiantool::hostToNetwork(msgId);
-		msgHead->msgLen	= endiantool::hostToNetwork(packetLen);
+		msgHead->msgSize = endiantool::HostToNetwork32((uint32)packetSize);
+		msgHead->msgId = endiantool::HostToNetwork16((uint16)msgId);
 
-		return packetLen;
-	}
-
-	int BuildLanMsgHeader(LanMsgHead *msgHead, uint32 clientId, uint16 msgId, uint32 msgLen)
-	{
-		uint32 packetLen = msgLen + sizeof(LanMsgHead);
-
-		msgHead->clientId = endiantool::hostToNetwork(clientId);
-		msgHead->msgId	  = endiantool::hostToNetwork(msgId);
-		msgHead->msgLen	  = endiantool::hostToNetwork(packetLen);
-
-		return packetLen;
+		return packetSize;
 	}
 }

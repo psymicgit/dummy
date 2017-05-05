@@ -14,7 +14,7 @@
     <ProjectGuid>{DFEE9973-826F-421E-9C8C-3F4108A245CF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>robot</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
