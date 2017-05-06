@@ -1,3 +1,5 @@
+package Msg.Protocol;
+
 //---------------- 服务端 - 客户端消息号 ----------------//
 
 enum ClientMsgId
@@ -73,6 +75,17 @@ message LoginReq
 	required LoginType loginType = 9; // 操作类别
 	required int32 authType = 10; //认证类型
 	required string authKey = 11; //认证字符串
+}
+
+// 登录答复
+message LoginReply
+{
+	enum LoginType {
+		NewRole = 0; // 新创建角色
+		OldRole = 1; // 旧角色
+	}
+
+	required int32 userid = 6; //用户Id
 }
 
 // 加解密密钥通知

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 // Generated from: client.proto
-namespace client
+namespace Msg.Protocol
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"LoginReq")]
   public partial class LoginReq : global::ProtoBuf.IExtensible
@@ -71,9 +71,9 @@ namespace client
       get { return _job; }
       set { _job = value; }
     }
-    private LoginReq.LoginType _loginType;
+    private Msg.Protocol.LoginReq.LoginType _loginType;
     [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"loginType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public LoginReq.LoginType loginType
+    public Msg.Protocol.LoginReq.LoginType loginType
     {
       get { return _loginType; }
       set { _loginType = value; }
@@ -91,6 +91,34 @@ namespace client
     {
       get { return _authKey; }
       set { _authKey = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"LoginType")]
+    public enum LoginType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NewRole", Value=0)]
+      NewRole = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"OldRole", Value=1)]
+      OldRole = 1
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"LoginReply")]
+  public partial class LoginReply : global::ProtoBuf.IExtensible
+  {
+    public LoginReply() {}
+    
+    private int _userid;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"userid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int userid
+    {
+      get { return _userid; }
+      set { _userid = value; }
     }
     [global::ProtoBuf.ProtoContract(Name=@"LoginType")]
     public enum LoginType
@@ -161,9 +189,9 @@ namespace client
   {
     public AuthAck() {}
     
-    private AuthResult _result;
+    private Msg.Protocol.AuthResult _result;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public AuthResult result
+    public Msg.Protocol.AuthResult result
     {
       get { return _result; }
       set { _result = value; }

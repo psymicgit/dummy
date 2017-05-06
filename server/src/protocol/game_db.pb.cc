@@ -16,6 +16,9 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace Msg {
+namespace Protocol {
+
 namespace {
 
 const ::google::protobuf::Descriptor* SqlMsg_descriptor_ = NULL;
@@ -108,15 +111,16 @@ void protobuf_AddDesc_game_5fdb_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\rgame_db.proto\"J\n\006SqlMsg\022$\n\007sqltype\030\001 \002"
-    "(\0162\010.SqlType:\tNormalSql\022\r\n\005sqlid\030\002 \002(\006\022\013"
-    "\n\003sql\030\003 \002(\t\"J\n\007PostSql\022\014\n\004time\030\001 \002(\007\022\032\n\006"
-    "dbtype\030\002 \002(\0162\n.SqlDBType\022\025\n\004sqls\030\003 \003(\0132\007"
-    ".SqlMsg*N\n\rGameToDBMsgId\022\026\n\021eGameToDBMsg"
-    "IdMin\020\320\017\022\r\n\010ePostSql\020\321\017\022\026\n\021eGameToDBMsgI"
-    "dMax\020\270\027*4\n\007SqlType\022\r\n\tNormalSql\020\000\022\r\n\tPla"
-    "yerSql\020\001\022\013\n\007GuidSql\020\002*\"\n\tSqlDBType\022\n\n\006Ga"
-    "meDB\020\000\022\t\n\005LogDB\020\001", 337);
+    "\n\rgame_db.proto\022\014Msg.Protocol\"W\n\006SqlMsg\022"
+    "1\n\007sqltype\030\001 \002(\0162\025.Msg.Protocol.SqlType:"
+    "\tNormalSql\022\r\n\005sqlid\030\002 \002(\006\022\013\n\003sql\030\003 \002(\t\"d"
+    "\n\007PostSql\022\014\n\004time\030\001 \002(\007\022\'\n\006dbtype\030\002 \002(\0162"
+    "\027.Msg.Protocol.SqlDBType\022\"\n\004sqls\030\003 \003(\0132\024"
+    ".Msg.Protocol.SqlMsg*N\n\rGameToDBMsgId\022\026\n"
+    "\021eGameToDBMsgIdMin\020\320\017\022\r\n\010ePostSql\020\321\017\022\026\n\021"
+    "eGameToDBMsgIdMax\020\270\027*4\n\007SqlType\022\r\n\tNorma"
+    "lSql\020\000\022\r\n\tPlayerSql\020\001\022\013\n\007GuidSql\020\002*\"\n\tSq"
+    "lDBType\022\n\n\006GameDB\020\000\022\t\n\005LogDB\020\001", 390);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game_db.proto", &protobuf_RegisterTypes);
   SqlMsg::default_instance_ = new SqlMsg();
@@ -260,7 +264,7 @@ bool SqlMsg::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .SqlType sqltype = 1 [default = NormalSql];
+      // required .Msg.Protocol.SqlType sqltype = 1 [default = NormalSql];
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -268,8 +272,8 @@ bool SqlMsg::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::SqlType_IsValid(value)) {
-            set_sqltype(static_cast< ::SqlType >(value));
+          if (::Msg::Protocol::SqlType_IsValid(value)) {
+            set_sqltype(static_cast< ::Msg::Protocol::SqlType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(1, value);
           }
@@ -331,7 +335,7 @@ bool SqlMsg::MergePartialFromCodedStream(
 
 void SqlMsg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .SqlType sqltype = 1 [default = NormalSql];
+  // required .Msg.Protocol.SqlType sqltype = 1 [default = NormalSql];
   if (has_sqltype()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->sqltype(), output);
@@ -359,7 +363,7 @@ void SqlMsg::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* SqlMsg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .SqlType sqltype = 1 [default = NormalSql];
+  // required .Msg.Protocol.SqlType sqltype = 1 [default = NormalSql];
   if (has_sqltype()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->sqltype(), target);
@@ -391,7 +395,7 @@ int SqlMsg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .SqlType sqltype = 1 [default = NormalSql];
+    // required .Msg.Protocol.SqlType sqltype = 1 [default = NormalSql];
     if (has_sqltype()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->sqltype());
@@ -577,7 +581,7 @@ bool PostSql::MergePartialFromCodedStream(
         break;
       }
 
-      // required .SqlDBType dbtype = 2;
+      // required .Msg.Protocol.SqlDBType dbtype = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -586,8 +590,8 @@ bool PostSql::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::SqlDBType_IsValid(value)) {
-            set_dbtype(static_cast< ::SqlDBType >(value));
+          if (::Msg::Protocol::SqlDBType_IsValid(value)) {
+            set_dbtype(static_cast< ::Msg::Protocol::SqlDBType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(2, value);
           }
@@ -598,7 +602,7 @@ bool PostSql::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .SqlMsg sqls = 3;
+      // repeated .Msg.Protocol.SqlMsg sqls = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -636,13 +640,13 @@ void PostSql::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFixed32(1, this->time(), output);
   }
 
-  // required .SqlDBType dbtype = 2;
+  // required .Msg.Protocol.SqlDBType dbtype = 2;
   if (has_dbtype()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->dbtype(), output);
   }
 
-  // repeated .SqlMsg sqls = 3;
+  // repeated .Msg.Protocol.SqlMsg sqls = 3;
   for (int i = 0; i < this->sqls_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->sqls(i), output);
@@ -661,13 +665,13 @@ void PostSql::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteFixed32ToArray(1, this->time(), target);
   }
 
-  // required .SqlDBType dbtype = 2;
+  // required .Msg.Protocol.SqlDBType dbtype = 2;
   if (has_dbtype()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       2, this->dbtype(), target);
   }
 
-  // repeated .SqlMsg sqls = 3;
+  // repeated .Msg.Protocol.SqlMsg sqls = 3;
   for (int i = 0; i < this->sqls_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -690,14 +694,14 @@ int PostSql::ByteSize() const {
       total_size += 1 + 4;
     }
 
-    // required .SqlDBType dbtype = 2;
+    // required .Msg.Protocol.SqlDBType dbtype = 2;
     if (has_dbtype()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->dbtype());
     }
 
   }
-  // repeated .SqlMsg sqls = 3;
+  // repeated .Msg.Protocol.SqlMsg sqls = 3;
   total_size += 1 * this->sqls_size();
   for (int i = 0; i < this->sqls_size(); i++) {
     total_size +=
@@ -784,5 +788,8 @@ void PostSql::Swap(PostSql* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Protocol
+}  // namespace Msg
 
 // @@protoc_insertion_point(global_scope)

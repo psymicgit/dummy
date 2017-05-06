@@ -1,3 +1,5 @@
+package Msg.Protocol;
+
 enum NetMsgId
 {
 	eConnectSvrReq = 1; // 连接对端内网服务器请求

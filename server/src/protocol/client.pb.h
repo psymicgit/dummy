@@ -27,12 +27,16 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
+namespace Msg {
+namespace Protocol {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_client_2eproto();
 void protobuf_AssignDesc_client_2eproto();
 void protobuf_ShutdownFile_client_2eproto();
 
 class LoginReq;
+class LoginReply;
 class EncryptKeyNtf;
 class AuthReq;
 class AuthAck;
@@ -59,6 +63,25 @@ inline bool LoginReq_LoginType_Parse(
     const ::std::string& name, LoginReq_LoginType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<LoginReq_LoginType>(
     LoginReq_LoginType_descriptor(), name, value);
+}
+enum LoginReply_LoginType {
+  LoginReply_LoginType_NewRole = 0,
+  LoginReply_LoginType_OldRole = 1
+};
+bool LoginReply_LoginType_IsValid(int value);
+const LoginReply_LoginType LoginReply_LoginType_LoginType_MIN = LoginReply_LoginType_NewRole;
+const LoginReply_LoginType LoginReply_LoginType_LoginType_MAX = LoginReply_LoginType_OldRole;
+const int LoginReply_LoginType_LoginType_ARRAYSIZE = LoginReply_LoginType_LoginType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* LoginReply_LoginType_descriptor();
+inline const ::std::string& LoginReply_LoginType_Name(LoginReply_LoginType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    LoginReply_LoginType_descriptor(), value);
+}
+inline bool LoginReply_LoginType_Parse(
+    const ::std::string& name, LoginReply_LoginType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<LoginReply_LoginType>(
+    LoginReply_LoginType_descriptor(), name, value);
 }
 enum ClientMsgId {
   ClientMsg_LoginRequest = 1,
@@ -307,12 +330,12 @@ class LoginReq : public ::google::protobuf::Message {
   inline ::std::string* release_job();
   inline void set_allocated_job(::std::string* job);
 
-  // required .LoginReq.LoginType loginType = 9;
+  // required .Msg.Protocol.LoginReq.LoginType loginType = 9;
   inline bool has_logintype() const;
   inline void clear_logintype();
   static const int kLoginTypeFieldNumber = 9;
-  inline ::LoginReq_LoginType logintype() const;
-  inline void set_logintype(::LoginReq_LoginType value);
+  inline ::Msg::Protocol::LoginReq_LoginType logintype() const;
+  inline void set_logintype(::Msg::Protocol::LoginReq_LoginType value);
 
   // required int32 authType = 10;
   inline bool has_authtype() const;
@@ -333,7 +356,7 @@ class LoginReq : public ::google::protobuf::Message {
   inline ::std::string* release_authkey();
   inline void set_allocated_authkey(::std::string* authkey);
 
-  // @@protoc_insertion_point(class_scope:LoginReq)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.LoginReq)
  private:
   inline void set_has_clientversion();
   inline void clear_has_clientversion();
@@ -381,6 +404,112 @@ class LoginReq : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static LoginReq* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LoginReply : public ::google::protobuf::Message {
+ public:
+  LoginReply();
+  virtual ~LoginReply();
+
+  LoginReply(const LoginReply& from);
+
+  inline LoginReply& operator=(const LoginReply& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const LoginReply& default_instance();
+
+  void Swap(LoginReply* other);
+
+  // implements Message ----------------------------------------------
+
+  LoginReply* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const LoginReply& from);
+  void MergeFrom(const LoginReply& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef LoginReply_LoginType LoginType;
+  static const LoginType NewRole = LoginReply_LoginType_NewRole;
+  static const LoginType OldRole = LoginReply_LoginType_OldRole;
+  static inline bool LoginType_IsValid(int value) {
+    return LoginReply_LoginType_IsValid(value);
+  }
+  static const LoginType LoginType_MIN =
+    LoginReply_LoginType_LoginType_MIN;
+  static const LoginType LoginType_MAX =
+    LoginReply_LoginType_LoginType_MAX;
+  static const int LoginType_ARRAYSIZE =
+    LoginReply_LoginType_LoginType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  LoginType_descriptor() {
+    return LoginReply_LoginType_descriptor();
+  }
+  static inline const ::std::string& LoginType_Name(LoginType value) {
+    return LoginReply_LoginType_Name(value);
+  }
+  static inline bool LoginType_Parse(const ::std::string& name,
+      LoginType* value) {
+    return LoginReply_LoginType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required int32 userid = 6;
+  inline bool has_userid() const;
+  inline void clear_userid();
+  static const int kUseridFieldNumber = 6;
+  inline ::google::protobuf::int32 userid() const;
+  inline void set_userid(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.LoginReply)
+ private:
+  inline void set_has_userid();
+  inline void clear_has_userid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 userid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_client_2eproto();
+  friend void protobuf_AssignDesc_client_2eproto();
+  friend void protobuf_ShutdownFile_client_2eproto();
+
+  void InitAsDefaultInstance();
+  static LoginReply* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -474,7 +603,7 @@ class EncryptKeyNtf : public ::google::protobuf::Message {
   inline ::std::string* release_authkey();
   inline void set_allocated_authkey(::std::string* authkey);
 
-  // @@protoc_insertion_point(class_scope:EncryptKeyNtf)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.EncryptKeyNtf)
  private:
   inline void set_has_publickey();
   inline void clear_has_publickey();
@@ -567,7 +696,7 @@ class AuthReq : public ::google::protobuf::Message {
   inline ::std::string* release_authkey();
   inline void set_allocated_authkey(::std::string* authkey);
 
-  // @@protoc_insertion_point(class_scope:AuthReq)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.AuthReq)
  private:
   inline void set_has_authkey();
   inline void clear_has_authkey();
@@ -642,12 +771,12 @@ class AuthAck : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .AuthResult result = 1;
+  // required .Msg.Protocol.AuthResult result = 1;
   inline bool has_result() const;
   inline void clear_result();
   static const int kResultFieldNumber = 1;
-  inline ::AuthResult result() const;
-  inline void set_result(::AuthResult value);
+  inline ::Msg::Protocol::AuthResult result() const;
+  inline void set_result(::Msg::Protocol::AuthResult value);
 
   // required string encryptKey = 2;
   inline bool has_encryptkey() const;
@@ -661,7 +790,7 @@ class AuthAck : public ::google::protobuf::Message {
   inline ::std::string* release_encryptkey();
   inline void set_allocated_encryptkey(::std::string* encryptkey);
 
-  // @@protoc_insertion_point(class_scope:AuthAck)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.AuthAck)
  private:
   inline void set_has_result();
   inline void clear_has_result();
@@ -758,7 +887,7 @@ class PingPong : public ::google::protobuf::Message {
   inline ::google::protobuf::uint64 time() const;
   inline void set_time(::google::protobuf::uint64 value);
 
-  // @@protoc_insertion_point(class_scope:PingPong)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.PingPong)
  private:
   inline void set_has_pingpong();
   inline void clear_has_pingpong();
@@ -843,7 +972,7 @@ class ReadyRequest : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 is_ready() const;
   inline void set_is_ready(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:ReadyRequest)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.ReadyRequest)
  private:
   inline void set_has_is_ready();
   inline void clear_has_is_ready();
@@ -932,7 +1061,7 @@ class MoveRequest : public ::google::protobuf::Message {
   inline float y() const;
   inline void set_y(float value);
 
-  // @@protoc_insertion_point(class_scope:MoveRequest)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.MoveRequest)
  private:
   inline void set_has_x();
   inline void clear_has_x();
@@ -1024,7 +1153,7 @@ class MoveNotify : public ::google::protobuf::Message {
   inline float y() const;
   inline void set_y(float value);
 
-  // @@protoc_insertion_point(class_scope:MoveNotify)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.MoveNotify)
  private:
   inline void set_has_x();
   inline void clear_has_x();
@@ -1421,7 +1550,7 @@ inline void LoginReq::set_allocated_job(::std::string* job) {
   }
 }
 
-// required .LoginReq.LoginType loginType = 9;
+// required .Msg.Protocol.LoginReq.LoginType loginType = 9;
 inline bool LoginReq::has_logintype() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
@@ -1435,11 +1564,11 @@ inline void LoginReq::clear_logintype() {
   logintype_ = 0;
   clear_has_logintype();
 }
-inline ::LoginReq_LoginType LoginReq::logintype() const {
-  return static_cast< ::LoginReq_LoginType >(logintype_);
+inline ::Msg::Protocol::LoginReq_LoginType LoginReq::logintype() const {
+  return static_cast< ::Msg::Protocol::LoginReq_LoginType >(logintype_);
 }
-inline void LoginReq::set_logintype(::LoginReq_LoginType value) {
-  assert(::LoginReq_LoginType_IsValid(value));
+inline void LoginReq::set_logintype(::Msg::Protocol::LoginReq_LoginType value) {
+  assert(::Msg::Protocol::LoginReq_LoginType_IsValid(value));
   set_has_logintype();
   logintype_ = value;
 }
@@ -1534,6 +1663,32 @@ inline void LoginReq::set_allocated_authkey(::std::string* authkey) {
     clear_has_authkey();
     authkey_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
+}
+
+// -------------------------------------------------------------------
+
+// LoginReply
+
+// required int32 userid = 6;
+inline bool LoginReply::has_userid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void LoginReply::set_has_userid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void LoginReply::clear_has_userid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void LoginReply::clear_userid() {
+  userid_ = 0;
+  clear_has_userid();
+}
+inline ::google::protobuf::int32 LoginReply::userid() const {
+  return userid_;
+}
+inline void LoginReply::set_userid(::google::protobuf::int32 value) {
+  set_has_userid();
+  userid_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -1828,7 +1983,7 @@ inline void AuthReq::set_allocated_authkey(::std::string* authkey) {
 
 // AuthAck
 
-// required .AuthResult result = 1;
+// required .Msg.Protocol.AuthResult result = 1;
 inline bool AuthAck::has_result() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1842,11 +1997,11 @@ inline void AuthAck::clear_result() {
   result_ = 0;
   clear_has_result();
 }
-inline ::AuthResult AuthAck::result() const {
-  return static_cast< ::AuthResult >(result_);
+inline ::Msg::Protocol::AuthResult AuthAck::result() const {
+  return static_cast< ::Msg::Protocol::AuthResult >(result_);
 }
-inline void AuthAck::set_result(::AuthResult value) {
-  assert(::AuthResult_IsValid(value));
+inline void AuthAck::set_result(::Msg::Protocol::AuthResult value) {
+  assert(::Msg::Protocol::AuthResult_IsValid(value));
   set_has_result();
   result_ = value;
 }
@@ -2142,29 +2297,36 @@ inline void MoveNotify::set_y(float value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
+}  // namespace Protocol
+}  // namespace Msg
+
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::LoginReq_LoginType>() {
-  return ::LoginReq_LoginType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::LoginReq_LoginType>() {
+  return ::Msg::Protocol::LoginReq_LoginType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::ClientMsgId>() {
-  return ::ClientMsgId_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::LoginReply_LoginType>() {
+  return ::Msg::Protocol::LoginReply_LoginType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::ServerMsgId>() {
-  return ::ServerMsgId_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::ClientMsgId>() {
+  return ::Msg::Protocol::ClientMsgId_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::EncryptKeyDef>() {
-  return ::EncryptKeyDef_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::ServerMsgId>() {
+  return ::Msg::Protocol::ServerMsgId_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::AuthResult>() {
-  return ::AuthResult_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::EncryptKeyDef>() {
+  return ::Msg::Protocol::EncryptKeyDef_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::AuthResult>() {
+  return ::Msg::Protocol::AuthResult_descriptor();
 }
 
 }  // namespace google

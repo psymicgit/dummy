@@ -9,11 +9,7 @@
 
 #include "GameClient.h"
 #include <net/msgdispatcher.h>
-
-class AuthReq;
-class LoginReq;
-class MoveRequest;
-class ReadyRequest;
+#include <client.pb.h>
 
 // 客户端管理器，管理当前通过网关与本游戏服连接的所有玩家连接
 class GameClientMgr : public Singleton<GameClientMgr>

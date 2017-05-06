@@ -11,12 +11,11 @@
 
 #include <net/netdefine.h>
 #include <net/serverlink.h>
+#include <game_to_gate.pb.h>
 
 class Link;
 class NetAddress;
 class Buffer;
-class RouteFromClientMsg;
-class RouteLoginRequest;
 
 class GateLink : public ServerLink
 {

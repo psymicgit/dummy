@@ -16,6 +16,9 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace Msg {
+namespace Protocol {
+
 namespace {
 
 const ::google::protobuf::Descriptor* ConnectReq_descriptor_ = NULL;
@@ -106,15 +109,16 @@ void protobuf_AddDesc_net_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\tnet.proto\"=\n\nConnectReq\022\017\n\007svrType\030\001 \002"
-    "(\005\022\017\n\007authKey\030\002 \002(\t\022\r\n\005svrId\030\003 \001(\005\"N\n\017Co"
-    "nnectResponse\022\033\n\003ret\030\001 \002(\0162\016.ConnectResu"
-    "lt\022\017\n\007svrType\030\002 \002(\005\022\r\n\005svrId\030\003 \001(\005*2\n\010Ne"
-    "tMsgId\022\022\n\016eConnectSvrReq\020\001\022\022\n\016eConnectSv"
-    "rAck\020\002*\214\001\n\rConnectResult\022\016\n\nCONNECT_OK\020\000"
-    "\022$\n CONNECT_FAIL_UNKNOWN_SERVER_TYPE\020\001\022\""
-    "\n\036CONNECT_FAIL_FOUND_SAME_SERVER\020\002\022!\n\035CO"
-    "NNECT_FAIL_AUTH_KEY_INVALID\020\003", 349);
+    "\n\tnet.proto\022\014Msg.Protocol\"=\n\nConnectReq\022"
+    "\017\n\007svrType\030\001 \002(\005\022\017\n\007authKey\030\002 \002(\t\022\r\n\005svr"
+    "Id\030\003 \001(\005\"[\n\017ConnectResponse\022(\n\003ret\030\001 \002(\016"
+    "2\033.Msg.Protocol.ConnectResult\022\017\n\007svrType"
+    "\030\002 \002(\005\022\r\n\005svrId\030\003 \001(\005*2\n\010NetMsgId\022\022\n\016eCo"
+    "nnectSvrReq\020\001\022\022\n\016eConnectSvrAck\020\002*\214\001\n\rCo"
+    "nnectResult\022\016\n\nCONNECT_OK\020\000\022$\n CONNECT_F"
+    "AIL_UNKNOWN_SERVER_TYPE\020\001\022\"\n\036CONNECT_FAI"
+    "L_FOUND_SAME_SERVER\020\002\022!\n\035CONNECT_FAIL_AU"
+    "TH_KEY_INVALID\020\003", 376);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "net.proto", &protobuf_RegisterTypes);
   ConnectReq::default_instance_ = new ConnectReq();
@@ -543,7 +547,7 @@ bool ConnectResponse::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .ConnectResult ret = 1;
+      // required .Msg.Protocol.ConnectResult ret = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -551,8 +555,8 @@ bool ConnectResponse::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::ConnectResult_IsValid(value)) {
-            set_ret(static_cast< ::ConnectResult >(value));
+          if (::Msg::Protocol::ConnectResult_IsValid(value)) {
+            set_ret(static_cast< ::Msg::Protocol::ConnectResult >(value));
           } else {
             mutable_unknown_fields()->AddVarint(1, value);
           }
@@ -613,7 +617,7 @@ bool ConnectResponse::MergePartialFromCodedStream(
 
 void ConnectResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .ConnectResult ret = 1;
+  // required .Msg.Protocol.ConnectResult ret = 1;
   if (has_ret()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->ret(), output);
@@ -637,7 +641,7 @@ void ConnectResponse::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ConnectResponse::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .ConnectResult ret = 1;
+  // required .Msg.Protocol.ConnectResult ret = 1;
   if (has_ret()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->ret(), target);
@@ -664,7 +668,7 @@ int ConnectResponse::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .ConnectResult ret = 1;
+    // required .Msg.Protocol.ConnectResult ret = 1;
     if (has_ret()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->ret());
@@ -763,5 +767,8 @@ void ConnectResponse::Swap(ConnectResponse* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Protocol
+}  // namespace Msg
 
 // @@protoc_insertion_point(global_scope)

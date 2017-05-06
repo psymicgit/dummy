@@ -11,10 +11,7 @@
 #include <net/netaddress.h>
 #include <net/link.h>
 #include <basic/taskqueue.h>
-#include <protocol/message.h>
-#include <game_to_gate.pb.h>
 #include <server.h>
-
 #include "GateLogic.h"
 
 bool GameSvrLink::Init()

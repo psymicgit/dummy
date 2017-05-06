@@ -9,7 +9,7 @@
 
 // Generated from: game_to_gate.proto
 // Note: requires additional types generated from: client.proto
-namespace game_to_gate
+namespace Msg.Protocol
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RouteFromClientMsg")]
   public partial class RouteFromClientMsg : global::ProtoBuf.IExtensible
@@ -85,9 +85,9 @@ namespace game_to_gate
       get { return _client_id; }
       set { _client_id = value; }
     }
-    private LoginReq _loginReq;
+    private Msg.Protocol.LoginReq _loginReq;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"loginReq", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public LoginReq loginReq
+    public Msg.Protocol.LoginReq loginReq
     {
       get { return _loginReq; }
       set { _loginReq = value; }

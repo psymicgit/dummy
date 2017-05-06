@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 // Generated from: net.proto
-namespace net
+namespace Msg.Protocol
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ConnectReq")]
   public partial class ConnectReq : global::ProtoBuf.IExtensible
@@ -47,9 +47,9 @@ namespace net
   {
     public ConnectResponse() {}
     
-    private ConnectResult _ret;
+    private Msg.Protocol.ConnectResult _ret;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"ret", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public ConnectResult ret
+    public Msg.Protocol.ConnectResult ret
     {
       get { return _ret; }
       set { _ret = value; }

@@ -16,12 +16,19 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace Msg {
+namespace Protocol {
+
 namespace {
 
 const ::google::protobuf::Descriptor* LoginReq_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   LoginReq_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* LoginReq_LoginType_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* LoginReply_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  LoginReply_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* LoginReply_LoginType_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* EncryptKeyNtf_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   EncryptKeyNtf_reflection_ = NULL;
@@ -83,7 +90,23 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(LoginReq));
   LoginReq_LoginType_descriptor_ = LoginReq_descriptor_->enum_type(0);
-  EncryptKeyNtf_descriptor_ = file->message_type(1);
+  LoginReply_descriptor_ = file->message_type(1);
+  static const int LoginReply_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoginReply, userid_),
+  };
+  LoginReply_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      LoginReply_descriptor_,
+      LoginReply::default_instance_,
+      LoginReply_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoginReply, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoginReply, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(LoginReply));
+  LoginReply_LoginType_descriptor_ = LoginReply_descriptor_->enum_type(0);
+  EncryptKeyNtf_descriptor_ = file->message_type(2);
   static const int EncryptKeyNtf_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EncryptKeyNtf, publickey_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EncryptKeyNtf, privatekey_),
@@ -100,7 +123,7 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(EncryptKeyNtf));
-  AuthReq_descriptor_ = file->message_type(2);
+  AuthReq_descriptor_ = file->message_type(3);
   static const int AuthReq_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AuthReq, authkey_),
   };
@@ -115,7 +138,7 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AuthReq));
-  AuthAck_descriptor_ = file->message_type(3);
+  AuthAck_descriptor_ = file->message_type(4);
   static const int AuthAck_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AuthAck, result_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AuthAck, encryptkey_),
@@ -131,7 +154,7 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AuthAck));
-  PingPong_descriptor_ = file->message_type(4);
+  PingPong_descriptor_ = file->message_type(5);
   static const int PingPong_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PingPong, pingpong_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PingPong, time_),
@@ -147,7 +170,7 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PingPong));
-  ReadyRequest_descriptor_ = file->message_type(5);
+  ReadyRequest_descriptor_ = file->message_type(6);
   static const int ReadyRequest_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReadyRequest, is_ready_),
   };
@@ -162,7 +185,7 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReadyRequest));
-  MoveRequest_descriptor_ = file->message_type(6);
+  MoveRequest_descriptor_ = file->message_type(7);
   static const int MoveRequest_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequest, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequest, y_),
@@ -178,7 +201,7 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MoveRequest));
-  MoveNotify_descriptor_ = file->message_type(7);
+  MoveNotify_descriptor_ = file->message_type(8);
   static const int MoveNotify_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotify, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotify, y_),
@@ -213,6 +236,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     LoginReq_descriptor_, &LoginReq::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    LoginReply_descriptor_, &LoginReply::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     EncryptKeyNtf_descriptor_, &EncryptKeyNtf::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     AuthReq_descriptor_, &AuthReq::default_instance());
@@ -233,6 +258,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_client_2eproto() {
   delete LoginReq::default_instance_;
   delete LoginReq_reflection_;
+  delete LoginReply::default_instance_;
+  delete LoginReply_reflection_;
   delete EncryptKeyNtf::default_instance_;
   delete EncryptKeyNtf_reflection_;
   delete AuthReq::default_instance_;
@@ -256,40 +283,44 @@ void protobuf_AddDesc_client_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\014client.proto\"\210\002\n\010LoginReq\022\025\n\rclientVer"
-    "sion\030\001 \002(\005\022\020\n\010deviceid\030\002 \002(\t\022\020\n\010notifyid"
-    "\030\003 \002(\t\022\020\n\010username\030\004 \002(\t\022\016\n\006zoneid\030\005 \002(\005"
-    "\022\016\n\006userid\030\006 \002(\005\022\020\n\010playerid\030\007 \002(\005\022\013\n\003jo"
-    "b\030\010 \002(\t\022&\n\tloginType\030\t \002(\0162\023.LoginReq.Lo"
-    "ginType\022\020\n\010authType\030\n \002(\005\022\017\n\007authKey\030\013 \002"
-    "(\t\"%\n\tLoginType\022\013\n\007NewRole\020\000\022\013\n\007OldRole\020"
-    "\001\"G\n\rEncryptKeyNtf\022\021\n\tpublicKey\030\001 \002(\t\022\022\n"
-    "\nprivateKey\030\002 \002(\t\022\017\n\007authKey\030\003 \002(\t\"\032\n\007Au"
-    "thReq\022\017\n\007authKey\030\001 \002(\t\":\n\007AuthAck\022\033\n\006res"
-    "ult\030\001 \002(\0162\013.AuthResult\022\022\n\nencryptKey\030\002 \002"
-    "(\t\"*\n\010PingPong\022\020\n\010pingpong\030\001 \002(\t\022\014\n\004time"
-    "\030\002 \002(\004\" \n\014ReadyRequest\022\020\n\010is_ready\030\001 \002(\005"
-    "\"#\n\013MoveRequest\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"\"\n"
-    "\nMoveNotify\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002*\366\001\n\013Cl"
-    "ientMsgId\022\032\n\026ClientMsg_LoginRequest\020\001\022\031\n"
-    "\025ClientMsg_AuthRequest\020\002\022\031\n\025ClientMsg_Pi"
-    "ngRequest\020\003\022\036\n\032ClientMsg_SpeedTestReques"
-    "t\020\004\022 \n\034ClientMsg_LatencyTestRequest\020\005\022\032\n"
-    "\025ClientMsg_RouteToGate\020\350\007\022\033\n\026ClientMsg_R"
-    "eadyRequest\020\351\007\022\032\n\025ClientMsg_MoveRequest\020"
-    "\352\007*\322\001\n\013ServerMsgId\022\030\n\024ServerMsg_LoginRep"
-    "ly\020\001\022\036\n\032ServerMsg_EncryptKeyNotify\020\002\022\027\n\023"
-    "ServerMsg_AutyReply\020\003\022\027\n\023ServerMsg_PongR"
-    "eply\020\004\022\034\n\030ServerMsg_SpeedTestReply\020\005\022\036\n\032"
-    "ServerMsg_LatencyTestReply\020\006\022\031\n\024ClientMs"
-    "g_MoveNotify\020\351\007*\177\n\rEncryptKeyDef\022\021\n\rEncr"
-    "yptKeyLen\020 \022\022\n\016EncryptHeadLen\020\002\022\022\n\016Encry"
-    "ptTailLen\020\004\022\016\n\nAuthKeyLen\020\020\022\020\n\014PublicKey"
-    "Len\020\010\022\021\n\rPrivateKeyLen\020\024*(\n\nAuthResult\022\013"
-    "\n\007AUTH_OK\020\000\022\r\n\tAUTH_FAIL\020\001", 1226);
+    "\n\014client.proto\022\014Msg.Protocol\"\225\002\n\010LoginRe"
+    "q\022\025\n\rclientVersion\030\001 \002(\005\022\020\n\010deviceid\030\002 \002"
+    "(\t\022\020\n\010notifyid\030\003 \002(\t\022\020\n\010username\030\004 \002(\t\022\016"
+    "\n\006zoneid\030\005 \002(\005\022\016\n\006userid\030\006 \002(\005\022\020\n\010player"
+    "id\030\007 \002(\005\022\013\n\003job\030\010 \002(\t\0223\n\tloginType\030\t \002(\016"
+    "2 .Msg.Protocol.LoginReq.LoginType\022\020\n\010au"
+    "thType\030\n \002(\005\022\017\n\007authKey\030\013 \002(\t\"%\n\tLoginTy"
+    "pe\022\013\n\007NewRole\020\000\022\013\n\007OldRole\020\001\"C\n\nLoginRep"
+    "ly\022\016\n\006userid\030\006 \002(\005\"%\n\tLoginType\022\013\n\007NewRo"
+    "le\020\000\022\013\n\007OldRole\020\001\"G\n\rEncryptKeyNtf\022\021\n\tpu"
+    "blicKey\030\001 \002(\t\022\022\n\nprivateKey\030\002 \002(\t\022\017\n\007aut"
+    "hKey\030\003 \002(\t\"\032\n\007AuthReq\022\017\n\007authKey\030\001 \002(\t\"G"
+    "\n\007AuthAck\022(\n\006result\030\001 \002(\0162\030.Msg.Protocol"
+    ".AuthResult\022\022\n\nencryptKey\030\002 \002(\t\"*\n\010PingP"
+    "ong\022\020\n\010pingpong\030\001 \002(\t\022\014\n\004time\030\002 \002(\004\" \n\014R"
+    "eadyRequest\022\020\n\010is_ready\030\001 \002(\005\"#\n\013MoveReq"
+    "uest\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"\"\n\nMoveNotify"
+    "\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002*\366\001\n\013ClientMsgId\022\032"
+    "\n\026ClientMsg_LoginRequest\020\001\022\031\n\025ClientMsg_"
+    "AuthRequest\020\002\022\031\n\025ClientMsg_PingRequest\020\003"
+    "\022\036\n\032ClientMsg_SpeedTestRequest\020\004\022 \n\034Clie"
+    "ntMsg_LatencyTestRequest\020\005\022\032\n\025ClientMsg_"
+    "RouteToGate\020\350\007\022\033\n\026ClientMsg_ReadyRequest"
+    "\020\351\007\022\032\n\025ClientMsg_MoveRequest\020\352\007*\322\001\n\013Serv"
+    "erMsgId\022\030\n\024ServerMsg_LoginReply\020\001\022\036\n\032Ser"
+    "verMsg_EncryptKeyNotify\020\002\022\027\n\023ServerMsg_A"
+    "utyReply\020\003\022\027\n\023ServerMsg_PongReply\020\004\022\034\n\030S"
+    "erverMsg_SpeedTestReply\020\005\022\036\n\032ServerMsg_L"
+    "atencyTestReply\020\006\022\031\n\024ClientMsg_MoveNotif"
+    "y\020\351\007*\177\n\rEncryptKeyDef\022\021\n\rEncryptKeyLen\020 "
+    "\022\022\n\016EncryptHeadLen\020\002\022\022\n\016EncryptTailLen\020\004"
+    "\022\016\n\nAuthKeyLen\020\020\022\020\n\014PublicKeyLen\020\010\022\021\n\rPr"
+    "ivateKeyLen\020\024*(\n\nAuthResult\022\013\n\007AUTH_OK\020\000"
+    "\022\r\n\tAUTH_FAIL\020\001", 1335);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "client.proto", &protobuf_RegisterTypes);
   LoginReq::default_instance_ = new LoginReq();
+  LoginReply::default_instance_ = new LoginReply();
   EncryptKeyNtf::default_instance_ = new EncryptKeyNtf();
   AuthReq::default_instance_ = new AuthReq();
   AuthAck::default_instance_ = new AuthAck();
@@ -298,6 +329,7 @@ void protobuf_AddDesc_client_2eproto() {
   MoveRequest::default_instance_ = new MoveRequest();
   MoveNotify::default_instance_ = new MoveNotify();
   LoginReq::default_instance_->InitAsDefaultInstance();
+  LoginReply::default_instance_->InitAsDefaultInstance();
   EncryptKeyNtf::default_instance_->InitAsDefaultInstance();
   AuthReq::default_instance_->InitAsDefaultInstance();
   AuthAck::default_instance_->InitAsDefaultInstance();
@@ -675,7 +707,7 @@ bool LoginReq::MergePartialFromCodedStream(
         break;
       }
 
-      // required .LoginReq.LoginType loginType = 9;
+      // required .Msg.Protocol.LoginReq.LoginType loginType = 9;
       case 9: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -684,8 +716,8 @@ bool LoginReq::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::LoginReq_LoginType_IsValid(value)) {
-            set_logintype(static_cast< ::LoginReq_LoginType >(value));
+          if (::Msg::Protocol::LoginReq_LoginType_IsValid(value)) {
+            set_logintype(static_cast< ::Msg::Protocol::LoginReq_LoginType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(9, value);
           }
@@ -803,7 +835,7 @@ void LoginReq::SerializeWithCachedSizes(
       8, this->job(), output);
   }
 
-  // required .LoginReq.LoginType loginType = 9;
+  // required .Msg.Protocol.LoginReq.LoginType loginType = 9;
   if (has_logintype()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       9, this->logintype(), output);
@@ -891,7 +923,7 @@ void LoginReq::SerializeWithCachedSizes(
         8, this->job(), target);
   }
 
-  // required .LoginReq.LoginType loginType = 9;
+  // required .Msg.Protocol.LoginReq.LoginType loginType = 9;
   if (has_logintype()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       9, this->logintype(), target);
@@ -981,7 +1013,7 @@ int LoginReq::ByteSize() const {
 
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // required .LoginReq.LoginType loginType = 9;
+    // required .Msg.Protocol.LoginReq.LoginType loginType = 9;
     if (has_logintype()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->logintype());
@@ -1109,6 +1141,236 @@ void LoginReq::Swap(LoginReq* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = LoginReq_descriptor_;
   metadata.reflection = LoginReq_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* LoginReply_LoginType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return LoginReply_LoginType_descriptor_;
+}
+bool LoginReply_LoginType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const LoginReply_LoginType LoginReply::NewRole;
+const LoginReply_LoginType LoginReply::OldRole;
+const LoginReply_LoginType LoginReply::LoginType_MIN;
+const LoginReply_LoginType LoginReply::LoginType_MAX;
+const int LoginReply::LoginType_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int LoginReply::kUseridFieldNumber;
+#endif  // !_MSC_VER
+
+LoginReply::LoginReply()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void LoginReply::InitAsDefaultInstance() {
+}
+
+LoginReply::LoginReply(const LoginReply& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void LoginReply::SharedCtor() {
+  _cached_size_ = 0;
+  userid_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+LoginReply::~LoginReply() {
+  SharedDtor();
+}
+
+void LoginReply::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void LoginReply::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* LoginReply::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return LoginReply_descriptor_;
+}
+
+const LoginReply& LoginReply::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_client_2eproto();
+  return *default_instance_;
+}
+
+LoginReply* LoginReply::default_instance_ = NULL;
+
+LoginReply* LoginReply::New() const {
+  return new LoginReply;
+}
+
+void LoginReply::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    userid_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool LoginReply::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 userid = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &userid_)));
+          set_has_userid();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void LoginReply::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 userid = 6;
+  if (has_userid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->userid(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* LoginReply::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 userid = 6;
+  if (has_userid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->userid(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int LoginReply::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 userid = 6;
+    if (has_userid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->userid());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void LoginReply::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const LoginReply* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const LoginReply*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void LoginReply::MergeFrom(const LoginReply& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_userid()) {
+      set_userid(from.userid());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void LoginReply::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void LoginReply::CopyFrom(const LoginReply& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LoginReply::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void LoginReply::Swap(LoginReply* other) {
+  if (other != this) {
+    std::swap(userid_, other->userid_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata LoginReply::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = LoginReply_descriptor_;
+  metadata.reflection = LoginReply_reflection_;
   return metadata;
 }
 
@@ -1759,7 +2021,7 @@ bool AuthAck::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .AuthResult result = 1;
+      // required .Msg.Protocol.AuthResult result = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -1767,8 +2029,8 @@ bool AuthAck::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::AuthResult_IsValid(value)) {
-            set_result(static_cast< ::AuthResult >(value));
+          if (::Msg::Protocol::AuthResult_IsValid(value)) {
+            set_result(static_cast< ::Msg::Protocol::AuthResult >(value));
           } else {
             mutable_unknown_fields()->AddVarint(1, value);
           }
@@ -1814,7 +2076,7 @@ bool AuthAck::MergePartialFromCodedStream(
 
 void AuthAck::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .AuthResult result = 1;
+  // required .Msg.Protocol.AuthResult result = 1;
   if (has_result()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->result(), output);
@@ -1837,7 +2099,7 @@ void AuthAck::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* AuthAck::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .AuthResult result = 1;
+  // required .Msg.Protocol.AuthResult result = 1;
   if (has_result()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->result(), target);
@@ -1864,7 +2126,7 @@ int AuthAck::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .AuthResult result = 1;
+    // required .Msg.Protocol.AuthResult result = 1;
     if (has_result()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->result());
@@ -2917,5 +3179,8 @@ void MoveNotify::Swap(MoveNotify* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Protocol
+}  // namespace Msg
 
 // @@protoc_insertion_point(global_scope)

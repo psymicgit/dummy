@@ -16,6 +16,9 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace Msg {
+namespace Protocol {
+
 namespace {
 
 const ::google::protobuf::Descriptor* RouteFromClientMsg_descriptor_ = NULL;
@@ -128,18 +131,19 @@ void protobuf_AddDesc_game_5fto_5fgate_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::protobuf_AddDesc_client_2eproto();
+  ::Msg::Protocol::protobuf_AddDesc_client_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022game_to_gate.proto\032\014client.proto\"D\n\022Ro"
-    "uteFromClientMsg\022\021\n\tclient_id\030\001 \002(\005\022\016\n\006m"
-    "sg_id\030\002 \002(\005\022\013\n\003msg\030\003 \002(\t\"B\n\020RouteToClien"
-    "tMsg\022\021\n\tclient_id\030\001 \002(\005\022\016\n\006msg_id\030\002 \002(\005\022"
-    "\013\n\003msg\030\003 \002(\t\"C\n\021RouteLoginRequest\022\021\n\tcli"
-    "ent_id\030\001 \002(\005\022\033\n\010loginReq\030\002 \002(\0132\t.LoginRe"
-    "q*S\n\017GateToGameMsgId\022\036\n\032GateToGame_Route"
-    "FromClient\020\001\022 \n\034GateToGame_RouteLoginReq"
-    "uest\020\002*/\n\017GameToGateMsgId\022\034\n\030GameToGate_"
-    "RouteToClient\020\001", 375);
+    "\n\022game_to_gate.proto\022\014Msg.Protocol\032\014clie"
+    "nt.proto\"D\n\022RouteFromClientMsg\022\021\n\tclient"
+    "_id\030\001 \002(\005\022\016\n\006msg_id\030\002 \002(\005\022\013\n\003msg\030\003 \002(\t\"B"
+    "\n\020RouteToClientMsg\022\021\n\tclient_id\030\001 \002(\005\022\016\n"
+    "\006msg_id\030\002 \002(\005\022\013\n\003msg\030\003 \002(\t\"P\n\021RouteLogin"
+    "Request\022\021\n\tclient_id\030\001 \002(\005\022(\n\010loginReq\030\002"
+    " \002(\0132\026.Msg.Protocol.LoginReq*S\n\017GateToGa"
+    "meMsgId\022\036\n\032GateToGame_RouteFromClient\020\001\022"
+    " \n\034GateToGame_RouteLoginRequest\020\002*/\n\017Gam"
+    "eToGateMsgId\022\034\n\030GameToGate_RouteToClient"
+    "\020\001", 402);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game_to_gate.proto", &protobuf_RegisterTypes);
   RouteFromClientMsg::default_instance_ = new RouteFromClientMsg();
@@ -810,7 +814,7 @@ RouteLoginRequest::RouteLoginRequest()
 }
 
 void RouteLoginRequest::InitAsDefaultInstance() {
-  loginreq_ = const_cast< ::LoginReq*>(&::LoginReq::default_instance());
+  loginreq_ = const_cast< ::Msg::Protocol::LoginReq*>(&::Msg::Protocol::LoginReq::default_instance());
 }
 
 RouteLoginRequest::RouteLoginRequest(const RouteLoginRequest& from)
@@ -861,7 +865,7 @@ void RouteLoginRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     client_id_ = 0;
     if (has_loginreq()) {
-      if (loginreq_ != NULL) loginreq_->::LoginReq::Clear();
+      if (loginreq_ != NULL) loginreq_->::Msg::Protocol::LoginReq::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -889,7 +893,7 @@ bool RouteLoginRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // required .LoginReq loginReq = 2;
+      // required .Msg.Protocol.LoginReq loginReq = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -926,7 +930,7 @@ void RouteLoginRequest::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->client_id(), output);
   }
 
-  // required .LoginReq loginReq = 2;
+  // required .Msg.Protocol.LoginReq loginReq = 2;
   if (has_loginreq()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->loginreq(), output);
@@ -945,7 +949,7 @@ void RouteLoginRequest::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->client_id(), target);
   }
 
-  // required .LoginReq loginReq = 2;
+  // required .Msg.Protocol.LoginReq loginReq = 2;
   if (has_loginreq()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -970,7 +974,7 @@ int RouteLoginRequest::ByteSize() const {
           this->client_id());
     }
 
-    // required .LoginReq loginReq = 2;
+    // required .Msg.Protocol.LoginReq loginReq = 2;
     if (has_loginreq()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1008,7 +1012,7 @@ void RouteLoginRequest::MergeFrom(const RouteLoginRequest& from) {
       set_client_id(from.client_id());
     }
     if (from.has_loginreq()) {
-      mutable_loginreq()->::LoginReq::MergeFrom(from.loginreq());
+      mutable_loginreq()->::Msg::Protocol::LoginReq::MergeFrom(from.loginreq());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -1055,5 +1059,8 @@ void RouteLoginRequest::Swap(RouteLoginRequest* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace Protocol
+}  // namespace Msg
 
 // @@protoc_insertion_point(global_scope)

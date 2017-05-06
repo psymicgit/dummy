@@ -262,7 +262,10 @@ using namespace std;
 #endif
 
 namespace google {namespace protobuf { class Message; }}
-typedef google::protobuf::Message Message;
+using google::protobuf::Message;
+
+namespace Msg { namespace Protocol {} }
+using namespace Msg::Protocol;
 
 #include <def/global.h>
 

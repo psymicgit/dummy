@@ -28,6 +28,9 @@
 #include "client.pb.h"
 // @@protoc_insertion_point(includes)
 
+namespace Msg {
+namespace Protocol {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_game_5fto_5fgate_2eproto();
 void protobuf_AssignDesc_game_5fto_5fgate_2eproto();
@@ -156,7 +159,7 @@ class RouteFromClientMsg : public ::google::protobuf::Message {
   inline ::std::string* release_msg();
   inline void set_allocated_msg(::std::string* msg);
 
-  // @@protoc_insertion_point(class_scope:RouteFromClientMsg)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.RouteFromClientMsg)
  private:
   inline void set_has_client_id();
   inline void clear_has_client_id();
@@ -263,7 +266,7 @@ class RouteToClientMsg : public ::google::protobuf::Message {
   inline ::std::string* release_msg();
   inline void set_allocated_msg(::std::string* msg);
 
-  // @@protoc_insertion_point(class_scope:RouteToClientMsg)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.RouteToClientMsg)
  private:
   inline void set_has_client_id();
   inline void clear_has_client_id();
@@ -351,16 +354,16 @@ class RouteLoginRequest : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 client_id() const;
   inline void set_client_id(::google::protobuf::int32 value);
 
-  // required .LoginReq loginReq = 2;
+  // required .Msg.Protocol.LoginReq loginReq = 2;
   inline bool has_loginreq() const;
   inline void clear_loginreq();
   static const int kLoginReqFieldNumber = 2;
-  inline const ::LoginReq& loginreq() const;
-  inline ::LoginReq* mutable_loginreq();
-  inline ::LoginReq* release_loginreq();
-  inline void set_allocated_loginreq(::LoginReq* loginreq);
+  inline const ::Msg::Protocol::LoginReq& loginreq() const;
+  inline ::Msg::Protocol::LoginReq* mutable_loginreq();
+  inline ::Msg::Protocol::LoginReq* release_loginreq();
+  inline void set_allocated_loginreq(::Msg::Protocol::LoginReq* loginreq);
 
-  // @@protoc_insertion_point(class_scope:RouteLoginRequest)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.RouteLoginRequest)
  private:
   inline void set_has_client_id();
   inline void clear_has_client_id();
@@ -369,7 +372,7 @@ class RouteLoginRequest : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::LoginReq* loginreq_;
+  ::Msg::Protocol::LoginReq* loginreq_;
   ::google::protobuf::int32 client_id_;
 
   mutable int _cached_size_;
@@ -647,7 +650,7 @@ inline void RouteLoginRequest::set_client_id(::google::protobuf::int32 value) {
   client_id_ = value;
 }
 
-// required .LoginReq loginReq = 2;
+// required .Msg.Protocol.LoginReq loginReq = 2;
 inline bool RouteLoginRequest::has_loginreq() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -658,24 +661,24 @@ inline void RouteLoginRequest::clear_has_loginreq() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void RouteLoginRequest::clear_loginreq() {
-  if (loginreq_ != NULL) loginreq_->::LoginReq::Clear();
+  if (loginreq_ != NULL) loginreq_->::Msg::Protocol::LoginReq::Clear();
   clear_has_loginreq();
 }
-inline const ::LoginReq& RouteLoginRequest::loginreq() const {
+inline const ::Msg::Protocol::LoginReq& RouteLoginRequest::loginreq() const {
   return loginreq_ != NULL ? *loginreq_ : *default_instance_->loginreq_;
 }
-inline ::LoginReq* RouteLoginRequest::mutable_loginreq() {
+inline ::Msg::Protocol::LoginReq* RouteLoginRequest::mutable_loginreq() {
   set_has_loginreq();
-  if (loginreq_ == NULL) loginreq_ = new ::LoginReq;
+  if (loginreq_ == NULL) loginreq_ = new ::Msg::Protocol::LoginReq;
   return loginreq_;
 }
-inline ::LoginReq* RouteLoginRequest::release_loginreq() {
+inline ::Msg::Protocol::LoginReq* RouteLoginRequest::release_loginreq() {
   clear_has_loginreq();
-  ::LoginReq* temp = loginreq_;
+  ::Msg::Protocol::LoginReq* temp = loginreq_;
   loginreq_ = NULL;
   return temp;
 }
-inline void RouteLoginRequest::set_allocated_loginreq(::LoginReq* loginreq) {
+inline void RouteLoginRequest::set_allocated_loginreq(::Msg::Protocol::LoginReq* loginreq) {
   delete loginreq_;
   loginreq_ = loginreq;
   if (loginreq) {
@@ -688,17 +691,20 @@ inline void RouteLoginRequest::set_allocated_loginreq(::LoginReq* loginreq) {
 
 // @@protoc_insertion_point(namespace_scope)
 
+}  // namespace Protocol
+}  // namespace Msg
+
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::GateToGameMsgId>() {
-  return ::GateToGameMsgId_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::GateToGameMsgId>() {
+  return ::Msg::Protocol::GateToGameMsgId_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::GameToGateMsgId>() {
-  return ::GameToGateMsgId_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::GameToGateMsgId>() {
+  return ::Msg::Protocol::GameToGateMsgId_descriptor();
 }
 
 }  // namespace google

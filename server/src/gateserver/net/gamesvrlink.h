@@ -11,9 +11,9 @@
 
 #include <net/netdefine.h>
 #include <net/serverlink.h>
+#include <game_to_gate.pb.h>
 
 class Link;
-class RouteToClientMsg;
 
 class GameSvrLink : public ServerLink
 {

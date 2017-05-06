@@ -27,6 +27,9 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
+namespace Msg {
+namespace Protocol {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_net_2eproto();
 void protobuf_AssignDesc_net_2eproto();
@@ -157,7 +160,7 @@ class ConnectReq : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 svrid() const;
   inline void set_svrid(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:ConnectReq)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.ConnectReq)
  private:
   inline void set_has_svrtype();
   inline void clear_has_svrtype();
@@ -238,12 +241,12 @@ class ConnectResponse : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .ConnectResult ret = 1;
+  // required .Msg.Protocol.ConnectResult ret = 1;
   inline bool has_ret() const;
   inline void clear_ret();
   static const int kRetFieldNumber = 1;
-  inline ::ConnectResult ret() const;
-  inline void set_ret(::ConnectResult value);
+  inline ::Msg::Protocol::ConnectResult ret() const;
+  inline void set_ret(::Msg::Protocol::ConnectResult value);
 
   // required int32 svrType = 2;
   inline bool has_svrtype() const;
@@ -259,7 +262,7 @@ class ConnectResponse : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 svrid() const;
   inline void set_svrid(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:ConnectResponse)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.ConnectResponse)
  private:
   inline void set_has_ret();
   inline void clear_has_ret();
@@ -409,7 +412,7 @@ inline void ConnectReq::set_svrid(::google::protobuf::int32 value) {
 
 // ConnectResponse
 
-// required .ConnectResult ret = 1;
+// required .Msg.Protocol.ConnectResult ret = 1;
 inline bool ConnectResponse::has_ret() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -423,11 +426,11 @@ inline void ConnectResponse::clear_ret() {
   ret_ = 0;
   clear_has_ret();
 }
-inline ::ConnectResult ConnectResponse::ret() const {
-  return static_cast< ::ConnectResult >(ret_);
+inline ::Msg::Protocol::ConnectResult ConnectResponse::ret() const {
+  return static_cast< ::Msg::Protocol::ConnectResult >(ret_);
 }
-inline void ConnectResponse::set_ret(::ConnectResult value) {
-  assert(::ConnectResult_IsValid(value));
+inline void ConnectResponse::set_ret(::Msg::Protocol::ConnectResult value) {
+  assert(::Msg::Protocol::ConnectResult_IsValid(value));
   set_has_ret();
   ret_ = value;
 }
@@ -479,17 +482,20 @@ inline void ConnectResponse::set_svrid(::google::protobuf::int32 value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
+}  // namespace Protocol
+}  // namespace Msg
+
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NetMsgId>() {
-  return ::NetMsgId_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::NetMsgId>() {
+  return ::Msg::Protocol::NetMsgId_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::ConnectResult>() {
-  return ::ConnectResult_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::ConnectResult>() {
+  return ::Msg::Protocol::ConnectResult_descriptor();
 }
 
 }  // namespace google

@@ -1,3 +1,5 @@
+package Msg.Protocol;
+
 import "client.proto";
 
 //---------------- 服务端 <-> 服务端消息号 ----------------//

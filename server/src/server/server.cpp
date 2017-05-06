@@ -14,8 +14,6 @@
 #include "tool/randtool.h"
 
 #include <signal.h>
-
-#include <net.pb.h>
 #include <basic/evbuffer.h>
 
 Server* Server::instance = nullptr;

@@ -8,7 +8,6 @@
 
 #include "GameClientMgr.h"
 #include "GameLogic.h"
-#include <client.pb.h>
 #include <protocol/message.h>
 
 bool GameClientMgr::Init()

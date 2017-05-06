@@ -10,15 +10,13 @@
 #define _server_h_
 
 #include "protocol/protocol.h"
-
 #include "net/net.h"
 #include "net/msgdispatcher.h"
-
 #include "basic/taskqueue.h"
 #include "tool/servertool.h"
+#include <net.pb.h>
 
 class Buffer;
-class ConnectReq;
 class ServerLink;
 
 // 服务器基类

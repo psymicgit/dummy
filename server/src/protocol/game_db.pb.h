@@ -27,6 +27,9 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
+namespace Msg {
+namespace Protocol {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_game_5fdb_2eproto();
 void protobuf_AssignDesc_game_5fdb_2eproto();
@@ -150,12 +153,12 @@ class SqlMsg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .SqlType sqltype = 1 [default = NormalSql];
+  // required .Msg.Protocol.SqlType sqltype = 1 [default = NormalSql];
   inline bool has_sqltype() const;
   inline void clear_sqltype();
   static const int kSqltypeFieldNumber = 1;
-  inline ::SqlType sqltype() const;
-  inline void set_sqltype(::SqlType value);
+  inline ::Msg::Protocol::SqlType sqltype() const;
+  inline void set_sqltype(::Msg::Protocol::SqlType value);
 
   // required fixed64 sqlid = 2;
   inline bool has_sqlid() const;
@@ -176,7 +179,7 @@ class SqlMsg : public ::google::protobuf::Message {
   inline ::std::string* release_sql();
   inline void set_allocated_sql(::std::string* sql);
 
-  // @@protoc_insertion_point(class_scope:SqlMsg)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.SqlMsg)
  private:
   inline void set_has_sqltype();
   inline void clear_has_sqltype();
@@ -264,26 +267,26 @@ class PostSql : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 time() const;
   inline void set_time(::google::protobuf::uint32 value);
 
-  // required .SqlDBType dbtype = 2;
+  // required .Msg.Protocol.SqlDBType dbtype = 2;
   inline bool has_dbtype() const;
   inline void clear_dbtype();
   static const int kDbtypeFieldNumber = 2;
-  inline ::SqlDBType dbtype() const;
-  inline void set_dbtype(::SqlDBType value);
+  inline ::Msg::Protocol::SqlDBType dbtype() const;
+  inline void set_dbtype(::Msg::Protocol::SqlDBType value);
 
-  // repeated .SqlMsg sqls = 3;
+  // repeated .Msg.Protocol.SqlMsg sqls = 3;
   inline int sqls_size() const;
   inline void clear_sqls();
   static const int kSqlsFieldNumber = 3;
-  inline const ::SqlMsg& sqls(int index) const;
-  inline ::SqlMsg* mutable_sqls(int index);
-  inline ::SqlMsg* add_sqls();
-  inline const ::google::protobuf::RepeatedPtrField< ::SqlMsg >&
+  inline const ::Msg::Protocol::SqlMsg& sqls(int index) const;
+  inline ::Msg::Protocol::SqlMsg* mutable_sqls(int index);
+  inline ::Msg::Protocol::SqlMsg* add_sqls();
+  inline const ::google::protobuf::RepeatedPtrField< ::Msg::Protocol::SqlMsg >&
       sqls() const;
-  inline ::google::protobuf::RepeatedPtrField< ::SqlMsg >*
+  inline ::google::protobuf::RepeatedPtrField< ::Msg::Protocol::SqlMsg >*
       mutable_sqls();
 
-  // @@protoc_insertion_point(class_scope:PostSql)
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.PostSql)
  private:
   inline void set_has_time();
   inline void clear_has_time();
@@ -294,7 +297,7 @@ class PostSql : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 time_;
   int dbtype_;
-  ::google::protobuf::RepeatedPtrField< ::SqlMsg > sqls_;
+  ::google::protobuf::RepeatedPtrField< ::Msg::Protocol::SqlMsg > sqls_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
@@ -313,7 +316,7 @@ class PostSql : public ::google::protobuf::Message {
 
 // SqlMsg
 
-// required .SqlType sqltype = 1 [default = NormalSql];
+// required .Msg.Protocol.SqlType sqltype = 1 [default = NormalSql];
 inline bool SqlMsg::has_sqltype() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -327,11 +330,11 @@ inline void SqlMsg::clear_sqltype() {
   sqltype_ = 0;
   clear_has_sqltype();
 }
-inline ::SqlType SqlMsg::sqltype() const {
-  return static_cast< ::SqlType >(sqltype_);
+inline ::Msg::Protocol::SqlType SqlMsg::sqltype() const {
+  return static_cast< ::Msg::Protocol::SqlType >(sqltype_);
 }
-inline void SqlMsg::set_sqltype(::SqlType value) {
-  assert(::SqlType_IsValid(value));
+inline void SqlMsg::set_sqltype(::Msg::Protocol::SqlType value) {
+  assert(::Msg::Protocol::SqlType_IsValid(value));
   set_has_sqltype();
   sqltype_ = value;
 }
@@ -454,7 +457,7 @@ inline void PostSql::set_time(::google::protobuf::uint32 value) {
   time_ = value;
 }
 
-// required .SqlDBType dbtype = 2;
+// required .Msg.Protocol.SqlDBType dbtype = 2;
 inline bool PostSql::has_dbtype() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -468,36 +471,36 @@ inline void PostSql::clear_dbtype() {
   dbtype_ = 0;
   clear_has_dbtype();
 }
-inline ::SqlDBType PostSql::dbtype() const {
-  return static_cast< ::SqlDBType >(dbtype_);
+inline ::Msg::Protocol::SqlDBType PostSql::dbtype() const {
+  return static_cast< ::Msg::Protocol::SqlDBType >(dbtype_);
 }
-inline void PostSql::set_dbtype(::SqlDBType value) {
-  assert(::SqlDBType_IsValid(value));
+inline void PostSql::set_dbtype(::Msg::Protocol::SqlDBType value) {
+  assert(::Msg::Protocol::SqlDBType_IsValid(value));
   set_has_dbtype();
   dbtype_ = value;
 }
 
-// repeated .SqlMsg sqls = 3;
+// repeated .Msg.Protocol.SqlMsg sqls = 3;
 inline int PostSql::sqls_size() const {
   return sqls_.size();
 }
 inline void PostSql::clear_sqls() {
   sqls_.Clear();
 }
-inline const ::SqlMsg& PostSql::sqls(int index) const {
+inline const ::Msg::Protocol::SqlMsg& PostSql::sqls(int index) const {
   return sqls_.Get(index);
 }
-inline ::SqlMsg* PostSql::mutable_sqls(int index) {
+inline ::Msg::Protocol::SqlMsg* PostSql::mutable_sqls(int index) {
   return sqls_.Mutable(index);
 }
-inline ::SqlMsg* PostSql::add_sqls() {
+inline ::Msg::Protocol::SqlMsg* PostSql::add_sqls() {
   return sqls_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::SqlMsg >&
+inline const ::google::protobuf::RepeatedPtrField< ::Msg::Protocol::SqlMsg >&
 PostSql::sqls() const {
   return sqls_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::SqlMsg >*
+inline ::google::protobuf::RepeatedPtrField< ::Msg::Protocol::SqlMsg >*
 PostSql::mutable_sqls() {
   return &sqls_;
 }
@@ -505,21 +508,24 @@ PostSql::mutable_sqls() {
 
 // @@protoc_insertion_point(namespace_scope)
 
+}  // namespace Protocol
+}  // namespace Msg
+
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::GameToDBMsgId>() {
-  return ::GameToDBMsgId_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::GameToDBMsgId>() {
+  return ::Msg::Protocol::GameToDBMsgId_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SqlType>() {
-  return ::SqlType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::SqlType>() {
+  return ::Msg::Protocol::SqlType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SqlDBType>() {
-  return ::SqlDBType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Msg::Protocol::SqlDBType>() {
+  return ::Msg::Protocol::SqlDBType_descriptor();
 }
 
 }  // namespace google

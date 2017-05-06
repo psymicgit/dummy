@@ -8,16 +8,16 @@
 //------------------------------------------------------------------------------
 
 // Generated from: game_db.proto
-namespace game_db
+namespace Msg.Protocol
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SqlMsg")]
   public partial class SqlMsg : global::ProtoBuf.IExtensible
   {
     public SqlMsg() {}
     
-    private SqlType _sqltype;
+    private Msg.Protocol.SqlType _sqltype;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"sqltype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public SqlType sqltype
+    public Msg.Protocol.SqlType sqltype
     {
       get { return _sqltype; }
       set { _sqltype = value; }
@@ -53,16 +53,16 @@ namespace game_db
       get { return _time; }
       set { _time = value; }
     }
-    private SqlDBType _dbtype;
+    private Msg.Protocol.SqlDBType _dbtype;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"dbtype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public SqlDBType dbtype
+    public Msg.Protocol.SqlDBType dbtype
     {
       get { return _dbtype; }
       set { _dbtype = value; }
     }
-    private readonly global::System.Collections.Generic.List<SqlMsg> _sqls = new global::System.Collections.Generic.List<SqlMsg>();
+    private readonly global::System.Collections.Generic.List<Msg.Protocol.SqlMsg> _sqls = new global::System.Collections.Generic.List<Msg.Protocol.SqlMsg>();
     [global::ProtoBuf.ProtoMember(3, Name=@"sqls", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<SqlMsg> sqls
+    public global::System.Collections.Generic.List<Msg.Protocol.SqlMsg> sqls
     {
       get { return _sqls; }
     }

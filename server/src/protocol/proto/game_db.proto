@@ -1,3 +1,5 @@
+package Msg.Protocol;
+
 enum GameToDBMsgId
 {
 	eGameToDBMsgIdMin = 2000;

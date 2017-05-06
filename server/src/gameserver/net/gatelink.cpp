@@ -11,7 +11,6 @@
 #include "GameLogic.h"
 #include "logic/GameClientMgr.h"
 
-#include <game_to_gate.pb.h>
 #include <net/netaddress.h>
 #include <net/link.h>
 #include <server.h>
