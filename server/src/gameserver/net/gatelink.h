@@ -26,8 +26,9 @@ class GateLink : public ServerLink
 	void handleMsg(Link* link);
 
 public:
-	static void OnRouteFromClient(GateLink* gateLink, RouteFromClientMsg *msg, int64 receiveTime);
-	static void OnRouteLogin(GateLink* gateLink, RouteLoginRequest* msg, int64 receiveTime);
+	static void OnRouteFromClient(GateLink& gateLink, RouteFromClientMsg& msg, int64 receiveTime);
+	static void OnRouteLogin(GateLink& gateLink, RouteLoginRequest& msg, int64 receiveTime);
+	static void OnClientDisconnect(GateLink& gateLink, ClientDisconnectMsg& msg, int64 receiveTime);
 };
 
 #endif //_gatelink_h_

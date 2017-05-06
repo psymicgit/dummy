@@ -25,9 +25,9 @@ void GameSvrLink::onRecv(Link *link)
 	ServerLink::onRecv(link);
 }
 
-void GameSvrLink::OnRouteToClient(GameSvrLink* gameLink, RouteToClientMsg* routeToClientMsg, int64 receiveTime)
+void GameSvrLink::OnRouteToClient(GameSvrLink& gameLink, RouteToClientMsg& routeToClientMsg, int64 receiveTime)
 {
-	int clientId = routeToClientMsg->client_id();
+	int clientId = routeToClientMsg.client_id();
 
 	GateClient* client = GateClientMgr::instance->FindClient(clientId);
 	if (nullptr == client)
@@ -35,8 +35,8 @@ void GameSvrLink::OnRouteToClient(GameSvrLink* gameLink, RouteToClientMsg* route
 		return;
 	}
 
-	const std::string& routeMsg = routeToClientMsg->msg();
-	int msgId = routeToClientMsg->msg_id();
+	const std::string& routeMsg = routeToClientMsg.msg();
+	int msgId = routeToClientMsg.msg_id();
 	int msgSize = routeMsg.size();
 
 	client->Send(msgId, routeMsg.c_str(), msgSize);

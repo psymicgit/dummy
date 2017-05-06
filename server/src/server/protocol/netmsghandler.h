@@ -17,57 +17,57 @@
 class NetMsgHandler
 {
 public:
-	static void OnConnectServerReq(Link* link, ConnectReq *req, Timestamp receiveTime)
+	static void OnConnectServerReq(Link& link, ConnectReq& req, Timestamp receiveTime)
 	{
-		ServerType peerSvrType		= (ServerType)req->svrtype();
-		int peerSvrId				= req->svrid();
+		ServerType peerSvrType		= (ServerType)req.svrtype();
+		int peerSvrId				= req.svrid();
 
 		int svrId = Server::instance->getServerId(peerSvrType, peerSvrId);
-		const std::string &authKey = req->authkey();
+		const std::string &authKey = req.authkey();
 
 		ConnectResponse res;
 		res.set_svrtype(Server::instance->m_svrType);
 		res.set_ret(CONNECT_OK);
 
 		if(authKey != g_serverHandshakeAuthKey) {
-			LOG_WARN << "reject server<" << svrtool::getSvrName((ServerType)req->svrtype()) << ", zoneId=" << req->svrid() << "> connect : auth failed, auth key invalid! \n" << msgtool::getMsgDebugString(*req);
+			LOG_WARN << "reject server<" << svrtool::getSvrName((ServerType)req.svrtype()) << ", zoneId=" << req.svrid() << "> connect : auth failed, auth key invalid! \n" << msgtool::getMsgDebugString(req);
 			res.set_ret(CONNECT_FAIL_AUTH_KEY_INVALID);
-			link->send(eConnectSvrAck, res);
+			link.send(eConnectSvrAck, res);
 
 			return;
 		}
 
-		if(Server::instance->isSvrLinkExist((ServerType)req->svrtype(), req->svrid())) {
-			LOG_WARN << "reject server<" << svrtool::getSvrName((ServerType)req->svrtype()) << ", zoneId=" << req->svrid() << "> connect : found same server connection! \n" << msgtool::getMsgDebugString(*req);
+		if(Server::instance->isSvrLinkExist((ServerType)req.svrtype(), req.svrid())) {
+			LOG_WARN << "reject server<" << svrtool::getSvrName((ServerType)req.svrtype()) << ", zoneId=" << req.svrid() << "> connect : found same server connection! \n" << msgtool::getMsgDebugString(req);
 			res.set_ret(CONNECT_FAIL_FOUND_SAME_SERVER);
 		} else {
 			// LOG_DEBUG << "OnAcceptConnect : \n" << msgtool::getMsgString(*req);
-			ServerLink *svrLink = Server::instance->onAcceptServer(*link, (ServerType)req->svrtype(), req->svrid());
+			ServerLink *svrLink = Server::instance->onAcceptServer(link, (ServerType)req.svrtype(), req.svrid());
 			if (NULL == svrLink) {
 				res.set_ret(CONNECT_FAIL_UNKNOWN_SERVER_TYPE);
 			} else {
-				svrLink->m_link			= link;
+				svrLink->m_link			= &link;
 				svrLink->m_localSvrType	= Server::instance->m_svrType;
-				svrLink->m_peerSvrType		= peerSvrType;
-				svrLink->m_peerSvrId		= peerSvrId;
-				svrLink->m_taskQueue		= &Server::instance->getTaskQueue();
+				svrLink->m_peerSvrType	= peerSvrType;
+				svrLink->m_peerSvrId	= peerSvrId;
+				svrLink->m_taskQueue	= &Server::instance->getTaskQueue();
 
-				link->m_logic = svrLink;
+				link.m_logic = svrLink;
 
 				Server::instance->registerServer(svrId, svrLink);
 				svrLink->onEstablish();
 			}
 		}
 
-		link->send(eConnectSvrAck, res);
-// 		LOG_DEBUG << "<<:" << req->GetDescriptor()->full_name();
-// 		LOG_DEBUG << "<<:" << req->GetDescriptor()->DebugString();
-// 		LOG_DEBUG << "<<:" << req->DebugString();
+		link.send(eConnectSvrAck, res);
+// 		LOG_DEBUG << "<<:" << req.GetDescriptor()->full_name();
+// 		LOG_DEBUG << "<<:" << req.GetDescriptor()->DebugString();
+// 		LOG_DEBUG << "<<:" << req.DebugString();
 	}
 
-	static void OnConnectServerAck(Link* link, ConnectResponse *res, Timestamp receiveTime)
+	static void OnConnectServerAck(Link& link, ConnectResponse& res, Timestamp receiveTime)
 	{
-		ConnectResult ret = res->ret();
+		ConnectResult ret = res.ret();
 		if (ret != CONNECT_OK) {
 			const char* reason = "";
 			switch(ret) {
@@ -88,24 +88,24 @@ public:
 				break;
 			}
 
-			LOG_ERROR << "connect failed: peer server<" << svrtool::getSvrName((ServerType)res->svrtype())
-			          << ", zoneId=" << res->svrid() << "> reject connection : " << reason << "! \n" << msgtool::getMsgDebugString(*res);
+			LOG_ERROR << "connect failed: peer server<" << svrtool::getSvrName((ServerType)res.svrtype())
+			          << ", zoneId=" << res.svrid() << "> reject connection : " << reason << "! \n" << msgtool::getMsgDebugString(res);
 
-			link->close();
+			link.close();
 			return;
 		}
 
 		// LOG_DEBUG << "OnAcceptConnect : \n" << msgtool::getMsgString(*req);
-		ServerLink *svrLink = Server::instance->onAcceptServer(*link, (ServerType)res->svrtype(), res->svrid());
+		ServerLink *svrLink = Server::instance->onAcceptServer(link, (ServerType)res.svrtype(), res.svrid());
 		if (svrLink) {
-			svrLink->m_link		= link;
-			svrLink->m_peerSvrType = (ServerType)res->svrtype();
-			svrLink->m_peerSvrId	= res->svrid();
+			svrLink->m_link		= &link;
+			svrLink->m_peerSvrType = (ServerType)res.svrtype();
+			svrLink->m_peerSvrId	= res.svrid();
 			svrLink->m_taskQueue	= &Server::instance->getTaskQueue();
 
-			link->m_logic			= svrLink;
+			link.m_logic			= svrLink;
 
-			int svrId = Server::instance->getServerId((ServerType)res->svrtype(), res->svrid());
+			int svrId = Server::instance->getServerId((ServerType)res.svrtype(), res.svrid());
 			Server::instance->registerServer(svrId, svrLink);
 			svrLink->onEstablish();
 		}

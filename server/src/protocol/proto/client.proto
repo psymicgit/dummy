@@ -33,7 +33,8 @@ enum ServerMsgId
 	
 	//******** 游戏服下发 ********//
 	
-	ClientMsg_MoveNotify = 1001;			// 下发移动消息
+	ServerMsg_MoveNotify = 1001;			// 下发移动消息
+	ServerMsg_RemoveObj = 1002;				// 移除可视对象
 }
 
 //---------------- 服务端 - 客户端消息内容 ----------------//
@@ -133,6 +134,15 @@ message MoveRequest
 // 下发移动消息
 message MoveNotify
 {
-	required float x = 1;
-	required float y = 2;
+	required int64 obj_id = 1;
+	required float from_x = 2;
+	required float from_y = 3;
+	required float to_x = 4;
+	required float to_y = 5;
+}
+
+// 下发移除可视对象消息
+message RemoveObjNotify
+{
+	required int64 obj_id = 1;
 }

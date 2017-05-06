@@ -54,7 +54,6 @@ bool GameServer::init(const char* jsonConfig)
 		return false;
 	}
 
-	GameClientMgr::Instance().Init();
 	return true;
 }
 

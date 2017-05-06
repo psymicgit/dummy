@@ -268,5 +268,8 @@ namespace Msg { namespace Protocol {} }
 using namespace Msg::Protocol;
 
 #include <def/global.h>
+#include "logic/IModule.h"
+
+typedef int64 ObjectId;
 
 #endif //_platform_h_

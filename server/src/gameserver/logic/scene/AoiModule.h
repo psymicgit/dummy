@@ -7,8 +7,6 @@
 
 #pragma once
 
-typedef int64 ObjectId;
-
 struct AoiObject
 {
 	ObjectId objId;
@@ -16,6 +14,7 @@ struct AoiObject
 	float y;
 	float height;
 	float seeRadius;
+	int clientId;
 
 	// 默认排序：按x从小到大排序
 	bool operator<(const AoiObject& other)
@@ -36,12 +35,14 @@ struct AoiObject
 	}
 };
 
-class AoiModule
+class AoiModule : public IModule, public Singleton<AoiModule>
 {
 public:
 	AoiModule();
 
 public:
+	bool Init();
+
 	void Update();
 
 	bool Add(AoiObject*);
@@ -54,9 +55,9 @@ public:
 
 	int GetObjPos(AoiObject*);
 
-	void SetPos(int from, int to);
-
 	bool PickNear(AoiObject*, float radius, std::vector<AoiObject*>&);
+
+	bool PickByKen(ObjectId, std::vector<AoiObject*>&);
 
 	bool Pick(float x, float y, float radius, std::vector<AoiObject*>&);
 
@@ -67,9 +68,17 @@ public:
 
 	bool IsOk();
 
+	int AllocObjId();
+
+	AoiObject* FindObject(ObjectId);
+
+	const std::vector<AoiObject*>& GetObjs();
+
 private:
 	std::map<ObjectId, AoiObject*> m_objs;
 
 	std::vector<AoiObject*> m_vecX;
 	std::vector<AoiObject*> m_vecY;
+
+	int m_allocObjId;
 };

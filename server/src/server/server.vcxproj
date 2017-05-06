@@ -142,9 +142,11 @@
     <ClInclude Include="def\global.h" />
     <ClInclude Include="def\platform.h" />
     <ClInclude Include="def\type.h" />
-    <ClInclude Include="global\VarList.h" />
     <ClInclude Include="http\httpcmd.h" />
     <ClInclude Include="http\httpmgr.h" />
+    <ClInclude Include="logic\ComponentModule.h" />
+    <ClInclude Include="logic\IModule.h" />
+    <ClInclude Include="logic\VarList.h" />
     <ClInclude Include="net\connector.h" />
     <ClInclude Include="net\link.h" />
     <ClInclude Include="net\listener.h" />
@@ -193,9 +195,10 @@
     <ClCompile Include="db\dbrecordset.cpp" />
     <ClCompile Include="db\dbsession.cpp" />
     <ClCompile Include="def\global.cpp" />
-    <ClCompile Include="global\VarList.cpp" />
     <ClCompile Include="http\httpcmd.cpp" />
     <ClCompile Include="http\httpmgr.cpp" />
+    <ClCompile Include="logic\ComponentModule.cpp" />
+    <ClCompile Include="logic\VarList.cpp" />
     <ClCompile Include="net\connector.cpp" />
     <ClCompile Include="net\link.cpp" />
     <ClCompile Include="net\listener.cpp" />

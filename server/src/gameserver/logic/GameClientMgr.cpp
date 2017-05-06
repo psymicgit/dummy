@@ -8,7 +8,9 @@
 
 #include "GameClientMgr.h"
 #include "GameLogic.h"
+#include "logic/scene/AoiModule.h"
 #include <protocol/message.h>
+#include <tool/randtool.h>
 
 bool GameClientMgr::Init()
 {
@@ -46,20 +48,42 @@ GameClient* GameClientMgr::AddClient(int clientId)
 	return client;
 }
 
-void GameClientMgr::OnAuthRequest(GameClient* client, AuthReq *req, Timestamp receiveTime)
+void GameClientMgr::OnAuthRequest(GameClient& client, AuthReq& req, Timestamp receiveTime)
 {
 }
 
-void GameClientMgr::OnLoginRequest(GameClient* client, LoginReq *req, Timestamp receiveTime)
+void GameClientMgr::OnLoginRequest(GameClient& client, LoginReq& req, Timestamp receiveTime)
 {
+	AoiObject *aoiObj = new AoiObject();
+	aoiObj->x = randtool::rand_float(1000);
+	aoiObj->y = randtool::rand_float(1000);
+	aoiObj->height = randtool::rand_float(1000);
+	aoiObj->objId = AoiModule::instance->AllocObjId();
+	aoiObj->clientId = client.m_clientId;
+	AoiModule::instance->Add(aoiObj);
 }
 
-void GameClientMgr::OnMoveRequest(GameClient* client, MoveRequest *req, Timestamp receiveTime)
+void GameClientMgr::OnMoveRequest(GameClient& client, MoveRequest& req, Timestamp receiveTime)
 {
+	AoiObject* aoiObj = AoiModule::instance->FindObject(client.m_aoiObjId);
+	if (nullptr == aoiObj)
+	{
+		return;
+	}
 
+	MoveNotify move;
+	move.set_obj_id(aoiObj->objId);
+	move.set_from_x(aoiObj->x);
+	move.set_from_x(aoiObj->y);
+	move.set_to_x(req.y());
+	move.set_to_x(req.y());
+
+	AoiModule::instance->Move(aoiObj, req.x(), req.y());
+
+	GameLogic::SendToClientByKen(aoiObj->objId, ServerMsg_MoveNotify, 0, move);
 }
 
-void GameClientMgr::OnReadyRequest(GameClient* client, ReadyRequest *req, Timestamp receiveTime)
+void GameClientMgr::OnReadyRequest(GameClient& client, ReadyRequest& req, Timestamp receiveTime)
 {
 
 }

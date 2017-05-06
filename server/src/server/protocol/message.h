@@ -15,11 +15,16 @@
 
 // namespace google {namespace protobuf { class Message; }}
 
+#pragma pack(push)
+#pragma pack(1)
+
 // 外网消息头
 struct NetMsgHead {
 	int msgSize;
 	int16 msgId;
 };
+
+#pragma pack(pop)
 
 namespace msgtool
 {

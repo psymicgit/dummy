@@ -12,10 +12,12 @@
 
 bool GameClient::Init()
 {
+	m_clientId = 0;
+	m_aoiObjId = 0;
 	return true;
 }
 
-bool GameClient::SendMsg(int msgId, Message &msg)
+bool GameClient::SendMsg(int msgId, const Message &msg)
 {
 	int size = msg.ByteSize();
 

@@ -39,14 +39,16 @@ void protobuf_ShutdownFile_game_5fto_5fgate_2eproto();
 class RouteFromClientMsg;
 class RouteToClientMsg;
 class RouteLoginRequest;
+class ClientDisconnectMsg;
 
 enum GateToGameMsgId {
   GateToGame_RouteFromClient = 1,
-  GateToGame_RouteLoginRequest = 2
+  GateToGame_RouteLoginRequest = 2,
+  GateToGame_ClientDisconnect = 3
 };
 bool GateToGameMsgId_IsValid(int value);
 const GateToGameMsgId GateToGameMsgId_MIN = GateToGame_RouteFromClient;
-const GateToGameMsgId GateToGameMsgId_MAX = GateToGame_RouteLoginRequest;
+const GateToGameMsgId GateToGameMsgId_MAX = GateToGame_ClientDisconnect;
 const int GateToGameMsgId_ARRAYSIZE = GateToGameMsgId_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* GateToGameMsgId_descriptor();
@@ -385,6 +387,88 @@ class RouteLoginRequest : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static RouteLoginRequest* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class ClientDisconnectMsg : public ::google::protobuf::Message {
+ public:
+  ClientDisconnectMsg();
+  virtual ~ClientDisconnectMsg();
+
+  ClientDisconnectMsg(const ClientDisconnectMsg& from);
+
+  inline ClientDisconnectMsg& operator=(const ClientDisconnectMsg& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ClientDisconnectMsg& default_instance();
+
+  void Swap(ClientDisconnectMsg* other);
+
+  // implements Message ----------------------------------------------
+
+  ClientDisconnectMsg* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ClientDisconnectMsg& from);
+  void MergeFrom(const ClientDisconnectMsg& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 client_id = 1;
+  inline bool has_client_id() const;
+  inline void clear_client_id();
+  static const int kClientIdFieldNumber = 1;
+  inline ::google::protobuf::int32 client_id() const;
+  inline void set_client_id(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.ClientDisconnectMsg)
+ private:
+  inline void set_has_client_id();
+  inline void clear_has_client_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 client_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_game_5fto_5fgate_2eproto();
+  friend void protobuf_AssignDesc_game_5fto_5fgate_2eproto();
+  friend void protobuf_ShutdownFile_game_5fto_5fgate_2eproto();
+
+  void InitAsDefaultInstance();
+  static ClientDisconnectMsg* default_instance_;
+};
 // ===================================================================
 
 
@@ -686,6 +770,32 @@ inline void RouteLoginRequest::set_allocated_loginreq(::Msg::Protocol::LoginReq*
   } else {
     clear_has_loginreq();
   }
+}
+
+// -------------------------------------------------------------------
+
+// ClientDisconnectMsg
+
+// required int32 client_id = 1;
+inline bool ClientDisconnectMsg::has_client_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ClientDisconnectMsg::set_has_client_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ClientDisconnectMsg::clear_has_client_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ClientDisconnectMsg::clear_client_id() {
+  client_id_ = 0;
+  clear_has_client_id();
+}
+inline ::google::protobuf::int32 ClientDisconnectMsg::client_id() const {
+  return client_id_;
+}
+inline void ClientDisconnectMsg::set_client_id(::google::protobuf::int32 value) {
+  set_has_client_id();
+  client_id_ = value;
 }
 
 

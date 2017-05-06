@@ -30,6 +30,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* RouteLoginRequest_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   RouteLoginRequest_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ClientDisconnectMsg_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ClientDisconnectMsg_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* GateToGameMsgId_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* GameToGateMsgId_descriptor_ = NULL;
 
@@ -92,6 +95,21 @@ void protobuf_AssignDesc_game_5fto_5fgate_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(RouteLoginRequest));
+  ClientDisconnectMsg_descriptor_ = file->message_type(3);
+  static const int ClientDisconnectMsg_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientDisconnectMsg, client_id_),
+  };
+  ClientDisconnectMsg_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ClientDisconnectMsg_descriptor_,
+      ClientDisconnectMsg::default_instance_,
+      ClientDisconnectMsg_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientDisconnectMsg, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientDisconnectMsg, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ClientDisconnectMsg));
   GateToGameMsgId_descriptor_ = file->enum_type(0);
   GameToGateMsgId_descriptor_ = file->enum_type(1);
 }
@@ -112,6 +130,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     RouteToClientMsg_descriptor_, &RouteToClientMsg::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     RouteLoginRequest_descriptor_, &RouteLoginRequest::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ClientDisconnectMsg_descriptor_, &ClientDisconnectMsg::default_instance());
 }
 
 }  // namespace
@@ -123,6 +143,8 @@ void protobuf_ShutdownFile_game_5fto_5fgate_2eproto() {
   delete RouteToClientMsg_reflection_;
   delete RouteLoginRequest::default_instance_;
   delete RouteLoginRequest_reflection_;
+  delete ClientDisconnectMsg::default_instance_;
+  delete ClientDisconnectMsg_reflection_;
 }
 
 void protobuf_AddDesc_game_5fto_5fgate_2eproto() {
@@ -139,19 +161,22 @@ void protobuf_AddDesc_game_5fto_5fgate_2eproto() {
     "\n\020RouteToClientMsg\022\021\n\tclient_id\030\001 \002(\005\022\016\n"
     "\006msg_id\030\002 \002(\005\022\013\n\003msg\030\003 \002(\t\"P\n\021RouteLogin"
     "Request\022\021\n\tclient_id\030\001 \002(\005\022(\n\010loginReq\030\002"
-    " \002(\0132\026.Msg.Protocol.LoginReq*S\n\017GateToGa"
-    "meMsgId\022\036\n\032GateToGame_RouteFromClient\020\001\022"
-    " \n\034GateToGame_RouteLoginRequest\020\002*/\n\017Gam"
-    "eToGateMsgId\022\034\n\030GameToGate_RouteToClient"
-    "\020\001", 402);
+    " \002(\0132\026.Msg.Protocol.LoginReq\"(\n\023ClientDi"
+    "sconnectMsg\022\021\n\tclient_id\030\001 \002(\005*t\n\017GateTo"
+    "GameMsgId\022\036\n\032GateToGame_RouteFromClient\020"
+    "\001\022 \n\034GateToGame_RouteLoginRequest\020\002\022\037\n\033G"
+    "ateToGame_ClientDisconnect\020\003*/\n\017GameToGa"
+    "teMsgId\022\034\n\030GameToGate_RouteToClient\020\001", 477);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game_to_gate.proto", &protobuf_RegisterTypes);
   RouteFromClientMsg::default_instance_ = new RouteFromClientMsg();
   RouteToClientMsg::default_instance_ = new RouteToClientMsg();
   RouteLoginRequest::default_instance_ = new RouteLoginRequest();
+  ClientDisconnectMsg::default_instance_ = new ClientDisconnectMsg();
   RouteFromClientMsg::default_instance_->InitAsDefaultInstance();
   RouteToClientMsg::default_instance_->InitAsDefaultInstance();
   RouteLoginRequest::default_instance_->InitAsDefaultInstance();
+  ClientDisconnectMsg::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_game_5fto_5fgate_2eproto);
 }
 
@@ -169,6 +194,7 @@ bool GateToGameMsgId_IsValid(int value) {
   switch(value) {
     case 1:
     case 2:
+    case 3:
       return true;
     default:
       return false;
@@ -1054,6 +1080,215 @@ void RouteLoginRequest::Swap(RouteLoginRequest* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = RouteLoginRequest_descriptor_;
   metadata.reflection = RouteLoginRequest_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ClientDisconnectMsg::kClientIdFieldNumber;
+#endif  // !_MSC_VER
+
+ClientDisconnectMsg::ClientDisconnectMsg()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ClientDisconnectMsg::InitAsDefaultInstance() {
+}
+
+ClientDisconnectMsg::ClientDisconnectMsg(const ClientDisconnectMsg& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ClientDisconnectMsg::SharedCtor() {
+  _cached_size_ = 0;
+  client_id_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ClientDisconnectMsg::~ClientDisconnectMsg() {
+  SharedDtor();
+}
+
+void ClientDisconnectMsg::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ClientDisconnectMsg::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ClientDisconnectMsg::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ClientDisconnectMsg_descriptor_;
+}
+
+const ClientDisconnectMsg& ClientDisconnectMsg::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_game_5fto_5fgate_2eproto();
+  return *default_instance_;
+}
+
+ClientDisconnectMsg* ClientDisconnectMsg::default_instance_ = NULL;
+
+ClientDisconnectMsg* ClientDisconnectMsg::New() const {
+  return new ClientDisconnectMsg;
+}
+
+void ClientDisconnectMsg::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    client_id_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ClientDisconnectMsg::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 client_id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &client_id_)));
+          set_has_client_id();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ClientDisconnectMsg::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 client_id = 1;
+  if (has_client_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->client_id(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ClientDisconnectMsg::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 client_id = 1;
+  if (has_client_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->client_id(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ClientDisconnectMsg::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 client_id = 1;
+    if (has_client_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->client_id());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ClientDisconnectMsg::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ClientDisconnectMsg* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ClientDisconnectMsg*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ClientDisconnectMsg::MergeFrom(const ClientDisconnectMsg& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_client_id()) {
+      set_client_id(from.client_id());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ClientDisconnectMsg::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ClientDisconnectMsg::CopyFrom(const ClientDisconnectMsg& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ClientDisconnectMsg::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void ClientDisconnectMsg::Swap(ClientDisconnectMsg* other) {
+  if (other != this) {
+    std::swap(client_id_, other->client_id_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ClientDisconnectMsg::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ClientDisconnectMsg_descriptor_;
+  metadata.reflection = ClientDisconnectMsg_reflection_;
   return metadata;
 }
 

@@ -16,13 +16,14 @@ public:
 	bool Init();
 
 	// 发送消息包
-	bool SendMsg(int msgId, Message&);
+	bool SendMsg(int msgId, const Message&);
 
 	// 发送消息包
 	bool Send(int msgId, const char* msg, int msgSize);
 
 public:
 	int m_clientId;
+	int m_aoiObjId;
 };
 
 #endif //_client_h_

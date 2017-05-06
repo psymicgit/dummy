@@ -174,11 +174,17 @@
     <ClInclude Include="tool\utiltool.h">
       <Filter>tool</Filter>
     </ClInclude>
-    <ClInclude Include="global\VarList.h">
-      <Filter>global</Filter>
-    </ClInclude>
     <ClInclude Include="protocol\MsgDefine.h">
       <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\VarList.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\IModule.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\ComponentModule.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,8 +209,8 @@
     <Filter Include="http">
       <UniqueIdentifier>{5ab3f19e-c72d-4e06-85d7-f7bf46f7bbeb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="global">
-      <UniqueIdentifier>{bb5808f1-7e29-4c0e-b5c5-b21025e24449}</UniqueIdentifier>
+    <Filter Include="logic">
+      <UniqueIdentifier>{8f6041b1-b745-4a60-a3ef-46e4e4d947d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -330,8 +336,11 @@
     <ClCompile Include="tool\utiltool.cpp">
       <Filter>tool</Filter>
     </ClCompile>
-    <ClCompile Include="global\VarList.cpp">
-      <Filter>global</Filter>
+    <ClCompile Include="logic\VarList.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\ComponentModule.cpp">
+      <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

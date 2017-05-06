@@ -8,19 +8,34 @@
 
 #include "gameserver.h"
 #include "scene/AoiModule.h"
+#include "logic/ComponentModule.h"
+
+bool Init()
+{
+	DeclareModule(AoiModule);
+	DeclareModule(GameClientMgr);
+
+	if (!ComponentModule::instance->Init())
+	{
+		return false;
+	}
+
+	return true;
+}
 
 int main(int argc, char **argv)
 {
-	GameServer &svr = GameServer::Instance();
-	if (!svr.init("../gameconfig.json")) {
-		svr.uninit();
+	GameServer &server = GameServer::Instance();
+	if (!server.init("../gameconfig.json")) {
+		server.uninit();
 		return 0;
 	}
 
-	AoiModule aoiModule;
-	aoiModule.test();
+	if (!Init())
+	{
+		return 0;
+	}
 
-	svr.start();
-
+	server.start();
 	return 0;
 }

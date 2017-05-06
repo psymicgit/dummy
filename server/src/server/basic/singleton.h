@@ -26,14 +26,20 @@ public:
 	static T& Instance()
 	{
 		if (NULL == instance) {
-			lock_guard_t<> lock(s_lock);
-			if (NULL == instance) {
-				T *t = new T;
-				instance = t;
-			}
+			CreateInstance();
 		}
 
 		return *instance;
+	}
+
+	// 该单例方法是线程安全的
+	static void CreateInstance()
+	{
+		lock_guard_t<> lock(s_lock);
+		if (NULL == instance) {
+			T *t = new T;
+			instance = t;
+		}
 	}
 
 private:

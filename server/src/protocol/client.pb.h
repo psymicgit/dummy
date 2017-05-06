@@ -44,6 +44,7 @@ class PingPong;
 class ReadyRequest;
 class MoveRequest;
 class MoveNotify;
+class RemoveObjNotify;
 
 enum LoginReq_LoginType {
   LoginReq_LoginType_NewRole = 0,
@@ -115,11 +116,12 @@ enum ServerMsgId {
   ServerMsg_PongReply = 4,
   ServerMsg_SpeedTestReply = 5,
   ServerMsg_LatencyTestReply = 6,
-  ClientMsg_MoveNotify = 1001
+  ServerMsg_MoveNotify = 1001,
+  ServerMsg_RemoveObj = 1002
 };
 bool ServerMsgId_IsValid(int value);
 const ServerMsgId ServerMsgId_MIN = ServerMsg_LoginReply;
-const ServerMsgId ServerMsgId_MAX = ClientMsg_MoveNotify;
+const ServerMsgId ServerMsgId_MAX = ServerMsg_RemoveObj;
 const int ServerMsgId_ARRAYSIZE = ServerMsgId_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ServerMsgId_descriptor();
@@ -1139,34 +1141,64 @@ class MoveNotify : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required float x = 1;
-  inline bool has_x() const;
-  inline void clear_x();
-  static const int kXFieldNumber = 1;
-  inline float x() const;
-  inline void set_x(float value);
+  // required int64 obj_id = 1;
+  inline bool has_obj_id() const;
+  inline void clear_obj_id();
+  static const int kObjIdFieldNumber = 1;
+  inline ::google::protobuf::int64 obj_id() const;
+  inline void set_obj_id(::google::protobuf::int64 value);
 
-  // required float y = 2;
-  inline bool has_y() const;
-  inline void clear_y();
-  static const int kYFieldNumber = 2;
-  inline float y() const;
-  inline void set_y(float value);
+  // required float from_x = 2;
+  inline bool has_from_x() const;
+  inline void clear_from_x();
+  static const int kFromXFieldNumber = 2;
+  inline float from_x() const;
+  inline void set_from_x(float value);
+
+  // required float from_y = 3;
+  inline bool has_from_y() const;
+  inline void clear_from_y();
+  static const int kFromYFieldNumber = 3;
+  inline float from_y() const;
+  inline void set_from_y(float value);
+
+  // required float to_x = 4;
+  inline bool has_to_x() const;
+  inline void clear_to_x();
+  static const int kToXFieldNumber = 4;
+  inline float to_x() const;
+  inline void set_to_x(float value);
+
+  // required float to_y = 5;
+  inline bool has_to_y() const;
+  inline void clear_to_y();
+  static const int kToYFieldNumber = 5;
+  inline float to_y() const;
+  inline void set_to_y(float value);
 
   // @@protoc_insertion_point(class_scope:Msg.Protocol.MoveNotify)
  private:
-  inline void set_has_x();
-  inline void clear_has_x();
-  inline void set_has_y();
-  inline void clear_has_y();
+  inline void set_has_obj_id();
+  inline void clear_has_obj_id();
+  inline void set_has_from_x();
+  inline void clear_has_from_x();
+  inline void set_has_from_y();
+  inline void clear_has_from_y();
+  inline void set_has_to_x();
+  inline void clear_has_to_x();
+  inline void set_has_to_y();
+  inline void clear_has_to_y();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  float x_;
-  float y_;
+  ::google::protobuf::int64 obj_id_;
+  float from_x_;
+  float from_y_;
+  float to_x_;
+  float to_y_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_client_2eproto();
   friend void protobuf_AssignDesc_client_2eproto();
@@ -1174,6 +1206,88 @@ class MoveNotify : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static MoveNotify* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RemoveObjNotify : public ::google::protobuf::Message {
+ public:
+  RemoveObjNotify();
+  virtual ~RemoveObjNotify();
+
+  RemoveObjNotify(const RemoveObjNotify& from);
+
+  inline RemoveObjNotify& operator=(const RemoveObjNotify& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RemoveObjNotify& default_instance();
+
+  void Swap(RemoveObjNotify* other);
+
+  // implements Message ----------------------------------------------
+
+  RemoveObjNotify* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RemoveObjNotify& from);
+  void MergeFrom(const RemoveObjNotify& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int64 obj_id = 1;
+  inline bool has_obj_id() const;
+  inline void clear_obj_id();
+  static const int kObjIdFieldNumber = 1;
+  inline ::google::protobuf::int64 obj_id() const;
+  inline void set_obj_id(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:Msg.Protocol.RemoveObjNotify)
+ private:
+  inline void set_has_obj_id();
+  inline void clear_has_obj_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int64 obj_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_client_2eproto();
+  friend void protobuf_AssignDesc_client_2eproto();
+  friend void protobuf_ShutdownFile_client_2eproto();
+
+  void InitAsDefaultInstance();
+  static RemoveObjNotify* default_instance_;
 };
 // ===================================================================
 
@@ -2250,48 +2364,140 @@ inline void MoveRequest::set_y(float value) {
 
 // MoveNotify
 
-// required float x = 1;
-inline bool MoveNotify::has_x() const {
+// required int64 obj_id = 1;
+inline bool MoveNotify::has_obj_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MoveNotify::set_has_x() {
+inline void MoveNotify::set_has_obj_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MoveNotify::clear_has_x() {
+inline void MoveNotify::clear_has_obj_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MoveNotify::clear_x() {
-  x_ = 0;
-  clear_has_x();
+inline void MoveNotify::clear_obj_id() {
+  obj_id_ = GOOGLE_LONGLONG(0);
+  clear_has_obj_id();
 }
-inline float MoveNotify::x() const {
-  return x_;
+inline ::google::protobuf::int64 MoveNotify::obj_id() const {
+  return obj_id_;
 }
-inline void MoveNotify::set_x(float value) {
-  set_has_x();
-  x_ = value;
+inline void MoveNotify::set_obj_id(::google::protobuf::int64 value) {
+  set_has_obj_id();
+  obj_id_ = value;
 }
 
-// required float y = 2;
-inline bool MoveNotify::has_y() const {
+// required float from_x = 2;
+inline bool MoveNotify::has_from_x() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MoveNotify::set_has_y() {
+inline void MoveNotify::set_has_from_x() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MoveNotify::clear_has_y() {
+inline void MoveNotify::clear_has_from_x() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MoveNotify::clear_y() {
-  y_ = 0;
-  clear_has_y();
+inline void MoveNotify::clear_from_x() {
+  from_x_ = 0;
+  clear_has_from_x();
 }
-inline float MoveNotify::y() const {
-  return y_;
+inline float MoveNotify::from_x() const {
+  return from_x_;
 }
-inline void MoveNotify::set_y(float value) {
-  set_has_y();
-  y_ = value;
+inline void MoveNotify::set_from_x(float value) {
+  set_has_from_x();
+  from_x_ = value;
+}
+
+// required float from_y = 3;
+inline bool MoveNotify::has_from_y() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MoveNotify::set_has_from_y() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MoveNotify::clear_has_from_y() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MoveNotify::clear_from_y() {
+  from_y_ = 0;
+  clear_has_from_y();
+}
+inline float MoveNotify::from_y() const {
+  return from_y_;
+}
+inline void MoveNotify::set_from_y(float value) {
+  set_has_from_y();
+  from_y_ = value;
+}
+
+// required float to_x = 4;
+inline bool MoveNotify::has_to_x() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void MoveNotify::set_has_to_x() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void MoveNotify::clear_has_to_x() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void MoveNotify::clear_to_x() {
+  to_x_ = 0;
+  clear_has_to_x();
+}
+inline float MoveNotify::to_x() const {
+  return to_x_;
+}
+inline void MoveNotify::set_to_x(float value) {
+  set_has_to_x();
+  to_x_ = value;
+}
+
+// required float to_y = 5;
+inline bool MoveNotify::has_to_y() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void MoveNotify::set_has_to_y() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void MoveNotify::clear_has_to_y() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void MoveNotify::clear_to_y() {
+  to_y_ = 0;
+  clear_has_to_y();
+}
+inline float MoveNotify::to_y() const {
+  return to_y_;
+}
+inline void MoveNotify::set_to_y(float value) {
+  set_has_to_y();
+  to_y_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// RemoveObjNotify
+
+// required int64 obj_id = 1;
+inline bool RemoveObjNotify::has_obj_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RemoveObjNotify::set_has_obj_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RemoveObjNotify::clear_has_obj_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RemoveObjNotify::clear_obj_id() {
+  obj_id_ = GOOGLE_LONGLONG(0);
+  clear_has_obj_id();
+}
+inline ::google::protobuf::int64 RemoveObjNotify::obj_id() const {
+  return obj_id_;
+}
+inline void RemoveObjNotify::set_obj_id(::google::protobuf::int64 value) {
+  set_has_obj_id();
+  obj_id_ = value;
 }
 
 

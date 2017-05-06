@@ -278,19 +278,57 @@ namespace Msg.Protocol
   {
     public MoveNotify() {}
     
-    private float _x;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float x
+    private long _obj_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"obj_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long obj_id
     {
-      get { return _x; }
-      set { _x = value; }
+      get { return _obj_id; }
+      set { _obj_id = value; }
     }
-    private float _y;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float y
+    private float _from_x;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"from_x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float from_x
     {
-      get { return _y; }
-      set { _y = value; }
+      get { return _from_x; }
+      set { _from_x = value; }
+    }
+    private float _from_y;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"from_y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float from_y
+    {
+      get { return _from_y; }
+      set { _from_y = value; }
+    }
+    private float _to_x;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"to_x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float to_x
+    {
+      get { return _to_x; }
+      set { _to_x = value; }
+    }
+    private float _to_y;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"to_y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float to_y
+    {
+      get { return _to_y; }
+      set { _to_y = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RemoveObjNotify")]
+  public partial class RemoveObjNotify : global::ProtoBuf.IExtensible
+  {
+    public RemoveObjNotify() {}
+    
+    private long _obj_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"obj_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long obj_id
+    {
+      get { return _obj_id; }
+      set { _obj_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -348,8 +386,11 @@ namespace Msg.Protocol
       [global::ProtoBuf.ProtoEnum(Name=@"ServerMsg_LatencyTestReply", Value=6)]
       ServerMsg_LatencyTestReply = 6,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"ClientMsg_MoveNotify", Value=1001)]
-      ClientMsg_MoveNotify = 1001
+      [global::ProtoBuf.ProtoEnum(Name=@"ServerMsg_MoveNotify", Value=1001)]
+      ServerMsg_MoveNotify = 1001,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ServerMsg_RemoveObj", Value=1002)]
+      ServerMsg_RemoveObj = 1002
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EncryptKeyDef")]

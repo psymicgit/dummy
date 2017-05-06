@@ -28,4 +28,10 @@ public:
 
 	// 发消息给客户端
 	static bool SendToClient(ObjectId, int msgId, int subId, const Message& msg);
+
+	// 发消息给可见到该对象的所有玩家
+	static bool SendToClientByKen(ObjectId centerId, int msgId, int subId, const Message& msg);
+
+	// 发消息给所有玩家
+	static bool SendToClientByWorld(int msgId, int subId, const Message& msg);
 };

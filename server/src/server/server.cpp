@@ -12,6 +12,8 @@
 #include "protocol/message.h"
 #include "protocol/netmsghandler.h"
 #include "tool/randtool.h"
+#include "tool/randtool.h"
+#include "logic//ComponentModule.h"
 
 #include <signal.h>
 #include <basic/evbuffer.h>
@@ -69,6 +71,7 @@ bool Server::init()
 	m_dispatcher.registerMsg(eConnectSvrReq, NetMsgHandler::OnConnectServerReq);	// 连接服务器请求
 	m_dispatcher.registerMsg(eConnectSvrAck, NetMsgHandler::OnConnectServerAck);	// 连接服务器答复
 
+	ComponentModule::CreateInstance();
 	return true;
 }
 

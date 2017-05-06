@@ -21,7 +21,7 @@
 class RobotMsgHandler
 {
 public:
-	static void OnEncryptKeyNtf(Robot* robot, EncryptKeyNtf *ntf, Timestamp receiveTime)
+	static void OnEncryptKeyNtf(Robot& robot, EncryptKeyNtf& ntf, Timestamp receiveTime)
 	{
 		static int count = 0;
 
@@ -33,43 +33,43 @@ public:
 
 		// LOG_INFO << "OnEncryptKeyNtf :" << msgtool::getMsgString(*ntf);
 
-		robot->m_encryptKey = ntf->publickey();
-		robot->m_isEncrypt = true;
+		robot.m_encryptKey = ntf.publickey();
+		robot.m_isEncrypt = true;
 
-		robot->Login();
-		robot->MoveTest();
-		robot->speedTest();
+		robot.Login();
+		robot.MoveTest();
+		robot.speedTest();
 	}
 
 	//  ’µΩµ«¬º¥∏¥£®≤‚ ‘”√£©
-	static void OnLoginAck(Robot* robot, LoginReq *req, Timestamp receiveTime)
+	static void OnLoginAck(Robot& robot, LoginReq& req, Timestamp receiveTime)
 	{
-		robot->send(ClientMsg_LoginRequest, *req);
+		robot.send(ClientMsg_LoginRequest, req);
 	}
 
 	//  ’µΩµ«¬º¥∏¥£®≤‚ ‘”√£©
-	static void OnAuthAck(Robot* robot, AuthAck *ack, Timestamp receiveTime)
+	static void OnAuthAck(Robot& robot, AuthAck& ack, Timestamp receiveTime)
 	{
-		LOG_INFO << msgtool::getMsgDebugString(*ack);
+		LOG_INFO << msgtool::getMsgDebugString(ack);
 	}
 
-	static void OnPongTest(Robot* robot, PingPong *p, Timestamp receiveTime)
+	static void OnPongTest(Robot& robot, PingPong& p, Timestamp receiveTime)
 	{
-		robot->m_pingpongCount++;
+		robot.m_pingpongCount++;
 
-		if (robot->m_pingpongCount % 10) {
-			robot->send(ClientMsg_PingRequest, *p);
+		if (robot.m_pingpongCount % 10) {
+			robot.send(ClientMsg_PingRequest, p);
 		} else {
-			robot->speedTest();
+			robot.speedTest();
 		}
 	}
 
-	static void OnSpeedTestDone(Robot* robot, PingPong *p, Timestamp receiveTime)
+	static void OnSpeedTestDone(Robot& robot, PingPong& p, Timestamp receiveTime)
 	{
-		robot->latencyTest();
+		robot.latencyTest();
 	}
 
-	static void OnLatencyTestDone(Robot* robot, PingPong *p, Timestamp receiveTime)
+	static void OnLatencyTestDone(Robot& robot, PingPong& p, Timestamp receiveTime)
 	{
 	}
 };

@@ -29,7 +29,7 @@ template <typename LinkType, typename MessageType>
 class CallbackT : public Callback<LinkType>
 {
 public:
-	typedef void (*ProtobufMessageCallback)(LinkType*, MessageType* message, Timestamp);
+	typedef void (*ProtobufMessageCallback)(LinkType&, MessageType& message, Timestamp);
 
 	CallbackT(const ProtobufMessageCallback &callback)
 		: m_callback(callback)
@@ -47,7 +47,7 @@ public:
 			return;
 		}
 
-		m_callback(&link, &t, receiveTime);
+		m_callback(link, t, receiveTime);
 	}
 
 private:
@@ -66,7 +66,7 @@ private:
 public:
 	// 对某个消息id注册对应的回调函数
 	template <typename MessageType>
-	void registerMsg(int msgId, void(*callback)(LinkType*, MessageType* message, Timestamp))
+	void registerMsg(int msgId, void(*callback)(LinkType&, MessageType& message, Timestamp))
 	{
 		CallbackT<LinkType, MessageType> *pd = new CallbackT<LinkType, MessageType>(callback);
 		m_callbackMap[msgId] = pd;

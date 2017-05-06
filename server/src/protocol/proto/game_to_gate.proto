@@ -8,11 +8,12 @@ enum GateToGameMsgId
 {
 	GateToGame_RouteFromClient = 1;
 	GateToGame_RouteLoginRequest = 2;
+	GateToGame_ClientDisconnect = 3;
 }
 
 enum GameToGateMsgId
 {
-	GameToGate_RouteToClient = 1;
+	GameToGate_RouteToClient = 1;	
 }
 
 message RouteFromClientMsg
@@ -33,4 +34,9 @@ message RouteLoginRequest
 {
 	required int32 client_id = 1; // 客户端id
 	required LoginReq loginReq = 2;	// 客户端原始登录包
+}
+
+message ClientDisconnectMsg
+{
+	required int32 client_id = 1; // 客户端id
 }

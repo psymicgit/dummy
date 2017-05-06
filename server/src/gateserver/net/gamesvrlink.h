@@ -23,7 +23,7 @@ public:
 	void onRecv(Link*) override;
 
 public:
-	static void OnRouteToClient(GameSvrLink* gameLink, RouteToClientMsg* routeToClientMsg, int64 receiveTime);
+	static void OnRouteToClient(GameSvrLink& gameLink, RouteToClientMsg& routeToClientMsg, int64 receiveTime);
 };
 
 #endif //_gamesvrlink_h_

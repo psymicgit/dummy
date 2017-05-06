@@ -97,6 +97,23 @@ namespace Msg.Protocol
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ClientDisconnectMsg")]
+  public partial class ClientDisconnectMsg : global::ProtoBuf.IExtensible
+  {
+    public ClientDisconnectMsg() {}
+    
+    private int _client_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"client_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int client_id
+    {
+      get { return _client_id; }
+      set { _client_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"GateToGameMsgId")]
     public enum GateToGameMsgId
     {
@@ -105,7 +122,10 @@ namespace Msg.Protocol
       GateToGame_RouteFromClient = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"GateToGame_RouteLoginRequest", Value=2)]
-      GateToGame_RouteLoginRequest = 2
+      GateToGame_RouteLoginRequest = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GateToGame_ClientDisconnect", Value=3)]
+      GateToGame_ClientDisconnect = 3
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"GameToGateMsgId")]
