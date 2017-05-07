@@ -22,6 +22,7 @@
 
 #include "GateClientMgr.h"
 #include "gateserver.h"
+#include "GateLogic.h"
 
 bool GateClient::Init()
 {
@@ -62,7 +63,10 @@ void GateClient::onDisconnect(Link *link, const NetAddress& localAddr, const Net
 		LOG_INFO << name() << " [" << peerAddr.toIpPort() << "] <-> gatesvr [" << localAddr.toIpPort() << "] broken! current client cnt = " << clientCount - 1;
 	}
 
-	GateClientMgr::Instance().delClient(this);
+	ClientDisconnectMsg msg;
+	msg.set_client_id(m_clientId);
+
+	GateLogic::SendToGame(GateToGame_ClientDisconnect, msg);
 }
 
 void GateClient::onRecv(Link *link)
@@ -132,12 +136,7 @@ void GateClient::handleMsg()
 
 		// 转发给游戏服
 		if (NeedRouteToGame(msgId)) {
-			RouteFromClientMsg routeMsg;
-			routeMsg.set_client_id(m_clientId);
-			routeMsg.set_msg_id(msgId);
-			routeMsg.set_msg(msg, msgSize);
-
-			GateServer::Instance().SendToGameServer(GateToGame_RouteFromClient, routeMsg);
+			GateLogic::SendToGameByClient(m_clientId, msgId, msg, msgSize);
 		} 
 		// 直接处理
 		else 
@@ -171,6 +170,7 @@ bool GateClient::SendMsg(int msgId, Message &msg)
 	// 加密
 	else
 	{
+		/*
 		int size = msg.ByteSize();
 
 		// 将消息包序列化
@@ -192,6 +192,7 @@ bool GateClient::SendMsg(int msgId, Message &msg)
 		int packetLen = msgtool::BuildNetHeader(header, msgId, decryptBufLen);
 
 		m_link->send(m_link->m_net->g_encryptBuf, packetLen);
+		*/
 	}
 	
 	return true;

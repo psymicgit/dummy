@@ -22,6 +22,8 @@ public:
 
 	void onRecv(Link*) override;
 
+	void HandleMsg(Link* link);
+
 public:
 	static void OnRouteToClient(GameSvrLink& gameLink, RouteToClientMsg& routeToClientMsg, int64 receiveTime);
 };

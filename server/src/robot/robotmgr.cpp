@@ -89,6 +89,9 @@ bool RobotMgr::init(const char* jsonConfig)
 	m_dispatcher.registerMsg(ServerMsg_PongReply, RobotMsgHandler::OnPongTest);
 	m_dispatcher.registerMsg(ServerMsg_SpeedTestReply, RobotMsgHandler::OnSpeedTestDone);
 	m_dispatcher.registerMsg(ServerMsg_LatencyTestReply, RobotMsgHandler::OnLatencyTestDone);
+	m_dispatcher.registerMsg(ServerMsg_MoveNotify, RobotMsgHandler::OnMoveNotify);
+	m_dispatcher.registerMsg(ServerMsg_AddObj, RobotMsgHandler::OnAddObj);
+	m_dispatcher.registerMsg(ServerMsg_RemoveObj, RobotMsgHandler::OnRemoveObj);
 
 	m_run = true;
 

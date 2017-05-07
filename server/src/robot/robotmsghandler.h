@@ -38,7 +38,6 @@ public:
 
 		robot.Login();
 		robot.MoveTest();
-		robot.speedTest();
 	}
 
 	//  ’µΩµ«¬º¥∏¥£®≤‚ ‘”√£©
@@ -70,6 +69,18 @@ public:
 	}
 
 	static void OnLatencyTestDone(Robot& robot, PingPong& p, Timestamp receiveTime)
+	{
+	}
+
+	static void OnMoveNotify(Robot& robot, MoveNotify& msg, Timestamp receiveTime)
+	{
+	}
+
+	static void OnAddObj(Robot& robot, AddObjNotify& msg, Timestamp receiveTime)
+	{
+	}
+
+	static void OnRemoveObj(Robot& robot, RemoveObjNotify& msg, Timestamp receiveTime)
 	{
 	}
 };

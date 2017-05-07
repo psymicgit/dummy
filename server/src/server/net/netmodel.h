@@ -81,11 +81,7 @@ protected:
 	LinkPool	m_linkPool;			// 连接池，保存预先分配好的连接
 
 public:
-	char g_encryptBuf[MAX_PACKET_LEN];	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
-
 	char g_recvBuf[MAX_PACKET_LEN];		// 预先申请的接收缓冲区
-
-	char g_sendBuf[MAX_PACKET_LEN];		// 预先申请的发送缓冲区
 };
 
 #else
@@ -161,12 +157,7 @@ private:
 	bool		m_running;	// <网络是否正在运行>标志位
 
 public:
-
-	char g_encryptBuf[MAX_PACKET_LEN];	// 预先申请的加密缓冲区: 用于发送和接收数据时进行加解密运算
-
 	char g_recvBuf[MAX_PACKET_LEN];		// 预先申请的接收缓冲区
-
-	char g_sendBuf[MAX_PACKET_LEN];		// 预先申请的发送缓冲区
 };
 
 #endif

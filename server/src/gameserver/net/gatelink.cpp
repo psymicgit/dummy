@@ -25,7 +25,7 @@ bool GateLink::Init()
 {
 	GameLogic::RegisterGateMsg(GateToGame_RouteFromClient, GateLink::OnRouteFromClient);
 	GameLogic::RegisterGateMsg(GateToGame_RouteLoginRequest, GateLink::OnRouteLogin);
-	GameLogic::RegisterGateMsg(GateToGame_ClientDisconnect, GateLink::OnRouteLogin);
+	GameLogic::RegisterGateMsg(GateToGame_ClientDisconnect, GateLink::OnClientDisconnect);
 
 	return true;
 }

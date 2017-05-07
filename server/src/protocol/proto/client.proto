@@ -130,6 +130,7 @@ message MoveRequest
 {
 	required float x = 1;
 	required float y = 2;
+	required float z = 3;
 }
 
 // 下发移动消息
@@ -138,8 +139,10 @@ message MoveNotify
 	required int64 obj_id = 1;
 	required float from_x = 2;
 	required float from_y = 3;
-	required float to_x = 4;
-	required float to_y = 5;
+	required float from_z = 4;
+	required float to_x = 5;
+	required float to_y = 6;
+	required float to_z = 7;
 }
 
 // 下发添加可视对象消息
@@ -147,7 +150,8 @@ message AddObjNotify
 {
 	required int64 obj_id = 1;
 	required float x = 2;
-	required float y = 3;	
+	required float y = 3;
+	required float z = 4;
 }
 
 // 下发移除可视对象消息

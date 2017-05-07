@@ -192,9 +192,10 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReadyRequest));
   MoveRequest_descriptor_ = file->message_type(7);
-  static const int MoveRequest_offsets_[2] = {
+  static const int MoveRequest_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequest, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequest, y_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequest, z_),
   };
   MoveRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -208,12 +209,14 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MoveRequest));
   MoveNotify_descriptor_ = file->message_type(8);
-  static const int MoveNotify_offsets_[5] = {
+  static const int MoveNotify_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotify, obj_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotify, from_x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotify, from_y_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotify, from_z_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotify, to_x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotify, to_y_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotify, to_z_),
   };
   MoveNotify_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -227,10 +230,11 @@ void protobuf_AssignDesc_client_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MoveNotify));
   AddObjNotify_descriptor_ = file->message_type(9);
-  static const int AddObjNotify_offsets_[3] = {
+  static const int AddObjNotify_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddObjNotify, obj_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddObjNotify, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddObjNotify, y_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddObjNotify, z_),
   };
   AddObjNotify_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -347,30 +351,31 @@ void protobuf_AddDesc_client_2eproto() {
     "\n\007AuthAck\022(\n\006result\030\001 \002(\0162\030.Msg.Protocol"
     ".AuthResult\022\022\n\nencryptKey\030\002 \002(\t\"*\n\010PingP"
     "ong\022\020\n\010pingpong\030\001 \002(\t\022\014\n\004time\030\002 \002(\004\" \n\014R"
-    "eadyRequest\022\020\n\010is_ready\030\001 \002(\005\"#\n\013MoveReq"
-    "uest\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"X\n\nMoveNotify"
-    "\022\016\n\006obj_id\030\001 \002(\003\022\016\n\006from_x\030\002 \002(\002\022\016\n\006from"
-    "_y\030\003 \002(\002\022\014\n\004to_x\030\004 \002(\002\022\014\n\004to_y\030\005 \002(\002\"4\n\014"
-    "AddObjNotify\022\016\n\006obj_id\030\001 \002(\003\022\t\n\001x\030\002 \002(\002\022"
-    "\t\n\001y\030\003 \002(\002\"!\n\017RemoveObjNotify\022\016\n\006obj_id\030"
-    "\001 \002(\003*\366\001\n\013ClientMsgId\022\032\n\026ClientMsg_Login"
-    "Request\020\001\022\031\n\025ClientMsg_AuthRequest\020\002\022\031\n\025"
-    "ClientMsg_PingRequest\020\003\022\036\n\032ClientMsg_Spe"
-    "edTestRequest\020\004\022 \n\034ClientMsg_LatencyTest"
-    "Request\020\005\022\032\n\025ClientMsg_RouteToGate\020\350\007\022\033\n"
-    "\026ClientMsg_ReadyRequest\020\351\007\022\032\n\025ClientMsg_"
-    "MoveRequest\020\352\007*\203\002\n\013ServerMsgId\022\030\n\024Server"
-    "Msg_LoginReply\020\001\022\036\n\032ServerMsg_EncryptKey"
-    "Notify\020\002\022\027\n\023ServerMsg_AutyReply\020\003\022\027\n\023Ser"
-    "verMsg_PongReply\020\004\022\034\n\030ServerMsg_SpeedTes"
-    "tReply\020\005\022\036\n\032ServerMsg_LatencyTestReply\020\006"
-    "\022\031\n\024ServerMsg_MoveNotify\020\351\007\022\025\n\020ServerMsg"
-    "_AddObj\020\352\007\022\030\n\023ServerMsg_RemoveObj\020\353\007*\177\n\r"
-    "EncryptKeyDef\022\021\n\rEncryptKeyLen\020 \022\022\n\016Encr"
-    "yptHeadLen\020\002\022\022\n\016EncryptTailLen\020\004\022\016\n\nAuth"
-    "KeyLen\020\020\022\020\n\014PublicKeyLen\020\010\022\021\n\rPrivateKey"
-    "Len\020\024*(\n\nAuthResult\022\013\n\007AUTH_OK\020\000\022\r\n\tAUTH"
-    "_FAIL\020\001", 1527);
+    "eadyRequest\022\020\n\010is_ready\030\001 \002(\005\".\n\013MoveReq"
+    "uest\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"v\n"
+    "\nMoveNotify\022\016\n\006obj_id\030\001 \002(\003\022\016\n\006from_x\030\002 "
+    "\002(\002\022\016\n\006from_y\030\003 \002(\002\022\016\n\006from_z\030\004 \002(\002\022\014\n\004t"
+    "o_x\030\005 \002(\002\022\014\n\004to_y\030\006 \002(\002\022\014\n\004to_z\030\007 \002(\002\"\?\n"
+    "\014AddObjNotify\022\016\n\006obj_id\030\001 \002(\003\022\t\n\001x\030\002 \002(\002"
+    "\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\"!\n\017RemoveObjNotif"
+    "y\022\016\n\006obj_id\030\001 \002(\003*\366\001\n\013ClientMsgId\022\032\n\026Cli"
+    "entMsg_LoginRequest\020\001\022\031\n\025ClientMsg_AuthR"
+    "equest\020\002\022\031\n\025ClientMsg_PingRequest\020\003\022\036\n\032C"
+    "lientMsg_SpeedTestRequest\020\004\022 \n\034ClientMsg"
+    "_LatencyTestRequest\020\005\022\032\n\025ClientMsg_Route"
+    "ToGate\020\350\007\022\033\n\026ClientMsg_ReadyRequest\020\351\007\022\032"
+    "\n\025ClientMsg_MoveRequest\020\352\007*\203\002\n\013ServerMsg"
+    "Id\022\030\n\024ServerMsg_LoginReply\020\001\022\036\n\032ServerMs"
+    "g_EncryptKeyNotify\020\002\022\027\n\023ServerMsg_AutyRe"
+    "ply\020\003\022\027\n\023ServerMsg_PongReply\020\004\022\034\n\030Server"
+    "Msg_SpeedTestReply\020\005\022\036\n\032ServerMsg_Latenc"
+    "yTestReply\020\006\022\031\n\024ServerMsg_MoveNotify\020\351\007\022"
+    "\025\n\020ServerMsg_AddObj\020\352\007\022\030\n\023ServerMsg_Remo"
+    "veObj\020\353\007*\177\n\rEncryptKeyDef\022\021\n\rEncryptKeyL"
+    "en\020 \022\022\n\016EncryptHeadLen\020\002\022\022\n\016EncryptTailL"
+    "en\020\004\022\016\n\nAuthKeyLen\020\020\022\020\n\014PublicKeyLen\020\010\022\021"
+    "\n\rPrivateKeyLen\020\024*(\n\nAuthResult\022\013\n\007AUTH_"
+    "OK\020\000\022\r\n\tAUTH_FAIL\020\001", 1579);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "client.proto", &protobuf_RegisterTypes);
   LoginReq::default_instance_ = new LoginReq();
@@ -2753,6 +2758,7 @@ void ReadyRequest::Swap(ReadyRequest* other) {
 #ifndef _MSC_VER
 const int MoveRequest::kXFieldNumber;
 const int MoveRequest::kYFieldNumber;
+const int MoveRequest::kZFieldNumber;
 #endif  // !_MSC_VER
 
 MoveRequest::MoveRequest()
@@ -2773,6 +2779,7 @@ void MoveRequest::SharedCtor() {
   _cached_size_ = 0;
   x_ = 0;
   y_ = 0;
+  z_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2810,6 +2817,7 @@ void MoveRequest::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     x_ = 0;
     y_ = 0;
+    z_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -2848,6 +2856,22 @@ bool MoveRequest::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(29)) goto parse_z;
+        break;
+      }
+
+      // required float z = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+         parse_z:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &z_)));
+          set_has_z();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2880,6 +2904,11 @@ void MoveRequest::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
   }
 
+  // required float z = 3;
+  if (has_z()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->z(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -2896,6 +2925,11 @@ void MoveRequest::SerializeWithCachedSizes(
   // required float y = 2;
   if (has_y()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
+  }
+
+  // required float z = 3;
+  if (has_z()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->z(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2916,6 +2950,11 @@ int MoveRequest::ByteSize() const {
 
     // required float y = 2;
     if (has_y()) {
+      total_size += 1 + 4;
+    }
+
+    // required float z = 3;
+    if (has_z()) {
       total_size += 1 + 4;
     }
 
@@ -2952,6 +2991,9 @@ void MoveRequest::MergeFrom(const MoveRequest& from) {
     if (from.has_y()) {
       set_y(from.y());
     }
+    if (from.has_z()) {
+      set_z(from.z());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -2969,7 +3011,7 @@ void MoveRequest::CopyFrom(const MoveRequest& from) {
 }
 
 bool MoveRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -2978,6 +3020,7 @@ void MoveRequest::Swap(MoveRequest* other) {
   if (other != this) {
     std::swap(x_, other->x_);
     std::swap(y_, other->y_);
+    std::swap(z_, other->z_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -2999,8 +3042,10 @@ void MoveRequest::Swap(MoveRequest* other) {
 const int MoveNotify::kObjIdFieldNumber;
 const int MoveNotify::kFromXFieldNumber;
 const int MoveNotify::kFromYFieldNumber;
+const int MoveNotify::kFromZFieldNumber;
 const int MoveNotify::kToXFieldNumber;
 const int MoveNotify::kToYFieldNumber;
+const int MoveNotify::kToZFieldNumber;
 #endif  // !_MSC_VER
 
 MoveNotify::MoveNotify()
@@ -3022,8 +3067,10 @@ void MoveNotify::SharedCtor() {
   obj_id_ = GOOGLE_LONGLONG(0);
   from_x_ = 0;
   from_y_ = 0;
+  from_z_ = 0;
   to_x_ = 0;
   to_y_ = 0;
+  to_z_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -3062,8 +3109,10 @@ void MoveNotify::Clear() {
     obj_id_ = GOOGLE_LONGLONG(0);
     from_x_ = 0;
     from_y_ = 0;
+    from_z_ = 0;
     to_x_ = 0;
     to_y_ = 0;
+    to_z_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -3118,12 +3167,28 @@ bool MoveNotify::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(37)) goto parse_to_x;
+        if (input->ExpectTag(37)) goto parse_from_z;
         break;
       }
 
-      // required float to_x = 4;
+      // required float from_z = 4;
       case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+         parse_from_z:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &from_z_)));
+          set_has_from_z();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(45)) goto parse_to_x;
+        break;
+      }
+
+      // required float to_x = 5;
+      case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
          parse_to_x:
@@ -3134,12 +3199,12 @@ bool MoveNotify::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(45)) goto parse_to_y;
+        if (input->ExpectTag(53)) goto parse_to_y;
         break;
       }
 
-      // required float to_y = 5;
-      case 5: {
+      // required float to_y = 6;
+      case 6: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
          parse_to_y:
@@ -3147,6 +3212,22 @@ bool MoveNotify::MergePartialFromCodedStream(
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &to_y_)));
           set_has_to_y();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(61)) goto parse_to_z;
+        break;
+      }
+
+      // required float to_z = 7;
+      case 7: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+         parse_to_z:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &to_z_)));
+          set_has_to_z();
         } else {
           goto handle_uninterpreted;
         }
@@ -3187,14 +3268,24 @@ void MoveNotify::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->from_y(), output);
   }
 
-  // required float to_x = 4;
-  if (has_to_x()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->to_x(), output);
+  // required float from_z = 4;
+  if (has_from_z()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->from_z(), output);
   }
 
-  // required float to_y = 5;
+  // required float to_x = 5;
+  if (has_to_x()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->to_x(), output);
+  }
+
+  // required float to_y = 6;
   if (has_to_y()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->to_y(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->to_y(), output);
+  }
+
+  // required float to_z = 7;
+  if (has_to_z()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->to_z(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -3220,14 +3311,24 @@ void MoveNotify::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->from_y(), target);
   }
 
-  // required float to_x = 4;
-  if (has_to_x()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->to_x(), target);
+  // required float from_z = 4;
+  if (has_from_z()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->from_z(), target);
   }
 
-  // required float to_y = 5;
+  // required float to_x = 5;
+  if (has_to_x()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->to_x(), target);
+  }
+
+  // required float to_y = 6;
   if (has_to_y()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->to_y(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->to_y(), target);
+  }
+
+  // required float to_z = 7;
+  if (has_to_z()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->to_z(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3258,13 +3359,23 @@ int MoveNotify::ByteSize() const {
       total_size += 1 + 4;
     }
 
-    // required float to_x = 4;
+    // required float from_z = 4;
+    if (has_from_z()) {
+      total_size += 1 + 4;
+    }
+
+    // required float to_x = 5;
     if (has_to_x()) {
       total_size += 1 + 4;
     }
 
-    // required float to_y = 5;
+    // required float to_y = 6;
     if (has_to_y()) {
+      total_size += 1 + 4;
+    }
+
+    // required float to_z = 7;
+    if (has_to_z()) {
       total_size += 1 + 4;
     }
 
@@ -3304,11 +3415,17 @@ void MoveNotify::MergeFrom(const MoveNotify& from) {
     if (from.has_from_y()) {
       set_from_y(from.from_y());
     }
+    if (from.has_from_z()) {
+      set_from_z(from.from_z());
+    }
     if (from.has_to_x()) {
       set_to_x(from.to_x());
     }
     if (from.has_to_y()) {
       set_to_y(from.to_y());
+    }
+    if (from.has_to_z()) {
+      set_to_z(from.to_z());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -3327,7 +3444,7 @@ void MoveNotify::CopyFrom(const MoveNotify& from) {
 }
 
 bool MoveNotify::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+  if ((_has_bits_[0] & 0x0000007f) != 0x0000007f) return false;
 
   return true;
 }
@@ -3337,8 +3454,10 @@ void MoveNotify::Swap(MoveNotify* other) {
     std::swap(obj_id_, other->obj_id_);
     std::swap(from_x_, other->from_x_);
     std::swap(from_y_, other->from_y_);
+    std::swap(from_z_, other->from_z_);
     std::swap(to_x_, other->to_x_);
     std::swap(to_y_, other->to_y_);
+    std::swap(to_z_, other->to_z_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -3360,6 +3479,7 @@ void MoveNotify::Swap(MoveNotify* other) {
 const int AddObjNotify::kObjIdFieldNumber;
 const int AddObjNotify::kXFieldNumber;
 const int AddObjNotify::kYFieldNumber;
+const int AddObjNotify::kZFieldNumber;
 #endif  // !_MSC_VER
 
 AddObjNotify::AddObjNotify()
@@ -3381,6 +3501,7 @@ void AddObjNotify::SharedCtor() {
   obj_id_ = GOOGLE_LONGLONG(0);
   x_ = 0;
   y_ = 0;
+  z_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -3419,6 +3540,7 @@ void AddObjNotify::Clear() {
     obj_id_ = GOOGLE_LONGLONG(0);
     x_ = 0;
     y_ = 0;
+    z_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -3473,6 +3595,22 @@ bool AddObjNotify::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(37)) goto parse_z;
+        break;
+      }
+
+      // required float z = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+         parse_z:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &z_)));
+          set_has_z();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -3510,6 +3648,11 @@ void AddObjNotify::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->y(), output);
   }
 
+  // required float z = 4;
+  if (has_z()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->z(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -3531,6 +3674,11 @@ void AddObjNotify::SerializeWithCachedSizes(
   // required float y = 3;
   if (has_y()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->y(), target);
+  }
+
+  // required float z = 4;
+  if (has_z()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->z(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3558,6 +3706,11 @@ int AddObjNotify::ByteSize() const {
 
     // required float y = 3;
     if (has_y()) {
+      total_size += 1 + 4;
+    }
+
+    // required float z = 4;
+    if (has_z()) {
       total_size += 1 + 4;
     }
 
@@ -3597,6 +3750,9 @@ void AddObjNotify::MergeFrom(const AddObjNotify& from) {
     if (from.has_y()) {
       set_y(from.y());
     }
+    if (from.has_z()) {
+      set_z(from.z());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -3614,7 +3770,7 @@ void AddObjNotify::CopyFrom(const AddObjNotify& from) {
 }
 
 bool AddObjNotify::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
   return true;
 }
@@ -3624,6 +3780,7 @@ void AddObjNotify::Swap(AddObjNotify* other) {
     std::swap(obj_id_, other->obj_id_);
     std::swap(x_, other->x_);
     std::swap(y_, other->y_);
+    std::swap(z_, other->z_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

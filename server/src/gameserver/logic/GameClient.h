@@ -23,7 +23,7 @@ public:
 
 public:
 	int m_clientId;
-	int m_aoiObjId;
+	ObjectId m_aoiObjId;
 };
 
 #endif //_client_h_

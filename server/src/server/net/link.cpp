@@ -255,23 +255,12 @@ void Link::send(int msgId, const Message & msg)
 
 	int size = msg.ByteSize();
 
-	NetMsgHead msgHead = {0, 0};
-	msgtool::BuildNetHeader(&msgHead, msgId, size);
+	std::string buf;
+	buf.resize(size);
 
-	msg.SerializeToArray(m_net->g_sendBuf, size);
+	msg.SerializeToArray((void*)buf.c_str(), size);
 
-	{
-		lock_guard_t<> lock(m_sendBufLock);
-		evbuffer_add(&m_sendBuf, (const char*)&msgHead, sizeof(msgHead));
-		evbuffer_add(&m_sendBuf, m_net->g_sendBuf, size);
-
-		if (m_isWaitingWrite) {
-			return;
-		}
-		m_isWaitingWrite = true;
-	}
-
-	this->sendBuffer();
+	this->send(msgId, buf.c_str(), size);
 }
 
 void Link::send(int msgId, const char *data, int len)
@@ -280,12 +269,12 @@ void Link::send(int msgId, const char *data, int len)
 		return;
 	}
 
-	NetMsgHead *msgHead = (NetMsgHead*)m_net->g_sendBuf;
-	msgtool::BuildNetHeader(msgHead, msgId, len);
+	NetMsgHead msgHead;
+	msgtool::BuildNetHeader(&msgHead, msgId, len);
 
 	{
 		lock_guard_t<> lock(m_sendBufLock);
-		evbuffer_add(&m_sendBuf, m_net->g_sendBuf, sizeof(msgHead));
+		evbuffer_add(&m_sendBuf, &msgHead, sizeof(msgHead));
 		evbuffer_add(&m_sendBuf, data, len);
 
 		if (m_isWaitingWrite) {

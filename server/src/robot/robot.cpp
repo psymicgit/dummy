@@ -88,69 +88,12 @@ void Robot::onDisconnect(Link *link, const NetAddress& localAddr, const NetAddre
 void Robot::onRecv(Link *link)
 {
 	// 直接本地进行处理
-	m_robotMgr->m_taskQueue.put(boost::bind(&Robot::handleMsg, this));
+	m_robotMgr->m_taskQueue.put(boost::bind(&Robot::HandleMsg, this));
 }
 
-void Robot::handleMsg()
+void Robot::HandleMsg()
 {
-	Link *link = m_link;
-
-	// 1. 将接收缓冲区的数据全部取出
-	evbuffer recvSwapBuf;
-	evbuffer *dst = &recvSwapBuf;
-
-	link->beginRead(dst);
-
-	while(true) {
-		// 检测包头长度
-		size_t bytes = evbuffer_get_length(dst);
-		if (bytes < sizeof(NetMsgHead)) {
-			break;
-		}
-
-		NetMsgHead *head	= (NetMsgHead *)evbuffer_pullup(dst, sizeof(NetMsgHead));
-		uint16 msgId		= endiantool::NetworkToHost16(head->msgId);
-		uint32 rawMsgSize		= endiantool::NetworkToHost32(head->msgSize);
-
-		if (rawMsgSize > bytes) {
-			break;
-		}
-
-		char *peek = (char*)evbuffer_pullup(dst, rawMsgSize);
-
-		char *msg = nullptr;
-		int msgSize = 0;
-
-		// 不加密
-		if (m_encryptKey.empty()) {
-			msg = (char*)peek + sizeof(NetMsgHead);
-			msgSize = rawMsgSize - sizeof(NetMsgHead);
-		}
-		// 加密
-		else
-		{
-			// 解密
-			uint8* encryptBuf = (uint8*)(peek + sizeof(NetMsgHead));
-			int encryptBufLen = rawMsgSize - sizeof(NetMsgHead);
-
-			if (!encrypttool::xor_decrypt(encryptBuf, encryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size())) {
-				LOG_ERROR << "robot [" << link->getLocalAddr().toIpPort() << "] <-> gatesvr [" << link->getPeerAddr().toIpPort()
-					<< "] receive invalid msg[len=" << encryptBufLen << "]";
-				evbuffer_drain(dst, rawMsgSize);
-				continue;
-			}
-
-			msg = (char*)peek + sizeof(NetMsgHead) + EncryptHeadLen;
-			msgSize = rawMsgSize - sizeof(NetMsgHead) - EncryptHeadLen - EncryptTailLen;
-		}
-
-		// 直接本地进行处理
-		m_robotMgr->m_dispatcher.dispatch(*this, msgId, msg, msgSize, 0);
-		evbuffer_drain(dst, rawMsgSize);
-	}
-
-	// 3. 处理完毕后，若有残余的消息体，则将残余消息体重新拷贝到接收缓冲区的头部以保持正确的数据顺序
-	link->endRead(dst);
+	msgtool::DispatchMsg(m_link, *this, m_robotMgr->m_dispatcher);
 }
 
 TaskQueue& Robot::getTaskQueue()
@@ -172,32 +115,6 @@ bool Robot::send(int msgId, Message &msg)
 	// 加密
 	else
 	{
-		int size = msg.ByteSize();
-
-		bool ok = msg.SerializeToArray(m_link->m_net->g_encryptBuf + sizeof(NetMsgHead) + EncryptHeadLen, size);
-		if (!ok) {
-			LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->getLocalAddr().toIpPort() << "] <-> gatesvr [" << m_link->getPeerAddr().toIpPort()
-				<< "] send msg failed, SerializeToArray error, [len=" << size << "] failed, content = [" << msgtool::getMsgDebugString(msg) << "]";
-
-			return false;
-		}
-
-		// 添加加解密头尾
-		uint8* decryptBuf = (uint8*)(m_link->m_net->g_encryptBuf + sizeof(NetMsgHead));
-		int decryptBufLen = size + EncryptHeadLen + EncryptTailLen;
-
-		encrypttool::xor_encrypt(decryptBuf, decryptBufLen, (uint8*)m_encryptKey.c_str(), m_encryptKey.size());
-
-		NetMsgHead* pHeader = (NetMsgHead*)m_link->m_net->g_encryptBuf;
-
-		int packetLen = msgtool::BuildNetHeader(pHeader, msgId, decryptBufLen);
-		if (packetLen <= 0) {
-			LOG_ERROR << "robot<" << m_robotId << "> [" << m_link->getLocalAddr().toIpPort() << "] <-> gatesvr [" << m_link->getPeerAddr().toIpPort()
-				<< "] pakcetLen = " << packetLen;
-			return false;
-		}
-
-		m_link->send(m_link->m_net->g_encryptBuf, packetLen);
 	}
 
 	return true;
@@ -304,11 +221,13 @@ void Robot::latencyTest()
 // 开始移动测试
 void Robot::MoveTest()
 {
-	float randX = randtool::rand_float_all();
-	float randY = randtool::rand_float_all();
+	float randX = randtool::rand_float_between(-10, 10);
+	float randY = randtool::rand_float_between(-5, 5);
+	float randZ = randtool::rand_float_between(-2, 40);
 
 	MoveRequest msg;
 	msg.set_x(randX);
 	msg.set_y(randY);
+	msg.set_z(randZ);
 	send(ClientMsg_MoveRequest, msg);
 }

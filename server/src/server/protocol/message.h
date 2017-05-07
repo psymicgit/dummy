@@ -20,8 +20,8 @@
 
 // 外网消息头
 struct NetMsgHead {
-	int msgSize;
-	int16 msgId;
+	int msgSize;	// 整包大小
+	int16 msgId;	// 消息id
 };
 
 #pragma pack(pop)
@@ -32,7 +32,7 @@ namespace msgtool
 	string getMsgDebugString(const Message &msg);
 
 	// 构建网络包头
-	int BuildNetHeader(NetMsgHead *msgHead, int msgId, int msgLen);
+	int BuildNetHeader(NetMsgHead *msgHead, int msgId, int msgSize);
 
 	// 在预先分配好的接收消息包内存上申请一个Message
 	template<typename T>
@@ -100,8 +100,8 @@ namespace msgtool
 			uint16 msgId = endiantool::NetworkToHost16(head->msgId);
 			uint32 rawMsgSize = endiantool::NetworkToHost32(head->msgSize);
 
-			// 检测半包
-			if (rawMsgSize > bytes) {
+			// 检测半包、出错的空包
+			if (rawMsgSize > bytes || rawMsgSize <= 0) {
 				break;
 			}
 

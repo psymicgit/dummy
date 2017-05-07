@@ -36,7 +36,7 @@ public:
 
 	virtual void onRecv(Link*);
 
-	void handleMsg();
+	void HandleMsg();
 
 	virtual TaskQueue& getTaskQueue();
 

@@ -211,7 +211,7 @@ bool AoiModule::Pick(float x, float y, float radius, std::vector<AoiObject*>& ou
 		}
 	}
 
-	for (int i = leftPos - 1; i > n; --i)
+	for (int i = leftPos - 1; i >= 0; --i)
 	{
 		AoiObject* obj = m_vecX[i];
 

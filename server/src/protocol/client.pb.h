@@ -1065,20 +1065,30 @@ class MoveRequest : public ::google::protobuf::Message {
   inline float y() const;
   inline void set_y(float value);
 
+  // required float z = 3;
+  inline bool has_z() const;
+  inline void clear_z();
+  static const int kZFieldNumber = 3;
+  inline float z() const;
+  inline void set_z(float value);
+
   // @@protoc_insertion_point(class_scope:Msg.Protocol.MoveRequest)
  private:
   inline void set_has_x();
   inline void clear_has_x();
   inline void set_has_y();
   inline void clear_has_y();
+  inline void set_has_z();
+  inline void clear_has_z();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   float x_;
   float y_;
+  float z_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_client_2eproto();
   friend void protobuf_AssignDesc_client_2eproto();
@@ -1164,19 +1174,33 @@ class MoveNotify : public ::google::protobuf::Message {
   inline float from_y() const;
   inline void set_from_y(float value);
 
-  // required float to_x = 4;
+  // required float from_z = 4;
+  inline bool has_from_z() const;
+  inline void clear_from_z();
+  static const int kFromZFieldNumber = 4;
+  inline float from_z() const;
+  inline void set_from_z(float value);
+
+  // required float to_x = 5;
   inline bool has_to_x() const;
   inline void clear_to_x();
-  static const int kToXFieldNumber = 4;
+  static const int kToXFieldNumber = 5;
   inline float to_x() const;
   inline void set_to_x(float value);
 
-  // required float to_y = 5;
+  // required float to_y = 6;
   inline bool has_to_y() const;
   inline void clear_to_y();
-  static const int kToYFieldNumber = 5;
+  static const int kToYFieldNumber = 6;
   inline float to_y() const;
   inline void set_to_y(float value);
+
+  // required float to_z = 7;
+  inline bool has_to_z() const;
+  inline void clear_to_z();
+  static const int kToZFieldNumber = 7;
+  inline float to_z() const;
+  inline void set_to_z(float value);
 
   // @@protoc_insertion_point(class_scope:Msg.Protocol.MoveNotify)
  private:
@@ -1186,21 +1210,27 @@ class MoveNotify : public ::google::protobuf::Message {
   inline void clear_has_from_x();
   inline void set_has_from_y();
   inline void clear_has_from_y();
+  inline void set_has_from_z();
+  inline void clear_has_from_z();
   inline void set_has_to_x();
   inline void clear_has_to_x();
   inline void set_has_to_y();
   inline void clear_has_to_y();
+  inline void set_has_to_z();
+  inline void clear_has_to_z();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int64 obj_id_;
   float from_x_;
   float from_y_;
+  float from_z_;
   float to_x_;
   float to_y_;
+  float to_z_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
 
   friend void  protobuf_AddDesc_client_2eproto();
   friend void protobuf_AssignDesc_client_2eproto();
@@ -1286,6 +1316,13 @@ class AddObjNotify : public ::google::protobuf::Message {
   inline float y() const;
   inline void set_y(float value);
 
+  // required float z = 4;
+  inline bool has_z() const;
+  inline void clear_z();
+  static const int kZFieldNumber = 4;
+  inline float z() const;
+  inline void set_z(float value);
+
   // @@protoc_insertion_point(class_scope:Msg.Protocol.AddObjNotify)
  private:
   inline void set_has_obj_id();
@@ -1294,15 +1331,18 @@ class AddObjNotify : public ::google::protobuf::Message {
   inline void clear_has_x();
   inline void set_has_y();
   inline void clear_has_y();
+  inline void set_has_z();
+  inline void clear_has_z();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int64 obj_id_;
   float x_;
   float y_;
+  float z_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_client_2eproto();
   friend void protobuf_AssignDesc_client_2eproto();
@@ -2464,6 +2504,28 @@ inline void MoveRequest::set_y(float value) {
   y_ = value;
 }
 
+// required float z = 3;
+inline bool MoveRequest::has_z() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MoveRequest::set_has_z() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MoveRequest::clear_has_z() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MoveRequest::clear_z() {
+  z_ = 0;
+  clear_has_z();
+}
+inline float MoveRequest::z() const {
+  return z_;
+}
+inline void MoveRequest::set_z(float value) {
+  set_has_z();
+  z_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // MoveNotify
@@ -2534,15 +2596,37 @@ inline void MoveNotify::set_from_y(float value) {
   from_y_ = value;
 }
 
-// required float to_x = 4;
-inline bool MoveNotify::has_to_x() const {
+// required float from_z = 4;
+inline bool MoveNotify::has_from_z() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void MoveNotify::set_has_to_x() {
+inline void MoveNotify::set_has_from_z() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void MoveNotify::clear_has_to_x() {
+inline void MoveNotify::clear_has_from_z() {
   _has_bits_[0] &= ~0x00000008u;
+}
+inline void MoveNotify::clear_from_z() {
+  from_z_ = 0;
+  clear_has_from_z();
+}
+inline float MoveNotify::from_z() const {
+  return from_z_;
+}
+inline void MoveNotify::set_from_z(float value) {
+  set_has_from_z();
+  from_z_ = value;
+}
+
+// required float to_x = 5;
+inline bool MoveNotify::has_to_x() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void MoveNotify::set_has_to_x() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void MoveNotify::clear_has_to_x() {
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void MoveNotify::clear_to_x() {
   to_x_ = 0;
@@ -2556,15 +2640,15 @@ inline void MoveNotify::set_to_x(float value) {
   to_x_ = value;
 }
 
-// required float to_y = 5;
+// required float to_y = 6;
 inline bool MoveNotify::has_to_y() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void MoveNotify::set_has_to_y() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void MoveNotify::clear_has_to_y() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void MoveNotify::clear_to_y() {
   to_y_ = 0;
@@ -2576,6 +2660,28 @@ inline float MoveNotify::to_y() const {
 inline void MoveNotify::set_to_y(float value) {
   set_has_to_y();
   to_y_ = value;
+}
+
+// required float to_z = 7;
+inline bool MoveNotify::has_to_z() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void MoveNotify::set_has_to_z() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void MoveNotify::clear_has_to_z() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void MoveNotify::clear_to_z() {
+  to_z_ = 0;
+  clear_has_to_z();
+}
+inline float MoveNotify::to_z() const {
+  return to_z_;
+}
+inline void MoveNotify::set_to_z(float value) {
+  set_has_to_z();
+  to_z_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -2646,6 +2752,28 @@ inline float AddObjNotify::y() const {
 inline void AddObjNotify::set_y(float value) {
   set_has_y();
   y_ = value;
+}
+
+// required float z = 4;
+inline bool AddObjNotify::has_z() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void AddObjNotify::set_has_z() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void AddObjNotify::clear_has_z() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void AddObjNotify::clear_z() {
+  z_ = 0;
+  clear_has_z();
+}
+inline float AddObjNotify::z() const {
+  return z_;
+}
+inline void AddObjNotify::set_z(float value) {
+  set_has_z();
+  z_ = value;
 }
 
 // -------------------------------------------------------------------

@@ -55,19 +55,22 @@ void GameClientMgr::OnAuthRequest(GameClient& client, AuthReq& req, Timestamp re
 void GameClientMgr::OnLoginRequest(GameClient& client, LoginReq& req, Timestamp receiveTime)
 {
 	AoiObject *aoiObj = new AoiObject();
-	aoiObj->x = randtool::rand_float(1000);
-	aoiObj->y = randtool::rand_float(1000);
-	aoiObj->height = randtool::rand_float(1000);
+	aoiObj->x = randtool::rand_float_between(-10, 10);
+	aoiObj->y = randtool::rand_float_between(-5, 5);
+	aoiObj->height = randtool::rand_float_between(-2, 40);
 	aoiObj->objId = AoiModule::instance->AllocObjId();
 	aoiObj->clientId = client.m_clientId;
+	client.m_aoiObjId = aoiObj->objId;
+
 	AoiModule::instance->Add(aoiObj);
 
 	AddObjNotify notify;
 	notify.set_obj_id(aoiObj->objId);
 	notify.set_x(aoiObj->x);
 	notify.set_y(aoiObj->y);
+	notify.set_z(aoiObj->height);
 
-	GameLogic::SendToClientByKen(aoiObj->objId, ServerMsg_MoveNotify, 0, move);
+	GameLogic::SendToClientByKen(aoiObj->objId, ServerMsg_AddObj, 0, notify);
 }
 
 void GameClientMgr::OnMoveRequest(GameClient& client, MoveRequest& req, Timestamp receiveTime)
@@ -81,9 +84,11 @@ void GameClientMgr::OnMoveRequest(GameClient& client, MoveRequest& req, Timestam
 	MoveNotify move;
 	move.set_obj_id(aoiObj->objId);
 	move.set_from_x(aoiObj->x);
-	move.set_from_x(aoiObj->y);
+	move.set_from_y(aoiObj->y);
+	move.set_from_z(aoiObj->height);
 	move.set_to_x(req.y());
-	move.set_to_x(req.y());
+	move.set_to_y(req.y());
+	move.set_to_z(req.y());
 
 	AoiModule::instance->Move(aoiObj, req.x(), req.y());
 

@@ -10,6 +10,7 @@
 
 #include <net/netaddress.h>
 #include <net/link.h>
+#include <protocol/message.h>
 #include <basic/taskqueue.h>
 #include <server.h>
 #include "GateLogic.h"
@@ -22,7 +23,12 @@ bool GameSvrLink::Init()
 
 void GameSvrLink::onRecv(Link *link)
 {
-	ServerLink::onRecv(link);
+	Server::instance->getTaskQueue().put(boost::bind(&GameSvrLink::HandleMsg, this, link));
+}
+
+void GameSvrLink::HandleMsg(Link* link)
+{
+	msgtool::DispatchMsg(link, *this, GateServer::Instance().m_gameDispatcher);
 }
 
 void GameSvrLink::OnRouteToClient(GameSvrLink& gameLink, RouteToClientMsg& routeToClientMsg, int64 receiveTime)
