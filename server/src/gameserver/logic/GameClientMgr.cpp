@@ -60,11 +60,39 @@ void GameClientMgr::OnLoginRequest(GameClient& client, LoginReq& req, Timestamp 
 	aoiObj->height = randtool::rand_float_between(-2, 40);
 	aoiObj->objId = AoiModule::instance->AllocObjId();
 	aoiObj->clientId = client.m_clientId;
+	aoiObj->seeRadius = 1000.0f;
 	client.m_aoiObjId = aoiObj->objId;
 
+	// 消息：添加对象
+	AddObjNotify notify;
+	MoveNotify move;
+
+	// 下发视野内的其他对象
+	std::vector<AoiObject*> nearObjs;
+	AoiModule::instance->Pick(aoiObj->x, aoiObj->y, aoiObj->seeRadius, nearObjs);
+
+	for (int i = 0, n = (int)nearObjs.size(); i < n; ++i)
+	{
+		AoiObject* other = nearObjs[i];
+		notify.set_obj_id(other->objId);
+		notify.set_x(other->x);
+		notify.set_y(other->y);
+		notify.set_z(other->height);
+		client.SendMsg(ServerMsg_AddObj, notify);
+
+		move.set_obj_id(other->objId);
+		move.set_from_x(other->x);
+		move.set_from_y(other->y);
+		move.set_from_z(other->height);
+		move.set_to_x(other->x);
+		move.set_to_y(other->y);
+		move.set_to_z(other->height);
+		client.SendMsg(ServerMsg_MoveNotify, move);
+	}
+
+	// 通知其他玩家
 	AoiModule::instance->Add(aoiObj);
 
-	AddObjNotify notify;
 	notify.set_obj_id(aoiObj->objId);
 	notify.set_x(aoiObj->x);
 	notify.set_y(aoiObj->y);

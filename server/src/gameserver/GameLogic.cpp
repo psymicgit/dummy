@@ -29,7 +29,7 @@ bool GameLogic::SendToClient(ObjectId objId, int msgId, int subId, const Message
 bool GameLogic::SendToClientByKen(ObjectId centerId, int msgId, int subId, const Message& msg)
 {
 	std::vector<AoiObject*> all;
-	AoiModule::instance->PickByKen(centerId, all);
+	AoiModule::instance->PickKen(centerId, all);
 
 	for (int i = 0, n = all.size(); i < n; ++i)
 	{

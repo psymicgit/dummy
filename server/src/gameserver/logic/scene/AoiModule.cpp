@@ -177,7 +177,7 @@ bool AoiModule::PickNear(AoiObject* obj, float radius, std::vector<AoiObject*>& 
 	return Pick(obj->x, obj->y, radius, outs);
 }
 
-bool AoiModule::PickByKen(ObjectId aoiObjId, std::vector<AoiObject*>& outs)
+bool AoiModule::PickKen(ObjectId aoiObjId, std::vector<AoiObject*>& outs)
 {
 	AoiObject* obj = FindObject(aoiObjId);
 	if (nullptr == obj)
@@ -186,6 +186,11 @@ bool AoiModule::PickByKen(ObjectId aoiObjId, std::vector<AoiObject*>& outs)
 	}
 
 	return Pick(obj->x, obj->y, 1000, outs);
+}
+
+bool AoiModule::PickKenByPos(float x, float y, std::vector<AoiObject*>& outs)
+{
+	return Pick(x, y, 1000, outs);
 }
 
 bool AoiModule::Pick(float x, float y, float radius, std::vector<AoiObject*>& outs)

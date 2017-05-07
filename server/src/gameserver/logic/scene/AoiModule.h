@@ -57,7 +57,9 @@ public:
 
 	bool PickNear(AoiObject*, float radius, std::vector<AoiObject*>&);
 
-	bool PickByKen(ObjectId, std::vector<AoiObject*>&);
+	bool PickKen(ObjectId, std::vector<AoiObject*>&);
+
+	bool PickKenByPos(float x, float y, std::vector<AoiObject*>&);
 
 	bool Pick(float x, float y, float radius, std::vector<AoiObject*>&);
 
