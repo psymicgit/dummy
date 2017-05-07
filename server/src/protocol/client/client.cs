@@ -318,6 +318,37 @@ namespace Msg.Protocol
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AddObjNotify")]
+  public partial class AddObjNotify : global::ProtoBuf.IExtensible
+  {
+    public AddObjNotify() {}
+    
+    private long _obj_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"obj_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long obj_id
+    {
+      get { return _obj_id; }
+      set { _obj_id = value; }
+    }
+    private float _x;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float x
+    {
+      get { return _x; }
+      set { _x = value; }
+    }
+    private float _y;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float y
+    {
+      get { return _y; }
+      set { _y = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RemoveObjNotify")]
   public partial class RemoveObjNotify : global::ProtoBuf.IExtensible
   {
@@ -389,8 +420,11 @@ namespace Msg.Protocol
       [global::ProtoBuf.ProtoEnum(Name=@"ServerMsg_MoveNotify", Value=1001)]
       ServerMsg_MoveNotify = 1001,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"ServerMsg_RemoveObj", Value=1002)]
-      ServerMsg_RemoveObj = 1002
+      [global::ProtoBuf.ProtoEnum(Name=@"ServerMsg_AddObj", Value=1002)]
+      ServerMsg_AddObj = 1002,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ServerMsg_RemoveObj", Value=1003)]
+      ServerMsg_RemoveObj = 1003
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EncryptKeyDef")]

@@ -12,7 +12,8 @@ rem 	%%~xs =扩展名，如: txt
 
 set protoc=bin\protoc.exe
 set csprotoc=bin\ProtoGen.exe
-set out_dir=..
+set out_server_dir=..
+set out_client_dir="D:\Unity Projects\game\Assets\Script\Net\Protocol"
 set cur_dir=%~dp0
 set temp_dir=无用文件
 
@@ -31,11 +32,11 @@ echo 2. 拷贝变更过的文件
 
 	for /R "%temp_dir%" %%f in (*.cc *.h) do (
 		set new_file=%%f
-		set old_file=%out_dir%\%%~nxf
+		set old_file=%out_server_dir%\%%~nxf
 		
 		echo n|comp !old_file! !new_file! >nul 2>&1
 		if errorlevel 1 (		
-			move /Y !new_file! %out_dir%
+			move /Y !new_file! %out_server_dir%
 		)
 	)
 
@@ -48,15 +49,13 @@ echo 1. 生成c#文件
 	)
 	
 echo 2. 拷贝变更过的文件
-	set client_out_dir=%out_dir%\client
-
 	for /R "%temp_dir%" %%f in (*.cs) do (
 		set new_file=%%f
-		set old_file=%client_out_dir%\%%~nxf
+		set old_file=%out_client_dir%\%%~nxf
 		
 		echo n|comp !old_file! !new_file! >nul 2>&1
 		if errorlevel 1 (		
-			move /Y !new_file! %client_out_dir%
+			move /Y !new_file! %out_client_dir%
 		)
 	)
 	

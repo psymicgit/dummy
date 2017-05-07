@@ -61,6 +61,13 @@ void GameClientMgr::OnLoginRequest(GameClient& client, LoginReq& req, Timestamp 
 	aoiObj->objId = AoiModule::instance->AllocObjId();
 	aoiObj->clientId = client.m_clientId;
 	AoiModule::instance->Add(aoiObj);
+
+	AddObjNotify notify;
+	notify.set_obj_id(aoiObj->objId);
+	notify.set_x(aoiObj->x);
+	notify.set_y(aoiObj->y);
+
+	GameLogic::SendToClientByKen(aoiObj->objId, ServerMsg_MoveNotify, 0, move);
 }
 
 void GameClientMgr::OnMoveRequest(GameClient& client, MoveRequest& req, Timestamp receiveTime)
