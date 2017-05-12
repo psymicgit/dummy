@@ -20,6 +20,7 @@ bool Init()
 		return false;
 	}
 
+	//AoiModule::instance->test();
 	return true;
 }
 

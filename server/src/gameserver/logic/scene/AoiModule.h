@@ -53,6 +53,8 @@ public:
 
 	int GetInsertPos(float x, float y);
 
+	inline int GetInsertPosBetween(float x, int from, int to);
+
 	int GetObjPos(AoiObject*);
 
 	bool PickNear(AoiObject*, float radius, std::vector<AoiObject*>&);

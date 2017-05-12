@@ -37,6 +37,7 @@ bool AoiModule::Add(AoiObject *obj)
 	int at = GetInsertPos(obj->x, obj->y);
 	m_vecX.insert(m_vecX.begin() + at, obj);
 
+	/*
 	for (int i = 0, n = m_vecX.size(); i < n; ++i)
 	{
 		AoiObject* other = m_vecX[i];
@@ -45,6 +46,7 @@ bool AoiModule::Add(AoiObject *obj)
 			
 		}
 	}
+	*/
 
 	return true;
 }
@@ -78,7 +80,7 @@ void AoiModule::Move(AoiObject* obj, float x, float y)
 	else
 	{
 		int old_pos = GetObjPos(obj);
-		int new_pos = GetInsertPos(x, y);
+		int new_pos = GetInsertPos(x, 0);
 
 		obj->x = x;
 		obj->y = y;
@@ -103,19 +105,23 @@ void AoiModule::Move(AoiObject* obj, float x, float y)
 
 int AoiModule::GetInsertPos(float x, float y)
 {
-	int n = m_vecX.size();
-	if (n <= 0)
+	int n = (int)m_vecX.size();
+	return GetInsertPosBetween(x, 0, n);
+}
+
+int AoiModule::GetInsertPosBetween(float x, int from, int to)
+{
+	if (to <= 0)
 	{
 		return 0;
 	}
 
-	int low = 0;
-	int high = n - 1;
-	int mid = 0;
+	int low = from;
+	int high = to - 1;
 
 	while (low <= high)
 	{
-		mid = (low + high) / 2;
+		int mid = (low + high) / 2;
 
 		AoiObject* midObj = m_vecX[mid];
 
@@ -242,7 +248,7 @@ bool AoiModule::IsInSeeRange(AoiObject* obj, float x)
 void AoiModule::test()
 {
 	const float range = 1000.0f;
-	int n = 4000;
+	int n = 10000;
 	int pickNum = 1000;
 
 	float init[] =
