@@ -29,7 +29,7 @@ exit
 
     echo 启动%svrdir%下的robot机器人
     cd robot
-    start "%svrdir%\robot.exe" "%svrdir%\robot.exe"
+    rem start "%svrdir%\robot.exe" "%svrdir%\robot.exe"
     cd ..
 
     echo.
