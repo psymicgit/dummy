@@ -133,6 +133,7 @@
     <ClInclude Include="basic\taskqueue.h" />
     <ClInclude Include="basic\thread.h" />
     <ClInclude Include="basic\timerqueue.h" />
+    <ClInclude Include="basic\Var.h" />
     <ClInclude Include="db\db.h" />
     <ClInclude Include="db\dbcommand.h" />
     <ClInclude Include="db\dbconnection.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="basic\rsa.cpp" />
     <ClCompile Include="basic\thread.cpp" />
     <ClCompile Include="basic\timerqueue.cpp" />
+    <ClCompile Include="basic\Var.cpp" />
     <ClCompile Include="db\dbconnection.cpp" />
     <ClCompile Include="db\dbfactory.cpp" />
     <ClCompile Include="db\dbrecordset.cpp" />

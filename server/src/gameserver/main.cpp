@@ -9,6 +9,7 @@
 #include "gameserver.h"
 #include "scene/AoiModule.h"
 #include "logic/ComponentModule.h"
+#include "basic/Var.h"
 
 bool Init()
 {
@@ -21,6 +22,8 @@ bool Init()
 	}
 
 	//AoiModule::instance->test();
+
+	VarList::Test();
 	return true;
 }
 

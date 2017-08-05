@@ -52,17 +52,17 @@ namespace strtool
 		return (str == nullptr) || (str[0] == 0x00);
 	}
 
-	inline bool is_same_ignore_case(char a, char b)
+	inline bool IsSameIgnoreCase(char a, char b)
 	{
 		return ::tolower(a) == ::tolower(b);
 	}
 
-	inline bool is_same_ignore_case(const std::string &a, const char *b)
+	inline bool IsSameIgnoreCase(const std::string &a, const char *b)
 	{
 		return 0 == strnicmp(a.c_str(), b, a.size());
 	}
 
-	inline bool is_same_ignore_case(const char *a, const char *b)
+	inline bool IsSameIgnoreCase(const char *a, const char *b)
 	{
 		return 0 == strnicmp(a, b, strlen(a));
 	}
@@ -247,31 +247,36 @@ namespace strtool
 		return string(str.begin() + pos + 1, str.end());
 	}
 
-	stringvec_t split(const string &src, char cut /* = ',' */)
+	// 将字符串根据分隔符分割为字符串数组
+	void split(const std::string &src, std::vector<std::string> &strvec, char cut /* = ',' */)
 	{
-		stringvec_t vec;
-
 		std::string::size_type pos1 = 0, pos2 = 0;
-		while (pos2 != std::string::npos) {
+		while (pos2 != std::string::npos)
+		{
 			pos1 = src.find_first_not_of(cut, pos2);
-			if (pos1 == std::string::npos) {
+			if (pos1 == std::string::npos)
+			{
 				break;
 			}
 
 			pos2 = src.find_first_of(cut, pos1 + 1);
-			if (pos2 == std::string::npos) {
-				if (pos1 != src.size()) {
-					vec.push_back(src.substr(pos1));
+			if (pos2 == std::string::npos)
+			{
+				if (pos1 != src.size())
+				{
+					strvec.push_back(src.substr(pos1));
 				}
 
 				break;
-
 			}
 
-			vec.push_back(src.substr(pos1, pos2 - pos1));
+			strvec.push_back(src.substr(pos1, pos2 - pos1));
 		}
+	}
 
-		return vec;
+	int ConvertInt(const char* str)
+	{
+		return atoi(str);
 	}
 
 	enum
@@ -311,5 +316,35 @@ namespace strtool
 		}
 
 		return -1;
+	}
+	
+	std::wstring s2ws(const std::string& s)
+	{
+		std::locale old_loc = std::locale::global(std::locale(""));
+
+		const size_t buffer_size = s.size() + 1;
+		wchar_t* dst_wstr = new wchar_t[buffer_size];
+		wmemset(dst_wstr, 0, buffer_size);
+		mbstowcs(dst_wstr, s.c_str(), buffer_size);
+		std::wstring ws = dst_wstr;
+		delete[]dst_wstr;
+
+		std::locale::global(old_loc);
+		return ws;
+	}
+
+	std::string ws2s(const std::wstring& ws)
+	{
+		std::locale old_loc =std::locale::global(std::locale(""));
+
+		size_t buffer_size = ws.size() * 4 + 1;
+		char* dst_str = new char[buffer_size];
+		memset(dst_str, 0, buffer_size);
+		wcstombs(dst_str, ws.c_str(), buffer_size);
+		std::string s = dst_str;
+		delete[]dst_str;
+
+		std::locale::global(old_loc);
+		return s;
 	}
 }

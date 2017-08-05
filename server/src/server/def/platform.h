@@ -269,6 +269,7 @@ using namespace Msg::Protocol;
 
 #include <def/global.h>
 #include "logic/IModule.h"
+#include "tool/strtool.h"
 
 typedef int64 ObjectId;
 

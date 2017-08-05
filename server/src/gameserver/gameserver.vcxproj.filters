@@ -46,6 +46,12 @@
     <ClInclude Include="..\protocol\game_to_gate.pb.h">
       <Filter>protocol</Filter>
     </ClInclude>
+    <ClInclude Include="config\ClassTree.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="config\ClassModule.h">
+      <Filter>config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameserver.cpp" />
@@ -90,6 +96,12 @@
     </ClCompile>
     <ClCompile Include="..\protocol\game_to_gate.pb.cc">
       <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="config\ClassTree.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="config\ClassModule.cpp">
+      <Filter>config</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

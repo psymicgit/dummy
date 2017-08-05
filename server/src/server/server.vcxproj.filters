@@ -186,6 +186,9 @@
     <ClInclude Include="logic\ComponentModule.h">
       <Filter>logic</Filter>
     </ClInclude>
+    <ClInclude Include="basic\Var.h">
+      <Filter>basic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tool">
@@ -341,6 +344,9 @@
     </ClCompile>
     <ClCompile Include="logic\ComponentModule.cpp">
       <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\Var.cpp">
+      <Filter>basic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

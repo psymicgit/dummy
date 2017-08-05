@@ -59,7 +59,17 @@ namespace strtool
 	typedef std::vector<std::string> stringvec_t;
 
 	// 将字符串根据分隔符分割为字符串数组
-	stringvec_t split(const string &src, char cut = ',');
+	void split(const std::string &src, std::vector<std::string> &strvec, char cut = ',');
+
+	// 转为整数
+	int ConvertInt(const char* str);
+
+	bool IsSameIgnoreCase(char a, char b);
+
+	bool IsSameIgnoreCase(const std::string &a, const char *b);
+
+	// 字符串是否相等（忽略大小写）
+	bool IsSameIgnoreCase(const char* a, const char* b);
 
 	template <typename T>
 	std::vector<T> split_str_to_int_vec(const string &src, char cut = ',')
@@ -67,7 +77,9 @@ namespace strtool
 		typedef std::vector<T> intvec_t;
 		intvec_t intvec;
 
-		stringvec_t strvec = split(src, cut);
+		stringvec_t strvec;
+		split(src, strvec, cut);
+
 		for (size_t n = 0; n < strvec.size(); n++) {
 			std::string str = strvec[n];
 			intvec.push_back((T)atoi(str.c_str()));
@@ -82,7 +94,9 @@ namespace strtool
 		typedef std::set<T> intset_t;
 		intset_t intset;
 
-		stringvec_t strvec = split(src);
+		stringvec_t strvec;
+		split(src, strvec, cut);
+
 		for (size_t n = 0; n < strvec.size(); n++) {
 			std::string str = strvec[n];
 			intset.insert((T)atoi(str.c_str()));
@@ -93,6 +107,12 @@ namespace strtool
 
 	// sunday算法
 	int sunday(const char *src, const char *des);
+	
+	// 字符串 -> 宽字符串
+	std::wstring s2ws(const std::string& s);
+	
+	// 宽字符串 -> 字符串
+	std::string ws2s(const std::wstring& ws);
 };
 
 

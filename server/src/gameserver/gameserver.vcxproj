@@ -78,7 +78,7 @@
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;../../3rd/curl/include;../../3rd/rapidjson/include;logic</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../server;../../3rd/glog-0.3.3/src/windows;../../3rd/protobuf/protobuf-2.5.0/src;../protocol;../../3rd/mysql/include;../../3rd/curl/include;../../3rd/rapidjson/include;logic;../../3rd</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4099</DisableSpecificWarnings>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -102,6 +102,8 @@
     <ClInclude Include="..\protocol\game_to_gate.pb.h" />
     <ClInclude Include="..\protocol\net.pb.h" />
     <ClInclude Include="..\protocol\protocol.pb.h" />
+    <ClInclude Include="config\ClassModule.h" />
+    <ClInclude Include="config\ClassTree.h" />
     <ClInclude Include="config\gameconfig.h" />
     <ClInclude Include="db\dbagent.h" />
     <ClInclude Include="GameLogic.h" />
@@ -120,6 +122,8 @@
     <ClCompile Include="..\protocol\game_db.pb.cc" />
     <ClCompile Include="..\protocol\game_to_gate.pb.cc" />
     <ClCompile Include="..\protocol\net.pb.cc" />
+    <ClCompile Include="config\ClassModule.cpp" />
+    <ClCompile Include="config\ClassTree.cpp" />
     <ClCompile Include="config\gameconfig.cpp" />
     <ClCompile Include="db\dbagent.cpp" />
     <ClCompile Include="GameLogic.cpp" />
